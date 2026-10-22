@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # HyperLevel installer – Docker Compose + Caddy (automatic HTTPS) on a fresh Linux server.
 #
-#   curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
 #
 # Asks for your domain and admin e-mail, generates the admin password and the app secret, writes .env
 # and starts HyperLevel. Non-interactive: GOHIGH_DOMAIN=crm.example.com GOHIGH_ADMIN_EMAIL=you@example.com
@@ -11,9 +11,9 @@
 # GOHIGH_REF (branch/tag), GOHIGH_DOMAIN, GOHIGH_ADMIN_EMAIL, GOHIGH_NO_CADDY=1 (own proxy).
 set -euo pipefail
 
-REPO="${GOHIGH_REPO:-https://github.com/gohyperlevel/gohyperlevel.git}"
+REPO="${GOHIGH_REPO:-https://github.com/BAISESYSTEMS/hyperlevel.git}"
 REF="${GOHIGH_REF:-main}"
-RAW="${GOHIGH_RAW:-https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/${REF}}"
+RAW="${GOHIGH_RAW:-https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/${REF}}"
 if [ "$(id -u)" = "0" ]; then DEFAULT_DIR=/opt/gohigh; else DEFAULT_DIR="$HOME/gohigh"; fi
 DIR="${GOHIGH_DIR:-$DEFAULT_DIR}"
 YES=0

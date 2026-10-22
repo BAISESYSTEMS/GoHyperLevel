@@ -32,7 +32,7 @@ import { TOOLS } from './mcp.js';
  */
 
 const PRODUCT = 'HyperLevel';
-const STARS_API = 'https://api.github.com/repos/gohyperlevel/gohyperlevel';
+const STARS_API = 'https://api.github.com/repos/BAISESYSTEMS/hyperlevel';
 const STARS_TTL = 6 * 3600_000;
 /** Screenshots of the demo in the hero, in the order of the copy's alt texts (scripts/landing-assets.mjs makes them). */
 const SHOTS = ['shot-workflow.webp', 'shot-inbox.webp', 'shot-funnel.webp', 'shot-pipeline.webp'];

@@ -11,7 +11,7 @@ services:
     build:
       context: deploy/office
       args:
-        GOHIGH_IMAGE: ${GOHIGH_IMAGE:-ghcr.io/gohyperlevel/gohyperlevel:latest}
+        GOHIGH_IMAGE: ${GOHIGH_IMAGE:-ghcr.io/baisesystems/hyperlevel:latest}
         OFFICE_KINDS: ${OFFICE_KINDS:-docx,xlsx,pptx,pdf}
     environment:
       PGHL_OFFICE_DIR: /opt/office/web

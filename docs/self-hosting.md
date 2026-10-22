@@ -125,7 +125,7 @@ Alle Variablen sind optional außer `PGHL_BASE_URL`; vieles lässt sich auch in 
 ## Mit Docker (empfohlen)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
 ```
 
 Das Skript fragt Domain und Admin-E-Mail, erzeugt Passwort und `PGHL_SECRET`, schreibt `.env` und startet `docker-compose.yml` mit Caddy (automatisches HTTPS). Von Hand: `cp .env.example .env`, Werte setzen, `docker compose --profile caddy up -d`. Ohne `PGHL_ADMIN_EMAIL`/`PGHL_ADMIN_PASSWORD` legst du das erste Konto im Browser an (Einrichtungsseite).

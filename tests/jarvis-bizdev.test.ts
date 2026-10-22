@@ -431,10 +431,17 @@ describe('the agent: role prompt, fallback models, rules when no model answers',
       model.reset();
       model.reply(says('Gerade ist alles ruhig – ich würde die Reaktivierung vorbereiten. Sollen wir?'));
       expect((await t.api.post('/api/companion/growth/run', { kind: 'daily' })).data.review.source).toBe('ai');
-      // a number that is not in the data → the rules' words
+      // a number the last briefing said (it came from the data) may come back – one that is in neither is still refused
+      t.app.db.run("INSERT INTO companion_growth_runs (user_id, location_id, kind, slot, sig, say, created_at) VALUES (?, ?, 'daily', 'manual:last', '', 'Seit 28 Tagen kein neuer Kontakt.', ?)", me, A, new Date(Date.now() + 60_000).toISOString());
+      model.reset();
+      model.reply(says('Seit 28 Tagen ist es ruhig – soll ich einen Lead-Magneten vorbereiten?'));
+      expect((await t.api.post('/api/companion/growth/run', { kind: 'daily' })).data.review.source).toBe('ai');
+      // a number that is not in the data → the rules' words (a fresh day's allowance, so the model is really asked)
+      t.app.db.run("DELETE FROM ai_calls WHERE purpose = 'companion_growth'");
       model.reset();
       model.reply(says('Du hast diese Woche 99.999 € verdient!'));
       const x = await t.api.post('/api/companion/growth/run', { kind: 'weekly' });
+      expect(model.calls).toHaveLength(1);
       expect(x.data.review.source).toBe('rules');
       expect(x.data.review.say).not.toContain('99.999');
     } finally {

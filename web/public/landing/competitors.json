@@ -410,7 +410,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "AGPL-3.0, kompletter Quellcode offen",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/LICENSE"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/LICENSE"
       },
       "highlevel": {
        "v": "no",
@@ -472,7 +472,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kostenlos auf eigenem Server (Docker, ein Befehl); eine SQLite-Datei",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/self-hosting.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/self-hosting.md"
       },
       "highlevel": {
        "v": "no",
@@ -534,7 +534,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Self-hosted 0 €; Cloud Solo 49,99 €/Monat (1 Nutzer, alle Funktionen außer White-Label)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -596,7 +596,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Cloud Agentur 199 €/Monat mit unbegrenzt Kunden-Sub-Accounts und Nutzern; self-hosted 0 €",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -658,7 +658,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Im Agentur-Plan (199 €/Monat) enthalten, inkl. installierbarer App (PWA) mit eigener Marke; self-hosted inklusive",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -720,7 +720,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Team & Company und Agentur: unbegrenzt Nutzer ohne Platzgebühr (Solo = 1 Nutzer)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -782,7 +782,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kontakte unbegrenzt; Fair-Use für E-Mail- und KI-Volumen in der Cloud",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -844,7 +844,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Cloud in Frankfurt (DE); self-hosted an jedem Standort",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "no",
@@ -906,7 +906,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "AVV wird bei der Anmeldung akzeptiert und ist im Kundenbereich abrufbar",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -975,7 +975,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kontakte, Firmen (Domain-Abgleich, Merge), beliebige Verknüpfungen mit Labels",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/objects.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/objects.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1037,7 +1037,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Eigene Objekte mit typisierten Feldern, Listen, CSV-Import und Triggern",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/objects.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/objects.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1099,7 +1099,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Mehrere Pipelines, Kanban, gewichteter Forecast, Positionen; Listenansicht in Kürze",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1161,7 +1161,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Regeln für Merkmale und Engagement, Verfall, Schwellen, Trigger",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1223,7 +1223,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Abgleich per E-Mail, Telefon (jede Schreibweise) oder Name+Firma; Feld-für-Feld-Merge, rückgängig machbar",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1292,7 +1292,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kampagnen an Tags, Smart Lists, Segmente; A/B, Versand an Nicht-Öffner; self-hosted mit eigenem SMTP/API-Versender",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/email-marketing.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/email-marketing.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1354,7 +1354,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Drag & Drop, Outlook-sicheres responsives HTML mit Dark Mode, 60 deutsche Vorlagen",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/email-builder.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/email-builder.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1416,7 +1416,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Über eigenes Konto bei Twilio, seven.io, Vonage, Plivo, Bird oder eigenes Android-Handy; kein SMS-Guthaben inklusive",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/channels.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/channels.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1478,7 +1478,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "WhatsApp Cloud API: Vorlagen, Kampagnen, Buttons, Medien; ohne Aufpreis, Meta-App-Einrichtung manuell",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/meta-channels.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/meta-channels.md"
       },
       "highlevel": {
        "v": "addon",
@@ -1540,7 +1540,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "Planen und Posten über einen separaten Postiz-Dienst (u. a. LinkedIn, IG, FB, TikTok, YouTube Shorts, GBP); einfache Statistik",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/integrations.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1602,7 +1602,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Mehrstufig, Logik, Scoring/Quiz, Zahlungsfeld, Signatur, 26 deutsche Vorlagen",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/forms.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/forms.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1664,7 +1664,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Drag & Drop, 23 deutsche Vorlagen, CMS, eigene Domains mit TLS, Barrierefreiheits-Check; KI-Seitengenerator in Kürze",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sites.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1726,7 +1726,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Blog je Website: Markdown-Editor, Planung, RSS, SEO, strukturierte Daten",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sites.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1788,7 +1788,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Seiten (bis 4 Varianten), Funnel-Schritte, E-Mail (Betreff/Absender/Inhalt), Workflow-Splits",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sites.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1850,7 +1850,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "Bewertungsanfragen, Widget und KI-Antworten nur für Google; kein Facebook, Yelp oder Trustpilot",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/integrations.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1919,7 +1919,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "140+ Trigger, 130+ Aktionen, Versionen, Testlauf, Fehler-Workflows; Schrittlisten-Editor (visueller Canvas in Kürze)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/workflow-actions.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/workflow-actions.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1981,7 +1981,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "In-App-Agent und eigene KI-Mitarbeiter mit 240+ Werkzeugen, Freigabe vor Schreibzugriffen, Zeitpläne",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/agent.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/agent.md"
       },
       "highlevel": {
        "v": "addon",
@@ -2043,7 +2043,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Antwortvorschläge, Website-Chatbot mit Übergabe, Agent-Auto-Reply für E-Mail, SMS, WhatsApp, Messenger, Instagram",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/ai-assistant.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/ai-assistant.md"
       },
       "highlevel": {
        "v": "addon",
@@ -2105,7 +2105,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "KI-Telefonagent nur für eingehende Anrufe (bucht Termine, leitet weiter); braucht eigenes Twilio",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/voice.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/voice.md"
       },
       "highlevel": {
        "v": "addon",
@@ -2167,7 +2167,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "MCP-Server mit 240+ Tools, OAuth 2.1, Ein-Klick-Einrichtung für Claude, ChatGPT, Cursor, Codex",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/agent.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/agent.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2229,7 +2229,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Rund 40 Text-KI-Anbieter inkl. EU-gehosteter (IONOS, STACKIT, OVH, Scaleway, Mistral) und lokaler Modelle (Ollama)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/ai-providers.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/ai-providers.md"
       },
       "highlevel": {
        "v": "no",
@@ -2291,7 +2291,7 @@
       "gohyperlevel": {
        "v": "no",
        "note": "Telefonie nur mit eigenem Twilio-Konto; keine Nummernportierung, kein A2P-10DLC",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/telephony.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/telephony.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2360,7 +2360,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Einzel, Round Robin, Kollektiv, Klassen; Zahlung bei Buchung; Google/Outlook-Sync; Wochenansicht in Kürze",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/booking.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/booking.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2422,7 +2422,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Angebote mit Varianten und Optionen; Online-Annahme erzeugt Vertrag und Rechnung; kein Drag-&-Drop-Proposal-Designer",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2484,7 +2484,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Verträge mit gezeichneter/getippter Signatur, SHA-256 und Audit-Trail; ein Unterzeichner pro Vertrag",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2546,7 +2546,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Storno, Gutschrift, Abschlag/Schluss, Skonto, wiederkehrende Rechnungen, PDF nach DIN 5008 mit GiroCode",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/invoicing.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/invoicing.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2608,7 +2608,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Stripe-Kauflinks mit Order-Bump, One-Click-Upsell, Gutscheinen",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/stripe.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/stripe.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2670,7 +2670,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Abos und Ratenzahlung (2–60 Raten), Zugriff folgt Zahlung",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/payment-plans.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/payment-plans.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2732,7 +2732,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Abo-Fehlzahlungen mit Retry und Zugriffspause; Rechnungsmahnungen mit Gebühren und Verzugszinsen (§ 288 BGB)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/dunning.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/dunning.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2794,7 +2794,7 @@
       "gohyperlevel": {
        "v": "no",
        "note": "Kein Warenkorb/Shop; Produkte über Kauflinks, Checkout leitet zu Stripe",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/stripe.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/stripe.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2856,7 +2856,7 @@
       "gohyperlevel": {
        "v": "no",
        "note": "Karten nur über Stripe; daneben SEPA-Lastschrift ohne Stripe und PayPal.me-Link",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/stripe.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/stripe.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2925,7 +2925,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "XRechnung 3.0 (CII und UBL) mit eigener Prüfung, ZUGFeRD 2.3 / Factur-X; ohne KoSIT-Validator und Peppol-Versand",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/invoicing.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/invoicing.md"
       },
       "highlevel": {
        "v": "no",
@@ -2987,7 +2987,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Lückenlose Nummernkreise, SHA-256-Festschreibung, unveränderliches Audit-Log (GoBD-orientiert, nicht zertifiziert)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/invoicing.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/invoicing.md"
       },
       "highlevel": {
        "v": "no",
@@ -3049,7 +3049,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Online-Mandate, pain.008-Lastschriftläufe, Vorabankündigung, Rückläufer – auch ohne Stripe",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sepa.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sepa.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3111,7 +3111,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "DATEV-Export; Live-Sync mit Lexware Office und sevDesk",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/backoffice.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/backoffice.md"
       },
       "highlevel": {
        "v": "no",
@@ -3173,7 +3173,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Double-Opt-in und Consent-Ledger je Kanal und Zweck, Nachweis-Export als PDF/CSV",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/consent.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/consent.md"
       },
       "highlevel": {
        "v": "partial",
@@ -3235,7 +3235,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Deutsch ist die Hauptsprache; Englisch teilweise",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/translating.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/translating.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3304,7 +3304,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kurse mit Drip, gehostetem Video (HLS), Quizzen, Zertifikaten, Kohorten",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/courses.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/courses.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3366,7 +3366,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Skool-ähnlich: Feed, Punkte/Level, kostenpflichtige Stufen, Events, Live-Calls (Jitsi)",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/community.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/community.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3428,7 +3428,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Tickets mit SLAs, Eskalation, Wissensdatenbank/Help-Center, CSAT/NPS",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/helpdesk.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/helpdesk.md"
       },
       "highlevel": {
        "v": "no",
@@ -3490,7 +3490,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Liste, Board, Kalender, Gantt mit kritischem Pfad; Zeiterfassung mit Freigabe und Abrechnung",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/projects.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/projects.md"
       },
       "highlevel": {
        "v": "no",
@@ -3552,7 +3552,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "Automatisierte Evergreen-Webinare mit Q&A, Umfragen, Angebot; kein Live-Streaming",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/webinars.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/webinars.md"
       },
       "highlevel": {
        "v": "partial",
@@ -3682,7 +3682,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Unbegrenzt, self-hosted und im Cloud-Agentur-Plan",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3744,7 +3744,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Seiten, Funnels, Formulare, Kalender, Workflows, Pipelines, Kurse; JSON-Export/-Import",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3806,7 +3806,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Name, Logos, Farben, Login-Domain je Kunde, gebrandete PWA-Icons",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3868,7 +3868,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Eigene Pläne, Signup → Stripe → Sub-Account aus Snapshot, Usage-Rebilling mit Aufschlag; kein Weiterverkauf von Telefonie/E-Mail-Guthaben – selbst gehostet; in der Cloud (auch im Tarif Agentur) nicht enthalten",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3930,7 +3930,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kurse, Community, Tickets und geteilte Projekt-Boards",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/courses.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/courses.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3999,7 +3999,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "REST-API für alle Bereiche, OpenAPI 3.1, Agentur- und Sub-Account-Schlüssel",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/api.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/api.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4061,7 +4061,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Signierte ausgehende Webhooks für jedes Ereignis, eingehende Webhook-Trigger mit HMAC",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/api.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/api.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4123,7 +4123,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "REST-Hooks plus Zapier-/Make-Apps und n8n-Node zum Selbst-Einrichten; nicht im öffentlichen Zapier-Verzeichnis",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/integrations/zapier/README.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/integrations/zapier/README.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4185,7 +4185,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "via PWA-Install (iPhone/iPad/Android), Android zusätzlich als APK – nicht in den App-Stores",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/ios-web-app.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/ios-web-app.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4247,7 +4247,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "via PWA-Install (iPhone/iPad/Android), Android zusätzlich als APK – nicht in den App-Stores",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/android-app.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/android-app.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4309,7 +4309,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "~20 eingebaute Integrationen, Composio (250+ Apps), Nango, MCP-Client; eigener Plugin-Marktplatz noch klein",
-       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/integrations.md"
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
       },
       "highlevel": {
        "v": "yes",

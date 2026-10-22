@@ -13,7 +13,7 @@ name: gohigh
 
 services:
   gohigh:
-    image: ${GOHIGH_IMAGE:-ghcr.io/gohyperlevel/gohyperlevel:latest}
+    image: ${GOHIGH_IMAGE:-ghcr.io/baisesystems/hyperlevel:latest}
     build: .
     restart: unless-stopped
     # Least privilege: only what the start script needs to hand /data to the "node" user, no privilege escalation.

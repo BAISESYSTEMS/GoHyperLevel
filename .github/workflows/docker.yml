@@ -1,10 +1,10 @@
 name: Docker image
 
 # Multi-arch image (linux/amd64 + linux/arm64) to GitHub Container Registry on version tags:
-#   git tag v0.0.19 && git push origin v0.0.19   →   ghcr.io/<owner>/gohyperlevel:0.0.19, :0.0, :latest
+#   git tag v0.0.19 && git push origin v0.0.19   →   ghcr.io/<owner>/hyperlevel:0.0.19, :0.0, :latest
 # Manual runs (workflow_dispatch) publish :edge from the selected branch.
 # Optional Docker Hub mirror (for the README's pull badge): set the repository variable DOCKERHUB_IMAGE
-# (e.g. gohyperlevel/gohyperlevel) and the secrets DOCKERHUB_USERNAME + DOCKERHUB_TOKEN.
+# (e.g. BAISESYSTEMS/hyperlevel) and the secrets DOCKERHUB_USERNAME + DOCKERHUB_TOKEN.
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
 
       - name: Lower-case image name (registries reject upper case)
         id: image
-        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/gohyperlevel" >> "$GITHUB_OUTPUT"
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/hyperlevel" >> "$GITHUB_OUTPUT"
 
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3

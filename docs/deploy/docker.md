@@ -5,7 +5,7 @@
 On a server with Docker and a DNS record (`A`/`AAAA`) for your domain pointing at it:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
 ```
 
 The script asks for the domain and your admin e-mail, generates a strong admin password and `PGHL_SECRET`,
@@ -23,14 +23,14 @@ Options: `GOHIGH_DIR` (install folder), `GOHIGH_REF` (branch or tag, e.g. `v0.0.
 ## By hand
 
 ```bash
-git clone https://github.com/gohyperlevel/gohyperlevel.git && cd gohyperlevel
+git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
 cp .env.example .env          # set PGHL_BASE_URL and PGHL_DOMAIN (and optionally the first admin)
 docker compose --profile caddy up -d
 ```
 
 - Without the `caddy` profile HyperLevel is published on `127.0.0.1:4700` only – put your own proxy in front.
 - `docker compose pull gohigh` before `up` uses the prebuilt multi-arch image (`GOHIGH_IMAGE`, default
-  `ghcr.io/gohyperlevel/gohyperlevel:latest`, pin e.g. `:0.0.18`) instead of building locally.
+  `ghcr.io/baisesystems/hyperlevel:latest`, pin e.g. `:0.0.18`) instead of building locally.
 - **Custom domains** for funnels, websites and client logins work automatically with Caddy: customers point
   their domain at the server, Caddy asks `GET /api/tls/ask?domain=…` and only requests certificates for
   domains HyperLevel knows.

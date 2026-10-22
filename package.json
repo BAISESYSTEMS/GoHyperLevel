@@ -1,16 +1,16 @@
 {
   "name": "gohigh",
-  "version": "1.0.62",
+  "version": "1.0.63",
   "private": true,
   "description": "The open-source, self-hosted alternative to GoHighLevel and HubSpot: CRM, inbox, funnels, automations, AI, Android app and 340+ MCP tools.",
   "license": "AGPL-3.0-only",
-  "homepage": "https://github.com/gohyperlevel/gohyperlevel#readme",
+  "homepage": "https://github.com/BAISESYSTEMS/hyperlevel#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gohyperlevel/gohyperlevel.git"
+    "url": "git+https://github.com/BAISESYSTEMS/hyperlevel.git"
   },
   "bugs": {
-    "url": "https://github.com/gohyperlevel/gohyperlevel/issues"
+    "url": "https://github.com/BAISESYSTEMS/hyperlevel/issues"
   },
   "keywords": [
     "crm",

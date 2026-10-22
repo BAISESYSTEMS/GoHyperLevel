@@ -38,7 +38,7 @@ or cloud instance, never their data folder.
 
    ```bash
    mkdir -p /srv/ghyl-demo && cd /srv/ghyl-demo
-   git clone https://github.com/gohyperlevel/gohyperlevel.git . && cp .env.example .env
+   git clone https://github.com/BAISESYSTEMS/hyperlevel.git . && cp .env.example .env
    ```
 
 3. **`.env`** – only these:

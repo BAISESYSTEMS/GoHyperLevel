@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/gohyperlevel/gohyperlevel/security/advisories/new
+    url: https://github.com/BAISESYSTEMS/hyperlevel/security/advisories/new
     about: Please report security problems privately.
   - name: Questions & ideas
-    url: https://github.com/gohyperlevel/gohyperlevel/discussions
+    url: https://github.com/BAISESYSTEMS/hyperlevel/discussions
     about: Ask questions and share setups in GitHub Discussions.

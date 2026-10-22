@@ -274,7 +274,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
     expect(home).toMatch(/<meta property="og:image" content="http:\/\/localhost\/landing\/og-en\.png">/);
     expect(home).toContain('<link rel="alternate" hreflang="de" href="http://localhost/de">');
     expect(home).toContain('codex mcp add gohyperlevel --url https://localhost/mcp');
-    expect(home).toContain('curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash');
+    expect(home).toContain('curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash');
     expect(home).toContain('https://demo.gohyperlevel.com');
     // Prices: list prices without cloud mode, VAT note, white-label headline of the Agentur plan.
     for (const s of ['€49.99', '€99.99', '€199', 'or €479 a year', 'or €959 a year', 'or €1,910 a year', 'Stripe Tax', 'White-label on the Agency plan']) expect(home, s).toContain(s);

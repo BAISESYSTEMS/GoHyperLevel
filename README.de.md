@@ -1,8 +1,25 @@
-# HyperLevel
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-dark.svg">
+  <img src="docs/assets/readme/hero-light.svg" alt="HyperLevel – das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen" width="100%">
+</picture>
+
+<h3>Dein ganzes Business in einer Open-Source-App.<br>Kostenlos für alle. Selbst gehostet. Für immer deins.</h3>
+
+<p>
+  <a href="LICENSE"><img alt="Lizenz: AGPL-3.0" src="https://img.shields.io/badge/Lizenz-AGPL--3.0-2563eb?style=for-the-badge"></a>
+  <a href="https://github.com/BAISESYSTEMS/hyperlevel/stargazers"><img alt="GitHub-Sterne" src="https://img.shields.io/github/stars/BAISESYSTEMS/hyperlevel?style=for-the-badge&color=8b5cf6"></a>
+  <a href="CONTRIBUTING.md"><img alt="Beiträge willkommen" src="https://img.shields.io/badge/Beitr%C3%A4ge-willkommen-22c55e?style=for-the-badge"></a>
+</p>
 
 [English](README.md) · **Deutsch**
 
-**Dein eigenes GoHighLevel – Open Source, selbst gehostet, ohne Abo.**
+</div>
+
+**Alles komplett offen und anpassbar – und offen für Beiträge:** Jedes Modul, jede Ansicht und jeder Workflow-Schritt steht unter
+der AGPL-3.0 in diesem Repository. Themes, Logos, eigene Domains, eigene Module, eigene KI – ohne Enterprise-Sperre. Mitmachen:
+[Wie du beitragen kannst](README.md#open-for-contributions) · [CONTRIBUTING.md](CONTRIBUTING.md).
 
 CRM, Pipelines, Kalender mit Online-Buchung, Formulare & Umfragen, Funnels & Websites mit Blog, Kurse & Mitgliederbereich mit Community, Posteingang (E-Mail, SMS, WhatsApp, Messenger, Instagram, Telefon), Workflows, Kampagnen, Rechnungen & Angebote, Bewertungen und Sub-Accounts – in einer kleinen Node-App mit einer SQLite-Datei. Läuft auf jedem Server mit Docker (z. B. einem Hostinger-VPS) und kostet selbst gehostet nur den Server: 0 € Lizenz, alle Funktionen, keine Gebühr pro Nutzer. Eine gehostete Cloud ist geplant (voraussichtlich Solo 49,99 €, Team & Company 99,99 €, Agentur 199 € inkl. White-Label pro Monat zzgl. USt. – ebenfalls ohne Gebühr pro Nutzer), aber noch nicht offen: auf [gohyperlevel.com](https://gohyperlevel.com) gibt es dafür nur die Warteliste. Den Cloud-Modus selbst bringt die Software mit. Lizenz: AGPL-3.0.
 
@@ -218,13 +235,13 @@ Tests und Prüfungen: `npm run typecheck`, `npm test`.
 **Ein Befehl** auf einem frischen Linux-Server mit Docker (fragt Domain und Admin-E-Mail, erzeugt Passwort und Schlüssel, startet HyperLevel mit Caddy und automatischem HTTPS):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
 ```
 
 **Von Hand** mit Docker Compose:
 
 ```bash
-git clone https://github.com/gohyperlevel/gohyperlevel.git && cd gohyperlevel
+git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
 cp .env.example .env              # PGHL_BASE_URL und PGHL_DOMAIN setzen
 docker compose --profile caddy up -d
 ```
@@ -298,7 +315,7 @@ Ehrlich: eine native iPhone-App und ein Eintrag im Play Store (die Android-App k
 
 ## Mitmachen & Lizenz
 
-Beiträge sind willkommen – siehe [CONTRIBUTING.md](CONTRIBUTING.md) (Englisch) und den [Verhaltenskodex](CODE_OF_CONDUCT.md); Pull Requests brauchen einmalig die Zustimmung zur [CLA](CLA.md) (der CLA Assistant fragt beim ersten PR). Fragen gehören in die [GitHub Discussions](https://github.com/gohyperlevel/gohyperlevel/discussions). Sicherheitslücken bitte vertraulich melden: [SECURITY.md](SECURITY.md). Empfehlen, für Kunden betreiben oder beim Umzug helfen: [Partnerprogramm](docs/partner-program.md).
+Beiträge sind willkommen – siehe [CONTRIBUTING.md](CONTRIBUTING.md) (Englisch) und den [Verhaltenskodex](CODE_OF_CONDUCT.md); Pull Requests brauchen einmalig die Zustimmung zur [CLA](CLA.md) (der CLA Assistant fragt beim ersten PR). Fragen gehören in die [GitHub Discussions](https://github.com/BAISESYSTEMS/hyperlevel/discussions). Sicherheitslücken bitte vertraulich melden: [SECURITY.md](SECURITY.md). Empfehlen, für Kunden betreiben oder beim Umzug helfen: [Partnerprogramm](docs/partner-program.md).
 
 HyperLevel steht unter der **GNU Affero General Public License v3.0** ([LICENSE](LICENSE)): frei nutzen, ändern und selbst betreiben – wer eine veränderte Fassung als Online-Dienst anbietet, muss deren Quellcode offenlegen. Fremdkomponenten: [NOTICE](NOTICE). GoHighLevel und HubSpot sind Marken ihrer Inhaber; HyperLevel ist ein unabhängiges Projekt.
 

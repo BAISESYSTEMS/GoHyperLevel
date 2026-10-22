@@ -6,9 +6,13 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.63] – 2026-10-22
+
 ### Fixed
 - Wachstums-Briefing: fehlgeschlagene KI-Aufrufe (Ausfall beim Anbieter) verbrauchen nicht mehr die vier KI-Formulierungen pro Tag – nur
   echte Antworten zählen.
+- Wachstums-Briefing: eine KI-Formulierung, die eine Zahl aus dem letzten Briefing aufgreift (z. B. „seit 28 Tagen“), wird nicht mehr
+  verworfen – auch diese Zahlen stammen aus den Daten; Verwerfen und Fehler stehen jetzt im Server-Log.
 
 ## [1.0.62] – 2026-10-22
 
@@ -660,12 +664,12 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   (§ 7 and Anlage 2) and the privacy policy (new installs; saved texts keep their version).
 
 ### Changed
-- **Renamed to GoHyperLevel** (formerly GoHigh; gohyperlevel.com, [github.com/gohyperlevel/gohyperlevel](https://github.com/gohyperlevel/gohyperlevel)):
+- **Renamed to GoHyperLevel** (formerly GoHigh; gohyperlevel.com, [github.com/BAISESYSTEMS/hyperlevel](https://github.com/BAISESYSTEMS/hyperlevel)):
   UI texts (de/en), page titles, the default brand name, e-mails, the PWA manifest, the landing page, the MCP server's and
   the OpenAPI title, the "GoHyperLevel Agent", the Android app label and the docs. Internal identifiers stay so existing
   installs keep working: `PGHL_*`/`GOHIGH_*` variables, `ghl_*` tools, database, cookie and file names, the `gohigh-steps`
   clipboard format, the npm/Android package names. A saved branding that still carries the old default name shows the new
-  one; white-label names win as before. Docker image `ghcr.io/gohyperlevel/gohyperlevel`, install script and badges point
+  one; white-label names win as before. Docker image `ghcr.io/baisesystems/hyperlevel`, install script and badges point
   at the new repository.
 - **Open-source readiness:** a [Contributor License Agreement](CLA.md) (Apache ICLA-based, allows dual licensing) signed
   through CLA Assistant Lite (`.github/workflows/cla.yml`, signatures stored in the repository), CONTRIBUTING with

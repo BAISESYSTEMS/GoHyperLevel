@@ -2,7 +2,7 @@
 
 Version 1.0 · based on the Apache Software Foundation Individual Contributor License Agreement (ICLA)
 
-Thank you for contributing to HyperLevel (the "Project", https://github.com/gohyperlevel/gohyperlevel).
+Thank you for contributing to HyperLevel (the "Project", https://github.com/BAISESYSTEMS/hyperlevel).
 This agreement makes clear which rights you grant to the Project's maintainer (the "Maintainer") for your
 contributions. You keep the copyright in your contributions; the agreement only grants a licence.
 

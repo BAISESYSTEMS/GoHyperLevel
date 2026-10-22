@@ -30,6 +30,6 @@ an alle, die HyperLevel weiterempfehlen, für Kunden betreiben oder beim Umstieg
 
 ## Mitmachen
 
-Anfragen über [GitHub Discussions](https://github.com/gohyperlevel/gohyperlevel/discussions) (Kategorie
+Anfragen über [GitHub Discussions](https://github.com/BAISESYSTEMS/hyperlevel/discussions) (Kategorie
 „Partner“) oder per E-Mail an die im Partnerbereich genannte Adresse. Beiträge zum Code laufen unabhängig davon über
 [CONTRIBUTING.md](../CONTRIBUTING.md).

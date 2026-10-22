@@ -6,14 +6,14 @@
 #   PGHL_BASE_URL=https://crm.your-domain.com
 #   PGHL_ADMIN_EMAIL=you@your-domain.com      (first start only – otherwise the setup page)
 #   PGHL_ADMIN_PASSWORD=…                      (first start only, at least 8 characters)
-#   GOHIGH_IMAGE=ghcr.io/gohyperlevel/gohyperlevel:latest  (optional; pin a version like :0.0.18)
+#   GOHIGH_IMAGE=ghcr.io/baisesystems/hyperlevel:latest  (optional; pin a version like :0.0.18)
 #
 # Traefik names follow Hostinger's template (websecure, web, letsencrypt); others via TRAEFIK_ENTRYPOINT,
 # TRAEFIK_HTTP_ENTRYPOINT, TRAEFIK_CERTRESOLVER. Update: pull the new image and recreate the container.
 # No registry access? deploy/examples/hostinger/build-from-source.compose.yaml builds on the server.
 services:
   gohigh:
-    image: ${GOHIGH_IMAGE:-ghcr.io/gohyperlevel/gohyperlevel:latest}
+    image: ${GOHIGH_IMAGE:-ghcr.io/baisesystems/hyperlevel:latest}
     restart: unless-stopped
     environment:
       - PGHL_DATA_DIR=/data

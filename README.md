@@ -1,38 +1,102 @@
-<p align="center">
+<div align="center">
+
+<a href="#quick-start">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-    <img src="docs/assets/logo.svg" alt="HyperLevel" width="360">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-dark.svg">
+    <img src="docs/assets/readme/hero-light.svg" alt="HyperLevel – the free, open-source growth OS for solopreneurs, agencies and small agentic businesses" width="100%">
   </picture>
+</a>
+
+<h3>Your entire business stack in one open-source app.<br>Free for everyone. Self-hosted. Yours forever.</h3>
+
+<p>CRM, funnels & websites, unified inbox, automations, an AI business developer, courses & communities, helpdesk, invoices –<br>
+the tools solopreneurs, agencies and small businesses rent for hundreds a month, <b>in one app on your own server, with unlimited users and 0 € per seat.</b></p>
+
+<p>
+  <a href="LICENSE"><img alt="License: AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-2563eb?style=for-the-badge"></a>
+  <a href="https://github.com/BAISESYSTEMS/hyperlevel/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/BAISESYSTEMS/hyperlevel/ci.yml?branch=main&style=for-the-badge&label=CI"></a>
+  <a href="https://github.com/BAISESYSTEMS/hyperlevel/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/BAISESYSTEMS/hyperlevel?style=for-the-badge&color=8b5cf6"></a>
+  <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-22c55e?style=for-the-badge"></a>
+  <a href="https://github.com/BAISESYSTEMS/hyperlevel/pkgs/container/hyperlevel"><img alt="Docker image" src="https://img.shields.io/badge/docker-ghcr.io-0ea5e9?style=for-the-badge&logo=docker&logoColor=white"></a>
 </p>
 
-<h3 align="center">The open-source, self-hosted alternative to GoHighLevel and HubSpot</h3>
-
-<p align="center">
-  CRM · unified inbox · funnels & websites · automations · AI assistant & voice agent · courses & communities · helpdesk · invoices · Android app · iPhone & iPad web app · 340+ MCP tools · 250+ app connectors<br>
-  <b>One Node.js app, one SQLite file, unlimited sub-accounts – 0 € per seat.</b>
+<p>
+  <a href="#quick-start"><b>Quick start</b></a> ·
+  <a href="#features"><b>Features</b></a> ·
+  <a href="#made-for-solopreneurs-agencies--small-agentic-businesses"><b>Who it's for</b></a> ·
+  <a href="#how-it-compares"><b>Comparison</b></a> ·
+  <a href="#ai--mcp"><b>AI & MCP</b></a> ·
+  <a href="#open-for-contributions"><b>Contribute</b></a> ·
+  <a href="docs/roadmap.md"><b>Roadmap</b></a> ·
+  <a href="README.de.md"><b>Deutsch</b></a>
 </p>
 
-<p align="center">
-  <a href="LICENSE"><img alt="License: AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-blue"></a>
-  <a href="https://github.com/gohyperlevel/gohyperlevel/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/gohyperlevel/gohyperlevel/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://hub.docker.com/r/gohyperlevel/gohyperlevel"><img alt="Docker pulls" src="https://img.shields.io/docker/pulls/gohyperlevel/gohyperlevel"></a>
-  <a href="https://github.com/gohyperlevel/gohyperlevel/releases"><img alt="Release" src="https://img.shields.io/github/v/release/gohyperlevel/gohyperlevel?include_prereleases"></a>
-  <a href="https://github.com/gohyperlevel/gohyperlevel/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/gohyperlevel/gohyperlevel?style=social"></a>
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/stats-dark.svg">
+  <img src="docs/assets/readme/stats-light.svg" alt="340+ MCP tools · 250+ app connectors · 5,700+ automated tests · unlimited sub-accounts and users · 0 € per seat" width="100%">
+</picture>
 
-<p align="center">
-  <a href="#quick-start">Quick start</a> ·
-  <a href="#features">Features</a> ·
-  <a href="#how-it-compares">Comparison</a> ·
-  <a href="#ai--mcp">AI & MCP</a> ·
-  <a href="docs/deploy/README.md">Deploy</a> ·
-  <a href="docs/roadmap.md">Roadmap</a> ·
-  <a href="README.de.md">Deutsch</a>
-</p>
+<br><br>
 
-<p align="center">
-  <img src="docs/assets/tour.gif" alt="A quick tour through HyperLevel: dashboard, pipeline, inbox, calendar, reports" width="900">
-</p>
+<img src="docs/assets/tour.gif" alt="A quick tour through HyperLevel: dashboard, pipeline, inbox, calendar, reports" width="100%">
+
+</div>
+
+> [!TIP]
+> **Open for contributions – come build with us.** Every module, every screen and every workflow step is open source and
+> meant to be extended. Pick a [good first issue](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22),
+> request a connector, translate the UI or ship a whole module – [here's how](#open-for-contributions).
+
+## Made for solopreneurs, agencies & small agentic businesses
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3><img src="docs/assets/readme/icons/user.svg" width="22" height="22" alt="" align="top"> Solopreneurs</h3>
+      <ul>
+        <li><b>One app instead of ten subscriptions</b> – CRM, funnels, e-mail, booking, courses, invoices.</li>
+        <li><b>An AI business developer</b> (Jarvis) that reads your numbers every morning, spots the deal you forgot and drafts the follow-up.</li>
+        <li><b>Runs on a 5 € server</b> – one Node.js process, one SQLite file, backups with <code>cp</code>.</li>
+        <li><b>German & English UI</b>, GDPR-friendly, e-invoices (ZUGFeRD / XRechnung), SEPA.</li>
+      </ul>
+    </td>
+    <td width="33%" valign="top">
+      <h3><img src="docs/assets/readme/icons/building.svg" width="22" height="22" alt="" align="top"> Agencies</h3>
+      <ul>
+        <li><b>Unlimited sub-accounts</b> for every client – no per-seat, no per-contact pricing.</li>
+        <li><b>White-label everything</b>: your logo, colours, login domain, e-mails – and a SaaS mode to resell it with your own Stripe.</li>
+        <li><b>Snapshots & templates</b> to launch a new client in minutes, client logins with per-area rights.</li>
+        <li><b>Client reports, approvals and portals</b> your customers actually open.</li>
+      </ul>
+    </td>
+    <td width="33%" valign="top">
+      <h3><img src="docs/assets/readme/icons/bot.svg" width="22" height="22" alt="" align="top"> Small agentic businesses</h3>
+      <ul>
+        <li><b>340+ MCP tools</b> – Claude, ChatGPT, Codex or your own agents run sales, support and marketing with the same rights and audit log as a person.</li>
+        <li><b>Safe by design</b>: confirmation cards before anything is sent, deleted or paid, undo, per-agent safety modes.</li>
+        <li><b>AI steps in every workflow</b>, an AI chatbot, a voice agent and custom agents per team.</li>
+        <li><b>Bring your own model</b> – API keys or your own Claude / ChatGPT subscription for your personal chats.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+## 100 % open, 100 % customizable
+
+Nothing is locked, nothing is "enterprise only". **Every feature ships in this repository under the AGPL-3.0** – self-hosted
+is the full product, not a demo.
+
+| | |
+| --- | --- |
+| <img src="docs/assets/readme/icons/palette.svg" width="20" height="20" alt="" align="top"> **Make it yours** | Themes, colours, icon packs, logos, login pages and custom domains per agency and per client ([theming](docs/theming.md)). |
+| <img src="docs/assets/readme/icons/puzzle.svg" width="20" height="20" alt="" align="top"> **Add your own modules** | Every feature is a self-contained module with its own tables, routes and screens – plug yours into the registries without touching the core ([CONTRIBUTING.md](CONTRIBUTING.md)). |
+| <img src="docs/assets/readme/icons/plug.svg" width="20" height="20" alt="" align="top"> **Connect anything** | REST API with OpenAPI, webhooks, 340+ MCP tools, 250+ app connectors, Zapier / Make / n8n, external MCP servers ([API](docs/api.md)). |
+| <img src="docs/assets/readme/icons/cpu.svg" width="20" height="20" alt="" align="top"> **Bring your own AI** | Claude, OpenAI, Gemini, kie.ai or any OpenAI-compatible model – your keys, or your own Claude / ChatGPT subscription for your personal chats ([AI providers](docs/ai-providers.md)). |
+| <img src="docs/assets/readme/icons/database.svg" width="20" height="20" alt="" align="top"> **Own your data** | One SQLite file on your server, export everything, no telemetry, no vendor lock-in. |
+| <img src="docs/assets/readme/icons/languages.svg" width="20" height="20" alt="" align="top"> **Translate it** | The UI is German and English – adding a language is a set of plain files ([translating](docs/translating.md)). |
+
+<details>
+<summary><b>Status & languages</b></summary>
 
 > **Status:** HyperLevel is in daily production use, ships often (`0.0.N`, one step per deploy) and is now open source.
 > The UI is **German and English**: the English UI covers the app shell, sign-in, dashboard, contacts,
@@ -42,6 +106,8 @@
 > ([what is translated, how to add a language](docs/translating.md)). Each person picks the language in
 > *Einstellungen → Mein Konto* or the sidebar; the login page follows the browser. The docs for self-hosters are in
 > English.
+
+</details>
 
 ## Why HyperLevel?
 
@@ -69,13 +135,13 @@ sub-accounts.
 On any Linux server with Docker and a domain pointing at it – **one command**, with automatic HTTPS:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
 ```
 
 Or by hand, in **three commands**:
 
 ```bash
-git clone https://github.com/gohyperlevel/gohyperlevel.git && cd gohyperlevel
+git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
 cp .env.example .env                    # set PGHL_BASE_URL and PGHL_DOMAIN
 docker compose --profile caddy up -d    # HyperLevel + Caddy (Let's Encrypt)
 ```
@@ -91,6 +157,10 @@ npm ci && npm run build
 npm run demo:seed -- --data-dir ./demo-data
 PGHL_DATA_DIR=./demo-data npm start     # http://localhost:4700 · demo@example.com / demo1234
 ```
+
+<p>
+  <a href="https://render.com/deploy?repo=https://github.com/BAISESYSTEMS/hyperlevel"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height="32"></a>
+</p>
 
 More ways to deploy – Coolify, Railway, Render, Hostinger, plain Node: **[docs/deploy](docs/deploy/README.md)**.
 A public try-it-out instance: **[demo mode](docs/demo-mode.md)** (`PGHL_DEMO_MODE=1` – seeded data, nightly
@@ -350,14 +420,32 @@ Pages marked (DE) are written in German, like the app; all others are English.
 | Customize | [appearance, themes, icon packs, logos](docs/theming.md) · [UI language & translating](docs/translating.md) |
 | Project | [roadmap](docs/roadmap.md) · [changelog](CHANGELOG.md) · [contributing](CONTRIBUTING.md) · [contributor license agreement](CLA.md) · [security policy](SECURITY.md) · [partner program (DE)](docs/partner-program.md) |
 
-## Contributing
+## Open for contributions
 
-Issues, connector requests and pull requests are welcome – start with [CONTRIBUTING.md](CONTRIBUTING.md)
-(dev setup, tests, the module/registry rules and how to add a connector) and the
-[Code of Conduct](CODE_OF_CONDUCT.md). Pull requests need a one-time signature of the [CLA](CLA.md) (the CLA Assistant
-asks on your first PR). Questions go to [GitHub Discussions](https://github.com/gohyperlevel/gohyperlevel/discussions).
-Found a vulnerability? Please report it privately: [SECURITY.md](SECURITY.md). Recommending, hosting or setting up
-HyperLevel for others: [partner program](docs/partner-program.md).
+HyperLevel is built in the open and **we'd love your help** – whether you fix a typo, add a connector or ship a whole module.
+
+| You want to … | Start here |
+| --- | --- |
+| <img src="docs/assets/readme/icons/bug.svg" width="20" height="20" alt="" align="top"> Report a bug or suggest a feature | [Open an issue](https://github.com/BAISESYSTEMS/hyperlevel/issues/new/choose) |
+| <img src="docs/assets/readme/icons/sprout.svg" width="20" height="20" alt="" align="top"> Make your first contribution | [Good first issues](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22) · [help wanted](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22help+wanted%22) |
+| <img src="docs/assets/readme/icons/plug.svg" width="20" height="20" alt="" align="top"> Add an integration | [Connector request](https://github.com/BAISESYSTEMS/hyperlevel/issues/new?template=connector_request.yml) · [how connectors work](docs/connectors.md) |
+| <img src="docs/assets/readme/icons/puzzle.svg" width="20" height="20" alt="" align="top"> Build a module | [CONTRIBUTING.md](CONTRIBUTING.md) – dev setup, tests, the module/registry rules |
+| <img src="docs/assets/readme/icons/languages.svg" width="20" height="20" alt="" align="top"> Translate the UI | [docs/translating.md](docs/translating.md) |
+| <img src="docs/assets/readme/icons/chat.svg" width="20" height="20" alt="" align="top"> Ask, discuss, show what you built | [GitHub Discussions](https://github.com/BAISESYSTEMS/hyperlevel/discussions) |
+
+```bash
+git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
+npm ci && npm run build && npm run demo:seed -- --data-dir ./demo-data
+PGHL_DATA_DIR=./demo-data npm run dev     # hack away – demo@example.com / demo1234
+```
+
+Please read the [Code of Conduct](CODE_OF_CONDUCT.md). Pull requests need a one-time signature of the [CLA](CLA.md) (the CLA
+Assistant asks on your first PR). Found a vulnerability? Please report it privately: [SECURITY.md](SECURITY.md).
+Recommending, hosting or setting up HyperLevel for others: [partner program](docs/partner-program.md).
+
+<a href="https://github.com/BAISESYSTEMS/hyperlevel/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=BAISESYSTEMS/hyperlevel" alt="Contributors">
+</a>
 
 > **Partner links:** Some "Konto anlegen" links are referral links of the maintainer; replace or disable them under **Agentur → Partner-Links** or with `PGHL_REFERRALS_DISABLED=1`. They are always labelled "Partner-Link" and only clicks per provider are counted – details in [docs/referrals.md](docs/referrals.md).
 
@@ -366,3 +454,20 @@ HyperLevel for others: [partner program](docs/partner-program.md).
 HyperLevel is free software under the **[GNU Affero General Public License v3.0](LICENSE)**: use it, change it
 and run it for your business or your clients. If you offer a modified version as a network service, you must
 publish your changes under the same license. Third-party notices: [NOTICE](NOTICE).
+
+---
+
+<div align="center">
+
+<a href="https://star-history.com/#BAISESYSTEMS/hyperlevel&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=BAISESYSTEMS/hyperlevel&type=Date&theme=dark">
+    <img alt="Star history" src="https://api.star-history.com/svg?repos=BAISESYSTEMS/hyperlevel&type=Date" width="600">
+  </picture>
+</a>
+
+<p><b>If HyperLevel saves you a subscription, give it a ⭐ – it helps more solopreneurs, agencies and small businesses find it.</b></p>
+
+<sub>Built with ❤️ in Germany · coded together with Claude · free for everyone</sub>
+
+</div>

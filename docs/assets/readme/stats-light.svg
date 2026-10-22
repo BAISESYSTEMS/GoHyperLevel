@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="150" viewBox="0 0 1280 150" role="img" aria-label="340+ MCP tools, 250+ app connectors, 5,700+ automated tests, unlimited sub-accounts and users, 0 € per seat">
+<title>HyperLevel in numbers</title>
+<defs><linearGradient id="n" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+<style>.t{font-family:Inter,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif}.g{animation:glow 4s ease-in-out infinite}.g2{animation-delay:-.8s}.g3{animation-delay:-1.6s}.g4{animation-delay:-2.4s}.g5{animation-delay:-3.2s}@keyframes glow{0%,100%{stroke-opacity:.35}50%{stroke-opacity:1}}@media (prefers-reduced-motion:reduce){.g{animation:none}}</style></defs>
+<rect width="1280" height="150" rx="22" fill="#ffffff"/>
+<g transform="translate(28 22)"><rect width="232" height="106" rx="16" fill="#f8fafc" stroke="#e2e8f0"/><rect class="g g1" width="232" height="106" rx="16" fill="none" stroke="url(#n)" stroke-width="1.5"/>
+<text class="t" x="116" y="56" text-anchor="middle" font-size="40" font-weight="800" fill="url(#n)">340+</text>
+<text class="t" x="116" y="86" text-anchor="middle" font-size="16" font-weight="500" fill="#475569">MCP tools for AI agents</text></g>
+<g transform="translate(276 22)"><rect width="232" height="106" rx="16" fill="#f8fafc" stroke="#e2e8f0"/><rect class="g g2" width="232" height="106" rx="16" fill="none" stroke="url(#n)" stroke-width="1.5"/>
+<text class="t" x="116" y="56" text-anchor="middle" font-size="40" font-weight="800" fill="url(#n)">250+</text>
+<text class="t" x="116" y="86" text-anchor="middle" font-size="16" font-weight="500" fill="#475569">app connectors</text></g>
+<g transform="translate(524 22)"><rect width="232" height="106" rx="16" fill="#f8fafc" stroke="#e2e8f0"/><rect class="g g3" width="232" height="106" rx="16" fill="none" stroke="url(#n)" stroke-width="1.5"/>
+<text class="t" x="116" y="56" text-anchor="middle" font-size="40" font-weight="800" fill="url(#n)">5,700+</text>
+<text class="t" x="116" y="86" text-anchor="middle" font-size="16" font-weight="500" fill="#475569">automated tests</text></g>
+<g transform="translate(772 22)"><rect width="232" height="106" rx="16" fill="#f8fafc" stroke="#e2e8f0"/><rect class="g g4" width="232" height="106" rx="16" fill="none" stroke="url(#n)" stroke-width="1.5"/>
+<text class="t" x="116" y="56" text-anchor="middle" font-size="40" font-weight="800" fill="url(#n)">∞</text>
+<text class="t" x="116" y="86" text-anchor="middle" font-size="16" font-weight="500" fill="#475569">sub-accounts &amp; users</text></g>
+<g transform="translate(1020 22)"><rect width="232" height="106" rx="16" fill="#f8fafc" stroke="#e2e8f0"/><rect class="g g5" width="232" height="106" rx="16" fill="none" stroke="url(#n)" stroke-width="1.5"/>
+<text class="t" x="116" y="56" text-anchor="middle" font-size="40" font-weight="800" fill="url(#n)">0 €</text>
+<text class="t" x="116" y="86" text-anchor="middle" font-size="16" font-weight="500" fill="#475569">per seat, forever</text></g>
+</svg>

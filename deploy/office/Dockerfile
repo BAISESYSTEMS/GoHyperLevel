@@ -9,7 +9,7 @@
 # The engines are glibc programs (≥ 2.35), so this image runs HyperLevel on Debian (bookworm) instead of Alpine – same app, same
 # /data volume, same start script and user. The editors are static files (about 13–40 MB each, precompressed .gz next to them).
 
-ARG GOHIGH_IMAGE=ghcr.io/gohyperlevel/gohyperlevel:latest
+ARG GOHIGH_IMAGE=ghcr.io/baisesystems/hyperlevel:latest
 ARG NODE_VERSION=22
 
 FROM debian:bookworm-slim AS office

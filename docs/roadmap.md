@@ -1,8 +1,8 @@
 # Roadmap
 
 What we plan next – roughly in this order. Priorities move with feedback: 👍 the matching issue or open a
-[feature request](https://github.com/gohyperlevel/gohyperlevel/issues/new?template=feature_request.yml) /
-[connector request](https://github.com/gohyperlevel/gohyperlevel/issues/new?template=connector_request.yml).
+[feature request](https://github.com/BAISESYSTEMS/hyperlevel/issues/new?template=feature_request.yml) /
+[connector request](https://github.com/BAISESYSTEMS/hyperlevel/issues/new?template=connector_request.yml).
 
 ## Now
 

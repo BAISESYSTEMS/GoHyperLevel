@@ -10,7 +10,7 @@ Any Hostinger **KVM** VPS (KVM 1 is enough without the Video-Studio) runs HyperL
 3. SSH in and run:
 
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
    ```
 
 4. Open `https://crm.your-domain.com` and sign in with the printed login. Open ports 80 and 443 in the VPS
@@ -22,7 +22,7 @@ If you picked the **Docker + Traefik** template and manage projects in hPanel's 
 
 1. Docker Manager → **Compose** → paste [`deploy/examples/hostinger/compose.yaml`](../../deploy/examples/hostinger/compose.yaml).
 2. Environment: `PGHL_DOMAIN`, `PGHL_BASE_URL`, and for the first start `PGHL_ADMIN_EMAIL` / `PGHL_ADMIN_PASSWORD`.
-   Optionally pin the image: `GOHIGH_IMAGE=ghcr.io/gohyperlevel/gohyperlevel:0.0.18`.
+   Optionally pin the image: `GOHIGH_IMAGE=ghcr.io/baisesystems/hyperlevel:0.0.18`.
 3. Deploy. Traefik (entry points `web`/`websecure`, resolver `letsencrypt` – Hostinger's names) issues the
    certificate. Other Traefik setups: `TRAEFIK_ENTRYPOINT`, `TRAEFIK_HTTP_ENTRYPOINT`, `TRAEFIK_CERTRESOLVER`.
 4. Update: pull the new image and recreate the project.

@@ -10,7 +10,7 @@ public internet. We take security reports seriously and appreciate responsible d
 Report privately through GitHub's security advisories:
 
 1. Open the repository's **Security** tab → **Report a vulnerability**
-   (`https://github.com/gohyperlevel/gohyperlevel/security/advisories/new`).
+   (`https://github.com/BAISESYSTEMS/hyperlevel/security/advisories/new`).
 2. Describe the issue, the affected version (`GET /api/version`), steps to reproduce and the impact.
    A proof of concept is welcome; please use your own test instance and fictional data.
 

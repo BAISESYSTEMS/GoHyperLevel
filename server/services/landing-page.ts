@@ -18,10 +18,10 @@ import { waitlistNote, whyWaitlist, withWaitlist } from './landing-waitlist-copy
  * cloud button scrolls to the waitlist form (#warteliste) and the texts come from landing-waitlist-copy.ts.
  */
 
-export const GITHUB_URL = 'https://github.com/gohyperlevel/gohyperlevel';
+export const GITHUB_URL = 'https://github.com/BAISESYSTEMS/hyperlevel';
 /** `/demo` signs the visitor in and opens the app – no login page in between (see modules/demo.ts). */
 export const DEMO_URL = 'https://demo.gohyperlevel.com/demo';
-export const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash';
+export const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash';
 export const FONT_FILE = '/landing/inter-tight-latin-wght-normal.woff2';
 
 export type PageKind = 'home' | 'compare' | 'highlevel';

@@ -19,7 +19,7 @@ requests, docs, translations of the docs and code are all welcome. Please read t
 Requirements: **Node.js 22.13+** (SQLite is built in – no database server) and npm. Docker is optional.
 
 ```bash
-git clone https://github.com/gohyperlevel/gohyperlevel.git && cd gohyperlevel
+git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
 npm ci
 npm run dev          # API on :4700 (restarts on change) + Vite on :5173 with hot reload
 ```
@@ -171,7 +171,7 @@ app.services.catalogExtra = [
   `web/src/pages/Workflows.tsx`), new events as triggers (`app.services.workflowTriggers`), and the most
   useful operations as MCP tools.
 
-Not sure whether a connector fits? Open a [connector request](https://github.com/gohyperlevel/gohyperlevel/issues/new?template=connector_request.yml) first.
+Not sure whether a connector fits? Open a [connector request](https://github.com/BAISESYSTEMS/hyperlevel/issues/new?template=connector_request.yml) first.
 
 ## UI conventions
 
@@ -198,7 +198,7 @@ Not sure whether a connector fits? Open a [connector request](https://github.com
 
 ## Questions and support
 
-- **Questions, ideas and setup help go to [GitHub Discussions](https://github.com/gohyperlevel/gohyperlevel/discussions)**, not
+- **Questions, ideas and setup help go to [GitHub Discussions](https://github.com/BAISESYSTEMS/hyperlevel/discussions)**, not
   to issues. Issues are for reproducible bugs, feature requests and connector requests (the templates ask for what is needed).
 - HyperLevel is maintained on a best-effort basis: there is **no guarantee of support, response times or that a pull
   request gets merged**. Small, focused PRs with tests have the best chance. Commercial help: see the

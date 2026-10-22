@@ -2,7 +2,7 @@
 
 [Coolify](https://coolify.io) builds HyperLevel from the repository and puts its proxy (with HTTPS) in front.
 
-1. **New resource → Public repository** → `https://github.com/gohyperlevel/gohyperlevel` (or your fork), branch `main`.
+1. **New resource → Public repository** → `https://github.com/BAISESYSTEMS/hyperlevel` (or your fork), branch `main`.
 2. **Build pack: Dockerfile** (the repository's `Dockerfile`). Port: **4700**.
 3. **Domain:** e.g. `https://crm.your-domain.com` (Coolify issues the certificate).
 4. **Persistent storage:** add a volume mounted at **`/data`**.
@@ -14,7 +14,7 @@
 6. **Health check:** path `/healthz` (the image also has a Docker `HEALTHCHECK`).
 7. Deploy. Updates: redeploy (or enable auto-deploy on push).
 
-Prefer the prebuilt image? Create a **Docker image** resource with `ghcr.io/gohyperlevel/gohyperlevel:latest` and the
+Prefer the prebuilt image? Create a **Docker image** resource with `ghcr.io/baisesystems/hyperlevel:latest` and the
 same port, volume and variables.
 
 **Custom domains** (funnels, client logins): add each domain to the resource's domain list in Coolify so its
