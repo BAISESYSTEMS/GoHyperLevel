@@ -1,0 +1,43 @@
+/* Tiles in your own order (web/src/sortable, docs/theming.md#kacheln-sortieren). No handles: the whole tile is the grip,
+   with a grab cursor as the only hint – and only where the tile does not bring its own cursor (clickable cards keep theirs). */
+:where([data-sort-item]) { cursor: grab; }
+:where([data-sort-item][data-sort-tab]):focus-visible { outline: 2px solid var(--brand-ring, var(--brand)); outline-offset: 2px; }
+
+/* Touch: the long-press picks a tile up – no link menu (iOS) in its way. Text stays selectable where no drag starts (tables);
+   once a tile is lifted, html.sortable-dragging below keeps the selection out. */
+@media (pointer: coarse) {
+  [data-sort-item] { -webkit-touch-callout: none; }
+}
+
+/* The tile under the pointer: lifted above the others, a little larger, with a shadow; it follows the pointer (translate). */
+.sortable-lifted {
+  z-index: 60;
+  scale: 1.025;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, .22), 0 3px 8px rgba(15, 23, 42, .14) !important;
+  cursor: grabbing !important;
+  pointer-events: none;
+  transition: none !important;
+  will-change: translate;
+}
+/* Where it will land. */
+.sortable-slot {
+  position: fixed;
+  z-index: 40;
+  pointer-events: none;
+  border: 2px dashed color-mix(in srgb, var(--brand) 55%, transparent);
+  background: color-mix(in srgb, var(--brand) 6%, transparent);
+  box-sizing: border-box;
+}
+html.sortable-dragging, html.sortable-dragging * { cursor: grabbing !important; -webkit-user-select: none !important; user-select: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sortable-lifted { scale: 1; }
+}
+
+/* "Reihenfolge zurücksetzen": small and quiet, the last row of a grid the person arranged (full width in a CSS grid or a
+   wrapping flex row, after every tile – also while a drag previews with `order`). */
+.sortable-reset { grid-column: 1 / -1; flex: 1 0 100%; order: 9999; display: flex; justify-content: flex-end; margin: -4px 0 0; padding: 0; font-size: 12px; line-height: 1.4; background: none; border: 0; }
+.sortable-reset .linkish { background: none; border: 0; padding: 2px 0; color: var(--muted); cursor: pointer; font: inherit; }
+.sortable-reset .linkish:hover, .sortable-reset .linkish:focus-visible { color: var(--brand-text, var(--brand)); text-decoration: underline; }
+
+.sortable-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

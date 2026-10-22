@@ -1,0 +1,209 @@
+{
+  "name": "updateContact",
+  "label": "Kontakt aktualisieren",
+  "description": "Ändert einen bestehenden Kontakt.",
+  "type": "action",
+  "typeId": 4,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/actions/update_contact",
+    "method": "POST",
+    "body": {
+      "{{...}}": "{{omit(parameters, \"custom\")}}",
+      "custom": "{{toCollection(parameters.custom, \"key\", \"value\")}}"
+    },
+    "response": {
+      "output": "{{body}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "contact_id",
+      "label": "Kontakt-ID",
+      "required": false,
+      "help": "Oder E-Mail/Telefon angeben",
+      "type": "text"
+    },
+    {
+      "name": "email",
+      "label": "E-Mail",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "phone",
+      "label": "Telefon",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "new_email",
+      "label": "Neue E-Mail",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "first_name",
+      "label": "Vorname",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "last_name",
+      "label": "Nachname",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "company",
+      "label": "Firma",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "address",
+      "label": "Adresse",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "city",
+      "label": "Ort",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "postal_code",
+      "label": "PLZ",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "country",
+      "label": "Land",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "website",
+      "label": "Website",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "source",
+      "label": "Quelle",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "label": "Tags",
+      "required": false,
+      "type": "array",
+      "spec": {
+        "type": "text",
+        "label": "Tags"
+      }
+    },
+    {
+      "name": "custom",
+      "label": "Eigene Felder",
+      "required": false,
+      "help": "Schlüssel des eigenen Felds (key) und Wert (value)",
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "key",
+            "label": "Feld",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "value",
+            "label": "Wert",
+            "type": "text"
+          }
+        ]
+      }
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "id"
+    },
+    {
+      "name": "first_name",
+      "type": "text",
+      "label": "first_name"
+    },
+    {
+      "name": "last_name",
+      "type": "text",
+      "label": "last_name"
+    },
+    {
+      "name": "email",
+      "type": "text",
+      "label": "email"
+    },
+    {
+      "name": "phone",
+      "type": "text",
+      "label": "phone"
+    },
+    {
+      "name": "company",
+      "type": "text",
+      "label": "company"
+    },
+    {
+      "name": "city",
+      "type": "text",
+      "label": "city"
+    },
+    {
+      "name": "country",
+      "type": "text",
+      "label": "country"
+    },
+    {
+      "name": "source",
+      "type": "text",
+      "label": "source"
+    },
+    {
+      "name": "tags",
+      "type": "array",
+      "label": "Tags",
+      "spec": {
+        "type": "text"
+      }
+    },
+    {
+      "name": "custom",
+      "type": "any",
+      "label": "Eigene Felder"
+    }
+  ],
+  "samples": {
+    "id": "con_123",
+    "first_name": "Anna",
+    "last_name": "Beispiel",
+    "email": "anna@example.com",
+    "phone": "+4915112345678",
+    "company": "Beispiel GmbH",
+    "tags": [
+      "lead"
+    ],
+    "custom": {
+      "budget": "5000"
+    },
+    "created_at": "2026-10-04T09:00:00.000Z"
+  }
+}

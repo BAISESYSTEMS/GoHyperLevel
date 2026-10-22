@@ -1,0 +1,2 @@
+/* Texts at both ends of a scale or NPS. */
+.pf .pf-ends{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:13px;color:var(--pf-muted)}

@@ -1,0 +1,49 @@
+{
+  "name": "gohigh",
+  "label": "HyperLevel",
+  "type": "basic",
+  "parameters": [
+    {
+      "name": "baseUrl",
+      "type": "url",
+      "label": "Adresse deiner HyperLevel-Installation",
+      "required": true,
+      "help": "z. B. https://crm.example.com – ohne /api"
+    },
+    {
+      "name": "apiKey",
+      "type": "password",
+      "label": "API-Schlüssel",
+      "required": true,
+      "help": "Einstellungen → API & Webhooks → „+ Schlüssel“ (pghl_…)"
+    },
+    {
+      "name": "locationId",
+      "type": "text",
+      "label": "Sub-Account-ID",
+      "required": false,
+      "help": "Nur bei Agentur-Schlüsseln (pghla_…)"
+    }
+  ],
+  "communication": {
+    "url": "{{parameters.baseUrl}}/api/hooks/me",
+    "headers": {
+      "authorization": "Bearer {{parameters.apiKey}}",
+      "x-location-id": "{{parameters.locationId}}"
+    },
+    "response": {
+      "metadata": {
+        "type": "text",
+        "value": "{{body.location.name}}"
+      },
+      "error": {
+        "message": "[{{statusCode}}] {{body.error}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.authorization"
+      ]
+    }
+  }
+}

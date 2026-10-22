@@ -1,0 +1,111 @@
+{
+  "name": "searchOpportunities",
+  "label": "Opportunities suchen",
+  "description": "Findet Deals per Kontakt, E-Mail, Status oder Name (max. 10).",
+  "type": "search",
+  "typeId": 9,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/search/opportunities",
+    "method": "GET",
+    "qs": {
+      "contact_id": "{{parameters.contact_id}}",
+      "email": "{{parameters.email}}",
+      "status": "{{parameters.status}}",
+      "q": "{{parameters.q}}"
+    },
+    "response": {
+      "iterate": "{{body}}",
+      "output": "{{item}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "contact_id",
+      "type": "text",
+      "label": "Kontakt-ID"
+    },
+    {
+      "name": "email",
+      "type": "email",
+      "label": "E-Mail des Kontakts"
+    },
+    {
+      "name": "status",
+      "type": "select",
+      "label": "Status",
+      "options": [
+        {
+          "label": "Offen",
+          "value": "open"
+        },
+        {
+          "label": "Gewonnen",
+          "value": "won"
+        },
+        {
+          "label": "Verloren",
+          "value": "lost"
+        },
+        {
+          "label": "Aufgegeben",
+          "value": "abandoned"
+        }
+      ]
+    },
+    {
+      "name": "q",
+      "type": "text",
+      "label": "Name enthält"
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "id"
+    },
+    {
+      "name": "name",
+      "type": "text",
+      "label": "name"
+    },
+    {
+      "name": "status",
+      "type": "text",
+      "label": "status"
+    },
+    {
+      "name": "pipeline_id",
+      "type": "text",
+      "label": "pipeline_id"
+    },
+    {
+      "name": "stage_id",
+      "type": "text",
+      "label": "stage_id"
+    },
+    {
+      "name": "contact_id",
+      "type": "text",
+      "label": "contact_id"
+    },
+    {
+      "name": "email",
+      "type": "text",
+      "label": "email"
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "label": "Wert (€)"
+    }
+  ],
+  "samples": {
+    "id": "opp_123",
+    "name": "Website-Relaunch",
+    "value": 4500,
+    "status": "open"
+  }
+}

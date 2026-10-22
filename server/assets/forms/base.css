@@ -1,0 +1,25 @@
+/* Form styles, base part (every form). All rules sit under .pf, the root element of a form; colours, font and radius come from the
+   --pf-* variables of its theme (style attribute). The other parts (css/*.css named in form-runtime.ts) are added only when the
+   form has the field type or layout they style. */
+.pf{font-family:var(--pf-font);color:var(--pf-text);position:relative;z-index:1}
+.pf *{box-sizing:border-box}
+.pf .pf-stack{display:grid}
+.pf .pghl-step{grid-area:1/1;min-width:0}
+.pf.pf-classic .pghl-step:not([data-state=active]){display:none}
+.pf .pf-q{margin:0 0 20px;text-align:var(--pf-align)}
+.pf [hidden]{display:none!important}
+.pf .pf-label{display:block;font-weight:600;font-size:15px;margin:0 0 8px;color:var(--pf-text)}
+.pf input:not([type=checkbox]):not([type=radio]):not([type=range]),.pf select,.pf textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:var(--pf-card);color:var(--pf-text);font:inherit}
+.pf textarea{min-height:120px;resize:vertical}
+.pf input:focus-visible,.pf select:focus-visible,.pf textarea:focus-visible,.pf button:focus-visible{outline:3px solid var(--pf-color);outline-offset:2px}
+.pf .pf-err{color:var(--pf-danger);font-size:14px;min-height:0;margin-top:6px}
+.pf .pf-err:empty{display:none}
+.pf .pf-q[data-bad="1"] input:not([type=checkbox]):not([type=radio]),.pf .pf-q[data-bad="1"] select,.pf .pf-q[data-bad="1"] textarea{border-color:var(--pf-danger)}
+.pf .pf-nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.pf .pf-next{min-height:48px;padding:0 28px;border:0;border-radius:var(--pf-radius);background:var(--pf-color);color:var(--pf-btn-text);font:inherit;font-weight:700;cursor:pointer}
+.pf .pf-next:hover{filter:brightness(1.07)}
+.pf .pf-next[disabled]{opacity:.55;cursor:default}
+.pf .pf-done{text-align:var(--pf-align);padding:8px 0}
+.pf .error{color:var(--pf-danger)}
+@media (prefers-reduced-motion:reduce){.pf *{transition:none!important;animation:none!important}}
+@media (max-width:560px){.pf .pf-nav{position:sticky;bottom:0;background:var(--pf-card);padding:10px 0;margin-bottom:-4px}}

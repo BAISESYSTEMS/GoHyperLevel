@@ -1,0 +1,222 @@
+{
+  "name": "gohigh_event",
+  "label": "HyperLevel-Ereignis",
+  "type": "dedicated",
+  "connection": "gohigh",
+  "parameters": [
+    {
+      "name": "event",
+      "type": "select",
+      "label": "Auslöser",
+      "required": true,
+      "options": [
+        {
+          "label": "Neuer Kontakt",
+          "value": "contact.created"
+        },
+        {
+          "label": "Kontakt geändert",
+          "value": "contact.updated"
+        },
+        {
+          "label": "Tag hinzugefügt",
+          "value": "contact.tagged"
+        },
+        {
+          "label": "Neue Opportunity",
+          "value": "opportunity.created"
+        },
+        {
+          "label": "Pipeline-Stufe geändert",
+          "value": "opportunity.stage_changed"
+        },
+        {
+          "label": "Deal gewonnen",
+          "value": "opportunity.won"
+        },
+        {
+          "label": "Deal verloren",
+          "value": "opportunity.lost"
+        },
+        {
+          "label": "Formular eingereicht",
+          "value": "form.submitted"
+        },
+        {
+          "label": "Termin gebucht",
+          "value": "appointment.booked"
+        },
+        {
+          "label": "Termin abgesagt",
+          "value": "appointment.cancelled"
+        },
+        {
+          "label": "Rechnung bezahlt",
+          "value": "invoice.paid"
+        },
+        {
+          "label": "Produkt gekauft",
+          "value": "product.purchased"
+        },
+        {
+          "label": "Aufgabe erledigt",
+          "value": "task.completed"
+        },
+        {
+          "label": "Nachricht empfangen",
+          "value": "message.inbound"
+        },
+        {
+          "label": "Anruf verpasst",
+          "value": "call.missed"
+        },
+        {
+          "label": "Bewertung erhalten",
+          "value": "review.received"
+        },
+        {
+          "label": "Jedes Ereignis",
+          "value": "any"
+        }
+      ]
+    },
+    {
+      "name": "tag",
+      "label": "Nur dieser Tag",
+      "required": false,
+      "help": "Leer = jeder Tag. Gilt für: Tag hinzugefügt",
+      "type": "select",
+      "options": "rpc://listTags",
+      "mode": "edit"
+    },
+    {
+      "name": "pipeline_id",
+      "label": "Nur diese Pipeline",
+      "required": false,
+      "type": "select",
+      "options": "rpc://listPipelines",
+      "mode": "edit",
+      "help": "Optional – leer = alle. Gilt für: Neue Opportunity, Pipeline-Stufe geändert, Deal gewonnen, Deal verloren"
+    },
+    {
+      "name": "stage_id",
+      "label": "Nur diese Stufe",
+      "required": false,
+      "type": "select",
+      "options": "rpc://listStages",
+      "mode": "edit",
+      "help": "Optional – leer = alle. Gilt für: Pipeline-Stufe geändert"
+    },
+    {
+      "name": "form_id",
+      "label": "Nur dieses Formular",
+      "required": false,
+      "type": "select",
+      "options": "rpc://listForms",
+      "mode": "edit",
+      "help": "Optional – leer = alle. Gilt für: Formular eingereicht"
+    },
+    {
+      "name": "calendar_id",
+      "label": "Nur dieser Kalender",
+      "required": false,
+      "type": "select",
+      "options": "rpc://listCalendars",
+      "mode": "edit",
+      "help": "Optional – leer = alle. Gilt für: Termin gebucht, Termin abgesagt"
+    },
+    {
+      "name": "product_id",
+      "label": "Nur dieses Produkt",
+      "required": false,
+      "type": "select",
+      "options": "rpc://listProducts",
+      "mode": "edit",
+      "help": "Optional – leer = alle. Gilt für: Produkt gekauft"
+    },
+    {
+      "name": "channel",
+      "label": "Nur dieser Kanal",
+      "required": false,
+      "type": "select",
+      "options": [
+        {
+          "label": "E-Mail",
+          "value": "email"
+        },
+        {
+          "label": "SMS",
+          "value": "sms"
+        },
+        {
+          "label": "Live-Chat",
+          "value": "chat"
+        },
+        {
+          "label": "WhatsApp",
+          "value": "whatsapp"
+        },
+        {
+          "label": "Messenger",
+          "value": "messenger"
+        },
+        {
+          "label": "Instagram",
+          "value": "instagram"
+        }
+      ],
+      "help": "Optional – leer = alle. Gilt für: Nachricht empfangen"
+    },
+    {
+      "name": "events",
+      "label": "Nur diese Ereignistypen",
+      "required": false,
+      "help": "z. B. contact.created, invoice.paid – leer = alle. Gilt für: Jedes Ereignis",
+      "type": "array",
+      "spec": {
+        "type": "text",
+        "label": "Nur diese Ereignistypen"
+      }
+    }
+  ],
+  "attach": {
+    "url": "{{connection.baseUrl}}/api/hooks",
+    "method": "POST",
+    "headers": {
+      "authorization": "Bearer {{connection.apiKey}}",
+      "x-location-id": "{{connection.locationId}}"
+    },
+    "body": {
+      "target_url": "{{webhook.url}}",
+      "event": "{{parameters.event}}",
+      "source": "make",
+      "label": "Make",
+      "filters": {
+        "tag": "{{parameters.tag}}",
+        "pipeline_id": "{{parameters.pipeline_id}}",
+        "stage_id": "{{parameters.stage_id}}",
+        "form_id": "{{parameters.form_id}}",
+        "calendar_id": "{{parameters.calendar_id}}",
+        "product_id": "{{parameters.product_id}}",
+        "channel": "{{parameters.channel}}",
+        "events": "{{parameters.events}}"
+      }
+    },
+    "response": {
+      "data": {
+        "externalHookId": "{{body.id}}"
+      }
+    }
+  },
+  "detach": {
+    "url": "{{connection.baseUrl}}/api/hooks/{{webhook.externalHookId}}",
+    "method": "DELETE",
+    "headers": {
+      "authorization": "Bearer {{connection.apiKey}}",
+      "x-location-id": "{{connection.locationId}}"
+    }
+  },
+  "communication": {
+    "output": "{{body}}"
+  }
+}

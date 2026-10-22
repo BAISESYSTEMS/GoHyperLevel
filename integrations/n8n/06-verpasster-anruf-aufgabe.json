@@ -1,0 +1,110 @@
+{
+  "name": "HyperLevel: Verpasster Anruf → Rückruf-Aufgabe",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gohigh-missed-call",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "0f2fc966-8ba9-4d95-afad-a9d1a876964c",
+      "name": "Anruf verpasst",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "2fd804a9-64d7-40ed-a7ca-389c1a047cb5",
+      "notes": "Mit Vorlage 01 abonnieren: event \"call.missed\".",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/create_task",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $json.body.contact_id, title: \"Rückruf: \" + ($json.body.data.from || \"unbekannt\"), due_at: new Date(Date.now() + 2 * 3600e3).toISOString() }) }}",
+        "options": {}
+      },
+      "id": "653ff9f4-0646-496e-aef6-92920cabf00f",
+      "name": "Rückruf-Aufgabe",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/send_message",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $(\"Anruf verpasst\").item.json.body.contact_id, channel: \"sms\", body: \"Sorry, wir haben deinen Anruf verpasst – wir melden uns gleich!\" }) }}",
+        "options": {}
+      },
+      "id": "7dc69d2c-05dc-4801-af69-8b2ba8afd10a",
+      "name": "SMS zurück",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Anruf verpasst": {
+      "main": [
+        [
+          {
+            "node": "Rückruf-Aufgabe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rückruf-Aufgabe": {
+      "main": [
+        [
+          {
+            "node": "SMS zurück",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Verpasste Anrufe werden zur Rückruf-Aufgabe in zwei Stunden plus SMS an den Anrufer."
+  },
+  "tags": []
+}

@@ -1,0 +1,46 @@
+/* Wissensgedächtnis (Cognee): agency card, sub-account settings tab. Tokens only, so dark mode and themes just work. */
+.cg-note { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 10px; margin: 0 0 12px; background: var(--brand-soft); border: 1px solid transparent; }
+.cg-note > .ico, .cg-note > svg { flex: none; margin-top: 2px; }
+.cg-note p { margin: 0; }
+.cg-note.critical { background: color-mix(in srgb, var(--red) 12%, var(--panel)); border-color: color-mix(in srgb, var(--red) 40%, var(--line)); }
+.cg-note.critical > svg { color: var(--red); }
+.cg-note.warning { background: color-mix(in srgb, var(--yellow) 14%, var(--panel)); border-color: color-mix(in srgb, var(--yellow) 40%, var(--line)); }
+.cg-note.warning > svg { color: var(--yellow); }
+.cg-note.ok { background: color-mix(in srgb, var(--green) 12%, var(--panel)); }
+.cg-note.ok > svg { color: var(--green); }
+
+.cg-steps { list-style: none; padding: 0; margin: 10px 0; display: flex; flex-direction: column; gap: 6px; }
+.cg-steps li { display: flex; gap: 8px; align-items: baseline; }
+.cg-steps .cg-step-label { font-weight: 600; min-width: 150px; }
+
+.cg-ask { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.cg-ask input[type='search'], .cg-ask input[type='text'] { flex: 1 1 280px; min-width: 0; }
+.cg-answer { border-left: 3px solid var(--brand); padding: 6px 12px; margin: 10px 0; background: var(--brand-soft); border-radius: 0 8px 8px 0; white-space: pre-wrap; }
+.cg-hits { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.cg-hit { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--panel); }
+.cg-hit-head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+.cg-hit-head a, .cg-hit-head strong { font-weight: 600; }
+.cg-hit p { margin: 0; overflow-wrap: anywhere; }
+
+.cg-types { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+.cg-type { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--panel); }
+.cg-type.on { border-color: color-mix(in srgb, var(--brand) 55%, var(--line)); }
+.cg-type-head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cg-type-head .check { font-weight: 600; }
+.cg-type-sub { margin: 4px 0 0 26px; display: flex; flex-direction: column; gap: 4px; }
+.cg-type-sub .check { font-weight: 400; }
+
+.cg-status td code { font-size: 12px; }
+.cg-actions { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.cg-log { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 4px; }
+.cg-log li { display: flex; gap: 10px; }
+.cg-log time { color: var(--muted); white-space: nowrap; }
+
+.cg-mem { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.cg-mem:last-child { border-bottom: 0; }
+.cg-mem p { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+
+@media (max-width: 700px) {
+  .cg-steps .cg-step-label { min-width: 0; }
+  .cg-type-sub { margin-left: 0; }
+}

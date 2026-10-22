@@ -1,0 +1,3 @@
+/* Signature. */
+.pf .pf-sig canvas{display:block;width:100%;height:180px;border:1.5px dashed var(--pf-line);border-radius:var(--pf-radius);background:#fff;touch-action:none;cursor:crosshair}
+.pf .pf-clear{min-height:44px;padding:0 16px;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:transparent;color:var(--pf-text);font:inherit;font-weight:600;cursor:pointer;margin-top:8px}

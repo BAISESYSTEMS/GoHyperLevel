@@ -1,0 +1,107 @@
+/* Fokus-Modus: the page (web/src/focus/FocusPage.tsx). Loaded with its chunk; the shell parts are in shell.css. Theme tokens only, so light, dark and every theme work. */
+
+.fx-page { min-height: calc(100vh - 60px); min-height: calc(100dvh - 60px); display: flex; flex-direction: column; }
+.fx-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 66px; padding: 10px 0 10px 50px; }
+.fx-top-title { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.fx-exit { flex: none; }
+
+/* the question: centred and calm while there is no answer, a compact bar at the top once there is one */
+.fx-hero { width: 100%; max-width: 760px; margin: auto; padding: 2vh 0 8vh; padding: 2dvh 0 8dvh; display: flex; flex-direction: column; align-items: stretch; gap: 14px; transition: padding .25s; }
+.fx-page.has-answer .fx-hero { margin: 0 auto; padding: 4px 0 10px; }
+.fx-hello { font-size: clamp(24px, 3.4vw, 34px); line-height: 1.2; letter-spacing: -.02em; font-weight: 700; text-align: center; margin: 0 0 6px; }
+.fx-hello span { display: block; color: var(--muted); font-weight: 600; }
+/* with an answer the greeting steps aside – still the page's heading for screen readers */
+.fx-page.has-answer .fx-hello { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.fx-prompt-wrap { display: flex; flex-direction: column; gap: 6px; }
+.fx-prompt { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 20px; border-radius: 99px; background: var(--panel); border: 1px solid var(--line); box-shadow: 0 14px 40px rgba(15, 23, 42, .14); position: relative; transition: border-color .15s, box-shadow .15s; }
+.fx-prompt > .ico { color: var(--bd-accent-text); flex: none; }
+.fx-prompt:focus-within { border-color: var(--bd-accent); box-shadow: 0 14px 40px rgba(15, 23, 42, .14), 0 0 0 4px color-mix(in srgb, var(--bd-accent) 20%, transparent); }
+.fx-prompt input { border: 0; background: transparent; padding: 12px 0; outline: none !important; flex: 1; min-width: 0; font-size: 17px; box-shadow: none; }
+.fx-prompt input:focus { outline: none; border: 0; }
+.fx-prompt input::placeholder { color: var(--muted); opacity: .9; }
+.fx-prompt.busy::after { content: ''; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid transparent; background: linear-gradient(90deg, transparent, var(--bd-accent), transparent) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; background-size: 220% 100%; animation: bd-shimmer 1.2s linear infinite; pointer-events: none; }
+.fx-prompt.rec { border-color: var(--red); }
+.fx-mic { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--bg); color: var(--text); cursor: pointer; display: grid; place-items: center; flex: none; touch-action: none; transition: background .12s, color .12s; }
+.fx-mic:hover:not(:disabled) { background: var(--bd-soft); }
+.fx-mic.on { background: var(--red-fill); color: #fff; animation: bd-pulse 1.4s ease-out infinite; }
+.fx-mic:focus-visible, .fx-chip:focus-visible, .fx-hist:focus-visible, .fx-toggle:focus-visible, .fx-src:focus-visible { outline: 2px solid var(--bd-accent); outline-offset: 2px; }
+.fx-send { border-radius: 99px; padding: 11px 18px; flex: none; }
+.fx-error { color: var(--red); font-size: 13px; text-align: center; margin: 0; }
+
+.fx-opts { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; }
+.fx-toggle { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); border-radius: 99px; padding: 5px 12px; font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.fx-toggle.on { color: var(--bd-accent-text); border-color: color-mix(in srgb, var(--bd-accent) 50%, var(--line)); background: var(--bd-soft); }
+.fx-mode { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+
+.fx-chips, .fx-history { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.fx-chip { border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 99px; padding: 8px 14px; font: inherit; font-size: 13.5px; cursor: pointer; transition: border-color .12s, background .12s; }
+.fx-chip:hover:not(:disabled) { border-color: var(--bd-accent); background: var(--bd-soft); }
+.fx-chip:disabled, .fx-hist:disabled { opacity: .55; cursor: default; }
+.fx-history { gap: 6px; }
+.fx-history-label { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); }
+.fx-hist { border: 0; background: var(--bg); color: var(--muted); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 12.5px; cursor: pointer; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fx-hist:hover:not(:disabled) { color: var(--text); }
+.fx-hist.on { color: var(--bd-accent-text); background: var(--bd-soft); font-weight: 600; }
+.fx-page.has-answer .fx-chips { gap: 6px; }
+.fx-page.has-answer .fx-chip { padding: 4px 11px; font-size: 12.5px; color: var(--muted); }
+
+/* the answer */
+.fx-answer { width: 100%; max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; padding-bottom: 20px; animation: bd-rise .25s ease-out; }
+.fx-say { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.fx-say-icon { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; flex: none; color: var(--bd-accent-text); background: var(--bd-soft); }
+.fx-say-body { flex: 1; min-width: 0; }
+.fx-say > div:not(.fx-say-body) { flex: 1; min-width: 0; }
+.fx-q { margin: 0 0 2px; font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+.fx-say-text { margin: 0; font-size: 17px; line-height: 1.5; font-weight: 500; overflow-wrap: anywhere; }
+.fx-action { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; padding: 12px 16px; border-radius: 14px; border: 1px dashed color-mix(in srgb, var(--bd-accent) 55%, var(--line)); background: color-mix(in srgb, var(--bd-accent) 6%, var(--panel)); }
+.fx-action > .ico { color: var(--bd-accent-text); flex: none; }
+.fx-action p { flex: 1 1 260px; margin: 0; font-size: 14px; }
+.fx-errorbox { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--red) 40%, var(--line)); background: color-mix(in srgb, var(--red) 7%, var(--panel)); }
+.fx-errorbox p { flex: 1 1 240px; margin: 0; }
+
+/* tiles: a strip of key figures, then full rows of 12 columns – two columns on a tablet, one on a phone */
+.fx-tiles { display: flex; flex-direction: column; gap: 14px; }
+.fx-figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.fx-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; }
+.fx-tile { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.fx-row > .fx-tile { grid-column: span var(--w, 6); }
+.fx-card { height: var(--h, 182px); min-height: 0; }
+.fx-skel .fx-card { border-radius: 14px; background: linear-gradient(90deg, var(--panel) 0%, var(--bg) 50%, var(--panel) 100%); background-size: 200% 100%; border: 1px solid var(--line); animation: fx-skel 1.4s ease-in-out infinite; }
+@keyframes fx-skel { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.fx-src { display: inline-flex; align-items: center; gap: 5px; align-self: flex-start; max-width: 100%; padding: 0 4px; font-size: 11.5px; color: var(--muted); text-decoration: none; }
+.fx-src:hover { color: var(--text); text-decoration: underline; }
+.fx-src-text { overflow-wrap: anywhere; line-height: 1.35; }
+@media (max-width: 899.98px) {
+  .fx-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fx-row > .fx-tile { grid-column: span var(--wm, 1); }
+}
+@media (max-width: 559.98px) {
+  .fx-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .fx-figures .fx-card { height: 140px; }
+  .fx-row { grid-template-columns: minmax(0, 1fr); }
+  .fx-row > .fx-tile { grid-column: auto; }
+  .fx-top { padding-left: 50px; min-height: 62px; justify-content: flex-end; }
+  .fx-top-title { display: none; }
+  .fx-prompt { padding-left: 16px; gap: 6px; }
+  .fx-prompt > .ico { display: none; }
+  .fx-prompt input { font-size: 16px; }
+  .fx-send { padding: 11px 13px; }
+  .fx-send-text { display: none; }
+  .fx-say { padding: 14px; gap: 10px; }
+  .fx-say-icon { width: 32px; height: 32px; }
+  .fx-say-text { font-size: 15.5px; }
+  .fx-hero { padding-bottom: 4vh; padding-bottom: 4dvh; }
+}
+
+.fx-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; padding-top: 4px; }
+.fx-foot-note { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); flex: 1 1 300px; }
+.fx-foot-note .ico { flex: none; color: var(--green); }
+.fx-saved { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text); }
+.fx-saved .ico { color: var(--green); }
+.fx-saved-link { font-weight: 650; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-answer, .fx-hero { animation: none; transition: none; }
+  .fx-skel .fx-card, .fx-mic.on, .fx-prompt.busy::after { animation: none; }
+}

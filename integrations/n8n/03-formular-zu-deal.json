@@ -1,0 +1,73 @@
+{
+  "name": "HyperLevel: Formular → Opportunity",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gohigh-form",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "b02859ac-619e-47f3-a1a2-27b7b7a83cc8",
+      "name": "Formular eingereicht",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "9af871ce-1f58-444c-ac12-916f26d1bd71",
+      "notes": "Mit Vorlage 01 abonnieren: event \"form.submitted\" (optional filters.form_id).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/create_opportunity",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $json.body.contact_id, pipeline: \"Vertrieb\", stage: \"Neuer Lead\", name: \"Anfrage: \" + ($json.body.contact?.first_name || $json.body.contact?.email || \"Lead\"), source: \"n8n\" }) }}",
+        "options": {}
+      },
+      "id": "1934860a-25d7-4494-abd8-0bd9eff73a02",
+      "name": "Opportunity anlegen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Formular eingereicht": {
+      "main": [
+        [
+          {
+            "node": "Opportunity anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Jede Formular-Einsendung wird zu einem Deal in der Pipeline „Vertrieb“."
+  },
+  "tags": []
+}

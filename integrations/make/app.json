@@ -1,0 +1,48 @@
+{
+  "name": "gohigh",
+  "label": "HyperLevel",
+  "description": "Selbst gehostetes CRM: Kontakte, Deals, Termine, Rechnungen, Nachrichten – Sofort-Auslöser per REST-Hook, Aktionen und Suchen.",
+  "version": "1.0.0",
+  "language": "de",
+  "theme": "#2563eb",
+  "countries": [
+    "de",
+    "at",
+    "ch"
+  ],
+  "groups": [
+    {
+      "label": "Auslöser",
+      "modules": [
+        "watchEvents"
+      ]
+    },
+    {
+      "label": "Kontakte",
+      "modules": [
+        "createContact",
+        "updateContact",
+        "addTag",
+        "removeTag",
+        "addNote",
+        "searchContacts"
+      ]
+    },
+    {
+      "label": "Deals",
+      "modules": [
+        "createOpportunity",
+        "moveStage",
+        "searchOpportunities"
+      ]
+    },
+    {
+      "label": "Weitere",
+      "modules": [
+        "createTask",
+        "sendMessage",
+        "createInvoiceDraft"
+      ]
+    }
+  ]
+}

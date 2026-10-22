@@ -1,0 +1,14 @@
+/* Einfach-Modus on the core daily-work pages (web/src/areas/easy-core.ts). */
+.dash-late { color: var(--red); font-weight: 600; }
+.dash-range { max-width: 220px; }
+/* A fold-out of filters inside a toolbar row: no dashed separator, the filters wrap next to each other once open. */
+.filter-fold .more-fields { margin: 0; border-top: 0; padding-top: 0; }
+.filter-fold .more-fields > summary { padding: 6px 4px; white-space: nowrap; }
+.filter-fold .more-fields-body { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 6px; }
+.filter-fold { display: contents; }
+/* "Mehr …" tab that unfolds the remaining tabs of a settings dialog */
+.tabs-more { margin: -6px 0 10px; }
+/* "Weitere Felder" inside a two-column form grid: spans the grid, its fields keep the two columns */
+.grid2 > .more-fields, .grid3 > .more-fields { grid-column: 1 / -1; }
+.grid2 > .more-fields > .more-fields-body { grid-template-columns: 1fr 1fr; gap: 0 14px; }
+@media (max-width: 700px) { .grid2 > .more-fields > .more-fields-body { grid-template-columns: 1fr; } }

@@ -1,0 +1,32 @@
+# Optional: custom domains on a host that already runs nginx + certbot (instead of Caddy/Traefik).
+# Add this service next to HyperLevel (e.g. `docker compose -f docker-compose.yml -f deploy/examples/nginx-domain-agent/compose.yaml up -d`).
+#
+# Needs on the HOST: python3, nginx (sites-available/sites-enabled layout) and certbot with the nginx plugin.
+# The container is privileged and enters the host's namespaces with nsenter – it exists to manage the
+# host's nginx. It only touches files named pghl-* and refuses domains another site already serves.
+#
+# .env (shared with HyperLevel):
+#   PGHL_AGENT_TOKEN=<long random string>   – same value for HyperLevel and the agent
+#   PGHL_SERVER_IP=203.0.113.10              – this server's public IP(s), comma-separated
+services:
+  domain-agent:
+    image: debian:bookworm-slim
+    restart: unless-stopped
+    privileged: true
+    pid: host
+    network_mode: host
+    environment:
+      PGHL_AGENT_TOKEN: ${PGHL_AGENT_TOKEN:?set PGHL_AGENT_TOKEN}
+      PGHL_SERVER_IP: ${PGHL_SERVER_IP:?set PGHL_SERVER_IP}
+      PGHL_APP_PORT: ${GOHIGH_PORT:-4700}
+    volumes:
+      - ./deploy/examples/nginx-domain-agent/domain-agent.py:/agent/domain-agent.py:ro
+      - /usr/local/lib/gohigh:/host-lib
+    command:
+      - sh
+      - -c
+      - >-
+        cp /agent/domain-agent.py /host-lib/domain-agent.py &&
+        exec nsenter -t 1 -m -u -n -i --
+        env PGHL_AGENT_TOKEN="$$PGHL_AGENT_TOKEN" PGHL_SERVER_IP="$$PGHL_SERVER_IP" PGHL_APP_PORT="$$PGHL_APP_PORT"
+        python3 /usr/local/lib/gohigh/domain-agent.py

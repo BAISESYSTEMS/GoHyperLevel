@@ -1,0 +1,16 @@
+{
+  "name": "listCalendars",
+  "label": "Kalender",
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/calendars",
+    "method": "GET",
+    "response": {
+      "iterate": "{{body}}",
+      "output": {
+        "label": "{{item.name}}",
+        "value": "{{item.id}}"
+      }
+    }
+  }
+}

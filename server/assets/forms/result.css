@@ -1,0 +1,5 @@
+/* Ending after submit: title, values, text. */
+.pf .pf-done h2{font-size:clamp(26px,5vw,38px);line-height:1.2;margin:0 0 10px;color:var(--pf-text)}
+.pf .pf-done p{font-size:18px;color:var(--pf-muted);margin:0 0 20px;white-space:pre-line}
+.pf .pf-done .pf-vals{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.pf .pf-done .pf-vals span{background:var(--pf-soft);border-radius:99px;padding:6px 14px;font-weight:600}

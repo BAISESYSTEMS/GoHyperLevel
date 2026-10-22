@@ -1,0 +1,16 @@
+{
+  "name": "listPipelines",
+  "label": "Pipelines",
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/pipelines",
+    "method": "GET",
+    "response": {
+      "iterate": "{{body}}",
+      "output": {
+        "label": "{{item.name}}",
+        "value": "{{item.id}}"
+      }
+    }
+  }
+}

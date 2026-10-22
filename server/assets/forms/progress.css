@@ -1,0 +1,4 @@
+/* Progress bar. */
+.pf .pf-progress{display:flex;align-items:center;gap:12px;margin:0 0 22px;font-size:13px;color:var(--pf-muted)}
+.pf .pf-bar{flex:1;height:6px;background:var(--pf-line);border-radius:99px;overflow:hidden}
+.pf .pf-bar i{display:block;height:100%;width:0;background:var(--pf-color);border-radius:99px;transition:width .4s ease}

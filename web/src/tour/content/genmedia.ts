@@ -1,0 +1,52 @@
+import type { Tour } from '../types';
+
+/** KI-Studio: images, video, music, speech and transcription with the sub-account's own provider keys. */
+export const GENMEDIA_TOURS: Tour[] = [
+  {
+    id: 'ai-studio',
+    title: 'AI Studio: Apps im Chat bauen (Beta)',
+    summary: 'Mit deinem eigenen Claude-, OpenAI- oder OpenRouter-Key kleine Apps und Websites im Chat bauen, in der Vorschau prüfen und unter einer eigenen Adresse veröffentlichen.',
+    icon: 'code',
+    group: 'ai',
+    perm: 'funnels',
+    minutes: 3,
+    routes: ['ai-studio'],
+    keywords: 'ai studio app builder lovable bolt react website chat byok claude openai openrouter veröffentlichen publish',
+    learned: ['Einen eigenen KI-Key verbinden (BYOK)', 'Ein Projekt aus einem Beispiel-Prompt starten', 'Vorschau, Versionen und ZIP-Export nutzen', 'Die App unter /apps/<adresse>/ veröffentlichen und wieder offline nehmen'],
+    docs: { label: 'AI Studio', file: 'ai-studio' },
+    steps: [
+      { title: 'Das AI Studio', route: 'ai-studio', target: 'nav-ai-studio', text: 'Hier baust du kleine Apps und Websites, indem du im Chat beschreibst, was du willst. Der Agent schreibt die Dateien, baut sie und zeigt eine Vorschau.' },
+      { title: 'Key verbinden', target: 'studio-connect', optional: true, missing: 'Du hast schon einen KI-Anbieter verbunden – weiter geht’s.', text: 'Ohne Key geht nichts: Unter Einstellungen → KI-Anbieter (BYOK) trägst du deinen Claude-, OpenAI- oder OpenRouter-Key ein. Du zahlst direkt beim Anbieter.' },
+      { title: 'Mit einem Beispiel starten', target: 'studio-examples', optional: true, text: 'Landingpage, Buchungs-Widget oder Rechner-App: Ein Klick legt das Projekt an und füllt den Chat mit dem Prompt.' },
+      { title: 'Neues Projekt', target: 'page-actions', text: 'Oder leg ein leeres Projekt an – mit React oder einfachem HTML als Vorlage.' },
+      { title: 'Veröffentlichen', text: 'Im Projekt zeigt **Veröffentlichen** die öffentliche Adresse `/apps/<adresse>/`. Neu veröffentlichen ersetzt die Fassung, „Offline nehmen“ nimmt sie vom Netz – beides steht im Protokoll.' },
+    ],
+  },
+  {
+    id: 'ki-studio',
+    title: 'KI-Studio: Bilder, Videos & Sprache',
+    summary: 'Mit deinem eigenen KI-Anbieter (fal.ai, kie.ai, Replicate, OpenAI, Gemini, ElevenLabs …) Bilder, Videos, Musik und Sprache erzeugen – mit jedem Modell.',
+    icon: 'sparkles',
+    group: 'ai',
+    perm: 'social',
+    minutes: 5,
+    routes: ['ki-studio'],
+    keywords: 'ki studio bild video musik sprache tts stt transkription fal kie replicate openai gemini veo flux suno elevenlabs byok generieren',
+    learned: ['Dass du einen eigenen Anbieter-Schlüssel (BYOK) verbindest und direkt bei ihm zahlst', 'Verbindung und beliebiges Modell wählen, Prompt und Optionen setzen', 'Ergebnisse in die Mediathek, in Social-Posts, E-Mails und Funnels übernehmen', 'Jeden anderen Dienst per HTTP-Vorlage anbinden'],
+    docs: { label: 'KI-Studio', file: 'genmedia' },
+    steps: [
+      { title: 'Das KI-Studio', route: 'ki-studio', target: 'nav-ki-studio', text: 'Hier erzeugst du Bilder, Videos, Musik und Sprache mit **deinem eigenen** KI-Anbieter. Die Kosten laufen direkt über dein Konto dort – {brand} speichert die Ergebnisse dauerhaft.' },
+      { title: 'Was willst du erzeugen?', target: 'tab-bild', text: 'Bild, Video, Audio (Musik & Sound) und Sprache (Text in Sprache oder Transkription). Jeder Reiter zeigt nur Anbieter, die das können.' },
+      { title: 'Anbieter verbinden', target: 'gm-byok', optional: true, missing: 'Du hast schon einen Anbieter verbunden – weiter geht’s.', text: 'Ohne Verbindung geht nichts: Unter Einstellungen → KI-Anbieter (BYOK) trägst du den Schlüssel von fal.ai, kie.ai, Replicate, OpenAI, Gemini, Stability, ElevenLabs, Runway oder Luma ein.' },
+      { title: 'Anbieter & Modell', target: 'gm-model', optional: true, text: 'Wähle die Verbindung und ein Modell aus den Vorschlägen – oder trag **jede beliebige Modell-ID** des Anbieters ein, z. B. fal-ai/veo3 oder google/nano-banana.' },
+      { title: 'Beschreiben', target: 'gm-prompt', optional: true, text: 'Beschreibe möglichst konkret: Motiv, Stil, Licht, Stimmung. Negativ-Prompt, Seitenverhältnis, Dauer und Seed findest du darunter.' },
+      { title: 'Referenzbild', target: 'gm-reference', optional: true, text: 'Mit einem Referenzbild bearbeitest du ein Foto (Bild zu Bild) oder erweckst es zum Leben (Bild zu Video).' },
+      { title: 'Erweiterte Parameter', target: 'gm-params', optional: true, text: 'Jede Option, die das Modell kennt, als JSON – sie wird 1:1 an den Anbieter übergeben und gewinnt gegen die Felder oben.' },
+      { title: 'Generieren', target: 'gm-generate', optional: true, text: 'Der Auftrag läuft im Hintergrund. Videos brauchen meist ein paar Minuten – du kannst die Seite verlassen.' },
+      { title: 'Deine Ergebnisse', target: 'gm-gallery', text: 'Hier liegen alle Ergebnisse mit Kosten-Hinweis vom Anbieter: Download, In Mediathek, Für Social-Post verwenden, In E-Mail/Funnel einfügen, Neu und Variation.' },
+      { title: 'Sprache', target: 'tab-sprache', text: 'Text in Sprache mit Stimmenauswahl (z. B. ElevenLabs, OpenAI, Gemini) oder Aufnahmen in Text umwandeln.' },
+      { title: 'Eigene Anbieter', target: 'tab-anbieter', text: 'Ein Dienst fehlt? Mit einer HTTP-Vorlage (Adresse, JSON-Body mit Platzhaltern, Ergebnis-Pfad, optional Status-Abfrage) bindest du ihn ohne Code an.' },
+      { title: 'Überall im Einsatz', text: 'Im E-Mail-Builder, im Funnel-Builder, im Social Planner und im Blog gibt es den Knopf **KI-Bild generieren**. In Automationen erzeugen „KI-Bild generieren“, „KI-Video generieren“ und „Text in Sprache“ Medien für Kontakte.' },
+    ],
+  },
+];

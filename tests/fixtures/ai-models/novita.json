@@ -1,0 +1,118 @@
+{
+ "data": [
+  {
+   "created": 1787754787,
+   "id": "zai-org/glm-5.3-flash",
+   "object": "model",
+   "owned_by": "novita",
+   "permission": null,
+   "root": "",
+   "parent": "",
+   "input_token_price_per_m": 1500,
+   "output_token_price_per_m": 5000,
+   "pricing": {
+    "prompt": {
+     "origin_price_per_m": 1500,
+     "price_per_m": 1500,
+     "origin_price_per_m_decimal": "0.15",
+     "price_per_m_decimal": "0.15"
+    },
+    "completion": {
+     "origin_price_per_m": 5000,
+     "price_per_m": 5000,
+     "origin_price_per_m_decimal": "0.5",
+     "price_per_m_decimal": "0.5"
+    },
+    "input_cache_read": {
+     "origin_price_per_m": 300,
+     "price_per_m": 300,
+     "origin_price_per_m_decimal": "0.03",
+     "price_per_m_decimal": "0.03"
+    }
+   },
+   "is_tiered_billing": false,
+   "title": "zai-org/glm-5.3-flash",
+   "tags": [],
+   "context_size": 1048576,
+   "status": 1,
+   "display_name": "GLM 5.3 Flash",
+   "model_type": "chat",
+   "max_output_tokens": 131072,
+   "features": [
+    "function-calling",
+    "structured-outputs",
+    "reasoning",
+    "serverless"
+   ],
+   "endpoints": [
+    "chat/completions",
+    "anthropic",
+    "responses"
+   ],
+   "input_modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ]
+  },
+  {
+   "created": 1790471016,
+   "id": "deepseek/deepseek-v4-pro-0813-p",
+   "object": "model",
+   "owned_by": "novita",
+   "permission": null,
+   "root": "",
+   "parent": "",
+   "input_token_price_per_m": 13200,
+   "output_token_price_per_m": 39600,
+   "pricing": {
+    "prompt": {
+     "origin_price_per_m": 13200,
+     "price_per_m": 13200,
+     "origin_price_per_m_decimal": "1.32",
+     "price_per_m_decimal": "1.32"
+    },
+    "completion": {
+     "origin_price_per_m": 39600,
+     "price_per_m": 39600,
+     "origin_price_per_m_decimal": "3.96",
+     "price_per_m_decimal": "3.96"
+    },
+    "input_cache_read": {
+     "origin_price_per_m": 440,
+     "price_per_m": 440,
+     "origin_price_per_m_decimal": "0.044",
+     "price_per_m_decimal": "0.044"
+    }
+   },
+   "is_tiered_billing": false,
+   "title": "deepseek/deepseek-v4-pro-0813-p",
+   "tags": [],
+   "context_size": 1048576,
+   "status": 1,
+   "display_name": "deepseek/deepseek-v4-pro-0813-p",
+   "model_type": "chat",
+   "max_output_tokens": 393216,
+   "features": [
+    "serverless",
+    "function-calling",
+    "structured-outputs",
+    "reasoning"
+   ],
+   "endpoints": [
+    "chat/completions",
+    "responses",
+    "anthropic"
+   ],
+   "input_modalities": [
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ]
+  }
+ ]
+}

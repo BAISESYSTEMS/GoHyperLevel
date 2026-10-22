@@ -1,0 +1,102 @@
+{
+  "name": "createInvoiceDraft",
+  "label": "Rechnungsentwurf anlegen",
+  "description": "Legt eine Rechnung als Entwurf an (wird nicht verschickt).",
+  "type": "action",
+  "typeId": 4,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/actions/create_invoice_draft",
+    "method": "POST",
+    "body": "{{parameters}}",
+    "response": {
+      "output": "{{body}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "contact_id",
+      "label": "Kontakt-ID",
+      "required": false,
+      "help": "Oder E-Mail/Telefon angeben",
+      "type": "text"
+    },
+    {
+      "name": "email",
+      "label": "E-Mail",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "phone",
+      "label": "Telefon",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "label": "Titel",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "items",
+      "label": "Positionen",
+      "required": true,
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "label": "Position",
+        "spec": [
+          {
+            "name": "name",
+            "label": "Position",
+            "required": true,
+            "type": "text"
+          },
+          {
+            "name": "qty",
+            "label": "Menge",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "price",
+            "label": "Preis netto (€)",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "tax_rate",
+            "label": "USt. %",
+            "required": false,
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "due_at",
+      "label": "Fällig am",
+      "required": false,
+      "type": "date"
+    },
+    {
+      "name": "notes",
+      "label": "Hinweise",
+      "required": false,
+      "type": "text"
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "ID"
+    }
+  ],
+  "samples": {
+    "id": "create_invoice_draft_1"
+  }
+}

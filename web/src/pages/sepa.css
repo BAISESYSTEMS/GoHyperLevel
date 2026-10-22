@@ -1,0 +1,30 @@
+/* SEPA page (web/src/pages/Sepa.tsx, SepaRuns.tsx) – builds on creator.css (.cr: 44 px targets, panels, list rows). */
+.sepa .page-head { margin-bottom: 12px; }
+.sepa-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; margin-bottom: 14px; }
+.sepa-stats > .card { margin-top: 0; }
+.sepa .cr-callout { margin: 10px 0; }
+.sepa .tabs { margin: 6px 0 14px; flex-wrap: wrap; }
+.sepa-filter { margin-bottom: 6px; }
+.sepa-filter .field { flex: 1 1 220px; }
+.sepa-picked { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); margin-bottom: 12px; }
+.sepa-link { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sepa-link code { flex: 1 1 260px; min-width: 0; overflow-wrap: anywhere; padding: 10px 12px; border-radius: 9px; background: var(--bg); border: 1px solid var(--line); font-size: 13px; }
+.sepa-hash { overflow-wrap: anywhere; font-size: 12px; }
+.sepa-text { white-space: pre-wrap; font-size: 14px; line-height: 1.55; padding: 12px 14px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); }
+.sepa-h4 { margin: 18px 0 8px; }
+.sepa-warn { color: var(--red); }
+.sepa-wide { width: 100%; margin: 10px 0 6px; }
+.sepa-scroll { overflow-x: auto; margin-top: 12px; }
+.sepa-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+.sepa-table th, .sepa-table td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.sepa-table th { font-size: 12px; color: var(--muted); font-weight: 600; }
+.sepa-table .num { text-align: right; white-space: nowrap; }
+.sepa-table tfoot td { font-weight: 700; border-bottom: 0; }
+.sepa-actions { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; min-width: 120px; }
+.sepa-line { padding: 12px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; background: var(--bg); }
+.sepa-savebar { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
+.sepa-savebar .btn { min-width: 220px; }
+@media (max-width: 600px) {
+  .sepa-actions { justify-content: flex-start; }
+  .sepa-savebar .btn { width: 100%; }
+}

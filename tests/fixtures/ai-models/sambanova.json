@@ -1,0 +1,29 @@
+{
+ "object": "list",
+ "data": [
+  {
+   "context_length": 131072,
+   "id": "DeepSeek-V3.1",
+   "max_completion_tokens": 7168,
+   "object": "model",
+   "owned_by": "no-reply@sambanova.ai",
+   "pricing": {
+    "completion": "0.00000450",
+    "prompt": "0.00000300"
+   },
+   "sn_metadata": {}
+  },
+  {
+   "context_length": 131072,
+   "id": "gpt-oss-120b",
+   "max_completion_tokens": 131072,
+   "object": "model",
+   "owned_by": "no-reply@sambanova.ai",
+   "pricing": {
+    "completion": "0.00000059",
+    "prompt": "0.00000022"
+   },
+   "sn_metadata": {}
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "gohigh-zapier",
+  "version": "1.0.0",
+  "description": "Zapier-App für HyperLevel (selbst gehostetes CRM): Sofort-Auslöser per REST-Hook, Aktionen und Suchen.",
+  "license": "AGPL-3.0-only",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "zapier-platform-core": "^17.0.0"
+  }
+}

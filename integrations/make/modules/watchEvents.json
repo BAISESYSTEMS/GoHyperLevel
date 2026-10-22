@@ -1,0 +1,140 @@
+{
+  "name": "watchEvents",
+  "label": "Neues Ereignis (sofort)",
+  "description": "Startet sofort, wenn in HyperLevel etwas passiert: neuer Kontakt, Tag, Deal gewonnen, Formular, Termin, Rechnung bezahlt …",
+  "type": "instant_trigger",
+  "typeId": 10,
+  "connection": null,
+  "webhook": "gohigh_event",
+  "communication": null,
+  "parameters": [],
+  "expect": [],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "Ereignis-ID"
+    },
+    {
+      "name": "event",
+      "type": "text",
+      "label": "Auslöser"
+    },
+    {
+      "name": "type",
+      "type": "text",
+      "label": "Ereignistyp"
+    },
+    {
+      "name": "location_id",
+      "type": "text",
+      "label": "Sub-Account"
+    },
+    {
+      "name": "occurred_at",
+      "type": "date",
+      "label": "Zeitpunkt"
+    },
+    {
+      "name": "contact_id",
+      "type": "text",
+      "label": "Kontakt-ID"
+    },
+    {
+      "name": "contact",
+      "type": "collection",
+      "label": "Kontakt",
+      "spec": [
+        {
+          "name": "id",
+          "type": "text",
+          "label": "id"
+        },
+        {
+          "name": "first_name",
+          "type": "text",
+          "label": "first_name"
+        },
+        {
+          "name": "last_name",
+          "type": "text",
+          "label": "last_name"
+        },
+        {
+          "name": "email",
+          "type": "text",
+          "label": "email"
+        },
+        {
+          "name": "phone",
+          "type": "text",
+          "label": "phone"
+        },
+        {
+          "name": "company",
+          "type": "text",
+          "label": "company"
+        },
+        {
+          "name": "city",
+          "type": "text",
+          "label": "city"
+        },
+        {
+          "name": "country",
+          "type": "text",
+          "label": "country"
+        },
+        {
+          "name": "source",
+          "type": "text",
+          "label": "source"
+        },
+        {
+          "name": "tags",
+          "type": "array",
+          "label": "Tags",
+          "spec": {
+            "type": "text"
+          }
+        },
+        {
+          "name": "custom",
+          "type": "any",
+          "label": "Eigene Felder"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "any",
+      "label": "Daten des Ereignisses"
+    }
+  ],
+  "samples": {
+    "id": "sample_contact_created",
+    "event": "contact.created",
+    "type": "contact.created",
+    "location_id": "loc_123",
+    "occurred_at": "2026-10-04T09:00:00.000Z",
+    "contact_id": "con_123",
+    "contact": {
+      "id": "con_123",
+      "first_name": "Anna",
+      "last_name": "Beispiel",
+      "email": "anna@example.com",
+      "phone": "+4915112345678",
+      "company": "Beispiel GmbH",
+      "tags": [
+        "lead"
+      ],
+      "custom": {
+        "budget": "5000"
+      },
+      "created_at": "2026-10-04T09:00:00.000Z"
+    },
+    "data": {
+      "contactId": "con_123"
+    }
+  }
+}

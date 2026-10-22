@@ -1,0 +1,71 @@
+/* Einfach-Modus – the shell parts every page needs: the sidebar's "Mehr" and pinned Einstellungen, the calm top bar with the
+   omnibox and the avatar menu, the "⋯" menu of page heads and the confirm dialog. The lazy parts are in simple.css. */
+
+/* --- sidebar ---------------------------------------------------------------------------------------------------------- */
+.side-simple { display: flex; flex-direction: column; gap: 1px; border-top: 1px solid var(--side-line, #1e293b); padding-top: 6px; }
+.side-simple .side-showall { font-size: 13.5px; padding: 7px 10px; color: var(--side-text); text-decoration: none; }
+.side-simple .side-showall .ico, .side-simple .side-showall svg { color: var(--side-muted, #7c8aa5); }
+.side-simple .side-showall.on { background: var(--side-hover); }
+.side-morecount { margin-left: 4px; font-size: 11px; color: var(--side-muted, #7c8aa5); }
+
+/* --- top bar ---------------------------------------------------------------------------------------------------------- */
+.omni-btn { flex: 1; max-width: 460px; min-width: 0; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--muted); font: inherit; cursor: text; text-align: left; }
+.omni-btn:hover { border-color: var(--muted); }
+.omni-btn span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.omni-btn kbd { font-size: 11px; border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; background: var(--panel); }
+.topbar .top-gap { flex: 1; }
+.avatar-btn { width: 34px; height: 34px; border-radius: 99px; border: 0; background: var(--brand); color: var(--on-brand, #fff); font: inherit; font-weight: 700; cursor: pointer; flex: none; }
+.avatar-wrap { position: relative; flex: none; }
+.avatar-menu { position: absolute; right: 0; top: 42px; z-index: 40; min-width: 240px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 14px 40px rgba(0, 0, 0, .16); padding: 6px; }
+.avatar-menu .am-who { padding: 8px 10px; border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+.avatar-menu .am-who small { display: block; color: var(--muted); }
+.avatar-menu button, .avatar-menu a { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: inherit; text-align: left; cursor: pointer; text-decoration: none; }
+.avatar-menu button:hover, .avatar-menu a:hover { background: var(--brand-soft); }
+.avatar-menu hr { margin: 4px 0; }
+@media (max-width: 599.98px) {
+  .omni-btn span, .omni-btn kbd { display: none; }
+  .omni-btn { flex: 0 0 auto; width: 40px; justify-content: center; padding: 8px; }
+  .topbar { gap: 6px; flex-wrap: nowrap; }
+  .topbar .pm-chip-title { display: none; }
+}
+
+/* --- page heads: one primary, the rest in "⋯" – never wrapping on phones ---------------------------------------------- */
+.page-head .actions { flex-wrap: nowrap; }
+.page-head .actions > * { flex: none; }
+.act-more { position: relative; display: inline-flex; }
+.act-more > .btn { min-width: 40px; justify-content: center; }
+.act-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; min-width: 220px; max-width: min(320px, 92vw); padding: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 14px 40px rgba(0, 0, 0, .16); display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
+/* closed but mounted: what a button in the menu opened (its dialog) stays alive */
+.act-pop.closed { visibility: hidden; pointer-events: none; height: 0; padding: 0; border: 0; overflow: visible; }
+.act-pop .modal-bg, .act-pop [role='dialog'] { visibility: visible; pointer-events: auto; }
+.act-pop > .btn, .act-pop > a.btn, .act-pop > button, .act-pop > span > .btn, .act-pop > * > .btn { width: 100%; justify-content: flex-start; border: 0; background: transparent; color: var(--text); box-shadow: none; text-align: left; padding: 8px 10px; }
+.act-pop > .btn:hover, .act-pop > button:hover, .act-pop > * > .btn:hover { background: var(--brand-soft); }
+.act-pop > .btn.danger, .act-pop > * > .btn.danger { color: var(--red-text, #b91c1c); }
+.act-pop > select, .act-pop > * { max-width: 100%; }
+@media (max-width: 599.98px) {
+  .page-head { flex-wrap: nowrap; gap: 8px; align-items: center; }
+  .page-head > div:first-child { min-width: 0; flex: 1; }
+  .page-head h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 19px; }
+  .page-head .muted { display: none; }
+}
+
+/* --- confirm dialog --------------------------------------------------------------------------------------------------- */
+.confirm-dlg .modal-body p { margin: 0; white-space: pre-line; }
+.confirm-dlg .confirm-type { margin-top: 12px; }
+/* A "Beta" pill next to a menu label (areas/info.ts AREA_BADGE). */
+.nav-beta { font-size: 10px; font-weight: 600; line-height: 1; padding: 2px 6px; border-radius: 999px; background: color-mix(in srgb, var(--accent, #6366f1) 16%, transparent); color: var(--accent, #6366f1); margin-left: 6px; flex: none; text-transform: uppercase; letter-spacing: 0.03em; }
+
+/* Quick menu behind the logo: Einfach/Profi, design, language (QuickMenu.tsx) */
+.qm-wrap{position:relative;margin-left:auto;display:inline-flex}
+.qm-btn{background:none;border:0;color:inherit;opacity:.7;padding:4px;border-radius:6px;cursor:pointer;display:inline-flex}
+.qm-btn:hover,.qm-btn[aria-expanded="true"]{opacity:1;background:color-mix(in srgb,currentColor 12%,transparent)}
+.qm-pop{position:fixed;z-index:1000;width:280px;max-width:calc(100vw - 16px);background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.28);padding:12px;display:grid;gap:12px}
+.qm-head{display:flex;align-items:center;justify-content:space-between}
+.qm-row{display:grid;gap:6px}
+.qm-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.qm-segs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:3px}
+.qm-seg{flex:1;border:0;background:none;border-radius:7px;padding:6px 8px;font:inherit;font-size:13px;color:inherit;cursor:pointer}
+.qm-seg.on{background:var(--panel);box-shadow:0 1px 3px rgba(0,0,0,.2);font-weight:600}
+.qm-seg:disabled{opacity:.5;cursor:not-allowed}
+.qm-links{display:flex;gap:6px;flex-wrap:wrap}
+.qm-links .btn{flex:1;font-size:13px}

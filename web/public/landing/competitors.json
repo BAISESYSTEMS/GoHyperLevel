@@ -1,0 +1,4369 @@
+{
+ "as_of": "2026-10-09",
+ "vendors": [
+  {
+   "id": "gohyperlevel",
+   "name": "HyperLevel",
+   "url": "https://gohyperlevel.com",
+   "pricing": [
+    {
+     "plan": "Self-hosted (AGPL)",
+     "price_month": 0,
+     "currency": "EUR",
+     "notes": "Open source; unlimited users, contacts and sub-accounts; own server, own Twilio/SMTP/AI keys"
+    },
+    {
+     "plan": "Cloud Solo",
+     "price_month": 49.99,
+     "currency": "EUR",
+     "notes": "1 user, all features except white-label and client accounts; hosted in Frankfurt"
+    },
+    {
+     "plan": "Cloud Team & Company",
+     "price_month": 99.99,
+     "currency": "EUR",
+     "notes": "Unlimited users, one price per company"
+    },
+    {
+     "plan": "Cloud Agency",
+     "price_month": 199,
+     "currency": "EUR",
+     "notes": "White-label, SaaS mode, unlimited users and client sub-accounts, own domains"
+    }
+   ],
+   "source": "https://gohyperlevel.com"
+  },
+  {
+   "id": "highlevel",
+   "name": "HighLevel (GoHighLevel)",
+   "url": "https://www.gohighlevel.com",
+   "pricing": [
+    {
+     "plan": "Starter",
+     "price_month": 97,
+     "currency": "USD",
+     "notes": "3 sub-accounts, unlimited users and contacts; usage-based charges for phone, SMS, email and AI"
+    },
+    {
+     "plan": "Unlimited",
+     "price_month": 297,
+     "currency": "USD",
+     "notes": "Unlimited sub-accounts, rebilling of phone/email without markup, basic API"
+    },
+    {
+     "plan": "Agency Pro",
+     "price_month": 497,
+     "currency": "USD",
+     "notes": "SaaS mode, rebilling with markup, advanced API"
+    },
+    {
+     "plan": "Enterprise",
+     "price_month": null,
+     "currency": "USD",
+     "notes": "Contact sales; includes white-label mobile app and HIPAA"
+    },
+    {
+     "plan": "Add-on: white-label mobile app",
+     "price_month": 497,
+     "currency": "USD",
+     "notes": "Per month, included in Enterprise"
+    },
+    {
+     "plan": "Add-on: AI Employee",
+     "price_month": 97,
+     "currency": "USD",
+     "notes": "Unlimited plan per sub-account (Growth plan 50 USD)"
+    },
+    {
+     "plan": "Add-on: WhatsApp",
+     "price_month": 10,
+     "currency": "USD",
+     "notes": "Per sub-account plus Meta message fees"
+    }
+   ],
+   "source": "https://www.gohighlevel.com/pricing"
+  },
+  {
+   "id": "hubspot",
+   "name": "HubSpot",
+   "url": "https://www.hubspot.com",
+   "pricing": [
+    {
+     "plan": "Starter Customer Platform",
+     "price_month": 20,
+     "currency": "USD",
+     "notes": "Per seat; Marketing, Sales, Service, Content, Data Hub Starter; 1,000 marketing contacts. Pricing page showed a promo of 7 USD/seat/month on annual billing (84 instead of 240 USD/year) on 2026-10-09"
+    },
+    {
+     "plan": "Marketing Hub Professional",
+     "price_month": 890,
+     "currency": "USD",
+     "notes": "3 core seats, 2,000 marketing contacts, mandatory one-time onboarding 3,000 USD; extra contacts in 5k blocks"
+    },
+    {
+     "plan": "Sales Hub / Service Hub Professional",
+     "price_month": 100,
+     "currency": "USD",
+     "notes": "Per seat; Professional Customer Platform bundle price not published as a fixed figure on the pricing page"
+    },
+    {
+     "plan": "Marketing Hub Enterprise",
+     "price_month": 3600,
+     "currency": "USD",
+     "notes": "5 core seats, 10,000 marketing contacts, onboarding 7,000 USD, billed annually"
+    }
+   ],
+   "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+  },
+  {
+   "id": "activecampaign",
+   "name": "ActiveCampaign",
+   "url": "https://www.activecampaign.com",
+   "pricing": [
+    {
+     "plan": "Starter",
+     "price_month": 19,
+     "currency": "EUR",
+     "notes": "1,000 contacts, monthly billing (15/month billed annually); 1 user; max 25,000 contacts; same figures in USD"
+    },
+    {
+     "plan": "Plus",
+     "price_month": 59,
+     "currency": "EUR",
+     "notes": "1,000 contacts (49/month annually); 1 user, extra seats from 15/month"
+    },
+    {
+     "plan": "Pro",
+     "price_month": 99,
+     "currency": "EUR",
+     "notes": "1,000 contacts (79/month annually); 3 users"
+    },
+    {
+     "plan": "Enterprise",
+     "price_month": 179,
+     "currency": "EUR",
+     "notes": "1,000 contacts (145/month annually); 5 users; custom objects"
+    },
+    {
+     "plan": "Add-on: Pipelines (CRM)",
+     "price_month": 49,
+     "currency": "EUR",
+     "notes": "On Plus (Pro 85, Enterprise 119) plus per-seat fee"
+    },
+    {
+     "plan": "Add-on: SMS",
+     "price_month": 21,
+     "currency": "EUR",
+     "notes": "1,000 SMS credits per month"
+    }
+   ],
+   "source": "https://www.activecampaign.com/pricing"
+  },
+  {
+   "id": "clickfunnels",
+   "name": "ClickFunnels 2.0",
+   "url": "https://www.clickfunnels.com",
+   "pricing": [
+    {
+     "plan": "Launch",
+     "price_month": 97,
+     "currency": "USD",
+     "notes": "81/month billed annually; 1 workspace, 2 team members, 10K contacts, no automations, no API"
+    },
+    {
+     "plan": "Scale",
+     "price_month": 197,
+     "currency": "USD",
+     "notes": "164/month annually; 5 workspaces, 5 team members, 75K contacts, automations, API/webhooks, calendars"
+    },
+    {
+     "plan": "Optimize",
+     "price_month": 297,
+     "currency": "USD",
+     "notes": "248/month annually; 10 workspaces, 10 team members, 150K contacts, advanced workflows, affiliate center"
+    },
+    {
+     "plan": "Dominate",
+     "price_month": 499.75,
+     "currency": "USD",
+     "notes": "Annual only (5,997/year); 20 workspaces, 400K contacts, branding removal, SSO"
+    }
+   ],
+   "source": "https://www.clickfunnels.com/pricing"
+  },
+  {
+   "id": "systemeio",
+   "name": "systeme.io",
+   "url": "https://systeme.io",
+   "pricing": [
+    {
+     "plan": "Free",
+     "price_month": 0,
+     "currency": "USD",
+     "notes": "2,000 contacts, 3 funnels, 1 course, 1 automation rule"
+    },
+    {
+     "plan": "Startup",
+     "price_month": 17,
+     "currency": "USD",
+     "notes": "5,000 contacts, 10 funnels, 5 courses"
+    },
+    {
+     "plan": "Webinar",
+     "price_month": 47,
+     "currency": "USD",
+     "notes": "10,000 contacts, 50 funnels, 20 courses, evergreen webinars"
+    },
+    {
+     "plan": "Unlimited",
+     "price_month": 97,
+     "currency": "USD",
+     "notes": "Unlimited contacts, funnels, courses, automations; annual billing = 2 months free"
+    }
+   ],
+   "source": "https://systeme.io/pricing"
+  },
+  {
+   "id": "kajabi",
+   "name": "Kajabi",
+   "url": "https://kajabi.com",
+   "pricing": [
+    {
+     "plan": "Basic",
+     "price_month": 179,
+     "currency": "USD",
+     "notes": "143/month billed annually; 5 products, 2,500 contacts, 2 admins, 1 website, 1 community; 2% fee on third-party payment providers"
+    },
+    {
+     "plan": "Growth",
+     "price_month": 249,
+     "currency": "USD",
+     "notes": "199/month annually; 50 products, 25,000 contacts, 11 admins; advanced automations, affiliates, webhooks, branding removal"
+    },
+    {
+     "plan": "Pro",
+     "price_month": 499,
+     "currency": "USD",
+     "notes": "399/month annually; unlimited products, 100,000 contacts, 26 admins, 3 websites; API and branded mobile app included"
+    },
+    {
+     "plan": "Add-on: contacts",
+     "price_month": 125,
+     "currency": "USD",
+     "notes": "Per 25,000 additional contacts"
+    }
+   ],
+   "source": "https://kajabi.com/pricing"
+  },
+  {
+   "id": "keap",
+   "name": "Keap",
+   "url": "https://keap.com",
+   "pricing": [
+    {
+     "plan": "Keap",
+     "price_month": 299,
+     "currency": "USD",
+     "notes": "Monthly billing (2,988/year = about 249/month annually); 2 users; contact allotment tiered; required paid implementation/onboarding"
+    },
+    {
+     "plan": "Add-on: extra user",
+     "price_month": 39,
+     "currency": "USD",
+     "notes": "Per user per month"
+    },
+    {
+     "plan": "Add-on: text messaging",
+     "price_month": 24,
+     "currency": "USD",
+     "notes": "Text tiers 24-279 USD/month, US/Canada only"
+    }
+   ],
+   "source": "https://keap.com/pricing"
+  },
+  {
+   "id": "pipedrive",
+   "name": "Pipedrive",
+   "url": "https://www.pipedrive.com",
+   "pricing": [
+    {
+     "plan": "Lite",
+     "price_month": 14,
+     "currency": "USD",
+     "notes": "Per user per month, billed annually (monthly billing up to 42% more); pipelines, AI reports"
+    },
+    {
+     "plan": "Growth",
+     "price_month": 39,
+     "currency": "USD",
+     "notes": "Per user, annual; automations, email sync, scheduler, products"
+    },
+    {
+     "plan": "Premium",
+     "price_month": 59,
+     "currency": "USD",
+     "notes": "Per user, annual; lead scoring, documents/quotes with e-signature, LeadBooster"
+    },
+    {
+     "plan": "Ultimate",
+     "price_month": 79,
+     "currency": "USD",
+     "notes": "Per user, annual; enrichment, sandbox, phone support"
+    },
+    {
+     "plan": "Add-ons",
+     "price_month": 13.33,
+     "currency": "USD",
+     "notes": "From: Campaigns 13.33, Projects 16, LeadBooster 32.50, Smart Docs 32.50, Web Visitors 41"
+    }
+   ],
+   "source": "https://www.pipedrive.com/de/pricing"
+  },
+  {
+   "id": "brevo",
+   "name": "Brevo",
+   "url": "https://www.brevo.com",
+   "pricing": [
+    {
+     "plan": "Free",
+     "price_month": 0,
+     "currency": "EUR",
+     "notes": "Up to 300 emails per day"
+    },
+    {
+     "plan": "Starter",
+     "price_month": 7,
+     "currency": "EUR",
+     "notes": "From 5,000 emails/month, 1 seat; 'Sent with Brevo' logo removal +9/month"
+    },
+    {
+     "plan": "Standard",
+     "price_month": 15,
+     "currency": "EUR",
+     "notes": "From 5,000 emails/month; automation, A/B tests, 1 landing page, no Brevo logo; extra seats 9/month"
+    },
+    {
+     "plan": "Professional",
+     "price_month": 350,
+     "currency": "EUR",
+     "notes": "From 150,000 emails/month, 10 seats, WhatsApp, push, contact scoring"
+    },
+    {
+     "plan": "Enterprise",
+     "price_month": null,
+     "currency": "EUR",
+     "notes": "Contact sales; multi-account, custom objects, loyalty, SSO"
+    },
+    {
+     "plan": "Sales Essentials / Advanced",
+     "price_month": 29,
+     "currency": "EUR",
+     "notes": "Per user per month (Advanced 59)"
+    }
+   ],
+   "source": "https://www.brevo.com/pricing.md"
+  },
+  {
+   "id": "klicktipp",
+   "name": "KlickTipp",
+   "url": "https://www.klicktipp.com/de",
+   "pricing": [
+    {
+     "plan": "Standard",
+     "price_month": 30,
+     "currency": "EUR",
+     "notes": "Up to 2,500 recipients, 3 automated campaigns, 3 landing pages, 1 user (27/month annually, 24 with 2-year term)"
+    },
+    {
+     "plan": "Premium",
+     "price_month": 50,
+     "currency": "EUR",
+     "notes": "Up to 5,000 recipients, 6 campaigns, newsletter A/B tests, REST API"
+    },
+    {
+     "plan": "Deluxe",
+     "price_month": 70,
+     "currency": "EUR",
+     "notes": "Up to 7,500 recipients, 10 campaigns, campaign A/B tests, agency access"
+    },
+    {
+     "plan": "Enterprise",
+     "price_month": 170,
+     "currency": "EUR",
+     "notes": "From 170; unlimited campaigns and users, SMS (Twilio/Vonage costs extra), dedicated mail server; setup fee from 699 one-time"
+    }
+   ],
+   "source": "https://www.klicktipp.com/de/preise"
+  }
+ ],
+ "categories": [
+  {
+   "id": "pricing",
+   "label_de": "Preis & Modell",
+   "label_en": "Pricing & model",
+   "features": [
+    {
+     "id": "open_source",
+     "label_de": "Open Source",
+     "label_en": "Open source",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "AGPL-3.0, kompletter Quellcode offen",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/LICENSE"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "self_hosting",
+     "label_de": "Self-Hosting möglich",
+     "label_en": "Self-hosting possible",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Kostenlos auf eigenem Server (Docker, ein Befehl); eine SQLite-Datei",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/self-hosting.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "price_entry",
+     "label_de": "Einstiegspreis (pro Monat)",
+     "label_en": "Entry price (per month)",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Self-hosted 0 €; Cloud Solo 49,99 €/Monat (1 Nutzer, alle Funktionen außer White-Label)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Starter 97 $/Monat (3 Sub-Accounts); zzgl. Nutzungsgebühren für Telefon, SMS, E-Mail und KI",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Starter Customer Platform 20 $/Monat je Seat (Aktion am 2026-10-09: 7 $/Monat bei Jahreszahlung); Gratis-CRM verfügbar",
+       "source": "https://www.hubspot.com/pricing/bundle"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Starter 19 €/Monat für 1.000 Kontakte (15 € bei Jahreszahlung); Preis steigt mit Kontakten",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Launch 97 $/Monat (81 $ bei Jahreszahlung); ohne Automationen und API",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Gratis-Plan (2.000 Kontakte); Startup 17 $/Monat",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Basic 179 $/Monat (143 $ bei Jahreszahlung); 2 % Gebühr bei Drittanbieter-Zahlungen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "299 $/Monat (ca. 249 $ bei Jahreszahlung) inkl. 2 Nutzer; Pflicht-Onboarding kostenpflichtig",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Lite 14 $ pro Nutzer/Monat bei Jahreszahlung",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Gratis (300 E-Mails/Tag); Starter 7 €/Monat ab 5.000 E-Mails",
+       "source": "https://www.brevo.com/pricing.md"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Standard 30 €/Monat für bis zu 2.500 Empfänger",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "price_agency",
+     "label_de": "Preis für Agenturen (viele Kunden-Accounts)",
+     "label_en": "Price for agencies (many client accounts)",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Cloud Agentur 199 €/Monat mit unbegrenzt Kunden-Sub-Accounts und Nutzern; self-hosted 0 €",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Unlimited 297 $/Monat (unbegrenzt Sub-Accounts); SaaS-Modus erst in Agency Pro 497 $/Monat",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein Agentur-/Sub-Account-Modell; Multi-Account-Management nur mit Enterprise (max. 30 Accounts)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Sub-Account-Modell für Agenturen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Workspaces statt Sub-Accounts: 5 (Scale, 197 $), 10 (Optimize, 297 $), 20 (Dominate, 5.997 $/Jahr)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Unbegrenzt Sub-Accounts in jedem Plan, jeweils mit den Limits des Hauptplans",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Agentur-/Sub-Account-Modell (Pro: 3 Websites)",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Sub-Account-Modell für Agenturen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Sub-Account-Modell für Agenturen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Multi-Account-Management nur im Enterprise-Plan (Preis auf Anfrage)",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Agenturzugang (mehrere Kundenkonten mit einem Login) ab Deluxe; jedes Kundenkonto braucht eigenen Tarif",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "price_whitelabel",
+     "label_de": "Preis für White-Label",
+     "label_en": "Price for white-label",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Im Agentur-Plan (199 €/Monat) enthalten, inkl. installierbarer App (PWA) mit eigener Marke; self-hosted inklusive",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "White-Label der Desktop-Web-App laut FAQ (Plan nicht genannt, ab 97 $); White-Label-Mobile-App im Store +497 $/Monat, gebrandete Kundenportal-App +49 $/Monat je Sub-Account",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Nur eigenes Branding (ab Plus), kein Agentur-White-Label",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Nur Entfernen des ClickFunnels-Brandings im Dominate-Plan (5.997 $/Jahr)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Branding-Entfernung ab Growth (249 $); gebrandete Mobile-App erst in Pro (499 $)",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein White-Label (nur Entfernen des Brevo-Logos)",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "no_seat_fees",
+     "label_de": "Keine Gebühr pro Nutzer",
+     "label_en": "No per-user (seat) fees",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Team & Company und Agentur: unbegrenzt Nutzer ohne Platzgebühr (Solo = 1 Nutzer)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Unbegrenzt Nutzer in allen Plänen (laut FAQ)",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Preis pro Seat (Starter 20 $/Seat; Pro: zusätzliche Core Seats kostenpflichtig)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Starter/Plus 1 Nutzer, Pro 3, Enterprise 5; weitere Nutzer kostenpflichtig (ab 10–40 €/Monat)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Teammitglieder je Plan begrenzt (2 / 5 / 10 / 20)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Assistenten-Accounts im Plan; Anzahl je Plan auf der Preisseite nicht maschinenlesbar",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Admin-Nutzer je Plan begrenzt (2 / 11 / 26)",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "2 Nutzer inklusive, jeder weitere 39 $/Monat",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Preis pro Nutzer (14–79 $/Monat)",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Weitere Marketing-Seats 9 €/Monat; Sales-Seats 29–59 € pro Nutzer",
+       "source": "https://www.brevo.com/pricing.md"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Standard bis Deluxe: 1 Nutzer; beliebig viele Nutzer erst ab Enterprise (ab 170 €)",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "no_contact_pricing",
+     "label_de": "Preis unabhängig von der Kontaktzahl",
+     "label_en": "Price independent of contact count",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Kontakte unbegrenzt; Fair-Use für E-Mail- und KI-Volumen in der Cloud",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Unbegrenzt Kontakte (laut FAQ); E-Mail-/SMS-Versand nutzungsbasiert",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Preis steigt mit Marketing-Kontakten (Pro: 2.000 inklusive, danach Blöcke à 5.000)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Preis nach Kontaktstufen (z. B. Plus: 59 € bei 1.000, 119 € bei 2.500 Kontakten)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Kontaktlimits je Plan (10K / 75K / 150K / 400K)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Plan richtet sich nach Kontakten (2.000 / 5.000 / 10.000 / unbegrenzt)",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kontaktlimits je Plan (2.500 / 25.000 / 100.000), +125 $ je 25.000",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kontakte in gestaffelten Preisstufen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Preis nach Nutzern, nicht nach Kontakten",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Preis nach E-Mail-Volumen, nicht nach Kontakten",
+       "source": "https://www.brevo.com/pricing.md"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Tarif nach Empfängerzahl (2.500 / 5.000 / 7.500 / bis 21 Mio.)",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "eu_hosting",
+     "label_de": "Hosting in der EU / in Deutschland",
+     "label_en": "EU / German hosting",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Cloud in Frankfurt (DE); self-hosted an jedem Standort",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Keine EU-Region ausgewiesen; DPA nennt AWS und Google Cloud, Übermittlung per SCC und EU-US Data Privacy Framework",
+       "source": "https://www.gohighlevel.com/data-processing-agreement"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "EU-Rechenzentrum (Frankfurt) für Neukunden seit 2021",
+       "source": "https://www.hubspot.com/eu-data-centre"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "EU-Rechenzentrum seit 2024 je nach Rechnungsadresse; Verarbeitung teils weiter in den USA",
+       "source": "https://help.activecampaign.com/hc/en-us/articles/12883541905436"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein EU-Hosting genannt; Betreiber Etison LLC (USA), Dienstleister sollen Daten nicht aus den USA übertragen",
+       "source": "https://www.clickfunnels.com/privacy-policy"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Server bei AWS in Irland; keine Übermittlung außerhalb der EU laut Datenschutzerklärung",
+       "source": "https://systeme.io/privacy-policy"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein EU-Hosting angeboten; Kajabi LLC (Kalifornien), Übermittlung per SCC",
+       "source": "https://kajabi.com/policies/dpa"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein EU-Hosting angeboten; Anbieter Infusion Software, Inc. (USA)",
+       "source": "https://keap.com/legal/dpa"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "EU-Rechenzentren (Frankfurt, Dublin) für Anmeldungen aus der EU (im Regelfall)",
+       "source": "https://support.pipedrive.com/en/article/how-secure-is-my-data-in-pipedrive"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Daten in der EU: OVH-Server in Frankreich und Deutschland, Google Cloud in Belgien",
+       "source": "https://help.brevo.com/hc/en-us/articles/360001005510"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Mailserver in Deutschland für alle Pakete",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "dpa",
+     "label_de": "DSGVO-AVV (Auftragsverarbeitungsvertrag)",
+     "label_en": "GDPR data processing agreement (DPA)",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "AVV wird bei der Anmeldung akzeptiert und ist im Kundenbereich abrufbar",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/cloud.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Customer Data Processing Addendum mit Standardvertragsklauseln",
+       "source": "https://www.gohighlevel.com/data-processing-agreement"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Data Processing Agreement mit Standardvertragsklauseln",
+       "source": "https://legal.hubspot.com/dpa"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "DPA in den Kontoeinstellungen abschließbar; EU-US-DPF-zertifiziert",
+       "source": "https://www.activecampaign.com/de/data-centers"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein öffentlich abrufbarer AVV gefunden; EU-Vertreter nach Art. 27 DSGVO benannt",
+       "source": "https://www.clickfunnels.com/privacy-policy"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein öffentlich abrufbarer AVV in der Datenschutzerklärung gefunden",
+       "source": "https://systeme.io/privacy-policy"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "DPA mit Standardvertragsklauseln, automatisch Teil der AGB",
+       "source": "https://kajabi.com/policies/dpa"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Keap Data Processing Addendum",
+       "source": "https://keap.com/legal/dpa"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Data Processing Addendum",
+       "source": "https://www.pipedrive.com/en/privacy/dpa"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "AVV (DPA) Teil der Allgemeinen Nutzungsbedingungen",
+       "source": "https://help.brevo.com/hc/en-us/articles/15403782599570"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "AVV in allen Paketen inklusive",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "crm",
+   "label_de": "CRM",
+   "label_en": "CRM",
+   "features": [
+    {
+     "id": "contacts_companies",
+     "label_de": "Kontakte und Firmen",
+     "label_en": "Contacts and companies",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Kontakte, Firmen (Domain-Abgleich, Merge), beliebige Verknüpfungen mit Labels",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/objects.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Kontakte und Firmen-Objekt im CRM",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Kontakte, Firmen, Deals, Tickets im kostenlosen Smart CRM",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Kontakte; Firmen (Accounts) mit Pipelines-Add-on",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Kontakte im CRM; Firmen-Objekt nicht ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Kontakte mit Tags; kein Firmen-Objekt ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Kontakte mit Tags; kein Firmen-Objekt",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Kontakte, Firmen, Tags, eigene Felder",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Personen und Organisationen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Kontakte und Firmen im CRM",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Kontakte mit Tags im Marketing-CRM; kein Firmen-Objekt",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "custom_objects",
+     "label_de": "Eigene Objekte (Custom Objects)",
+     "label_en": "Custom objects",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Eigene Objekte mit typisierten Feldern, Listen, CSV-Import und Triggern",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/objects.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Bis zu 10 Custom Objects pro Location",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000003897"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Nur mit Enterprise-Edition",
+       "source": "https://knowledge.hubspot.com/object-settings/create-custom-objects"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Eigene Objekt-Schemas nur in Enterprise (10)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine Custom Objects ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine Custom Objects",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Custom Objects",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Custom Objects ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Custom Objects (nur eigene Felder)",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Nur im Enterprise-Plan",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Custom Objects",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "pipelines",
+     "label_de": "Pipelines / Deals",
+     "label_en": "Pipelines / deals",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Mehrere Pipelines, Kanban, gewichteter Forecast, Positionen; Listenansicht in Kürze",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Sales-Pipelines",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Deal-Pipelines (Free: 1 Pipeline je Objekt, mehr in Starter/Pro)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "addon",
+       "note": "Pipelines-Add-on ab 49 €/Monat (Plus) zzgl. Nutzergebühr",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "CRM-Pipelines und Opportunities",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "CRM-Pipelines",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Deal-Pipelines",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Sales-Pipeline mit Pipeline-Automation",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Mehrere Pipelines – Kernprodukt",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Deals und Pipelines; Sales Essentials 29 €/Nutzer",
+       "source": "https://www.brevo.com/pricing.md"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Deal-Pipelines",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "lead_scoring",
+     "label_de": "Lead-Scoring",
+     "label_en": "Lead scoring",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Regeln für Merkmale und Engagement, Verfall, Schwellen, Trigger",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Lead-Scoring",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Ab Professional (bis 5 Scores), Enterprise bis 50",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Kontakt-Scoring ab Plus",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Lead-Scoring ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Lead-Scoring ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Lead-Scoring",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Lead-Scoring",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Ab Premium",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Kontakt-Scoring ab Professional (350 €)",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Lead-Scoring ausgewiesen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "duplicates_merge",
+     "label_de": "Dubletten finden und zusammenführen",
+     "label_en": "Find and merge duplicates",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Abgleich per E-Mail, Telefon (jede Schreibweise) oder Name+Firma; Feld-für-Feld-Merge, rückgängig machbar",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Duplikat-Tool, bis zu 10 Kontakte zu einem zusammenführen (nicht umkehrbar)",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/48001202210-how-to-manage-and-merge-duplicate-contacts"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Manuelles Zusammenführen immer; KI-Duplikatmanagement ab Professional",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Manuelles Zusammenführen von jeweils zwei Kontakten, nicht umkehrbar",
+       "source": "https://help.activecampaign.com/hc/en-us/articles/115000720644"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Dubletten-Tool ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Dubletten-Tool ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Dubletten-Tool ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Dubletten-Prüfung (Data cleanup) mit automatischem oder manuellem Merge; Deals/Termine werden nicht mitgemergt",
+       "source": "https://keap.com/product-updates/keaps-product-release-report-march-2023"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Merge-Duplicates-Tool für Personen und Organisationen",
+       "source": "https://support.pipedrive.com/en/article/merge-duplicates"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Kontakte eindeutig per E-Mail/Telefon; kein Merge-Assistent ausgewiesen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Dubletten-Assistent ausgewiesen (Kontakte eindeutig per E-Mail)",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "marketing",
+   "label_de": "Marketing",
+   "label_en": "Marketing",
+   "features": [
+    {
+     "id": "email_campaigns",
+     "label_de": "E-Mail-Kampagnen",
+     "label_en": "Email campaigns",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Kampagnen an Tags, Smart Lists, Segmente; A/B, Versand an Nicht-Öffner; self-hosted mit eigenem SMTP/API-Versender",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/email-marketing.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "E-Mail-Kampagnen; Versand nutzungsbasiert abgerechnet",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "E-Mail-Marketing ab Starter; Sendelimit = Vielfaches der Kontaktstufe",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Kern-Funktion; Sendelimit als Vielfaches der Kontakte",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "E-Mail-Marketing (50K–1,2 Mio. E-Mails/Monat je Plan)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "E-Mail-Kampagnen und Newsletter, unbegrenzter Versand",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Unbegrenzte Marketing-E-Mails",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Broadcasts, Newsletter, 1:1-E-Mails",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "addon",
+       "note": "Campaigns-Add-on ab 13,33 $/Monat",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Kernprodukt",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Newsletter und Kampagnen, unbegrenzter Versand",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "email_builder",
+     "label_de": "E-Mail-Designer (Drag & Drop)",
+     "label_en": "Email builder (drag and drop)",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Drag & Drop, Outlook-sicheres responsives HTML mit Dark Mode, 60 deutsche Vorlagen",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/email-builder.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Drag-&-Drop-E-Mail-Builder",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Drag-&-Drop-Editor und Vorlagen",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Drag-&-Drop-E-Mail-Designer mit KI-Inhalten",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "ClickFunnels-Editor für E-Mails",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "E-Mail-Editor",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "E-Mail-Editor",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "E-Mail-Builder mit Vorlagen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "addon",
+       "note": "E-Mail-Builder im Campaigns-Add-on",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Drag-&-Drop-Editor, Vorlagen, KI-Texte",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Drag-&-Drop-E-Mail-Builder mit KI",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "sms",
+     "label_de": "SMS",
+     "label_en": "SMS",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Über eigenes Konto bei Twilio, seven.io, Vonage, Plivo, Bird oder eigenes Android-Handy; kein SMS-Guthaben inklusive",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/channels.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "SMS über LC Phone, nutzungsbasiert",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "addon",
+       "note": "SMS-Add-ons nur mit US-Nummern an +1-Empfänger (US/Kanada)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "addon",
+       "note": "SMS-Add-on ab 21 €/Monat (1.000 Credits)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "SMS nicht im Leistungsumfang ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "SMS über Twilio-Integration",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine SMS ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "addon",
+       "note": "Text-Tarife 24–279 $/Monat; nur USA/Kanada",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Nur über Marktplatz-Apps",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "addon",
+       "note": "SMS-Guthaben separat zu kaufen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Nur Enterprise, Kosten bei Twilio/Vonage separat",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "whatsapp",
+     "label_de": "WhatsApp",
+     "label_en": "WhatsApp",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "WhatsApp Cloud API: Vorlagen, Kampagnen, Buttons, Medien; ohne Aufpreis, Meta-App-Einrichtung manuell",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/meta-channels.md"
+      },
+      "highlevel": {
+       "v": "addon",
+       "note": "10 $/Monat je Sub-Account plus Meta-Nachrichtengebühren",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/155000001428-whatsapp-pricing-billing-and-rebilling-guide"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "WhatsApp-Integration ab Marketing/Service Hub Professional (bis 1.000 Nachrichten/Monat)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "addon",
+       "note": "Eigene WhatsApp-Pläne bzw. Kombi-Pläne, Linie 50 €/Monat plus Kontakt- und Nachrichtenpreise",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "WhatsApp nicht ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "WhatsApp nicht ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein WhatsApp ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein WhatsApp ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Messaging-Integrationen über Marktplatz",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "addon",
+       "note": "WhatsApp-Kampagnen im Professional-Plan; Nachrichten-Guthaben separat",
+       "source": "https://help.brevo.com/hc/en-us/articles/4416961286674"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "WhatsApp nicht ausgewiesen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "social_planner",
+     "label_de": "Social-Media-Planer",
+     "label_en": "Social media planner",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "Planen und Posten über einen separaten Postiz-Dienst (u. a. LinkedIn, IG, FB, TikTok, YouTube Shorts, GBP); einfache Statistik",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/integrations.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Social Planner",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Social-Tools (FB, IG, LinkedIn, YouTube, X) ab Marketing Hub Professional",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Social-Planer; Comment-to-DM und Universal Inbox",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Social-Media-Planer",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "forms_quizzes",
+     "label_de": "Formulare und Quizze",
+     "label_en": "Forms and quizzes",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Mehrstufig, Logik, Scoring/Quiz, Zahlungsfeld, Signatur, 26 deutsche Vorlagen",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/forms.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Formulare, Umfragen, Quizze",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Formulare inkl. mehrstufig; Bedingungslogik ab Professional; keine Quiz-Auswertung dokumentiert",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Formulare (Modal-Formulare ab Plus); keine Quiz-Auswertung",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Formulare und Survey-Workflows",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Opt-in-Formulare in Funnels; keine Quiz-Auswertung ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Formulare und Kurs-Quizze; keine Quiz-Funnels mit Scoring ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "Formulare; keine Quiz-Funnels ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Web-Formulare über LeadBooster (Add-on bzw. in Premium); keine Quiz-Funnels",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Anmeldeformulare; keine Quizze",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Beliebig viele Formulare; keine Quizze ausgewiesen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "funnels_websites",
+     "label_de": "Funnel- und Website-Builder",
+     "label_en": "Funnel and website builder",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Drag & Drop, 23 deutsche Vorlagen, CMS, eigene Domains mit TLS, Barrierefreiheits-Check; KI-Seitengenerator in Kürze",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sites.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Websites, Funnels, Landingpages; WordPress-Hosting ab 10 $/Monat als Add-on",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Content Hub: Website, Landingpages, Themes",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Landingpages ab Plus; keine Websites/Funnels",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Funnels, Websites, KI-Funnel-Builder – Kernprodukt",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Sales-Funnels, Websites (mehrsprachig), Link-in-Bio",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Funnels, Landingpages, Website (1–3 je Plan)",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "Landingpages und mehrseitige Funnels; keine Websites",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Website-/Funnel-Builder",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Landingpages (Standard: 1 inklusive, weitere 20 € je 5); keine Websites/Funnels",
+       "source": "https://www.brevo.com/pricing.md"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Landingpage-Builder mit KI (3–25 Seiten je Tarif); keine Websites",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "blog",
+     "label_de": "Blog",
+     "label_en": "Blog",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Blog je Website: Markdown-Editor, Planung, RSS, SEO, strukturierte Daten",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sites.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Blogs im Website-Builder",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Blog im Content Hub (Free: 1 Blog mit Branding)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Blog",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Blog",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Blogs",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Blog im Website-Builder",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Blog",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Blog",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Blog",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Blog",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "ab_tests",
+     "label_de": "A/B-Tests",
+     "label_en": "A/B tests",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Seiten (bis 4 Varianten), Funnel-Schritte, E-Mail (Betreff/Absender/Inhalt), Workflow-Splits",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sites.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Split-Tests für Funnel-Schritte und E-Mails",
+       "source": "https://growthable.io/gohighlevel-tutorials/funnel-builder/split-testing-in-funnels-for-gohighlevel/"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "E-Mail-A/B-Tests ab Marketing Hub Professional",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "E-Mail-A/B in allen Plänen, Automations-Splits ab Pro",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "A/B-Tests",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "A/B-Tests",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine A/B-Tests ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine A/B-Tests im Leistungsumfang ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine A/B-Tests ausgewiesen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "A/B-Tests ab Standard",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Newsletter-A/B ab Premium, Kampagnen-A/B ab Deluxe",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "reputation",
+     "label_de": "Bewertungsmanagement (Reviews)",
+     "label_en": "Reputation / review management",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "Bewertungsanfragen, Widget und KI-Antworten nur für Google; kein Facebook, Yelp oder Trustpilot",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/integrations.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Bewertungsanfragen, Review-Widgets, AI Review Reply (nutzungsbasiert); Listings-Management +30 $/Monat",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement für Google o. ä. im Katalog",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Bewertungsmanagement",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "automation_ai",
+   "label_de": "Automatisierung & KI",
+   "label_en": "Automation & AI",
+   "features": [
+    {
+     "id": "workflow_builder",
+     "label_de": "Workflow-Builder",
+     "label_en": "Workflow builder",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "140+ Trigger, 130+ Aktionen, Versionen, Testlauf, Fehler-Workflows; Schrittlisten-Editor (visueller Canvas in Kürze)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/workflow-actions.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Visueller Workflow-Builder",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Starter: einfache Formular-/E-Mail-Automation (10 Aktionen); Workflows ab Professional",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Visueller Automations-Builder (Starter auf 5 Aktionen begrenzt)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Automationen ab Scale, erweiterte Workflows ab Optimize",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Automationsregeln und Workflows (Free: 1 Regel)",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Einfache Automationen; Advanced Automations ab Growth",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Automationen mit Vorlagenbibliothek und Verlauf",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Automatisierungen ab Growth",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Marketing-Automation ab Standard",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Visueller Kampagnen-Builder, 3/6/10 Kampagnen je Tarif",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "ai_agent_tools",
+     "label_de": "KI-Agent mit Werkzeugzugriff",
+     "label_en": "AI agent with tool access",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "In-App-Agent und eigene KI-Mitarbeiter mit 240+ Werkzeugen, Freigabe vor Schreibzugriffen, Zeitpläne",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/agent.md"
+      },
+      "highlevel": {
+       "v": "addon",
+       "note": "AI Employee / Agent Studio: 50 $ (Growth) oder 97 $ (Unlimited) pro Sub-Account und Monat",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Breeze-Agents (Customer, Prospecting, Work Agents) verbrauchen HubSpot Credits (Starter 500/Monat inklusive)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Active Intelligence (autonome KI-Funktionen), Umfang je Plan begrenzt",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "KI-Coaching und KI-Texttools (Wortkontingent), kein Agent mit Werkzeugzugriff ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein KI-Agent ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Backstage und Expert Agents angekündigt (Details/Preis offen); KI-Credits ab Growth",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "AI Content Assistant und AI Automation Assistant; kein Agent mit Werkzeugzugriff ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "KI-Funktionen (Berichte, E-Mail-Tools, Assistent); kein Agent mit Werkzeugzugriff ausgewiesen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Aura KI (Inhalte, Segmente, Datenanalyse); kein Agent mit Werkzeugzugriff ausgewiesen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "KI-Copywriter und KI-Builder, kein Agent mit Werkzeugzugriff",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "conversation_ai",
+     "label_de": "Konversations-KI (Chat-Antworten)",
+     "label_en": "Conversation AI (chat replies)",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Antwortvorschläge, Website-Chatbot mit Übergabe, Agent-Auto-Reply für E-Mail, SMS, WhatsApp, Messenger, Instagram",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/ai-assistant.md"
+      },
+      "highlevel": {
+       "v": "addon",
+       "note": "Conversation AI nutzungsbasiert oder im AI-Employee-Plan",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Customer Agent für Chat, E-Mail, Formulare; verbraucht Credits",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Geteilter Posteingang und Automatisierung nur mit WhatsApp-Plänen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Message Hub mit menschlichen Agents; keine Chat-KI ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine Chat-KI ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Chat-KI für Kundenantworten ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Chat-KI für Kundenantworten ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Chatbot im LeadBooster",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Aura fasst Konversationen zusammen und entwirft Antworten im Posteingang",
+       "source": "https://help.brevo.com/hc/en-us/articles/25951005963666"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Chat-KI",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "voice_ai",
+     "label_de": "Voice-KI-Telefonagent",
+     "label_en": "Voice AI phone agent",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "KI-Telefonagent nur für eingehende Anrufe (bucht Termine, leitet weiter); braucht eigenes Twilio",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/voice.md"
+      },
+      "highlevel": {
+       "v": "addon",
+       "note": "Voice AI für ein- und ausgehende Anrufe, nutzungsbasiert",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Customer Agent für Anrufe nur als Beta",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Voice-KI-Telefonagent",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "mcp_server",
+     "label_de": "MCP-Server für Claude/ChatGPT",
+     "label_en": "MCP server for Claude/ChatGPT",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "MCP-Server mit 240+ Tools, OAuth 2.1, Ein-Klick-Einrichtung für Claude, ChatGPT, Cursor, Codex",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/agent.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Offizieller MCP-Server, Zugriff per Private Integration Token",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/155000005741-how-to-setup-and-use-the-highlevel-mcp-server"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Offizieller Remote-MCP-Server, Connectoren für Claude und ChatGPT",
+       "source": "https://developers.hubspot.com/docs/build-with-ai/remote-mcp-server"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Offizieller MCP-Server für ChatGPT und Claude",
+       "source": "https://help.activecampaign.com/hc/en-us/articles/22566179229596"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein MCP-Server ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein MCP-Server ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Offizieller MCP-Server (mcp.kajabi.com) für Claude und ChatGPT",
+       "source": "https://help.kajabi.com/articles/api-integrations/connect-kajabi-to-claude-or-chatgpt"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein offizieller MCP-Server gefunden",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Nativer MCP-Server seit 30.06.2026, alle Pläne",
+       "source": "https://www.pipedrive.com/en/newsroom/pipedrive-launches-native-mcp-server-bringing-crm-workflows-directly-into-ai-assistants"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "MCP für ChatGPT und Claude ab Starter",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein MCP-Server ausgewiesen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "byok",
+     "label_de": "Eigene KI-Schlüssel (BYOK)",
+     "label_en": "Bring your own AI keys",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Rund 40 Text-KI-Anbieter inkl. EU-gehosteter (IONOS, STACKIT, OVH, Scaleway, Mistral) und lokaler Modelle (Ollama)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/ai-providers.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Kein BYOK dokumentiert; offener Feature-Wunsch im Ideas-Board",
+       "source": "https://ideas.gohighlevel.com/voice-ai/p/byok-bring-our-own-keys"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "KI über HubSpot Credits; kein BYOK im Katalog",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel dokumentiert",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine eigenen KI-Schlüssel",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "hosted_phone",
+     "label_de": "Telefonie inklusive (Nummern vom Anbieter)",
+     "label_en": "Hosted telephony (numbers from the vendor)",
+     "cells": {
+      "gohyperlevel": {
+       "v": "no",
+       "note": "Telefonie nur mit eigenem Twilio-Konto; keine Nummernportierung, kein A2P-10DLC",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/telephony.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "LC Phone: Nummern, Anrufe und SMS vom Anbieter, nutzungsbasiert, mit Rebilling",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "HubSpot-Nummern (1–5) und 500–12.000 Gesprächsminuten/Monat; nicht in allen Ländern",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Telefonie",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine Telefonie",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine Telefonie",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Telefonie",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "Keap-Geschäftsnummer für Anrufe/Texte, nur USA/Kanada",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Telefonie nur über Integrationen (Caller)",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Telefon-Kanal im Sales-Bereich",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Telefonie",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "sales",
+   "label_de": "Vertrieb & Zahlungen",
+   "label_en": "Sales & payments",
+   "features": [
+    {
+     "id": "calendar_booking",
+     "label_de": "Kalender / Online-Terminbuchung",
+     "label_en": "Calendar / online booking",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Einzel, Round Robin, Kollektiv, Klassen; Zahlung bei Buchung; Google/Outlook-Sync; Wochenansicht in Kürze",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/booking.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Kalender, Erinnerungen, bezahlte Termine",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Meeting-Links inkl. Round Robin",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Über Calendly-/Acuity-Integration (ab Plus)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Kalender und Termine ab Scale (5 / 10 / 20 Kalender)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Buchungskalender mit Google Calendar, Meet, Zoom",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Buchungskalender im Preisvergleich",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Online-Terminbuchung mit Kalender-Sync",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Terminplaner ab Growth",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Brevo Meetings kostenlos, Bezahlung über Stripe möglich",
+       "source": "https://help.brevo.com/hc/en-us/articles/7188060551058"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Nur über native Integrationen zu Termin-Tools",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "quotes_proposals",
+     "label_de": "Angebote / Proposals",
+     "label_en": "Quotes / proposals",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Angebote mit Varianten und Optionen; Online-Annahme erzeugt Vertrag und Rechnung; kein Drag-&-Drop-Proposal-Designer",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Estimates und Proposals",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Angebote (Quotes) im CRM",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Angebote",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine Angebote",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine Angebote",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Angebote",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Angebote (Quotes)",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Angebote/Dokumente ab Premium oder Smart-Docs-Add-on",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Angebote",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Angebote",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "esignature",
+     "label_de": "E-Signatur",
+     "label_en": "E-signature",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Verträge mit gezeichneter/getippter Signatur, SHA-256 und Audit-Trail; ein Unterzeichner pro Vertrag",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sales.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Documents & Contracts mit mehreren Unterzeichnern und Signaturreihenfolge",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/155000008358-how-to-add-multiple-signers-for-documents-and-contracts"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "Quotes mit Online-Signatur und Zahlung im Revenue Hub (ab Professional, 95 $/Monat)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "DocuSign-Integration ab Pro",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine E-Signatur",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine E-Signatur",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine E-Signatur",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine E-Signatur ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "E-Signatur ab Premium oder Smart-Docs-Add-on",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine E-Signatur",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine E-Signatur",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "invoicing",
+     "label_de": "Rechnungen",
+     "label_en": "Invoicing",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Storno, Gutschrift, Abschlag/Schluss, Skonto, wiederkehrende Rechnungen, PDF nach DIN 5008 mit GiroCode",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/invoicing.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Rechnungen inkl. wiederkehrender Rechnungen",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Rechnungen, Gutschriften, automatische Zahlungserinnerungen",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Rechnungsstellung",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Rechnungen über Stripe Invoicing (+0,4 %) oder Payments AI",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine Rechnungsstellung im Leistungsvergleich ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Einmal-Rechnungen nur mit Kajabi Payments (+0,4 %), keine wiederkehrenden Rechnungen",
+       "source": "https://help.kajabi.com/articles/sales/kajabi-payments/invoicing-with-kajabi-payments"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Einmalige und wiederkehrende Rechnungen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Rechnungen nur über Integrationen (z. B. Buchhaltungs-Apps)",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Rechnungsstellung",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Rechnungsstellung",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "payment_links",
+     "label_de": "Zahlungslinks",
+     "label_en": "Payment links",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Stripe-Kauflinks mit Order-Bump, One-Click-Upsell, Gutscheinen",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/stripe.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Zahlungslinks",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Zahlungslinks (HubSpot Payments nur US/UK/CA; sonst Stripe +0,75 % Plattformgebühr)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine eigene Zahlungsabwicklung",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Checkout, globale Produkte, Order-Bumps/Upsells",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Bestellformulare mit Order-Bumps und 1-Klick-Upsells, 0 % Transaktionsgebühr",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Checkout-Seiten und Angebote",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Zahlungen über Checkout/Rechnungen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine eigenen Zahlungslinks ausgewiesen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Nur bezahlte Termine über Stripe",
+       "source": "https://help.brevo.com/hc/en-us/articles/7188060551058"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine eigene Zahlungsabwicklung; Anbindung an Digistore24, PayPal u. a.",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "subscriptions_plans",
+     "label_de": "Abos und Ratenzahlung",
+     "label_en": "Subscriptions and payment plans",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Abos und Ratenzahlung (2–60 Raten), Zugriff folgt Zahlung",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/payment-plans.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Abos und wiederkehrende Rechnungen",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Abos mit wiederkehrenden Zahlungen",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Nur Auswertung wiederkehrender Zahlungen aus Shop-Integrationen (ab Pro)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Abos und Ratenzahlungen über Stripe/Payments AI",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Abos und Ratenzahlung über Stripe/PayPal",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Abos und Ratenzahlungen über Angebote",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Wiederkehrende Rechnungen und Abos",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Produkte mit Abo-/Ratenwerten ab Growth (Umsatzplanung, keine Zahlungsabwicklung)",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Abo-Abrechnung",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine eigene Abo-Abrechnung",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "dunning",
+     "label_de": "Mahnwesen / Zahlungsausfall-Management",
+     "label_en": "Dunning",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Abo-Fehlzahlungen mit Retry und Zugriffspause; Rechnungsmahnungen mit Gebühren und Verzugszinsen (§ 288 BGB)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/dunning.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Automatische Retries fehlgeschlagener Abo-Zahlungen und manuelle Retries",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/155000008761-how-to-manually-retry-failed-subscription-payments"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Subscription-Retries und automatische Rechnungserinnerungen",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Mahnwesen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Abhängig vom Zahlungsanbieter (Stripe/Payments AI)",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Mahnwesen ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Automatische Zahlungsversuche bei Kajabi Payments; keine Mahnstufen ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "Automatische Zahlungs-Retries; keine Mahnstufen ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Mahnwesen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Mahnwesen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Mahnwesen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "storefront_cart",
+     "label_de": "Onlineshop mit Warenkorb",
+     "label_en": "Storefront with cart",
+     "cells": {
+      "gohyperlevel": {
+       "v": "no",
+       "note": "Kein Warenkorb/Shop; Produkte über Kauflinks, Checkout leitet zu Stripe",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/stripe.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "E-Commerce-Store mit Produktkatalog und nativem Checkout",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "B2B-Checkout, aber kein Onlineshop mit Warenkorb",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Shop; Integrationen zu Shopify, BigCommerce, Magento",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Stores mit Add-to-Cart (1–20 Stores je Plan)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Physische Produkte mit Versand und Lager, aber Funnel-Checkout statt Warenkorb-Shop",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Warenkorb-Shop",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "Produkte und Checkout; Shop-Funktion begrenzt",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Shop",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Shop; Integrationen zu Shopify, WooCommerce",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Shop",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "payment_gateways",
+     "label_de": "Mehrere Zahlungsanbieter (Karte)",
+     "label_en": "Multiple card payment gateways",
+     "cells": {
+      "gohyperlevel": {
+       "v": "no",
+       "note": "Karten nur über Stripe; daneben SEPA-Lastschrift ohne Stripe und PayPal.me-Link",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/stripe.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Stripe, PayPal, Square, NMI, Authorize.net, Razorpay",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "HubSpot Payments (US/UK/CA) oder Stripe",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Stripe oder Payments AI (darüber PayPal, NMI u. a.)",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Stripe, PayPal, Apple Pay, Razorpay, Flutterwave, Mercado Pago, Xendit, Nachnahme",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Kajabi Payments, Stripe, PayPal und weitere Anbieter (2 %/1 %/0,5 % Plattformgebühr)",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Keap Payments (nur USA) plus Drittanbieter (USA und international)",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung außer Stripe für Termine",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung (nur Integration von Zahlungsanbietern, 1–unbegrenzt Produkte)",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "dach",
+   "label_de": "DACH-Compliance",
+   "label_en": "DACH compliance",
+   "features": [
+    {
+     "id": "xrechnung_zugferd",
+     "label_de": "E-Rechnung XRechnung / ZUGFeRD",
+     "label_en": "E-invoice XRechnung / ZUGFeRD",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "XRechnung 3.0 (CII und UBL) mit eigener Prüfung, ZUGFeRD 2.3 / Factur-X; ohne KoSIT-Validator und Peppol-Versand",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/invoicing.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Keine XRechnung/ZUGFeRD in Preis- und Zahlungsdokumentation genannt",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "partial",
+       "note": "E-Rechnungen als Beta, nur Belgien und Deutschland, mit Stripe-Konto",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine E-Rechnung",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine E-Rechnung",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine E-Rechnung",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine E-Rechnung",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "gobd_numbering",
+     "label_de": "GoBD-orientierte Rechnungsnummern und Festschreibung",
+     "label_en": "GoBD-style invoice numbering and locking",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Lückenlose Nummernkreise, SHA-256-Festschreibung, unveränderliches Audit-Log (GoBD-orientiert, nicht zertifiziert)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/invoicing.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Keine GoBD-Funktionen dokumentiert",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Keine GoBD-Funktionen dokumentiert",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine GoBD-Funktionen",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine GoBD-Funktionen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine GoBD-Funktionen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine GoBD-Funktionen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Rechnungen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "sepa_dd",
+     "label_de": "SEPA-Lastschrift",
+     "label_en": "SEPA direct debit",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Online-Mandate, pain.008-Lastschriftläufe, Vorabankündigung, Rückläufer – auch ohne Stripe",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/sepa.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "SEPA-Lastschrift über Stripe für Rechnungen, Zahlungslinks, Kurse, SaaS-Modus",
+       "source": "https://help.gohighlevel.com/en/support/solutions/articles/155000006075"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Gespeicherte Zahlungsarten: Karte und ACH; SEPA nicht genannt",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Nur soweit Stripe-Zahlungsmethoden aktiviert sind",
+       "source": "https://support.myclickfunnels.com/docs/getting-started-setting-up-payments-in-clickfunnels/"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Nur soweit über Stripe-Zahlungsmethoden verfügbar",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Nicht ausgewiesen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Nicht ausgewiesen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Zahlungsabwicklung",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "datev_export",
+     "label_de": "DATEV-Export",
+     "label_en": "DATEV export",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "DATEV-Export; Live-Sync mit Lexware Office und sevDesk",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/backoffice.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Kein DATEV-Export dokumentiert",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Integrationen für QuickBooks und Xero; DATEV nicht im Katalog",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Buchhaltungsfunktionen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein DATEV-Export",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein DATEV-Export",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein DATEV-Export",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein DATEV-Export",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Nur über Marktplatz-Apps",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Buchhaltungsfunktionen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Buchhaltungsfunktionen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "doi_proof",
+     "label_de": "Double-Opt-in mit Nachweis",
+     "label_en": "Double opt-in with proof",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Double-Opt-in und Consent-Ledger je Kanal und Zweck, Nachweis-Export als PDF/CSV",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/consent.md"
+      },
+      "highlevel": {
+       "v": "partial",
+       "note": "Double-Opt-in als Workflow nachbaubar; kein Nachweis-Export dokumentiert",
+       "source": "https://consultevo.com/gohighlevel-double-opt-in-flow-guide/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Double-Opt-in und Abonnementtypen mit Einwilligungsprotokoll",
+       "source": "https://knowledge.hubspot.com/marketing-email/use-double-opt-in-for-marketing-emails-in-multiple-languages"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Double-Opt-in für Formulare mit Bestätigungsseite",
+       "source": "https://help.activecampaign.com/hc/en-us/articles/115000995250"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Double-Opt-in per Workflow möglich; kein Nachweis-Export ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Double-Opt-in möglich; kein Nachweis-Export ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Double-Opt-in-Formulare; kein Nachweis-Export ausgewiesen",
+       "source": "https://help.kajabi.com/articles/marketing/forms/how-to-set-up-a-form-with-double-opt-in"
+      },
+      "keap": {
+       "v": "partial",
+       "note": "Bestätigungs-E-Mails (Opt-in) möglich; kein Nachweis-Export ausgewiesen",
+       "source": "https://help.keap.com/help/gdpr"
+      },
+      "pipedrive": {
+       "v": "partial",
+       "note": "Double-Opt-in im Campaigns-Add-on",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Double-Opt-in; jeder DOI-Schritt wird als Ereignis protokolliert",
+       "source": "https://help.brevo.com/hc/en-us/articles/208733449"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Single- und Double-Opt-in, DSGVO-Fokus",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "german_ui",
+     "label_de": "Deutsche Oberfläche",
+     "label_en": "German user interface",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Deutsch ist die Hauptsprache; Englisch teilweise",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/translating.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Deutsch als Plattformsprache wählbar (Übersetzung schrittweise)",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/155000000566-the-internationalization-of-highlevel-has-begun-"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Oberfläche auf Deutsch",
+       "source": "https://knowledge.hubspot.com/account-management/change-your-language-and-region-settings"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Deutschsprachige Website und Oberfläche",
+       "source": "https://www.activecampaign.com/de/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Plattform nur Englisch; Sprachauswahl ist offener Feature-Wunsch",
+       "source": "https://feedback.myclickfunnels.com/feature-requests/p/language-selection-in-platform"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Deutsche Oberfläche und Website",
+       "source": "https://systeme.io/de/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Kundenseiten auf Deutsch; Admin-Oberfläche nur Englisch/Spanisch",
+       "source": "https://help.kajabi.com/en/articles/17316549-dual-language-kajabi-dashboard"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Oberfläche nur Englisch (keine Sprachauswahl dokumentiert)",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Deutsche Oberfläche",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Deutsche Oberfläche und Hilfe",
+       "source": "https://help.brevo.com/hc/de/articles/208733449-Double-Opt-In-DOI-Was-das-ist-und-wie-du-die-Anmeldungen-von-Benutzer-innen-verfolgen-kannst"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Deutscher Anbieter, deutsche Oberfläche",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "business",
+   "label_de": "Business",
+   "label_en": "Business",
+   "features": [
+    {
+     "id": "courses",
+     "label_de": "Kurse / Mitgliederbereiche",
+     "label_en": "Courses / memberships",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Kurse mit Drip, gehostetem Video (HLS), Quizzen, Zertifikaten, Kohorten",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/courses.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Kurse / Mitgliederbereiche",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein Kurs-/LMS-Modul",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Kurse",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Kurse und Mitgliederbereiche (3–20 je Plan)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Kurse, unbegrenzt Teilnehmer",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Kurse, Kohorten-Kurse ab Growth, Video-Transkription",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Kurse",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Kurse",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Kurse",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Kurse",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "community",
+     "label_de": "Community",
+     "label_en": "Community",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Skool-ähnlich: Feed, Punkte/Level, kostenpflichtige Stufen, Events, Live-Calls (Jitsi)",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/community.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Communities",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Keine Community-Funktion",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Community",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "Communities (3–20 je Plan)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Communities",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Communities (1–3 je Plan)",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Kunden-Community im Produkt",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Community",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Community",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Community",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "helpdesk",
+     "label_de": "Helpdesk / Tickets",
+     "label_en": "Helpdesk / tickets",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Tickets mit SLAs, Eskalation, Wissensdatenbank/Help-Center, CSAT/NPS",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/helpdesk.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Kein natives Ticketsystem; HighLevel-Blog zeigt Eigenbau aus Formularen, Aufgaben, Workflows",
+       "source": "https://www.gohighlevel.com/post/build-support-ticketing-system"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Service Hub: Tickets, Help Desk, Wissensdatenbank",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Ticketsystem (Zendesk-Integration in Enterprise)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Ticketsystem",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Ticketsystem",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Ticketsystem",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Ticketsystem",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Ticketsystem",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Conversations-Posteingang (Chat, E-Mail); kein Ticketsystem mit SLAs ausgewiesen",
+       "source": "https://www.brevo.com/products/conversations/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Ticketsystem",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "pm_gantt_time",
+     "label_de": "Projektmanagement mit Gantt und Zeiterfassung",
+     "label_en": "Project management with Gantt and time tracking",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Liste, Board, Kalender, Gantt mit kritischem Pfad; Zeiterfassung mit Freigabe und Abrechnung",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/projects.md"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Aufgaben, aber kein Gantt und keine Zeiterfassung dokumentiert",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein Projektmanagement mit Gantt/Zeiterfassung im Katalog",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Projektmanagement",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein Projektmanagement",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein Projektmanagement",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein Projektmanagement",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Nur Aufgabenverwaltung",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "addon",
+       "note": "Projects-Add-on ab 16 $/Monat (ohne Gantt/Zeiterfassung ausgewiesen)",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Projektmanagement",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Projektmanagement",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "webinars",
+     "label_de": "Webinare",
+     "label_en": "Webinars",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "Automatisierte Evergreen-Webinare mit Q&A, Umfragen, Angebot; kein Live-Streaming",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/webinars.md"
+      },
+      "highlevel": {
+       "v": "partial",
+       "note": "Webinar-Funnels; Durchführung über Drittanbieter",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Nur über Integrationen (z. B. Zoom)",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Zoom-Webinar-Integration ab Pro",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Countdown-/Webinar-Funnels ab Scale; kein Webinar-Raum ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Evergreen-Webinare ab Webinar-Plan (47 $)",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Webinar-Funktion im Preisvergleich",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Webinare",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Webinare",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Webinare",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Nur über Integrationen zu Webinar-Tools",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "office_suite",
+     "label_de": "Office: Dokumente, Tabellen, Folien, PDF",
+     "label_en": "Office: documents, spreadsheets, slides, PDF",
+     "cells": {
+      "gohyperlevel": {
+       "v": "no",
+       "note": "Nicht enthalten – das Office-Modul ist in dieser Version noch nicht veröffentlicht"
+      },
+      "highlevel": {
+       "v": "no",
+       "note": "Nur Documents & Contracts; keine Office-Suite",
+       "source": "https://www.gohighlevel.com/"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Office-Suite",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "agency",
+   "label_de": "Agentur",
+   "label_en": "Agency",
+   "features": [
+    {
+     "id": "unlimited_subaccounts",
+     "label_de": "Unbegrenzte Kunden-Accounts (Sub-Accounts)",
+     "label_en": "Unlimited client sub-accounts",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Unbegrenzt, self-hosted und im Cloud-Agentur-Plan",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Ab Unlimited (297 $/Monat); Starter 3 Sub-Accounts",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Max. 30 verbundene Accounts, nur mit Enterprise",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Sub-Accounts",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Max. 20 Workspaces (Dominate)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Unbegrenzt Sub-Accounts in jedem Plan",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Sub-Accounts",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Sub-Accounts",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Sub-Accounts",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Multi-Account-Management nur Enterprise",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Agenturzugang zu separaten Kundenkonten, keine Sub-Accounts im eigenen Tarif",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "snapshots",
+     "label_de": "Snapshots / Vorlagen-Klon für Kunden",
+     "label_en": "Snapshots / template cloning for clients",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Seiten, Funnels, Formulare, Kalender, Workflows, Pipelines, Kurse; JSON-Export/-Import",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Snapshots kopieren Konfiguration zwischen Sub-Accounts",
+       "source": "https://help.gohighlevel.com/support/solutions/articles/48000982511"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Keine Vorlagen-Klone für Kunden-Accounts",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Keine Account-Vorlagen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Funnels/Vorlagen teilbar; kein Workspace-Snapshot ausgewiesen",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Funnels/Kurse teilbar; kein Account-Snapshot ausgewiesen",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Keine Account-Vorlagen",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Keine Account-Vorlagen",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Keine Account-Vorlagen",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Keine Account-Vorlagen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine Account-Vorlagen ausgewiesen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "white_label",
+     "label_de": "White-Label",
+     "label_en": "White-label",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Name, Logos, Farben, Login-Domain je Kunde, gebrandete PWA-Icons",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "White-Label-Weboberfläche; White-Label-Mobile-App +497 $/Monat",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "partial",
+       "note": "Eigenes Branding (ab Plus), kein Agentur-White-Label",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Nur Branding-Entfernung (Dominate)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Branding-Entfernung ab Growth; gebrandete App in Pro",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein White-Label",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "saas_mode",
+     "label_de": "SaaS-Modus / Weiterverkauf",
+     "label_en": "SaaS mode / reselling",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Eigene Pläne, Signup → Stripe → Sub-Account aus Snapshot, Usage-Rebilling mit Aufschlag; kein Weiterverkauf von Telefonie/E-Mail-Guthaben – selbst gehostet; in der Cloud (auch im Tarif Agentur) nicht enthalten",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/saas.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Nur in Agency Pro (497 $/Monat): SaaS-Modus, Rebilling mit Aufschlag",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "no",
+       "note": "Kein Weiterverkauf als eigene SaaS",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein SaaS-Modus",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "client_portal",
+     "label_de": "Kundenportal",
+     "label_en": "Client portal",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Kurse, Community, Tickets und geteilte Projekt-Boards",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/courses.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Kundenportal; gebrandete Portal-App +49 $/Monat je Sub-Account",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Kundenportal für Tickets im Service Hub",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "no",
+       "note": "Kein Kundenportal",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Customer Center für Käufer (Kurse, Bestellungen)",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Mitgliederbereich für Kurskäufer",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Kajabi Customer App und Mitgliederbereich",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "no",
+       "note": "Kein Kundenportal",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "no",
+       "note": "Kein Kundenportal",
+       "source": "https://www.pipedrive.com/de/pricing"
+      },
+      "brevo": {
+       "v": "no",
+       "note": "Kein Kundenportal",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Kein Kundenportal",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "apps_api",
+   "label_de": "Apps & API",
+   "label_en": "Apps & API",
+   "features": [
+    {
+     "id": "rest_api",
+     "label_de": "REST-API",
+     "label_en": "REST API",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "REST-API für alle Bereiche, OpenAPI 3.1, Agentur- und Sub-Account-Schlüssel",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/api.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Basic API ab Unlimited, Advanced API in Agency Pro (Starter-Liste ohne API)",
+       "source": "https://www.gohighlevel.com/pricing"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "REST-API; API-Limit-Erhöhung +500 $/Monat",
+       "source": "https://www.hubspot.com/pricing/bundle"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "REST-API",
+       "source": "https://developers.activecampaign.com/"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "API ab Scale",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Öffentliche API (Rate-Limit je Plan)",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "API nur im Pro-Plan",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "API",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "REST-API",
+       "source": "https://developers.pipedrive.com/docs/api/v1"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "REST-API in allen Plänen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "REST-API ab Premium",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "webhooks",
+     "label_de": "Webhooks",
+     "label_en": "Webhooks",
+     "cells": {
+      "gohyperlevel": {
+       "v": "yes",
+       "note": "Signierte ausgehende Webhooks für jedes Ereignis, eingehende Webhook-Trigger mit HMAC",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/api.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "Webhooks und Marketplace-Apps",
+       "source": "https://marketplace.gohighlevel.com/docs/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Webhooks über Apps und Workflows",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Webhooks und Webhook-Aktion in Automationen (ab Plus)",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Webhooks ab Scale",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Webhooks",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Webhooks ab Growth",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Webhooks",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Webhooks",
+       "source": "https://developers.pipedrive.com/docs/api/v1"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Ausgehende Webhooks in allen Plänen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Über API/Integrationen",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "zapier_make_n8n",
+     "label_de": "Zapier / Make / n8n",
+     "label_en": "Zapier / Make / n8n",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "REST-Hooks plus Zapier-/Make-Apps und n8n-Node zum Selbst-Einrichten; nicht im öffentlichen Zapier-Verzeichnis",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/integrations/zapier/README.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "LeadConnector-App im Zapier-Verzeichnis",
+       "source": "https://zapier.com/apps/leadconnector/integrations"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "HubSpot-Apps in Zapier, Make und n8n",
+       "source": "https://zapier.com/apps/hubspot/integrations"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Zapier ab Plus; über 1.000 Integrationen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "yes",
+       "note": "ClickFunnels-2.0-App in Make und Zapier",
+       "source": "https://apps.make.com/click-funnels-2"
+      },
+      "systemeio": {
+       "v": "yes",
+       "note": "Zapier-App verfügbar",
+       "source": "https://zapier.com/apps/systemeio/integrations"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Drittanbieter-Integrationen inkl. Zapier",
+       "source": "https://zapier.com/apps/kajabi/integrations"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Native Zapier-Integration",
+       "source": "https://keap.com/pricing"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Apps für Zapier, Make und n8n",
+       "source": "https://zapier.com/apps/pipedrive/integrations"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Zapier, Make, n8n; über 150 Integrationen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "yes",
+       "note": "Zapier, Make, Pabbly, n8n",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "ios_app",
+     "label_de": "iOS-App",
+     "label_en": "iOS app",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "via PWA-Install (iPhone/iPad/Android), Android zusätzlich als APK – nicht in den App-Stores",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/ios-web-app.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "LeadConnector/HighLevel-App im App Store",
+       "source": "https://apps.apple.com/app/id1564302502"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "HubSpot-App im App Store",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "ActiveCampaign-App im App Store",
+       "source": "https://apps.apple.com/app/id1239908329"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine ClickFunnels-2.0-App; offener Feature-Wunsch",
+       "source": "https://feedback.myclickfunnels.com/feature-requests/p/have-an-app-for-clickfunnels20-in-apple-google-store"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine offizielle App gefunden; mobile Website",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Kajabi-App im App Store; eigene gebrandete App nur in Pro",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Keap-App im App Store",
+       "source": "https://apps.apple.com/app/id1421097870"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Pipedrive-App im App Store",
+       "source": "https://pipedrive.com/en/features/mobile-crm"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Nur Conversations-App (Chat), Kampagnen nur im Browser",
+       "source": "https://apps.apple.com/app/id1605601366"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine eigene App, nur mobil-responsive Seiten und E-Mails",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "android_app",
+     "label_de": "Android-App",
+     "label_en": "Android app",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "via PWA-Install (iPhone/iPad/Android), Android zusätzlich als APK – nicht in den App-Stores",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/android-app.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "LeadConnector-App bei Google Play",
+       "source": "https://www.gohighlevel.com/post/free-mobile-app"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "HubSpot-App bei Google Play",
+       "source": "https://legal.hubspot.com/hubspot-product-and-services-catalog"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "ActiveCampaign-App bei Google Play",
+       "source": "https://www.activecampaign.com/platform/mobile-application"
+      },
+      "clickfunnels": {
+       "v": "no",
+       "note": "Keine ClickFunnels-2.0-App; offener Feature-Wunsch",
+       "source": "https://feedback.myclickfunnels.com/feature-requests/p/have-an-app-for-clickfunnels20-in-apple-google-store"
+      },
+      "systemeio": {
+       "v": "no",
+       "note": "Keine offizielle App gefunden; mobile Website",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "yes",
+       "note": "Kajabi-App bei Google Play; eigene gebrandete App nur in Pro",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Keap-App bei Google Play (Android 8+)",
+       "source": "https://help.keap.com/help/keap-mobile-android"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Pipedrive-App bei Google Play",
+       "source": "https://pipedrive.com/en/features/mobile-crm"
+      },
+      "brevo": {
+       "v": "partial",
+       "note": "Nur Conversations-App (Chat), Kampagnen nur im Browser",
+       "source": "https://help.brevo.com/hc/en-us/articles/5744139225106"
+      },
+      "klicktipp": {
+       "v": "no",
+       "note": "Keine eigene App, nur mobil-responsive Seiten und E-Mails",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    },
+    {
+     "id": "marketplace",
+     "label_de": "App-Marktplatz / Integrationen",
+     "label_en": "App marketplace / integrations",
+     "cells": {
+      "gohyperlevel": {
+       "v": "partial",
+       "note": "~20 eingebaute Integrationen, Composio (250+ Apps), Nango, MCP-Client; eigener Plugin-Marktplatz noch klein",
+       "source": "https://github.com/gohyperlevel/gohyperlevel/blob/main/docs/integrations.md"
+      },
+      "highlevel": {
+       "v": "yes",
+       "note": "HighLevel App Marketplace",
+       "source": "https://marketplace.gohighlevel.com/docs/"
+      },
+      "hubspot": {
+       "v": "yes",
+       "note": "Großer App-Marktplatz",
+       "source": "https://ecosystem.hubspot.com/marketplace/apps"
+      },
+      "activecampaign": {
+       "v": "yes",
+       "note": "Über 1.000 Integrationen",
+       "source": "https://www.activecampaign.com/pricing"
+      },
+      "clickfunnels": {
+       "v": "partial",
+       "note": "Drittanbieter-Integrationen, kein großer App-Marktplatz",
+       "source": "https://www.clickfunnels.com/pricing"
+      },
+      "systemeio": {
+       "v": "partial",
+       "note": "Wenige native Integrationen (Google, Zoom, ActiveCampaign, SendGrid, Twilio)",
+       "source": "https://systeme.io/pricing"
+      },
+      "kajabi": {
+       "v": "partial",
+       "note": "Drittanbieter-Integrationen, kein großer Marktplatz",
+       "source": "https://kajabi.com/pricing"
+      },
+      "keap": {
+       "v": "yes",
+       "note": "Keap Marketplace mit Integrationen",
+       "source": "https://marketplace.keap.com/"
+      },
+      "pipedrive": {
+       "v": "yes",
+       "note": "Großer App-Marktplatz",
+       "source": "https://www.pipedrive.com/en/marketplace"
+      },
+      "brevo": {
+       "v": "yes",
+       "note": "Über 150 Integrationen",
+       "source": "https://www.brevo.com/pricing/"
+      },
+      "klicktipp": {
+       "v": "partial",
+       "note": "Native Integrationen (Zahlung, Webinar, Termine), kein großer Marktplatz",
+       "source": "https://www.klicktipp.com/de/preise"
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

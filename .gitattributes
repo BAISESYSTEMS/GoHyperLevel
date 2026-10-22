@@ -1,0 +1,4 @@
+# Left out of scripts/oss-export.sh (git archive): internal launch notes and private agent instructions.
+docs/oss-audit.md export-ignore
+docs/launch-kit.md export-ignore
+CLAUDE.md export-ignore

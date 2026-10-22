@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="window_bg">#FF0B1220</color>
+    <color name="w_surface">#FF0F172A</color>
+    <color name="w_surface_variant">#FF1E293B</color>
+    <color name="w_outline">#FF1E293B</color>
+    <color name="w_header_start">#FF172554</color>
+    <color name="w_header_end">#FF0C4A6E</color>
+    <color name="w_hero_start">#FF1E3A8A</color>
+    <color name="w_hero_end">#FF0369A1</color>
+    <color name="w_chip">#FF1E293B</color>
+    <color name="w_tile">#26FFFFFF</color>
+</resources>

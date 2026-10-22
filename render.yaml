@@ -1,0 +1,27 @@
+# Render Blueprint – "New → Blueprint" with this repository. A persistent disk needs a paid instance type.
+# After the first deploy: set PGHL_BASE_URL to the service URL (or your custom domain) and redeploy.
+services:
+  - type: web
+    name: gohigh
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    numInstances: 1 # SQLite: exactly one instance
+    disk:
+      name: gohigh-data
+      mountPath: /data
+      sizeGB: 5
+    envVars:
+      - key: PGHL_BASE_URL
+        sync: false
+      - key: PGHL_ADMIN_EMAIL
+        sync: false
+      - key: PGHL_ADMIN_PASSWORD
+        sync: false
+      - key: PGHL_SECRET
+        generateValue: true
+      - key: PGHL_TIMEZONE
+        value: Europe/Berlin
+      - key: PORT
+        value: "4700"

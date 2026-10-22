@@ -1,0 +1,9 @@
+/* Picture choice. */
+.pf .pf-pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.pf .pf-pic{display:flex;flex-direction:column;gap:0;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:var(--pf-card);overflow:hidden;cursor:pointer;position:relative;margin:0;font-weight:400;color:var(--pf-text)}
+.pf .pf-pic:hover{border-color:var(--pf-color)}
+.pf .pf-pic:has(input:checked){border-color:var(--pf-color);background:var(--pf-soft);box-shadow:0 0 0 1px var(--pf-color) inset}
+.pf .pf-pic input{width:22px;height:22px;flex:none;accent-color:var(--pf-color);margin:0;position:absolute;top:10px;left:10px;z-index:1}
+.pf .pf-pic img,.pf .pf-noimg{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--pf-soft)}
+.pf .pf-cap{display:flex;gap:8px;align-items:center;padding:10px 12px;font-weight:600}
+.pf .pf-pic:focus-within{outline:3px solid var(--pf-color);outline-offset:2px}

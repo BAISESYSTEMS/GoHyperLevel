@@ -1,0 +1,3 @@
+/* Date range. */
+.pf .pf-range{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.pf .pf-range label{margin:0;font-size:14px;font-weight:600;color:var(--pf-text)}

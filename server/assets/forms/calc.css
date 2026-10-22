@@ -1,0 +1,2 @@
+/* Calculator: the result as a big number. */
+.pf .pf-calc{display:block;font-size:clamp(28px,6vw,44px);font-weight:800;color:var(--pf-color);padding:8px 0}

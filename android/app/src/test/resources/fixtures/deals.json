@@ -1,0 +1,2 @@
+{"pipelines":[{"id":"p1","name":"Vertrieb","location_id":"loc_a","location_name":"Testfirma","stages":[{"id":"s1","name":"Neu","count":2,"value_cents":200000},{"id":"s2","name":"Angebot","count":1,"value_cents":1050000}]}],
+ "top":[{"id":"o1","name":"Website-Relaunch","value_cents":1050000,"status":"open","stage_id":"s2","stage_name":"Angebot","pipeline_id":"p1","contact_id":"c_1","contact_name":"Lena Fischer","location_id":"loc_a","location_name":"Testfirma","updated_at":"2026-10-04T07:00:00.000Z"}]}

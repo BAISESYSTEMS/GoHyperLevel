@@ -1,0 +1,81 @@
+{
+  "name": "gohigh",
+  "version": "1.0.62",
+  "private": true,
+  "description": "The open-source, self-hosted alternative to GoHighLevel and HubSpot: CRM, inbox, funnels, automations, AI, Android app and 340+ MCP tools.",
+  "license": "AGPL-3.0-only",
+  "homepage": "https://github.com/gohyperlevel/gohyperlevel#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gohyperlevel/gohyperlevel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gohyperlevel/gohyperlevel/issues"
+  },
+  "keywords": [
+    "crm",
+    "self-hosted",
+    "gohighlevel-alternative",
+    "hubspot-alternative",
+    "marketing-automation",
+    "funnels",
+    "helpdesk",
+    "mcp",
+    "sqlite",
+    "agency"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "node --no-warnings --watch --import tsx server/index.ts",
+    "dev:web": "vite",
+    "build": "vite build && node scripts/landing-stats.mjs dist-web && node scripts/precompress.mjs dist-web && tsc -p tsconfig.server.json && node scripts/build-form-runtime.mjs",
+    "start": "node --no-warnings dist-server/server/index.js",
+    "typecheck": "tsc -p tsconfig.server.json --noEmit && tsc -p tsconfig.web.json --noEmit && tsc -p tsconfig.scripts.json --noEmit",
+    "test": "vitest run",
+    "import:ghl": "node --no-warnings --import tsx server/cli/import-ghl.ts",
+    "demo:seed": "node --no-warnings --import tsx scripts/demo-seed.ts",
+    "perf:seed": "node --no-warnings --import tsx scripts/perf-seed.ts",
+    "perf:bench": "node scripts/perf-bench.mjs",
+    "licenses": "node scripts/check-licenses.mjs",
+    "oss:check": "node scripts/oss-check.mjs",
+    "docs:check": "node scripts/check-docs.mjs",
+    "i18n:check": "node scripts/i18n-check.mjs",
+    "docs:gen": "node --no-warnings --import tsx scripts/gen-docs.ts",
+    "oss:export": "bash scripts/oss-export.sh",
+    "screenshots": "node scripts/screenshots.mjs",
+    "landing:assets": "node scripts/landing-assets.mjs",
+    "ios:shots": "node scripts/ios-shots.mjs",
+    "rotate-secret": "node --no-warnings --import tsx server/cli/rotate-secret.ts",
+    "backup:restore": "node --no-warnings --import tsx server/cli/backup-restore.ts"
+  },
+  "dependencies": {
+    "@twilio/voice-sdk": "^2.18.5",
+    "esbuild-wasm": "^0.28.2",
+    "imapflow": "^1.7.8",
+    "mailparser": "^3.9.33",
+    "nodemailer": "^10.0.13",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/mailparser": "^3.9.0",
+    "@types/node": "^22.13.0",
+    "@types/nodemailer": "^6.4.17",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.1.0",
+    "esbuild": "^0.28.0",
+    "lucide-react": "^1.51.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  }
+}

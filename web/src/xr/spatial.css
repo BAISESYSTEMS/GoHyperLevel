@@ -1,0 +1,227 @@
+/* ==========================================================================================================
+   Raum-Modus – the interface for headsets (eyes + pinch, controllers) and display glasses.
+   Loaded only while <html data-spatial="1"> (web/src/xr/spatial.ts); the colours are theme tokens
+   (--sp-*, web/src/xr/tokens.ts). Nothing here is a per-component fork: it is one set of tokens plus rules
+   for the classes the whole app uses, and everything follows from them:
+
+     · hit targets of at least 60 px (--sp-hit), generous spacing, a larger type scale
+     · a soft glow on hover (= gaze) and a stronger one on :focus-visible, smooth, never abrupt
+     · no hover-only actions: whatever a pointer reveals is simply there
+     · translucent glass surfaces whose text contrast is checked in tokens.ts (AA, also over black/white)
+     · prefers-reduced-motion: no movement, only colour; prefers-contrast: opaque surfaces, strong edges
+
+   The store sets data-density="comfortable" while this is on, so the density tokens below (--dn-*) drive the
+   padding of cards, buttons, inputs, cells and the page. Docs: docs/xr.md
+   ========================================================================================================== */
+
+/* ---- tokens: type scale, density, hit size ---- */
+html:root[data-spatial='1'] {
+  --sp-hit: 60px;
+  --sp-gap: 16px;
+  --sp-radius: 18px;
+  --sp-ease: cubic-bezier(.22, .8, .3, 1);
+  --sp-dur: .2s;
+  --radius: 16px;
+  --fs: 18px;
+  --fs-small: 15px;
+  /* text that sets its own small size is scaled by this (type-scale.ts) */
+  --sp-type: 1.22;
+  --dn-card: 26px; --dn-cell-y: 19px; --dn-cell-x: 18px; --dn-btn-y: 16px; --dn-btn-x: 26px; --dn-in-y: 16px; --dn-in-x: 18px;
+  --dn-nav-y: 16px; --dn-field: 24px; --dn-head: 30px; --dn-page-y: 32px; --dn-page-x: 40px;
+}
+html:root[data-spatial='1'][data-font='small'] { --fs: 17px; --fs-small: 14.5px; --sp-type: 1.15; }
+html:root[data-spatial='1'][data-font='large'] { --fs: 21px; --fs-small: 17.5px; --sp-type: 1.4; }
+html[data-spatial='1'] body { line-height: 1.55; }
+html[data-spatial='1'] h1 { letter-spacing: -.01em; }
+html[data-spatial='1'] .small { line-height: 1.5; }
+
+/* ---- the room: a calm gradient the glass sits on ---- */
+html[data-spatial='1'] body {
+  background: var(--bg);
+  background-image: radial-gradient(120% 90% at 12% 0%, color-mix(in srgb, var(--brand) 13%, transparent), transparent 62%),
+                    radial-gradient(90% 80% at 100% 100%, color-mix(in srgb, var(--brand) 9%, transparent), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ---- hit targets: nothing you have to hit is smaller than 60 px ---- */
+html[data-spatial='1'] :is(button, summary, select, [role='button'], [role='tab'], [role='radio'], [role='menuitem'], [role='switch'], .btn, .icon-btn, .chip, .tabs button) {
+  min-height: var(--sp-hit);
+}
+html[data-spatial='1'] :is(button, [role='button'], [role='tab'], [role='radio'], .btn, .icon-btn, .chip) { min-width: var(--sp-hit); justify-content: center; }
+/* a set minimum width replaces the automatic one: without this a row of buttons (the settings tabs) shrinks them into each other */
+html[data-spatial='1'] :is(button, [role='button'], [role='tab'], [role='radio'], .btn, .icon-btn, .chip) { flex-shrink: 0; }
+html[data-spatial='1'] :is(input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='hidden'], [type='file']), select, textarea) { min-height: var(--sp-hit); font-size: var(--fs); border-radius: 14px; }
+html[data-spatial='1'] textarea { min-height: 140px; }
+html[data-spatial='1'] input[type='color'] { min-height: var(--sp-hit); min-width: 90px; }
+html[data-spatial='1'] input[type='file'] { min-height: var(--sp-hit); padding: 14px; }
+/* checkboxes and radios: a big box, and the whole label is the target */
+/* The box is 34 px with 13 px of room around it = a 60 px footprint; in a table cell or row the whole cell is the target (spatial.ts). */
+html[data-spatial='1'] input[type='checkbox'], html[data-spatial='1'] input[type='radio'] { width: 34px; height: 34px; margin: 13px; flex: none; accent-color: var(--brand); }
+/* A box that is on its own (not in a label, not alone in a cell) is drawn larger: 34 px × 1.75 reaches 60 px; the 13 px margin is the room it grows into. */
+html[data-spatial='1'] :not(label, th, td) > input[type='checkbox'], html[data-spatial='1'] :not(label, th, td) > input[type='radio'] { transform: scale(1.75); margin: 26px; }
+html[data-spatial='1'] .check { min-height: var(--sp-hit); gap: 8px; padding: 0 12px 0 0; margin: 4px 0; border-radius: 14px; }
+html[data-spatial='1'] :is(th, td):has(> input[type='checkbox'], > input[type='radio']) { cursor: pointer; padding-top: 0; padding-bottom: 0; }
+html[data-spatial='1'] :is(th, td):has(> input[type='checkbox'], > input[type='radio']):hover { background: var(--sp-hover); }
+html[data-spatial='1'] .btn { border-radius: 14px; font-size: var(--fs); gap: 10px; }
+html[data-spatial='1'] .btn.small { padding: 12px 20px; font-size: var(--fs-small); }
+html[data-spatial='1'] .icon-btn { font-size: 22px; padding: 12px; border-radius: 14px; }
+html[data-spatial='1'] .chip { padding: 12px 20px; font-size: var(--fs-small); }
+html[data-spatial='1'] .tabs { gap: 6px; }
+html[data-spatial='1'] .tabs button { padding: 16px 22px; font-size: var(--fs); border-radius: 12px 12px 0 0; }
+html[data-spatial='1'] .badge { font-size: var(--fs-small); padding: 3px 12px; }
+html[data-spatial='1'] .tag { font-size: var(--fs-small); padding: 4px 8px 4px 12px; gap: 6px; }
+/* The × inside a tag is 44 px and reaches 60 px with an invisible margin (a pseudo-element, so the chip stays compact). */
+html[data-spatial='1'] .tag button { position: relative; min-width: 44px; min-height: 44px; font-size: 22px; border-radius: 99px; }
+html[data-spatial='1'] .tag button::after { content: ''; position: absolute; inset: -8px; }
+html[data-spatial='1'] .field { gap: 8px; }
+html[data-spatial='1'] .field > span { font-size: var(--fs-small); }
+html[data-spatial='1'] .row { gap: var(--sp-gap); }
+html[data-spatial='1'] .actions { gap: 12px; }
+/* links that stand alone in a cell, a list or a header are targets too */
+html[data-spatial='1'] :is(td, th, li, .page-head, .actions, .row) > a:not(.btn, .chip, .tag, .icon-btn) { display: inline-block; padding-block: 16px; }
+/* rows and list items that open something */
+html[data-spatial='1'] :is(.inbox .item, .deal-row, .doc-row, .palette-row, .switcher-row, .menu-pop a, .results a, .blocklist .blk, .list-row) { min-height: var(--sp-hit); padding-top: 14px; padding-bottom: 14px; }
+html[data-spatial='1'] :is(.menu-pop a, .topbar .search .results a) { padding: 14px 16px; font-size: var(--fs); }
+html[data-spatial='1'] table.t tr.click td { height: var(--sp-hit); }
+
+/* ---- components with sizes of their own (Boards, Canvas, planner …): the same floor ---- */
+html[data-spatial='1'] :is(.bd-iconbtn, .bd-mic, .bd-send, .bd-grip, .bd-resize, .bd-back, .bd-more, .bd-row, .bd-kcard, .cv-btn, .cv-tool, .cv-board-card) { min-height: var(--sp-hit); min-width: var(--sp-hit); }
+html[data-spatial='1'] :is(.bd-back, .bd-more, .bd-row, .bd-kcard) { display: inline-flex; align-items: center; }
+html[data-spatial='1'] .bd-row, html[data-spatial='1'] .bd-kcard { display: flex; }
+
+/* ---- HyperLevel Agent drawer ---- */
+html[data-spatial='1'] .agent-panel { width: min(580px, 100vw); background: var(--sp-glass-strong); border-left: 1px solid var(--sp-edge); -webkit-backdrop-filter: blur(26px) saturate(1.25); backdrop-filter: blur(26px) saturate(1.25); }
+html[data-spatial='1'] .agent-panel.full { width: 100vw; }
+html[data-spatial='1'] .agent-model { min-height: var(--sp-hit); display: flex; align-items: center; }
+html[data-spatial='1'] .agent-model select { min-height: 100%; }
+html[data-spatial='1'] .agent-model-label { padding: 12px 22px; font-size: var(--fs-small); }
+html[data-spatial='1'] .agent-mode { padding: 8px 14px; font-size: var(--fs-small); }
+html[data-spatial='1'] .agent-chip { min-height: 44px; padding: 8px 16px; font-size: var(--fs-small); }
+html[data-spatial='1'] .agent-head { padding: 14px 16px 8px 20px; gap: 12px; }
+html[data-spatial='1'] .agent-select { font-size: calc(var(--fs) * 1.1); }
+
+/* bars with a fixed height would clip the larger controls */
+html[data-spatial='1'] .cv-head { height: auto; min-height: 76px; padding: 8px 16px; gap: 14px; flex-wrap: wrap; }
+/* the toolbar and the side panels sit below a 52 px bar; the bar is 76 px now (on phones the toolbar is at the bottom anyway) */
+@media (min-width: 901px) {
+  html[data-spatial='1'] .cv { --cv-top: 92px; }
+  html[data-spatial='1'] .cv-toolbar { top: 88px; }
+}
+
+/* ---- glass: translucent surfaces over the room (contrast guaranteed by the --sp-glass tokens) ---- */
+html[data-spatial='1'] :is(.card, .table-wrap, .inbox, .kcol, .tag-input, .codebox, .proj-card, .stat) {
+  background: var(--sp-glass);
+  border: 1px solid var(--sp-edge);
+  border-radius: var(--sp-radius);
+  box-shadow: 0 10px 34px -14px var(--sp-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(1.25);
+  backdrop-filter: blur(22px) saturate(1.25);
+}
+html[data-spatial='1'] .topbar { background: var(--sp-glass-strong); border-bottom: 1px solid var(--sp-edge); -webkit-backdrop-filter: blur(22px) saturate(1.25); backdrop-filter: blur(22px) saturate(1.25); }
+html[data-spatial='1'] .modal { background: var(--sp-glass-strong); border: 1px solid var(--sp-edge); border-radius: 24px; box-shadow: 0 30px 90px -20px var(--sp-shadow); -webkit-backdrop-filter: blur(28px) saturate(1.3); backdrop-filter: blur(28px) saturate(1.3); }
+html[data-spatial='1'] .modal-bg { background: rgba(8, 12, 24, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+html[data-spatial='1'] .modal-head { padding: 18px 24px; }
+html[data-spatial='1'] .modal-head h3 { font-size: calc(var(--fs) * 1.25); }
+html[data-spatial='1'] .modal-body { padding: 24px; }
+html[data-spatial='1'] .modal-foot { padding: 16px 24px; gap: 12px; }
+html[data-spatial='1'] :is(.menu-pop, .switcher-pop, .palette, .search .results, .rail-flyout) { background: var(--sp-glass-strong); border: 1px solid var(--sp-edge); border-radius: 18px; -webkit-backdrop-filter: blur(24px) saturate(1.25); backdrop-filter: blur(24px) saturate(1.25); box-shadow: 0 24px 70px -18px var(--sp-shadow); }
+html[data-spatial='1'] .toast { font-size: var(--fs); padding: 16px 20px; border-radius: 16px; max-width: 460px; }
+html[data-spatial='1'] :is(input, select, textarea) { border: 1px solid var(--sp-edge); }
+html[data-spatial='1'] :is(.kcard, .bubble) { border-radius: 16px; }
+html[data-spatial='1'] .kcard { padding: 16px 18px; }
+html[data-spatial='1'] .kcol { flex-basis: 320px; }
+html[data-spatial='1'] .kcol-head { padding: 16px 18px; }
+html[data-spatial='1'] .kcol-body { gap: 12px; padding: 12px; }
+html[data-spatial='1'] .inbox { grid-template-columns: 380px 1fr; }
+html[data-spatial='1'] .inbox .item { padding: 16px 18px; }
+html[data-spatial='1'] .bubble { padding: 14px 16px; max-width: 78%; }
+html[data-spatial='1'] .stats { gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+html[data-spatial='1'] .stat .stat-value { font-size: 32px; }
+
+/* ---- the frame: sidebar, top bar ---- */
+html[data-spatial='1'] .shell { grid-template-columns: 300px 1fr; }
+html[data-spatial='1'][data-sidebar='rail'] .shell { grid-template-columns: 104px 1fr; }
+html[data-spatial='1'] .side nav { gap: 4px; padding: 6px 12px 20px; }
+html[data-spatial='1'] .side nav a { min-height: var(--sp-hit); border-radius: 14px; font-size: var(--fs); padding-left: 14px; padding-right: 14px; }
+html[data-spatial='1'][data-sidebar='rail'] .side nav a { padding-left: 0; padding-right: 0; }
+html[data-spatial='1'] .side nav .group { font-size: var(--fs-small); padding-top: 18px; }
+html[data-spatial='1'] .topbar { padding: 14px 32px; gap: 14px; }
+html[data-spatial='1'] .topbar .search { max-width: 520px; }
+html[data-spatial='1'] .content { padding-bottom: 80px; }
+html[data-spatial='1'] .page-head { gap: 16px; }
+@media (max-width: 860px) {
+  html[data-spatial='1'] .shell, html[data-spatial='1'][data-sidebar='rail'] .shell { grid-template-columns: 1fr; }
+  html[data-spatial='1'] .topbar { padding: 12px 16px; }
+}
+
+/* ---- hover = gaze: a soft glow that fades in; focus is stronger ---- */
+html[data-spatial='1'] :is(button, summary, select, input, textarea, [role='button'], [role='tab'], [role='radio'], [role='menuitem'], .btn, .icon-btn, .chip, .tabs button, .side nav a, .inbox .item, .kcard, .deal-row, .doc-row, .proj-card, .menu-pop a, .results a, .switcher-row, .palette-row, table.t tr.click, .check, .linkish, a.card) {
+  transition: background-color var(--sp-dur) var(--sp-ease), border-color var(--sp-dur) var(--sp-ease), box-shadow var(--sp-dur) var(--sp-ease), transform var(--sp-dur) var(--sp-ease), color var(--sp-dur) var(--sp-ease);
+}
+html[data-spatial='1'] :is(button, summary, [role='button'], [role='tab'], [role='radio'], [role='menuitem'], .btn, .icon-btn, .chip, .tabs button, .inbox .item, .kcard, .deal-row, .doc-row, .proj-card, .menu-pop a, .results a, .switcher-row, .palette-row, .check, a.card, select):not(:disabled):hover {
+  box-shadow: 0 0 0 4px var(--sp-glow), 0 8px 26px -10px var(--sp-shadow);
+  transform: translateY(-1px) scale(1.012);
+}
+html[data-spatial='1'] :is(input, textarea, select):not(:disabled):hover { box-shadow: 0 0 0 4px var(--sp-glow); border-color: var(--brand-ring); }
+html[data-spatial='1'] :is(.side nav a, table.t tr.click, .tabs button):not(:disabled):hover { transform: none; }
+html[data-spatial='1'] .side nav a:hover { box-shadow: inset 0 0 0 2px var(--side-icon), 0 0 0 4px var(--sp-glow); }
+html[data-spatial='1'] table.t tr.click:hover td { background: var(--sp-hover); }
+html[data-spatial='1'] :is(button, summary, select, input, textarea, a, [role='button'], [role='tab'], [role='radio'], [tabindex]):focus-visible {
+  outline: 3px solid var(--brand-ring);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 8px var(--sp-glow-strong);
+}
+html[data-spatial='1'] :is(.btn, .icon-btn, .chip, .kcard):hover { filter: none; }
+html[data-spatial='1'] .btn.secondary:hover, html[data-spatial='1'] .icon-btn:hover { background: var(--sp-hover); }
+html[data-spatial='1'] a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+html[data-spatial='1'] :is(.btn, .tabs button, .side nav a, .menu-pop a, .results a, .item):hover { text-decoration: none; }
+html[data-spatial='1'] :is(button, [role='button'], .btn):not(:disabled):active { transform: scale(.985); box-shadow: 0 0 0 6px var(--sp-glow-strong); }
+
+/* ---- no hover-only actions: what a pointer reveals is simply there ---- */
+html[data-spatial='1'] .doc-actions, html[data-spatial='1'] .chip-x, html[data-spatial='1'] .rpt-resize { opacity: 1; }
+html[data-spatial='1'] .eb-sec-tools { display: flex; }
+html[data-spatial='1'] .eb-blk-label { display: block; }
+html[data-spatial='1'] .bd-card-tools, html[data-spatial='1'] .bd-resize, html[data-spatial='1'] .cv-board-actions, html[data-spatial='1'] .wkp-add, html[data-spatial='1'] .pm-cal-add, html[data-spatial='1'] .pm-g-conn { opacity: 1; }
+html[data-spatial='1'] .tc-tools { display: flex; }
+
+/* ---- reduced motion and contrast ---- */
+@media (prefers-reduced-motion: reduce) {
+  html[data-spatial='1'] *, html[data-spatial='1'] *::before, html[data-spatial='1'] *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  html[data-spatial='1'] :is(button, summary, select, [role], .btn, .icon-btn, .chip, .kcard, .inbox .item, .deal-row, .doc-row, .proj-card, .menu-pop a, .results a, .check, a.card):not(:disabled):hover,
+  html[data-spatial='1'] :is(button, [role='button'], .btn):not(:disabled):active { transform: none; }
+}
+@media (prefers-contrast: more) {
+  html[data-spatial='1'] :is(.card, .table-wrap, .inbox, .kcol, .tag-input, .codebox, .proj-card, .stat, .topbar, .modal, .menu-pop, .switcher-pop, .palette, .search .results, .rail-flyout) {
+    background: var(--sp-glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-width: 2px;
+    border-color: var(--text);
+  }
+  html[data-spatial='1'] .modal-bg { background: rgba(0, 0, 0, .8); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  html[data-spatial='1'] :is(input, select, textarea, .btn.secondary, .chip, .kcard) { border-width: 2px; border-color: var(--text); }
+  html[data-spatial='1'] :is(button, summary, select, input, textarea, a, [role='button'], [role='tab'], [role='radio'], [tabindex]):focus-visible { outline-width: 4px; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-spatial='1'] :is(.card, .table-wrap, .inbox, .kcol, .tag-input, .codebox, .proj-card, .stat, .topbar, .modal, .menu-pop, .switcher-pop, .palette, .search .results, .rail-flyout) { background: var(--sp-glass-solid); }
+}
+
+/* ---- "Verschieben nach …" (MoveMenu.tsx): the button on a card, the list in a dialog ---- */
+html[data-spatial='1'] .sp-move-btn { margin-top: 12px; width: 100%; }
+html[data-spatial='1'] .sp-move-list { display: grid; gap: 10px; }
+.sp-move-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; min-height: 60px; padding: 14px 20px; font: inherit; font-size: var(--fs); color: var(--text); background: var(--panel); border: 1px solid var(--sp-edge, var(--line)); border-radius: 14px; cursor: pointer; }
+.sp-move-item:hover:not(:disabled) { background: var(--sp-hover, var(--brand-soft)); border-color: var(--brand); }
+.sp-move-item:disabled { opacity: 1; background: var(--brand-soft); border-color: var(--brand); font-weight: 650; cursor: default; }
+.sp-move-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+html[data-spatial='1'] .bd-card-tools .sp-move-btn { margin: 0; width: auto; }
+
+/* ---- planner list and widget heads: fixed narrow columns and bars were made for 18 px boxes ---- */
+html[data-spatial='1'] .bd-card-head { min-height: 72px; padding-top: 6px; padding-bottom: 6px; }
+@media (min-width: 861px) {
+  html[data-spatial='1'] .pm-row { grid-template-columns: 60px 60px minmax(240px, 1fr) 150px 210px 150px 200px 90px; gap: 10px; padding: 6px 12px; min-height: var(--sp-hit); }
+  html[data-spatial='1'] .pm-head { min-height: 48px; }
+}
+html[data-spatial='1'] :is(.pm-cell-sel, .pm-cell-done) > input[type='checkbox'] { transform: none; margin: 13px; }
+html[data-spatial='1'] input.pm-round:checked::after { font-size: 22px; }
+html[data-spatial='1'] .pm-status select { border: 0; background: transparent; min-height: 52px; }
+html[data-spatial='1'] :is(.pm-prio-sel, .pm-date) { width: 100%; min-width: 0; }

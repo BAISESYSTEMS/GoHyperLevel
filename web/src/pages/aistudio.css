@@ -1,0 +1,16 @@
+/* AI Studio (pages/AiStudio.tsx) */
+.studio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.studio-card { display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer; }
+.studio-split { display: grid; grid-template-columns: minmax(280px, 380px) 1fr; gap: 12px; min-height: 70vh; min-height: 70dvh; }
+.studio-chat { display: flex; flex-direction: column; gap: 8px; overflow: auto; max-height: 78vh; max-height: 78dvh; }
+.studio-chat textarea { width: 100%; }
+.studio-turn { border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+.studio-prompt { font-weight: 600; margin: 0 0 4px; }
+.studio-tool { font-size: 12px; padding: 2px 0; }
+.studio-tool.err code, .studio-error { color: #dc2626; }
+.studio-preview { width: 100%; min-height: 70vh; min-height: 70dvh; border: 1px solid var(--border, #e5e7eb); border-radius: 8px; background: #fff; }
+@media (max-width: 900px) { .studio-split { grid-template-columns: 1fr; } }
+.studio-connect { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; margin-bottom: 12px; border-left: 3px solid var(--accent, #6366f1); }
+.studio-connect p { margin: 0; }
+.studio-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin: 8px 0; }
+.studio-example { display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer; }

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.server.json",
+  "compilerOptions": { "noEmit": true },
+  "include": ["scripts/**/*.ts", "server/**/*.ts"]
+}

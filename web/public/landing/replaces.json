@@ -1,0 +1,1365 @@
+{
+ "as_of": "2026-10-10",
+ "product": {
+  "name": "HyperLevel",
+  "self_hosted": {
+   "price_month": 0,
+   "currency": "EUR"
+  },
+  "cloud_from": {
+   "price_month": 49.99,
+   "currency": "EUR",
+   "plan": "Cloud Solo"
+  }
+ },
+ "method": "Per tool: cheapest plan that includes the row's capability, monthly billing where published, otherwise annual price per month (marked). Prices without VAT as shown by the vendor. Row cost = cheapest listed tool; range = cheapest to most expensive listed tool (compared via ECB rate). Per-seat prices are for 1 seat unless a minimum seat count applies (then noted). Free tiers with limits are mentioned in the tool note but not used as the price.",
+ "rows": [
+  {
+   "id": "crm",
+   "label_de": "CRM & Pipelines",
+   "label_en": "CRM & pipelines",
+   "coverage": "full",
+   "coverage_note_de": "Kontakte, Firmen, Custom Objects, mehrere Pipelines mit gewichtetem Forecast, Lead-Scoring; keine Gebühr pro Nutzer.",
+   "coverage_note_en": "Contacts, companies, custom objects, multiple pipelines with weighted forecast, lead scoring; no per-user fee.",
+   "tools": [
+    {
+     "name": "HubSpot Sales Hub",
+     "plan": "Starter",
+     "price_month": 20,
+     "currency": "USD",
+     "billing": "monatlich, pro Platz (7 $ jährlich abgerechnet laut Seite)",
+     "source": "https://www.hubspot.com/pricing/sales/starter",
+     "note": "EUR-Preis auf hubspot.de nur per JavaScript, nicht abrufbar; kostenloses CRM mit 1 Pipeline vorhanden"
+    },
+    {
+     "name": "Pipedrive",
+     "plan": "Lite",
+     "price_month": 24,
+     "currency": "EUR",
+     "billing": "monatlich, pro Nutzer (14 € jährlich abgerechnet)",
+     "source": "https://www.pipedrive.com/de/pricing",
+     "note": "EUR-Werte aus den eingebetteten pricingData der Preisseite (lite_monthly_v2 / lite_annual_v2)"
+    },
+    {
+     "name": "Zoho CRM",
+     "plan": "Standard",
+     "price_month": 20,
+     "currency": "EUR",
+     "billing": "monatlich, pro Nutzer (14 € jährlich abgerechnet)",
+     "source": "https://www.zoho.com/de/crm/zohocrm-pricing.html",
+     "note": "EUR-Werte aus der Preisdatei der Seite (zoho.com/sites/zweb/json/pricing/crm-pricing-val.json); Standard enthält mehrere Pipelines; Free-Edition für 3 Nutzer vorhanden"
+    }
+   ],
+   "min_price": 20,
+   "min_currency": "USD",
+   "min_tool": "HubSpot Sales Hub",
+   "range": {
+    "low": {
+     "tool": "HubSpot Sales Hub",
+     "price_month": 20,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Pipedrive",
+     "price_month": 24,
+     "currency": "EUR"
+    }
+   }
+  },
+  {
+   "id": "funnels",
+   "label_de": "Sales-Funnels & Landingpages",
+   "label_en": "Sales funnels & landing pages",
+   "coverage": "full",
+   "coverage_note_de": "Drag-and-drop-Builder, Funnel-Schritte, Order-Bump, One-Click-Upsell, A/B-Tests, Funnel-Analytics; kein KI-Seitengenerator.",
+   "coverage_note_en": "Drag-and-drop builder, funnel steps, order bump, one-click upsell, A/B tests, funnel analytics; no AI page generator.",
+   "tools": [
+    {
+     "name": "ClickFunnels",
+     "plan": "Launch",
+     "price_month": 97,
+     "currency": "USD",
+     "billing": "monatlich",
+     "source": "https://www.clickfunnels.com/pricing",
+     "note": "Reused from competitors.json (verified 2026-10-09)"
+    },
+    {
+     "name": "systeme.io",
+     "plan": "Startup",
+     "price_month": 17,
+     "currency": "USD",
+     "billing": "monatlich",
+     "source": "https://systeme.io/pricing",
+     "note": "Reused from competitors.json (verified 2026-10-09); free plan with 3 funnels exists"
+    },
+    {
+     "name": "Leadpages",
+     "plan": "Grow",
+     "price_month": 99,
+     "currency": "USD",
+     "billing": "monatlich (79 $ jährlich abgerechnet)",
+     "source": "https://www.leadpages.com/pricing"
+    }
+   ],
+   "min_price": 17,
+   "min_currency": "USD",
+   "min_tool": "systeme.io",
+   "range": {
+    "low": {
+     "tool": "systeme.io",
+     "price_month": 17,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Leadpages",
+     "price_month": 99,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "website",
+   "label_de": "Website-Builder inkl. Blog",
+   "label_en": "Website builder incl. blog",
+   "coverage": "full",
+   "coverage_note_de": "Websites mit CMS-Sammlungen, eigener Domain inkl. TLS, SEO-Feldern und Blog (Markdown-Editor, RSS, Planung).",
+   "coverage_note_en": "Websites with CMS collections, custom domain incl. TLS, SEO fields and a blog (Markdown editor, RSS, scheduling).",
+   "tools": [
+    {
+     "name": "Wix",
+     "plan": "Light",
+     "price_month": 17,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet (Monatspreis bei monatlicher Zahlung nur im Checkout)",
+     "source": "https://www.wix.com/plans",
+     "note": "Seite zeigt Preise standortabhängig; unser Abruf zeigte 17,77 $ inkl. GST, die US-Seite laut Suche 17 $"
+    },
+    {
+     "name": "Squarespace",
+     "plan": "Basic",
+     "price_month": 25,
+     "currency": "USD",
+     "billing": "monatlich (19 $ jährlich abgerechnet)",
+     "source": "https://www.squarespace.com/pricing",
+     "note": "Blog in allen Plänen; Basic mit 7 % Gebühr auf verkaufte Inhalte"
+    },
+    {
+     "name": "Webflow",
+     "plan": "Premium (Site-Plan mit CMS)",
+     "price_month": 39,
+     "currency": "USD",
+     "billing": "monatlich (25 $ jährlich abgerechnet)",
+     "source": "https://webflow.com/pricing",
+     "note": "Basic (25 $) hat kein CMS/Blog"
+    }
+   ],
+   "min_price": 17,
+   "min_currency": "USD",
+   "min_tool": "Wix",
+   "range": {
+    "low": {
+     "tool": "Wix",
+     "price_month": 17,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Webflow",
+     "price_month": 39,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "forms",
+   "label_de": "Formulare, Umfragen & Quizze",
+   "label_en": "Forms, surveys & quizzes",
+   "coverage": "full",
+   "coverage_note_de": "Mehrstufige Formulare mit Logik, Datei-Upload, Unterschrift, NPS, Bewertungs- und Rechenfeldern (Quiz-Funnels), Zahlungsfeld.",
+   "coverage_note_en": "Multi-step forms with logic, file upload, signature, NPS, scoring and calculator fields (quiz funnels), payment field.",
+   "tools": [
+    {
+     "name": "Typeform",
+     "plan": "Basic",
+     "price_month": 39,
+     "currency": "USD",
+     "billing": "monatlich (28 $ jährlich abgerechnet)",
+     "source": "https://www.typeform.com/pricing",
+     "note": "Free-Plan vorhanden; Vergleichstabelle der Seite nennt teils andere Werte (29/25 $), Preiskarte zeigt 39 $"
+    },
+    {
+     "name": "Jotform",
+     "plan": "Bronze",
+     "price_month": 39,
+     "currency": "USD",
+     "billing": "monatlich (34 $ jährlich abgerechnet)",
+     "source": "https://www.jotform.com/pricing/",
+     "note": "Kostenloser Starter-Plan mit Limits vorhanden"
+    },
+    {
+     "name": "SurveyMonkey",
+     "plan": "Standard Monthly",
+     "price_month": 149,
+     "currency": "USD",
+     "billing": "monatlich (Advantage Annual: 39 $/Monat, jährlich abgerechnet)",
+     "source": "https://www.surveymonkey.com/pricing/individual/",
+     "note": "Kostenloser Basic-Plan mit Limits vorhanden"
+    }
+   ],
+   "min_price": 39,
+   "min_currency": "USD",
+   "min_tool": "Typeform",
+   "range": {
+    "low": {
+     "tool": "Typeform",
+     "price_month": 39,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "SurveyMonkey",
+     "price_month": 149,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "email",
+   "label_de": "E-Mail-Marketing",
+   "label_en": "Email marketing",
+   "coverage": "full",
+   "coverage_note_de": "Kampagnen, Drag-and-drop-Designer, A/B-Tests, Zustellbarkeits-Tools, unbegrenzte Kontakte. Versand über eigenen Anbieter (SMTP, SES, Brevo usw.) – dessen Versandkosten kommen hinzu.",
+   "coverage_note_en": "Campaigns, drag-and-drop designer, A/B tests, deliverability tools, unlimited contacts. Sending via your own provider (SMTP, SES, Brevo etc.) – its sending fees apply.",
+   "tools": [
+    {
+     "name": "Mailchimp",
+     "plan": "Essentials",
+     "price_month": 13,
+     "currency": "USD",
+     "billing": "monatlich, Einstiegspreis (500 Kontakte)",
+     "source": "https://mailchimp.com/pricing/marketing/",
+     "note": "Seite zeigt 13 $/Monat 'für 12 Monate'; der reguläre Folgepreis wird per JavaScript geladen; Free-Plan bis 250 Kontakte"
+    },
+    {
+     "name": "ActiveCampaign",
+     "plan": "Starter",
+     "price_month": 19,
+     "currency": "EUR",
+     "billing": "monatlich (15 € jährlich abgerechnet), 1.000 Kontakte",
+     "source": "https://www.activecampaign.com/pricing",
+     "note": "Reused from competitors.json (verified 2026-10-09)"
+    },
+    {
+     "name": "Brevo",
+     "plan": "Starter",
+     "price_month": 7,
+     "currency": "EUR",
+     "billing": "monatlich, ab 5.000 E-Mails/Monat",
+     "source": "https://www.brevo.com/pricing/",
+     "note": "Reused from competitors.json (verified 2026-10-09 via brevo.com/pricing.md); free plan with 300 emails/day exists"
+    }
+   ],
+   "extra_costs_de": "Versandkosten beim eigenen Anbieter (z. B. SES, Brevo, Postmark).",
+   "extra_costs_en": "Sending fees at your own provider (e.g. SES, Brevo, Postmark).",
+   "min_price": 7,
+   "min_currency": "EUR",
+   "min_tool": "Brevo",
+   "range": {
+    "low": {
+     "tool": "Brevo",
+     "price_month": 7,
+     "currency": "EUR"
+    },
+    "high": {
+     "tool": "ActiveCampaign",
+     "price_month": 19,
+     "currency": "EUR"
+    }
+   }
+  },
+  {
+   "id": "sms_whatsapp",
+   "label_de": "SMS & WhatsApp",
+   "label_en": "SMS & WhatsApp",
+   "coverage": "full",
+   "coverage_note_de": "Zwei-Wege-SMS, WhatsApp Cloud API mit Vorlagen-Kampagnen, Messenger/Instagram im Posteingang. Eigener Anbieter nötig (Twilio, seven.io u. a. bzw. Meta) – Nachrichtengebühren zahlst du dort.",
+   "coverage_note_en": "Two-way SMS, WhatsApp Cloud API with template campaigns, Messenger/Instagram in the inbox. Bring your own provider (Twilio, seven.io etc. or Meta) – message fees are paid there.",
+   "tools": [
+    {
+     "name": "respond.io",
+     "plan": "Starter",
+     "price_month": 99,
+     "currency": "USD",
+     "billing": "monatlich (79 $ jährlich abgerechnet), 5 Nutzer",
+     "source": "https://respond.io/pricing",
+     "note": "WhatsApp-Gebühren von Meta nicht enthalten"
+    },
+    {
+     "name": "Superchat",
+     "plan": "Basic",
+     "price_month": 89,
+     "currency": "EUR",
+     "billing": "monatlich, netto, Mindestlaufzeit 12 Monate, 3 Nutzer",
+     "source": "https://www.superchat.com/de/preise",
+     "note": "Deutscher Anbieter; WhatsApp, SMS, Instagram, Messenger im Posteingang; Free-Plan mit 1 Nutzer vorhanden; vom Unternehmen gestartete WhatsApp-Nachrichten kosten extra"
+    },
+    {
+     "name": "Textedly",
+     "plan": "Basic",
+     "price_month": 29,
+     "currency": "USD",
+     "billing": "monatlich, 500 SMS/Monat",
+     "source": "https://www.textedly.com/pricing",
+     "note": "SMS-Marketing (USA); kostenloses Konto mit 50 SMS"
+    }
+   ],
+   "extra_costs_de": "SMS- und WhatsApp-Nachrichtengebühren beim eigenen Anbieter bzw. bei Meta – wie bei den Vergleichstools auch.",
+   "extra_costs_en": "SMS and WhatsApp message fees at your own provider or Meta – as with the compared tools.",
+   "min_price": 29,
+   "min_currency": "USD",
+   "min_tool": "Textedly",
+   "range": {
+    "low": {
+     "tool": "Textedly",
+     "price_month": 29,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Superchat",
+     "price_month": 89,
+     "currency": "EUR"
+    }
+   }
+  },
+  {
+   "id": "booking",
+   "label_de": "Terminbuchung",
+   "label_en": "Booking & appointments",
+   "coverage": "full",
+   "coverage_note_de": "Buchungsseiten, Round-Robin, Gruppen-/Kurstermine, Erinnerungen per E-Mail/SMS, Zahlung bei Buchung, Google/Outlook-Sync.",
+   "coverage_note_en": "Booking pages, round robin, collective/class events, email/SMS reminders, payment at booking, Google/Outlook sync.",
+   "tools": [
+    {
+     "name": "Calendly",
+     "plan": "Standard",
+     "price_month": 12,
+     "currency": "EUR",
+     "billing": "monatlich, pro Platz (10 € jährlich abgerechnet)",
+     "source": "https://calendly.com/pricing",
+     "note": "EUR-Preise aus den eingebetteten Preisdaten der Seite; Free-Plan mit 1 Termintyp; Round-Robin erst im Teams-Plan (20 € monatlich)"
+    },
+    {
+     "name": "Acuity Scheduling",
+     "plan": "Starter",
+     "price_month": 20,
+     "currency": "USD",
+     "billing": "monatlich (16 $ jährlich abgerechnet)",
+     "source": "https://acuityscheduling.com/signup.php"
+    },
+    {
+     "name": "Cal.com",
+     "plan": "Teams",
+     "price_month": 12,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet, pro Nutzer (Monatspreis nicht angezeigt)",
+     "source": "https://cal.com/pricing",
+     "note": "Kostenloser Plan für Einzelpersonen inkl. Zahlungen vorhanden; Round-Robin erst in Teams"
+    }
+   ],
+   "min_price": 12,
+   "min_currency": "USD",
+   "min_tool": "Cal.com",
+   "range": {
+    "low": {
+     "tool": "Cal.com",
+     "price_month": 12,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Acuity Scheduling",
+     "price_month": 20,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "automation",
+   "label_de": "Workflow-Automatisierung",
+   "label_en": "Workflow automation",
+   "coverage": "full",
+   "coverage_note_de": "140+ Trigger, 130+ Aktionen, Verzweigungen, Wartezeiten, A/B-Splits, HTTP/Webhooks. Ersetzt Zapier/Make für Abläufe rund ums CRM; für Fremd-Apps gibt es rund 20 native Schritte plus Composio (250+ Apps) – nicht die tausenden Apps von Zapier.",
+   "coverage_note_en": "140+ triggers, 130+ actions, branches, waits, A/B splits, HTTP/webhooks. Replaces Zapier/Make for CRM-centred flows; for third-party apps there are ~20 native steps plus Composio (250+ apps) – not Zapier's thousands of apps.",
+   "tools": [
+    {
+     "name": "Zapier",
+     "plan": "Professional",
+     "price_month": 29.99,
+     "currency": "USD",
+     "billing": "monatlich, 750 Tasks (19,99 $ jährlich abgerechnet)",
+     "source": "https://zapier.com/pricing",
+     "note": "Free-Plan nur mit Zwei-Schritt-Zaps, 100 Tasks"
+    },
+    {
+     "name": "Make",
+     "plan": "Core",
+     "price_month": 12,
+     "currency": "USD",
+     "billing": "monatlich, 10.000 Credits (jährlich mind. 15 % günstiger)",
+     "source": "https://www.make.com/en/pricing",
+     "note": "Free-Plan mit 1.000 Credits; Seite blockt curl (403), WebFetch ging"
+    },
+    {
+     "name": "n8n Cloud",
+     "plan": "Starter",
+     "price_month": 24,
+     "currency": "EUR",
+     "billing": "monatlich, 2.500 Ausführungen (20 € jährlich abgerechnet)",
+     "source": "https://n8n.io/pricing/",
+     "note": "Monatspreis aus den eingebetteten Preisdaten; selbst gehostete Community Edition kostenlos"
+    }
+   ],
+   "min_price": 12,
+   "min_currency": "USD",
+   "min_tool": "Make",
+   "range": {
+    "low": {
+     "tool": "Make",
+     "price_month": 12,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Zapier",
+     "price_month": 29.99,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "ai_chat_content",
+   "label_de": "KI-Chat & Inhalte",
+   "label_en": "AI chat & content",
+   "coverage": "partial",
+   "coverage_note_de": "KI-Agent, KI-Mitarbeiter, Website-Chatbot und KI-Schritte sind eingebaut – das Modell kommt von einem KI-Anbieter (eigene Schlüssel oder das KI-Kontingent der Cloud). Nicht in der Summe.",
+   "coverage_note_en": "AI agent, AI employees, website chat bot and AI steps are built in – the model comes from an AI provider (your own keys or the cloud's AI allowance). Not in the total.",
+   "tools": [
+    {
+     "name": "Jasper",
+     "plan": "Pro",
+     "price_month": 69,
+     "currency": "USD",
+     "billing": "monatlich, pro Platz (59 $ jährlich abgerechnet)",
+     "source": "https://www.jasper.ai/pricing",
+     "note": "Strukturierte Daten der Seite tragen priceValidUntil 2025-12-31, FAQ-Text nennt dieselben Preise"
+    }
+   ],
+   "extra_costs_de": "KI-Nutzung (Tokens) direkt beim KI-Anbieter; lokale Modelle (Ollama) kostenlos.",
+   "extra_costs_en": "AI usage (tokens) paid to the AI provider; local models (Ollama) are free.",
+   "min_price": 69,
+   "min_currency": "USD",
+   "min_tool": "ChatGPT",
+   "range": {
+    "low": {
+     "tool": "ChatGPT",
+     "price_month": 20,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Jasper",
+     "price_month": 69,
+     "currency": "USD"
+    }
+   },
+   "in_total": false
+  },
+  {
+   "id": "ai_voice",
+   "label_de": "KI-Telefonagent",
+   "label_en": "AI voice agent",
+   "coverage": "partial",
+   "coverage_note_de": "Nur eingehende Anrufe (immer, außerhalb der Zeiten oder bei Nichtannahme): bucht Termine, nimmt Nachrichten auf, leitet weiter. Keine ausgehenden KI-Anrufe. Eigenes Twilio-Konto und eigene TTS/STT-Schlüssel nötig.",
+   "coverage_note_en": "Inbound calls only (always, after hours or on no answer): books appointments, takes messages, transfers. No outbound AI calls. Requires your own Twilio account and TTS/STT keys.",
+   "tools": [
+    {
+     "name": "Goodcall",
+     "plan": "Starter",
+     "price_month": 79,
+     "currency": "USD",
+     "billing": "monatlich, 100 Anrufer/Monat",
+     "source": "https://www.goodcall.com/pricing"
+    },
+    {
+     "name": "Smith.ai",
+     "plan": "AI Receptionist Pro",
+     "price_month": 150,
+     "currency": "USD",
+     "billing": "monatlich, ab 75 Anrufe",
+     "source": "https://smith.ai/pricing/ai-receptionist",
+     "note": "Free-Stufe mit 25 Anrufen/Monat vorhanden"
+    },
+    {
+     "name": "fonio.ai",
+     "plan": "KI Telefonassistent Solo",
+     "price_month": 119,
+     "currency": "EUR",
+     "billing": "monatlich, netto, 1.000 Minuten (99 € jährlich abgerechnet)",
+     "source": "https://www.fonio.ai/preise",
+     "note": "Österreichischer Anbieter; Seite zeigt 119 € durchgestrichen und 99 € 'pro Monat, jährlich abgerechnet' mit Umschalter Monatlich/Jährlich – 119 € als Monatspreis gelesen"
+    }
+   ],
+   "extra_costs_de": "Twilio-Minuten und TTS/STT-Nutzung beim eigenen Anbieter.",
+   "extra_costs_en": "Twilio minutes and TTS/STT usage at your own providers.",
+   "min_price": 79,
+   "min_currency": "USD",
+   "min_tool": "Goodcall",
+   "range": {
+    "low": {
+     "tool": "Goodcall",
+     "price_month": 79,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Smith.ai",
+     "price_month": 150,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "social",
+   "label_de": "Social-Media-Planer",
+   "label_en": "Social media planner",
+   "coverage": "full",
+   "coverage_note_de": "Planen und Posten auf X, LinkedIn, Facebook, Instagram, Threads, Bluesky, TikTok, YouTube Shorts, Google u. a.; Kalender, KI-Entwürfe. Benötigt einen selbst gehosteten Postiz-Dienst; einfache Statistik.",
+   "coverage_note_en": "Plan and post to X, LinkedIn, Facebook, Instagram, Threads, Bluesky, TikTok, YouTube Shorts, Google and more; calendar, AI drafts. Needs a self-hosted Postiz service; basic analytics.",
+   "tools": [
+    {
+     "name": "Hootsuite",
+     "plan": "Standard",
+     "price_month": 99,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet (laut FAQ 'Paid plans start at $99'; Monatspreis nicht angezeigt)",
+     "source": "https://www.hootsuite.com/plans"
+    },
+    {
+     "name": "Buffer",
+     "plan": "Essentials",
+     "price_month": 5,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet, pro Kanal (60 $/Jahr); Monatspreis nicht im Seitentext",
+     "source": "https://buffer.com/pricing",
+     "note": "Preis pro verbundenem Kanal; Free-Plan mit 3 Kanälen vorhanden"
+    },
+    {
+     "name": "Later",
+     "plan": "Starter",
+     "price_month": 18.75,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet (monatliche Zahlung laut FAQ 25 % teurer)",
+     "source": "https://later.com/pricing/"
+    }
+   ],
+   "extra_costs_de": "Postiz läuft als eigener Dienst (Open Source, selbst gehostet).",
+   "extra_costs_en": "Postiz runs as a separate service (open source, self-hosted).",
+   "min_price": 5,
+   "min_currency": "USD",
+   "min_tool": "Buffer",
+   "range": {
+    "low": {
+     "tool": "Buffer",
+     "price_month": 5,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Hootsuite",
+     "price_month": 99,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "courses",
+   "label_de": "Kurse & Mitgliederbereiche",
+   "label_en": "Courses & memberships",
+   "coverage": "full",
+   "coverage_note_de": "Kurse mit gehostetem Video, Drip, Quizze, Zertifikate, Kohorten, Mitgliederportal als PWA; keine Store-Apps.",
+   "coverage_note_en": "Courses with hosted video, drip, quizzes, certificates, cohorts, member portal as PWA; no store apps.",
+   "tools": [
+    {
+     "name": "Kajabi",
+     "plan": "Basic",
+     "price_month": 179,
+     "currency": "USD",
+     "billing": "monatlich (143 $ jährlich abgerechnet)",
+     "source": "https://kajabi.com/pricing",
+     "note": "Reused from competitors.json (verified 2026-10-09)"
+    },
+    {
+     "name": "Teachable",
+     "plan": "Starter",
+     "price_month": 39,
+     "currency": "USD",
+     "billing": "monatlich (29 $ jährlich abgerechnet); 7,5 % Transaktionsgebühr",
+     "source": "https://www.teachable.com/pricing"
+    },
+    {
+     "name": "Thinkific",
+     "plan": "Basic",
+     "price_month": 54,
+     "currency": "USD",
+     "billing": "monatlich (40 $ jährlich abgerechnet)",
+     "source": "https://www.thinkific.com/pricing/"
+    }
+   ],
+   "min_price": 39,
+   "min_currency": "USD",
+   "min_tool": "Teachable",
+   "range": {
+    "low": {
+     "tool": "Teachable",
+     "price_month": 39,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Kajabi",
+     "price_month": 179,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "community",
+   "label_de": "Communities",
+   "label_en": "Communities",
+   "coverage": "full",
+   "coverage_note_de": "Skool-artige Community: Feed, kostenpflichtige Stufen, Punkte/Level, Challenges, Events, Live-Calls (Jitsi), DMs, PWA mit Push.",
+   "coverage_note_en": "Skool-style community: feed, paid tiers, points/levels, challenges, events, live calls (Jitsi), DMs, PWA with push.",
+   "tools": [
+    {
+     "name": "Skool",
+     "plan": "Hobby",
+     "price_month": 9,
+     "currency": "USD",
+     "billing": "monatlich; 10 % Transaktionsgebühr (Pro: 99 $, 2,9 %)",
+     "source": "https://www.skool.com/pricing"
+    },
+    {
+     "name": "Circle",
+     "plan": "Professional",
+     "price_month": 89,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet (Seite: 'based on annual billing'); 2 % Transaktionsgebühr",
+     "source": "https://circle.so/pricing"
+    },
+    {
+     "name": "Mighty Networks",
+     "plan": "Launch",
+     "price_month": 79,
+     "currency": "USD",
+     "billing": "monatlich",
+     "source": "https://www.mightynetworks.com/pricing"
+    }
+   ],
+   "min_price": 9,
+   "min_currency": "USD",
+   "min_tool": "Skool",
+   "range": {
+    "low": {
+     "tool": "Skool",
+     "price_month": 9,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Circle",
+     "price_month": 89,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "call_tracking",
+   "label_de": "Call-Tracking",
+   "label_en": "Call tracking",
+   "coverage": "full",
+   "coverage_note_de": "Statische Nummern je Kampagne, dynamische Nummern (DNI) auf Websites, Zuordnung zur Quelle, Bericht „Anrufe nach Quelle“. Nummern und Minuten über dein eigenes Twilio-Konto.",
+   "coverage_note_en": "Static numbers per campaign, dynamic number insertion (DNI) on websites, source attribution, calls-by-source report. Numbers and minutes via your own Twilio account.",
+   "tools": [
+    {
+     "name": "CallRail",
+     "plan": "Call Tracking (Lead Tracking)",
+     "price_month": 50,
+     "currency": "USD",
+     "billing": "ab 50 $/Monat zzgl. Nutzung, 5 Nummern, 250 Minuten (jährlich bis 10 % günstiger)",
+     "source": "https://www.callrail.com/pricing",
+     "note": "Seite ordnet 50 $ nicht eindeutig monatlicher oder jährlicher Zahlung zu"
+    },
+    {
+     "name": "CallTrackingMetrics",
+     "plan": "Marketing Lite",
+     "price_month": 79,
+     "currency": "USD",
+     "billing": "monatlich zzgl. Nutzung (65 $ jährlich abgerechnet)",
+     "source": "https://www.ctm.com/plans-pricing/"
+    },
+    {
+     "name": "WhatConverts",
+     "plan": "Call Tracking",
+     "price_month": 30,
+     "currency": "USD",
+     "billing": "monatlich, inkl. 30 $ Nutzungsguthaben",
+     "source": "https://www.whatconverts.com/pricing/"
+    }
+   ],
+   "extra_costs_de": "Nummern und Minuten im eigenen Twilio-Konto.",
+   "extra_costs_en": "Numbers and minutes in your own Twilio account.",
+   "min_price": 30,
+   "min_currency": "USD",
+   "min_tool": "WhatConverts",
+   "range": {
+    "low": {
+     "tool": "WhatConverts",
+     "price_month": 30,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "CallTrackingMetrics",
+     "price_month": 79,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "reputation",
+   "label_de": "Bewertungsmanagement",
+   "label_en": "Reputation management",
+   "coverage": "partial",
+   "coverage_note_de": "Nur Google: Bewertungsanfragen per E-Mail/SMS, Google-Bewertungen lesen und beantworten, KI-Antwortentwürfe, Widget. Kein Facebook, Yelp oder Trustpilot, kein Listings-Management.",
+   "coverage_note_en": "Google only: review requests by email/SMS, read and reply to Google reviews, AI reply drafts, widget. No Facebook, Yelp or Trustpilot, no listings management.",
+   "tools": [
+    {
+     "name": "Birdeye",
+     "plan": "—",
+     "price_month": null,
+     "currency": "USD",
+     "billing": "Preis nicht veröffentlicht (nur auf Anfrage)",
+     "source": "https://birdeye.com/pricing/",
+     "note": "Nicht in Minimum/Spanne eingerechnet"
+    },
+    {
+     "name": "NiceJob",
+     "plan": "Starter",
+     "price_month": 75,
+     "currency": "USD",
+     "billing": "monatlich",
+     "source": "https://get.nicejob.com/pricing"
+    },
+    {
+     "name": "ProvenExpert",
+     "plan": "Basic",
+     "price_month": 49.99,
+     "currency": "EUR",
+     "billing": "monatlich, netto (29,99 €/Monat bei jährlicher Vorauszahlung)",
+     "source": "https://www.provenexpert.com/de-de/funktionen-preise/",
+     "note": "Deutscher Anbieter; Google-Sterne ab Basic; Free-Plan vorhanden"
+    }
+   ],
+   "min_price": 49.99,
+   "min_currency": "EUR",
+   "min_tool": "ProvenExpert",
+   "range": {
+    "low": {
+     "tool": "ProvenExpert",
+     "price_month": 49.99,
+     "currency": "EUR"
+    },
+    "high": {
+     "tool": "NiceJob",
+     "price_month": 75,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "esign_quotes",
+   "label_de": "Dokumente signieren & Angebote",
+   "label_en": "Document signing & quotes",
+   "coverage": "partial",
+   "coverage_note_de": "Verträge mit E-Signatur (gezeichnet oder getippt, Audit-Trail) und Angebote mit Varianten, die online angenommen werden. Nur ein Unterzeichner pro Vertrag, kein Drag-and-drop-Angebotsbaukasten.",
+   "coverage_note_en": "Contracts with e-signature (drawn or typed, audit trail) and quotes with variants accepted online. One signer per contract only, no drag-and-drop proposal builder.",
+   "tools": [
+    {
+     "name": "DocuSign",
+     "plan": "Personal",
+     "price_month": 14,
+     "currency": "EUR",
+     "billing": "monatlich, 5 Umschläge/Monat (9 € jährlich abgerechnet = 108 €/Jahr)",
+     "source": "https://ecom.docusign.com/de-DE/plans-and-pricing/esignature",
+     "note": "Monatspreis aus den eingebetteten Preisdaten der deutschen Preisseite; Standard: 39 € monatlich"
+    },
+    {
+     "name": "PandaDoc",
+     "plan": "Starter",
+     "price_month": 35,
+     "currency": "USD",
+     "billing": "monatlich, pro Platz (19 $ jährlich abgerechnet)",
+     "source": "https://www.pandadoc.com/pricing/",
+     "note": "Herstellerseite antwortete mit 429 (Rate Limit); Preis über mehrere Quellen per Suche bestätigt; kostenlose eSign-Stufe vorhanden"
+    },
+    {
+     "name": "Proposify",
+     "plan": "Build",
+     "price_month": 49,
+     "currency": "USD",
+     "billing": "monatlich, pro Nutzer (35 $ jährlich abgerechnet)",
+     "source": "https://www.proposify.com/pricing"
+    }
+   ],
+   "row_note_de": "DocuSign Personal deckt nur das Signieren ab (5 Umschläge/Monat); Angebote mit Annahme online bieten PandaDoc und Proposify.",
+   "row_note_en": "DocuSign Personal covers signing only (5 envelopes/month); online-accepted quotes come with PandaDoc and Proposify.",
+   "min_price": 14,
+   "min_currency": "EUR",
+   "min_tool": "DocuSign",
+   "range": {
+    "low": {
+     "tool": "DocuSign",
+     "price_month": 14,
+     "currency": "EUR"
+    },
+    "high": {
+     "tool": "Proposify",
+     "price_month": 49,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "invoicing",
+   "label_de": "Rechnungen inkl. XRechnung/ZUGFeRD & DATEV",
+   "label_en": "Invoicing incl. XRechnung/ZUGFeRD & DATEV",
+   "coverage": "full",
+   "coverage_note_de": "GoBD-orientierte Nummernkreise, XRechnung 3.0, ZUGFeRD 2.3, Mahnwesen, SEPA, DATEV-Export, Live-Sync mit Lexware Office und sevDesk. Buchhaltung nur „light“, ersetzt keine Steuerkanzlei-Software.",
+   "coverage_note_en": "GoBD-style number ranges, XRechnung 3.0, ZUGFeRD 2.3, dunning, SEPA, DATEV export, live sync with Lexware Office and sevDesk. Bookkeeping is 'light' only.",
+   "tools": [
+    {
+     "name": "Lexware Office (lexoffice)",
+     "plan": "M",
+     "price_month": 12.9,
+     "currency": "EUR",
+     "billing": "monatlich, netto, ohne Mindestlaufzeit (Aktion: 6,45 € für 3 Monate)",
+     "source": "https://www.lexware.de/preise/",
+     "note": "E-Rechnungen (ZUGFeRD/XRechnung) erstellen erst ab Version M (S nur empfangen); Steuerberater-Zugang und elektronische Pendelakte in allen Versionen"
+    },
+    {
+     "name": "sevDesk",
+     "plan": "Rechnung",
+     "price_month": 11.9,
+     "currency": "EUR",
+     "billing": "monatlich, netto (Aktion: 4,45 €; jährlich 9,90 €)",
+     "source": "https://sevdesk.de/preise/",
+     "note": "Unbegrenzte E-Rechnungen, ZUGFeRD/XRechnung, DATEV-/ADDISON-Schnittstelle; Kostenlos-Tarif mit 3 Rechnungen/Monat"
+    }
+   ],
+   "min_price": 11.9,
+   "min_currency": "EUR",
+   "min_tool": "sevDesk",
+   "range": {
+    "low": {
+     "tool": "sevDesk",
+     "price_month": 11.9,
+     "currency": "EUR"
+    },
+    "high": {
+     "tool": "Lexware Office (lexoffice)",
+     "price_month": 12.9,
+     "currency": "EUR"
+    }
+   }
+  },
+  {
+   "id": "helpdesk",
+   "label_de": "Helpdesk & Wissensdatenbank",
+   "label_en": "Helpdesk & knowledge base",
+   "coverage": "full",
+   "coverage_note_de": "Tickets mit Pipelines, SLAs in Geschäftszeiten, Eskalation, Kundenportal, Wissensdatenbank/Help Center mit eigener Domain, CSAT/NPS.",
+   "coverage_note_en": "Tickets with pipelines, SLAs in business hours, escalation, customer portal, knowledge base/help center on your domain, CSAT/NPS.",
+   "tools": [
+    {
+     "name": "Zendesk",
+     "plan": "Suite Team",
+     "price_month": 69,
+     "currency": "EUR",
+     "billing": "monatlich, pro Agent (55 € jährlich abgerechnet)",
+     "source": "https://www.zendesk.de/pricing/",
+     "note": "Günstigster Plan mit Help Center; SLAs laut Vergleichstabelle erst ab Suite Professional (149 € monatlich)"
+    },
+    {
+     "name": "Freshdesk",
+     "plan": "Growth",
+     "price_month": 17,
+     "currency": "EUR",
+     "billing": "jährlich abgerechnet, pro Agent (Monatspreis nicht angezeigt)",
+     "source": "https://www.freshworks.com/de/freshdesk/pricing/",
+     "note": "Wissensdatenbank ab Growth; mehrere SLA-Richtlinien erst ab Pro (52 €); Free-Programm für 2 Agenten"
+    }
+   ],
+   "min_price": 17,
+   "min_currency": "EUR",
+   "min_tool": "Freshdesk",
+   "range": {
+    "low": {
+     "tool": "Freshdesk",
+     "price_month": 17,
+     "currency": "EUR"
+    },
+    "high": {
+     "tool": "Zendesk",
+     "price_month": 69,
+     "currency": "EUR"
+    }
+   }
+  },
+  {
+   "id": "projects",
+   "label_de": "Projektmanagement inkl. Gantt & Zeiterfassung",
+   "label_en": "Project management incl. Gantt & time tracking",
+   "coverage": "full",
+   "coverage_note_de": "Liste, Board, Kalender, Gantt mit kritischem Pfad, Abhängigkeiten, Auslastung, Zeiterfassung mit Freigabe bis zur Rechnung, Budgets. Keine Gebühr pro Nutzer.",
+   "coverage_note_en": "List, board, calendar, Gantt with critical path, dependencies, workload, time tracking with approval through to invoice, budgets. No per-user fee.",
+   "tools": [
+    {
+     "name": "Asana",
+     "plan": "Advanced",
+     "price_month": 60.98,
+     "currency": "USD",
+     "billing": "monatlich, 30,49 $ pro Nutzer, mind. 2 Nutzer (24,99 $ jährlich abgerechnet)",
+     "source": "https://asana.com/de/pricing",
+     "seats_min": 2,
+     "price_per_seat": 30.49,
+     "note": "Gantt/Zeitleiste ab Starter (13,49 $ monatlich), eigene Zeiterfassung erst in Advanced; Pläne für Teams ab 2 Mitgliedern (FAQ); Personal-Plan kostenlos für bis zu 2 Nutzer"
+    },
+    {
+     "name": "ClickUp",
+     "plan": "Core",
+     "price_month": 12,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet, pro Nutzer, regulärer Preis (Aktion: 8 $); ältere Tabelle derselben Seite: Unlimited 7 $ jährlich / 10 $ monatlich",
+     "source": "https://clickup.com/pricing",
+     "price_per_seat": 12,
+     "note": "Unbegrenzte Gantt-Diagramme und Zeiterfassung ab Core/Unlimited; Free Forever nur mit Testkontingent"
+    },
+    {
+     "name": "monday.com",
+     "plan": "Pro",
+     "price_month": 57,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet, 19 $ pro Platz, mind. 3 Plätze (monatliche Zahlung laut FAQ ohne Rabatt, Preis nicht angezeigt)",
+     "source": "https://monday.com/pricing",
+     "seats_min": 3,
+     "price_per_seat": 19,
+     "note": "Gantt ab Standard (12 $), Zeiterfassung erst in Pro"
+    }
+   ],
+   "min_price": 12,
+   "min_currency": "USD",
+   "min_tool": "ClickUp",
+   "range": {
+    "low": {
+     "tool": "ClickUp",
+     "price_month": 12,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Asana",
+     "price_month": 60.98,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "webinars",
+   "label_de": "Automatisierte Webinare (Evergreen)",
+   "label_en": "Automated (evergreen) webinars",
+   "coverage": "partial",
+   "coverage_note_de": "Automatisierte/Evergreen-Webinare mit Terminen, Just-in-time, Erinnerungen, Fragen, Umfragen, Angebotsbutton, Replay, Analytics. Kein Live-Streaming.",
+   "coverage_note_en": "Automated/evergreen webinars with schedules, just-in-time, reminders, Q&A, polls, offer button, replay, analytics. No live streaming.",
+   "tools": [
+    {
+     "name": "EverWebinar",
+     "plan": "Monthly",
+     "price_month": 199,
+     "currency": "USD",
+     "billing": "monatlich (99 $ effektiv bei jährlicher Zahlung, 79 $ bei 2 Jahren)",
+     "source": "https://everwebinar.com/pricing/"
+    },
+    {
+     "name": "WebinarJam",
+     "plan": "Basic (inkl. EverWebinar)",
+     "price_month": 99,
+     "currency": "USD",
+     "billing": "monatlich (79 $ jährlich abgerechnet)",
+     "source": "https://www.webinarjam.com/pricing",
+     "note": "Laut Seite ist EverWebinar (automatisierte Webinare) in Basic, Professional und Enterprise ohne Aufpreis enthalten; Starter (49 $) ohne"
+    },
+    {
+     "name": "Demio",
+     "plan": "Growth",
+     "price_month": null,
+     "currency": "USD",
+     "billing": "Preis wird nur per JavaScript geladen, nicht abrufbar",
+     "source": "https://demio.com/pricing",
+     "note": "Automatisierte Webinare erst ab Growth (Starter 63 $ monatlich ohne); Premium 196 $/Monat jährlich; eine Drittquelle nennt 109 $/Monat für Growth – nicht übernommen"
+    }
+   ],
+   "min_price": 99,
+   "min_currency": "USD",
+   "min_tool": "WebinarJam",
+   "range": {
+    "low": {
+     "tool": "WebinarJam",
+     "price_month": 99,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "EverWebinar",
+     "price_month": 199,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "team_chat_wiki",
+   "label_de": "Team-Chat & Wiki",
+   "label_en": "Team chat & wiki",
+   "coverage": "full",
+   "coverage_note_de": "Kanäle, DMs, Threads, Reaktionen, Dateien, Suche, CRM-Karten; Wiki mit Seitenbaum, Versionen, Vorlagen, Freigabelinks. Keine Gebühr pro Nutzer.",
+   "coverage_note_en": "Channels, DMs, threads, reactions, files, search, CRM cards; wiki with page tree, versions, templates, share links. No per-user fee.",
+   "tools": [
+    {
+     "name": "Slack",
+     "plan": "Pro",
+     "price_month": 8.75,
+     "currency": "USD",
+     "billing": "monatlich, pro Person (7,25 $ jährlich abgerechnet; Aktion 50 % für 3 Monate)",
+     "source": "https://slack.com/intl/de-de/pricing",
+     "note": "Deutsche Seite nennt USD; Free-Plan mit 90 Tagen Nachrichtenverlauf"
+    },
+    {
+     "name": "Notion",
+     "plan": "Plus",
+     "price_month": 12,
+     "currency": "USD",
+     "billing": "monatlich, pro Mitglied (10 $ jährlich abgerechnet)",
+     "source": "https://www.notion.com/de/pricing",
+     "note": "Werte aus den eingebetteten Preisdaten (plus_monthly_usd 1200 Cent, plus_yearly_usd 12000 Cent); Free-Plan für Einzelpersonen"
+    }
+   ],
+   "row_note_de": "Zeile fasst zwei Kategorien zusammen: Minimum = günstigstes Einzeltool (Slack), nicht die Summe Slack + Notion (20,75 $).",
+   "row_note_en": "Row combines two categories: minimum = cheapest single tool (Slack), not Slack + Notion (20.75 $).",
+   "min_price": 8.75,
+   "min_currency": "USD",
+   "min_tool": "Slack",
+   "range": {
+    "low": {
+     "tool": "Slack",
+     "price_month": 8.75,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Notion",
+     "price_month": 12,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "whiteboard",
+   "label_de": "Whiteboard",
+   "label_en": "Whiteboard",
+   "coverage": "full",
+   "coverage_note_de": "Unendliche Boards mit Formen, Pfeilen, Frames, Vorlagen, Live-Karten aus dem CRM, KI-Zeichnen, Export als PNG/SVG/PDF.",
+   "coverage_note_en": "Infinite boards with shapes, arrows, frames, templates, live CRM cards, AI drawing, PNG/SVG/PDF export.",
+   "tools": [
+    {
+     "name": "Miro",
+     "plan": "Starter",
+     "price_month": 8,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet, pro Mitglied (monatliche Zahlung laut Seite 20 % teurer, Preis nicht angezeigt)",
+     "source": "https://miro.com/de/pricing/",
+     "note": "Free-Plan mit 3 bearbeitbaren Boards"
+    },
+    {
+     "name": "Mural",
+     "plan": "Team+",
+     "price_month": 12,
+     "currency": "USD",
+     "billing": "monatlich, pro Mitglied (9,99 $ jährlich abgerechnet)",
+     "source": "https://www.mural.co/pricing",
+     "note": "Free-Plan vorhanden"
+    }
+   ],
+   "min_price": 8,
+   "min_currency": "USD",
+   "min_tool": "Miro",
+   "range": {
+    "low": {
+     "tool": "Miro",
+     "price_month": 8,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Mural",
+     "price_month": 12,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "affiliate",
+   "label_de": "Affiliate-Management",
+   "label_en": "Affiliate management",
+   "coverage": "full",
+   "coverage_note_de": "Partnerprogramme mit %- oder Festprovision, wiederkehrend, First/Last Click, Partnerportal, Auszahlung als CSV oder SEPA.",
+   "coverage_note_en": "Affiliate programmes with % or fixed commission, recurring, first/last click, affiliate portal, payouts as CSV or SEPA.",
+   "tools": [
+    {
+     "name": "FirstPromoter",
+     "plan": "Starter",
+     "price_month": 49,
+     "currency": "USD",
+     "billing": "monatlich (490 $/Jahr), bis 5.000 $ Affiliate-Umsatz/Monat",
+     "source": "https://firstpromoter.com/pricing"
+    },
+    {
+     "name": "Tapfiliate",
+     "plan": "Launch",
+     "price_month": 89,
+     "currency": "USD",
+     "billing": "monatlich (74 $ jährlich abgerechnet), 50 Affiliates",
+     "source": "https://tapfiliate.com/pricing/"
+    },
+    {
+     "name": "Rewardful",
+     "plan": "Starter",
+     "price_month": 49,
+     "currency": "USD",
+     "billing": "monatlich (490 $/Jahr), bis 7.500 $ Umsatz/Monat",
+     "source": "https://www.rewardful.com/pricing"
+    }
+   ],
+   "min_price": 49,
+   "min_currency": "USD",
+   "min_tool": "FirstPromoter",
+   "range": {
+    "low": {
+     "tool": "FirstPromoter",
+     "price_month": 49,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Tapfiliate",
+     "price_month": 89,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "ads",
+   "label_de": "Ads-Management (Meta & Google)",
+   "label_en": "Ads management (Meta & Google)",
+   "coverage": "full",
+   "coverage_note_de": "Kampagnen-Assistent für Meta und Google, Zielgruppen aus Smart-Listen, Regeln (z. B. pausieren bei CPL > X), Lead-Ads, Offline-Conversions, ROAS-Berichte. Kein TikTok, LinkedIn oder Microsoft Ads.",
+   "coverage_note_en": "Campaign wizard for Meta and Google, audiences from smart lists, rules (e.g. pause when CPL > X), lead ads, offline conversions, ROAS reports. No TikTok, LinkedIn or Microsoft Ads.",
+   "tools": [
+    {
+     "name": "AdEspresso",
+     "plan": "Starter",
+     "price_month": 49,
+     "currency": "USD",
+     "billing": "monatlich, bis 1.000 $ Werbebudget/Monat",
+     "source": "https://adespresso.com/pricing/",
+     "note": "Laut Seite nur noch Facebook und Instagram (kein Google)"
+    },
+    {
+     "name": "Bïrch (ehem. Revealbot)",
+     "plan": "Pro",
+     "price_month": 99,
+     "currency": "USD",
+     "billing": "monatlich, bis 10.000 $ Werbebudget (20 % Rabatt jährlich)",
+     "source": "https://bir.ch/pricing",
+     "note": "Automatische Regeln erst in Pro; Meta, Google, Snapchat, TikTok; Essential 49 $ ohne Regeln"
+    }
+   ],
+   "min_price": 49,
+   "min_currency": "USD",
+   "min_tool": "AdEspresso",
+   "range": {
+    "low": {
+     "tool": "AdEspresso",
+     "price_month": 49,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Bïrch (ehem. Revealbot)",
+     "price_month": 99,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "reporting",
+   "label_de": "Reporting-Dashboards",
+   "label_en": "Reporting dashboards",
+   "coverage": "partial",
+   "coverage_note_de": "Berichts-Builder mit 30+ Datenquellen, Dashboards, TV-Modus, geplante E-Mail-Berichte, über alle Sub-Accounts – aber nur für die eigenen CRM-, Funnel-, Ads- und Umsatzdaten. Keine Anbindung an Google Analytics oder Search Console.",
+   "coverage_note_en": "Report builder with 30+ sources, dashboards, TV mode, scheduled email reports, across sub-accounts – but only on its own CRM, funnel, ads and revenue data. No Google Analytics or Search Console integration.",
+   "tools": [
+    {
+     "name": "AgencyAnalytics",
+     "plan": "Core",
+     "price_month": 20,
+     "currency": "USD",
+     "billing": "jährlich abgerechnet, pro Kunde (monatliche Zahlung teurer, Preis nicht angezeigt)",
+     "source": "https://agencyanalytics.com/pricing",
+     "note": "85+ Marketing-Integrationen (u. a. Google Analytics/Search Console) – mehr Datenquellen als HyperLevel"
+    },
+    {
+     "name": "DashThis",
+     "plan": "Individual",
+     "price_month": 54,
+     "currency": "USD",
+     "billing": "monatlich, 3 Dashboards (44 $ jährlich abgerechnet)",
+     "source": "https://dashthis.com/pricing/"
+    }
+   ],
+   "row_note_de": "AgencyAnalytics und DashThis verbinden viele externe Datenquellen (GA4, Search Console, SEO, Social); HyperLevel berichtet nur über eigene Daten plus Meta/Google Ads.",
+   "row_note_en": "AgencyAnalytics and DashThis connect many external sources (GA4, Search Console, SEO, social); HyperLevel reports on its own data plus Meta/Google Ads.",
+   "min_price": 20,
+   "min_currency": "USD",
+   "min_tool": "AgencyAnalytics",
+   "range": {
+    "low": {
+     "tool": "AgencyAnalytics",
+     "price_month": 20,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "DashThis",
+     "price_month": 54,
+     "currency": "USD"
+    }
+   }
+  },
+  {
+   "id": "mcp_server",
+   "label_de": "MCP-Server für Claude, ChatGPT & Codex",
+   "label_en": "MCP server for Claude, ChatGPT & Codex",
+   "coverage": "unique",
+   "coverage_note_de": "MCP-Server mit 240+ Werkzeugen und OAuth 2.1 – als Open Source und selbst hostbar nur hier. Einen MCP-Server haben auch HighLevel, HubSpot, ActiveCampaign, Kajabi, Pipedrive und Brevo.",
+   "coverage_note_en": "MCP server with 240+ tools and OAuth 2.1 – open source and self-hostable only here. HighLevel, HubSpot, ActiveCampaign, Kajabi, Pipedrive and Brevo have an MCP server too.",
+   "tools": [],
+   "price_display_de": "einzigartig",
+   "price_display_en": "unique",
+   "min_price": null,
+   "min_currency": null,
+   "min_tool": null,
+   "range": null
+  },
+  {
+   "id": "mobile_app",
+   "label_de": "Mobile App",
+   "label_en": "Mobile app",
+   "coverage": "partial",
+   "coverage_note_de": "Installierbare PWA mit Push auf allen Geräten plus Android-App als APK (13 Widgets). Keine Apps im App Store oder Play Store, keine native iOS-App; White-Label-APK selbst bauen.",
+   "coverage_note_en": "Installable PWA with push on every device plus an Android APK (13 widgets). No App Store or Play Store apps, no native iOS app; white-label APK is self-built.",
+   "tools": [
+    {
+     "name": "Progressier",
+     "plan": "Founder",
+     "price_month": 25,
+     "currency": "USD",
+     "billing": "monatlich, 1 App (15 $ jährlich abgerechnet)",
+     "source": "https://progressier.com/pricing",
+     "note": "PWA mit Installation und Push; Werte aus den eingebetteten Plandaten der Seite"
+    },
+    {
+     "name": "Median.co",
+     "plan": "Starter",
+     "price_month": null,
+     "currency": "USD",
+     "billing": "Herstellerseite blockt Abruf (403); Drittquellen: einmalig 229 $ plus 179 $/Jahr – nicht übernommen",
+     "source": "https://median.co/pricing",
+     "note": "Web-zu-App (Android/iOS) für Stores – geht über HyperLevel hinaus; nicht in Minimum/Spanne"
+    }
+   ],
+   "row_note_de": "Vergleich mit PWA-/App-Wrapper-Diensten; CRM-Apps der Wettbewerber sind meist im Preis enthalten und kein eigener Posten.",
+   "row_note_en": "Compared with PWA/app-wrapper services; competitors' CRM apps are usually included in their price, not a separate line item.",
+   "min_price": 25,
+   "min_currency": "USD",
+   "min_tool": "Progressier",
+   "range": {
+    "low": {
+     "tool": "Progressier",
+     "price_month": 25,
+     "currency": "USD"
+    },
+    "high": {
+     "tool": "Progressier",
+     "price_month": 25,
+     "currency": "USD"
+    }
+   }
+  }
+ ],
+ "excluded_rows": [
+  {
+   "label": "E-Commerce-Shop / Storefront (z. B. Shopify)",
+   "reason": "Kein Warenkorb, kein Versand/Fulfilment; Checkout ist eine Weiterleitung zu Stripe. Nur Einzelprodukt-Kauflinks und Checkout-Seiten."
+  },
+  {
+   "label": "SEO-Tools & Local Listings (z. B. Semrush, Yext)",
+   "reason": "Keine Keyword-/SEO-Audit-Tools und kein Listings-/Citations-Management; nur SEO-Felder, Sitemaps und strukturierte Daten auf eigenen Seiten."
+  },
+  {
+   "label": "Gehostete Telefonie (z. B. Aircall, sipgate, LC Phone)",
+   "reason": "Kein eigener Telefondienst: Nummern und Minuten laufen über das eigene Twilio-Konto; keine Portierung, kein A2P 10DLC, kein MMS."
+  },
+  {
+   "label": "Office: Dokumente, Tabellen, Präsentationen (z. B. Google Workspace, Microsoft 365)",
+   "reason": "Das Office-Modul ist in dieser Version noch nicht veröffentlicht."
+  }
+ ],
+ "totals": {
+  "sum_min_eur": 99.89,
+  "sum_min_usd": 578.75,
+  "rows_priced": 25,
+  "rows_total": 27,
+  "combined_eur_estimate": 616.35,
+  "full_coverage_only": {
+   "rows": 19,
+   "sum_min_eur": 35.9,
+   "sum_min_usd": 355.75,
+   "combined_eur_estimate": 353.36
+  },
+  "notes": {
+   "de": "Summe = je Zeile das günstigste gelistete Tool (Einstiegsplan), getrennt nach Währung; Zeilen ohne Preis (MCP-Server) fehlen. Bei HyperLevel kommen Nutzungskosten beim eigenen Anbieter hinzu (SMS, E-Mail-Versand, KI-Tokens, Telefonminuten); manche Vergleichstools enthalten ein Kontingent (z. B. Textedly 500 SMS, fonio.ai 1.000 Minuten, Brevo 5.000 E-Mails), andere rechnen ebenfalls nach Verbrauch ab. Viele Tools rechnen pro Nutzer ab; die Summe gilt für 1 Nutzer bzw. die kleinste kaufbare Konfiguration. 'full_coverage_only' zählt nur Zeilen, die HyperLevel vollständig abdeckt. Preise ohne MwSt.",
+   "en": "Sum = cheapest listed tool (entry plan) per row, per currency; rows without a price (MCP server) are left out. With HyperLevel, usage costs at your own providers come on top (SMS, email sending, AI tokens, call minutes); some compared tools include an allowance (e.g. Textedly 500 SMS, fonio.ai 1,000 minutes, Brevo 5,000 emails), others also bill usage. Many tools charge per user; the sum is for 1 user or the smallest purchasable configuration. 'full_coverage_only' counts only rows HyperLevel fully covers. Prices exclude VAT."
+  },
+  "fx_rate_usd_per_eur": 1.1206,
+  "fx_date": "2026-10-09",
+  "fx_source": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+  "fx_note": "ECB-Referenzkurs vom 2026-10-09 (Freitag; der 2026-10-10 ist ein Samstag, an dem die EZB keinen Kurs veröffentlicht): 1 EUR = 1,1206 USD. Die kombinierte EUR-Schätzung rechnet die USD-Summe mit diesem Kurs um. Preise ohne MwSt., wie vom Anbieter angezeigt.",
+  "corrections": "Checked against the code on 2026-10-10: Office row removed (module not released), ChatGPT/Claude removed from \"KI-Chat & Inhalte\" (HyperLevel uses an AI provider, it does not replace one; row partial and not in the total), MCP row: other vendors have MCP servers too."
+ },
+ "unverified": [
+  "Wix Light: Preisseite ist standortabhängig; Abruf zeigte 17,77 $/Monat inkl. GST (jährlich), US-Listenpreis 17 $ nur über Suche bestätigt; Monatszahlungspreis nicht öffentlich.",
+  "HubSpot Sales Hub Starter: hubspot.de lädt EUR-Preise nur per JavaScript; USD-Seite zeigt 20 $/Platz monatlich und 7 $ jährlich (vermutlich Aktion).",
+  "Mailchimp Essentials: 13 $/Monat ist der Einstiegspreis 'für 12 Monate'; der reguläre Preis danach wird erst per JavaScript eingeblendet.",
+  "ChatGPT Plus: chatgpt.com/pricing und openai.com antworten mit 403; 20 $/Monat nur über Drittquellen per Suche bestätigt.",
+  "Birdeye: keine öffentlichen Preise (nur Formular 'GET PRICING').",
+  "CallRail: 50 $/Monat ohne eindeutige Zuordnung zu monatlicher oder jährlicher Zahlung (Seite lädt per JavaScript).",
+  "PandaDoc: pandadoc.com/pricing antwortete mit 429; 35 $/Monat (Starter, monatlich) nur über Drittquellen per Suche bestätigt.",
+  "Demio Growth (günstigster Plan mit automatisierten Webinaren): Preis nur per JavaScript, nicht verifiziert; daher ohne Preis.",
+  "ClickUp: Preisseite zeigt zwei Tabellen (neu: Core 8 $ Aktion / 12 $ regulär, jährlich; alt: Unlimited 7 $ jährlich / 10 $ monatlich). Übernommen: 12 $ regulär.",
+  "Google Workspace Business Starter: Preisseite zeigt Beträge nur per JavaScript; 8,40 $ (flexibel) / 7 $ (Jahresvertrag) über mehrere Drittquellen per Suche bestätigt.",
+  "Microsoft 365 Business Basic: microsoft.com antwortete mit 503; Drittquellen widersprüchlich (7 € bzw. 7–7,50 $ nach Erhöhung zum 1. Juli 2026); ohne Preis.",
+  "Median.co: Preisseite blockt Abruf (403); Drittquellen (229 $ einmalig + 179 $/Jahr) nicht übernommen; ohne Preis."
+ ]
+}

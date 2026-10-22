@@ -1,0 +1,3 @@
+{"leads_today":3,"leads_7d":12,"open_deals_count":5,"open_deals_value_cents":1250000,"won_month_cents":300000,"revenue_today_cents":45000,"revenue_month_cents":980000,"open_invoices_cents":120000,"unread_conversations":4,"tasks_due_today":2,"tasks_overdue":1,"appointments_today":3,"missed_calls_today":1,"rating":{"avg":4.7,"count":31},"websites":{"up":2,"down":1},
+ "spark_revenue_30d":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12000,0,45000],
+ "spark_leads_14d":[0,1,0,2,0,0,1,0,3,1,0,0,2,3],"currency":"EUR","updated_at":"2026-10-04T08:00:00.000Z"}

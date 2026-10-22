@@ -1,0 +1,3 @@
+/* Small grey texts (file size, ranking hint, payment note). */
+.pf .pf-muted,.pf small.pf-muted{color:var(--pf-muted)}
+.pf .pf-small{font-size:13px;margin:0 0 8px}

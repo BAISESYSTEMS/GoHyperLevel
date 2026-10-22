@@ -1,0 +1,16 @@
+{
+  "name": "listForms",
+  "label": "Formulare",
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/forms",
+    "method": "GET",
+    "response": {
+      "iterate": "{{body}}",
+      "output": {
+        "label": "{{item.name}}",
+        "value": "{{item.id}}"
+      }
+    }
+  }
+}

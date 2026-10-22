@@ -1,0 +1,50 @@
+import type { Tour } from '../types';
+
+/** Getting around: the shell, the palette, the „?“ button and the academy itself. */
+export const START_TOURS: Tour[] = [
+  {
+    id: 'start-basics',
+    title: 'So findest du dich zurecht',
+    summary: 'Menü, Projekt-Wechsler, Suche, Strg+K und das „?“ – die Oberfläche in fünf Minuten.',
+    icon: 'academy',
+    group: 'start',
+    minutes: 5,
+    routes: ['dashboard', 'agency'],
+    keywords: 'oberfläche menü navigation strg k suche hilfe anfang einstieg',
+    learned: ['Wo Menü, Projekt-Wechsler und Suche sind', 'Mit **Strg+K** überall hinspringen', 'Über das **?** oben rechts die passende Tour starten', 'Wo die Akademie und dein Konto sind'],
+    docs: { label: 'Überblick über alle Funktionen', file: 'README', anchor: 'funktionen' },
+    steps: [
+      { title: 'Willkommen!', text: 'Ich zeige dir in fünf Minuten, wie {brand} aufgebaut ist. Mit ✕ oder Esc kannst du jederzeit pausieren – dein Fortschritt bleibt gespeichert.' },
+      { title: 'Das Menü', target: 'nav-dashboard', placement: 'right', text: 'Links findest du alle Bereiche: oben das Tagesgeschäft, darunter Marketing, Seiten und Umsatz. Bereiche, die du nicht nutzen darfst, sind ausgeblendet.', perm: 'dashboard' },
+      { title: 'Der Projekt-Wechsler', target: 'project-switcher', placement: 'right', text: 'Jeder Kunde und jedes Projekt ist ein eigener **Sub-Account** mit eigenen Kontakten, Kalendern und Einstellungen. Hier wechselst du zwischen ihnen – mit Suche.' },
+      { title: 'Die Agentur-Ansicht', target: 'nav-agency', placement: 'right', admin: true, text: 'Unter **Agentur** siehst du alle Projekte und Kunden auf einmal – dazu Vorlagen, Domains, White-Label, Integrationen und das Protokoll.' },
+      { title: 'Schnell suchen', target: 'search', text: 'Die Suche findet Kontakte und Deals im gerade gewählten Sub-Account. Zwei Buchstaben reichen.' },
+      { title: 'Springen mit Strg+K', target: 'jump', kind: 'click', text: 'Die Befehlsleiste bringt dich zu jedem Projekt, jeder Seite, jedem Dokument und jeder Claude-Sitzung.', do: 'Klicke auf **Springen** (oder drücke Strg+K).' },
+      { title: 'Tippen und Enter', target: 'palette', optional: true, text: 'Tippe einen Projektnamen oder z. B. „Rechnungen“ und drücke Enter. Mit Esc schließt du die Leiste wieder.', missing: 'Die Leiste ist schon wieder zu – kein Problem. Strg+K öffnet sie jederzeit.' },
+      { title: 'Hilfe auf jeder Seite', target: 'help', text: 'Das **?** zeigt dir die Tour, die zur aktuellen Seite passt. So lernst du genau dann, wenn du es brauchst.' },
+      { title: 'Die Akademie', target: 'nav-academy', placement: 'right', text: 'Hier findest du alle Touren, den Gesamt-Guide „Firma übernehmen“, deine Abzeichen und das Handbuch zum Ausdrucken.' },
+      { title: 'Dein Konto', target: 'account', placement: 'right', text: 'Unten links stehen dein Name und „Abmelden“. Passwort, Zwei-Faktor-Login und hell/dunkel stellst du unter **Einstellungen → Mein Konto** ein.' },
+    ],
+  },
+  {
+    id: 'start-academy',
+    title: 'Die Akademie & die Übungs-Firma',
+    summary: 'Gesamt-Guide, Modul-Touren, Abzeichen, Übergabe-Status und das Handbuch.',
+    icon: 'trophy',
+    group: 'start',
+    minutes: 4,
+    routes: ['academy'],
+    keywords: 'akademie tour guide übung sandbox handbuch abzeichen übergabe',
+    learned: ['Den Gesamt-Guide starten und fortsetzen', 'Modul-Touren suchen und wiederholen', 'In der **Übungs-Firma** gefahrlos üben', 'Das Handbuch drucken oder als PDF speichern'],
+    docs: { label: 'Akademie', file: 'academy' },
+    steps: [
+      { title: 'Der Gesamt-Guide', route: 'academy', target: 'academy-journey', text: '„Firma übernehmen“ führt dich in 14 Kapiteln durch alles, was du zum Führen der Firma brauchst. Jedes Kapitel lässt sich einzeln machen und später fortsetzen.' },
+      { title: 'Modul-Touren', target: 'academy-tours', text: 'Für jeden Bereich gibt es eine kurze Tour mit 5–15 Schritten. Erledigte bekommen ein ✓, angefangene ein „Weitermachen“.' },
+      { title: 'Abzeichen', target: 'academy-badges', text: 'Für erledigte Touren gibt es Abzeichen – und am Ende „Firma übernommen“.', missing: 'Leere zuerst das Suchfeld, dann siehst du die Abzeichen.' },
+      { title: 'Die Übungs-Firma', target: 'academy-sandbox', admin: true, text: 'Ein eigener Sub-Account mit erfundenen Kunden. Dort kannst du alles ausprobieren, ohne echte Kunden anzuschreiben – E-Mails und SMS werden nur gespeichert.' },
+      { title: 'Der Übergabe-Status', target: 'academy-handover', admin: true, text: 'Zeigt, was eingerichtet ist und was noch fehlt, wer Zugang hat und was dringend ist. Geheimnisse wie Passwörter werden nie angezeigt.' },
+      { title: 'Das Handbuch', target: 'academy-handbook', text: 'Der ganze Gesamt-Guide als Dokument zum Ausdrucken oder als PDF – praktisch für die Übergabe.' },
+      { title: 'Suchen', target: 'academy-search', kind: 'fill', text: 'Suchst du etwas Bestimmtes? Tippe ein Stichwort – die Touren werden sofort gefiltert.', do: 'Tippe z. B. „Rechnung“.', demo: { fill: 'Rechnung' } },
+    ],
+  },
+];

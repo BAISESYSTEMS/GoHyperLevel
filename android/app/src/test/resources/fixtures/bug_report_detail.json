@@ -1,0 +1,88 @@
+{
+ "report": {
+  "id": "NZgu0lnfcDkBZZl0",
+  "kind": "bug",
+  "number": 1,
+  "title": "Widget zeigt keine Termine",
+  "status": {
+   "key": "in_arbeit",
+   "board": "",
+   "label": "In Arbeit",
+   "tone": "yellow",
+   "done": false
+  },
+  "severity": "hoch",
+  "area": "",
+  "platform": "android",
+  "version": "",
+  "reason": "",
+  "note": "",
+  "duplicate_of": null,
+  "unread": false,
+  "created_at": "2026-10-04T11:12:33.819Z",
+  "updated_at": "2026-10-04T11:12:33.917Z",
+  "url": "/app/feedback/NZgu0lnfcDkBZZl0"
+ },
+ "body": "Widget zeigt keine Termine",
+ "expected": "",
+ "steps": "",
+ "diagnostics": {
+  "route": "/app/dashboard",
+  "app_version": "1.0.1 (2)",
+  "device": {
+   "model": "Pixel 9",
+   "manufacturer": "Google",
+   "android": "15",
+   "sdk": 35,
+   "app_version": "1.0.1 (2)"
+  },
+  "api_errors": [
+   {
+    "method": "GET",
+    "path": "/api/mobile/appointments?location=all",
+    "status": 503,
+    "error": "Serverfehler (503)",
+    "at": "2026-10-04T10:00:00.000Z"
+   }
+  ],
+  "role": "Kunden-Login",
+  "location_name": "Testfirma",
+  "location_id": "6bjxX72eTyn7mXB4",
+  "server_version": "0.1.0",
+  "platform": "android"
+ },
+ "files": [],
+ "thread": [
+  {
+   "id": "69ybnK9sDHfSrdEX",
+   "type": "user",
+   "body": "Nach Neustart auch",
+   "author": "Du",
+   "mine": true,
+   "at": "2026-10-04T11:12:33.834Z"
+  },
+  {
+   "id": "pUNERyLN0OkRjAiK",
+   "type": "team",
+   "body": "Danke, wir schauen es uns an.",
+   "author": "Team",
+   "at": "2026-10-04T11:12:33.900Z"
+  },
+  {
+   "id": "gmLABCX4WT0PEd5T",
+   "type": "status",
+   "label": "Bestätigt",
+   "status": "bestaetigt",
+   "at": "2026-10-04T11:12:33.903Z"
+  },
+  {
+   "id": "SOe1PiH70CKBvilh",
+   "type": "status",
+   "label": "In Arbeit",
+   "status": "in_arbeit",
+   "at": "2026-10-04T11:12:33.908Z"
+  }
+ ],
+ "can_reply": true,
+ "can_reopen": false
+}

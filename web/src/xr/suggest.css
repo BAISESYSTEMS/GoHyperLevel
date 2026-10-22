@@ -1,0 +1,4 @@
+/* The Raum-Modus suggestion (SpatialSuggest.tsx): a small card in the lower left corner. */
+.xr-suggest { position: fixed; left: 16px; bottom: 16px; z-index: 45; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; max-width: min(640px, calc(100vw - 32px)); padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 14px 40px rgba(15, 23, 42, .22); }
+.xr-suggest-text { display: flex; flex-direction: column; flex: 1 1 260px; min-width: 0; }
+.xr-suggest .ico { color: var(--brand-text, var(--brand)); flex: none; }

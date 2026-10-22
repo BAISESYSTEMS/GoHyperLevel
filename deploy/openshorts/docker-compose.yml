@@ -1,0 +1,87 @@
+# OpenShorts (https://github.com/mutonby/openshorts, MIT) next to HyperLevel on the same server – the engine
+# behind HyperLevel's Video-Studio. Nothing starts this file automatically; HyperLevel only talks to its REST API.
+#
+#   cd deploy/openshorts
+#   cp .env.example .env          # GEMINI_API_KEY (free at aistudio.google.com) or LLM_BASE_URL …
+#   docker network ls             # HyperLevel's network, e.g. gohigh_default → GOHIGH_NETWORK in .env
+#   docker compose up -d --build  # first build 10–20 min (Python, ffmpeg, Whisper, YOLO), image ~4 GB
+#
+# Then in HyperLevel: Agentur → Integrationen → Einrichtung → OpenShorts → Adresse http://openshorts:8000
+# → „Speichern & testen“. Details, sizing and the hosted alternative: docs/video-studio.md.
+#
+# Design choices:
+# - CPU-only image (no GPU): 5–8 minutes per 8-minute video.
+# - One job at a time and hard CPU/RAM limits, lower CPU priority than the CRM: a long video can't starve HyperLevel.
+# - No published port: self-hosted OpenShorts has no login, so it is only reachable inside the Docker network.
+# - No Upload-Post key: HyperLevel publishes through its own Social Planner (Postiz).
+name: openshorts
+
+services:
+  openshorts:
+    build:
+      # Upstream repository; pin a commit for reproducible builds, e.g. …/openshorts.git#06a119c
+      context: ${OPENSHORTS_GIT:-https://github.com/mutonby/openshorts.git#main}
+    image: openshorts-local:latest
+    container_name: openshorts
+    restart: unless-stopped
+    init: true
+    environment:
+      # One render at a time – queued jobs wait (HyperLevel shows the position).
+      MAX_CONCURRENT_JOBS: "1"
+      # AI that picks the moments: a Gemini key, or any OpenAI-compatible server (then Gemini is optional;
+      # automatic layout and silent videos still need Gemini). Example with Anthropic's OpenAI-compatible API:
+      #   LLM_BASE_URL=https://api.anthropic.com/v1  LLM_MODEL=claude-haiku-4-5  LLM_API_KEY=sk-ant-…
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      # CPU transcription: "small" is a good balance for German; "base" is faster, "medium" more exact.
+      WHISPER_MODEL: ${WHISPER_MODEL:-small}
+      WHISPER_DEVICE: cpu
+      WHISPER_COMPUTE: int8
+      FFMPEG_ENCODER: x264
+      # Keep thread pools inside the CPU limit below (otherwise they size themselves to the host).
+      OMP_NUM_THREADS: ${OPENSHORTS_CPUS:-3}
+      # How long finished jobs (clips!) stay – HyperLevel streams clips from here and keeps no copy.
+      JOB_RETENTION_SECONDS: ${JOB_RETENTION_SECONDS:-604800}
+      # Disk caps for the working folders (oldest jobs go first).
+      OUTPUT_MAX_GB: ${OUTPUT_MAX_GB:-20}
+      UPLOADS_MAX_GB: ${UPLOADS_MAX_GB:-10}
+      # Ask before processing YouTube sources below this height (HyperLevel shows "trotzdem verarbeiten").
+      QUALITY_GATE_MIN_HEIGHT: ${QUALITY_GATE_MIN_HEIGHT:-720}
+      # Optional: Netscape-format cookies when YouTube blocks the server's downloads.
+      YOUTUBE_COOKIES: ${YOUTUBE_COOKIES:-}
+      DISABLE_YOUTUBE_URL: ${DISABLE_YOUTUBE_URL:-false}
+    volumes:
+      - openshorts-output:/app/output
+      - openshorts-uploads:/app/uploads
+      - openshorts-models:/app/.cache/huggingface
+    expose:
+      - "8000"
+    networks:
+      - gohigh
+    # Lower CPU priority than the CRM (default 1024) plus hard limits.
+    cpu_shares: 256
+    deploy:
+      resources:
+        limits:
+          cpus: "${OPENSHORTS_CPUS:-3}"
+          memory: ${OPENSHORTS_MEMORY:-6g}
+        reservations:
+          memory: 1g
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  gohigh:
+    # HyperLevel's Docker network (docker-compose.yml in the repo root: gohigh_default); HyperLevel then reaches http://openshorts:8000.
+    name: ${GOHIGH_NETWORK:-gohigh_default}
+    external: true
+
+volumes:
+  openshorts-output:
+  openshorts-uploads:
+  openshorts-models:

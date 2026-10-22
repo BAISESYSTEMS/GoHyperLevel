@@ -1,0 +1,73 @@
+{
+  "name": "HyperLevel: Ereignisse empfangen",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gohigh-events",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "fecb0006-1fc0-48ee-a24e-d057d5798799",
+      "name": "HyperLevel-Ereignis",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "92a6d5d7-e0c3-4942-a7bb-af97d188e4fd",
+      "notes": "Body: {id, event, type, location_id, occurred_at, contact_id, contact, data}. Signatur im Header x-pghl-signature = sha256(secret + body).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/add_note",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $json.body.contact_id, body: \"n8n hat \" + $json.body.event + \" verarbeitet\" }) }}",
+        "options": {}
+      },
+      "id": "71a98677-4027-48db-aeef-e57c954397ee",
+      "name": "Notiz am Kontakt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "HyperLevel-Ereignis": {
+      "main": [
+        [
+          {
+            "node": "Notiz am Kontakt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Empfängt jede Zustellung eines REST-Hooks und schreibt als Beispiel eine Notiz an den Kontakt zurück."
+  },
+  "tags": []
+}

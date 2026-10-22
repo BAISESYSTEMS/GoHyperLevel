@@ -1,0 +1,151 @@
+# HyperLevel – self-hosting with Docker Compose.
+#
+#   cp .env.example .env                        # or let scripts/install.sh write it
+#   docker compose up -d                        # HyperLevel on http://127.0.0.1:4700 (builds the image if needed)
+#   docker compose --profile caddy up -d        # + Caddy: automatic HTTPS for PGHL_DOMAIN and custom domains
+#   docker compose --profile openshorts up -d   # + OpenShorts for the Video-Studio (large CPU image)
+#   docker compose --profile nango up -d        # + self-hosted Nango (Auth + Proxy) for the Nango connector
+#
+# Prebuilt image instead of a local build: `docker compose pull gohigh` before `up` (GOHIGH_IMAGE).
+# Updates: `git pull && docker compose pull gohigh; docker compose up -d --build` – migrations run on start.
+# Behind Traefik (e.g. Hostinger's Docker VPS) use deploy/examples/hostinger/compose.yaml instead.
+name: gohigh
+
+services:
+  gohigh:
+    image: ${GOHIGH_IMAGE:-ghcr.io/gohyperlevel/gohyperlevel:latest}
+    build: .
+    restart: unless-stopped
+    # Least privilege: only what the start script needs to hand /data to the "node" user, no privilege escalation.
+    cap_drop: [ALL]
+    cap_add: [CHOWN, FOWNER, DAC_OVERRIDE, SETUID, SETGID]
+    security_opt: [no-new-privileges:true]
+    env_file: .env
+    environment:
+      PGHL_DATA_DIR: /data
+      PGHL_BEHIND_PROXY: "1"
+    volumes:
+      - gohigh-data:/data
+    ports:
+      # Only on the host's loopback by default – Caddy (or your own proxy) handles the public side.
+      # GOHIGH_BIND=0.0.0.0 to reach it directly on the LAN (no HTTPS!).
+      - "${GOHIGH_BIND:-127.0.0.1}:${GOHIGH_PORT:-4700}:4700"
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "5" }
+
+  caddy:
+    image: caddy:2-alpine
+    profiles: [caddy]
+    restart: unless-stopped
+    depends_on: [gohigh]
+    environment:
+      PGHL_DOMAIN: ${PGHL_DOMAIN:?set PGHL_DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+  # Engine behind the Video-Studio (https://github.com/mutonby/openshorts, MIT – built from upstream,
+  # not bundled). Then in HyperLevel: Agentur → Integrationen → OpenShorts → http://openshorts:8000.
+  # Details, sizing and all options: deploy/openshorts/ and docs/video-studio.md.
+  openshorts:
+    profiles: [openshorts]
+    build:
+      context: ${OPENSHORTS_GIT:-https://github.com/mutonby/openshorts.git#main}
+    image: openshorts-local:latest
+    restart: unless-stopped
+    init: true
+    environment:
+      MAX_CONCURRENT_JOBS: "1"
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      WHISPER_MODEL: ${WHISPER_MODEL:-small}
+      WHISPER_DEVICE: cpu
+      WHISPER_COMPUTE: int8
+      FFMPEG_ENCODER: x264
+      OMP_NUM_THREADS: ${OPENSHORTS_CPUS:-3}
+      JOB_RETENTION_SECONDS: ${JOB_RETENTION_SECONDS:-604800}
+      OUTPUT_MAX_GB: ${OUTPUT_MAX_GB:-20}
+      UPLOADS_MAX_GB: ${UPLOADS_MAX_GB:-10}
+    volumes:
+      - openshorts-output:/app/output
+      - openshorts-uploads:/app/uploads
+      - openshorts-models:/app/.cache/huggingface
+    expose:
+      - "8000"
+    cpu_shares: 256
+    deploy:
+      resources:
+        limits:
+          cpus: "${OPENSHORTS_CPUS:-3}"
+          memory: ${OPENSHORTS_MEMORY:-6g}
+
+  # Nango for the "Nango" connector (docs/nango.md, deploy/nango/README.md): the free self-hosted edition
+  # (Auth + Proxy – what HyperLevel uses; syncs, webhooks and Nango's MCP server need Nango Cloud/Enterprise).
+  # LICENCE: Nango is Elastic License 2.0 (source-available, NOT OSI open source). HyperLevel bundles no Nango
+  # code – this pulls the official image. Don't offer Nango itself as a hosted service to third parties.
+  # In HyperLevel: Agentur → Integrationen → Nango → http://nango-server:3003 + "internes Netz erlauben",
+  # or the public URL behind your proxy (NANGO_SERVER_URL – OAuth callbacks need a public HTTPS address).
+  nango-server:
+    image: ${NANGO_IMAGE:-nangohq/nango-server:hosted}
+    profiles: [nango]
+    restart: unless-stopped
+    depends_on: [nango-db, nango-redis]
+    environment:
+      # Required in .env before the first start (see deploy/nango/README.md) – plain ${…:-} so the other
+      # profiles still start without Nango settings. Without it Nango stores credentials unencrypted.
+      NANGO_ENCRYPTION_KEY: ${NANGO_ENCRYPTION_KEY:-}
+      NANGO_DB_HOST: nango-db
+      NANGO_DB_USER: nango
+      NANGO_DB_NAME: nango
+      NANGO_DB_PASSWORD: ${NANGO_DB_PASSWORD:-}
+      RECORDS_DATABASE_URL: postgresql://nango:${NANGO_DB_PASSWORD:-}@nango-db:5432/nango
+      NANGO_REDIS_URL: redis://nango-redis:6379
+      SERVER_PORT: "3003"
+      NANGO_SERVER_URL: ${NANGO_SERVER_URL:-http://localhost:3003}
+      FLAG_SERVE_CONNECT_UI: "true"
+      NANGO_CONNECT_UI_PORT: "3009"
+      NANGO_PUBLIC_CONNECT_URL: ${NANGO_PUBLIC_CONNECT_URL:-http://localhost:3009}
+      # Dashboard behind basic auth, no open sign-up.
+      FLAG_AUTH_ENABLED: "false"
+      AUTH_ALLOW_SIGNUP: "false"
+      NANGO_DASHBOARD_USERNAME: ${NANGO_DASHBOARD_USERNAME:-admin}
+      NANGO_DASHBOARD_PASSWORD: ${NANGO_DASHBOARD_PASSWORD:-}
+      NANGO_LOGS_ENABLED: "false"
+    ports:
+      # Loopback only – put your proxy (Caddy) in front for the public URLs.
+      - "${NANGO_BIND:-127.0.0.1}:3003:3003"
+      - "${NANGO_BIND:-127.0.0.1}:3009:3009"
+
+  nango-db:
+    image: postgres:16-alpine
+    profiles: [nango]
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nango
+      POSTGRES_DB: nango
+      # Postgres refuses to initialise without a password: set NANGO_DB_PASSWORD in .env.
+      POSTGRES_PASSWORD: ${NANGO_DB_PASSWORD:-}
+    volumes:
+      - nango-db:/var/lib/postgresql/data
+
+  nango-redis:
+    image: redis:7-alpine
+    profiles: [nango]
+    restart: unless-stopped
+
+volumes:
+  gohigh-data:
+  caddy-data:
+  caddy-config:
+  openshorts-output:
+  openshorts-uploads:
+  openshorts-models:
+  nango-db:

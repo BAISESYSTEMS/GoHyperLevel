@@ -1,0 +1,20 @@
+# HyperLevel with the Office editors and engines – an override for the main docker-compose.yml (docs/office.md):
+#
+#   docker compose -f docker-compose.yml -f deploy/office/docker-compose.office.yml up -d --build
+#
+# It builds deploy/office/Dockerfile on top of the HyperLevel image (GOHIGH_IMAGE) and sets the two paths. Without this file the
+# Office area still works: files, versions, comments and the agent's plain-text reading – only the browser editors and the
+# engine-based agent edits/PDF export are missing.
+services:
+  gohigh:
+    image: ${GOHIGH_OFFICE_IMAGE:-gohigh-office:local}
+    build:
+      context: deploy/office
+      args:
+        GOHIGH_IMAGE: ${GOHIGH_IMAGE:-ghcr.io/gohyperlevel/gohyperlevel:latest}
+        OFFICE_KINDS: ${OFFICE_KINDS:-docx,xlsx,pptx,pdf}
+    environment:
+      PGHL_OFFICE_DIR: /opt/office/web
+      PGHL_OFFICE_BIN_DIR: /opt/office/bin
+      # strict (default): the editors run in a sandboxed iframe without HyperLevel's origin; same-origin only if an editor needs it
+      PGHL_OFFICE_SANDBOX: ${PGHL_OFFICE_SANDBOX:-strict}

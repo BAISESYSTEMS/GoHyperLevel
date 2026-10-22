@@ -1,0 +1,6 @@
+{"user":{"id":"u1","name":"Chef","email":"chef@example.com","role":"admin","permissions":null},"agency":true,
+ "locations":[{"id":"loc_a","name":"Testfirma","timezone":"Europe/Berlin","color":"#2563eb","status":"live","areas":["dashboard","conversations","tasks"]},
+              {"id":"loc_b","name":"Zweitfirma","timezone":"Europe/Berlin","color":null,"status":null,"areas":[]}],
+ "server_time":"2026-10-04T08:00:00.000Z",
+ "app":{"version_code":2,"version_name":"1.0.1","apk_url":"https://crm.example.com/downloads/gohigh.apk","sha256":"aa","size":123,"changelog":"Fixes","min_supported_code":0,"uploaded_at":"2026-10-04T07:00:00.000Z","page_url":"https://crm.example.com/android"},
+ "device_id":"dev_1"}

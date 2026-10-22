@@ -1,0 +1,110 @@
+{
+  "name": "HyperLevel: Deal gewonnen → Rechnungsentwurf",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gohigh-won",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "78c02798-55de-4c76-a39f-702497a2aa01",
+      "name": "Deal gewonnen",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "28d80df9-ad55-4dad-ab1f-10e90556a76c",
+      "notes": "Mit Vorlage 01 abonnieren: event \"opportunity.won\".",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/create_invoice_draft",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $json.body.contact_id, title: $json.body.data.opportunity.name, items: [{ name: $json.body.data.opportunity.name, qty: 1, price: $json.body.data.opportunity.value }] }) }}",
+        "options": {}
+      },
+      "id": "710c5668-de72-448d-aaa4-415bec14acfa",
+      "name": "Rechnungsentwurf anlegen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/create_task",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $(\"Deal gewonnen\").item.json.body.contact_id, title: \"Rechnung \" + $json.number + \" prüfen und senden\" }) }}",
+        "options": {}
+      },
+      "id": "5a6e6e70-2995-4dff-a66f-112d270d8ee3",
+      "name": "Aufgabe: Rechnung prüfen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Deal gewonnen": {
+      "main": [
+        [
+          {
+            "node": "Rechnungsentwurf anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rechnungsentwurf anlegen": {
+      "main": [
+        [
+          {
+            "node": "Aufgabe: Rechnung prüfen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Gewonnene Deals bekommen sofort einen Rechnungsentwurf (netto = Deal-Wert) und eine Aufgabe zum Prüfen."
+  },
+  "tags": []
+}

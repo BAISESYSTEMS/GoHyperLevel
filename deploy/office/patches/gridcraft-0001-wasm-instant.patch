@@ -1,0 +1,43 @@
+diff --git a/crates/engine/src/cmd/mod.rs b/crates/engine/src/cmd/mod.rs
+index 397a05c..49f65aa 100644
+--- a/crates/engine/src/cmd/mod.rs
++++ b/crates/engine/src/cmd/mod.rs
+@@ -217,8 +217,9 @@ pub(crate) fn edit<R>(s: &mut Session, f: impl FnOnce(&mut Ctx) -> Result<R>) ->
+ }
+ 
+ pub(crate) fn commit<R>(d: &mut DocState, f: impl FnOnce(&mut Ctx) -> Result<R>) -> Result<R> {
+-    let prof = std::env::var_os("GRIDCRAFT_PROFILE").is_some();
+-    let t0 = std::time::Instant::now();
++    // std::time::Instant panics on wasm32-unknown-unknown ("time not implemented on this platform"): only time when profiling natively.
++    let prof = cfg!(not(target_arch = "wasm32")) && std::env::var_os("GRIDCRAFT_PROFILE").is_some();
++    let t0 = prof.then(std::time::Instant::now);
+     let mut sel = d.selection.clone();
+     let mut ctx = Ctx { wb: (*d.wb).clone(), changed: Vec::new(), structural: false, sel: &mut sel, fit_rows: Vec::new() };
+     let r = f(&mut ctx)?;
+@@ -227,7 +228,7 @@ pub(crate) fn commit<R>(d: &mut DocState, f: impl FnOnce(&mut Ctx) -> Result<R>)
+         fit_rows.extend(changed.iter().map(|(s, c)| (*s, c.row)));
+     }
+     if prof {
+-        eprintln!("commit: edit {:?}, {} changed", t0.elapsed(), changed.len());
++        eprintln!("commit: edit {:?}, {} changed", t0.map(|t| t.elapsed()).unwrap_or_default(), changed.len());
+     }
+     if structural {
+         d.calc.recalc_all(&mut wb);
+@@ -235,7 +236,7 @@ pub(crate) fn commit<R>(d: &mut DocState, f: impl FnOnce(&mut Ctx) -> Result<R>)
+         d.calc.cells_changed(&mut wb, &changed);
+     }
+     if prof {
+-        eprintln!("commit: + recalc {:?}", t0.elapsed());
++        eprintln!("commit: + recalc {:?}", t0.map(|t| t.elapsed()).unwrap_or_default());
+     }
+     fit_rows.sort_unstable();
+     fit_rows.dedup();
+@@ -243,7 +244,7 @@ pub(crate) fn commit<R>(d: &mut DocState, f: impl FnOnce(&mut Ctx) -> Result<R>)
+         auto_row_height(&mut wb, si, row);
+     }
+     if prof {
+-        eprintln!("commit: + rows {:?}", t0.elapsed());
++        eprintln!("commit: + rows {:?}", t0.map(|t| t.elapsed()).unwrap_or_default());
+     }
+     d.wb = std::sync::Arc::new(wb);
+     d.selection = sel;

@@ -1,0 +1,6 @@
+/* Welcome screen. */
+.pf .pf-welcome{text-align:var(--pf-align)}
+.pf .pf-welcome h1{font-size:clamp(26px,5vw,38px);line-height:1.2;margin:0 0 10px;color:var(--pf-text)}
+.pf .pf-welcome p{font-size:18px;color:var(--pf-muted);margin:0 0 20px;white-space:pre-line}
+.pf .pf-start{min-height:48px;padding:0 28px;border:0;border-radius:var(--pf-radius);background:var(--pf-color);color:var(--pf-btn-text);font:inherit;font-weight:700;cursor:pointer}
+.pf .pf-start:hover{filter:brightness(1.07)}

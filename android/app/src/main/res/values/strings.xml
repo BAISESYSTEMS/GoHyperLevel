@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HyperLevel</string>
+
+    <string name="w_cockpit">Cockpit</string>
+    <string name="w_cockpit_desc">Leads, Deals, Umsatz, Ungelesen und Aufgaben auf einen Blick</string>
+    <string name="w_inbox">Posteingang</string>
+    <string name="w_inbox_desc">Neueste Nachrichten mit Direkt-Antwort</string>
+    <string name="w_tasks">Aufgaben</string>
+    <string name="w_tasks_desc">Heute und überfällig – direkt abhaken</string>
+    <string name="w_appointments">Termine</string>
+    <string name="w_appointments_desc">Termine von heute und morgen</string>
+    <string name="w_pipeline">Pipeline</string>
+    <string name="w_pipeline_desc">Phasen mit Anzahl und Wert, Top-Deals verschieben</string>
+    <string name="w_projects">Projekte</string>
+    <string name="w_projects_desc">Alle Projekte mit Website-Status, Aufgaben und Ungelesen</string>
+    <string name="w_quick">Schnellaktionen</string>
+    <string name="w_quick_desc">Kontakt, Aufgabe, Notiz, Anruf und mehr mit einem Tipp</string>
+    <string name="w_revenue">Umsatz</string>
+    <string name="w_revenue_desc">Heute, Monat, offene Rechnungen und Verlauf</string>
+    <string name="w_calls">Anrufe</string>
+    <string name="w_calls_desc">Verpasste Anrufe mit Rückruf-Knopf</string>
+    <string name="w_reviews">Bewertungen</string>
+    <string name="w_reviews_desc">Sterne, Anzahl, Entwicklung und neueste Bewertung</string>
+    <string name="w_voice">Sprach-Notiz</string>
+    <string name="w_voice_desc">Ein Tipp: sprechen, fertig – wird Aufgabe oder Notiz</string>
+    <string name="w_kpi">Zahl</string>
+    <string name="w_kpi_desc">Eine Kennzahl deiner Wahl mit Trend</string>
+    <string name="w_social">Social</string>
+    <string name="w_social_desc">Die nächsten geplanten Beiträge</string>
+
+    <string name="shortcut_task">Neue Aufgabe</string>
+    <string name="shortcut_contact">Neuer Kontakt</string>
+    <string name="shortcut_voice">Sprach-Notiz</string>
+    <string name="shortcut_inbox">Posteingang</string>
+    <string name="shortcut_report">Fehler melden</string>
+
+    <string name="widget_loading">HyperLevel lädt…</string>
+</resources>

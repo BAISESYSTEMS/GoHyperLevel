@@ -1,0 +1,71 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! **Security problems:** please don't file them here – see [SECURITY.md](../../SECURITY.md).
+        Please never paste real customer data, API keys or passwords; use fictional examples.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+      placeholder: "1. Go to …  2. Click …  3. See error …"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: HyperLevel version
+      description: Shown in the sidebar footer, or `GET /api/version`.
+      placeholder: "0.0.18"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How do you run HyperLevel?
+      options:
+        - Docker Compose (docker-compose.yml / install.sh)
+        - Docker image behind my own proxy (Traefik, nginx …)
+        - Coolify
+        - Railway / Render
+        - Plain Node.js (npm start)
+        - Development (npm run dev)
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Contacts / companies / objects
+        - Pipelines / opportunities
+        - Calendars / bookings
+        - Conversations (e-mail, SMS, WhatsApp, chat, phone)
+        - Workflows / campaigns
+        - Funnels / websites / forms / blog
+        - Courses / community / member portal
+        - Invoices / payments / Stripe
+        - Helpdesk / tickets
+        - Reports / dashboards
+        - AI assistant / MCP
+        - Agency / SaaS / white-label
+        - Android app
+        - Installation / Docker / update
+        - Other
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and screenshots
+      description: Server log (`docker compose logs gohigh`), browser console, screenshots. Remove secrets first.
+      render: shell
+  - type: input
+    id: env
+    attributes:
+      label: Browser / OS / Android version
+      placeholder: "Firefox 140 on Ubuntu 24.04"

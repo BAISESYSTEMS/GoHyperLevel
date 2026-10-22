@@ -1,0 +1,49 @@
+/* Webinare (web/src/pages/Webinar*.tsx). Own file, loaded with the lazy page; colours are the theme tokens, so light, dark and every theme work. */
+
+.wb-tab { max-width: 980px; }
+.wb-sec { margin-bottom: 14px; }
+.wb-sec > h3 { margin: 0 0 6px; }
+.wb-hint { margin: 0 0 12px; max-width: 70ch; }
+.wb-err { color: var(--red); font-size: 13px; margin: -6px 0 10px; }
+.wb-bad { border-color: var(--red) !important; }
+
+/* lists of lines (times, dates, messages) */
+.wb-list { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; width: 100%; }
+.wb-line { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; width: 100%; }
+.wb-line .grow { flex: 1 1 220px; min-width: 0; }
+.wb-line input[type='text'], .wb-line input:not([type]) { min-width: 0; }
+.wb-line input[type='time'], .wb-line input[type='datetime-local'] { width: auto; flex: 0 0 auto; }
+.wb-top { align-items: flex-start; }
+.wb-poll, .wb-rem { padding: 12px; margin: 0 0 10px; width: 100%; }
+.wb-rem details { margin-top: 8px; }
+.wb-rem summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+
+/* sessions preview */
+.wb-sessions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.wb-sessions li { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+
+/* "what is missing" */
+.wb-callout { margin: 0 0 14px; padding: 10px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--yellow) 40%, var(--line)); background: color-mix(in srgb, var(--yellow) 10%, var(--panel)); }
+.wb-callout ul { margin: 6px 0; padding-left: 20px; }
+
+/* unsaved changes: a bar that stays reachable on long tabs */
+.wb-savebar { position: sticky; bottom: 12px; margin-top: 14px; display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); box-shadow: 0 6px 24px rgba(0, 0, 0, .18); z-index: 5; }
+
+/* analytics */
+.wb-chart { width: 100%; height: auto; max-height: 240px; display: block; }
+.wb-chart .grid { stroke: var(--line); stroke-width: 1; }
+.wb-chart .tick { fill: var(--muted); font-size: 11px; }
+.wb-chart .area { fill: color-mix(in srgb, var(--brand) 18%, transparent); }
+.wb-chart .line { fill: none; stroke: var(--brand); stroke-width: 2; stroke-linejoin: round; }
+.wb-chart .dot { fill: var(--brand); }
+.wb-pollres { margin-bottom: 14px; }
+.wb-bar { position: relative; margin: 5px 0; padding: 4px 10px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-height: 28px; }
+.wb-bar .fill { position: absolute; inset: 0 auto 0 0; background: color-mix(in srgb, var(--brand) 28%, transparent); }
+.wb-bar .lbl { position: relative; font-size: 14px; }
+.wb-q { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.wb-q:last-child { border-bottom: 0; }
+
+@media (max-width: 700px) {
+  .wb-line { align-items: stretch; }
+  .wb-savebar { bottom: 8px; }
+}

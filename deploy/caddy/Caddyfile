@@ -1,0 +1,23 @@
+# Caddy for HyperLevel (docker compose --profile caddy up -d): automatic HTTPS via Let's Encrypt.
+# PGHL_DOMAIN comes from .env; DNS A/AAAA records must point at this server and ports 80/443 be open.
+{
+	# Certificates for custom domains (funnels, websites, client logins) are requested on first visit –
+	# but only for domains HyperLevel knows (the ask endpoint answers 404 for everything else).
+	on_demand_tls {
+		ask http://gohigh:4700/api/tls/ask
+	}
+}
+
+{$PGHL_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy gohigh:4700
+}
+
+# Every other host name: a custom domain entered in HyperLevel (Funnel → Einstellungen & Domain).
+https:// {
+	tls {
+		on_demand
+	}
+	encode zstd gzip
+	reverse_proxy gohigh:4700
+}

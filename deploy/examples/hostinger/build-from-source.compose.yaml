@@ -1,0 +1,60 @@
+# For hosts that can neither build images nor pull from a registry (e.g. Hostinger's Docker Manager
+# without registry access): the container clones the repository on first start, builds it once and
+# keeps the build on the volume. Prefer deploy/examples/hostinger/compose.yaml (prebuilt image).
+#
+# Project environment:
+#   PGHL_DOMAIN=crm.your-domain.com
+#   PGHL_BASE_URL=https://crm.your-domain.com
+#   PGHL_REPO_PATH=github.com/gohyperlevel/gohyperlevel.git   (your fork, optional)
+#   PGHL_REF=main                                   (branch or tag, e.g. v0.0.18)
+#   PGHL_GIT_TOKEN=…                                (only for a private fork: token with read access)
+#   PGHL_ADMIN_EMAIL=… / PGHL_ADMIN_PASSWORD=…      (first start only)
+#
+# Update: recreate the container with PGHL_REBUILD=1 once (or delete /data/app).
+services:
+  gohigh:
+    image: node:22-bookworm-slim
+    restart: unless-stopped
+    init: true
+    working_dir: /data
+    command:
+      - bash
+      - -c
+      - >-
+        set -e;
+        if [ ! -d /data/app ] || [ "$${PGHL_REBUILD:-0}" = "1" ]; then
+          apt-get update -qq && apt-get install -y -qq git ca-certificates >/dev/null;
+          rm -rf /data/app.tmp;
+          if [ -n "$${PGHL_GIT_TOKEN:-}" ]; then AUTH="x-access-token:$${PGHL_GIT_TOKEN}@"; else AUTH=""; fi;
+          git clone --depth 1 --branch "$${PGHL_REF:-main}" "https://$${AUTH}$${PGHL_REPO_PATH:-github.com/gohyperlevel/gohyperlevel.git}" /data/app.tmp;
+          git -C /data/app.tmp remote remove origin;
+          cd /data/app.tmp && npm ci --no-audit --no-fund && npm run build && npm prune --omit=dev;
+          rm -rf /data/app && mv /data/app.tmp /data/app;
+        fi;
+        cd /data/app && exec node --no-warnings dist-server/server/index.js
+    environment:
+      - PGHL_DATA_DIR=/data/state
+      - PGHL_BEHIND_PROXY=1
+      - PORT=4700
+      - PGHL_BASE_URL
+      - PGHL_ADMIN_EMAIL
+      - PGHL_ADMIN_PASSWORD
+      - PGHL_COMPANY_NAME
+      - PGHL_GIT_TOKEN
+      - PGHL_REF
+      - PGHL_REPO_PATH
+      - PGHL_REBUILD
+    volumes:
+      - gohigh-data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gohigh.rule=Host(`${PGHL_DOMAIN:?set PGHL_DOMAIN}`)
+      - traefik.http.routers.gohigh.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}
+      - traefik.http.routers.gohigh.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}
+      - traefik.http.services.gohigh.loadbalancer.server.port=4700
+      - traefik.http.routers.gohigh-http.rule=Host(`${PGHL_DOMAIN}`)
+      - traefik.http.routers.gohigh-http.entrypoints=${TRAEFIK_HTTP_ENTRYPOINT:-web}
+      - traefik.http.routers.gohigh-http.middlewares=gohigh-https
+      - traefik.http.middlewares.gohigh-https.redirectscheme.scheme=https
+volumes:
+  gohigh-data:

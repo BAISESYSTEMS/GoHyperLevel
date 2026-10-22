@@ -1,0 +1,101 @@
+{
+ "object": "list",
+ "type": "text",
+ "data": [
+  {
+   "context_length": 1000000,
+   "created": 1783555200,
+   "id": "gemini-3-6-flash",
+   "model_spec": {
+    "pricing": {
+     "input": {
+      "usd": 0.9375,
+      "diem": 0.9375
+     },
+     "cache_input": {
+      "usd": 0.09375,
+      "diem": 0.09375
+     },
+     "output": {
+      "usd": 4.6875,
+      "diem": 4.6875
+     }
+    },
+    "availableContextTokens": 1000000,
+    "maxCompletionTokens": 65536,
+    "capabilities": {
+     "optimizedForCode": false,
+     "quantization": "not-available",
+     "supportsAudioInput": true,
+     "supportsFunctionCalling": true,
+     "supportsLogProbs": false,
+     "supportsMultipleImages": false,
+     "supportsReasoning": true,
+     "supportsReasoningEffort": false,
+     "supportsResponseSchema": true,
+     "supportsTeeAttestation": false,
+     "supportsE2EE": false,
+     "supportsVideoInput": true,
+     "supportsVision": true,
+     "supportsWebSearch": true,
+     "supportsXSearch": false
+    },
+    "name": "Gemini 3.6 Flash",
+    "offline": false,
+    "privacy": "anonymized",
+    "traits": []
+   },
+   "object": "model",
+   "owned_by": "venice.ai",
+   "type": "text"
+  },
+  {
+   "context_length": 1000000,
+   "created": 1787011200,
+   "id": "z-ai-glm-5-3",
+   "model_spec": {
+    "pricing": {
+     "input": {
+      "usd": 1.75,
+      "diem": 1.75
+     },
+     "cache_input": {
+      "usd": 0.325,
+      "diem": 0.325
+     },
+     "output": {
+      "usd": 5.5,
+      "diem": 5.5
+     }
+    },
+    "availableContextTokens": 1000000,
+    "maxCompletionTokens": 131072,
+    "capabilities": {
+     "optimizedForCode": true,
+     "quantization": "not-available",
+     "supportsAudioInput": false,
+     "supportsFunctionCalling": true,
+     "supportsLogProbs": false,
+     "supportsMultipleImages": false,
+     "supportsReasoning": true,
+     "supportsReasoningEffort": false,
+     "supportsResponseSchema": true,
+     "supportsTeeAttestation": false,
+     "supportsE2EE": false,
+     "supportsVideoInput": false,
+     "supportsVision": false,
+     "supportsWebSearch": true,
+     "supportsXSearch": false
+    },
+    "name": "GLM 5.3",
+    "modelSource": "https://huggingface.co/zai-org/GLM-5.3",
+    "offline": false,
+    "privacy": "private",
+    "traits": []
+   },
+   "object": "model",
+   "owned_by": "venice.ai",
+   "type": "text"
+  }
+ ]
+}

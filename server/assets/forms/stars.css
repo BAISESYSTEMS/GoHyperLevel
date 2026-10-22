@@ -1,0 +1,5 @@
+/* Rating stars. */
+.pf .pf-stars{display:flex;flex-wrap:wrap;gap:2px}
+.pf .pf-stars button{min-width:44px;min-height:44px;padding:0;background:none;border:0;font-size:34px;line-height:1;color:var(--pf-line);cursor:pointer}
+.pf .pf-stars button.on{color:#f59e0b}
+.pf .pf-stars button:hover{transform:scale(1.12)}

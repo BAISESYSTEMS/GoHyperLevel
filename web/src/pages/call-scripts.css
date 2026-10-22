@@ -1,0 +1,9 @@
+/* Call scripts (pages/CallScripts.tsx): the panel in the browser phone and the power dialer, the step editor */
+.cs-panel { border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 10px; padding: 10px 12px; margin-top: 10px; background: var(--panel); display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.cs-head { display: flex; gap: 8px; align-items: center; }
+.cs-text { white-space: pre-wrap; line-height: 1.5; font-size: 15px; }
+.cs-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.cs-options .btn { min-height: 40px; }
+.cs-foot { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+.cs-edit-step { border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
+.phone-panel .cs-panel { max-height: 260px; overflow-y: auto; }

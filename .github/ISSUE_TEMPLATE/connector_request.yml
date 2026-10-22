@@ -1,0 +1,47 @@
+name: Connector request
+description: Ask for a new integration (payment, messaging, calendar, accounting, AI …)
+labels: ["connector", "enhancement"]
+body:
+  - type: input
+    id: service
+    attributes:
+      label: Service
+      placeholder: "e.g. Mollie, Lexware Office, Telegram, Cal.com"
+    validations:
+      required: true
+  - type: input
+    id: api
+    attributes:
+      label: API documentation
+      placeholder: "https://…"
+  - type: textarea
+    id: usecase
+    attributes:
+      label: What should HyperLevel do with it?
+      description: Which data flows in which direction? Triggers (something happens there → workflow here) and actions (HyperLevel does something there)?
+    validations:
+      required: true
+  - type: dropdown
+    id: auth
+    attributes:
+      label: Authentication
+      options:
+        - API key / token
+        - OAuth 2.0
+        - Webhook signature only
+        - Don't know
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Configured per
+      options:
+        - Sub-account (each client connects their own account)
+        - Agency (one connection for all)
+        - Don't know
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The service can't already be connected through Zapier/Make/n8n REST hooks or the "Webhook empfangen" trigger in a way that's good enough
+        - label: I'd like to build or test this connector (see "Adding a connector" in CONTRIBUTING.md)

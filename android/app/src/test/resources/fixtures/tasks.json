@@ -1,0 +1,2 @@
+[{"id":"t1","title":"Angebot schicken","description":"","due_at":"2026-10-04T00:00:00.000Z","done":false,"location_id":"loc_a","location_name":"Testfirma","contact_id":null,"contact_name":null,"assigned_to":null},
+ {"id":"t2","title":"Rückruf","description":"Steuerberater","due_at":"2026-10-03T14:00:00.000Z","done":false,"location_id":"loc_b","location_name":"Zweitfirma","contact_id":"c_9","contact_name":"Max Muster","assigned_to":"u1"}]

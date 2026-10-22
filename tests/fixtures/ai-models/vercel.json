@@ -1,0 +1,147 @@
+{
+ "object": "list",
+ "data": [
+  {
+   "id": "alibaba/qwen3-235b-a22b-thinking",
+   "object": "model",
+   "created": 1755815280,
+   "released": 1758585600,
+   "owned_by": "alibaba",
+   "name": "Qwen3 VL 235B A22B Thinking",
+   "context_window": 131072,
+   "max_tokens": 32768,
+   "type": "language",
+   "zdr": "some",
+   "no_training": "some",
+   "tags": [
+    "vision",
+    "reasoning",
+    "tool-use",
+    "file-input",
+    "structured-output"
+   ],
+   "supported_specifications": [
+    "v2",
+    "v3",
+    "v4"
+   ],
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "pdf"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "supported_parameters": [
+    "max_tokens",
+    "temperature",
+    "stop",
+    "tools",
+    "tool_choice",
+    "reasoning",
+    "include_reasoning",
+    "response_format",
+    "structured_outputs"
+   ],
+   "temperature": true,
+   "reasoning_options": [
+    {
+     "type": "budget_tokens",
+     "min": 1,
+     "max": 81920
+    }
+   ],
+   "knowledge": "2025-04",
+   "pricing": {
+    "input": "0.0000004",
+    "output": "0.000004",
+    "varies_by_provider": true
+   }
+  },
+  {
+   "id": "alibaba/qwen-3-14b",
+   "object": "model",
+   "created": 1755815280,
+   "released": 1745798400,
+   "owned_by": "alibaba",
+   "name": "Qwen3-14B",
+   "context_window": 40960,
+   "max_tokens": 16384,
+   "type": "language",
+   "zdr": "all",
+   "no_training": "all",
+   "tags": [
+    "reasoning",
+    "tool-use",
+    "structured-output"
+   ],
+   "supported_specifications": [
+    "v2",
+    "v3",
+    "v4"
+   ],
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "supported_parameters": [
+    "max_tokens",
+    "temperature",
+    "stop",
+    "tools",
+    "tool_choice",
+    "reasoning",
+    "include_reasoning",
+    "response_format",
+    "structured_outputs"
+   ],
+   "temperature": true,
+   "reasoning_options": [
+    {
+     "type": "toggle"
+    }
+   ],
+   "knowledge": "2025-04",
+   "pricing": {
+    "input": "0.00000012",
+    "output": "0.00000024"
+   }
+  },
+  {
+   "id": "alibaba/qwen3-embedding-0.6b",
+   "object": "model",
+   "created": 1755815280,
+   "released": 1763078400,
+   "owned_by": "alibaba",
+   "name": "Qwen3 Embedding 0.6B",
+   "context_window": 32768,
+   "max_tokens": 32768,
+   "type": "embedding",
+   "zdr": "all",
+   "no_training": "all",
+   "supported_specifications": [
+    "v2",
+    "v3",
+    "v4"
+   ],
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "pricing": {
+    "input": "0.00000001"
+   }
+  }
+ ]
+}

@@ -1,0 +1,255 @@
+/* ==========================================================================================================================
+   iPhone, iPad, foldables – the installed web app (docs/ios-web-app.md). Loaded after styles.css and theme/theme.css.
+   Layout follows the WIDTH of the window (never the user agent), so a phone, an iPad in Split View, a Stage Manager window and a
+   foldable that unfolds all use the same rules:
+     < 600 px       compact   bottom bar + drawer              (phone, iPhone Duo folded 466 px, Slide Over, 1/3 Split View)
+     600 – 1023 px  medium    sidebar rail, two panes from 720  (iPad portrait, Duo unfolded, 1/2–2/3 Split View)
+     ≥ 1024 px      expanded  sidebar (or rail), two/three panes (iPad landscape, desktop)
+   The page-level CSS uses its own breakpoints below this layer; rules here win by order or by one more :root.
+   ========================================================================================================================== */
+
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --tabbar-h: 0px;
+}
+
+/* ---- touch: no zoom on double tap (pinch zoom stays), no grey flash, no bounce of the whole page ------------------------------ */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overscroll-behavior: none; }
+body { -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
+a, button, summary, label, select, [role='button'], [role='tab'], .kcard, .inbox .item, tr.click { touch-action: manipulation; }
+/* the scroll areas keep their own bounce but never pass it on to the page behind */
+.main, .modal-body, .inbox .list, .inbox .msgs, .kcol-body, .side { overscroll-behavior: contain; }
+/* the tap highlight is off, so pressed things say so themselves */
+.btn:active, .icon-btn:active, .tabs button:active, .tab:active { filter: brightness(.92); }
+.inbox .item:active, table.t tr.click:active td, .deal-row:active, .doc-row:active, .side nav a:active, .switcher-row:active { background: var(--brand-soft); }
+
+/* ---- the shell inside the safe areas (notch and Dynamic Island in landscape, home indicator) -------------------------------------- */
+/* the strips beside the camera cutout (landscape) carry the sidebar's and the page's colour, so the whole screen is used */
+.shell { padding-left: var(--sal); padding-right: var(--sar); background: linear-gradient(90deg, var(--side) 0 var(--sal), transparent var(--sal)); }
+.side { padding-bottom: var(--sab); }
+.topbar { padding-top: max(10px, calc(var(--sat) + 6px)); }
+.content { padding-bottom: calc(60px + var(--sab)); }
+.toasts { right: max(18px, calc(var(--sar) + 12px)); bottom: max(18px, calc(var(--sab) + 12px)); }
+.install-hint { bottom: max(18px, calc(var(--sab) + 12px)); }
+.modal-bg { padding-left: max(16px, var(--sal)); padding-right: max(16px, var(--sar)); padding-top: max(16px, var(--sat)); padding-bottom: max(16px, var(--sab)); }
+.modal { max-height: calc(100vh - 32px - var(--sat) - var(--sab)); max-height: calc(100dvh - 32px - var(--sat) - var(--sab)); }
+.modal-foot { padding-bottom: max(12px, calc(var(--sab) * .5)); }
+
+/* ---- keyboard: the visible part of the page is --vv-h; the shell follows it so composers and fields stay above the keys ---------- */
+html[data-keyboard='open'] .shell { position: fixed; left: 0; right: 0; top: var(--vv-top, 0px); height: var(--vv-h, 100%); }
+html[data-keyboard='open'] .modal-bg { top: var(--vv-top, 0px); bottom: auto; height: var(--vv-h, 100%); }
+html[data-keyboard='open'] .modal { max-height: calc(var(--vv-h, 100dvh) - 16px); }
+:root:root[data-keyboard='open'] .tabbar, :root:root[data-keyboard='open'] .phone-fab { display: none; }
+:root:root[data-keyboard='open'] { --tabbar-h: 0px; }
+
+/* ---- touch targets and no zoom-on-focus (iOS zooms into fields under 16 px; pinch zoom stays possible) -------------------------- */
+@media (pointer: coarse) {
+  .btn, .icon-btn, .tabs button, .switcher-btn, .menu-pop a { min-height: 44px; }
+  .icon-btn { min-width: 44px; }
+  .check { min-height: 44px; }
+  input[type='checkbox'], input[type='radio'] { width: 22px; height: 22px; }
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']):not([type='hidden']), select, textarea, [contenteditable='true'] { font-size: max(16px, 1em); }
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']):not([type='hidden']), select { min-height: 44px; }
+  .side nav a { min-height: 44px; }
+  /* inbox channel filter, sortable table headers (lists and report tables on dashboards): the tap area grows, the look stays */
+  .chan-chip { min-width: 44px; height: 44px; padding: 0 12px; }
+  .th-sort, .viz-table th button { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+}
+
+/* ---- hover does not stick after a tap on touch screens ------------------------------------------------------------------------------ */
+@media (hover: none) {
+  .btn:hover { filter: none; }
+  a:hover { text-decoration: none; }
+  .icon-btn:hover { background: transparent; color: var(--muted); }
+  table.t tr.click:hover td { background: transparent; }
+  .inbox .item:hover:not(.on) { background: transparent; }
+  .side nav a:hover:not(.on) { background: transparent; }
+  /* tools that only show on hover are there to tap */
+  .doc-actions { opacity: 1; }
+}
+
+/* ==========================================================================================================================
+   compact: bottom bar and drawer
+   ========================================================================================================================== */
+.tabbar { display: none; }
+.side-scrim { display: none; }
+@media (max-width: 599.98px) {
+  .side { right: auto; width: min(320px, 86vw); padding-top: var(--sat); padding-left: var(--sal); box-shadow: 12px 0 40px rgba(0, 0, 0, .35); }
+  .side:not(.open) { box-shadow: none; visibility: hidden; transition: transform .2s, visibility 0s .2s; }
+  .side-scrim { display: block; position: fixed; inset: 0; z-index: 29; background: rgba(15, 23, 42, .5); }
+  .topbar { padding-left: max(16px, calc(var(--sal) + 12px)); padding-right: max(16px, calc(var(--sar) + 12px)); }
+  .content { padding-left: max(16px, calc(var(--sal) + 12px)); padding-right: max(16px, calc(var(--sar) + 12px)); }
+  .shell { padding-left: 0; padding-right: 0; }
+
+  :root:not([data-shell='android']) { --tabbar-h: calc(56px + var(--sab)); }
+  :root:not([data-shell='android']) .tabbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; height: var(--tabbar-h); padding: 0 var(--sar) var(--sab) var(--sal); background: var(--panel); border-top: 1px solid var(--line); }
+  :root:not([data-shell='android']) .content { padding-bottom: calc(28px + var(--tabbar-h)); }
+  /* what floats at the bottom stays above the bar */
+  :root:not([data-shell='android']) .toasts { bottom: calc(var(--tabbar-h) + 10px); right: 12px; left: 12px; align-items: stretch; }
+  :root:not([data-shell='android']) .phone-fab { bottom: calc(var(--tabbar-h) + 12px); }
+  :root:not([data-shell='android']) .phone-panel, :root:not([data-shell='android']) .phone-incoming { bottom: calc(var(--tabbar-h) + 76px); }
+  :root:not([data-shell='android']) .install-hint { bottom: calc(var(--tabbar-h) + 10px); }
+  :root:not([data-shell='android']) .undo-toasts { bottom: calc(var(--tabbar-h) + 10px); }
+  :root:not([data-shell='android']) .xr-suggest { bottom: calc(var(--tabbar-h) + 10px); }
+}
+.tab { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 10.5px; letter-spacing: -.01em; font-weight: 600; text-decoration: none; cursor: pointer; min-height: 52px; padding: 4px 0 0; }
+.tab:hover { text-decoration: none; color: var(--text); }
+.tab.on { color: var(--brand-text, var(--brand)); }
+.tab:focus-visible { outline: 3px solid var(--brand); outline-offset: -3px; border-radius: 12px; }
+.tab-ico { position: relative; display: grid; place-items: center; width: 56px; height: 30px; border-radius: 15px; transition: background .15s; }
+.tab.on .tab-ico { background: var(--brand-soft); }
+.tab-badge { position: absolute; top: -3px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px; background: var(--red-fill); color: #fff; font-size: 11px; line-height: 18px; text-align: center; font-weight: 700; }
+.tab-label { max-width: 100%; padding: 0 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.2; }
+@media (max-width: 399.98px) { .tab-label { font-size: 10px; letter-spacing: -.02em; } .tab-ico { width: 48px; } }
+@media (prefers-reduced-motion: reduce) { .side, .tab-ico { transition: none; } }
+
+/* topbar on narrow screens: row 1 menu + search, row 2 the tools; it scrolls away with the page (the bar below stays) */
+@media (max-width: 599.98px) {
+  :root .topbar { position: static; flex-wrap: wrap; justify-content: flex-end; gap: 6px 8px; }
+  :root .topbar .menu-btn { order: 0; }
+  :root .topbar .search { order: 1; flex: 1 1 0; max-width: none; min-width: 0; }
+  :root .topbar > :not(.menu-btn):not(.search) { order: 2; }
+  :root .topbar::after { content: ''; order: 1; flex: 0 0 100%; height: 0; }
+  :root .topbar .btn.small { padding-left: 4px; padding-right: 4px; min-width: 44px; justify-content: center; }
+  :root .topbar .jump-btn { display: none; }
+  /* a conversation fills the screen like in Messages: no header above it, "‹ Liste" and the bar below get you out */
+  :root .main:has(.inbox.has-sel) > .topbar, :root .page-head:has(+ .inbox.has-sel) { display: none; }
+  :root .page-head:has(+ .inbox) p.muted { display: none; }
+}
+
+/* ==========================================================================================================================
+   medium and expanded: the page next to the sidebar rail – two panes where they fit
+   ========================================================================================================================== */
+@media (min-width: 600px) {
+  .tab, .tabbar { display: none; }
+  .topbar { padding-left: 16px; padding-right: 16px; }
+  .content { padding-left: 20px; padding-right: 20px; }
+}
+@media (min-width: 1024px) {
+  .topbar { padding-left: 24px; padding-right: 24px; }
+  .content { padding-left: 24px; padding-right: 24px; }
+}
+/* a record in a side drawer (Pipeline → Deal): the board stays visible next to it */
+@media (min-width: 720px) {
+  /* the one grid row is as tall as the screen (minmax(0, 1fr)); with an auto row the drawer grew with its content, its footer (Speichern) ended below the screen and could not be reached */
+  .modal-bg:has(> .modal.drawer) { place-items: stretch end; grid-template-rows: minmax(0, 1fr); padding: 0; background: rgba(15, 23, 42, .28); }
+  .modal.drawer:focus, .modal.drawer:focus-visible { outline: none; }
+  .modal.drawer { max-width: none; width: min(460px, 46vw); height: 100%; max-height: 100%; border-radius: 0; padding-top: var(--sat); padding-bottom: var(--sab); animation: ios-drawer .2s cubic-bezier(.2, .8, .2, 1); }
+  .modal.drawer .modal-head { padding-right: max(18px, var(--sar)); }
+}
+@keyframes ios-drawer { from { transform: translateX(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .modal.drawer { animation: none; } }
+
+/* ---- inbox: list + conversation. < 720 px one pane at a time (master → detail), from 720 px two panes ---------------------------- */
+.btn.inbox-back { display: none; }
+@media (max-width: 719.98px) {
+  :root .inbox, :root .inbox.tx, :root .inbox:has(> .ai-panel), :root .inbox.tx:has(> .ai-panel) { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); height: auto; }
+  :root .inbox.has-sel { height: calc(100vh - var(--tabbar-h) - 48px); height: calc(100dvh - var(--tabbar-h) - 48px); }
+  :root .inbox .list { max-height: none; border-right: 0; border-bottom: 0; min-height: 0; overflow: visible; }
+  :root .inbox.has-sel > .list, :root .inbox.has-sel > .tx-rail { display: none; }
+  :root .inbox:not(.has-sel) > .thread, :root .inbox:not(.has-sel) > .ai-panel { display: none; }
+  :root .inbox.has-sel > .ai-panel { display: none; }
+  :root .inbox .thread { grid-row: 1 / -1; }
+  :root .inbox.has-sel .btn.inbox-back { display: inline-flex; }
+  :root .inbox .msgs { padding-inline: 12px; }
+  /* the controls, the messages and the composer are one scroll area: nothing gets squashed to a sliver above the keyboard */
+  :root .inbox.has-sel .thread { overflow-y: auto; }
+  :root .inbox.has-sel .thread > * { flex-shrink: 0; }
+  :root .inbox.has-sel .msgs { flex: none; min-height: 40vh; min-height: 40dvh; overflow: visible; }
+  :root .inbox.has-sel .tx-bar { flex-wrap: nowrap; overflow-x: auto; gap: 8px 12px; padding: 8px 12px; }
+  :root .inbox.has-sel .tx-bar > * { flex: none; }
+  :root .inbox.has-sel .tx-field { width: auto; }
+  :root .inbox .thread > .row:first-child { position: sticky; top: 0; z-index: 3; background: var(--panel); flex-wrap: nowrap; overflow-x: auto; align-items: center; gap: 8px; }
+  :root .inbox .thread > .row:first-child > * { flex: none; }
+  :root .inbox .thread > .row:first-child > .grow { flex: 1 0 150px; }
+  .bubble { max-width: 88%; }
+  html[data-keyboard='open'] .inbox.has-sel { height: calc(var(--vv-h, 100dvh) - 44px); }
+}
+@media (min-width: 720px) and (max-width: 1199.98px) {
+  :root .inbox { grid-template-columns: 270px minmax(0, 1fr); height: calc(100vh - 140px); height: calc(100dvh - 140px); }
+  :root .inbox .list { max-height: none; }
+  :root .inbox:has(> .ai-panel) { grid-template-columns: 270px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+  :root .inbox.tx, :root .inbox.tx:has(> .ai-panel) { grid-template-columns: 290px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  :root .inbox.tx:has(> .ai-panel) { grid-template-rows: auto minmax(0, 1fr) auto; }
+  :root .inbox .tx-rail { grid-column: 1 / -1; }
+  :root .inbox .msgs { padding-inline: 14px; }
+}
+
+/* tablets: the top bar's tools shrink to icons so the search keeps its room (labels stay in the title / for screen readers) */
+@media (min-width: 600px) and (max-width: 1279.98px) {
+  :root .topbar .btn.small { font-size: 0; gap: 0; padding-left: 4px; padding-right: 4px; min-width: 44px; justify-content: center; }
+  :root .topbar .btn kbd { display: none; }
+  :root .topbar .search { min-width: 150px; }
+}
+/* the inbox fills what is left of the window (not a guess of the header's height) */
+@media (min-width: 720px) {
+  :root .main > .content:has(> .inbox) { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
+  :root .content > .inbox { flex: 1 1 0; height: auto; min-height: 380px; }
+  :root .page-head:has(+ .inbox) p.muted { display: none; }
+}
+/* narrow conversation panes (list + conversation side by side below 1200 px): header and controls are one scrolling row each */
+@media (min-width: 720px) and (max-width: 1199.98px) {
+  :root .inbox .thread > .row:first-child, :root .inbox .tx-bar { flex-wrap: nowrap; overflow-x: auto; align-items: center; gap: 8px 12px; }
+  :root .inbox .thread > .row:first-child > *, :root .inbox .tx-bar > * { flex: none; }
+  :root .inbox .thread > .row:first-child > .grow { flex: 1 0 160px; }
+  :root .inbox .thread > * { flex-shrink: 0; }
+  :root .inbox .thread > .msgs { flex: 1 1 0; min-height: 80px; }
+  :root .inbox .tx-field { width: auto; }
+}
+
+/* ---- list + record (web/src/ios/MasterDetail.tsx): side by side when the box is wide enough, else one pane at a time ----------------- */
+.md-wrap { container-type: inline-size; }
+.md-list, .md-detail { min-width: 0; }
+.md[data-open='1'] > .md-list, .md[data-open='0'] > .md-detail { display: none; }
+.md-sub { display: none; }
+.md-empty { padding: 40px 16px; text-align: center; }
+table.t tr.click.on td { background: var(--brand-soft); }
+.task-row.on { background: var(--brand-soft); border-radius: 8px; }
+.md-back { display: inline-flex; }
+@container (min-width: 760px) {
+  .md { display: grid; grid-template-columns: minmax(300px, 36%) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .md > .md-list, .md > .md-detail { display: block !important; }
+  .md > .md-list { position: sticky; top: 8px; max-height: calc(100vh - 100px); max-height: calc(100dvh - 100px); overflow: auto; overscroll-behavior: contain; padding-right: 2px; }
+  .md-list .page-head { flex-wrap: wrap; gap: 8px; }
+  .md-list .page-head .actions { flex-wrap: wrap; }
+  .md-list table.t th:nth-child(n+3), .md-list table.t td:nth-child(n+3) { display: none; }
+  .md-list .md-sub { display: block; }
+  .md-list .table-wrap { overflow: visible; }
+  /* the filters are one row to scroll, not a column of selects */
+  .md-list > .row:not(.card) { flex-wrap: nowrap; overflow-x: auto; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .md-list > .row:not(.card) > * { flex: none; }
+  .md-list > .row:not(.card) > .grow { flex: 1 0 200px; }
+  .md-detail > .page-head { margin-top: 0; }
+  .btn.md-back { display: none; }
+  .md-list .task-row { flex-wrap: wrap; row-gap: 0; }
+  .md-list .task-row > .grow { flex: 1 1 100%; }
+}
+
+/* ---- boards, canvas and the workspace use the full width of the window ----------------------------------------------------------- */
+@media (min-width: 600px) and (max-width: 1023.98px) {
+  .kcol { flex-basis: 250px; }
+}
+
+/* ---- pen: Apple Pencil writes into every field (Scribble); never block it with selection or touch rules on fields ----------------- */
+input, textarea, [contenteditable='true'] { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
+canvas, .cv-wrap { touch-action: none; }
+
+/* ---- foldables that report a fold (Viewport Segments; Safari does not – nothing depends on this) ----------------------------------- */
+@media (horizontal-viewport-segments: 2) {
+  :root .inbox { grid-template-columns: env(viewport-segment-width 0 0, 320px) minmax(0, 1fr); column-gap: var(--hinge-gap, 0px); }
+  .modal-bg { padding-left: max(16px, env(viewport-segment-left 1 0, 0px)); }
+}
+@media (vertical-viewport-segments: 2) {
+  .modal { max-height: calc(env(viewport-segment-height 0 0, 100dvh) - 32px); }
+}
+
+@media print { .tabbar, .side-scrim, .ptr, .kb-hint { display: none !important; } }
+
+/* ---- the push settings' explicit button (iOS asks for the permission only after a tap) ----------------------------------------------- */
+.push-step { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); margin-bottom: 10px; }
+.push-step p { margin: 0 0 4px; }
+.push-enable { min-height: 48px; padding: 0 22px; font-size: 15px; }
+.ios-facts { margin: 0 0 8px; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }

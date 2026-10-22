@@ -1,0 +1,69 @@
+/* Job costing, retainers and the internal approval of quotes (PmProfit.tsx, PmBudget.tsx, QuoteApproval.tsx). Every control is at least 44 px. */
+.jc button, .jc .btn, .jc select, .jc input:not([type='checkbox']):not([type='radio']), .jc-modal button, .jc-modal .btn, .jc-modal select, .jc-modal input:not([type='checkbox']):not([type='radio']) { min-height: 44px; }
+.jc .btn.small, .jc-modal .btn.small { min-height: 44px; padding: 6px 12px; font-size: 13px; }
+.jc .icon-btn, .jc-modal .icon-btn { min-width: 44px; min-height: 44px; }
+.jc input[type='checkbox'], .jc-modal input[type='checkbox'] { width: 22px; height: 22px; }
+.jc .check, .jc-modal .check { min-height: 44px; align-items: center; }
+.jc button:focus-visible, .jc .btn:focus-visible, .jc-modal button:focus-visible, .jc-modal .btn:focus-visible, .jc tr.click:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+.jc-tabs { margin-bottom: 14px; }
+.jc-tabs a { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 14px; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; text-decoration: none; }
+.jc-tabs a:hover, .jc-tabs a:focus-visible { color: var(--text); }
+.jc-tabs a.on { color: var(--brand-text, var(--brand)); border-bottom-color: var(--brand); font-weight: 600; }
+.jc-bar { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 14px; }
+.jc-bar .field { margin: 0; min-width: 150px; }
+.jc-bar .grow { flex: 1 1 120px; }
+.jc-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.jc-kpis > div { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.jc-kpis b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+.jc-kpis span { color: var(--muted); font-size: 12px; }
+.jc-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.jc-table th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.jc-table td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.jc-table .r { text-align: right; white-space: nowrap; }
+.jc-table tr.click { cursor: pointer; }
+.jc-table tr.click:hover td, .jc-table tr.click:focus-visible td { background: var(--bg); }
+.jc-table tfoot td { font-weight: 600; border-bottom: 0; }
+.jc-neg { color: var(--red); }
+.jc-hint { color: var(--muted); font-size: 12px; }
+.jc-sec { margin-top: 20px; }
+.jc-sec h3 { margin: 0 0 8px; font-size: 16px; }
+
+/* budget meters: the bar plus its numbers in text, never colour alone */
+.jc-meter { display: grid; grid-template-columns: 72px minmax(60px, 1fr) 15em; gap: 8px; align-items: center; font-size: 13px; }
+.jc-meter > span:last-child { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.jc-meter .track { height: 10px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.jc-meter .track i { display: block; height: 100%; border-radius: 99px; background: var(--brand); }
+.jc-meter.warn .track i { background: var(--yellow); }
+.jc-meter.over .track i { background: var(--red); }
+.jc-state { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; }
+.jc-state.warn { color: var(--yellow); }
+.jc-state.over { color: var(--red); }
+.jc-state.ok { color: var(--green); }
+
+/* the strip in the project head */
+.jc-strip { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 8px; }
+.jc-strip .jc-meter { min-width: min(100%, 400px); flex: 1 1 400px; max-width: 560px; }
+
+/* retainer and approval cards */
+.jc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.jc-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; text-align: left; color: var(--text); font: inherit; cursor: pointer; }
+.jc-card:hover, .jc-card:focus-visible { border-color: var(--brand); }
+.jc-card h4 { margin: 0; font-size: 15px; }
+.jc-lines { display: flex; flex-direction: column; gap: 4px; margin: 6px 0; }
+.jc-lines div { display: flex; justify-content: space-between; gap: 12px; }
+.jc-approval { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0 0 14px; background: var(--panel); display: flex; flex-direction: column; gap: 8px; }
+.jc-approval.need { border-color: var(--yellow); background: color-mix(in srgb, var(--yellow) 8%, var(--panel)); }
+.jc-approval.ok { border-color: var(--green); background: color-mix(in srgb, var(--green) 8%, var(--panel)); }
+.jc-approval > .btn { align-self: flex-start; }
+.jc-approval .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.jc-approval ul { margin: 0; padding-left: 18px; }
+.jc-inbox { margin-bottom: 14px; }
+.jc-inbox-item { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.jc-inbox-item:last-child { border-bottom: 0; }
+.jc-inbox-item .grow { flex: 1 1 220px; min-width: 0; }
+@media (max-width: 640px) {
+  .jc-meter { grid-template-columns: 1fr auto; }
+  .jc-meter > span:first-child { grid-column: 1 / -1; }
+  .jc-meter > span:last-child { text-align: left; }
+}

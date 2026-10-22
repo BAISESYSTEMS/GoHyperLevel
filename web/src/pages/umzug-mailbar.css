@@ -1,0 +1,7 @@
+/* Hinweis zur Zustellung im Versand-Dialog der Kampagnen (UmzugMailBanner.tsx); Farben sind die Theme-Tokens. */
+.um-mailbar { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); font-size: 13px; display: flex; flex-direction: column; gap: 3px; }
+.um-mailbar.ok { border-color: color-mix(in srgb, var(--green) 45%, var(--line)); color: var(--text); flex-direction: row; }
+.um-mailbar.warn { border-color: color-mix(in srgb, var(--yellow) 55%, var(--line)); background: color-mix(in srgb, var(--yellow) 10%, var(--panel)); }
+.um-mailbar.fail { border-color: color-mix(in srgb, var(--red) 55%, var(--line)); background: color-mix(in srgb, var(--red) 8%, var(--panel)); }
+.um-mailbar a { font-weight: 600; }
+.um-mailbar ul { margin: 0; padding-left: 18px; }

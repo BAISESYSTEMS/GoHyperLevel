@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <gradient android:angle="315" android:endColor="#FF0EA5E9" android:startColor="#FF1D4ED8" />
+            <size android:width="48dp" android:height="48dp" />
+        </shape>
+    </item>
+    <item android:bottom="12dp" android:drawable="@drawable/ic_task_alt" android:left="12dp" android:right="12dp" android:top="12dp" />
+</layer-list>

@@ -1,0 +1,43 @@
+# Dependencies and build output
+node_modules
+/dist-web/
+/dist-server/
+/oss-export/
+
+# Runtime data: database, uploads, backups, the generated secret – never commit.
+# (Anchored to the repository root: a bare "data" would also hide source folders such as
+# android/app/src/main/java/org/gohigh/android/data.)
+/data/
+.env
+*.db
+*.db-*
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Android app (android/)
+android/.gradle/
+android/.kotlin/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+*.iml
+*.apk
+*.aab
+*.jks
+*.keystore
+signing.properties
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Private terms for scripts/oss-check.mjs (never commit)
+.oss-denylist
+/perf-data/

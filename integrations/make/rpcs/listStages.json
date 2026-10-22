@@ -1,0 +1,16 @@
+{
+  "name": "listStages",
+  "label": "Stufen",
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/pipelines",
+    "method": "GET",
+    "response": {
+      "iterate": "{{flatten(map(body, \"stages\"))}}",
+      "output": {
+        "label": "{{item.name}}",
+        "value": "{{item.id}}"
+      }
+    }
+  }
+}

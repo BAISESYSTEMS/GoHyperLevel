@@ -1,0 +1,4 @@
+/* Scale as a slider. */
+.pf .pf-slider{display:flex;gap:16px;align-items:center}
+.pf .pf-slider input{flex:1;min-height:44px;accent-color:var(--pf-color)}
+.pf .pf-out{min-width:44px;font-size:24px;font-weight:700;text-align:center}

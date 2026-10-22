@@ -1,0 +1,16 @@
+{
+  "name": "listProducts",
+  "label": "Produkte",
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/products",
+    "method": "GET",
+    "response": {
+      "iterate": "{{body}}",
+      "output": {
+        "label": "{{item.name}}",
+        "value": "{{item.id}}"
+      }
+    }
+  }
+}

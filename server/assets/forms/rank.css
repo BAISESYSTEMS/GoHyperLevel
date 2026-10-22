@@ -1,0 +1,6 @@
+/* Ranking. */
+.pf .pf-rank{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:rk}
+.pf .pf-rank li{display:flex;gap:8px;align-items:center;min-height:52px;padding:6px 8px 6px 14px;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:var(--pf-card);counter-increment:rk}
+.pf .pf-rank li::before{content:counter(rk);width:26px;height:26px;border-radius:50%;background:var(--pf-soft);color:var(--pf-color);display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}
+.pf .pf-rk{flex:1;min-width:0}
+.pf .pf-rank button{min-width:44px;min-height:44px;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:transparent;color:var(--pf-text);font-size:18px;cursor:pointer}

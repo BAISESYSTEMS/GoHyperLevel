@@ -1,0 +1,114 @@
+{
+  "name": "searchContacts",
+  "label": "Kontakte suchen",
+  "description": "Findet Kontakte per E-Mail, Telefon oder Suchtext (max. 10).",
+  "type": "search",
+  "typeId": 9,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/search/contacts",
+    "method": "GET",
+    "qs": {
+      "email": "{{parameters.email}}",
+      "phone": "{{parameters.phone}}",
+      "q": "{{parameters.q}}"
+    },
+    "response": {
+      "iterate": "{{body}}",
+      "output": "{{item}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "email",
+      "type": "email",
+      "label": "E-Mail"
+    },
+    {
+      "name": "phone",
+      "type": "text",
+      "label": "Telefon"
+    },
+    {
+      "name": "q",
+      "type": "text",
+      "label": "Suchtext"
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "id"
+    },
+    {
+      "name": "first_name",
+      "type": "text",
+      "label": "first_name"
+    },
+    {
+      "name": "last_name",
+      "type": "text",
+      "label": "last_name"
+    },
+    {
+      "name": "email",
+      "type": "text",
+      "label": "email"
+    },
+    {
+      "name": "phone",
+      "type": "text",
+      "label": "phone"
+    },
+    {
+      "name": "company",
+      "type": "text",
+      "label": "company"
+    },
+    {
+      "name": "city",
+      "type": "text",
+      "label": "city"
+    },
+    {
+      "name": "country",
+      "type": "text",
+      "label": "country"
+    },
+    {
+      "name": "source",
+      "type": "text",
+      "label": "source"
+    },
+    {
+      "name": "tags",
+      "type": "array",
+      "label": "Tags",
+      "spec": {
+        "type": "text"
+      }
+    },
+    {
+      "name": "custom",
+      "type": "any",
+      "label": "Eigene Felder"
+    }
+  ],
+  "samples": {
+    "id": "con_123",
+    "first_name": "Anna",
+    "last_name": "Beispiel",
+    "email": "anna@example.com",
+    "phone": "+4915112345678",
+    "company": "Beispiel GmbH",
+    "tags": [
+      "lead"
+    ],
+    "custom": {
+      "budget": "5000"
+    },
+    "created_at": "2026-10-04T09:00:00.000Z"
+  }
+}

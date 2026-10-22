@@ -1,0 +1,2 @@
+[{"conversation_id":"conv_1","location_id":"loc_a","location_name":"Testfirma","contact_id":"c_1","contact_name":"Lena Fischer","channel":"whatsapp","last_message":"Passt Donnerstag?","last_direction":"in","last_at":"2026-10-04T07:58:00.000Z","unread":2,"starred":false},
+ {"conversation_id":"conv_2","location_id":"loc_b","location_name":"Zweitfirma","contact_id":"c_2","contact_name":"Jonas Becker","channel":null,"last_message":"","last_direction":null,"last_at":"2026-10-03T07:58:00.000Z","unread":0,"starred":true}]

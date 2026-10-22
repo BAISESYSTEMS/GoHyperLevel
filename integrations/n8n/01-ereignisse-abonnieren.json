@@ -1,0 +1,67 @@
+{
+  "name": "HyperLevel: REST-Hook abonnieren",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "209d8bcf-60b0-414f-a78d-69df93fc0589",
+      "name": "Einmal ausführen",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"target_url\": \"https://DEIN-N8N/webhook/gohigh-events\",\n  \"event\": \"contact.created\",\n  \"source\": \"n8n\",\n  \"label\": \"n8n: Neuer Kontakt\"\n}",
+        "options": {}
+      },
+      "id": "9fd2811e-a211-4983-a47f-8bfd80d1f49d",
+      "name": "Abo anlegen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      },
+      "notes": "target_url = Produktions-URL des Webhook-Knotens aus Vorlage 02; event = ein Auslöser aus GET /api/hooks/triggers",
+      "notesInFlow": true
+    }
+  ],
+  "connections": {
+    "Einmal ausführen": {
+      "main": [
+        [
+          {
+            "node": "Abo anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Registriert die URL eines n8n-Webhooks als REST-Hook. Abbestellen: DELETE /api/hooks/<id> (die ID steht in der Antwort)."
+  },
+  "tags": []
+}

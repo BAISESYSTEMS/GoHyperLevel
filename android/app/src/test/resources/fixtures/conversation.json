@@ -1,0 +1,5 @@
+{"conversation_id":"conv_1","location_id":"loc_a","location_name":"Testfirma","unread":2,"starred":false,
+ "contact":{"id":"c_1","name":"Lena Fischer","phone":"+491701234567","email":null},
+ "channels":["sms","whatsapp"],
+ "messages":[{"id":"m1","direction":"in","channel":"whatsapp","subject":null,"body":"Hallo!","at":"2026-10-04T07:50:00.000Z","status":"received","error":null},
+             {"id":"m2","direction":"out","channel":"sms","subject":null,"body":"Hi Lena","at":"2026-10-04T07:55:00.000Z","status":"failed","error":"Twilio nicht eingerichtet"}]}

@@ -1,0 +1,8 @@
+/* Single and multiple choice, consent: bordered rows. */
+.pf .pf-opts{display:grid;gap:8px}
+.pf .pf-opt{display:flex;gap:12px;align-items:center;min-height:48px;padding:10px 14px;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:var(--pf-card);cursor:pointer;font-weight:400;margin:0;color:var(--pf-text)}
+.pf .pf-opt:hover{border-color:var(--pf-color)}
+.pf .pf-opt:has(input:checked){border-color:var(--pf-color);background:var(--pf-soft);box-shadow:0 0 0 1px var(--pf-color) inset}
+.pf .pf-opt input{width:22px;height:22px;flex:none;accent-color:var(--pf-color);margin:0}
+.pf .pf-opt:focus-within{outline:3px solid var(--pf-color);outline-offset:2px}
+.pf .pf-q[data-bad="1"] .pf-opt{border-color:var(--pf-danger)}

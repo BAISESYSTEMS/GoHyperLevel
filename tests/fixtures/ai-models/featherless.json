@@ -1,0 +1,41 @@
+{
+ "data": [
+  {
+   "id": "recursal/EagleX_1-7T",
+   "is_gated": false,
+   "created": 1719250778,
+   "model_class": "rwkv5-7b",
+   "owned_by": "Feather",
+   "context_length": 16384,
+   "concurrency_cost": 1,
+   "pricing": {
+    "prompt": "0.0000001",
+    "completion": "0.0000002",
+    "image": "0",
+    "request": "0",
+    "input": 0.1,
+    "output": 0.2
+   }
+  },
+  {
+   "id": "meta-llama/Llama-3.3-70B-Instruct",
+   "is_gated": true,
+   "created": 1733521405,
+   "model_class": "llama33-70b",
+   "owned_by": "Feather",
+   "context_length": 32768,
+   "concurrency_cost": 4,
+   "pricing": {
+    "prompt": "0.00000065",
+    "completion": "0.00000075",
+    "image": "0",
+    "request": "0",
+    "input": 0.65,
+    "output": 0.75
+   },
+   "features": {
+    "tool_use": true
+   }
+  }
+ ]
+}

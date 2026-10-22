@@ -1,0 +1,60 @@
+/* Office (documents, spreadsheets, presentations, PDF). Colours come from the app tokens (light and dark). */
+.of-page { min-width: 0; }
+.of-new { display: flex; flex-wrap: wrap; gap: 8px; }
+.of-new .btn, .of-actions .btn { display: inline-flex; align-items: center; gap: 6px; }
+.of-note { border: 1px solid color-mix(in srgb, var(--yellow) 45%, var(--line)); background: color-mix(in srgb, var(--yellow) 10%, var(--panel)); border-radius: 10px; padding: 10px 14px; margin: 0 0 14px; }
+.of-note p { margin: 0 0 4px; }
+.of-note p:last-child { margin-bottom: 0; }
+.of-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 12px; }
+.of-search { flex: 1 1 220px; max-width: 360px; }
+.of-name { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; overflow-wrap: anywhere; }
+.of-ico { flex: none; }
+.of-docx { color: #2b6cb0; } .of-xlsx { color: #2f855a; } .of-pptx { color: #c05621; } .of-pdf { color: #c53030; }
+:root[data-theme='dark'] .of-docx { color: #7fb3f0; } :root[data-theme='dark'] .of-xlsx { color: #6fcf97; } :root[data-theme='dark'] .of-pptx { color: #f6ad55; } :root[data-theme='dark'] .of-pdf { color: #fc8181; }
+.of-faces { display: inline-flex; vertical-align: middle; }
+.of-face { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; color: #fff; font: 700 11px/1 system-ui, sans-serif; border: 2px solid var(--panel); margin-left: -6px; }
+.of-face:first-child { margin-left: 0; }
+.of-usage { margin-top: 10px; }
+
+.of-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 14px; }
+.of-title { display: flex; align-items: center; gap: 8px; font-size: 20px; margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.of-meta { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.of-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.of-body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.of-main { min-width: 0; }
+.of-side { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-width: 0; max-height: calc(100vh - 160px); max-height: calc(100dvh - 160px); overflow-y: auto; }
+.of-side .tabs { margin-bottom: 10px; flex-wrap: wrap; }
+.of-placeholder { display: grid; justify-items: center; text-align: center; gap: 4px; padding: 40px 20px; }
+.of-placeholder p { margin: 0; max-width: 520px; }
+
+.of-editor { position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--bg); }
+.of-frame { display: block; width: 100%; height: calc(100vh - 190px); height: calc(100dvh - 190px); min-height: 480px; border: 0; background: #e6e6e6; }
+.of-file.editing .of-body { grid-template-columns: minmax(0, 1fr) 300px; }
+.of-editor-state { padding: 8px 12px; font-size: 13px; background: var(--brand-soft); border-bottom: 1px solid var(--line); }
+.of-editor-state.warn { background: color-mix(in srgb, var(--yellow) 14%, var(--panel)); }
+
+.of-versions { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.of-versions li, .of-comment { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+.of-versions li.cur { border-color: color-mix(in srgb, var(--green) 50%, var(--line)); }
+.of-v-head { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.of-v-head .muted { margin-left: auto; }
+.of-v-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.of-v-actions .btn { display: inline-flex; align-items: center; gap: 4px; }
+.of-comments { display: grid; gap: 8px; }
+.of-comment p { margin: 4px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.of-comment.done { opacity: .65; }
+.of-comment.reply { margin-left: 16px; }
+.of-check { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.of-ai { display: grid; gap: 8px; }
+.of-ai .btn { justify-self: start; display: inline-flex; align-items: center; gap: 6px; }
+.of-links dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0 0 12px; font-size: 14px; }
+.of-links dt { color: var(--muted); }
+.of-links dd { margin: 0; overflow-wrap: anywhere; }
+.of-hits { display: flex; flex-wrap: wrap; gap: 6px; }
+
+@media (max-width: 900px) {
+  .of-body, .of-file.editing .of-body { grid-template-columns: minmax(0, 1fr); }
+  .of-side { max-height: none; }
+  .of-actions { margin-left: 0; }
+  .of-frame { height: 70vh; height: 70dvh; }
+}

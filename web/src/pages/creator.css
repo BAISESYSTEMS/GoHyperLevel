@@ -1,0 +1,95 @@
+/* Creator & Commerce (Ratenzahlung, Mahnwesen, Quiz & Zertifikate, Kommentar-zu-DM, KI-Workflow-Builder).
+   Own file, loaded with the lazy pages; colours are the theme tokens, so light, dark and every theme work.
+   Made for eye tracking plus pinch: every control is at least 44 px high, has a visible hover and focus state, and the panels
+   spread into columns on wide and ultrawide screens. */
+
+.cr { --cr-hit: 44px; }
+@media (pointer: coarse) { .cr { --cr-hit: 48px; } }
+
+/* controls: large hit targets */
+.cr .btn, .cr button.btn { min-height: var(--cr-hit); padding: 8px 16px; justify-content: center; }
+.cr .btn.small { min-height: var(--cr-hit); padding: 6px 14px; font-size: 13px; }
+.cr .tabs button { min-height: var(--cr-hit); padding: 10px 16px; }
+.cr select, .cr textarea, .cr input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']) { min-height: var(--cr-hit); }
+.cr .check { min-height: var(--cr-hit); display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.cr .check input { width: 22px; height: 22px; flex: none; }
+/* .modal sits outside .cr on most pages, where --cr-hit is not defined: without the fallback the declaration is invalid, drops the
+   44 px of ios.css and the ✕ of every dialog stays 31 px high on a phone. */
+.cr .icon-btn, .modal .icon-btn { min-width: var(--cr-hit, 44px); min-height: var(--cr-hit, 44px); font-size: 18px; }
+
+/* hover and focus: visible without a mouse */
+.cr .btn:hover, .cr .tabs button:hover { filter: brightness(1.06); }
+.cr .btn:focus-visible, .cr .tabs button:focus-visible, .cr .cr-item:focus-visible, .cr .cr-fold-head:focus-visible, .cr select:focus-visible, .cr input:focus-visible, .cr textarea:focus-visible,
+.modal .btn:focus-visible, .modal .icon-btn:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.cr .tabs button:hover:not(.on) { background: var(--brand-soft); color: var(--text); }
+
+/* panels */
+.cr-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px; align-items: start; }
+.cr-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; min-width: 0; }
+.cr-panel.wide { grid-column: 1 / -1; }
+.cr-panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; padding: 14px 16px 0; }
+.cr-panel-head h2 { margin: 0; font-size: 17px; }
+.cr-panel-head p { margin: 2px 0 0; }
+.cr-panel-body { padding: 14px 16px 16px; }
+@media (min-width: 1800px) {
+  .cr-panels { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .cr-panels.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cr-panel-head h2 { font-size: 19px; }
+  .cr { --cr-hit: 52px; }
+}
+
+/* list rows */
+.cr-list { display: flex; flex-direction: column; gap: 8px; }
+.cr-item { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; min-height: 56px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.cr-item.click { cursor: pointer; }
+.cr-item.click:hover { background: var(--brand-soft); border-color: color-mix(in srgb, var(--brand) 50%, var(--line)); }
+.cr-item.warn { border-left: 4px solid var(--yellow); }
+.cr-item.bad { border-left: 4px solid var(--red); }
+.cr-item.ok { border-left: 4px solid var(--green); }
+.cr-item-main { flex: 1 1 240px; min-width: 0; }
+.cr-item-main strong { overflow-wrap: anywhere; }
+.cr-item-side { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.cr-sub { color: var(--muted); font-size: 13px; margin-top: 2px; overflow-wrap: anywhere; }
+
+/* progress */
+.cr-progress { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; margin-top: 8px; max-width: 360px; }
+.cr-progress > i { display: block; height: 100%; background: var(--brand); border-radius: 99px; }
+
+/* callouts */
+.cr-callout { margin: 0 0 14px; padding: 12px 16px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--brand) 35%, var(--line)); background: color-mix(in srgb, var(--brand) 8%, var(--panel)); }
+.cr-callout.warn { border-color: color-mix(in srgb, var(--yellow) 45%, var(--line)); background: color-mix(in srgb, var(--yellow) 12%, var(--panel)); }
+.cr-callout a:not([class]) { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.cr-callout.bad { border-color: color-mix(in srgb, var(--red) 45%, var(--line)); background: color-mix(in srgb, var(--red) 10%, var(--panel)); }
+.cr-callout ul { margin: 6px 0 0; padding-left: 20px; }
+.cr-callout p { margin: 0 0 6px; }
+.cr-callout p:last-child { margin-bottom: 0; }
+
+/* facts */
+.cr-facts { margin: 0 0 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 18px; }
+.cr-facts dt { font-size: 12px; color: var(--muted); font-weight: 600; }
+.cr-facts dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+
+/* fold */
+.cr-fold { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: var(--bg); }
+.cr-fold-head { width: 100%; text-align: left; background: none; border: 0; font: inherit; font-weight: 600; color: var(--text); min-height: var(--cr-hit); padding: 8px 14px; cursor: pointer; border-radius: 12px; }
+.cr-fold-head:hover { background: var(--brand-soft); }
+.cr-fold-body { padding: 4px 14px 12px; }
+
+/* forms in dialogs */
+.cr-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0 14px; }
+.cr-hint { color: var(--muted); font-size: 13px; margin: -4px 0 12px; }
+.cr-err { color: var(--red); font-size: 13px; margin: 0 0 10px; }
+.cr-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 2px 6px; overflow-wrap: anywhere; }
+.cr-lines { display: flex; flex-direction: column; gap: 8px; }
+.cr-line { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cr-line > .grow { flex: 1 1 200px; min-width: 0; }
+.cr-pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; margin: 0 0 12px; }
+.cr-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.cr-chip { min-height: var(--cr-hit, 44px); padding: 8px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+.cr-chip:hover { background: var(--brand-soft); border-color: color-mix(in srgb, var(--brand) 50%, var(--line)); }
+.cr-chip:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+@media (max-width: 700px) {
+  .cr-item-side { justify-content: flex-start; width: 100%; }
+  .cr-panel-head, .cr-panel-body { padding-left: 12px; padding-right: 12px; }
+}

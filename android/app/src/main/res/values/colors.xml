@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand">#FF2563EB</color>
+    <color name="window_bg">#FFF8FAFC</color>
+    <!-- Widget palette (night variants in values-night) -->
+    <color name="w_surface">#FFFFFFFF</color>
+    <color name="w_surface_variant">#FFF1F5F9</color>
+    <color name="w_outline">#FFE2E8F0</color>
+    <color name="w_header_start">#FFEFF6FF</color>
+    <color name="w_header_end">#FFE0F2FE</color>
+    <color name="w_hero_start">#FF1D4ED8</color>
+    <color name="w_hero_end">#FF0EA5E9</color>
+    <color name="w_chip">#FFEFF6FF</color>
+    <color name="w_tile">#33FFFFFF</color>
+</resources>

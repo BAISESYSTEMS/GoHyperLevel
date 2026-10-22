@@ -1,0 +1,67 @@
+/* Arbeitsfläche: pages side by side (web/src/xr/Workspace.tsx, docs/xr.md). Loaded with the page's chunk. */
+
+/* The page takes the whole work area: no padding, the panels scroll on their own. */
+.content:has(> .ws:not(.ws-compact)) { padding: 0; flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.ws { display: flex; flex-direction: column; flex: 1; min-height: 0; --ws-chrome: 330px; }
+.ws-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px 10px; }
+.ws-bar h1 { display: flex; align-items: center; gap: 10px; font-size: calc(var(--fs) * 1.3); margin-right: 8px; }
+.ws-bar-gap, .ws-head-gap { flex: 1; }
+.ws-bar .check { margin: 0; }
+.ws-panels { flex: 1; min-height: 0; display: flex; padding: 0 16px 16px; }
+.ws-panel { display: flex; flex-direction: column; min-width: 300px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.ws-head { display: flex; align-items: center; gap: 2px; padding: 4px 6px 4px 10px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 88%, var(--bg)); }
+.ws-title { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; font: inherit; font-weight: 700; color: var(--text); cursor: pointer; border-radius: 8px; padding: 6px 8px; }
+.ws-title:hover { background: var(--brand-soft); }
+.ws-body { flex: 1; min-height: 0; overflow: auto; padding: 14px 16px 20px; container-type: inline-size; }
+.ws-body .page-head { margin-bottom: 12px; }
+.ws-body .page-head h1 { font-size: calc(var(--fs) * 1.3); }
+
+/* splitter: a slim handle between two panels, a wide invisible hit area */
+.ws-split { flex: none; width: 16px; position: relative; cursor: col-resize; touch-action: none; outline: none; }
+.ws-split::before { content: ''; position: absolute; top: 0; bottom: 0; left: -8px; right: -8px; }
+.ws-split::after { content: ''; position: absolute; top: 12%; bottom: 12%; left: 6px; width: 4px; border-radius: 4px; background: var(--line); transition: background-color .15s, box-shadow .15s; }
+.ws-split:hover::after { background: var(--brand); }
+.ws-split:focus-visible::after { background: var(--brand); box-shadow: 0 0 0 4px var(--brand-select); }
+.ws-split:focus-visible { outline: 2px solid var(--brand-ring); outline-offset: -2px; border-radius: 8px; }
+
+/* pages built for the whole window use the panel instead */
+.ws-body .inbox { height: max(420px, calc(100vh - var(--ws-chrome))); height: max(420px, calc(100dvh - var(--ws-chrome))); }
+.ws-body .kcol { max-height: max(380px, calc(100vh - var(--ws-chrome) - 40px)); max-height: max(380px, calc(100dvh - var(--ws-chrome) - 40px)); }
+@container (max-width: 700px) {
+  .inbox { grid-template-columns: 1fr; height: auto; }
+  .inbox .list { max-height: 240px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+}
+
+/* the agent inside a panel: the same chat, no drawer */
+.ws-agent { height: 100%; display: flex; }
+.ws-agent .agent-panel { position: static; width: 100%; height: 100%; max-width: none; box-shadow: none; border: 0; animation: none; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.ws-agent .agent-full-btn { display: none; }
+.ws-agent:empty { display: none; }
+.ws-agent-closed { display: none; place-items: center; align-content: center; gap: 12px; height: 100%; text-align: center; }
+.ws-agent:empty + .ws-agent-closed { display: grid; }
+html[data-ws-agent] .agent-panel:not(.ws-agent .agent-panel) { display: none; }
+.ws-body:has(> .ws-agent) { padding: 0; }
+
+/* page chooser */
+.ws-pages { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.ws-page { display: flex; align-items: center; gap: 10px; text-align: left; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: inherit; color: var(--text); cursor: pointer; }
+.ws-page:hover { border-color: var(--brand); background: var(--brand-soft); }
+.ws-page.on { border-color: var(--brand); background: var(--brand-soft); font-weight: 600; }
+
+/* below the breakpoint: one page at a time (the normal flow of the page) */
+.ws-compact .ws-note { margin: 0 16px 10px; }
+.ws-compact .ws-tabs { margin: 0 16px 12px; }
+.ws-compact .ws-single { padding: 0 16px 24px; }
+
+/* Raum-Modus: bigger handles, bigger gaps */
+html[data-spatial='1'] .ws-bar { padding: 18px 28px 14px; gap: 16px; }
+html[data-spatial='1'] .ws-panels { padding: 0 28px 28px; }
+html[data-spatial='1'] .ws-split { width: 28px; }
+html[data-spatial='1'] .ws-split::before { left: -16px; right: -16px; }
+html[data-spatial='1'] .ws-split::after { left: 11px; width: 6px; }
+html[data-spatial='1'] .ws-panel { border-radius: var(--sp-radius); background: var(--sp-glass); border-color: var(--sp-edge); -webkit-backdrop-filter: blur(22px) saturate(1.25); backdrop-filter: blur(22px) saturate(1.25); }
+html[data-spatial='1'] .ws-head { padding: 6px 10px 6px 14px; gap: 6px; }
+html[data-spatial='1'] .ws-title { min-height: var(--sp-hit); padding: 8px 14px; font-size: var(--fs); }
+html[data-spatial='1'] .ws-page { min-height: var(--sp-hit); padding: 14px 18px; font-size: var(--fs); border-radius: 14px; }
+html[data-spatial='1'] .ws { --ws-chrome: 400px; }

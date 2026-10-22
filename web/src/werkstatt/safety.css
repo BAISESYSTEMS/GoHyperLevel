@@ -1,0 +1,44 @@
+/* Werkstatt "Sicherheitsnetz": badge row, model gate notice, signature notice, Pro marks, chat cards. Tokens only (dark mode follows). */
+.wk-vbadges { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; margin-top: 4px; }
+.wk-chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 99px; font-size: 12px; line-height: 20px; border: 1px solid var(--line); background: var(--bg); color: var(--text); white-space: nowrap; }
+.wk-chip.ok { border-color: var(--green); color: var(--green); }
+.wk-chip.warn { border-color: var(--yellow, #d97706); color: var(--yellow, #d97706); }
+.wk-chip.bad { border-color: var(--red); color: var(--red); }
+.wk-chip.muted { color: var(--muted); }
+.wk-pro { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--brand-text, var(--brand)); background: var(--brand-soft); vertical-align: middle; }
+.wk-gate { border-color: var(--yellow, #d97706); margin: 10px 0; }
+.wk-gate.ok { border-color: var(--line); }
+.wk-gate strong { display: block; }
+.wk-gate .actions { margin-top: 8px; }
+.wk-diff { margin: 4px 0 0; padding-left: 18px; font-size: 13px; }
+.wk-diff li { margin: 2px 0; }
+.wk-ai { color: var(--muted); font-size: 13px; margin: 4px 0; }
+.wk-sig { margin: 10px 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.wk-sig.good { border-color: var(--green); }
+.wk-sig.warn { border-color: var(--yellow, #d97706); }
+.wk-sig.bad { border-color: var(--red); }
+.wk-review-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+.wk-review-cmp > div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--bg); }
+.wk-review-cmp h4 { margin: 0 0 6px; }
+.wk-pat { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+/* chat cards */
+.wk-chat { margin: 6px 0 2px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel, var(--bg)); padding: 10px 12px; font-size: 14px; }
+.wk-chat.compact { padding: 8px 10px; }
+.wk-chat h3 { margin: 0; font-size: 15px; }
+.wk-chat h4 { margin: 10px 0 4px; font-size: 13px; }
+.wk-chat .head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.wk-chat ol, .wk-chat ul { margin: 4px 0; padding-left: 20px; }
+.wk-chat .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.wk-chat .wk-scopes li { padding: 6px 8px; }
+.wk-chat-steps { list-style: none; padding: 0; margin: 6px 0; font-size: 13px; }
+.wk-chat-steps li { display: flex; gap: 6px; align-items: baseline; padding: 2px 0; color: var(--muted); }
+.wk-chat-steps li.now { color: var(--text); font-weight: 600; }
+.wk-chat-steps li.err { color: var(--red); }
+.wk-chat-preview { margin: 8px 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--bg); }
+.wk-chat-preview .plugin-frame iframe { height: 240px; }
+.wk-chat textarea { width: 100%; min-height: 64px; }
+@media (max-width: 640px) {
+  .wk-review-cmp { grid-template-columns: 1fr; }
+}
+/* three buttons in a dialog footer (Abbrechen, Prüfung wiederholen, Veröffentlichen) must wrap on a phone, not run off the screen */
+.modal-foot { flex-wrap: wrap; }

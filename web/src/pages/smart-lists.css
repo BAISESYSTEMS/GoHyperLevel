@@ -1,0 +1,12 @@
+/* Contacts page (pages/SmartLists.tsx): with no contact open the list uses the whole width and shows every chosen column –
+   the side-by-side split of web/src/ios/ios.css only applies while a contact is open (class md-full-list from main.tsx). */
+@container (min-width: 760px) {
+  .md-wrap.md-full-list > .md { display: block; }
+  .md-wrap.md-full-list > .md > .md-detail { display: none !important; }
+  .md-wrap.md-full-list > .md > .md-list { position: static; max-height: none; overflow: visible; padding-right: 0; }
+  .md-wrap.md-full-list .md-list table.t th, .md-wrap.md-full-list .md-list table.t td { display: table-cell; }
+  .md-wrap.md-full-list .md-list .md-sub { display: none; }
+  .md-wrap.md-full-list .md-list .table-wrap { overflow-x: auto; }
+  .md-wrap.md-full-list .md-list > .row:not(.card) { flex-wrap: wrap; overflow-x: visible; }
+  .md-wrap.md-full-list .md-list > .row:not(.card) > .grow { flex: 1 1 200px; }
+}

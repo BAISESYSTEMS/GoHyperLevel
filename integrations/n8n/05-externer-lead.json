@@ -1,0 +1,110 @@
+{
+  "name": "HyperLevel: Lead von außen anlegen",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "neuer-lead",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "c429a7a5-131d-45ed-a130-2af843a8ae99",
+      "name": "Lead von Website/Tool",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "3f0a8af2-83b5-462c-a812-56ddbd5416af",
+      "notes": "Beliebiges Tool schickt JSON mit email, first_name, last_name, phone, nachricht.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/create_contact",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ email: $json.body.email, first_name: $json.body.first_name, last_name: $json.body.last_name, phone: $json.body.phone, tags: [\"n8n\", \"website\"], source: \"n8n\" }) }}",
+        "options": {}
+      },
+      "id": "99638522-4487-49c3-ab79-3fb883fbcd76",
+      "name": "Kontakt anlegen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://DEINE-DOMAIN/api/hooks/actions/add_note",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contact_id: $json.id, body: $(\"Lead von Website/Tool\").item.json.body.nachricht || \"Neuer Lead über n8n\" }) }}",
+        "options": {}
+      },
+      "id": "cb1e0551-af98-4668-a25d-cc07accbf696",
+      "name": "Nachricht als Notiz",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "HyperLevel API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Lead von Website/Tool": {
+      "main": [
+        [
+          {
+            "node": "Kontakt anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kontakt anlegen": {
+      "main": [
+        [
+          {
+            "node": "Nachricht als Notiz",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Nimmt Leads aus beliebigen Quellen an, legt den Kontakt an (oder führt ihn zusammen) und hängt die Nachricht als Notiz an."
+  },
+  "tags": []
+}

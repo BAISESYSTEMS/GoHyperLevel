@@ -1,0 +1,43 @@
+/* Builder tools both workflow editors share (tools.tsx): editor switch, step menu, pause switch, issues, paste/move slots. */
+
+.wfc-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); padding: 2px; gap: 2px; }
+.wfc-toggle button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--muted); padding: 5px 12px; border-radius: 7px; font: inherit; font-size: 13px; cursor: pointer; }
+.wfc-toggle button.on { background: var(--brand-soft); color: var(--brand-text, var(--brand)); font-weight: 600; }
+.wfc-toggle button:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+
+.wfc-builder-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.wfc-builder-bar .muted { font-size: 12px; }
+
+.wfc-menu { position: fixed; z-index: 1200; min-width: 200px; background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(15, 23, 42, .18); padding: 4px; }
+.wfc-menu button { display: flex; align-items: center; gap: 9px; width: 100%; border: 0; background: transparent; color: inherit; font: inherit; font-size: 13px; text-align: left; padding: 7px 10px; border-radius: 7px; cursor: pointer; }
+.wfc-menu button span { flex: 1; }
+.wfc-menu button:hover, .wfc-menu button:focus-visible { background: var(--brand-soft); outline: none; }
+.wfc-menu button.danger { color: var(--red); }
+.wfc-menu button:disabled { opacity: .45; cursor: default; }
+.wfc-menu kbd { font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); }
+
+.wfc-switch { position: relative; width: 30px; height: 18px; border-radius: 999px; border: 0; padding: 0; background: var(--green-fill); cursor: pointer; flex: none; vertical-align: middle; }
+.wfc-switch span { position: absolute; top: 2px; left: 14px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: left .15s ease; }
+.wfc-switch.off { background: var(--line); }
+.wfc-switch.off span { left: 2px; }
+.wfc-switch:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+.wfc-kebab { font-size: 16px; line-height: 1; }
+.wfc-paused-badge { font-size: 11px; font-weight: 600; color: var(--yellow); border: 1px dashed currentColor; border-radius: 999px; padding: 1px 7px; }
+.wf-step.wfc-paused { border-style: dashed; opacity: .72; }
+.wf-step.wfc-bad { border-color: var(--red); }
+
+.wfc-issues { list-style: none; margin: 6px 0 0; padding: 0; color: var(--red); font-size: 12px; }
+.wfc-issues li { display: flex; align-items: center; gap: 5px; }
+
+.wfc-slot { display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap; }
+.wfc-slot > .wf-add { display: contents; }
+.wfc-drop { background: var(--brand); color: #fff; }
+
+.wfc-move-banner { position: sticky; top: 64px; z-index: 30; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--brand-soft); color: var(--brand-text, var(--brand)); border: 1px solid var(--brand); border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; font-size: 13px; font-weight: 600; }
+.wfc-warn-list { margin: 0; padding-left: 18px; font-size: 13px; }
+.wfc-warn-list li { margin: 4px 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wfc-switch span { transition: none; }
+}

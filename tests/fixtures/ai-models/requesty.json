@@ -1,0 +1,83 @@
+{
+ "object": "list",
+ "data": [
+  {
+   "api": "chat",
+   "id": "deepseek/deepseek-v4.1-flash",
+   "object": "model",
+   "created": 1789010266,
+   "updated": 1789028588,
+   "owned_by": "system",
+   "input_price": 3e-07,
+   "cached_price": 6e-09,
+   "output_price": 1.2e-06,
+   "pricing": [
+    {
+     "prompt_tokens_threshold": 0,
+     "input_price": 3e-07,
+     "cached_price": 6e-09,
+     "output_price": 1.2e-06
+    }
+   ],
+   "max_output_tokens": 384000,
+   "context_window": 1000000,
+   "supports_caching": true,
+   "supports_vision": true,
+   "supports_computer_use": false,
+   "supports_reasoning": true,
+   "supports_image_generation": false,
+   "supports_tool_calling": true,
+   "supports_role_developer": false,
+   "supports_web_search": false,
+   "supports_output_json_object": true,
+   "supports_output_json_schema": false,
+   "supports_system_mid_conversation": true,
+   "data_retention": true,
+   "data_retention_days": 0,
+   "data_used_for_training": false,
+   "privacy_comments": "No online information",
+   "geolocation": "global",
+   "open_weights": true,
+   "model_lab": "deepseek",
+   "model_canonical_name": "deepseek-v4.1-flash"
+  },
+  {
+   "api": "chat",
+   "id": "scaleway/glm-5.2",
+   "object": "model",
+   "created": 1781568000,
+   "updated": 1788116466,
+   "owned_by": "system",
+   "input_price": 2.09e-06,
+   "output_price": 6.38e-06,
+   "pricing": [
+    {
+     "prompt_tokens_threshold": 0,
+     "input_price": 2.09e-06,
+     "output_price": 6.38e-06
+    }
+   ],
+   "max_output_tokens": 32768,
+   "context_window": 256000,
+   "supports_caching": false,
+   "supports_vision": false,
+   "supports_computer_use": false,
+   "supports_reasoning": true,
+   "supports_image_generation": false,
+   "supports_tool_calling": true,
+   "supports_role_developer": false,
+   "supports_web_search": false,
+   "supports_output_json_object": true,
+   "supports_output_json_schema": true,
+   "supports_system_mid_conversation": true,
+   "data_retention": false,
+   "data_retention_days": 0,
+   "data_used_for_training": false,
+   "privacy_comments": "N/A",
+   "geolocation": "eu",
+   "open_weights": true,
+   "model_lab": "zai",
+   "model_canonical_name": "glm-5.2"
+  }
+ ]
+}

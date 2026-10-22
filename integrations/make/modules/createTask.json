@@ -1,0 +1,66 @@
+{
+  "name": "createTask",
+  "label": "Aufgabe anlegen",
+  "description": "Legt eine Aufgabe an, optional für einen Kontakt.",
+  "type": "action",
+  "typeId": 4,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/actions/create_task",
+    "method": "POST",
+    "body": "{{parameters}}",
+    "response": {
+      "output": "{{body}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "contact_id",
+      "label": "Kontakt-ID",
+      "required": false,
+      "help": "Oder E-Mail/Telefon angeben",
+      "type": "text"
+    },
+    {
+      "name": "email",
+      "label": "E-Mail",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "phone",
+      "label": "Telefon",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "label": "Titel",
+      "required": true,
+      "type": "text"
+    },
+    {
+      "name": "description",
+      "label": "Beschreibung",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "due_at",
+      "label": "Fällig am",
+      "required": false,
+      "type": "date"
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "ID"
+    }
+  ],
+  "samples": {
+    "id": "create_task_1"
+  }
+}

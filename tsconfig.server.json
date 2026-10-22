@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "dist-server",
+    "rootDir": ".",
+    "types": ["node"],
+    "allowImportingTsExtensions": false,
+    "noUnusedLocals": true
+  },
+  "include": ["server/**/*.ts"]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "moveStage",
+  "label": "Opportunity verschieben",
+  "description": "Setzt Stufe und/oder Status eines Deals.",
+  "type": "action",
+  "typeId": 4,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/actions/move_stage",
+    "method": "POST",
+    "body": "{{parameters}}",
+    "response": {
+      "output": "{{body}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "opportunity_id",
+      "label": "Opportunity-ID",
+      "required": true,
+      "type": "text"
+    },
+    {
+      "name": "stage",
+      "label": "Stufe",
+      "required": false,
+      "type": "select",
+      "options": "rpc://listStages",
+      "mode": "edit"
+    },
+    {
+      "name": "status",
+      "label": "Status",
+      "required": false,
+      "type": "select",
+      "options": [
+        {
+          "label": "Offen",
+          "value": "open"
+        },
+        {
+          "label": "Gewonnen",
+          "value": "won"
+        },
+        {
+          "label": "Verloren",
+          "value": "lost"
+        },
+        {
+          "label": "Aufgegeben",
+          "value": "abandoned"
+        }
+      ]
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "ID"
+    }
+  ],
+  "samples": {
+    "id": "move_stage_1"
+  }
+}

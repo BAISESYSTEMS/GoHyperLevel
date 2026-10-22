@@ -1,0 +1,81 @@
+import type { PackDef } from '../../icons';
+
+/**
+ * Icon pack "Gefüllt": hand-drawn solid glyphs for the menu (24×24, `currentColor`). Loaded on demand when a
+ * person picks the pack (theme/store.ts); icons that are not in this list keep their Lucide drawing.
+ * Cut-outs are real holes (fill-rule evenodd), so the glyphs sit on any background; softer secondary shapes
+ * use opacity. To add a glyph: draw it on the 24 grid and add it under the icon's name (docs/theming.md).
+ */
+
+const HOLE = 'fill-rule="evenodd"';
+const SOFT = 'opacity=".5"';
+
+export const SOLID: PackDef = {
+  dashboard: '<rect x="3" y="3" width="8" height="10" rx="2"/><rect x="13" y="3" width="8" height="6" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="15" width="8" height="6" rx="2"/>',
+  boards: `<path ${HOLE} d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M5.5 5.5h13V8h-13Z M5.5 10.5h4.5v8H5.5Z M12 10.5h6.5v8H12Z"/>`,
+  workspace: `<path ${HOLE} d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M5.2 5.5h3.9v13H5.2Z M10.05 5.5h3.9v13h-3.9Z M14.9 5.5h3.9v13h-3.9Z"/>`,
+  reports: `<path d="M12 12V3a9 9 0 1 0 9 9h-9Z"/><path d="M14 10V2.5A7.5 7.5 0 0 1 21.5 10H14Z" ${SOFT}/>`,
+  project: `<path ${HOLE} d="M3 6a2 2 0 0 1 2-2h4.2c.6 0 1.1.3 1.5.7L12 6h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z M8 10h2v7H8Z M11.5 10h2v4h-2Z M15 10h2v6h-2Z"/>`,
+  conversations: `<path d="M4 3h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9.5L6 17v-3H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M19 8h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-1v3l-3.4-3H11a2 2 0 0 1-2-2v-1.5h6a4 4 0 0 0 4-4V8Z" ${SOFT}/>`,
+  phone: '<path d="M5.5 3h3l1.7 4.3-2 1.3a11 11 0 0 0 5.2 5.2l1.3-2L20 13.5v3A2.5 2.5 0 0 1 17.5 19C9.5 19 3 12.5 3 5.5A2.5 2.5 0 0 1 5.5 3Z"/>',
+  calendars: `<path ${HOLE} d="M6 5h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z M7 11h2v2H7Z M11 11h2v2h-2Z M15 11h2v2h-2Z M7 15h2v2H7Z M11 15h2v2h-2Z"/><rect x="7" y="2.5" width="2" height="4.5" rx="1"/><rect x="15" y="2.5" width="2" height="4.5" rx="1"/>`,
+  contacts: `<circle cx="9" cy="8" r="3.6"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0v.5h-13V20Z"/><circle cx="17" cy="9" r="2.8" ${SOFT}/><path d="M17 14a5 5 0 0 1 5 5v1.5h-4.6a8 8 0 0 0-2.4-5.6A5 5 0 0 1 17 14Z" ${SOFT}/>`,
+  contact: '<circle cx="12" cy="7.5" r="4"/><path d="M4 21a8 8 0 0 1 16 0v.5H4V21Z"/>',
+  company: `<path ${HOLE} d="M5 2h9a1 1 0 0 1 1 1v6h4a1 1 0 0 1 1 1v12H4V3a1 1 0 0 1 1-1Z M7 5h2v2H7Z M11 5h2v2h-2Z M7 9h2v2H7Z M11 9h2v2h-2Z M7 13h2v2H7Z M11 13h2v2h-2Z M17 12h1.5v2H17Z M17 16h1.5v2H17Z M10 18h2v4h-2Z"/>`,
+  objects: `<rect x="3" y="12" width="8" height="8" rx="1.8"/><rect x="13" y="12" width="8" height="8" rx="1.8" ${SOFT}/><rect x="8" y="3" width="8" height="8" rx="1.8" ${SOFT}/>`,
+  opportunities: `<path ${HOLE} d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M7 7h2v8H7Z M11 7h2v5h-2Z M15 7h2v10h-2Z"/>`,
+  trophy: `<path d="M7 3h10v5.5a5 5 0 0 1-10 0V3Z"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10H8V8.4A5 5 0 0 1 7 5.6V5Zm10 0h3v1.5a3.5 3.5 0 0 1-3.5 3.5H16V8.4A5 5 0 0 0 17 5.6V5Z" ${SOFT}/><path d="M11 14h2v3.5h-2Z"/><path d="M8 19.5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1V21H8v-1.5Z"/>`,
+  deal: `<path ${HOLE} d="M9 3h6a1 1 0 0 1 1 1v2h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3V4a1 1 0 0 1 1-1Z M10 5v1h4V5h-4Z"/>`,
+  tasks: `<path ${HOLE} d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M16.7 8.8a1 1 0 0 0-1.4-1.4L10.5 12.2 8.7 10.4a1 1 0 0 0-1.4 1.4l2.5 2.5a1 1 0 0 0 1.4 0l5.5-5.5Z"/>`,
+  canvas: `<path d="M3 17.5 15.5 5 19 8.5 6.5 21H3v-3.5Z"/><path d="m17 3.5 1.2-1.2a1.7 1.7 0 0 1 2.4 0l1.1 1.1a1.7 1.7 0 0 1 0 2.4L20.5 7 17 3.5Z" ${SOFT}/>`,
+  office: `<path d="M8 2h7.5L20 6.5V17a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/><path d="M4 7v13a2 2 0 0 0 2 2h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" ${SOFT}/>`,
+  wiki: `<path ${HOLE} d="M5 4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v12H7.5A2.5 2.5 0 0 0 5 18.5V4Z M8.5 6h8v2h-8Z M8.5 10h5v2h-5Z"/><path d="M7.5 18H20v2.2A1.8 1.8 0 0 1 18.2 22H7.5a2 2 0 0 1 0-4Z" ${SOFT}/>`,
+  teamchat: `<path ${HOLE} d="M5 3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-6.2L8 21.5a.8.8 0 0 1-1.3-.6V18H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z M7 7.5h10v1.8H7Z M7 11h6.5v1.8H7Z"/>`,
+  ticket: `<path ${HOLE} d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.5a2.5 2.5 0 0 0 0 5V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.5a2.5 2.5 0 0 0 0-5V7Z M13 8h-2v2h2V8Z M13 11h-2v2h2v-2Z M13 14h-2v2h2v-2Z"/>`,
+  kb: `<rect x="3" y="3" width="5" height="18" rx="1.4"/><rect x="9.5" y="3" width="5" height="18" rx="1.4" ${SOFT}/><rect x="16" y="4.5" width="5" height="16.5" rx="1.4" transform="rotate(-12 18.5 12.7)"/>`,
+  survey: `<path ${HOLE} d="M9 2h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1Z M10 4v1h4V4h-4Z M15.7 11.3a1 1 0 0 0-1.4-1.4L11 13.2l-1.3-1.3a1 1 0 0 0-1.4 1.4l2 2a1 1 0 0 0 1.4 0l3-3Z"/>`,
+  campaigns: '<path d="M3 10a2 2 0 0 1 2-2h3l8-4.5v15L8 16H7l1 4a1 1 0 0 1-1 1.3H6a1.5 1.5 0 0 1-1.4-1L3.6 16A2 2 0 0 1 3 14.5V10Z"/><path d="M18.5 9a4 4 0 0 1 0 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  workflows: '<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/><path d="M7 11v2.5a2.5 2.5 0 0 0 2.5 2.5H13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  social: '<circle cx="18" cy="5.5" r="3.2"/><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="18.5" r="3.2"/><path d="m8.7 10.5 6.6-3.7M8.7 13.5l6.6 3.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  studio: `<path d="M4 10h16v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9Z"/><path d="m3.3 6.4.4-1.6a1.5 1.5 0 0 1 1.8-1l13.3 3.6-.9 3.5H4.5a1.5 1.5 0 0 1-1.2-1.5V6.4Z" ${SOFT}/>`,
+  sparkles: `<path d="M10 3l1.9 5.1L17 10l-5.1 1.9L10 17l-1.9-5.1L3 10l5.1-1.9L10 3Z"/><path d="m18.5 13 .9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6Z" ${SOFT}/>`,
+  gantt: `<path ${HOLE} d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M6.5 6.5h6v2.2h-6Z M10 10.9h7.5v2.2H10Z M7.5 15.3h5.5v2.2H7.5Z"/>`,
+  schedule: `<path ${HOLE} d="M12 2.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Z M11 6.5h2v5l3.4 2-1 1.7L11 12.7v-6.2Z"/>`,
+  ads: `<path ${HOLE} d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14Z"/><circle cx="12" cy="12" r="5" ${SOFT}/><circle cx="12" cy="12" r="2.6"/>`,
+  attribution: '<rect x="4" y="12" width="4" height="9" rx="1.2"/><rect x="10" y="3" width="4" height="18" rx="1.2"/><rect x="16" y="8" width="4" height="13" rx="1.2"/>',
+  gauge: `<path ${HOLE} d="M12 2.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Zm3.6 5.4a1 1 0 0 1 .4 1.5l-2.8 3.9a1.9 1.9 0 1 1-1.6-1.1l3.3-3.9a1 1 0 0 1 .7-.4Z"/>`,
+  calculator: `<path ${HOLE} d="M7 2h10a2.5 2.5 0 0 1 2.5 2.5v15A2.5 2.5 0 0 1 17 22H7a2.5 2.5 0 0 1-2.5-2.5v-15A2.5 2.5 0 0 1 7 2Z M7.5 5.5h9v4h-9Z M7.5 12h2v2h-2Z M11 12h2v2h-2Z M14.5 12h2v2h-2Z M7.5 16h2v2h-2Z M11 16h2v2h-2Z M14.5 16h2v2h-2Z"/>`,
+  webinar: `<path ${HOLE} d="M5 3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.5l1.4 3H17a1 1 0 1 1 0 2H7a1 1 0 1 1 0-2h1.1l1.4-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z M10.2 7.6v6.8a.8.8 0 0 0 1.2.7l5.4-3.4a.8.8 0 0 0 0-1.4l-5.4-3.4a.8.8 0 0 0-1.2.7Z"/>`,
+  funnels: `<path ${HOLE} d="M12 2.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Zm4.7 4.8a.7.7 0 0 1 .9.9l-1.8 5.1a1.5 1.5 0 0 1-.9.9l-5.1 1.8a.7.7 0 0 1-.9-.9l1.8-5.1a1.5 1.5 0 0 1 .9-.9l5.1-1.8Z"/>`,
+  forms: `<path ${HOLE} d="M9 2h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1Z M10 4v1h4V4h-4Z M8 10.5h8v1.6H8Z M8 14h8v1.6H8Z M8 17.5h5v1.6H8Z"/>`,
+  courses: `<path d="M12 3 1.5 8.5 12 14l8.5-4.4V16h2V8.5L12 3Z"/><path d="M5.5 12.5V17c0 1.7 3 3.5 6.5 3.5s6.5-1.8 6.5-3.5v-4.5L12 16l-6.5-3.5Z" ${SOFT}/>`,
+  community: `<circle cx="12" cy="7" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0v.5H5V20Z"/><circle cx="4.8" cy="10" r="2.2" ${SOFT}/><circle cx="19.2" cy="10" r="2.2" ${SOFT}/>`,
+  ledger: `<path ${HOLE} d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z M9 6h7v2H9Z M9 10h7v1.8H9Z M9 14h4.5v1.8H9Z"/><rect x="2.5" y="5" width="2" height="14" rx="1" ${SOFT}/>`,
+  warehouse: `<path ${HOLE} d="M12 2.5 2.5 7v14h19V7L12 2.5Z M7 11h10v2.2H7Z M7 14.8h10V17H7Z"/>`,
+  hr: `<path ${HOLE} d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M9 8a2.2 2.2 0 1 0 0 4.4A2.2 2.2 0 0 0 9 8Z M5.8 17c.3-2 1.6-3.2 3.2-3.2s2.9 1.2 3.2 3.2H5.8Z M14 9h4.2v1.6H14Z M14 12.4h4.2V14H14Z"/>`,
+  invoices: `<path ${HOLE} d="M5 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v18.2a.5.5 0 0 1-.8.4L16.5 20l-2 1.6a.5.5 0 0 1-.6 0L12 20.2l-1.9 1.4a.5.5 0 0 1-.6 0L7.5 20l-1.7 1.6a.5.5 0 0 1-.8-.4V3Z M8 7h8v1.7H8Z M8 11h8v1.7H8Z M8 15h5v1.7H8Z"/>`,
+  contracts: `<path ${HOLE} d="M7 2h7l6 6v11a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z M8 12h8v1.7H8Z M8 16h5v1.7H8Z"/>`,
+  products: `<path d="M12 2 3 6.5v.2l9 4.8 9-4.8v-.2L12 2Z" ${SOFT}/><path d="M3 9.2v8.3l8 4.4V13.7l-8-4.5Z"/><path d="m21 9.2-8 4.5v8.2l8-4.4V9.2Z" opacity=".8"/>`,
+  affiliates: `<rect x="2.5" y="8" width="10" height="8" rx="4"/><rect x="11.5" y="8" width="10" height="8" rx="4" ${SOFT}/>`,
+  reviews: '<path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.1-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/>',
+  star: '<path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.1-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/>',
+  bot: `<path ${HOLE} d="M12 2a1 1 0 0 1 1 1v1.5h4a3 3 0 0 1 3 3V15a3 3 0 0 1-3 3h-2.5L12 21l-2.5-3H7a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3h4V3a1 1 0 0 1 1-1Z M9 9.5a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Z M15 9.5a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Z"/>`,
+  apps: `<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2" ${SOFT}/><rect x="3" y="13" width="8" height="8" rx="2" ${SOFT}/><rect x="13" y="13" width="8" height="8" rx="2"/>`,
+  umzug: `<path ${HOLE} d="M2 5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v2h3.2a2 2 0 0 1 1.6.8l2.2 2.9c.3.4.5.9.5 1.4V17a1.5 1.5 0 0 1-1.5 1.5h-19A1.5 1.5 0 0 1 2 17V5Z M17 9.5V12h3.8L19 9.5h-2Z"/><circle cx="7" cy="18.5" r="2.5"/><circle cx="17" cy="18.5" r="2.5"/>`,
+  hammer: `<rect x="8.5" y="2.5" width="13" height="6.2" rx="1.8" transform="rotate(45 15 5.6)"/><path d="m12.6 9.8-8.4 8.4a2.2 2.2 0 0 0 3.1 3.1l8.4-8.4-3.1-3.1Z" ${SOFT}/>`,
+  store: `<path d="M4.2 3h15.6l2.2 6.6a3.3 3.3 0 0 1-5.8 1.9 3.3 3.3 0 0 1-4.2 0 3.3 3.3 0 0 1-4.2 0A3.3 3.3 0 0 1 2 9.6L4.2 3Z"/><path ${HOLE} d="M4.5 13.4A4.7 4.7 0 0 0 8 14.5c1 0 1.9-.3 2.7-.8h2.6c.8.5 1.7.8 2.7.8a4.7 4.7 0 0 0 3.5-1.1V20a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1v-6.6Z M10 16.5h4V21h-4Z" ${SOFT}/>`,
+  cart: `<path d="M2 3.5a1 1 0 0 1 1-1h1.6a1.6 1.6 0 0 1 1.6 1.3l.3 1.7H21a1 1 0 0 1 1 1.2l-1.3 6.7a2 2 0 0 1-2 1.6H8.4l.3 1.6H19a1 1 0 1 1 0 2H8a1.5 1.5 0 0 1-1.5-1.2L4.2 4.5H3a1 1 0 0 1-1-1Z"/><circle cx="9" cy="20.2" r="1.8" ${SOFT}/><circle cx="18" cy="20.2" r="1.8" ${SOFT}/>`,
+  gift: `<path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h15A1.5 1.5 0 0 1 21 8.5v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2Z"/><path d="M4.5 12.5H11V21H6a1.5 1.5 0 0 1-1.5-1.5v-7Z M13 12.5h6.5v7A1.5 1.5 0 0 1 18 21h-5v-8.5Z" ${SOFT}/><path d="M11 7h2v14h-2Z"/><path d="M12 7c-1.5-3-5-4-5.8-2.2C5.4 6.6 8 7 12 7Zm0 0c1.5-3 5-4 5.8-2.2C18.6 6.6 16 7 12 7Z"/>`,
+  academy: `<path d="M12 2.5 2 8v1.5h20V8L12 2.5Z"/><path ${HOLE} d="M4 11h16v9a1 1 0 0 1-1 1h-5v-5h-4v5H5a1 1 0 0 1-1-1v-9Z"/>`,
+  trash: `<path ${HOLE} d="M9 2.5h6a1 1 0 0 1 1 1V5h4.5a1 1 0 1 1 0 2H19l-.9 12.1a2.5 2.5 0 0 1-2.5 2.4H8.4a2.5 2.5 0 0 1-2.5-2.4L5 7H3.5a1 1 0 1 1 0-2H8V3.5a1 1 0 0 1 1-1Z M9.7 10a.9.9 0 0 0-.9.9v5.2a.9.9 0 1 0 1.8 0v-5.2a.9.9 0 0 0-.9-.9Z M14.3 10a.9.9 0 0 0-.9.9v5.2a.9.9 0 1 0 1.8 0v-5.2a.9.9 0 0 0-.9-.9Z"/>`,
+  settings: `<path ${HOLE} d="M10.4 2.5h3.2l.5 2.4c.6.2 1.2.5 1.7.9l2.3-.8 1.6 2.8-1.8 1.6c.1.6.1 1.2 0 1.7l1.8 1.6-1.6 2.8-2.3-.8c-.5.4-1.1.7-1.7.9l-.5 2.4h-3.2l-.5-2.4a6.6 6.6 0 0 1-1.7-.9l-2.3.8-1.6-2.8 1.8-1.6a6.4 6.4 0 0 1 0-1.7L4.3 8.8l1.6-2.8 2.3.8c.5-.4 1.1-.7 1.7-.9l.5-2.4Z M12 9.3a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4Z"/>`,
+  agency: `<path ${HOLE} d="M6 2h8a1 1 0 0 1 1 1v6h3a2 2 0 0 1 2 2v10a1 1 0 0 1-1 1H3V3a1 1 0 0 1 1-1h2Z M7 5h2v2H7Z M11 5h2v2h-2Z M7 9h2v2H7Z M11 9h2v2h-2Z M7 13h2v2H7Z M11 13h2v2h-2Z M17 12h1.5v2H17Z M17 16h1.5v2H17Z"/>`,
+  email: `<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v.2l-9 5.8-9-5.8V7Z" ${SOFT}/><path d="M3 9.6V17a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.6l-8.5 5.5a1 1 0 0 1-1 0L3 9.6Z"/>`,
+  // Creator & Commerce: Ratenzahlung, Mahnwesen, Quiz & Zertifikate, Kommentar-zu-DM
+  trendUp: `<path d="M15 4.5h6.5V11l-2.3-2.3-5.6 5.6a1.5 1.5 0 0 1-2.1 0L9 11.8l-5.4 5.4a1.5 1.5 0 1 1-2.1-2.1l6.4-6.5a1.5 1.5 0 0 1 2.1 0l2.5 2.5 4.6-4.6Z"/><rect x="2" y="19.5" width="20" height="2" rx="1" ${SOFT}/>`,
+  repeat: '<path d="M17 2.5 21 6.5l-4 4V8H7a3 3 0 0 0-3 3v1H2v-1a5 5 0 0 1 5-5h10V2.5Z"/><path d="M7 21.5 3 17.5l4-4V16h10a3 3 0 0 0 3-3v-1h2v1a5 5 0 0 1-5 5H7v2.5Z"/>',
+  bank: `<path d="M12 2.2 2.5 7v2h19V7L12 2.2Z"/><path d="M4.5 10.5h3v7h-3Z M10.5 10.5h3v7h-3Z M16.5 10.5h3v7h-3Z" ${SOFT}/><rect x="2.5" y="18.5" width="19" height="3" rx="1"/>`,
+  push: `<path d="M12 2.5a6 6 0 0 0-6 6V12l-1.8 3.6A1 1 0 0 0 5.1 17H18.9a1 1 0 0 0 .9-1.4L18 12V8.5a6 6 0 0 0-6-6Z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0h-5Z" ${SOFT}/>`,
+  award: `<circle cx="12" cy="9" r="6.5"/><path d="M8.2 14.6 6.5 22l5.5-3 5.5 3-1.7-7.4A8 8 0 0 1 12 16a8 8 0 0 1-3.8-1.4Z" ${SOFT}/>`,
+  instagram: `<path ${HOLE} d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z M12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z M17.5 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/>`,
+};

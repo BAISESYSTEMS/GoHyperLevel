@@ -1,0 +1,93 @@
+{
+  "name": "sendMessage",
+  "label": "Nachricht senden",
+  "description": "Schickt eine E-Mail, SMS, Chat- oder WhatsApp-Nachricht.",
+  "type": "action",
+  "typeId": 4,
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/hooks/actions/send_message",
+    "method": "POST",
+    "body": "{{parameters}}",
+    "response": {
+      "output": "{{body}}"
+    }
+  },
+  "parameters": [],
+  "expect": [
+    {
+      "name": "contact_id",
+      "label": "Kontakt-ID",
+      "required": false,
+      "help": "Oder E-Mail/Telefon angeben",
+      "type": "text"
+    },
+    {
+      "name": "email",
+      "label": "E-Mail",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "phone",
+      "label": "Telefon",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "channel",
+      "label": "Kanal",
+      "required": false,
+      "type": "select",
+      "options": [
+        {
+          "label": "E-Mail",
+          "value": "email"
+        },
+        {
+          "label": "SMS",
+          "value": "sms"
+        },
+        {
+          "label": "Live-Chat",
+          "value": "chat"
+        },
+        {
+          "label": "WhatsApp",
+          "value": "whatsapp"
+        },
+        {
+          "label": "Messenger",
+          "value": "messenger"
+        },
+        {
+          "label": "Instagram",
+          "value": "instagram"
+        }
+      ],
+      "default": "email"
+    },
+    {
+      "name": "subject",
+      "label": "Betreff (E-Mail)",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "name": "body",
+      "label": "Text",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  "interface": [
+    {
+      "name": "id",
+      "type": "text",
+      "label": "ID"
+    }
+  ],
+  "samples": {
+    "id": "send_message_1"
+  }
+}

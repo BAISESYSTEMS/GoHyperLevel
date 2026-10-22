@@ -1,0 +1,5 @@
+/* NPS and scale as buttons. */
+.pf .pf-scale{display:flex;flex-wrap:wrap;gap:6px}
+.pf .pf-scale button{min-width:44px;min-height:44px;padding:0 6px;border:1.5px solid var(--pf-line);border-radius:var(--pf-radius);background:var(--pf-card);color:var(--pf-text);font:inherit;font-weight:700;cursor:pointer}
+.pf .pf-scale button:hover{border-color:var(--pf-color)}
+.pf .pf-scale button.on{background:var(--pf-color);border-color:var(--pf-color);color:var(--pf-btn-text)}

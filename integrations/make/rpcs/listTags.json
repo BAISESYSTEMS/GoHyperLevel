@@ -1,0 +1,16 @@
+{
+  "name": "listTags",
+  "label": "Tags",
+  "connection": "gohigh",
+  "communication": {
+    "url": "/api/tags",
+    "method": "GET",
+    "response": {
+      "iterate": "{{body}}",
+      "output": {
+        "label": "{{item.name}}",
+        "value": "{{item.name}}"
+      }
+    }
+  }
+}

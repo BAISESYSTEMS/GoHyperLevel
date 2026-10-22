@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      android: ${{ steps.filter.outputs.android }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            android:
+              - 'android/**'
+              - '.github/workflows/ci.yml'
+
+  server-web:
+    name: Server & web (Node 22)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Licenses of distributed dependencies
+        run: npm run licenses
+      - name: No secrets, public IPs or forbidden files
+        run: npm run oss:check
+
+  docker:
+    name: Docker image builds
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: gohigh:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Smoke test (starts, answers /healthz and /api/version, runs unprivileged)
+        run: |
+          docker run -d --name gohigh-ci -p 4700:4700 -e PGHL_BASE_URL=http://localhost:4700 gohigh:ci
+          for i in $(seq 1 30); do curl -fsS http://localhost:4700/healthz && break; sleep 1; done
+          curl -fsS http://localhost:4700/api/version | tee /dev/stderr | grep -q '"name":"HyperLevel"'
+          docker exec gohigh-ci grep -E '^Uid:\s+1000\s' /proc/1/status
+          docker logs gohigh-ci
+          docker rm -f gohigh-ci
+
+  android:
+    name: Android (assembleDebug + unit tests)
+    needs: changes
+    if: needs.changes.outputs.android == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew --no-daemon assembleDebug testDebugUnitTest
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-debug
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+            android/app/build/reports/tests/
+          if-no-files-found: ignore

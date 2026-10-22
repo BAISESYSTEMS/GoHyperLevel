@@ -1,0 +1,17 @@
+{
+  "baseUrl": "{{connection.baseUrl}}",
+  "headers": {
+    "authorization": "Bearer {{connection.apiKey}}",
+    "x-location-id": "{{connection.locationId}}"
+  },
+  "response": {
+    "error": {
+      "message": "[{{statusCode}}] {{body.error}}"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.authorization"
+    ]
+  }
+}

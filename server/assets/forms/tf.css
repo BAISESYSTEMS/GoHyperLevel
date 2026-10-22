@@ -1,0 +1,12 @@
+/* One question at a time: the screens lie on top of each other and fade, bigger type, letters before the options. */
+.pf.pf-tf{min-height:min(560px,100dvh);display:flex;flex-direction:column;justify-content:center;padding:8px 0}
+.pf.pf-tf .pf-inner{width:100%;max-width:720px;margin:0 auto}
+.pf.pf-tf .pghl-step{transition:opacity .35s ease,transform .35s ease;align-self:center}
+.pf.pf-tf .pghl-step[data-state=before]{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-26px)}
+.pf.pf-tf .pghl-step[data-state=after]{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(26px)}
+.pf.pf-tf .pf-label{font-size:clamp(21px,4.2vw,30px);line-height:1.25;margin:0 0 14px}
+.pf.pf-tf input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),.pf.pf-tf select,.pf.pf-tf textarea{font-size:clamp(18px,3vw,24px);min-height:56px}
+.pf .pf-key{display:inline-flex;min-width:26px;height:26px;border:1.5px solid var(--pf-line);border-radius:6px;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--pf-muted)}
+.pf .pf-hintkey{font-size:13px;color:var(--pf-muted)}
+.pf .pf-hintkey kbd{font:inherit;font-weight:700;border:1px solid var(--pf-line);border-radius:5px;padding:1px 6px}
+@media (prefers-reduced-motion:reduce){.pf.pf-tf .pghl-step{transform:none!important}}

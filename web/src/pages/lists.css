@@ -1,0 +1,17 @@
+/* Shared list view (pages/ListKit.tsx): smart-list tabs, selection column, bulk bar, toolbar */
+.ls-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.sl-tabs { gap: 6px; }
+.sl-tab { padding: 0 4px 0 0; gap: 0; }
+.sl-tab-btn { background: none; border: 0; font: inherit; color: inherit; cursor: pointer; padding: 5px 4px 5px 11px; display: inline-flex; gap: 5px; align-items: center; min-height: 32px; }
+.sl-pin { font-size: 14px; padding: 0 4px; opacity: .45; }
+.sl-pin.on { opacity: 1; color: var(--yellow); }
+.sl-team { display: inline-flex; }
+.list-table th.sel, .list-table td.sel { width: 36px; }
+.list-table tr.on td { background: var(--brand-soft); }
+.list-bulk { position: sticky; top: 0; z-index: 3; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+.list-bulk select, .list-bulk input { min-height: 34px; }
+.list-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+.list-toolbar .grow { min-width: 180px; }
+.list-filters { border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 10px; background: var(--panel); }
+.col-pick-row.dragging { opacity: .55; }
+.col-pick-row[draggable='true'] { cursor: grab; }

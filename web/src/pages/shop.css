@@ -1,0 +1,18 @@
+/* Online-Shop, Gutscheine and the payment providers (pages/Shop.tsx, GiftCards.tsx, PayProviders.tsx) */
+.shop-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 0 0 14px; }
+.shop-filter { margin: 12px 0; align-items: center; }
+.shop-filter > :first-child { width: 220px; }
+.shop-scroll { overflow-x: auto; padding: 0; }
+.shop-hint { background: var(--brand-soft); border-radius: 10px; padding: 10px 14px; margin: 0 0 14px; }
+.shop-order h4, .shop-settings h3, .pay-card h3 { margin: 0 0 8px; }
+.shop-facts { margin: 14px 0; }
+.shop-actions { margin-top: 12px; gap: 8px; }
+.shop-rate { border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 12px; }
+.shop-tiers { margin: 0 0 8px 12px; }
+.shop-tiers .row { align-items: flex-end; }
+.shop-settings .card + .card { margin-top: 14px; }
+.shop-savebar { position: sticky; bottom: 0; padding: 12px 0; background: var(--bg); }
+.shop-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .02em; }
+.pay-providers { margin-top: 24px; }
+.pay-providers .card + .card { margin-top: 14px; }
+.pay-card h3 { display: flex; gap: 8px; align-items: center; }

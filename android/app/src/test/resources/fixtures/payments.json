@@ -1,0 +1,1 @@
+{"today_cents":45000,"month_cents":980000,"open_invoices_cents":120000,"overdue_count":1,"latest":[{"id":"i1","kind":"invoice","number":"2026-0042","title":"Rechnung 2026-0042","contact_name":"Muster GmbH","total_cents":45000,"currency":"EUR","status":"paid","overdue":false,"paid_at":"2026-10-04T07:30:00.000Z","location_id":"loc_a","location_name":"Testfirma"}],"currency":"EUR"}

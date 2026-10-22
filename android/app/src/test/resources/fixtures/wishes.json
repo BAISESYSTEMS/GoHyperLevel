@@ -1,0 +1,27 @@
+[
+ {
+  "id": "xLcPDdnsoqMwZSPS",
+  "number": 2,
+  "title": "Widget für Tickets",
+  "body": "Offene Tickets auf dem Homescreen",
+  "area": "App",
+  "status": {
+   "key": "bestaetigt",
+   "board": "planned",
+   "label": "Geplant",
+   "tone": "purple",
+   "done": false
+  },
+  "votes": 1,
+  "my_vote": true,
+  "comments": 0,
+  "mine": true,
+  "author": "Du",
+  "origin": "",
+  "version": "",
+  "reason": "",
+  "note": "",
+  "created_at": "2026-10-04T11:12:33.938Z",
+  "updated_at": "2026-10-04T11:12:33.949Z"
+ }
+]

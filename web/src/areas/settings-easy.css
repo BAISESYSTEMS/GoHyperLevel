@@ -1,0 +1,28 @@
+/* Einstellungen in the Einfach-Modus: the tab bar with "Weitere Einstellungen" (SettingsTabs.tsx) and the
+   "Was muss ich einrichten?" card (SetupChecklist.tsx). */
+
+.set-tabs { display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.set-tabs > .tabs { flex: 1; min-width: 0; border-bottom: 0; margin-bottom: 0; }
+.set-more { position: relative; flex: none; padding: 4px 0; }
+.set-more > .btn { white-space: nowrap; }
+.set-more-bg { position: fixed; inset: 0; z-index: 40; }
+.set-more-menu { position: absolute; right: 0; top: calc(100% + 4px); z-index: 41; width: min(340px, calc(100vw - 32px)); max-height: min(70vh, 560px); max-height: min(70dvh, 560px); display: flex; flex-direction: column; background: var(--panel, var(--bg)); color: var(--text); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, .16); }
+.set-more-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 4px; }
+.set-more-search { margin: 4px 12px 8px; width: calc(100% - 24px); }
+.set-more-body { overflow-y: auto; padding: 0 6px 10px; }
+.set-more-body h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 10px 6px 2px; }
+.set-more-body ul { list-style: none; margin: 0; padding: 0; }
+.set-more-body li button { width: 100%; text-align: left; border: 0; background: transparent; color: inherit; font: inherit; padding: 7px 8px; border-radius: 8px; cursor: pointer; }
+.set-more-body li button:hover, .set-more-body li button:focus-visible { background: var(--brand-soft); }
+.set-more-body p { margin: 6px 8px; }
+@media (max-width: 599.98px) {
+  .set-tabs { flex-direction: column-reverse; gap: 0; }
+  .set-tabs > .tabs { width: 100%; }
+  .set-more { align-self: flex-end; }
+}
+
+.setup-card { max-width: 720px; }
+.setup-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.setup-card-head h2 { margin: 0; font-size: 16px; }
+.setup-card ol { margin: 8px 0 0; padding-left: 22px; display: grid; gap: 6px; }
+.setup-card li a { font-weight: 600; }

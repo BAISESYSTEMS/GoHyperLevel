@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <!-- viewport-fit=cover: the page may use the whole screen (notch, home indicator, Dynamic Island); the CSS keeps content inside env(safe-area-inset-*). Pinch zoom stays on (accessibility). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>HyperLevel</title>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <!-- iPhone/iPad/foldables: home-screen meta, touch icons and launch images. Written by the build (scripts/vite-ios-head.ts, docs/ios-web-app.md). -->
+    <!--ios-head-->
+    <script src="/boot-guard.js"></script>
+    <script src="/theme-boot.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

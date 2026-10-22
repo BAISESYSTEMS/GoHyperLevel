@@ -1,0 +1,9 @@
+/* The Raum-Modus card on Einstellungen → Darstellung (SpatialCard.tsx). */
+.sp-facts { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.sp-facts li { display: flex; align-items: baseline; gap: 8px; }
+.sp-facts .ico { flex: none; color: var(--muted); }
+.sp-install summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
+.sp-install-item { margin: 10px 0 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.sp-install-item.mine { border-color: var(--brand); background: var(--brand-soft); }
+.sp-install-item ol { margin: 6px 0 0; padding-left: 20px; }
+.sp-install-item li { margin: 3px 0; }

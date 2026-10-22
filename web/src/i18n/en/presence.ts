@@ -1,0 +1,43 @@
+import type { Catalog } from '../registry';
+
+/** English – Live-Zusammenarbeit überall (presence/Presence.tsx, presence/canvas.tsx). */
+export default {
+  online: 'online',
+  Agentur: 'Agency',
+  und: 'and',
+  '{name} hat hier gerade gespeichert.': '{name} just saved here.',
+  'Neu laden': 'Reload',
+  'Hinweis schließen': 'Dismiss',
+  'bearbeiten das gerade auch – stimmt euch ab, damit nichts überschrieben wird.': {
+    one: 'is editing this too – agree on who saves so nothing gets overwritten.',
+    other: 'are editing this too – agree on who saves so nothing gets overwritten.',
+  },
+  '{name} – bearbeitet gerade': '{name} – editing right now',
+  '{name} – ist auch auf dieser Seite': '{name} – also on this page',
+  'Auch auf dieser Seite': 'Also on this page',
+  'Team ist hier': 'Team is here',
+  'Team ist hier: {n} Personen online': { one: 'Team is here: {n} person online', other: 'Team is here: {n} people online' },
+  'Live-Zusammenarbeit ist in diesem Sub-Account ausgeschaltet.': 'Live collaboration is switched off in this sub-account.',
+  'Gerade ist niemand sonst online.': 'Nobody else is online right now.',
+  'bearbeitet gerade': 'editing right now',
+  'Zu {name} gehen': 'Go to {name}',
+  Hingehen: 'Go there',
+  'Team im Menü zeigen': 'Show the team in the menu',
+  'Mauszeiger anderer zeigen': "Show other people's cursors",
+  'Nur auf Boards und Canvas': 'Only on boards and Canvas',
+  'Auf allen Seiten': 'On every page',
+  Aus: 'Off',
+  'Unsichtbar – die anderen sehen mich nicht': "Invisible – the others don't see me",
+  'Live-Zusammenarbeit in diesem Sub-Account': 'Live collaboration in this sub-account',
+  'Nur der Live-Zustand: kein Verlauf, keine Protokolle. Dein Mauszeiger geht nur an Leute, die ihre Zeiger auch teilen.':
+    'Live state only: no history, no logs. Your cursor only goes to people who share theirs too.',
+  '{names} sind hier': { one: '{names} is here', other: '{names} are here' },
+  '{name} ist bei {where}': '{name} is in {where}',
+  'Wer ist bei {where}: {names}': 'Who is in {where}: {names}',
+  'Wer ist auf dem Board': 'Who is on the board',
+  '{name} (du)': '{name} (you)',
+  '{name} nicht mehr folgen': 'Stop following {name}',
+  '{name} folgen – deine Ansicht geht mit': 'Follow {name} – your view moves along',
+  'Du folgst {name}': 'Following {name}',
+  'Nicht mehr folgen': 'Stop following',
+} satisfies Catalog;

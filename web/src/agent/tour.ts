@@ -1,0 +1,52 @@
+import type { Tour } from '../tour/types';
+
+/** Academy tours: the HyperLevel Agent (panel, confirmations, custom agents) and KI-Anbieter (BYOK). */
+export const AGENT_TOURS: Tour[] = [
+  {
+    id: 'agent',
+    title: 'Der KI-Agent',
+    summary: 'Ein KI-Mitarbeiter auf jeder Seite: sucht, fasst zusammen, legt an und erledigt Aufgaben – mit Bestätigung vor Änderungen.',
+    icon: 'bot',
+    group: 'ai',
+    minutes: 5,
+    routes: ['agents'],
+    keywords: 'ki agent chat assistent custom gpt mitarbeiter automatisch werkzeuge bestätigung strg j',
+    learned: ['Den Agenten auf jeder Seite öffnen (Strg/⌘ + J)', 'Wie Kontext, Werkzeug-Karten und Bestätigungen funktionieren', 'Eigene Agenten aus Vorlagen anlegen', 'Was die Sicherheitsmodi bedeuten'],
+    docs: { label: 'KI-Agent', file: 'agent' },
+    steps: [
+      { title: 'Der KI-Agent', target: 'agent-button', kind: 'click', text: 'Hier öffnest du den Agenten – auf jeder Seite, auch mit **Strg + J** (Mac: ⌘ + J). Er arbeitet mit deinen Rechten im aktuellen Sub-Account.', do: 'Klicke auf **KI-Agent**.' },
+      { title: 'Was er gerade sieht', target: 'agent-context', optional: true, text: 'Der Kontext zeigt, was du offen hast, z. B. „Kontakt: Max Mustermann“. Dann reicht „Fasse diesen Kontakt zusammen“. Ein Klick schaltet den Kontext ab.' },
+      { title: 'Aufträge geben', target: 'agent-input', text: 'Schreib ganz normal, was zu tun ist – oder nimm eine Startfrage. Dateien gehen auch: eine CSV importiert Kontakte, Bilder liest ein Modell mit Bild-Verständnis.' },
+      { title: 'Modell wählen', target: 'agent-model', text: 'Welches KI-Modell antwortet, legst du unter KI-Anbieter fest. Hier kannst du für diesen Chat wechseln – auch auf dein eigenes ChatGPT- oder Claude-Abo über die Bridge.' },
+      { title: 'Werkzeug-Karten', text: 'Jeder Schritt des Agenten erscheint als Karte: was er gesucht oder angelegt hat, aufklappbar mit allen Eingaben und Ergebnissen und mit Links zu den Datensätzen.' },
+      { title: 'Wünsche bauen lassen', target: 'agent-wk-card', optional: true, missing: 'Äußere im Chat einen Funktionswunsch („Ich hätte gern eine Ampel für Deals“) – dann erscheint hier der Plan als Karte.', text: 'Bei einem Funktionswunsch plant der Agent und zeigt den Plan als Karte. Du bestätigst mit dem Knopf der Karte, siehst den Bau live und eine Vorschau – mit Öffnen, Ändern lassen und Verwerfen.' },
+      { title: 'Erst fragen, dann ändern', text: 'Im Modus **Vor Änderungen fragen** zeigt der Agent jede Änderung vorher mit allen Details – du klickst „Ausführen“ oder „Ablehnen“. Versenden, Löschen und Zahlungen fragt er immer.' },
+      { title: 'Eigene Agenten', route: 'agents', target: 'agents-list', text: 'Unter **KI-Agenten** legst du eigene KI-Mitarbeiter an – mit Rolle, Anweisungen, Werkzeugen, Wissen, Zeitplänen und Auto-Antwort im Posteingang.' },
+      { title: 'Vorlagen', target: 'tab-templates', kind: 'click', text: 'Die Vorlagen sind fertige Rollen: Vertrieb, Support, Social Media, Projekte, Rechnungen, Onboarding, Daten-Aufräumen und Lead-Recherche.', do: 'Klicke auf **Vorlagen**.' },
+      { title: 'Freigaben', target: 'tab-approvals', text: 'Laufen Agenten automatisch (Workflow, Zeitplan, MCP), führen sie nichts aus, was eine Bestätigung braucht – es wartet hier auf dich.' },
+    ],
+  },
+  {
+    id: 'ai-providers',
+    title: 'KI-Anbieter (BYOK)',
+    summary: 'Jedes Modell mit deinem eigenen Schlüssel: OpenAI, Anthropic, Gemini, OpenRouter, Groq, lokale Modelle, fal.ai, kie.ai und mehr.',
+    icon: 'ai',
+    group: 'ai',
+    perm: 'settings',
+    minutes: 4,
+    routes: ['settings/ai-providers', 'agents/models'],
+    keywords: 'byok schlüssel api key openai anthropic gemini openrouter groq ollama fal kie replicate modell anbieter',
+    learned: ['Einen Anbieter mit eigenem Schlüssel verbinden', 'Die Verbindung testen und ein Modell wählen (auch per Freitext)', 'Festlegen, welches Modell wofür genutzt wird'],
+    docs: { label: 'KI-Anbieter', file: 'ai-providers' },
+    steps: [
+      { title: 'Mit deinem Abo', route: 'settings/ai-providers', target: 'aisub', optional: true, text: 'Dein ChatGPT-Plan („Mit ChatGPT anmelden“) oder dein Claude-Abo (über Claude Code auf deinem Rechner) statt eines API-Schlüssels. Die Anmeldung gehört dir persönlich – nur du kannst sie nutzen, nie Workflows oder andere Personen.' },
+      { title: 'Filter: EU-Hosting, günstig, schnell', target: 'aig-filters', optional: true, text: 'Such einen Anbieter oder filtere nach „EU-Hosting“ (IONOS, STACKIT, OVHcloud, Scaleway, Mistral EU), günstig, schnell, lokal oder Abo-Anmeldung. Die Karte nennt den Verarbeitungsort laut Anbieter und führt über „Konto anlegen ↗“ zur Anmeldung.' },
+      { title: 'KI-Anbieter', route: 'settings/ai-providers', target: 'aic-presets', text: 'Hier verbindest du jedes KI-Modell mit deinem eigenen Schlüssel – Text-Modelle für Agent und Assistent, Bild-, Video- und Audio-Anbieter für Medien.' },
+      { title: 'Anbieter wählen', target: 'aic-presets', text: 'Klick auf einen Anbieter, trag den Schlüssel ein – fertig. Lokale Modelle (Ollama, LM Studio) und jeder OpenAI-kompatible Server gehen auch.' },
+      { title: 'Verbunden', target: 'aic-list', optional: true, text: 'Deine Verbindungen mit Fähigkeiten, Standard-Modellen, Prüf-Status und Kosten dieses Monats. Schlüssel werden nie wieder angezeigt.' },
+      { title: 'Wofür welches Modell?', target: 'aic-routing', text: 'Lege fest, welche Verbindung der KI-Agent, schnelle KI-Texte, Zusammenfassungen, Bilder, Videos oder Sprache nutzen. Ohne Angabe nimmt HyperLevel die erste passende.' },
+      { title: 'Denkstufe', target: 'aic-effort', text: 'Wie gründlich die Modelle nachdenken: ein Standard (maximal) und je Bereich eine eigene Stufe. Telefonagent und schnelle Texte dürfen niedriger sein; die Werkstatt fragt nie unter „hoch“ an.' },
+      { title: 'Modell frei wählbar', text: 'Die Modell-Liste lädt HyperLevel live vom Anbieter, wo es eine gibt. Du kannst aber immer jede Modell-ID selbst eintippen – auch ganz neue.' },
+    ],
+  },
+];

@@ -1,0 +1,16 @@
+/* Better notes (pages/NotesPlus.tsx): coloured cards, pinned first, rendered Markdown */
+.notes-plus { display: flex; flex-direction: column; gap: 10px; }
+.note-form, .note-card { border: 1px solid var(--line); border-left: 4px solid var(--nc, var(--line)); border-radius: 10px; padding: 10px 12px; background: color-mix(in srgb, var(--nc, transparent) 7%, var(--panel)); display: flex; flex-direction: column; gap: 8px; }
+.note-card.pinned { box-shadow: 0 0 0 1px color-mix(in srgb, var(--nc, var(--brand)) 40%, transparent); }
+.note-yellow { --nc: #eab308; } .note-green { --nc: #22c55e; } .note-blue { --nc: #3b82f6; } .note-red { --nc: #ef4444; } .note-purple { --nc: #a855f7; } .note-gray { --nc: #64748b; }
+.note-colors { display: inline-flex; gap: 6px; }
+.note-color { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); background: var(--nc, var(--panel)); cursor: pointer; padding: 0; }
+.note-color.note-none { background: repeating-linear-gradient(45deg, var(--panel), var(--panel) 4px, var(--line) 4px, var(--line) 6px); }
+.note-color[aria-pressed='true'] { outline: 2px solid var(--brand); outline-offset: 1px; }
+.note-tools { display: inline-flex; gap: 2px; }
+.note-body { overflow-wrap: anywhere; line-height: 1.5; }
+.note-body > :first-child { margin-top: 0; }
+.note-body > :last-child { margin-bottom: 0; }
+.note-body p { margin: 0 0 6px; }
+.note-body ul, .note-body ol { margin: 0 0 6px; padding-left: 20px; }
+.notes-search { gap: 10px; }

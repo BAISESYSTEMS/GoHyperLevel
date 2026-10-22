@@ -1,0 +1,23 @@
+# Keep the build context small and free of local data and secrets.
+.git
+.github
+node_modules
+dist-web
+dist-server
+data
+oss-export
+.env
+.env.*
+!.env.example
+.oss-denylist
+*.db
+*.db-*
+*.log
+android
+integrations
+deploy
+docs/assets
+tests
+coverage
+.vscode
+.idea

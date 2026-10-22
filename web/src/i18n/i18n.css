@@ -1,0 +1,11 @@
+/* Language switch (web/src/i18n/LanguageMenu.tsx): the sidebar's menu, the links on the login card. Targets ≥ 44 px. */
+.lang-menu { position: relative; display: inline-flex; }
+.lang-pop { position: fixed; z-index: 60; min-width: 180px; background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 34px rgba(0, 0, 0, .25); padding: 4px; }
+.lang-pop button { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 8px 10px; border: 0; border-radius: 7px; background: transparent; color: var(--text); font: inherit; font-size: 14px; text-align: left; cursor: pointer; }
+.lang-pop button:hover, .lang-pop button:focus-visible { background: var(--brand-soft); outline: none; }
+.lang-pop button[aria-checked='true'] { font-weight: 600; }
+.lang-pop .grow { flex: 1; }
+.lang-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin: 14px 0 0; }
+.lang-links button { min-height: 44px; min-width: 44px; padding: 6px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; }
+.lang-links button[aria-pressed='true'] { color: var(--text); font-weight: 600; }
+.lang-links button:hover, .lang-links button:focus-visible { background: var(--brand-soft); color: var(--text); }

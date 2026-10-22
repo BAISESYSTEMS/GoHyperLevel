@@ -1,0 +1,59 @@
+/* Formulare: Feld-Optionen, Sprünge, Vorlagen-Galerie, Design, Ergebnisse, Spam-Schutz, Auswertung. Wird nur mit dem Formular-Editor geladen. */
+.fd-hint { font-size: 13px; color: var(--muted); margin: 4px 0 10px; }
+.fd-hint code, .fd code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 0 4px; }
+.fd-title { font-weight: 600; margin: 10px 0 4px; }
+.fd-note { border: 1px solid var(--line); border-left: 4px solid var(--yellow); border-radius: 10px; background: var(--panel); padding: 10px 14px; font-size: 13px; margin: 8px 0 12px; }
+.fd-note.ok { border-left-color: var(--green); }
+.fd-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.fd-rows { display: grid; gap: 6px; }
+.fd-row { display: flex; gap: 10px; align-items: center; }
+.fd-row input[type=number] { width: 90px; }
+.fd-row .fd-opt { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 500; }
+.fd-score { border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; margin: 10px 0; background: var(--bg); }
+.fd-score summary { cursor: pointer; font-weight: 600; min-height: 32px; display: flex; align-items: center; }
+.fd-jump { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 8px; }
+.fd-jump > span { font-size: 13px; color: var(--muted); }
+.fd-jump select, .fd-jump input { width: auto; min-width: 120px; flex: 0 1 190px; }
+.fd-ending { border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin: 0 0 12px; background: var(--bg); }
+.fd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; margin-top: 12px; }
+.fd-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--panel); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.fd-card-head { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: flex-start; justify-content: space-between; }
+.fd-card h3 { margin: 0; font-size: 15px; overflow-wrap: break-word; hyphens: auto; }
+.fd-card-head .badge { flex: none; }
+.fd-card p { margin: 0; }
+.fd-feat { display: flex; flex-wrap: wrap; gap: 4px; }
+.fd-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.fd-chip { border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 99px; padding: 6px 14px; min-height: 36px; font: inherit; font-size: 13px; cursor: pointer; }
+.fd-chip.on { background: var(--brand); border-color: var(--brand); color: var(--on-brand, #fff); }
+.fd-design { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (min-width: 1000px) { .fd-design { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.fd-presets { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-bottom: 12px; }
+.fd-preset { display: flex; flex-direction: column; gap: 6px; align-items: stretch; border: 2px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--text); padding: 8px; font: inherit; font-size: 13px; cursor: pointer; min-height: 44px; text-align: center; }
+.fd-preset.on { border-color: var(--brand); }
+.fd-preset .sw { display: flex; gap: 4px; align-items: flex-end; height: 38px; border-radius: 8px; padding: 5px; border: 1px solid var(--line); }
+.fd-preset .sw i { flex: 1; border-radius: 4px; height: 100%; }
+.fd-preset .sw i:last-child { height: 55%; }
+.fd-colors { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px 12px; }
+.fd-color { width: 56px; height: 44px; padding: 2px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; }
+.fd-theme-preview { border: 1px solid var(--line); border-radius: 12px; padding: 22px; margin-bottom: 8px; }
+.fd-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.fd-stat { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 12px 14px; }
+.fd-stat b { display: block; font-size: 22px; line-height: 1.2; }
+.fd-stat span { font-size: 12px; color: var(--muted); }
+.fd-funnel { display: grid; gap: 6px; margin-bottom: 14px; }
+.fd-frow { display: grid; grid-template-columns: minmax(90px, 220px) minmax(0, 1fr) 110px; gap: 10px; align-items: center; font-size: 13px; }
+.fd-frow .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fd-frow .bar { height: 14px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.fd-frow .bar span { display: block; height: 100%; background: var(--brand); border-radius: 99px; }
+.fd-frow .n { text-align: right; white-space: nowrap; }
+.fd-days { display: flex; align-items: flex-end; gap: 3px; height: 90px; margin-bottom: 12px; }
+.fd-days > div { flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; min-width: 3px; }
+.fd-days i { flex: 1; background: var(--brand); opacity: .7; border-radius: 2px 2px 0 0; min-height: 1px; }
+.fd-days i.done { background: var(--green); opacity: 1; }
+.fd-sub-extra { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 6px; align-items: center; }
+@media (pointer: coarse) {
+  .fd .btn, .fd .btn.small, .fd .icon-btn, .fd select, .fd input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]) { min-height: 44px; }
+}
+
+.fd h3 { margin: 22px 0 8px; font-size: 16px; }
+.fd .fd-card h3 { margin: 0; }

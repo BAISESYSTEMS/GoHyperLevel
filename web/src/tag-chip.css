@@ -1,0 +1,12 @@
+/* Coloured tag chips (web/src/tag-chip.tsx): the tag's colour as a dot, a tinted background and a matching outline – readable in
+   light and dark themes because the text mixes the colour with the theme's text colour. */
+.tag.tc { background: color-mix(in srgb, var(--tc) 15%, var(--panel)); color: color-mix(in srgb, var(--tc) 55%, var(--text)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tc) 45%, transparent); }
+.tag.tc::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--tc); flex: none; }
+.tag-swatch { width: 22px; height: 22px; border-radius: 6px; border: 1px solid var(--line); padding: 0; cursor: pointer; flex: none; background: var(--sw, transparent); }
+.tag-swatch.none { background: repeating-linear-gradient(45deg, var(--panel), var(--panel) 4px, var(--line) 4px, var(--line) 6px); }
+.tag-swatch[aria-pressed='true'] { outline: 2px solid var(--brand); outline-offset: 1px; }
+.tag-palette { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tag-meta-cat { border-left: 4px solid var(--cc, var(--line)); padding: 6px 0 6px 10px; margin: 10px 0 4px; }
+.tag-meta-row { display: flex; gap: 8px; align-items: center; justify-content: space-between; padding: 4px 0; flex-wrap: wrap; }
+.tag-meta-row .tm-tools { display: flex; gap: 6px; align-items: center; }
+.tag-meta-row select { max-width: 150px; }

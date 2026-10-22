@@ -1,0 +1,374 @@
+import { createHash } from 'node:crypto';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { request } from 'node:http';
+import { join } from 'node:path';
+import vm from 'node:vm';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { startTestApp } from './helpers.js';
+import { CALC_DEFAULT, EUR_USD, HL_PRICES, calculate, parseCalc, shareLinks } from '../server/services/landing-calc.js';
+import { OUR_ID, entryPriceEurCents, matrixHtml, mixTools, parseMatrix } from '../server/services/landing-compare.js';
+import { COPY } from '../server/services/landing-copy.js';
+import { parseStack, stackHtml, sumsText } from '../server/services/landing-stack.js';
+import { CSP, SCRIPT, SCRIPT_HASH, pagePath } from '../server/services/landing-page.js';
+import { checkDocument, checkFragment } from '../server/services/site-a11y.js';
+import { contrast } from '../server/services/site-style.js';
+import { PLAN_INFO } from '../server/services/cloud.js';
+
+const OURS = { solo: PLAN_INFO.solo.price_month_cents, team: PLAN_INFO.team.price_month_cents, agency: PLAN_INFO.agency.price_month_cents };
+
+/** A research file in the agreed schema (the real one: web/public/landing/competitors.json). */
+const FIXTURE = {
+  as_of: '2026-10-09',
+  vendors: [
+    { id: 'ghl0', name: 'HyperLevel', url: 'https://gohyperlevel.com', pricing: [{ plan: 'Self-hosted', price_month: 0, currency: 'EUR' }], source: 'https://gohyperlevel.com' },
+    { id: 'highlevel', name: 'HighLevel', url: 'https://www.gohighlevel.com', pricing: [{ plan: 'Starter', price_month: 97, currency: 'USD' }, { plan: 'Unlimited', price_month: 297, currency: 'USD' }], source: 'https://www.gohighlevel.com/pricing' },
+    { id: 'hubspot', name: 'HubSpot', url: 'https://www.hubspot.com', pricing: [{ plan: 'Free', price_month: 0, currency: 'USD' }, { plan: 'Starter Customer Platform', price_month: 20, currency: 'USD', notes: 'per seat' }, { plan: 'Professional', price_month: 890, currency: 'USD' }], source: 'https://www.hubspot.com/pricing' },
+    { id: 'kajabi', name: 'Kajabi', url: 'https://kajabi.com', pricing: [{ plan: 'Kickstarter', price_month: 89, currency: 'USD' }], source: 'https://kajabi.com/pricing' },
+    { id: 'evil', name: '<script>', url: 'javascript:alert(1)', pricing: [], source: 'http://insecure.example' },
+  ],
+  categories: [
+    {
+      id: 'crm',
+      label_de: 'CRM',
+      label_en: 'CRM',
+      features: [
+        { id: 'pipelines', label_de: 'Pipelines', label_en: 'Pipelines', cells: { ghl0: { v: 'yes' }, highlevel: { v: 'yes' }, hubspot: { v: 'partial', note: 'Nur eine Pipeline im Starter', source: 'https://www.hubspot.com/pricing' }, kajabi: { v: 'no' } } },
+        { id: 'apps', label_de: 'Mobile Apps', label_en: 'Mobile apps', cells: { ghl0: { v: 'partial', note: 'via PWA-Install (Android zusätzlich als APK), nicht in den App-Stores' }, highlevel: { v: 'yes' }, hubspot: { v: 'bogus' } } },
+      ],
+    },
+    { id: 'bad id!', label_de: 'x', label_en: 'x', features: [{ id: 'x', label_de: 'x', label_en: 'x', cells: { highlevel: { v: 'yes' } } }] },
+  ],
+};
+
+/** "Replaces your stack" research in the agreed schema (the real one: web/public/landing/replaces.json). */
+const STACK = {
+  as_of: '2026-10-09',
+  rows: [
+    { id: 'crm', label_de: 'CRM & Pipelines', label_en: 'CRM & pipelines', coverage: 'full', tools: [{ name: 'HubSpot', plan: 'Starter', price_month: 20, currency: 'USD', billing: 'per seat', source: 'https://www.hubspot.com/pricing' }, { name: 'Pipedrive', plan: 'Lite', price_month: 14, currency: 'USD', billing: 'per user', source: 'https://www.pipedrive.com/pricing' }], min_price: 14, min_currency: 'USD' },
+    { id: 'email', label_de: 'E-Mail-Marketing', label_en: 'E-mail marketing', coverage: 'full', tools: [{ name: 'ActiveCampaign', plan: 'Starter', price_month: 19, currency: 'EUR', source: 'https://www.activecampaign.com/pricing' }], min_price: 19, min_currency: 'EUR' },
+    { id: 'voice', label_de: 'KI-Telefonagent', label_en: 'AI phone agent', coverage: 'partial', coverage_note_de: 'Voice AI: nur eingehende Anrufe', coverage_note_en: 'Voice AI: inbound calls only', tools: [{ name: 'Bland<b>', plan: 'Build', price_month: 299, currency: 'USD', source: 'javascript:alert(1)' }], min_price: 299, min_currency: 'USD' },
+    { id: 'mcp', label_de: 'MCP für Claude/Codex', label_en: 'MCP for Claude/Codex', coverage: 'unique', tools: [], min_price: null },
+    { id: 'junk', label_de: '', coverage: 'full', tools: [] },
+  ],
+  excluded_rows: [],
+  totals: { usd: 313, eur: 19 },
+};
+
+describe('landing: replaces your stack', () => {
+  it('parses the research, sums per currency without converting, and renders chips, partial and unique rows', () => {
+    const st = parseStack(STACK)!;
+    expect(st.rows.map((r) => r.id)).toEqual(['crm', 'email', 'voice', 'mcp']);
+    expect(st.sums).toEqual({ USD: 313, EUR: 19 });
+    expect(st.converted).toBeUndefined();
+    expect(sumsText(st, 'de-DE').replace(/\u00a0/g, ' ')).toBe('313 $ + 19 €');
+    expect(st.rows[2].tools[0].source).toBe('');
+    const out = stackHtml(st, COPY.de, 'de', 'HyperLevel').replace(/\u00a0/g, ' ');
+    expect(out).toContain('<ul class="tchips"><li title="Starter · 20 $">HubSpot</li><li title="Lite · 14 $">Pipedrive</li></ul>');
+    expect(out).toContain('title="Voice AI: nur eingehende Anrufe">◐ Teilweise');
+    expect(out).toContain('★ Selbst hostbar nur bei HyperLevel');
+    expect(out).toContain('Bland&lt;b&gt;');
+    expect(out).toContain('<b>0 € <small>(selbst gehostet)</small></b><em>Cloud ab 49,99 €/Monat</em>');
+    expect(out).not.toMatch(/<img/);
+    expect(stackHtml(st, COPY.de, 'de', 'X', 2).match(/<tr class=/g)).toHaveLength(2);
+    // Converted here, at the rate the research names – only with its source.
+    const conv = parseStack({ ...STACK, totals: { fx_rate_usd_per_eur: 1.1206, fx_source: 'https://www.ecb.europa.eu/stats/eurofxref/' } })!;
+    expect(conv.converted).toMatchObject({ eur: Math.round((313 / 1.1206 + 19) * 100) / 100, rate: 1.1206 });
+    expect(conv.fullOnly).toMatchObject({ rows: 2, eur: Math.round((14 / 1.1206 + 19) * 100) / 100 });
+    expect(parseStack({ ...STACK, totals: { fx_rate_usd_per_eur: 1.1206 } })!.converted).toBeUndefined();
+    // A row marked in_total: false is shown but not counted.
+    expect(parseStack({ ...STACK, rows: STACK.rows.map((r) => (r.id === 'voice' ? { ...r, in_total: false } : r)) })!.sums).toEqual({ USD: 14, EUR: 19 });
+    expect(parseStack({ as_of: '2026-10-09', rows: [] })).toBeUndefined();
+  });
+});
+
+describe('landing: the committed stack research', () => {
+  it('parses, has a sourced ECB total, no Office row and the MCP row as unique', async () => {
+    const { readFileSync } = await import('node:fs');
+    const st = parseStack(JSON.parse(readFileSync('web/public/landing/replaces.json', 'utf8')))!;
+    expect(st.rows.length).toBeGreaterThan(20);
+    expect(st.rows.find((r) => r.id === 'office')).toBeUndefined();
+    expect(st.rows.find((r) => r.id === 'mcp_server')?.coverage).toBe('unique');
+    expect(st.rows.find((r) => r.id === 'ai_chat_content')?.tools.map((t) => t.name)).not.toContain('ChatGPT');
+    expect(st.converted?.source).toMatch(/^https:\/\/www\.ecb\.europa\.eu\//);
+    for (const r of st.rows) for (const t of r.tools) if (t.price !== null) expect(t.source, `${r.id}/${t.name}`).toMatch(/^https:\/\//);
+    // the converted total is the per-currency sums at the stated rate, and matches what the file states after the corrections
+    const raw = JSON.parse(readFileSync('web/public/landing/replaces.json', 'utf8'));
+    expect(st.converted!.eur).toBeCloseTo((st.sums.USD ?? 0) / st.converted!.rate + (st.sums.EUR ?? 0), 1);
+    expect(st.converted!.eur).toBeCloseTo(raw.totals.combined_eur_estimate, 1);
+    expect(st.fullOnly!.eur).toBeCloseTo(raw.totals.full_coverage_only.combined_eur_estimate, 1);
+    expect(st.rows.find((r) => r.id === 'ai_chat_content')?.in_total).toBe(false);
+  });
+});
+
+describe('landing: the savings calculator', () => {
+  it('compares against HighLevel list prices, converted at the ECB rate, and never claims SaaS mode in the cloud', () => {
+    const r = calculate(CALC_DEFAULT, OURS);
+    expect(r).toMatchObject({ hlPlan: 'unlimited', hlMonthUsd: 297, ourPlan: 'self', ourMonthCents: 0 });
+    expect(r.saveYearEur).toBe(Math.round((297 * 12) / EUR_USD));
+    // Starter has 3 sub-accounts: more bump the comparison to Unlimited.
+    expect(calculate({ plan: 'starter', subs: 4, wlApp: false, hosting: 'self' }, OURS)).toMatchObject({ hlPlan: 'unlimited', hlBumped: true });
+    expect(calculate({ plan: 'starter', subs: 3, wlApp: false, hosting: 'self' }, OURS)).toMatchObject({ hlPlan: 'starter', hlBumped: false, hlMonthUsd: 97 });
+    // SaaS mode + white-label app = 994 $ a month; the cloud has no SaaS mode, so that falls back to self-hosting.
+    const pro = calculate({ plan: 'pro', subs: 5, wlApp: true, hosting: 'cloud' }, OURS);
+    expect(pro).toMatchObject({ hlMonthUsd: HL_PRICES.pro + HL_PRICES.wlApp, saasSelfOnly: true, ourPlan: 'self' });
+    expect(pro.hlMonthUsd).toBe(994);
+    // Several sub-accounts or a branded app in the cloud: the Agentur plan (white-label + client accounts).
+    expect(calculate({ plan: 'unlimited', subs: 2, wlApp: false, hosting: 'cloud' }, OURS)).toMatchObject({ ourPlan: 'agency', ourMonthCents: 19900, saveYearEur: Math.round((297 * 12) / EUR_USD) - 2388 });
+    expect(calculate({ plan: 'starter', subs: 1, wlApp: false, hosting: 'cloud' }, OURS)).toMatchObject({ ourPlan: 'team' });
+  });
+
+  it('reads its input from the shared link and clamps anything odd', () => {
+    expect(parseCalc(new URLSearchParams('p=pro&n=7&app=1&h=cloud'))).toEqual({ plan: 'pro', subs: 7, wlApp: true, hosting: 'cloud' });
+    expect(parseCalc(new URLSearchParams('p=<x>&n=99999&app=yes&h=moon'))).toEqual({ plan: 'unlimited', subs: 100, wlApp: false, hosting: 'self' });
+    expect(parseCalc(new URLSearchParams('n=-3'))).toMatchObject({ subs: 1 });
+    const s = shareLinks('https://gohyperlevel.com/?p=pro&n=2#rechner', 'I save €1 & more');
+    expect(s.x).toBe('https://x.com/intent/post?text=I%20save%20%E2%82%AC1%20%26%20more&url=https%3A%2F%2Fgohyperlevel.com%2F%3Fp%3Dpro%26n%3D2%23rechner');
+    expect(s.linkedin.startsWith('https://www.linkedin.com/sharing/share-offsite/?url=')).toBe(true);
+    expect(s.reddit).toContain('https://www.reddit.com/submit?url=');
+  });
+});
+
+describe('landing: the comparison research', () => {
+  it('validates the file: renames our column, drops bad ids, values, links and empty categories', () => {
+    const m = parseMatrix(FIXTURE)!;
+    expect(m.vendors.map((v) => v.id)).toEqual([OUR_ID, 'highlevel', 'hubspot', 'kajabi', 'evil']);
+    expect(m.vendors.find((v) => v.id === 'evil')).toMatchObject({ url: '', source: '' });
+    expect(m.categories.map((c) => c.id)).toEqual(['crm']);
+    expect(m.categories[0].features[1].cells).not.toHaveProperty('hubspot');
+    expect(m.categories[0].features[1].cells[OUR_ID]).toMatchObject({ v: 'partial' });
+    expect(parseMatrix({ as_of: 'gestern', vendors: [], categories: [] })).toBeUndefined();
+    expect(parseMatrix('x')).toBeUndefined();
+  });
+
+  it('builds the tool mix from entry prices (paid plans, the named plan, dollars converted)', () => {
+    const m = parseMatrix(FIXTURE)!;
+    expect(entryPriceEurCents(m.vendors.find((v) => v.id === 'hubspot')!, /starter/i)).toBe(Math.round((20 / EUR_USD) * 100));
+    const mix = mixTools(m);
+    expect(mix.map((t) => t.key)).toEqual(['crm', 'courses']);
+    expect(mix[0]).toMatchObject({ vendor: 'HubSpot', plan: 'Starter Customer Platform' });
+  });
+
+  it('renders the matrix accessibly: escaped, sticky header, a footnote per note, sources, disclaimer', () => {
+    const c = COPY.de;
+    const out = matrixHtml(parseMatrix(FIXTURE), c, 'de', 'HyperLevel');
+    expect(out).not.toContain('<script>');
+    expect(out).toContain('&lt;script&gt;');
+    expect(out).toContain('<thead>');
+    expect(out).toContain('title="teilweise: Nur eine Pipeline im Starter"');
+    expect(out).toContain('nicht in den App-Stores');
+    // A competitor "no" without a note is "nicht ausgewiesen", ours stays an honest ✗.
+    expect(out).toContain('<td class="v-unlisted"');
+    const full = matrixHtml(parseMatrix(FIXTURE), c, 'de', 'HyperLevel', { full: true });
+    expect(full).toContain('<small class="cn"><a href="https://www.hubspot.com/pricing" rel="noopener nofollow">Nur eine Pipeline im Starter</a></small>');
+    expect(out).toContain('nicht mit HighLevel Inc. oder den anderen genannten Anbietern verbunden');
+    expect(checkFragment({ html: out }).filter((i) => i.level !== 'info')).toEqual([]);
+    expect(matrixHtml(undefined, c, 'de', 'X')).toContain(c.matrix.empty);
+  });
+});
+
+describe('landing: the committed research file', () => {
+  it('parses, keeps every competitor cell sourced, and says what we do not have', async () => {
+    const { readFileSync } = await import('node:fs');
+    const raw = JSON.parse(readFileSync('web/public/landing/competitors.json', 'utf8'));
+    const m = parseMatrix(raw)!;
+    expect(m.as_of).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(m.vendors[0].id).toBe(OUR_ID);
+    expect(m.vendors.length).toBeGreaterThanOrEqual(10);
+    expect(m.vendors.map((v) => v.id)).toContain('highlevel');
+    const features = m.categories.flatMap((c) => c.features);
+    expect(features.length).toBeGreaterThan(50);
+    for (const f of features) for (const [id, cell] of Object.entries(f.cells)) if (id !== OUR_ID) expect(cell.source, `${f.id}/${id}`).toMatch(/^https:\/\//);
+    // Where we lose, the matrix says so; SaaS mode is not part of the cloud.
+    const ours = (id: string) => features.find((f) => f.id === id)?.cells[OUR_ID];
+    expect(ours('office_suite')?.v).toBe('no');
+    expect(ours('hosted_phone')?.v).toBe('no');
+    expect(ours('saas_mode')?.note).toMatch(/Cloud.*nicht enthalten/);
+    expect(ours('ios_app')).toMatchObject({ v: 'partial', note: expect.stringMatching(/PWA.*nicht in den App-Stores/) });
+    // USD prices stay USD.
+    expect(m.vendors.find((v) => v.id === 'highlevel')!.pricing[0]).toMatchObject({ price_month: 97, currency: 'USD' });
+  });
+});
+
+describe('landing: copy', () => {
+  it('says the same prices, the white-label exception and no SaaS mode in the cloud, in both languages', () => {
+    for (const c of Object.values(COPY)) {
+      const all = JSON.stringify(c);
+      expect(all).toMatch(/49[,.]99/);
+      expect(all).toMatch(/99[,.]99/);
+      expect(all).toMatch(/199/);
+      expect(all).not.toMatch(/\b299\b|\b79 ?€|€79\b/);
+      expect(c.pricing.lead).toMatch(/White-Label|white-label/);
+      expect(c.wl.saas).toMatch(/SaaS/);
+    }
+    expect(COPY.en.hero.h1).toBe('Your platform for');
+    expect(COPY.de.hero.h1).toBe('Deine Plattform für');
+    expect(COPY.en.hero.rotate.length).toBe(7);
+    expect(COPY.de.hero.rotate.length).toBe(7);
+    expect(COPY.en.hero.sub).toContain('Sick of all-in-one platforms that drain your wallet?');
+    expect(COPY.de.hero.sub).toContain('Schluss mit teuren All-in-One-Abos');
+  });
+});
+
+/** Runs the page's inline script against a tiny DOM and returns what it wrote for a set of form values. */
+function runScript(dataJson: string, values: Record<string, string[]>) {
+  const els: Record<string, any> = {};
+  const handlers: (() => void)[] = [];
+  const form = { dataset: {} as Record<string, string>, classList: { add() {} }, addEventListener: (_t: string, fn: () => void) => handlers.push(fn), values };
+  const el = (sel: string) => {
+    if (sel === '#calc-data') return { textContent: dataJson };
+    if (sel === '#calc') return form;
+    return (els[sel] ??= { textContent: '', href: '' });
+  };
+  class FormData {
+    constructor(private f: typeof form) {}
+    get(k: string) {
+      return this.f.values[k]?.[0] ?? null;
+    }
+    getAll(k: string) {
+      return this.f.values[k] ?? [];
+    }
+  }
+  const ctx = vm.createContext({ document: { querySelector: el, querySelectorAll: () => [], getElementById: () => null }, FormData, history: { replaceState() {} }, Intl, URLSearchParams, encodeURIComponent, navigator: {}, setTimeout, JSON, Math });
+  vm.runInContext(SCRIPT, ctx);
+  handlers[0]();
+  return els;
+}
+
+describe('landing page (PGHL_LANDING=1)', () => {
+  let t: Awaited<ReturnType<typeof startTestApp>>;
+  const prev = process.env.PGHL_LANDING;
+  beforeAll(async () => {
+    process.env.PGHL_LANDING = '1';
+    t = await startTestApp();
+    const dir = join(t.app.config.webDir, 'landing');
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, 'competitors.json'), JSON.stringify(FIXTURE));
+    writeFileSync(join(dir, 'replaces.json'), JSON.stringify(STACK));
+  });
+  afterAll(async () => {
+    await t.close();
+    if (prev === undefined) delete process.env.PGHL_LANDING;
+    else process.env.PGHL_LANDING = prev;
+  });
+  const get = (p: string) => t.api.raw(p, { redirect: 'manual' });
+
+  it('serves English at /, German at /de, the comparison pages – strict CSP, no cookie, nothing from third parties', async () => {
+    for (const [p, lang] of [['/', 'en'], ['/de', 'de'], ['/vergleich', 'en'], ['/de/vergleich', 'de'], ['/vergleich/highlevel', 'en'], ['/de/vergleich/highlevel', 'de']] as const) {
+      const r = await get(p);
+      expect(r.status, p).toBe(200);
+      const body = await r.text();
+      expect(r.headers.get('content-security-policy'), p).toBe(CSP);
+      expect(r.headers.get('set-cookie'), p).toBeNull();
+      expect(body, p).toContain(`<html lang="${lang}">`);
+      // No external script, style, font or image; the only script is the inline one the CSP allows by its hash.
+      expect(body, p).not.toMatch(/<script[^>]+src=|<link[^>]+stylesheet|src="https?:|url\(https?:/i);
+      const inline = [...body.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+      expect(inline).toEqual([SCRIPT]);
+      expect(`sha256-${createHash('sha256').update(inline[0]).digest('base64')}`).toBe(SCRIPT_HASH);
+      expect(body, p).toContain(lang === 'de' ? 'nicht mit HighLevel Inc.' : 'not affiliated with HighLevel Inc.');
+    }
+    const home = await (await get('/')).text();
+    expect(home).toContain('Your platform for');
+    expect(home).toContain('class="rot"');
+    expect(home).toContain('<meta name="twitter:card" content="summary_large_image">');
+    expect(home).toMatch(/<meta property="og:image" content="http:\/\/localhost\/landing\/og-en\.png">/);
+    expect(home).toContain('<link rel="alternate" hreflang="de" href="http://localhost/de">');
+    expect(home).toContain('codex mcp add gohyperlevel --url https://localhost/mcp');
+    expect(home).toContain('curl -fsSL https://raw.githubusercontent.com/gohyperlevel/gohyperlevel/main/scripts/install.sh | bash');
+    expect(home).toContain('https://demo.gohyperlevel.com');
+    // Prices: list prices without cloud mode, VAT note, white-label headline of the Agentur plan.
+    for (const s of ['€49.99', '€99.99', '€199', 'or €479 a year', 'or €959 a year', 'or €1,910 a year', 'Stripe Tax', 'White-label on the Agency plan']) expect(home, s).toContain(s);
+    const de = await (await get('/de')).text();
+    expect(de).toContain('Deine Plattform für');
+    for (const s of ['49,99 €', '99,99 €', '199 €', 'zzgl. gesetzlicher USt.', 'Gehostet in Deutschland (Frankfurt am Main)']) expect(de.replace(/ /g, ' '), s).toContain(s);
+    // The matrix from the research file, with the category chips' CSS in the head.
+    expect(home).toContain('.cmpw:has(#cmp-c-crm:checked)');
+    expect(home).toContain('<th scope="col" class="ours">HyperLevel</th>');
+    // Replaces your stack, with the sources and the disclaimer under it.
+    expect(home).toContain('Replaces your stack');
+    expect(home).toContain('<a href="https://www.pipedrive.com/pricing" rel="noopener nofollow">Pipedrive</a>');
+    expect(home).toContain('USD prices are not converted.');
+  });
+
+  it('passes the accessibility check (BFSG) and keeps the colour contrast', async () => {
+    for (const p of ['/', '/de', '/vergleich/highlevel']) {
+      const body = await (await get(p)).text();
+      const issues = [...checkDocument(body), ...checkFragment({ html: body })].filter((i) => i.level !== 'info');
+      expect(issues, p).toEqual([]);
+    }
+    // ink on paper, muted on paper, light on the dark hero, muted on dark, ink on the accent
+    for (const [fg, bg] of [['#0b0d12', '#f6f5ef'], ['#545a66', '#f6f5ef'], ['#545a66', '#efede4'], ['#f4f4ef', '#0b0d12'], ['#aeb4c2', '#0b0d12'], ['#aeb4c2', '#151923'], ['#0b0d12', '#c8f031'], ['#c8f031', '#0b0d12'], ['#16794a', '#ffffff'], ['#a23b2a', '#ffffff'], ['#8a5a00', '#ffffff']]) {
+      expect(contrast(fg, bg), `${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it('puts the result of a shared calculator link into the page and its social title – the live script computes the same', async () => {
+    const body = await (await get('/?m=hl&p=pro&n=5&app=1&h=self')).text();
+    const save = Math.round((994 * 12) / EUR_USD).toLocaleString('en-GB');
+    expect(body).toContain(`<meta property="og:title" content="I save €${save} a year with HyperLevel instead of HighLevel`);
+    expect(body).toContain(`You save €${save} a year.`);
+    expect(body).toContain('https://x.com/intent/post?text=');
+    // The script, fed the page's own data, writes the same number.
+    const data = /<script type="application\/json" id="calc-data">([\s\S]*?)<\/script>/.exec(body)![1];
+    for (const [q, v] of [
+      ['m=hl&p=pro&n=5&app=1&h=self', { m: ['hl'], p: ['pro'], n: ['5'], app: ['1'], h: ['self'] }],
+      ['m=hl&p=starter&n=12&app=0&h=cloud', { m: ['hl'], p: ['starter'], n: ['12'], h: ['cloud'] }],
+      ['m=hl&p=unlimited&n=1&app=0&h=cloud', { m: ['hl'], p: ['unlimited'], n: ['1'], h: ['cloud'] }],
+      ['m=mix&t=crm&t=courses&h=cloud', { m: ['mix'], t: ['crm', 'courses'], h: ['cloud'] }],
+    ] as const) {
+      const page = await (await get(`/?${q}`)).text();
+      const server = /<p class="save" id="calc-save">([^<]*)<\/p>/.exec(page)![1].replace(/&amp;/g, '&');
+      const els = runScript(data, v as unknown as Record<string, string[]>);
+      expect(els['#calc-save'].textContent, q).toBe(server);
+    }
+    // Mix mode: the research file's prices.
+    const mix = await (await get('/?m=mix&t=crm&t=courses&h=self')).text();
+    expect(mix).toContain('Your 2 tools:');
+  });
+
+  it('shows live counts, hides the star count until GitHub answers, and the APK once uploaded', async () => {
+    const body = await (await get('/')).text();
+    const tools = t.app.services.landing.stats().tools;
+    expect(tools).toBeGreaterThan(200);
+    expect(body).toContain(`<b>${tools.toLocaleString('en-GB')}</b><span>MCP tools</span>`);
+    expect(body).not.toMatch(/stars<\/span>/);
+    t.app.services.landingFetch = async () => new Response(JSON.stringify({ stargazers_count: 1234 }), { headers: { 'content-type': 'application/json' } });
+    await t.app.services.landing.refreshStars(true);
+    expect(await (await get('/')).text()).toContain('1,234 stars');
+    t.app.services.landingFetch = async () => new Response('rate limited', { status: 403 });
+    await t.app.services.landing.refreshStars(true);
+    expect(await (await get('/')).text()).toContain('1,234 stars');
+    expect(await (await get('/')).text()).toContain('APK · coming soon');
+  });
+
+  it('stays the app on any other host, and adds the sitemap', async () => {
+    const other = await new Promise<{ status: number; location?: string }>((res, rej) => {
+      const u = new URL(t.base);
+      request({ host: u.hostname, port: u.port, path: '/', headers: { host: 'crm.kunde.example' } }, (r) => {
+        r.resume();
+        res({ status: r.statusCode!, location: r.headers.location });
+      })
+        .on('error', rej)
+        .end();
+    });
+    expect(other).toEqual({ status: 302, location: '/app' });
+    const sm = await (await get('/sitemap.xml')).text();
+    for (const k of ['home', 'compare', 'highlevel'] as const) for (const l of ['en', 'de'] as const) expect(sm).toContain(`<loc>http://localhost${pagePath(k, l)}</loc>`);
+    expect(await (await get('/robots.txt')).text()).toContain('Sitemap: http://localhost/sitemap.xml');
+    expect((await get('/en')).status).toBe(301);
+  });
+});
+
+describe('landing page off (default)', () => {
+  it('leaves / to the web app and adds no routes', async () => {
+    const t = await startTestApp();
+    try {
+      expect(t.app.router.match('GET', '/')).toBeUndefined();
+      expect(t.app.router.match('GET', '/vergleich')).toBeUndefined();
+      expect(t.app.router.match('GET', '/sitemap.xml')).toBeUndefined();
+      expect(await (await t.api.raw('/robots.txt')).text()).not.toContain('Sitemap:');
+    } finally {
+      await t.close();
+    }
+  });
+});
