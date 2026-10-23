@@ -21,7 +21,7 @@ or set `PGHL_DEMO_MODE=1` in `.env`. What happens:
 | **No sign-ups** | Nobody can create an account: new logins (`/api/users`) and the SaaS sign-up settings are locked, the SaaS sign-up page `/signup` stays closed, and the cloud sign-up would need a confirmation e-mail that cannot leave the server. Visitors use the shared demo login. |
 | **No own domains** | Connecting a domain to a website, a client login or a help centre is refused – otherwise a visitor could point a domain of theirs at the demo and the reverse proxy would fetch a certificate for it. |
 | **Public pages are marked** | Every public page (websites, forms, booking, help centre …) starts with the note "Demo-Instanz: Alle Daten werden jede Nacht gelöscht. Bitte hier keine echten Daten oder Passwörter eingeben." and is sent with `X-Robots-Tag: noindex, nofollow` – a page built in the demo cannot pass for a real one or end up in search engines. |
-| **Product name** | `PGHL_DEMO_BRAND` (e.g. `HyperLevel`) names the demo: "HyperLevel Demo" in the menu, "HyperLevel – Live-Demo" on the login page. It is part of the seed, so it survives every reset. |
+| **Product name** | `PGHL_DEMO_BRAND` (e.g. `HyperLevel`) names the demo: "HyperLevel Demo" with the HyperLevel icon in the menu, "HyperLevel – Live-Demo" on the login page. It is part of the seed, so it survives every reset. |
 
 **Safety:** demo mode never wipes a database that has users but was not created by demo mode – it logs an
 error and leaves the data alone. Use a fresh data folder (or volume) for a demo instance. Turn off the daily

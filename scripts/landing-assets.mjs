@@ -4,6 +4,8 @@
  *
  *  - shot-workflow|inbox|funnel|pipeline.webp – real screens of a freshly seeded, fictional demo instance (headless Chromium,
  *    1440×900, the product name set to HyperLevel in the agency branding), converted to WebP in the browser;
+ *  - shot-jarvis|academy|themes|xr.webp – focus mode with Jarvis' briefing, the Academy with a running tour (German, like its
+ *    tours), four looks side by side and the 3D preview of a board (the steps live in scripts/shots-kit.mjs);
  *  - og-en.png, og-de.png – the social cards (1200×630) with the hero line, set in the page's own font;
  *  - og-waitlist-en.png, og-waitlist-de.png – the same cards for the cloud waitlist mode (cloud "coming soon", no price as on offer);
  *  - og-stack-de.png, og-stack-en.png – "Replaces your stack" as a card (top rows and the total, from replaces.json);
@@ -21,6 +23,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { countTests } from './landing-stats.mjs';
+import { academyTour, endTour, focusBriefing, salesBoard, themeCollage, tidy, xrPreview } from './shots-kit.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'web/public/landing');
@@ -88,6 +91,7 @@ if (!args.includes('--no-shots')) {
     const r = await context.request.post(`${base}/api/auth/login`, { data: { email: 'demo@example.com', password: 'demo1234' }, headers: { 'x-pghl': '1' } });
     if (!r.ok()) throw new Error(`login failed: ${r.status()}`);
     await context.request.patch(`${base}/api/agency/branding`, { data: { name: 'HyperLevel' }, headers: { 'x-pghl': '1' } });
+    await tidy(context, base);
     const me = await (await context.request.get(`${base}/api/me`)).json();
     const loc = Object.fromEntries(me.locations.map((l) => [l.name, l.id]));
     const agency = loc['Nordlicht Digital'];
@@ -112,7 +116,24 @@ if (!args.includes('--no-shots')) {
     if (site?.id) await shot(`funnels/${site.id}`, 'shot-funnel.webp', 1800);
     // The pipeline board. (An AI agent screen needs a configured model, which a fresh demo does not have.)
     await shot('opportunities', 'shot-pipeline.webp', 1500);
+    const save = async (file, png) => (writeFileSync(join(out, file), await toWebp(png ?? (await page.screenshot()))), console.log(`  ${file}`));
+    await focusBriefing(page, `${base}/app/focus?loc=${agency}`);
+    await save('shot-jarvis.webp');
+    const board = await salesBoard(context, base, agency);
+    await xrPreview(page, `${base}/app/boards/${board.id}?loc=${agency}`);
+    await save('shot-xr.webp');
+    await save('shot-themes.webp', await themeCollage({ browser, context, base, loc: agency, lang: 'en' }));
     await context.close();
+    // The Academy and its tours are German: the whole screen in German, so it does not mix languages.
+    const de = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', locale: 'de-DE', timezoneId: 'Europe/Berlin' });
+    await de.request.post(`${base}/api/auth/login`, { data: { email: 'demo@example.com', password: 'demo1234' }, headers: { 'x-pghl': '1' } });
+    await tidy(de, base);
+    const dp = await de.newPage();
+    await academyTour(dp, `${base}/app/academy?loc=${agency}`);
+    writeFileSync(join(out, 'shot-academy.webp'), await toWebp(await dp.screenshot()));
+    console.log('  shot-academy.webp');
+    await endTour(dp);
+    await de.close();
   } finally {
     server.kill('SIGTERM');
     rmSync(data, { recursive: true, force: true });
@@ -122,12 +143,12 @@ if (!args.includes('--no-shots')) {
 // --- social cards ----------------------------------------------------------------------------------------------------------
 const font = readFileSync(join(out, 'inter-tight-latin-wght-normal.woff2')).toString('base64');
 const CARDS = {
-  en: { eyebrow: 'Open source · Self-host free · Cloud from €49.99', h1: 'Sick of all-in-one platforms that drain your wallet?', sub: 'CRM, funnels, automation and AI in one open-source app. Own your stack.', badges: ['Self-host: $0', 'Cloud from €49.99', 'MCP: Claude, Codex, ChatGPT, Cursor'] },
-  de: { eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €', h1: 'Schluss mit All-in-One-Plattformen, die dein Konto leerräumen.', sub: 'CRM, Funnels, Automationen und KI in einer Open-Source-App. Dein Stack gehört dir.', badges: ['Selbst gehostet: 0 €', 'Cloud ab 49,99 €', 'Gehostet in Frankfurt'] },
+  en: { eyebrow: 'Open source · Self-host free · Cloud from €49.99', h1: 'The free, open-source growth OS for solopreneurs, agencies & small agentic businesses', sub: 'CRM, funnels, automations and Jarvis, your AI business developer.', badges: ['Self-host: $0', 'Cloud from €49.99', 'MCP: Claude, ChatGPT, Codex, Cursor'] },
+  de: { eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €', h1: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen', sub: 'CRM, Funnels, Automationen und Jarvis, dein KI-Business-Developer.', badges: ['Selbst gehostet: 0 €', 'Cloud ab 49,99 €', 'Gehostet in Frankfurt'] },
 };
 // Cloud waitlist mode (docs/landing.md#cloud-waitlist-mode): the cloud is not on offer yet, so no cloud price and no "hosted in".
 const CARDS_WAITLIST = {
-  en: { ...CARDS.en, eyebrow: 'Open source · Self-host free · Cloud coming soon', badges: ['Self-host: $0', 'Cloud: waitlist open', 'MCP: Claude, Codex, ChatGPT, Cursor'] },
+  en: { ...CARDS.en, eyebrow: 'Open source · Self-host free · Cloud coming soon', badges: ['Self-host: $0', 'Cloud: waitlist open', 'MCP: Claude, ChatGPT, Codex, Cursor'] },
   de: { ...CARDS.de, eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud bald verfügbar', badges: ['Selbst gehostet: 0 €', 'Cloud: Warteliste offen', 'Dein Server, deine Daten'] },
 };
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -138,7 +159,7 @@ for (const [prefix, lang, c] of [...Object.entries(CARDS).map(([l, x]) => ['', l
 *{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:radial-gradient(900px 420px at 92% -10%,#1d3a8a 0%,rgba(29,58,138,0) 62%),#0a1430;color:#f4f4ef;font-family:D,system-ui,sans-serif;letter-spacing:.01em;padding:58px 64px;display:flex;flex-direction:column}
 .top{display:flex;align-items:center;gap:14px;font:600 26px D;letter-spacing:-.01em}.mk{width:46px;height:46px;border-radius:12px}
 .eb{color:#f3c983;font-weight:500;font-size:22px;letter-spacing:.03em;margin:34px 0 16px}
-h1{font:600 ${lang === 'de' ? 62 : 68}px/1.08 D;letter-spacing:-.022em;margin:0;max-width:1050px}
+h1{font:600 ${lang === 'de' ? 52 : 58}px/1.08 D;letter-spacing:-.022em;margin:0;max-width:1070px}
 p{font-size:26px;color:#c3c8d3;margin:20px 0 0;max-width:1000px}
 .b{display:flex;gap:12px;margin-top:auto}.b span{border:1px solid #ffffff33;border-radius:999px;padding:9px 18px;font-weight:500;font-size:20px;color:#dfe3ea}.b span:first-child{background:linear-gradient(180deg,#ffc56a,#ffb547);color:#0a1430;border-color:#ffb547}
 .u{position:absolute;right:64px;top:72px;font:500 22px D;color:#aeb4c2}

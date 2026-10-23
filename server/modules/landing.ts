@@ -1,9 +1,10 @@
-import { existsSync, readFileSync, statSync } from 'node:fs';
+import { closeSync, existsSync, openSync, readFileSync, readSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import QRCode from 'qrcode';
 import type { Module } from '../core/app.js';
 import { html, notFound, redirect, type Ctx, type RawResult } from '../core/http.js';
 import { PERMISSIONS } from '../core/permissions.js';
+import { ICON_PACKS, THEME_IDS } from '../services/appearance-model.js';
 import { PLAN_INFO, defaultSettings } from '../services/cloud.js';
 import { CATALOG } from '../services/integrations-catalog.js';
 import { WAITLIST_ANCHOR } from '../services/cloud-waitlist.js';
@@ -11,7 +12,10 @@ import { hasCalcQuery, parseCalc } from '../services/landing-calc.js';
 import { MIX, mixTools, parseMatrix, type Matrix } from '../services/landing-compare.js';
 import { parseStack } from '../services/landing-stack.js';
 import type { Lang } from '../services/landing-copy.js';
+import type { ShotKey } from '../services/landing-agentic-copy.js';
 import { CSP, defaultCalc, pagePath, renderLanding, sitemapXml, type LandingData, type PageKind, type Shot } from '../services/landing-page.js';
+import { BUILTIN_ACTION_META } from '../services/wfx-catalog.js';
+import { TRIGGERS } from '../services/workflow-engine.js';
 import { getBranding } from './agency.js';
 import { cloudEnabled, cloudSettings } from './cloud.js';
 import { TOOLS } from './mcp.js';
@@ -25,7 +29,7 @@ import { TOOLS } from './mcp.js';
  * Data: prices from the cloud settings (or the list prices), the product name from the agency branding (the shipped default
  * shows as HyperLevel), counts from the running code, the latest Android APK, the GitHub star count (fetched in the
  * background, cached, hidden when unavailable), the comparison research (competitors.json, replaces.json) and screenshots
- * from web/public/landing/.
+ * from web/public/landing/ – each shown only while its file exists, with its real size read from the file.
  * Cloud waitlist mode (modules/cloud-waitlist.ts): the page leads with self-hosting and shows the waitlist form instead of selling
  * the cloud; `?wl=` carries the result of a form post, `?plan=` preselects a plan.
  * Docs: docs/landing.md.
@@ -34,8 +38,31 @@ import { TOOLS } from './mcp.js';
 const PRODUCT = 'HyperLevel';
 const STARS_API = 'https://api.github.com/repos/BAISESYSTEMS/hyperlevel';
 const STARS_TTL = 6 * 3600_000;
-/** Screenshots of the demo in the hero, in the order of the copy's alt texts (scripts/landing-assets.mjs makes them). */
-const SHOTS = ['shot-workflow.webp', 'shot-inbox.webp', 'shot-funnel.webp', 'shot-pipeline.webp'];
+/** Screenshots (scripts/landing-assets.mjs makes them): the hero's crossfade and the spotlights' pictures, by key. */
+const SHOTS: Record<ShotKey, string> = {
+  jarvis: 'shot-jarvis.webp',
+  pipeline: 'shot-pipeline.webp',
+  inbox: 'shot-inbox.webp',
+  workflow: 'shot-workflow.webp',
+  funnel: 'shot-funnel.webp',
+  academy: 'shot-academy.webp',
+  themes: 'shot-themes.webp',
+  xr: 'shot-xr.webp',
+};
+
+/** Width and height from a WebP or PNG header (null for anything else), so the page reserves the right space. */
+export function imageSize(b: Buffer): { w: number; h: number } | null {
+  if (b.length >= 24 && b.readUInt32BE(0) === 0x89504e47) return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+  if (b.length < 30 || b.toString('ascii', 0, 4) !== 'RIFF' || b.toString('ascii', 8, 12) !== 'WEBP') return null;
+  const kind = b.toString('ascii', 12, 16);
+  if (kind === 'VP8X') return { w: 1 + b.readUIntLE(24, 3), h: 1 + b.readUIntLE(27, 3) };
+  if (kind === 'VP8L') {
+    const v = b.readUInt32LE(21);
+    return { w: (v & 0x3fff) + 1, h: ((v >> 14) & 0x3fff) + 1 };
+  }
+  if (kind === 'VP8 ') return { w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff };
+  return null;
+}
 
 export const landingEnabled = () => process.env.PGHL_LANDING === '1';
 
@@ -76,7 +103,28 @@ export const landingModule: Module = {
       return value;
     };
     const matrix = (): Matrix | undefined => parseMatrix(readJson('competitors.json'));
-    const shots = (): Shot[] => SHOTS.filter((n) => fileOf(n)).map((n) => ({ src: `/landing/${n}`, w: 1440, h: 900 }));
+    const sizeCache = new Map<string, { mtime: number; size: { w: number; h: number } }>();
+    const sizeOf = (f: string) => {
+      const mtime = statSync(f).mtimeMs;
+      const hit = sizeCache.get(f);
+      if (hit && hit.mtime === mtime) return hit.size;
+      const b = Buffer.alloc(32);
+      const fd = openSync(f, 'r');
+      try {
+        readSync(fd, b, 0, 32, 0);
+      } finally {
+        closeSync(fd);
+      }
+      const s = imageSize(b);
+      const size = s && s.w > 0 && s.h > 0 ? s : { w: 1440, h: 900 };
+      sizeCache.set(f, { mtime, size });
+      return size;
+    };
+    const shots = (): Shot[] =>
+      (Object.entries(SHOTS) as [ShotKey, string][]).flatMap(([key, n]) => {
+        const f = fileOf(n);
+        return f ? [{ key, src: `/landing/${n}`, ...sizeOf(f) }] : [];
+      });
 
     // --- GitHub stars: fetched in the background, never on the request path ------------------------------------------------
     const stars: { n?: number; at: number; busy?: Promise<void> } = { at: 0 };
@@ -104,6 +152,11 @@ export const landingModule: Module = {
         areas: Object.keys(PERMISSIONS).length,
         tools: TOOLS.length + ((app.services.mcpTools as unknown[] | undefined)?.length ?? 0),
         integrations: CATALOG.length + ((app.services.catalogExtra as unknown[] | undefined)?.length ?? 0),
+        // the workflow catalogue's own way of counting (modules/wfx-tools.ts): built-in plus what modules register
+        triggers: new Set([...TRIGGERS, ...((app.services.workflowTriggers as string[] | undefined) ?? [])]).size,
+        actions: new Set([...Object.keys(BUILTIN_ACTION_META), ...Object.keys((app.services.workflowActions as Record<string, unknown> | undefined) ?? {})]).size,
+        themes: THEME_IDS.length,
+        iconPacks: ICON_PACKS.length,
         tests: Number.isInteger(tests) && tests > 0 ? tests : undefined,
       };
     };

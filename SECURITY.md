@@ -34,7 +34,7 @@ is live – GitHub advisories are the preferred channel). This address is also t
 | --- | --- |
 | Latest `0.0.N` release (and `main`) | ✅ security fixes |
 | Older `0.0.N` releases | ❌ please update |
-| Android app: latest `1.0.x` from your server's `/downloads/gohigh.apk` | ✅ |
+| Android app: latest `1.0.x` from your server's `/downloads/hyperlevel.apk` | ✅ |
 
 Only the **latest release** receives security fixes. HyperLevel releases often (`0.0.N`, one step per
 production deploy); please update before reporting and keep your installation current

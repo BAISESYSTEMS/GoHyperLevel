@@ -23,6 +23,8 @@ goes through CSS custom properties and a handful of attributes on `<html>`.
 
 ## What people can choose
 
+![Four looks of the same dashboard: HyperLevel Standard (light), Mitternacht (dark, duotone icons), Wald (vibrant area colours, solid icons) and a white-label agency with its own logo and colour](assets/themes.png)
+
 Per user (stored on the server, so it follows the account to every device; `localStorage` only makes the first
 paint fast):
 
@@ -249,7 +251,7 @@ The branding has five image slots: `logo_url`, `logo_dark_url`, `mark_url`, `mar
 `show_name` (`no` hides the app name beside the logo). The sidebar picks by *its own colour*: a dark sidebar
 takes the "for dark" logo when there is one, a light sidebar (e.g. *Papier*) the normal one. In the narrow
 sidebar the square mark is used; without a mark the wide logo is cropped to its left square, without any logo
-the first letter of the app name. The login page takes the "for dark" logo when the page is dark. The favicon falls back to the mark. Clients can have their own set; empty
+the HyperLevel icon (`/icon.svg`, `PRODUCT_ICON` in `web/src/theme/brand-icon.ts`) – never an initial. The login page takes the "for dark" logo when the page is dark (no wide logo: the mark, else the HyperLevel icon). The favicon falls back to the mark. Clients can have their own set; empty
 slots fall back to the agency's.
 
 Uploads accept PNG, JPEG, WebP and SVG (raster ≤ 1 MB, SVG ≤ 256 KB). Raster files must really be what they

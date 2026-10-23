@@ -436,6 +436,12 @@ describe('the agent: role prompt, fallback models, rules when no model answers',
       model.reset();
       model.reply(says('Seit 28 Tagen ist es ruhig – soll ich einen Lead-Magneten vorbereiten?'));
       expect((await t.api.post('/api/companion/growth/run', { kind: 'daily' })).data.review.source).toBe('ai');
+      // a fallback model that answers in plain words instead of JSON still counts (a fresh day's allowance)
+      t.app.db.run("DELETE FROM ai_calls WHERE purpose = 'companion_growth'");
+      model.reset();
+      model.reply(json({ content: [{ type: 'text', text: 'Diese Woche ist ruhig – soll ich eine Reaktivierung vorbereiten?' }], model: 'claude-haiku-5-5', stop_reason: 'end_turn', usage: { input_tokens: 5, output_tokens: 5 } }));
+      const plain = await t.api.post('/api/companion/growth/run', { kind: 'daily' });
+      expect(plain.data.review).toMatchObject({ source: 'ai', say: 'Diese Woche ist ruhig – soll ich eine Reaktivierung vorbereiten?' });
       // a number that is not in the data → the rules' words (a fresh day's allowance, so the model is really asked)
       t.app.db.run("DELETE FROM ai_calls WHERE purpose = 'companion_growth'");
       model.reset();

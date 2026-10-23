@@ -115,6 +115,8 @@ reads *3D-Vorschau* and the same scene runs in the browser with a mouse-orbit ca
 not shown. Esc and ✕ close the layer. Everything lives in a lazy chunk (`XrViewer`, ≈ 48 KB / 18 KB gzip) that downloads when the
 button is pressed.
 
+![A board as floating panels on a curved wall – the 3D preview in the browser](assets/xr.png)
+
 ### The scene
 
 - **Board:** the board's grid becomes a **curved wall** around you: a widget's column decides its angle on a circle of 2.2 m, its row

@@ -151,7 +151,7 @@ alten Meldungen.
 ## Öffentliche APK für alle
 
 Die Startseite des Projekts ([landing.md](landing.md)) bietet die APK von gohyperlevel.com zum Herunterladen an: Knopf auf
-`/downloads/gohigh.apk` mit Version, Größe und SHA-256 der zuletzt hochgeladenen Datei, QR-Code zur Seite `/android`,
+`/downloads/hyperlevel.apk` (früher `gohigh.apk`, bleibt als Alias) mit Version, Größe und SHA-256 der zuletzt hochgeladenen Datei, QR-Code zur Seite `/android`,
 Anleitung für „Apps aus dieser Quelle zulassen“. Download, Prüfsumme und Selbst-Update sind die vorhandenen Wege (siehe
 oben) – neu ist nur der Platz auf der Startseite.
 

@@ -408,7 +408,7 @@ describe('APK distribution & App Links', () => {
 
   it('has nothing to offer before the first upload', async () => {
     expect((await t.api.raw('/api/mobile/app')).status).toBe(404);
-    expect((await t.api.raw('/downloads/gohigh.apk')).status).toBe(404);
+    expect((await t.api.raw('/downloads/hyperlevel.apk')).status).toBe(404);
     const page = await (await t.api.raw('/android')).text();
     expect(page).toContain('noch nicht verfügbar');
   });
@@ -422,14 +422,18 @@ describe('APK distribution & App Links', () => {
     const r = await put(apk, { 'x-version-code': '3', 'x-version-name': '1.0.0', 'x-changelog': encodeURIComponent('Erste Version – mit Widgets') });
     const data = await r.json();
     expect(r.status).toBe(200);
-    expect(data).toMatchObject({ version_code: 3, version_name: '1.0.0', sha256: sha(apk), size: apk.length, changelog: 'Erste Version – mit Widgets', apk_url: 'http://localhost/downloads/gohigh.apk', min_supported_code: 0 });
+    expect(data).toMatchObject({ version_code: 3, version_name: '1.0.0', sha256: sha(apk), size: apk.length, changelog: 'Erste Version – mit Widgets', apk_url: 'http://localhost/downloads/hyperlevel.apk', min_supported_code: 0 });
     expect((await put(apk, { 'x-version-code': '2', 'x-version-name': '0.9' })).status).toBe(400);
 
     const meta = await (await t.api.raw('/api/mobile/app')).json();
-    expect(meta).toEqual({ version_code: 3, version_name: '1.0.0', apk_url: 'http://localhost/downloads/gohigh.apk', sha256: sha(apk), size: apk.length, changelog: 'Erste Version – mit Widgets', min_supported_code: 0, uploaded_at: expect.any(String), page_url: 'http://localhost/android' });
-    const dl = await t.api.raw('/downloads/gohigh.apk');
+    expect(meta).toEqual({ version_code: 3, version_name: '1.0.0', apk_url: 'http://localhost/downloads/hyperlevel.apk', sha256: sha(apk), size: apk.length, changelog: 'Erste Version – mit Widgets', min_supported_code: 0, uploaded_at: expect.any(String), page_url: 'http://localhost/android' });
+    const dl = await t.api.raw('/downloads/hyperlevel.apk');
     expect(dl.headers.get('content-type')).toBe('application/vnd.android.package-archive');
-    expect(dl.headers.get('content-disposition')).toContain('gohigh.apk');
+    expect(dl.headers.get('content-disposition')).toContain('hyperlevel.apk');
+    // the old file name still serves the same file for apps installed before the rename
+    const old = await t.api.raw('/downloads/gohigh.apk');
+    expect(old.status).toBe(200);
+    expect(old.headers.get('x-apk-sha256')).toBe(sha(apk));
     expect(sha(Buffer.from(await dl.arrayBuffer()))).toBe(sha(apk));
     expect((await get('/api/mobile/me')).data.app).toMatchObject({ version_code: 3, sha256: sha(apk) });
     // A device token may not upload.
@@ -444,7 +448,9 @@ describe('APK distribution & App Links', () => {
     expect(page).toContain('HyperLevel fürs Handy');
     expect(page).toContain('Version 1.0.0 (3)');
     expect(page).toContain('<svg');
-    expect(page).toContain('href="/downloads/gohigh.apk"');
+    expect(page).toContain('href="/downloads/hyperlevel.apk"');
+    // the brand mark is the app icon unless the agency uploaded its own logo – never a bare letter
+    expect(page).toMatch(/<img src="\/icon\.svg"/);
     expect(page).toContain('Apps aus dieser Quelle zulassen');
     expect(r.headers.get('content-security-policy')).toContain("default-src 'none'");
   });

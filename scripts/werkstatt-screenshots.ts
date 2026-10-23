@@ -107,7 +107,7 @@ app.services.aiReady = () => null;
 app.services.aiRun = async (input: any) => {
   const text = String(input.user);
   const body = input.purpose === 'werkstatt_plan' ? (text.includes('Wunsch: Rückrufe') ? stage1 : { stage: 2, title: manifestOf('geburtstags-erinnerungen').name, summary: manifestOf('geburtstags-erinnerungen').description, rationale: 'Eine tägliche Prüfung und eine eigene Übersicht brauchen ein Plugin – Automationen allein zeigen keine Liste.', steps: [], manifest_json: JSON.stringify(manifestOf('geburtstags-erinnerungen')), notes: ['Das Plugin legt nur Aufgaben an – es versendet keine Nachrichten.'] }) : input.purpose === 'werkstatt_review' ? okReview : answer('geburtstags-erinnerungen');
-  return { text: JSON.stringify(body), model: 'claude-sonnet-5-5', stopReason: 'end_turn', usage, ms: 5 };
+  return { text: JSON.stringify(body), model: 'claude-opus-5-5', stopReason: 'end_turn', usage, ms: 5 };
 };
 
 const server = await instance.listen();
@@ -140,6 +140,8 @@ try {
   const locations: { id: string; name: string }[] = (await admin.call('GET', '/api/locations')).map((l: any) => ({ id: l.id, name: l.name }));
   const loc = (name: string) => locations.find((l) => l.name === name)!.id;
   const A = loc('Nordlicht Digital');
+  // The Werkstatt needs a top model (its model gate): the scripted AI answers as one.
+  for (const l of locations) await admin.call('PUT', '/api/ai/settings', { model: 'claude-opus-5-5' }, { 'x-location-id': l.id });
   const aa = client(A);
   await aa.call('POST', '/api/auth/login', { email, password });
   await aa.call('PUT', '/api/werkstatt/policy', { who: 'admins', approval: true, budget_usd: 10 });
@@ -191,6 +193,15 @@ try {
     const context = await browser.newContext({ viewport, deviceScaleFactor: 1, colorScheme: scheme, locale: 'de-DE', timezoneId: 'Europe/Berlin' });
     const r = await context.request.post(`${base}/api/auth/login`, { data: { email, password }, headers: { 'x-pghl': '1' } });
     if (!r.ok()) throw new Error(`login failed: ${r.status()}`);
+    // No first-run banners on the shots (as in scripts/shots-kit.mjs): Einfach-Modus offer answered, Academy welcome card hidden.
+    await context.request.patch(`${base}/api/appearance`, { data: { goals: ['all'], goal_asked: true }, headers: { 'x-pghl': '1' } });
+    await context.addInitScript(() => {
+      try {
+        localStorage.setItem('pghl.academyWelcome', '1');
+      } catch {
+        /* private mode */
+      }
+    });
     const page = await context.newPage();
     for (const [path, file, ready, height] of list) {
       await page.setViewportSize({ width: viewport.width, height: height ?? viewport.height });

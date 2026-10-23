@@ -17,6 +17,11 @@
 
 </div>
 
+**Eine einzige Quelle der Wahrheit – gefüllt von deinen Agenten, nicht von dir.** Niemand tippt mehr Daten ins CRM:
+Claude, ChatGPT, Codex, Hermes oder eigene Agenten legen Kontakte, Deals, Notizen, Aufgaben und Rechnungen über MCP und die
+REST-API an und halten sie aktuell. Alle Agenten und alle Menschen arbeiten auf derselben Datenbank – mit denselben Rechten,
+demselben Protokoll und demselben Rückgängig.
+
 **Alles komplett offen und anpassbar – und offen für Beiträge:** Jedes Modul, jede Ansicht und jeder Workflow-Schritt steht unter
 der AGPL-3.0 in diesem Repository. Themes, Logos, eigene Domains, eigene Module, eigene KI – ohne Enterprise-Sperre. Mitmachen:
 [Wie du beitragen kannst](README.md#open-for-contributions) · [CONTRIBUTING.md](CONTRIBUTING.md).

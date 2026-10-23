@@ -7,8 +7,23 @@ import { buildCss, buildVars, modeTokens, resolveAccent } from '../web/src/theme
 import { DEPTS, DEPT_OF_ROUTE, deptColors } from '../web/src/theme/depts';
 import { THEMES, THEME_LIST } from '../web/src/theme/themes';
 import { SOLID } from '../web/src/theme/packs/solid';
+import { PRODUCT_ICON } from '../web/src/theme/brand-icon';
 
 const read = (p: string) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
+
+describe('brand mark without an own logo', () => {
+  it('is the HyperLevel icon in every brand-mark spot – never an initial, whatever the name (e.g. the demo\'s "HyperLevel Demo")', () => {
+    expect(PRODUCT_ICON).toBe('/icon.svg');
+    expect(read('web/public/icon.svg')).toContain('<svg');
+    for (const f of ['web/src/theme/Sidebar.tsx', 'web/src/pages/Login.tsx', 'web/src/pages/OAuthConsent.tsx', 'web/src/theme/BrandingLook.tsx']) {
+      const src = read(f);
+      expect(src, f).toMatch(/PRODUCT_ICON\}/);
+      // No letter avatar from the brand name, no name-dependent icon rule, no leftover "G" of the old name.
+      expect(src, f).not.toMatch(/(?:b|branding|brand|name)\)?\.slice\(0, 1\)\.toUpperCase\(\)/);
+      expect(src, f).not.toMatch(/name === 'HyperLevel'|\|\| 'G'\)/);
+    }
+  });
+});
 
 /** CSS `color-mix(in srgb, fg a%, transparent)` over a background: plain alpha compositing in sRGB. */
 const over = (bg: string, fg: string, a: number) => {

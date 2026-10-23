@@ -6,6 +6,7 @@ import { DEMO_PAGE_NOTE, demoBlocks, withDemoNote } from '../server/modules/demo
 import { deliverEmail, deliverSms } from '../server/services/messaging.js';
 import { safeFetch } from '../server/services/net.js';
 import { blockedConnections, installOutboundGuard, isLoopbackHost, outboundGuardActive, uninstallOutboundGuard } from '../server/services/outbound-guard.js';
+import { PRODUCT_ICON } from '../web/src/theme/brand-icon.js';
 
 /** 'EDEMOBLOCKED' when the guard refused the call somewhere down the error chain (clients re-wrap errors). */
 const errCode = (e: any): string | undefined => {
@@ -124,6 +125,9 @@ describe('demo mode (PGHL_DEMO_MODE=1)', () => {
     // The agency „Nordlicht Digital“ (white-label) and its five clients, each with a believable amount of data.
     expect(t.app.db.all('SELECT name FROM locations ORDER BY name').map((r: any) => r.name)).toEqual(['Elektro Meyer', 'FitWerk Coaching', 'Nordlicht Digital', 'Praxis Sonnenweg', 'Rösterei Hafenbohne', 'Taktwerk Software']);
     expect(n(`SELECT COUNT(*) n FROM locations WHERE json_extract(settings, '$.branding.name') = 'Nordlicht Digital'`)).toBe(5);
+    // The agency is the HyperLevel demo without a logo of its own: sidebar and login page show PRODUCT_ICON (web/src/theme/brand-icon.ts).
+    expect((await t.api.get('/api/branding')).data).toMatchObject({ name: 'HyperLevel Demo', logo_url: '', mark_url: '', logo_dark_url: '', mark_dark_url: '' });
+    expect(PRODUCT_ICON).toBe('/icon.svg');
     expect(n('SELECT COUNT(*) n FROM contacts')).toBeGreaterThan(150);
     expect(n('SELECT COUNT(*) n FROM opportunities')).toBeGreaterThan(40);
     expect(n('SELECT COUNT(*) n FROM appointments')).toBeGreaterThan(200);

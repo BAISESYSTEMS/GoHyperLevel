@@ -42,6 +42,12 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
 
 </div>
 
+> [!IMPORTANT]
+> **One single source of truth – filled by your agents, not by you.** Nobody types data into this CRM any more:
+> Claude, ChatGPT, Codex, Hermes or your own agents create and maintain contacts, deals, notes, tasks and invoices
+> over MCP and the REST API. Every agent and every person works on the same database – with the same permissions,
+> the same audit log and the same undo. ([AI & MCP](#ai--mcp))
+
 > [!TIP]
 > **Open for contributions – come build with us.** Every module, every screen and every workflow step is open source and
 > meant to be extended. Pick a [good first issue](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22),
@@ -200,6 +206,14 @@ reset, nothing ever leaves the server).
   <tr>
     <td><b>Helpdesk</b><br>Tickets with SLAs, knowledge base & help center, CSAT/NPS, health scores.<br><img src="docs/assets/helpdesk.png" alt="Helpdesk"></td>
     <td><b>Revenue</b><br>Invoices & offers, subscriptions, Stripe checkout with order bumps and upsells, contracts with e-signature.<br><img src="docs/assets/invoices.png" alt="Invoices"></td>
+  </tr>
+  <tr>
+    <td><b>Focus mode with Jarvis</b><br>Ask instead of click: <i>Was brennt?</i> gives a briefing with hot spots and next steps, requests go straight to the agent – typed or spoken.<br><img src="docs/assets/jarvis-focus.png" alt="Focus mode: Jarvis' briefing with hot spots and next steps"></td>
+    <td><b>Academy</b><br>Guided tours in the real interface – a 14-chapter handover guide, 110+ module tours, badges and a practice company.<br><img src="docs/assets/academy.png" alt="The Academy with a running tour that points at the 14-chapter guide"></td>
+  </tr>
+  <tr>
+    <td><b>Themes & white label</b><br>19 themes in light and dark, accent and area colours, six icon packs and your own logo – per person, with agency defaults.<br><img src="docs/assets/themes.png" alt="Four looks of the dashboard: standard, dark with duotone icons, area colours and a white-label logo"></td>
+    <td><b>XR</b><br>Raum-Modus for headsets and display glasses, boards as floating panels in WebXR – or as a 3D preview in the browser.<br><img src="docs/assets/xr.png" alt="A board as floating panels on a curved wall in the 3D preview"></td>
   </tr>
   <tr>
     <td><b>Agency cockpit</b><br>All sub-accounts at a glance, snapshots, white-label, SaaS mode.<br><img src="docs/assets/agency.png" alt="Agency overview"></td>

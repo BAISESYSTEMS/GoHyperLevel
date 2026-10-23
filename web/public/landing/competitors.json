@@ -1098,7 +1098,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "Mehrere Pipelines, Kanban, gewichteter Forecast, Positionen; Listenansicht in Kürze",
+       "note": "Mehrere Pipelines, Kanban und Listenansicht mit Smart Lists, gewichteter Forecast, Positionen",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
@@ -1663,7 +1663,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "Drag & Drop, 23 deutsche Vorlagen, CMS, eigene Domains mit TLS, Barrierefreiheits-Check; KI-Seitengenerator in Kürze",
+       "note": "Drag & Drop, 23 deutsche Vorlagen, CMS, eigene Domains mit TLS, Barrierefreiheits-Check; KI-Seitengenerator (Funnel- & Website-KI)",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
       },
       "highlevel": {
@@ -1848,9 +1848,9 @@
      "label_en": "Reputation / review management",
      "cells": {
       "gohyperlevel": {
-       "v": "partial",
-       "note": "Bewertungsanfragen, Widget und KI-Antworten nur für Google; kein Facebook, Yelp oder Trustpilot",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
+       "v": "yes",
+       "note": "Bewertungsanfragen (auch in Massen), Widget, KI-Antwortentwürfe; Google, Facebook, Trustpilot, ProvenExpert, Yelp und Tripadvisor über ihre APIs, weitere per Import; kein Listings-Management",
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/reputation.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1918,7 +1918,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "140+ Trigger, 130+ Aktionen, Versionen, Testlauf, Fehler-Workflows; Schrittlisten-Editor (visueller Canvas in Kürze)",
+       "note": "160+ Trigger, 130+ Aktionen, visueller Canvas-Editor und Liste, Versionen, Testlauf, Fehlerbehandlung",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/workflow-actions.md"
       },
       "highlevel": {
@@ -1980,7 +1980,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "In-App-Agent und eigene KI-Mitarbeiter mit 240+ Werkzeugen, Freigabe vor Schreibzugriffen, Zeitpläne",
+       "note": "In-App-Agent und eigene KI-Mitarbeiter mit 350+ Werkzeugen, Freigabe vor Schreibzugriffen, Zeitpläne",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/agent.md"
       },
       "highlevel": {
@@ -2103,8 +2103,8 @@
      "label_en": "Voice AI phone agent",
      "cells": {
       "gohyperlevel": {
-       "v": "partial",
-       "note": "KI-Telefonagent nur für eingehende Anrufe (bucht Termine, leitet weiter); braucht eigenes Twilio",
+       "v": "yes",
+       "note": "KI-Telefonagent für eingehende und ausgehende Anrufe (bucht Termine, qualifiziert, erinnert); braucht eigenes Twilio-Konto",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/voice.md"
       },
       "highlevel": {
@@ -2166,7 +2166,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "MCP-Server mit 240+ Tools, OAuth 2.1, Ein-Klick-Einrichtung für Claude, ChatGPT, Cursor, Codex",
+       "note": "MCP-Server mit 350+ Tools, OAuth 2.1, Ein-Klick-Einrichtung für Claude, ChatGPT, Cursor, Codex",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/agent.md"
       },
       "highlevel": {
@@ -2359,7 +2359,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "Einzel, Round Robin, Kollektiv, Klassen; Zahlung bei Buchung; Google/Outlook-Sync; Wochenansicht in Kürze",
+       "note": "Einzel, Round Robin, Kollektiv, Klassen; Zahlung bei Buchung; Google/Outlook-Sync; Tages-, Wochen-, Monats- und Teamansicht",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/booking.md"
       },
       "highlevel": {
@@ -2483,7 +2483,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "Verträge mit gezeichneter/getippter Signatur, SHA-256 und Audit-Trail; ein Unterzeichner pro Vertrag",
+       "note": "Verträge mit gezeichneter/getippter Signatur, SHA-256 und Audit-Trail; mehrere Unterzeichner mit Rolle und Reihenfolge",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
       },
       "highlevel": {
@@ -2792,9 +2792,9 @@
      "label_en": "Storefront with cart",
      "cells": {
       "gohyperlevel": {
-       "v": "no",
-       "note": "Kein Warenkorb/Shop; Produkte über Kauflinks, Checkout leitet zu Stripe",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/stripe.md"
+       "v": "yes",
+       "note": "Onlineshop mit Warenkorb, Varianten und Lagerbestand, Checkout auf der eigenen Seite, Versandkosten, Gutscheinkarten; jede Bestellung wird eine festgeschriebene Rechnung",
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/store.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2854,9 +2854,9 @@
      "label_en": "Multiple card payment gateways",
      "cells": {
       "gohyperlevel": {
-       "v": "no",
-       "note": "Karten nur über Stripe; daneben SEPA-Lastschrift ohne Stripe und PayPal.me-Link",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/stripe.md"
+       "v": "yes",
+       "note": "Stripe, PayPal und Mollie (iDEAL, SEPA-Überweisung, Karten, Klarna) nebeneinander; dazu SEPA-Lastschrift ohne Zahlungsanbieter",
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/payment-providers.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3612,8 +3612,9 @@
      "label_en": "Office: documents, spreadsheets, slides, PDF",
      "cells": {
       "gohyperlevel": {
-       "v": "no",
-       "note": "Nicht enthalten – das Office-Modul ist in dieser Version noch nicht veröffentlicht"
+       "v": "partial",
+       "note": "Dokumente, Tabellen, Präsentationen und PDFs mit Versionen, Kommentaren und Bearbeitungssperre; die Browser-Editoren sind optional und werden selbst installiert",
+       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/office.md"
       },
       "highlevel": {
        "v": "no",
@@ -3929,7 +3930,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "yes",
-       "note": "Kurse, Community, Tickets und geteilte Projekt-Boards",
+       "note": "Kurse, Community, Tickets, geteilte Projekt-Boards, eigene Termine und freigegebene Dateien (mit Uploads)",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/courses.md"
       },
       "highlevel": {
@@ -4308,7 +4309,7 @@
      "cells": {
       "gohyperlevel": {
        "v": "partial",
-       "note": "~20 eingebaute Integrationen, Composio (250+ Apps), Nango, MCP-Client; eigener Plugin-Marktplatz noch klein",
+       "note": "50+ eingebaute Integrationen, Composio (250+ Apps), Nango, MCP-Client; eigener Plugin-Marktplatz noch klein",
        "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
       },
       "highlevel": {

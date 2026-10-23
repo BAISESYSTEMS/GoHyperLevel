@@ -8,6 +8,7 @@ import { getPasskey, passkeyError, passkeysSupported } from '../webauthn';
 import { Later, lazyPages } from '../lazy';
 import { ProviderIcon } from '../provider-icon';
 import { resolveDark, usePrefs } from '../theme/store';
+import { PRODUCT_ICON } from '../theme/brand-icon';
 import { serverText, useT } from '../i18n';
 import { LanguageLinks } from '../i18n/LanguageMenu';
 
@@ -55,18 +56,18 @@ const errText = (x: unknown) => serverText((x as Error).message);
 function Shell({ branding, title, text, children }: { branding: Branding; title: string; text?: ReactNode; children: ReactNode }) {
   const t = useT('login');
   // The card is dark in dark mode: take the logo made for dark surfaces when there is one.
-  const logo = (resolveDark(usePrefs().mode) ? branding.logo_dark_url : '') || branding.logo_url;
+  const dark = resolveDark(usePrefs().mode);
+  const logo = (dark ? branding.logo_dark_url : '') || branding.logo_url;
+  const mark = (dark ? branding.mark_dark_url : '') || branding.mark_url;
   return (
     <div className="login">
       <div className="card login-card">
         <div className="login-head">
-          {/* no own logo: HyperLevel shows its app icon (as in the sidebar), a white-label brand its initial */}
+          {/* no wide logo: the uploaded square mark, else the HyperLevel icon (as in the sidebar) – never an initial */}
           {logo ? (
             <img src={logo} alt={branding.name} className="login-logo" />
-          ) : branding.name === 'HyperLevel' ? (
-            <img src="/icon.svg" alt={branding.name} className="login-icon" width={52} height={52} />
           ) : (
-            <span className="login-mark">{branding.name.slice(0, 1).toUpperCase()}</span>
+            <img src={mark || PRODUCT_ICON} alt={branding.name} className="login-icon" width={52} height={52} />
           )}
           <h1 style={{ marginBottom: 6 }}>{title}</h1>
           {text && <p className="muted" style={{ marginTop: 0 }}>{text}</p>}

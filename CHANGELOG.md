@@ -6,6 +6,39 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.65] – 2026-10-23
+
+### Changed
+- **Landing page, agentic first:** new tagline "The free, open-source growth OS for solopreneurs, agencies & small agentic
+  businesses" (DE: „Das freie Open-Source-Wachstums-Betriebssystem …"); an "Integrates with your favorite tools" row of real
+  integrations under the hero (CSS-only, pauses on hover/focus, still with reduced motion, each mark checked against the
+  catalogue); new sections *One single source of truth* (agents fill the CRM over MCP/REST with the same rights, audit log and
+  undo), *Jarvis*, *What makes HyperLevel different* (nine reasons), the Academy (14 chapters, 120+ module tours, 10 lessons),
+  designs, XR and *Open source – and open for contributions*; the proof row counts MCP tools, workflow triggers and actions
+  live; features, FAQ and the apps section updated (APK at `/downloads/hyperlevel.apk`, the HyperLevel mark on the download
+  buttons, in the footer and as SVG favicon); optional screenshots `shot-jarvis|academy|themes|xr.webp` show once present, at
+  their real size. Social cards re-rendered with the new tagline.
+- Markenzeichen ohne hochgeladenes Logo ist überall das HyperLevel-Icon (`/icon.svg`) statt eines Anfangsbuchstabens: Seitenleiste,
+  Login, OAuth-Freigabe und Logo-Vorschau – auch für die Demo („HyperLevel Demo“). Ein hochgeladenes Logo oder Zeichen gewinnt weiter.
+- README- und Landing-Bilder neu gerendert (HyperLevel-Icon statt „G GoHigh“, ohne Erststart-Hinweise), dazu neu: Fokus-Modus mit
+  Jarvis, Akademie, Designs nebeneinander und die 3D-Vorschau (XR); Canvas, Wiki und Team-Chat kommen jetzt auch aus dem Skript
+  (`scripts/shots-kit.mjs`). PNGs auf 256 Farben (8,8 → 3,3 MB).
+
+### Fixed
+- Landing page research: our own cells and notes re-checked against the code (store with cart, PayPal and Mollie, reviews from
+  several platforms, outbound AI calls, several signers, list and calendar views, visual workflow editor, Funnel AI, Office as
+  *partial*, 350+ MCP tools); the *Warum wechseln?* paragraphs no longer name these as gaps; the test count is current.
+
+## [1.0.64] – 2026-10-22
+
+### Changed
+- Android-App: Download heißt jetzt `/downloads/hyperlevel.apk` (die alte Adresse `gohigh.apk` bleibt für installierte Apps); die Seite
+  `/android` zeigt das App-Icon bzw. das Agentur-Logo statt eines Anfangsbuchstabens.
+
+### Fixed
+- Wachstums-Briefing: antwortet das Ersatzmodell mit normalem Text statt im JSON-Format, wird die Antwort jetzt genutzt (die
+  Zahlenprüfung bleibt) – bisher fiel das Briefing dann auf die Regel-Worte zurück.
+
 ## [1.0.63] – 2026-10-22
 
 ### Fixed

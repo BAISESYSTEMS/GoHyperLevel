@@ -40,7 +40,7 @@ Neben der Web-App gibt es eine native Android-App (Paket `org.gohigh.android` �
 
 ### Installieren
 
-- Auf dem Handy **`https://<deine-domain>/android`** öffnen (oder den QR-Code auf dieser Seite mit der Kamera scannen) → **App herunterladen** → `gohigh.apk` öffnen → für den Browser „Apps aus dieser Quelle zulassen“ → **Installieren**. Warnt Google Play Protect: „Weitere Details“ → „Trotzdem installieren“ (die App kommt nicht aus dem Play Store).
+- Auf dem Handy **`https://<deine-domain>/android`** öffnen (oder den QR-Code auf dieser Seite mit der Kamera scannen) → **App herunterladen** → `hyperlevel.apk` öffnen → für den Browser „Apps aus dieser Quelle zulassen“ → **Installieren**. Warnt Google Play Protect: „Weitere Details“ → „Trotzdem installieren“ (die App kommt nicht aus dem Play Store).
 - In der App mit den gewohnten Zugangsdaten anmelden (auch mit Zwei-Faktor-Code). Updates meldet die App selbst.
 - Unter **Einstellungen → Mein Konto** steht oben die Karte **„App fürs Handy“** mit dem Link auf `/android`.
 
@@ -67,7 +67,7 @@ curl -X PUT https://crm.example.com/api/mobile/app \
   --data-binary @app-release.apk
 ```
 
-Die Datei (bis 200 MB) liegt unter `<PGHL_DATA_DIR>/mobile-app/` (die letzten drei Versionen), die SHA-256-Prüfsumme rechnet der Server aus. Sofort danach gibt es sie unter `/android`, `/downloads/gohigh.apk` und `GET /api/mobile/app` (Update-Prüfung der App, mit `min_supported_code` – ältere Apps verlangen dann ein Update; optional Header `x-min-supported-code`).
+Die Datei (bis 200 MB) liegt unter `<PGHL_DATA_DIR>/mobile-app/` (die letzten drei Versionen), die SHA-256-Prüfsumme rechnet der Server aus. Sofort danach gibt es sie unter `/android`, `/downloads/hyperlevel.apk` (Alias `/downloads/gohigh.apk`) und `GET /api/mobile/app` (Update-Prüfung der App, mit `min_supported_code` – ältere Apps verlangen dann ein Update; optional Header `x-min-supported-code`).
 
 ### App Links
 

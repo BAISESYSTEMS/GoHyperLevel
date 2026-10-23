@@ -13,6 +13,7 @@ import { BASE, act, navigate } from '../ui';
 import { useSizeClass } from '../ios/viewport';
 import { luminance } from './color';
 import { modeTokens } from './css';
+import { PRODUCT_ICON } from './brand-icon';
 import { DEPT_OF_ROUTE } from './depts';
 import { resolveDark, setShowAll, toggleSidebar, useLook } from './store';
 import { useNavSplit } from '../areas/adaptive';
@@ -133,6 +134,8 @@ export function Sidebar({ session, cur, route, open, entries, childrenOf, preloa
   const wideLogo = (sideDark ? b.logo_dark_url : '') || b.logo_url;
   const mark = (sideDark ? b.mark_dark_url : '') || b.mark_url;
   const showName = b.show_name !== 'no' || (!wideLogo && !mark);
+  // No own logo: the HyperLevel icon, never an initial (theme/brand-icon.ts).
+  const fallback = <img className="brand-mark" src={PRODUCT_ICON} alt="" />;
 
   // Menu: entries the person may use, minus the hidden ones (unless "show all"), headings only above a visible entry.
   const hidden = look.prefs.hidden;
@@ -179,11 +182,11 @@ export function Sidebar({ session, cur, route, open, entries, childrenOf, preloa
           mark || wideLogo ? (
             <img className={mark ? 'brand-mark' : 'brand-wide'} src={mark || wideLogo} alt={b.name} />
           ) : (
-            (b.name === 'HyperLevel' ? <img className="brand-mark" src="/icon.svg" alt="" /> : <span className="logo">{b.name.slice(0, 1).toUpperCase()}</span>)
+            fallback
           )
         ) : (
           <>
-            {wideLogo ? <img className="brand-wide" src={wideLogo} alt={showName ? '' : b.name} /> : mark ? <img className="brand-mark" src={mark} alt="" /> : (b.name === 'HyperLevel' ? <img className="brand-mark" src="/icon.svg" alt="" /> : <span className="logo">{b.name.slice(0, 1).toUpperCase()}</span>)}
+            {wideLogo ? <img className="brand-wide" src={wideLogo} alt={showName ? '' : b.name} /> : mark ? <img className="brand-mark" src={mark} alt="" /> : fallback}
             {showName && <span className="brand-name">{b.name}</span>}
             <QuickMenuButton />
           </>

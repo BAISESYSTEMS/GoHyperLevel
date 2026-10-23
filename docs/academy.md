@@ -2,6 +2,8 @@
 
 Die **Akademie** (Menüpunkt *Akademie*, ganz unten über *Einstellungen*) bringt jedem bei, wie man die Firma mit der App führt – direkt in der echten Oberfläche: Die Tour markiert das Feld oder den Knopf, erklärt ihn in ein, zwei Sätzen, sagt, was du klicken oder tippen sollst, wartet, bis du es gemacht hast (oder du klickst „Weiter“), und geht weiter – auch über mehrere Seiten.
 
+![Die Akademie mit laufender Tour: der erste Schritt zeigt auf den Gesamt-Guide mit 14 Kapiteln](assets/academy.png)
+
 ## Was es gibt
 
 - **Gesamt-Guide „Firma übernehmen“** – 14 Kapitel für eine Nachfolgerin oder einen Nachfolger, zusammen rund fünf Stunden, jedes Kapitel einzeln und jederzeit fortsetzbar: Zugang & Sicherheit → Agentur-Überblick → Tagesroutine (mit Tickets und eigenem Dashboard) → Kunden & Projekte (mit Firmen, eigenen Objekten und Eigenschaften) → Marketing (mit Lead-Scoring und Marketing-Dashboard) → Websites & Funnels → Kurse & Community → Umsatz → Reputation → Service & Support → KI → Einstellungen & Integrationen (mit Integrations-Katalog, Zapier/Make/n8n, HubSpot-Import und Android-App) → Betrieb → Abschluss-Checkliste.

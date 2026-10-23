@@ -166,6 +166,15 @@ try {
     const context = await browser.newContext({ viewport, deviceScaleFactor: 1, colorScheme: scheme, locale: 'de-DE', timezoneId: 'Europe/Berlin' });
     const r = await context.request.post(`${base}/api/auth/login`, { data: { email, password }, headers: { 'x-pghl': '1' } });
     if (!r.ok()) throw new Error(`login failed: ${r.status()}`);
+    // No first-run banners on the shots (as in scripts/shots-kit.mjs): Einfach-Modus offer answered, Academy welcome card hidden.
+    await context.request.patch(`${base}/api/appearance`, { data: { goals: ['all'], goal_asked: true }, headers: { 'x-pghl': '1' } });
+    await context.addInitScript(() => {
+      try {
+        localStorage.setItem('pghl.academyWelcome', '1');
+      } catch {
+        /* private mode */
+      }
+    });
     await context.addInitScript((loc: string) => {
       try {
         localStorage.setItem('pghl.location', loc);

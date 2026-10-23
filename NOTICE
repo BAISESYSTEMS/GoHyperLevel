@@ -61,8 +61,11 @@ Landing page assets (web/public/landing/, shown with PGHL_LANDING=1)
   web/public/landing/OFL-InterTight.txt (file taken from the @fontsource-variable/inter-tight package).
 - The Android robot is reproduced or modified from work created and shared by Google and used
   according to terms described in the Creative Commons 3.0 Attribution License.
-- The small line icons of the page (devices, share, copy, star, arrow) follow Lucide
-  (https://lucide.dev), ISC License.
+- The small line icons of the page (devices, share, copy, star, arrow and the icons of the reasons
+  section) follow Lucide (https://lucide.dev), ISC License.
+- The integration marks in the "Integrates with your favorite tools" row (server/services/landing-logos.ts)
+  are paths from simple-icons 13.21.0 (https://simpleicons.org), CC0 1.0. The marks themselves are
+  trademarks of their owners; the page shows them only for integrations HyperLevel has and says so.
 - Screenshots and social cards are made from a fictional demo instance by scripts/landing-assets.mjs.
 
 ====================================================================================================

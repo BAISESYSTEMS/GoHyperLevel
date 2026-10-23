@@ -13,7 +13,7 @@ import { getBranding } from './agency.js';
  * Distribution of the native Android app (outside the Play Store):
  * - admins upload a signed APK (PUT /api/mobile/app, raw bytes) – stored in the data folder with SHA-256;
  * - `/android` is the public download page (German, white-label, QR code rendered server-side),
- *   `/downloads/gohigh.apk` the latest file, `GET /api/mobile/app` its metadata (the app's update check);
+ *   `/downloads/hyperlevel.apk` the latest file (the old `/downloads/gohigh.apk` stays as an alias for installed apps), `GET /api/mobile/app` its metadata (the app's update check);
  * - `/.well-known/assetlinks.json` verifies Android App Links for the release certificate, so links
  *   to this server open in the app.
  */
@@ -103,7 +103,7 @@ export const mobileAppModule: Module = {
     const { db, router } = app;
     const dir = join(app.config.dataDir, 'mobile-app');
     const latest = () => db.get('SELECT * FROM mobile_app_releases ORDER BY version_code DESC, created_at DESC LIMIT 1');
-    const apkUrl = () => `${app.baseUrl()}/downloads/gohigh.apk`;
+    const apkUrl = () => `${app.baseUrl()}/downloads/hyperlevel.apk`;
     const info = (r = latest()) =>
       r
         ? {
@@ -187,7 +187,7 @@ export const mobileAppModule: Module = {
       db.all('SELECT id, version_code, version_name, changelog, sha256, size, min_supported_code, created_at, file != \'\' AS available FROM mobile_app_releases ORDER BY version_code DESC, created_at DESC LIMIT 50'),
     );
 
-    router.get('/downloads/gohigh.apk', 'public', () => {
+    const download = () => {
       const r = latest();
       const path = r?.file ? join(dir, r.file) : '';
       if (!r || !path || !existsSync(path)) throw notFound('Noch keine App hochgeladen');
@@ -196,7 +196,7 @@ export const mobileAppModule: Module = {
         status: 200,
         headers: {
           'content-type': APK_TYPE,
-          'content-disposition': 'attachment; filename="gohigh.apk"',
+          'content-disposition': 'attachment; filename="hyperlevel.apk"',
           'content-length': String(statSync(path).size),
           'cache-control': 'no-cache',
           'x-content-type-options': 'nosniff',
@@ -205,7 +205,10 @@ export const mobileAppModule: Module = {
         },
         body: readFileSync(path),
       };
-    });
+    };
+    router.get('/downloads/hyperlevel.apk', 'public', download);
+    // the old file name stays for apps that were installed before the rename
+    router.get('/downloads/gohigh.apk', 'public', download);
 
     router.get('/.well-known/assetlinks.json', 'public', () => ({
       __raw: true,
@@ -220,7 +223,8 @@ export const mobileAppModule: Module = {
       const page = `${app.baseUrl()}/android`;
       const qr = await QRCode.toString(page, { type: 'svg', margin: 1, errorCorrectionLevel: 'M', color: { dark: '#111827', light: '#ffffff' } });
       const mb = r ? (r.size / 1024 / 1024).toFixed(1).replace('.', ',') : '';
-      const logo = /^https?:\/\//.test(b.logo_url) ? `<img src="${escapeHtml(b.logo_url)}" alt="" style="max-height:44px;max-width:160px;border-radius:8px">` : `<span class="mark">${escapeHtml(b.name.slice(0, 1).toUpperCase())}</span>`;
+      // the agency's own logo, else the app icon – the page never shows a bare letter
+      const logo = /^(https?:\/\/|\/)/.test(b.logo_url) ? `<img src="${escapeHtml(b.logo_url)}" alt="" style="max-height:44px;max-width:160px;border-radius:8px">` : `<img src="/icon.svg" alt="" width="44" height="44" style="border-radius:10px">`;
       const body = `<div class="wrap">
   <div class="card">
     <div class="head">${logo}<div><h1>${escapeHtml(b.name)} fürs Handy</h1><p class="muted" style="margin:0">Die App für Android – Posteingang, Aufgaben, Termine, Deals und Zahlen aller Projekte.</p></div></div>
@@ -228,7 +232,7 @@ export const mobileAppModule: Module = {
       r
         ? `<div class="grid">
       <div>
-        <p><a class="btn big" href="/downloads/gohigh.apk" download>App herunterladen</a></p>
+        <p><a class="btn big" href="/downloads/hyperlevel.apk" download>App herunterladen</a></p>
         <p class="muted small">Version ${escapeHtml(r.version_name)} (${r.version_code}) · ${mb} MB · ${escapeHtml(new Date(r.uploaded_at).toLocaleDateString('de-DE'))}</p>
         ${r.changelog ? `<h2>Neu in dieser Version</h2><p class="pre">${escapeHtml(r.changelog)}</p>` : ''}
       </div>
@@ -239,7 +243,7 @@ export const mobileAppModule: Module = {
     <h2>So installierst du die App</h2>
     <ol>
       <li>Diese Seite auf dem Android-Handy öffnen (QR-Code scannen) und <b>App herunterladen</b> tippen.</li>
-      <li>Die geladene Datei <code>gohigh.apk</code> öffnen. Fragt Android nach, für den Browser <b>„Apps aus dieser Quelle zulassen“</b> einschalten und zurück.</li>
+      <li>Die geladene Datei <code>hyperlevel.apk</code> öffnen. Fragt Android nach, für den Browser <b>„Apps aus dieser Quelle zulassen“</b> einschalten und zurück.</li>
       <li><b>Installieren</b> tippen. Warnt Google Play Protect, über „Weitere Details“ → „Trotzdem installieren“ bestätigen – die App kommt direkt von uns, nicht aus dem Play Store.</li>
       <li>App öffnen und mit deinen gewohnten Zugangsdaten anmelden. Abmelden oder ein verlorenes Handy sperren: im Browser unter <b>Einstellungen → Mein Konto → Geräte (App)</b>.</li>
     </ol>
@@ -253,7 +257,7 @@ export const mobileAppModule: Module = {
           color: b.color,
           body,
           head: `<style>
-.head{display:flex;gap:14px;align-items:center;margin-bottom:18px}.mark{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;font-size:22px;flex:none}
+.head{display:flex;gap:14px;align-items:center;margin-bottom:18px}
 .grid{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}.grid>div{flex:1 1 240px}.qr{text-align:center;max-width:220px}.qr svg{width:180px;height:180px;display:block;margin:0 auto}
 .btn.big{font-size:18px;padding:14px 26px}.small{font-size:13px}.pre{white-space:pre-line}ol{padding-left:20px}li{margin:6px 0}code{background:#f3f4f6;padding:1px 5px;border-radius:5px}.sum{word-break:break-all;font-size:12px}
 </style>`,

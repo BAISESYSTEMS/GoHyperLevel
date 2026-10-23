@@ -8,6 +8,9 @@ import { WHY_SWITCH } from './landing-switch.js';
 import { stackFoot, stackHtml, type Stack } from './landing-stack.js';
 import { WAITLIST_ANCHOR, waitlistFormHtml, wlText, type WaitlistView, type WlClasses } from './cloud-waitlist.js';
 import { waitlistNote, whyWaitlist, withWaitlist } from './landing-waitlist-copy.js';
+import { AGENTIC, type AgenticCopy, type ShotKey } from './landing-agentic-copy.js';
+import { AGENTIC_CSS, academySection, designsSection, jarvisSection, ossSection, ssotSection, uspSection, xrSection, type AgenticCtx, type Shot } from './landing-agentic.js';
+import { LOGOS_CSS, logosHtml } from './landing-logos.js';
 
 /**
  * Launch landing page (PGHL_LANDING=1), the HTML: `/` (English), `/de`, `/vergleich` and `/vergleich/highlevel` (each also
@@ -16,6 +19,8 @@ import { waitlistNote, whyWaitlist, withWaitlist } from './landing-waitlist-copy
  * carries the result). Pure: the module passes everything in.
  * Cloud waitlist mode (`LandingData.waitlist`): self-hosting is the main call to action, the cloud plans are marked as planned, every
  * cloud button scrolls to the waitlist form (#warteliste) and the texts come from landing-waitlist-copy.ts.
+ * The home page leads with the agentic side: the integrations row (landing-logos.ts) under the hero, then one source of truth, Jarvis,
+ * what makes the product different, the agents, the Academy, designs and XR (landing-agentic.ts, texts in landing-agentic-copy.ts).
  */
 
 export const GITHUB_URL = 'https://github.com/BAISESYSTEMS/hyperlevel';
@@ -25,11 +30,7 @@ export const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/BAISESY
 export const FONT_FILE = '/landing/inter-tight-latin-wght-normal.woff2';
 
 export type PageKind = 'home' | 'compare' | 'highlevel';
-export interface Shot {
-  src: string;
-  w: number;
-  h: number;
-}
+export type { Shot };
 export interface LandingData {
   kind: PageKind;
   lang: Lang;
@@ -41,7 +42,8 @@ export interface LandingData {
   /** /cloud with cloud mode, else the pricing section. */
   cloudUrl: string;
   stars?: number;
-  stats: { areas: number; tools: number; integrations: number; tests?: number };
+  /** Counted from the running code (tests: from the build); themes and icon packs from the appearance model. */
+  stats: { areas: number; tools: number; integrations: number; triggers: number; actions: number; themes: number; iconPacks: number; tests?: number };
   apk?: { version: string; size: number; sha256: string };
   qr: { android: string; ios: string };
   matrix?: Matrix;
@@ -49,6 +51,7 @@ export interface LandingData {
   stack?: Stack;
   calc: { input: CalcInput; mode: 'mix' | 'hl'; mix: string[]; shared: boolean };
   legal: { imprint?: string; privacy?: string };
+  /** Screenshots that exist on disk, by key (the hero shows up to four, the spotlights their own). */
   shots: Shot[];
   /** Cloud waitlist mode: the form to render (services/cloud-waitlist.ts); absent = the cloud is open (or not offered here). */
   waitlist?: WaitlistView;
@@ -62,7 +65,7 @@ const LANG_PREFIX: Record<Lang, string> = { en: '', de: '/de' };
 export const pagePath = (kind: PageKind, lang: Lang) => `${LANG_PREFIX[lang]}${kind === 'home' ? '' : kind === 'compare' ? '/vergleich' : '/vergleich/highlevel'}` || '/';
 
 /** The copy with the product name filled in (strings and the strings functions return). */
-function branded(c: Copy, brand: string): Copy {
+function branded<T>(c: T, brand: string): T {
   const fill = (v: unknown): unknown => {
     if (typeof v === 'string') return v.replace(/\{b\}/g, brand);
     if (typeof v === 'function') return (...a: unknown[]) => fill((v as (...x: unknown[]) => unknown)(...a));
@@ -70,7 +73,7 @@ function branded(c: Copy, brand: string): Copy {
     if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fill(x)]));
     return v;
   };
-  return fill(c) as Copy;
+  return fill(c) as T;
 }
 
 const money = (locale: string, currency: string, amount: number, frac?: number) =>
@@ -101,7 +104,7 @@ const ICON = {
 
 /**
  * Live calculator (same maths as landing-calc.ts – tests/landing.test.ts runs both against each other), share links that follow,
- * the copy button. Data comes from the JSON block #calc-data; the CSP allows exactly this script by its hash.
+ * the copy button, and a spotlight picture that fails to load hides its figure. Data comes from the JSON block #calc-data; the CSP allows exactly this script by its hash.
  */
 export const SCRIPT = `(()=>{const $=s=>document.querySelector(s);const d=JSON.parse(($('#calc-data')||{}).textContent||'null');
 const f=$('#calc');if(d&&f){const fm=(v,c,fr)=>new Intl.NumberFormat(d.locale,{style:'currency',currency:c,currencyDisplay:'narrowSymbol',minimumFractionDigits:fr,maximumFractionDigits:fr}).format(v);
@@ -117,6 +120,7 @@ const q=new URLSearchParams();q.set('m',mode);if(mode==='mix')v.getAll('t').forE
 const url=d.base+d.path+'?'+q+'#rechner';history.replaceState(null,'',d.path+'?'+q+'#rechner');const txt=d.t.share.replace('{eur}',fm(save,'EUR',0));const u=encodeURIComponent(url),tx=encodeURIComponent(txt);
 $('#share-x').href='https://x.com/intent/post?text='+tx+'&url='+u;$('#share-li').href='https://www.linkedin.com/sharing/share-offsite/?url='+u;$('#share-rd').href='https://www.reddit.com/submit?url='+u+'&title='+tx;};
 f.addEventListener('input',run);f.addEventListener('change',run);f.classList.add('live');}
+document.querySelectorAll('img[data-hide]').forEach(i=>{const f=()=>{const p=i.closest('[data-fig]');if(p)p.hidden=true};if(i.complete&&!i.naturalWidth)f();else i.addEventListener('error',f)});
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{const t=document.getElementById(b.dataset.copy);if(!t||!navigator.clipboard)return;navigator.clipboard.writeText(t.textContent.trim()).then(()=>{const l=b.querySelector('.lbl');const o=l.textContent;l.textContent=b.dataset.done;setTimeout(()=>l.textContent=o,1800)})}));})();`;
 export const SCRIPT_HASH = `sha256-${createHash('sha256').update(SCRIPT).digest('base64')}`;
 export const CSP = `default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; font-src 'self'; script-src '${SCRIPT_HASH}'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'`;
@@ -140,12 +144,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 .ic{width:24px;height:24px;flex:none}.ic.sm{width:18px;height:18px}
 .droid{color:#3ddc84}
 
-/* rotating hero words (systeme.io style): pure CSS, one word at a time, reduced motion shows the first */
-.rot{display:inline-block;height:1.22em;overflow:hidden;vertical-align:top;color:var(--accent)}
-.rot-in{display:flex;flex-direction:column;animation:rot calc(var(--n) * 2.2s) cubic-bezier(.7,0,.2,1) infinite}
-.rot-in b{font-weight:inherit;height:1.22em;line-height:1.22em;white-space:nowrap;background:linear-gradient(92deg,#ffe3ad,#ffb547 55%,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
-@keyframes rot{0.00%,10.29%{transform:translateY(-0.0%)}14.29%,24.57%{transform:translateY(-12.5%)}28.57%,38.86%{transform:translateY(-25.0%)}42.86%,53.14%{transform:translateY(-37.5%)}57.14%,67.43%{transform:translateY(-50.0%)}71.43%,81.71%{transform:translateY(-62.5%)}85.71%,96.00%{transform:translateY(-75.0%)}100%{transform:translateY(-87.5%)}}
-@media (prefers-reduced-motion:reduce){.rot-in{animation:none}}
+/* the hero tagline: the product in large type with its key words in a soft gold, who it is for as a smaller second line */
+.hero h1{max-width:24ch}
+.hero h1 .hl{display:block;background:linear-gradient(92deg,#ffe3ad,#ffb547 55%,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero h1 .tail{display:block;max-width:30ch;margin-top:.45em;font-size:clamp(21px,2.5vw,31px);line-height:1.2;font-weight:500;letter-spacing:-.012em;color:#dfe3ec}
 /* a slow aurora behind the hero */
 .dark{position:relative;isolation:isolate;overflow:hidden}
 .dark::before{content:"";position:absolute;inset:-20% -10% auto;height:620px;z-index:-1;background:radial-gradient(40% 50% at 20% 30%,#1d4ed855,transparent 70%),radial-gradient(35% 45% at 80% 20%,#ffb54733,transparent 70%),radial-gradient(30% 40% at 60% 70%,#0ea5e944,transparent 70%);filter:blur(10px);animation:aur 18s ease-in-out infinite alternate}
@@ -252,9 +254,11 @@ h3.small{font-size:15px;margin:22px 0 6px}
 .share a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1px solid #ffffff38;border-radius:10px;text-decoration:none;font-weight:600}
 .calcfoot{font-size:13px;color:var(--muted);margin:14px 0 0;max-width:900px}
 /* AI agents */
-.aigrid{display:grid;gap:18px}
-@media(min-width:960px){.aigrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
-.aitools{font-family:var(--display);font-weight:600;font-size:clamp(40px,6vw,72px);line-height:1;margin:0 0 8px}
+.aigrid{display:grid;gap:18px;margin:0 0 18px}
+@media(min-width:960px){.aigrid{grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr);align-items:center;gap:34px}}
+.aicards{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.aicards h3{font-size:16.5px}.aicards p{font-size:15.5px}
+.aitools{font-family:var(--display);font-weight:600;font-size:clamp(48px,7vw,88px);line-height:1;margin:0 0 8px}
 .aitools span{color:var(--accent2)}
 .snip{background:var(--ink);color:var(--on-dark);border-radius:18px;padding:18px;overflow:hidden}
 .snip .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;font-weight:600;font-size:14px;color:var(--muted-dark)}
@@ -388,12 +392,14 @@ table.cmp{border-collapse:separate;border-spacing:0;min-width:760px;width:100%;f
 .wlbox .fine{color:var(--muted-dark)}
 /* apps */
 .apps{display:grid;gap:16px}
-@media(min-width:900px){.apps{grid-template-columns:1fr 1fr}.app.xr{grid-column:1/-1}.app.xr .xrlist{grid-template-columns:1fr 1fr;column-gap:32px}}
+@media(min-width:900px){.apps{grid-template-columns:1fr 1fr}.app.xr{grid-column:1/-1}}
 .app.xr h3{display:flex;align-items:center;gap:10px}.app.xr h3 .ic{color:var(--accent2)}
 .app{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px}
 .dl{display:flex;align-items:center;gap:14px;border:2px solid var(--ink);border-radius:16px;padding:12px 18px;min-height:72px;text-decoration:none;color:var(--ink);background:var(--card);width:100%;max-width:420px;transition:background-color .15s}
 .dl:hover{background:#0b0d1209}
 .dl .ic{width:34px;height:34px}
+.dl .appic{width:44px;height:44px;border-radius:11px;flex:none;display:block}
+.dl small .ic{width:15px;height:15px;vertical-align:-2px;margin-right:3px}
 .dl b{display:block;font-size:17px;line-height:1.25}
 .dl small{display:block;color:var(--muted);font-size:13px;font-weight:600}
 .dl.off{border-style:dashed;color:var(--muted)}
@@ -419,6 +425,7 @@ table.cmp{border-collapse:separate;border-spacing:0;min-width:760px;width:100%;f
 /* footer */
 .foot{background:var(--ink);color:var(--muted-dark);padding:34px 0 46px;font-size:14px}
 .foot .row{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.foot .fbrand{display:inline-flex;align-items:center;gap:10px}.foot .fbrand img{width:28px;height:28px;border-radius:7px;display:block}
 .foot a{color:var(--on-dark);padding:10px 0;display:inline-block}
 .foot p{margin:12px 0 0;max-width:900px}
 .msg{max-width:760px}
@@ -455,8 +462,13 @@ table.cmp{border-collapse:separate;border-spacing:0;min-width:760px;width:100%;f
 interface Ctx {
   d: LandingData;
   c: Copy;
+  /** The agentic sections' copy (product name filled in). */
+  a: AgenticCopy;
   mix: MixTool[];
 }
+
+/** The hero's crossfade, in this order: Jarvis first when its screenshot exists, then the classic screens (four at most). */
+const HERO_SHOTS: ShotKey[] = ['jarvis', 'pipeline', 'inbox', 'workflow', 'funnel'];
 
 function header(x: Ctx): string {
   const { d, c } = x;
@@ -464,7 +476,7 @@ function header(x: Ctx): string {
   const other = d.lang === 'de' ? 'en' : 'de';
   const sec = (id: string) => (d.kind === 'home' ? `#${id}` : `${home === '/' ? '' : home}/#${id}`.replace(/^\/#/, '/#'));
   return `<header class="top"><a class="brand" href="${home}"><img class="mk" src="/icon.svg" alt="" width="34" height="34"><span>${h(d.brand)}</span></a>
-<nav class="nav" aria-label="${d.lang === 'de' ? 'Hauptmenü' : 'Main menu'}"><a class="opt" href="${sec('funktionen')}">${h(c.nav.features)}</a><a class="opt" href="${sec('tool-stack')}">${h(c.nav.stack)}</a><a class="opt" href="${sec('rechner')}">${h(c.nav.calc)}</a><a class="opt" href="${pagePath('compare', d.lang)}">${h(c.nav.compare)}</a><a class="opt" href="${sec('apps')}">${h(c.nav.apps)}</a><a href="${sec('preise')}">${h(c.nav.pricing)}</a><a class="opt" href="/app">${h(c.nav.login)}</a><a class="lang" href="${pagePath(d.kind, other)}" hreflang="${other}" lang="${other}" aria-label="${h(c.nav.switchLangLabel)}">${h(c.nav.switchLang)}</a></nav></header>`;
+<nav class="nav" aria-label="${d.lang === 'de' ? 'Hauptmenü' : 'Main menu'}"><a class="opt" href="${sec('agentisch')}">${h(c.nav.agents)}</a><a class="opt" href="${sec('warum')}">${h(c.nav.why)}</a><a class="opt" href="${sec('funktionen')}">${h(c.nav.features)}</a><a class="opt" href="${sec('akademie')}">${h(c.nav.academy)}</a><a class="opt" href="${sec('rechner')}">${h(c.nav.calc)}</a><a class="opt" href="${pagePath('compare', d.lang)}">${h(c.nav.compare)}</a><a href="${sec('preise')}">${h(c.nav.pricing)}</a><a class="opt" href="/app">${h(c.nav.login)}</a><a class="lang" href="${pagePath(d.kind, other)}" hreflang="${other}" lang="${other}" aria-label="${h(c.nav.switchLangLabel)}">${h(c.nav.switchLang)}</a></nav></header>`;
 }
 
 function starLink(x: Ctx): string {
@@ -472,19 +484,28 @@ function starLink(x: Ctx): string {
   return `<a class="gh" href="${GITHUB_URL}" rel="noopener">${ICON.star}<span>${h(c.hero.star)}</span>${d.stars !== undefined ? `<span class="cnt">· ${h(c.hero.starCount(num(c, d.stars)))}</span>` : ''}</a>`;
 }
 
+/** The tagline: `h1Hl` in the accent, `h1Tail` (its end) as the smaller second line; read as one sentence. */
+function tagline(c: Copy): string {
+  const { h1, h1Hl, h1Tail } = c.hero;
+  const tail = h1Tail && h1.endsWith(h1Tail) ? h1Tail : '';
+  const main = h1.slice(0, h1.length - tail.length).trimEnd();
+  const at = h1Hl ? main.indexOf(h1Hl) : -1;
+  const big = at < 0 ? h(main) : `${h(main.slice(0, at))}<span class="hl">${h(h1Hl)}</span>${h(main.slice(at + h1Hl.length))}`;
+  return `${big}${tail ? ` <span class="tail">${h(tail)}</span>` : ''}`;
+}
+
 function hero(x: Ctx): string {
-  const { d, c } = x;
-  const alts = c.hero.mockAlt;
-  const imgs = d.shots
-    .slice(0, 4)
-    .map((s, i) => `<img src="${h(s.src)}" width="${s.w}" height="${s.h}" alt="${h(alts[i] ?? '')}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`)
+  const { d, c, a } = x;
+  const shots = HERO_SHOTS.map((k) => d.shots.find((s) => s.key === k)).filter((s): s is Shot => !!s).slice(0, 4);
+  const imgs = shots
+    .map((s, i) => `<img src="${h(s.src)}" width="${s.w}" height="${s.h}" alt="${h(a.shots[s.key])}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`)
     .join('');
-  const mock = d.shots.length
-    ? `<figure class="mockfig" style="margin:0"><div class="mock"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>${h(d.base.replace(/^https?:\/\//, ''))}/app</span></div><div class="stage${d.shots.length === 1 ? ' solo' : ''}">${imgs}</div></div><figcaption class="mockcap">${h(c.hero.mockLabel)}</figcaption></figure>`
+  const mock = shots.length
+    ? `<figure class="mockfig" style="margin:0"><div class="mock"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>${h(d.base.replace(/^https?:\/\//, ''))}/app</span></div><div class="stage${shots.length === 1 ? ' solo' : ''}">${imgs}</div></div><figcaption class="mockcap">${h(c.hero.mockLabel)}</figcaption></figure>`
     : '';
   return `<div class="hero"><div>
 <p class="kicker">${h(c.hero.eyebrow)}</p>
-<h1 aria-label="${h(c.hero.h1)} ${h(c.hero.rotate.join(', '))}">${h(c.hero.h1)}<br><span class="rot" aria-hidden="true"><span class="rot-in" style="--n:${c.hero.rotate.length}">${[...c.hero.rotate, c.hero.rotate[0]].map((w) => `<b>${h(w)}</b>`).join('')}</span></span></h1>
+<h1>${tagline(c)}</h1>
 <p class="sub">${h(c.hero.sub)} <strong>${h(c.hero.subStrong)}</strong></p>
 <div class="ctas">${
     d.waitlist
@@ -511,17 +532,18 @@ function aiAgents(x: Ctx): string {
   const code = CODEX_SNIPPET(host)
     .map(([k, t]) => (k ? `<span class="${k}">${h(t)}</span>` : ''))
     .join('\n');
-  return `<section id="ki-agenten" aria-labelledby="ai-h"><div class="wrap"><h2 id="ai-h">${h(c.ai.h2)}</h2><p class="lead">${h(c.ai.lead)}</p>
-<div class="aigrid"><div><p class="aitools"><span>${h(num(c, d.stats.tools))}</span></p><p class="muted" style="margin:0 0 18px;font-weight:600">${h(c.ai.tools(num(c, d.stats.tools)).replace(/^[\d.,\s]+/, ''))}</p>
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">${c.ai.items.map(([t, p]) => `<div class="card"><h3>${h(t)}</h3><p>${h(p)}</p></div>`).join('')}</div></div>
-<div class="snip"><div class="hd"><span>${h(c.ai.snippetLabel)}</span><button class="copyb" type="button" data-copy="mcpcode" data-done="${h(c.install.copied)}">${ICON.copy}<span class="lbl">${h(c.install.copy)}</span></button></div><pre id="mcpcode">${code}</pre><p>${h(c.ai.snippetNote)} <a href="${GITHUB_URL}/blob/main/docs/ai-tools.md" rel="noopener" style="color:var(--on-dark)">${h(c.ai.docs)}</a></p></div></div></div></section>`;
+  return `<section id="ki-agenten" class="alt" aria-labelledby="ai-h"><div class="wrap"><h2 id="ai-h">${h(c.ai.h2)}</h2><p class="lead">${h(c.ai.lead)}</p>
+<div class="aigrid"><div><p class="aitools"><span>${h(num(c, d.stats.tools))}</span></p><p class="muted" style="margin:0 0 10px;font-weight:600">${h(c.ai.tools(num(c, d.stats.tools)).replace(/^[\d.,\s]+/, ''))}</p><p class="muted" style="margin:0;font-size:15px">${h(c.ai.toolsNote)}</p></div>
+<div class="snip"><div class="hd"><span>${h(c.ai.snippetLabel)}</span><button class="copyb" type="button" data-copy="mcpcode" data-done="${h(c.install.copied)}">${ICON.copy}<span class="lbl">${h(c.install.copy)}</span></button></div><pre id="mcpcode">${code}</pre><p>${h(c.ai.snippetNote)} <a href="${GITHUB_URL}/blob/main/docs/ai-tools.md" rel="noopener" style="color:var(--on-dark)">${h(c.ai.docs)}</a></p></div></div>
+<div class="grid aicards">${c.ai.items.map(([t, p]) => `<div class="card"><h3>${h(t)}</h3><p>${h(p)}</p></div>`).join('')}</div></div></section>`;
 }
 
 function proof(x: Ctx): string {
   const { d, c } = x;
   const items = [
-    [d.stats.areas, c.proof.areas],
     [d.stats.tools, c.proof.tools],
+    [d.stats.triggers, c.proof.triggers],
+    [d.stats.actions, c.proof.actions],
     [d.stats.integrations, c.proof.integrations],
     ...(d.stats.tests ? [[d.stats.tests, c.proof.tests] as [number, string]] : []),
   ] as [number, string][];
@@ -622,15 +644,16 @@ function stackSection(x: Ctx): string {
   if (!d.stack) return '';
   // Waitlist mode: a note that speaks of our cloud says that it is planned.
   const stack = d.waitlist ? { ...d.stack, rows: d.stack.rows.map((r) => ({ ...r, note_de: waitlistNote(r.note_de, 'de'), note_en: waitlistNote(r.note_en, 'en') })) } : d.stack;
-  return `<section id="tool-stack" aria-labelledby="stack-h"><div class="wrap"><h2 id="stack-h">${h(c.stack.h2)}</h2><p class="lead">${h(c.stack.lead)}</p>
+  return `<section id="tool-stack" class="alt" aria-labelledby="stack-h"><div class="wrap"><h2 id="stack-h">${h(c.stack.h2)}</h2><p class="lead">${h(c.stack.lead)}</p>
 ${stackHtml(stack, c, d.lang, d.brand)}
 ${stackFoot(d.stack, c, d.brand)}</div></section>`;
 }
 
 function features(x: Ctx): string {
-  const { c } = x;
+  const { d, c } = x;
+  const items = c.features.items({ triggers: num(c, d.stats.triggers), actions: num(c, d.stats.actions) });
   return `<section id="funktionen" class="feat alt" aria-labelledby="feat-h"><div class="wrap"><h2 id="feat-h">${h(c.features.h2)}</h2><p class="lead">${h(c.features.lead)}</p>
-<div class="grid">${c.features.items.map(([t, p]) => `<div class="card"><h3>${h(t)}</h3><p>${h(p)}</p></div>`).join('')}</div>
+<div class="grid">${items.map(([t, p]) => `<div class="card"><h3>${h(t)}</h3><p>${h(p)}</p></div>`).join('')}</div>
 <a class="morelink" href="${GITHUB_URL}#features" rel="noopener">${h(c.features.more)} ${ICON.arrow}</a></div></section>`;
 }
 
@@ -743,17 +766,17 @@ function apps(x: Ctx): string {
   const i = c.apps.ios;
   const mb = d.apk ? (d.apk.size / 1024 / 1024).toFixed(1).replace('.', c.lang === 'de' ? ',' : '.') : '';
   const android = d.apk
-    ? `<a class="dl" href="/downloads/gohigh.apk" download>${ICON.android}<span><b>${h(a.button)}</b><small>${h(a.sub(d.apk.version, mb))}</small></span></a><p class="sha"><span class="muted">${h(a.sha)}:</span> ${h(d.apk.sha256)}</p>`
-    : `<span class="dl off" role="note">${ICON.android}<span><b>${h(a.title)}</b><small>${h(a.subNone)}</small></span></span><p class="muted" style="margin:0">${h(a.none)}</p>`;
+    ? `<a class="dl" href="/downloads/hyperlevel.apk" download><img class="appic" src="/icon.svg" alt="" width="44" height="44"><span><b>${h(a.button)}</b><small>${ICON.android}${h(a.sub(d.apk.version, mb))}</small></span></a><p class="sha"><span class="muted">${h(a.sha)}:</span> ${h(d.apk.sha256)}</p>`
+    : `<span class="dl off" role="note"><img class="appic" src="/icon.svg" alt="" width="44" height="44"><span><b>${h(a.title)}</b><small>${ICON.android}${h(a.subNone)}</small></span></span><p class="muted" style="margin:0">${h(a.none)}</p>`;
   return `<section id="apps" class="alt" aria-labelledby="apps-h"><div class="wrap"><h2 id="apps-h">${h(c.apps.h2)}</h2><p class="lead">${h(c.apps.lead)}</p>
 <div class="apps">
 <div class="app"><h3>${h(a.title)}</h3>${android}
 <div class="qrrow"><div class="qr" role="img" aria-label="${h(a.qr)}">${d.qr.android}<span>${h(a.qr)}</span></div><ol>${a.steps.map((s) => `<li>${h(s)}</li>`).join('')}</ol></div>
 <p class="fine" style="margin:0">${h(a.firstStart)}</p></div>
-<div class="app"><h3>${h(i.title)}</h3><a class="dl" href="/app">${ICON.devices}<span><b>${h(i.title)}</b><small>${h(i.sub)}</small></span></a>
+<div class="app"><h3>${h(i.title)}</h3><a class="dl" href="/app"><img class="appic" src="/icon.svg" alt="" width="44" height="44"><span><b>${h(i.button)}</b><small>${ICON.devices}${h(i.sub)}</small></span></a>
 <div class="qrrow"><div class="qr" role="img" aria-label="${h(i.qr)}">${d.qr.ios}<span>${h(i.qr)}</span></div><ol>${i.steps.map((s, n) => `<li>${h(s)}${n === 1 ? ` ${ICON.share}` : ''}</li>`).join('')}</ol></div>
 <h4 style="margin:0;font-size:15px">${h(i.works)}</h4><ul class="works">${i.worksItems.map((w) => `<li>${h(w)}</li>`).join('')}</ul><p class="fine" style="margin:0">${h(i.note)}</p></div>
-<div class="app xr"><h3>${ICON.headset}${h(c.apps.xr.title)}</h3><p class="muted" style="margin:0">${h(c.apps.xr.sub)}</p><ul class="ticks xrlist">${c.apps.xr.items.map((w) => `<li>${h(w)}</li>`).join('')}</ul><p class="fine" style="margin:0">${h(c.apps.xr.note)} <a href="${GITHUB_URL}/blob/main/docs/xr.md" rel="noopener">${h(c.apps.xr.docs)}</a></p></div>
+<div class="app xr"><h3>${ICON.headset}${h(c.apps.xr.title)}</h3><p class="muted" style="margin:0">${h(c.apps.xr.sub)}</p><p style="margin:0">${h(c.apps.xr.text)} <a href="#xr">${h(c.apps.xr.more)}</a> · <a href="${GITHUB_URL}/blob/main/docs/xr.md" rel="noopener">${h(c.apps.xr.docs)}</a></p></div>
 </div><p class="agencyapps">${h(c.apps.agency)}</p></div></section>`;
 }
 
@@ -780,7 +803,7 @@ function footer(x: Ctx): string {
     `<a href="${pagePath('compare', d.lang)}">${h(c.nav.compare)}</a>`,
     `<a href="/app">${h(c.nav.login)}</a>`,
   ].filter(Boolean);
-  return `<footer class="foot"><div class="wrap"><div class="row"><span>© ${new Date().getFullYear()} ${h(d.brand)} · ${h(c.foot.madeIn)}</span>${links.join('')}</div>
+  return `<footer class="foot"><div class="wrap"><div class="row"><span class="fbrand"><img src="/icon.svg" alt="" width="28" height="28" loading="lazy"><span>© ${new Date().getFullYear()} ${h(d.brand)} · ${h(c.foot.madeIn)} · ${h(x.a.builtWith)}</span></span>${links.join('')}</div>
 <p>${h(c.disclaimer(asOf))}</p><p>${h(c.foot.noTracking)}</p><p lang="en">${h(c.foot.robot)}</p></div></footer>`;
 }
 
@@ -806,7 +829,7 @@ function head(x: Ctx, o: { title: string; description: string; path: string; ogT
 <meta property="og:title" content="${h(o.ogTitle ?? o.title)}"><meta property="og:description" content="${h(o.ogDescription ?? o.description)}">
 <meta property="og:url" content="${h(`${d.base}${o.path}`)}"><meta property="og:image" content="${h(og)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${h(c.hero.h1)}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${h(o.ogTitle ?? o.title)}"><meta name="twitter:description" content="${h(o.ogDescription ?? o.description)}"><meta name="twitter:image" content="${h(og)}">
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="${FONT_FILE}" as="font" type="font/woff2" crossorigin>
 <style>${CSS}${o.extraCss ?? ''}</style>
 </head>`;
@@ -814,7 +837,7 @@ function head(x: Ctx, o: { title: string; description: string; path: string; ogT
 
 export function renderLanding(d: LandingData, mixAvailable: MixTool[] = mixTools(d.matrix)): string {
   const c = branded(d.waitlist ? withWaitlist(COPY[d.lang], d.lang) : COPY[d.lang], d.brand);
-  const x: Ctx = { d, c, mix: mixAvailable };
+  const x: Ctx = { d, c, a: branded(AGENTIC[d.lang], d.brand), mix: mixAvailable };
   const path = pagePath(d.kind, d.lang);
   const darkTop = (inner: string) => `<div class="dark"><div class="wrap">${header(x)}${inner}</div></div>`;
   const tail = `${footer(x)}\n<script>${SCRIPT}</script>\n</body>\n</html>`;
@@ -840,13 +863,20 @@ ${tail}`;
   // home
   const shared = d.calc.shared;
   const sc = shared ? summary(x) : undefined;
-  return `${head(x, { title: c.title, description: c.description, path, ogTitle: sc?.title, ogDescription: sc?.description, extraCss: matrixCss(d.matrix) })}
-<body>${skip}${darkTop(`${hero(x)}${proof(x)}`)}
+  const ax: AgenticCtx = { a: x.a, shots: d.shots, gh: GITHUB_URL, nums: { tools: num(c, d.stats.tools), themes: num(c, d.stats.themes), iconPacks: num(c, d.stats.iconPacks) } };
+  return `${head(x, { title: c.title, description: c.description, path, ogTitle: sc?.title, ogDescription: sc?.description, extraCss: `${LOGOS_CSS}${AGENTIC_CSS}${matrixCss(d.matrix)}` })}
+<body>${skip}${darkTop(`${hero(x)}${logosHtml(x.a.logos, `${GITHUB_URL}/blob/main/docs/integrations.md`)}${proof(x)}`)}
 <main id="inhalt">
+${ssotSection(ax)}
+${jarvisSection(ax)}
+${uspSection(ax)}
+${aiAgents(x)}
+${academySection(ax)}
+${designsSection(ax)}
+${xrSection(ax)}
 ${stackSection(x)}
 ${calculator(x)}
 ${features(x)}
-${aiAgents(x)}
 ${dach(x)}
 <section id="umzug" class="alt" aria-labelledby="umzug-h"><div class="wrap">${move(x)}</div></section>
 ${vsSection({ ...x })}
@@ -856,6 +886,7 @@ ${pricing(x)}
 ${waitlistSection(x)}
 ${whiteLabel(x)}
 ${apps(x)}
+${ossSection(ax)}
 ${install(x)}
 ${faq(x)}
 </main>

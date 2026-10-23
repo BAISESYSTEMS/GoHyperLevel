@@ -242,7 +242,14 @@ export const companionGrowthModule: Module = {
       const before = cleanName(lastSay(u.id, loc), 400);
       try {
         const out = await app.services.aiRun({ locationId: loc, purpose: 'companion_growth', user: `Daten:\n${facts}\n\nZuletzt gesagt (nicht wiederholen): ${before || '–'}`, system: [{ text: system }], schema: obj({ say: { type: 'string' } }, ['say']), maxTokens: 500, timeoutMs: 30_000, userId: u.id });
-        const said = cleanName(JSON.parse(String(out?.text ?? '')).say, 600);
+        // a fallback model may ignore the JSON format and answer in plain words – those count too
+        const raw = String(out?.text ?? '');
+        let said: string;
+        try {
+          said = cleanName(JSON.parse(raw).say, 600);
+        } catch {
+          said = cleanName(raw.replace(/^["'`\s]+|["'`\s]+$/g, ''), 600);
+        }
         // numbers from the last briefing came from the data too (e.g. "seit 28 Tagen")
         if (said && noInventedNumbers(said, `${facts}\n${before}`)) return said;
         if (said) console.info('[companion-growth] KI-Formulierung verworfen: eine Zahl steht nicht in den Daten');

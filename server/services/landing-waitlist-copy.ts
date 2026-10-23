@@ -30,11 +30,11 @@ interface WaitlistCopy {
 
 const WAITLIST: Record<Lang, WaitlistCopy> = {
   de: {
-    description: 'CRM, Postfach, Funnels, Automationen und KI in einer App – kostenlos selbst gehostet (AGPL), ohne Gebühr pro Nutzer. Eine gehostete Cloud ist geplant: Warteliste offen.',
+    description: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen: CRM, Postfach, Funnels, Automationen und Jarvis als KI-Business-Developer – kostenlos selbst gehostet (AGPL), ohne Gebühr pro Nutzer. Eine gehostete Cloud ist geplant: Warteliste offen.',
     hero: {
       eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud bald verfügbar',
-      sub: 'Schluss mit teuren All-in-One-Abos: {b} ist Open Source und läuft kostenlos auf deinem eigenen Server. CRM, Funnels, Automationen und KI in einem, mit MCP für Claude und Codex. Eine gehostete Cloud ist in Vorbereitung – trag dich auf die Warteliste ein.',
-      badges: ['Open Source (AGPL)', 'MCP für Claude, Codex, ChatGPT, Cursor', 'Dein Server, deine Daten', 'DSGVO'],
+      sub: 'Jarvis, dein KI-Business-Developer, liest am Morgen deine Zahlen, findet den Deal, den du vergessen hast, und bereitet das Nachfassen vor – du bestätigst mit einem Klick. {b} ist Open Source und läuft kostenlos auf deinem eigenen Server; eine gehostete Cloud ist in Vorbereitung – trag dich auf die Warteliste ein.',
+      badges: ['Open Source (AGPL)', 'MCP für Claude, ChatGPT, Codex & Cursor', 'Dein Claude- oder ChatGPT-Abo für deine Chats', 'Dein Server, deine Daten', 'DSGVO'],
       ctaSelf: 'Kostenlos selbst hosten',
       ctaCloud: 'Cloud: auf die Warteliste',
     },
@@ -76,8 +76,8 @@ const WAITLIST: Record<Lang, WaitlistCopy> = {
     },
     wl: { h2: 'White-Label: selbst gehostet heute, in der Cloud geplant', lead: 'Deine Kunden sehen deine Marke, nicht unsere – selbst gehostet schon heute kostenlos, in der geplanten Cloud im Tarif Agentur (voraussichtlich 199 € im Monat).' },
     apps: {
-      android: { firstStart: 'Für deinen eigenen Server baust du die App mit deiner Adresse oder lädst sie von deiner Instanz unter /android. Die gehostete Cloud ist noch nicht offen.' },
-      ios: { note: 'Eine Web-App für iPhone und iPad, keine App aus dem App Store – du öffnest sie auf deiner eigenen Instanz unter /app.' },
+      android: { firstStart: 'Diese APK verbindet sich mit der {b}-Cloud, die noch nicht offen ist. Für deinen eigenen Server lädst du die App von deiner Instanz unter /android oder baust sie mit deiner Adresse.' },
+      ios: { note: 'Eine Web-App für iPhone und iPad, keine App aus dem App Store (eine native iOS-App gibt es noch nicht) – du öffnest sie auf deiner eigenen Instanz unter /app.' },
     },
     faq: {
       replace: {
@@ -90,11 +90,11 @@ const WAITLIST: Record<Lang, WaitlistCopy> = {
     noteMarker: ' (Cloud: geplant, noch nicht verfügbar)',
   },
   en: {
-    description: 'CRM, inbox, funnels, automations and AI in one app – free to self-host (AGPL), no per-seat fee. A hosted cloud is planned: the waitlist is open.',
+    description: 'The free, open-source growth OS for solopreneurs, agencies and small agentic businesses: CRM, inbox, funnels, automations and Jarvis, an AI business developer – free to self-host (AGPL), no per-seat fee. A hosted cloud is planned: the waitlist is open.',
     hero: {
       eyebrow: 'Open source · Self-host free · Cloud coming soon',
-      sub: 'Sick of all-in-one platforms that drain your wallet? {b} is open source and runs free on your own server. CRM, funnels, automation and AI in one, with MCP for Claude and Codex. A hosted cloud is being prepared – join the waitlist.',
-      badges: ['Open source (AGPL)', 'MCP for Claude, Codex, ChatGPT, Cursor', 'Your server, your data', 'GDPR'],
+      sub: 'Jarvis, your AI business developer, reads your numbers in the morning, spots the deal you forgot and prepares the follow-up – you confirm with one click. {b} is open source and runs free on your own server; a hosted cloud is being prepared – join the waitlist.',
+      badges: ['Open source (AGPL)', 'MCP for Claude, ChatGPT, Codex & Cursor', 'Your Claude or ChatGPT plan for your own chats', 'Your server, your data', 'GDPR'],
       ctaSelf: 'Self-host for free',
       ctaCloud: 'Cloud: join the waitlist',
     },
@@ -136,8 +136,8 @@ const WAITLIST: Record<Lang, WaitlistCopy> = {
     },
     wl: { h2: 'White-label: self-hosted today, planned in the cloud', lead: 'Your clients see your brand, not ours – free when you self-host today, and on the planned cloud Agency plan (planned at €199 a month).' },
     apps: {
-      android: { firstStart: 'For your own server, build the app with your address or download it from your instance at /android. The hosted cloud is not open yet.' },
-      ios: { note: 'A web app for iPhone and iPad, not an App Store app – you open it on your own instance at /app.' },
+      android: { firstStart: 'This APK connects to the {b} cloud, which is not open yet. For your own server, download the app from your instance at /android or build it with your address.' },
+      ios: { note: 'A web app for iPhone and iPad, not an App Store app (there is no native iOS app yet) – you open it on your own instance at /app.' },
     },
     faq: {
       replace: {

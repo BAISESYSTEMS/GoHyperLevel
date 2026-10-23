@@ -113,6 +113,8 @@ REST routes, request/response shapes and the mobile endpoints are in [docs/api.m
 
 Focus mode and the voice companion are **one mode**: one entry, one prompt, one voice. Questions about your data become a view made of board widgets; requests to *do* something go to the HyperLevel Agent right there; "Was brennt?" and the proactive check-ins show what needs you now and where the business should move next.
 
+![Focus mode: Jarvis' briefing („Was brennt?“) with hot spots and next steps](assets/jarvis-focus.png)
+
 **Where:** the **Fokus** button at the top left – under the logo in the sidebar (a square button in the narrow rail), with the companion's name beneath it (*mit Jarvis*), next to the menu button on a phone. The route is `/app/focus`, so a bookmark or a link opens it directly. Three more ways in, on every page: the **edge button** on the right edge of the screen, the shortcut **Alt+J**, and – if you switch it on – the **wake word** (*"Hey Jarvis"*). All three open focus mode with the companion already listening (in focus mode they just start listening).
 
 **The layout:** sidebar, top bar, quick menu and the phone's bottom bar step aside. A **round button** at the top left opens the normal menu as a drawer – choosing an entry there leaves focus mode and goes to that page; Esc or a click beside it closes the drawer. **Fokus beenden** (top right, or Esc when nothing is open – Esc first clears what was typed and stops listening or speaking) returns to the page you came from. The browser remembers the choice (`localStorage`, nothing on the server): opening the app on its bare address – a reload, the next morning – comes back to focus mode; going to any other page forgets it. Without storage (private mode) it is simply not remembered.

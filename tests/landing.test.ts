@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { request } from 'node:http';
 import { join } from 'node:path';
 import vm from 'node:vm';
@@ -10,7 +10,14 @@ import { OUR_ID, entryPriceEurCents, matrixHtml, mixTools, parseMatrix } from '.
 import { COPY } from '../server/services/landing-copy.js';
 import { parseStack, stackHtml, sumsText } from '../server/services/landing-stack.js';
 import { CSP, SCRIPT, SCRIPT_HASH, pagePath } from '../server/services/landing-page.js';
+import { ACADEMY, AGENTIC, type AgenticCopy } from '../server/services/landing-agentic-copy.js';
+import { academySection, type AgenticCtx } from '../server/services/landing-agentic.js';
+import { LOGOS, logosHtml } from '../server/services/landing-logos.js';
+import { imageSize } from '../server/modules/landing.js';
+import { CATALOG } from '../server/services/integrations-catalog.js';
+import { GROUPS, JOURNEY, MODULE_TOURS } from '../web/src/tour/catalog';
 import { checkDocument, checkFragment } from '../server/services/site-a11y.js';
+import { escapeHtml as h } from '../server/core/template.js';
 import { contrast } from '../server/services/site-style.js';
 import { PLAN_INFO } from '../server/services/cloud.js';
 
@@ -180,8 +187,12 @@ describe('landing: the committed research file', () => {
     for (const f of features) for (const [id, cell] of Object.entries(f.cells)) if (id !== OUR_ID) expect(cell.source, `${f.id}/${id}`).toMatch(/^https:\/\//);
     // Where we lose, the matrix says so; SaaS mode is not part of the cloud.
     const ours = (id: string) => features.find((f) => f.id === id)?.cells[OUR_ID];
-    expect(ours('office_suite')?.v).toBe('no');
     expect(ours('hosted_phone')?.v).toBe('no');
+    // …and what exists since the research was made says so too (checked against the code on 2026-10-22)
+    expect(ours('office_suite')).toMatchObject({ v: 'partial', note: expect.stringMatching(/optional/) });
+    expect(ours('storefront_cart')?.v).toBe('yes');
+    expect(ours('payment_gateways')?.note).toMatch(/PayPal.*Mollie/);
+    for (const id of ['pipelines', 'funnels_websites', 'workflow_builder', 'calendar_booking']) expect(ours(id)?.note, id).not.toMatch(/in Kürze/);
     expect(ours('saas_mode')?.note).toMatch(/Cloud.*nicht enthalten/);
     expect(ours('ios_app')).toMatchObject({ v: 'partial', note: expect.stringMatching(/PWA.*nicht in den App-Stores/) });
     // USD prices stay USD.
@@ -200,12 +211,143 @@ describe('landing: copy', () => {
       expect(c.pricing.lead).toMatch(/White-Label|white-label/);
       expect(c.wl.saas).toMatch(/SaaS/);
     }
-    expect(COPY.en.hero.h1).toBe('Your platform for');
-    expect(COPY.de.hero.h1).toBe('Deine Plattform für');
-    expect(COPY.en.hero.rotate.length).toBe(7);
-    expect(COPY.de.hero.rotate.length).toBe(7);
-    expect(COPY.en.hero.sub).toContain('Sick of all-in-one platforms that drain your wallet?');
-    expect(COPY.de.hero.sub).toContain('Schluss mit teuren All-in-One-Abos');
+    expect(COPY.en.hero.h1).toBe('The free, open-source growth OS for solopreneurs, agencies & small agentic businesses');
+    expect(COPY.de.hero.h1).toBe('Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen');
+    for (const c of Object.values(COPY)) {
+      expect(c.hero.h1, c.lang).toContain(c.hero.h1Hl);
+      expect(c.hero.h1.endsWith(c.hero.h1Tail), c.lang).toBe(true);
+      expect(c.hero.sub, c.lang).toContain('Jarvis');
+      expect(c.features.items({ triggers: '1', actions: '2' }).length, c.lang).toBe(COPY.de.features.items({ triggers: '1', actions: '2' }).length);
+    }
+  });
+});
+
+/** A WebP header (VP8X) of the given size – enough for imageSize and the page. */
+const webp = (w: number, h: number) => {
+  const b = Buffer.alloc(30);
+  b.write('RIFF', 0, 'ascii');
+  b.writeUInt32LE(22, 4);
+  b.write('WEBPVP8X', 8, 'ascii');
+  b.writeUIntLE(w - 1, 24, 3);
+  b.writeUIntLE(h - 1, 27, 3);
+  return b;
+};
+
+describe('landing: the agentic sections', () => {
+  it('states the Academy as it is: chapters exactly, module tours and lessons never more than exist', () => {
+    expect(ACADEMY.chapters).toBe(JOURNEY.length);
+    const course = MODULE_TOURS.filter((t) => t.group === 'company');
+    expect(ACADEMY.lessons).toBe(course.length);
+    expect(ACADEMY.tours).toBeLessThanOrEqual(MODULE_TOURS.length - course.length);
+    expect(ACADEMY.groups).toBe(GROUPS.filter((g) => g.id !== 'company').length);
+    for (const a of Object.values(AGENTIC)) {
+      const text = JSON.stringify(a) + a.usp.items({ tools: '1', themes: '2', iconPacks: '3' }).flat().join(' ');
+      for (const m of text.matchAll(/(\d+)\+? (?:Kapitel|chapters)\b/g)) expect(Number(m[1])).toBe(JOURNEY.length);
+      for (const m of text.matchAll(/(?:Über|more than) (\d+) (?:Modul-Touren|module tours)\b/gi)) expect(Number(m[1])).toBeLessThanOrEqual(MODULE_TOURS.length - course.length);
+    }
+  });
+
+  it('has the same structure in German and English, and says the honest parts', () => {
+    const shape = (a: AgenticCopy) => ({
+      agents: a.ssot.agents.length,
+      data: a.ssot.data.length,
+      guards: a.ssot.guards.length,
+      jarvis: a.jarvis.items.length,
+      usp: a.usp.items({ tools: '1', themes: '2', iconPacks: '3' }).map(([k]) => k),
+      academy: [a.academy.items.length, a.academy.stats.length],
+      designs: a.designs.items({ tools: '1', themes: '2', iconPacks: '3' }).length,
+      xr: a.xr.items.length,
+      shots: Object.keys(a.shots).sort(),
+    });
+    expect(shape(AGENTIC.en)).toEqual(shape(AGENTIC.de));
+    expect(shape(AGENTIC.en).usp).toHaveLength(9);
+    // one source of truth, with what keeps it safe
+    expect(AGENTIC.en.ssot.h2).toMatch(/single source of truth/);
+    expect(AGENTIC.de.ssot.h2).toMatch(/einzige Quelle der Wahrheit/);
+    for (const a of Object.values(AGENTIC)) {
+      expect(a.ssot.agents).toEqual(expect.arrayContaining(['Claude', 'ChatGPT', 'Codex', 'Hermes']));
+      expect(a.ssot.fine).toMatch(/MCP/);
+      // own subscription: personal chats only, automations on API keys
+      const key = a.usp.items({ tools: '1', themes: '2', iconPacks: '3' }).find(([k]) => k === 'key')![2];
+      expect(key).toMatch(/Claude.Code/);
+      expect(key).toMatch(/API/);
+      // XR: beta, not tested on hardware, only devices the docs name
+      expect(a.xr.note).toMatch(/Beta/);
+      expect(a.xr.devices).toMatch(/Vision Pro.*Quest.*Android.XR.*Pico.*Wolvic.*Xreal.*Viture/);
+      // "Built with Claude" as plain words only
+      expect(a.builtWith).toMatch(/Claude$/);
+    }
+  });
+
+  it('renders a spotlight with its picture only when the screenshot exists, and reads WebP and PNG sizes', () => {
+    const x = (shots: AgenticCtx['shots']): AgenticCtx => ({ a: AGENTIC.en, shots, nums: { tools: '354', themes: '19', iconPacks: '6' }, gh: 'https://github.com/BAISESYSTEMS/hyperlevel' });
+    const without = academySection(x([]));
+    expect(without).toContain('class="spot nofig"');
+    expect(without).not.toContain('<img');
+    expect(without).toContain(`<b>${ACADEMY.chapters}</b>`);
+    const withShot = academySection(x([{ key: 'academy', src: '/landing/shot-academy.webp', w: 1600, h: 1000 }]));
+    expect(withShot).toContain('<figure class="spot-f" data-fig><img src="/landing/shot-academy.webp" width="1600" height="1000" alt="The Academy with its guided tours" loading="lazy" decoding="async" data-hide>');
+    expect(checkFragment({ html: withShot }).filter((i) => i.level !== 'info')).toEqual([]);
+    expect(imageSize(webp(1600, 1000))).toEqual({ w: 1600, h: 1000 });
+    const png = Buffer.alloc(24);
+    png.writeUInt32BE(0x89504e47, 0);
+    png.writeUInt32BE(1200, 16);
+    png.writeUInt32BE(630, 20);
+    expect(imageSize(png)).toEqual({ w: 1200, h: 630 });
+    expect(imageSize(Buffer.from('not an image at all, really not'))).toBeNull();
+    for (const f of readdirSync('web/public/landing').filter((n) => n.endsWith('.webp'))) expect(imageSize(readFileSync(`web/public/landing/${f}`)), f).not.toBeNull();
+  });
+
+  it('the page script hides a spotlight whose picture fails to load (also one that failed before the script ran)', () => {
+    const early = { hidden: false };
+    const late = { hidden: false };
+    let onError: (() => void) | undefined;
+    const imgs = [
+      { complete: true, naturalWidth: 0, closest: () => early, addEventListener() {} },
+      { complete: false, naturalWidth: 0, closest: () => late, addEventListener: (_t: string, f: () => void) => (onError = f) },
+    ];
+    const ctx = vm.createContext({ document: { querySelector: () => null, querySelectorAll: (q: string) => (q === 'img[data-hide]' ? imgs : []), getElementById: () => null }, JSON, navigator: {} });
+    vm.runInContext(SCRIPT, ctx);
+    expect(early.hidden).toBe(true);
+    expect(late.hidden).toBe(false);
+    onError!();
+    expect(late.hidden).toBe(true);
+  });
+
+  it('the integrations row: real integrations only, no compared vendor, no AI lab logo, accessible and still', () => {
+    const research = [JSON.parse(readFileSync('web/public/landing/competitors.json', 'utf8')), JSON.parse(readFileSync('web/public/landing/replaces.json', 'utf8'))];
+    const compared = new Set<string>([...research[0].vendors.map((v: { name: string }) => v.name), ...research[1].rows.flatMap((r: { tools: { name: string }[] }) => r.tools.map((t) => t.name))].map((n) => n.toLowerCase()));
+    expect(LOGOS.length).toBeGreaterThanOrEqual(20);
+    for (const l of LOGOS) {
+      expect(compared.has(l.name.toLowerCase()), `${l.name} is a vendor the page compares against`).toBe(false);
+      expect(l.via).toMatch(/^(catalog:[a-z_]+|file:server\/[\w/.-]+\.ts#[a-z]+)$/);
+      if (l.via.startsWith('file:')) {
+        const [file, word] = l.via.slice(5).split('#');
+        expect(existsSync(file), l.via).toBe(true);
+        expect(readFileSync(file, 'utf8').toLowerCase(), l.via).toContain(word);
+      }
+      if (l.icon) {
+        expect(l.icon.path, l.name).toMatch(/^[0-9A-Za-z.,\- ]+$/);
+        expect(l.icon.hex).toMatch(/^#[0-9A-F]{6}$/i);
+      }
+    }
+    // AI models are plain words – never a lab's mark
+    for (const n of ['Claude', 'OpenAI', 'Gemini']) expect(LOGOS.find((l) => l.name === n)?.icon, n).toBeUndefined();
+    expect(LOGOS.map((l) => l.name)).toEqual(expect.arrayContaining(['Claude', 'OpenAI', 'Gemini']));
+    expect(LOGOS.some((l) => /anthropic|claude|openai/i.test(l.icon?.id ?? ''))).toBe(false);
+    for (const lang of ['de', 'en'] as const) {
+      const out = logosHtml(AGENTIC[lang].logos, 'https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md');
+      expect(out).toContain(lang === 'de' ? 'Verbindet sich mit deinen Lieblings-Tools' : 'Integrates with your favorite tools');
+      expect(out).toContain(lang === 'de' ? 'Marken ihrer Inhaber' : 'trademarks of their owners');
+      // the list once for screen readers, its copy for the endless slide hidden from them
+      expect(out.match(/<ul class="mq-t">/g)).toHaveLength(1);
+      expect(out.match(/<ul class="mq-t" aria-hidden="true">/g)).toHaveLength(1);
+      const symbols = [...out.matchAll(/<symbol id="([^"]+)"/g)].map((m) => m[1]);
+      expect(new Set(symbols).size).toBe(symbols.length);
+      for (const id of symbols) expect(out).toContain(`<use href="#${id}"/>`);
+      expect(out).not.toMatch(/<img|https?:\/\/(?!github\.com)/);
+      expect(checkFragment({ html: out }).filter((i) => i.level !== 'info')).toEqual([]);
+    }
   });
 });
 
@@ -240,6 +382,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
   beforeAll(async () => {
     process.env.PGHL_LANDING = '1';
     t = await startTestApp();
+    await t.setup();
     const dir = join(t.app.config.webDir, 'landing');
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'competitors.json'), JSON.stringify(FIXTURE));
@@ -268,8 +411,12 @@ describe('landing page (PGHL_LANDING=1)', () => {
       expect(body, p).toContain(lang === 'de' ? 'nicht mit HighLevel Inc.' : 'not affiliated with HighLevel Inc.');
     }
     const home = await (await get('/')).text();
-    expect(home).toContain('Your platform for');
-    expect(home).toContain('class="rot"');
+    expect(home).toContain('The free, open-source <span class="hl">growth OS</span> <span class="tail">for solopreneurs, agencies &amp; small agentic businesses</span></h1>');
+    // the brand mark wherever the brand shows: header, footer, app downloads, favicon
+    expect(home).toContain('<img class="mk" src="/icon.svg"');
+    expect(home).toContain('<span class="fbrand"><img src="/icon.svg"');
+    expect(home).toContain('<link rel="icon" href="/icon.svg" type="image/svg+xml">');
+    expect(home).toContain('<a class="dl" href="/app"><img class="appic" src="/icon.svg"');
     expect(home).toContain('<meta name="twitter:card" content="summary_large_image">');
     expect(home).toMatch(/<meta property="og:image" content="http:\/\/localhost\/landing\/og-en\.png">/);
     expect(home).toContain('<link rel="alternate" hreflang="de" href="http://localhost/de">');
@@ -279,7 +426,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
     // Prices: list prices without cloud mode, VAT note, white-label headline of the Agentur plan.
     for (const s of ['€49.99', '€99.99', '€199', 'or €479 a year', 'or €959 a year', 'or €1,910 a year', 'Stripe Tax', 'White-label on the Agency plan']) expect(home, s).toContain(s);
     const de = await (await get('/de')).text();
-    expect(de).toContain('Deine Plattform für');
+    expect(de).toContain('Das freie Open-Source-<span class="hl">Wachstums-Betriebssystem</span> <span class="tail">für Solopreneure, Agenturen und kleine agentische Unternehmen</span></h1>');
     for (const s of ['49,99 €', '99,99 €', '199 €', 'zzgl. gesetzlicher USt.', 'Gehostet in Deutschland (Frankfurt am Main)']) expect(de.replace(/ /g, ' '), s).toContain(s);
     // The matrix from the research file, with the category chips' CSS in the head.
     expect(home).toContain('.cmpw:has(#cmp-c-crm:checked)');
@@ -297,7 +444,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
       expect(issues, p).toEqual([]);
     }
     // ink on paper, muted on paper, light on the dark hero, muted on dark, ink on the accent
-    for (const [fg, bg] of [['#0b0d12', '#f6f5ef'], ['#545a66', '#f6f5ef'], ['#545a66', '#efede4'], ['#f4f4ef', '#0b0d12'], ['#aeb4c2', '#0b0d12'], ['#aeb4c2', '#151923'], ['#0b0d12', '#c8f031'], ['#c8f031', '#0b0d12'], ['#16794a', '#ffffff'], ['#a23b2a', '#ffffff'], ['#8a5a00', '#ffffff']]) {
+    for (const [fg, bg] of [['#0b0d12', '#f6f5ef'], ['#545a66', '#f6f5ef'], ['#545a66', '#efede4'], ['#f4f4ef', '#0b0d12'], ['#aeb4c2', '#0b0d12'], ['#aeb4c2', '#151923'], ['#0b0d12', '#c8f031'], ['#c8f031', '#0b0d12'], ['#16794a', '#ffffff'], ['#a23b2a', '#ffffff'], ['#8a5a00', '#ffffff'], ['#ffe3ad', '#0a1430'], ['#f3c983', '#0a1430'], ['#dfe3ec', '#0a1430'], ['#aeb4c2', '#0a1430'], ['#0a1430', '#ffb547'], ['#8a5a00', '#fff1d6'], ['#545a66', '#ffffff']]) {
       expect(contrast(fg, bg), `${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5);
     }
   });
@@ -339,6 +486,69 @@ describe('landing page (PGHL_LANDING=1)', () => {
     await t.app.services.landing.refreshStars(true);
     expect(await (await get('/')).text()).toContain('1,234 stars');
     expect(await (await get('/')).text()).toContain('APK · coming soon');
+  });
+
+  it('leads with the agentic side: integrations under the hero, one source of truth, Jarvis, reasons, agents, Academy, designs, XR', async () => {
+    for (const [p, lang] of [['/', 'en'], ['/de', 'de']] as const) {
+      const body = await (await get(p)).text();
+      const a = AGENTIC[lang];
+      const at = (s: string) => {
+        const i = body.indexOf(s);
+        expect(i, `${p}: ${s}`).toBeGreaterThan(-1);
+        return i;
+      };
+      // order of the page
+      const order = ['<h1>', 'class="logos"', 'class="proof"', 'id="agentisch"', 'id="jarvis"', 'id="warum"', 'id="ki-agenten"', 'id="akademie"', 'id="designs"', 'id="xr"', 'id="tool-stack"', 'id="rechner"', 'id="funktionen"', 'id="preise"', 'id="apps"', 'id="open-source"', 'id="installieren"', 'id="faq"'].map(at);
+      expect([...order].sort((x, y) => x - y)).toEqual(order);
+      expect(body).toContain(a.logos.h2);
+      expect(body).toContain(h(a.ssot.h2));
+      expect(body).toContain(h(a.jarvis.h2));
+      expect(body.match(/<li class="card"><span class="usp-i">/g)).toHaveLength(9);
+      expect(body).toContain(`<b>${ACADEMY.chapters}</b>`);
+      expect(body).toContain('https://github.com/BAISESYSTEMS/hyperlevel/blob/main/CONTRIBUTING.md');
+      expect(body).toContain('label%3A%22good+first+issue%22');
+      expect(body).toContain(`· ${a.builtWith}</span>`);
+      // live numbers: themes and icon packs from the appearance model, workflow counts like the catalogue
+      expect(body).toContain(lang === 'de' ? '19 Themes' : '19 themes');
+      expect(body).toContain(lang === 'de' ? '6 Icon-Pakete' : '6 icon packs');
+    }
+    const cat = (await t.api.get('/api/workflow-catalog')).data;
+    const stats = t.app.services.landing.stats();
+    expect({ triggers: stats.triggers, actions: stats.actions }).toEqual(cat.counts);
+    const home = await (await get('/')).text();
+    expect(home).toContain(`<b>${stats.triggers.toLocaleString('en-GB')}</b><span>workflow triggers</span>`);
+    expect(home).toContain(`${stats.triggers} triggers and ${stats.actions} actions`);
+    // the research notes never promise more MCP tools than there are
+    for (const f of ['competitors.json', 'replaces.json']) for (const m of readFileSync(`web/public/landing/${f}`, 'utf8').matchAll(/(\d{3})\+ (?:Tools|Werkzeug|tools)/g)) expect(Number(m[1]), f).toBeLessThanOrEqual(stats.tools);
+  });
+
+  it('shows every integration logo only for something in the catalogue or the code', async () => {
+    const keys = new Set([...CATALOG.map((e) => e.key), ...((t.app.services.catalogExtra as { entry: { key: string } }[]) ?? []).map((e) => e.entry.key)]);
+    for (const l of LOGOS) if (l.via.startsWith('catalog:')) expect(keys.has(l.via.slice(8)), l.via).toBe(true);
+  });
+
+  it('puts the screenshots that exist into the hero and the spotlights, at their real size', async () => {
+    const dir = join(t.app.config.webDir, 'landing');
+    writeFileSync(join(dir, 'shot-jarvis.webp'), webp(1440, 900));
+    writeFileSync(join(dir, 'shot-xr.webp'), webp(1600, 1000));
+    const body = await (await get('/')).text();
+    // Jarvis leads the hero's crossfade
+    expect(body).toMatch(/<div class="stage"><img src="\/landing\/shot-jarvis\.webp" width="1440" height="900" alt="Focus mode with the Jarvis companion" fetchpriority="high"/);
+    expect(body).toContain('<img src="/landing/shot-xr.webp" width="1600" height="1000" alt="HyperLevel in the spatial mode for XR headsets" loading="lazy" decoding="async" data-hide>');
+    expect(body).toContain('id="xr" aria-labelledby="xr-h"><div class="wrap"><div class="spot">');
+  });
+
+  it('offers the Android app under its HyperLevel name once an APK is uploaded', async () => {
+    const prev = t.app.services.mobileAppInfo;
+    t.app.services.mobileAppInfo = () => ({ version_name: '1.0.3', size: 5 * 1024 * 1024, sha256: 'ab'.repeat(32) });
+    try {
+      const body = await (await get('/')).text();
+      expect(body).toContain('<a class="dl" href="/downloads/hyperlevel.apk" download><img class="appic" src="/icon.svg"');
+      expect(body).toContain('APK · v1.0.3 · 5.0 MB');
+      expect(body).toContain('there is no native iOS app yet');
+    } finally {
+      t.app.services.mobileAppInfo = prev;
+    }
   });
 
   it('stays the app on any other host, and adds the sitemap', async () => {

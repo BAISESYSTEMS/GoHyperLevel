@@ -11,10 +11,11 @@ export interface Copy {
   locale: string;
   title: string;
   description: string;
-  nav: { features: string; stack: string; calc: string; compare: string; apps: string; pricing: string; faq: string; switchLang: string; switchLangLabel: string; login: string };
-  hero: { eyebrow: string; h1: string; rotate: string[]; sub: string; subStrong: string; badges: string[]; ctaDemo: string; ctaSelf: string; ctaCloud: string; star: string; starCount: (n: string) => string; mockLabel: string; mockAlt: string[] };
-  ai: { h2: string; lead: string; items: [string, string][]; tools: (n: string) => string; snippetLabel: string; snippetNote: string; docs: string };
-  proof: { title: string; areas: string; tools: string; integrations: string; tests: string; note: string };
+  nav: { agents: string; why: string; features: string; academy: string; calc: string; compare: string; pricing: string; faq: string; switchLang: string; switchLangLabel: string; login: string };
+  /** `h1` is the whole tagline; `h1Hl`, a part of it, is set in the accent colour; `h1Tail`, its end, as a smaller second line. */
+  hero: { eyebrow: string; h1: string; h1Hl: string; h1Tail: string; sub: string; subStrong: string; badges: string[]; ctaDemo: string; ctaSelf: string; ctaCloud: string; star: string; starCount: (n: string) => string; mockLabel: string };
+  ai: { h2: string; lead: string; items: [string, string][]; tools: (n: string) => string; toolsNote: string; snippetLabel: string; snippetNote: string; docs: string };
+  proof: { title: string; tools: string; triggers: string; actions: string; integrations: string; tests: string; note: string };
   calc: {
     h2: string;
     lead: string;
@@ -47,7 +48,8 @@ export interface Copy {
     shareText: (eur: string) => string;
     foot: (date: string, rate: string) => string;
   };
-  features: { h2: string; lead: string; items: [string, string][]; more: string };
+  /** The automation card names the live counts of workflow triggers and actions. */
+  features: { h2: string; lead: string; items: (n: { triggers: string; actions: string }) => [string, string][]; more: string };
   dach: { h2: string; lead: string; items: [string, string][] };
   move: { h2: string; lead: string; steps: [string, string][]; note: string };
   vsHl: { h2: string; lead: string; colFeature: string; colHl: string; colUs: string; rows: [string, string, string][]; foot: (date: string) => string; appNote: string };
@@ -75,7 +77,7 @@ export interface Copy {
     lead: string;
     android: { title: string; sub: (v: string, mb: string) => string; subNone: string; button: string; sha: string; qr: string; steps: string[]; firstStart: string; none: string };
     ios: { title: string; sub: string; button: string; qr: string; steps: string[]; works: string; worksItems: string[]; note: string };
-    xr: { title: string; sub: string; items: string[]; note: string; docs: string };
+    xr: { title: string; sub: string; text: string; more: string; docs: string };
     agency: string;
   };
   install: { h2: string; lead: string; copy: string; copied: string; github: string; docs: string; note: string };
@@ -86,39 +88,44 @@ export interface Copy {
 const de: Copy = {
   lang: 'de',
   locale: 'de-DE',
-  title: '{b} – die Open-Source-Alternative zu GoHighLevel: CRM, Funnels, Automationen, KI',
-  description: 'CRM, Postfach, Funnels, Automationen und KI in einer App. Selbst gehostet kostenlos (AGPL), in der Cloud ab 49,99 € im Monat – ohne Gebühr pro Nutzer.',
-  nav: { features: 'Funktionen', stack: 'Tool-Stack', calc: 'Rechner', compare: 'Vergleich', apps: 'Apps', pricing: 'Preise', faq: 'FAQ', switchLang: 'EN', switchLangLabel: 'English version', login: 'Anmelden' },
+  title: '{b} – das freie Open-Source-Wachstums-Betriebssystem: CRM, Funnels, Automationen, KI-Agenten',
+  description: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen: CRM, Funnels, Postfach, Automationen und Jarvis als KI-Business-Developer. Selbst gehostet kostenlos (AGPL), Cloud ab 49,99 € im Monat – ohne Gebühr pro Nutzer.',
+  nav: { agents: 'Agenten', why: 'Warum {b}', features: 'Funktionen', academy: 'Akademie', calc: 'Rechner', compare: 'Vergleich', pricing: 'Preise', faq: 'FAQ', switchLang: 'EN', switchLangLabel: 'English version', login: 'Anmelden' },
   hero: {
     eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €',
-    h1: 'Deine Plattform für',
-    rotate: ['Vertrieb & CRM', 'Funnels & Websites', 'E-Mail-Marketing', 'Online-Kurse', 'Terminbuchung', 'Rechnungen', 'KI-Agenten'],
-    sub: 'Schluss mit teuren All-in-One-Abos: {b} ist Open Source – selbst gehostet kostenlos oder in unserer Cloud ab 49,99 €. CRM, Funnels, Automationen und KI in einem, mit MCP für Claude und Codex.',
-    subStrong: 'Dein Stack gehört dir.',
-    badges: ['Open Source (AGPL)', 'MCP für Claude, Codex, ChatGPT, Cursor', 'Gehostet in Frankfurt', 'DSGVO'],
+    h1: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen',
+    h1Hl: 'Wachstums-Betriebssystem',
+    h1Tail: 'für Solopreneure, Agenturen und kleine agentische Unternehmen',
+    sub: 'Jarvis, dein KI-Business-Developer, liest am Morgen deine Zahlen, findet den Deal, den du vergessen hast, und bereitet das Nachfassen vor – du bestätigst mit einem Klick. CRM, Funnels, Postfach, Automationen, Kurse und Rechnungen in einer App, mit der jeder KI-Agent arbeiten kann.',
+    subStrong: 'Eine einzige Quelle der Wahrheit – deine.',
+    badges: ['Open Source (AGPL)', 'MCP für Claude, ChatGPT, Codex & Cursor', 'Dein Claude- oder ChatGPT-Abo für deine Chats', 'Gehostet in Frankfurt', 'DSGVO'],
     ctaDemo: 'Live-Demo testen',
     ctaSelf: 'Mit 1 Befehl selbst hosten',
     ctaCloud: 'Cloud starten',
     star: 'auf GitHub',
     starCount: (n) => `${n} Sterne`,
     mockLabel: 'Echte Bildschirme aus der Demo',
-    mockAlt: ['Workflow-Editor mit Auslöser und Schritten', 'Gemeinsames Postfach mit einer E-Mail-Unterhaltung', 'Website-Baukasten mit Seitenvorschau', 'Pipeline mit Deals in jeder Phase'],
   },
   ai: {
     h2: 'Gebaut für KI-Agenten',
-    lead: 'Dein CRM als Werkzeugkasten für Claude, Codex, ChatGPT und Cursor – mit denselben Rechten und demselben Protokoll wie ein Mensch.',
+    lead: 'Der eingebaute Agent, deine eigenen Agenten und jedes MCP-Programm arbeiten mit denselben Werkzeugen – mit denselben Rechten und demselben Protokoll wie ein Mensch.',
     items: [
-      ['MCP-Server eingebaut', 'Über einen Endpunkt /mcp mit OAuth 2.1 (PKCE) oder API-Schlüssel. Jede Aktion läuft mit deinen Rechten und landet im Protokoll.'],
-      ['In einer Minute verbunden', 'Schlüssel mit einem Klick und fertige Befehle für Codex, Claude Code und Cursor; Anmeldung per OAuth für ChatGPT und Claude.ai.'],
-      ['Agent in der App', 'Der eingebaute KI-Agent sucht Kontakte, pflegt Deals, legt Aufgaben an – und fragt vor dem Senden, Löschen und Bezahlen.'],
-      ['Dein Modell, dein Abo', 'Eigene Schlüssel für jedes Modell (BYOK) – oder dein ChatGPT- bzw. Claude-Abo auf den offiziellen Wegen: als Connector in ChatGPT/Claude oder über die lokale Bridge mit den offiziellen CLIs.'],
+      ['HyperLevel-Agent auf jeder Seite', 'Strg/⌘+J: sucht, fasst zusammen, legt an und ändert mit deinen Rechten. Jeder Schritt als Karte mit Rückgängig; vor dem Senden, Löschen und Bezahlen fragt er.'],
+      ['Eigene KI-Mitarbeiter', 'Rolle, Anweisungen, Werkzeuge, Wissen, Zeitpläne und Auto-Antworten im Postfach – oder beschreib den Agenten und lass ihn von der KI als Entwurf bauen.'],
+      ['MCP-Server eingebaut', 'Ein Endpunkt /mcp mit OAuth 2.1 (PKCE) oder API-Schlüssel – für Claude, ChatGPT, Codex, Cursor, Hermes und jedes andere MCP-Programm.'],
+      ['KI-Schritte in jedem Workflow', 'Einordnen, Daten auslesen, zusammenfassen, übersetzen, Stimmung erkennen, einen Agenten starten, Bilder, Videos und Sprache erzeugen.'],
+      ['KI-Telefonagent', 'Nimmt Anrufe an und ruft selbst an (über Twilio), qualifiziert und bucht Termine – mit der Stimme deines eigenen Sprachanbieters.'],
+      ['Entwürfe statt Überraschungen', 'Antwort-Entwürfe für E-Mail, SMS und WhatsApp warten im Postfach – du prüfst und sendest mit einem Klick.'],
+      ['Jedes Modell, mit Ersatzkette', 'Eigene Schlüssel für jedes Modell (BYOK). Fällt eines aus, versucht der Agent es erneut und nimmt dann das nächste.'],
+      ['Dein ChatGPT- oder Claude-Abo', 'Für deine eigenen Chats: Claude Code auf deinem Rechner über die Bridge oder „Mit ChatGPT anmelden“ bei selbst gehosteten Installationen. Automationen nutzen API-Schlüssel.'],
     ],
     tools: (n) => `${n} MCP-Werkzeuge`,
+    toolsNote: 'Live gezählt. Jedes Werkzeug geht über die normale REST-API – Rechte, Prüfungen und Protokoll gelten unverändert.',
     snippetLabel: 'Codex oder Claude Code verbinden',
     snippetNote: 'Aus der Doku (docs/ai-tools.md). Ohne Schlüssel melden sich beide per OAuth an.',
     docs: 'Anleitung für alle KI-Werkzeuge',
   },
-  proof: { title: 'Gezählt, nicht behauptet', areas: 'Bereiche', tools: 'MCP-Werkzeuge', integrations: 'Integrationen', tests: 'automatische Tests', note: 'Zahlen aus dem laufenden Code und dem Repository beim Build.' },
+  proof: { title: 'Gezählt, nicht behauptet', tools: 'MCP-Werkzeuge', triggers: 'Workflow-Auslöser', actions: 'Workflow-Aktionen', integrations: 'Integrationen', tests: 'automatische Tests', note: 'Gezählt im laufenden Code; die Tests im Repository beim Build.' },
   calc: {
     h2: 'Was sparst du?',
     lead: 'Der Link merkt sich dein Ergebnis – teil ihn.',
@@ -154,19 +161,23 @@ const de: Copy = {
   features: {
     h2: 'Alles, wofür du sonst fünf Abos bezahlst',
     lead: 'Eine Node-App, eine SQLite-Datei, unbegrenzt Sub-Accounts.',
-    items: [
-      ['CRM & Pipelines', 'Kontakte, Firmen, Deals, Aufgaben, eigene Objekte und Lead-Scoring.'],
-      ['Gemeinsames Postfach', 'E-Mail, SMS, WhatsApp, Messenger, Instagram und Telefon in einer Liste.'],
-      ['Funnels & Websites', 'Seiten-Baukasten mit Vorlagen, Blog, A/B-Tests und BFSG-Prüfung.'],
-      ['Automationen', 'Workflows mit Auslösern, Bedingungen, Wartezeiten – und ein KI-Workflow-Builder.'],
-      ['KI-Agent & MCP', 'Claude, ChatGPT und Co. arbeiten über MCP mit deinen Rechten im CRM.'],
-      ['Kalender & Buchung', 'Online-Buchung, Team-Kalender, Round Robin, Zahlung bei Buchung.'],
-      ['Kurse & Community', 'Mitgliederbereich, Quiz, Zertifikate, Community und Webinare.'],
-      ['Rechnungen & Buchhaltung light', 'Angebote, Rechnungen, Mahnwesen, SEPA, DATEV-Export.'],
-      ['Helpdesk', 'Tickets, SLAs, Wissensdatenbank und Kundenportal.'],
-      ['Agentur & White-Label', 'Sub-Accounts, Kunden-Logins, eigene Domains, Snapshots, SaaS-Modus.'],
-      ['Telefonie & Voice', 'Browser-Telefon, Warteschlangen, IVR und ein KI-Telefonagent.'],
-      ['Apps', 'Android-App mit 13 Widgets und Web-App für iPhone und iPad.'],
+    items: (n) => [
+      ['CRM & Smart Lists', 'Kontakte, Firmen, Deals, eigene Objekte, Lead-Scoring und gespeicherte Listen mit eigenen Spalten – privat oder geteilt.'],
+      ['Gemeinsames Postfach', 'E-Mail, SMS, WhatsApp, Messenger, Instagram, Live-Chat und Telefon in einer Liste – mit Zuweisung im Team und KI-Entwürfen.'],
+      ['Funnels & Websites', 'Baukasten mit Vorlagen, Blog, A/B-Tests, SEO- und BFSG-Prüfung – oder die Seite beschreiben und die KI entwerfen lassen.'],
+      ['Automationen', `${n.triggers} Auslöser und ${n.actions} Aktionen, KI-Schritte, ein visueller Editor, Testläufe und Versionen – oder beschreiben und den KI-Entwurf prüfen.`],
+      ['Formulare & Umfragen', 'Eine Frage nach der anderen, Logik-Sprünge, Punkte, Zahlungen – und Felder, die in Kontakt, Firma, Deal oder eigene Objekte schreiben.'],
+      ['Kalender & Buchung', 'Buchungsseiten, Team-Kalender mit Round Robin, Zahlung bei Buchung, Serientermine, Leistungsmenü und mehrere Erinnerungen.'],
+      ['Vermietung & Event-Tickets', 'Dinge nach Tagen oder Nächten vermieten ohne Überbuchung, Tickets mit bis zu 20 Ticketarten, QR-Code und Check-in.'],
+      ['Kurse & Community', 'Mitgliederbereich mit eigenem Video, Quiz und Zertifikaten, eine Community mit bezahlten Stufen, Webinare.'],
+      ['Kundenportal', 'Kunden sehen ihre Termine und die Dateien, die du für sie freigibst – und laden auf Wunsch selbst Dokumente hoch.'],
+      ['Rechnungen & Buchhaltung light', 'Angebote, Rechnungen mit lückenlosen Nummern, XRechnung und ZUGFeRD, Mahnwesen, SEPA, DATEV-Export.'],
+      ['Helpdesk', 'Tickets mit SLAs, Wissensdatenbank und Hilfe-Center, CSAT und NPS.'],
+      ['Projekte & Zeit', 'Listen, Boards, Gantt, Zeiterfassung und Stundenzettel, die zum Rechnungsentwurf werden.'],
+      ['Living Boards & Canvas', 'Dashboards, die du per Wunsch zusammenstellst, unendliche Whiteboards mit Live-CRM-Karten – und Agenten, die mitzeichnen.'],
+      ['Agentur & White-Label', 'Unbegrenzt Sub-Accounts, Kunden-Logins, deine Marke und Domains, Snapshots, SaaS-Modus zum Weiterverkaufen.'],
+      ['Telefonie & Voice', 'Browser-Telefon, Telefonmenü und Warteschlangen, Power-Dialer, Gesprächsanalyse und ein KI-Telefonagent.'],
+      ['Apps & Anmeldung', 'Android-App mit 13 Widgets, Web-App für iPhone und iPad; Anmeldung mit Google, Microsoft, GitHub, Apple oder Passkey.'],
     ],
     more: 'Alle Funktionen im README',
   },
@@ -180,6 +191,7 @@ const de: Copy = {
       ['SEPA', 'Lastschrift-Mandate und Überweisungsdateien – auch ohne Stripe.'],
       ['DATEV', 'Buchungsstapel und Belege für deine Steuerberatung.'],
       ['Server in der EU', 'Selbst gehostet auf deinem Server, die Cloud läuft in Frankfurt am Main.'],
+      ['Deutsch & Englisch', 'Die Oberfläche auf Deutsch und Englisch, je Person wählbar; die meistgenutzten Bereiche sind übersetzt, weitere folgen.'],
     ],
   },
   move: {
@@ -359,18 +371,13 @@ const de: Copy = {
       steps: ['Die Web-App in Safari öffnen (QR-Code scannen).', 'Unten auf „Teilen“ tippen.', '„Zum Home-Bildschirm“ wählen und „Hinzufügen“ tippen.', 'Vom Home-Bildschirm starten und anmelden.'],
       works: 'Was funktioniert',
       worksItems: ['Push-Mitteilungen ab iOS 16.4', 'Zähler am App-Symbol', 'Startet offline mit der App-Hülle', 'Vollbild ohne Browser-Leiste'],
-      note: 'Eine Web-App für iPhone und iPad, keine App aus dem App Store.',
+      note: 'Eine Web-App für iPhone und iPad, keine App aus dem App Store – eine native iOS-App gibt es noch nicht.',
     },
     xr: {
       title: 'XR- und Datenbrillen (Beta)',
       sub: 'Im Browser der Brille – ohne App Store',
-      items: [
-        'Raum-Modus: große Ziele für Blick, Pinch und Controller, gut lesbares Glas',
-        'Arbeitsfläche: 2–4 Seiten nebeneinander für Ultrawide-Monitore und die virtuellen Riesenbildschirme von Datenbrillen',
-        'Boards und Canvas als schwebende Panels in WebXR – ohne WebXR als 3D-Vorschau im Browser',
-        'Für Meta Quest, Apple Vision Pro, Android XR und Display-Brillen',
-      ],
-      note: 'Beta: im Browser und mit einer simulierten WebXR-Brille getestet, noch nicht auf jeder echten Brille. Raum-Modus und 3D-Vorschau laufen überall.',
+      text: 'Raum-Modus, Arbeitsfläche mit 2–4 Seiten nebeneinander und Boards als schwebende Panels in WebXR.',
+      more: 'Mehr zu XR',
       docs: 'So funktioniert XR',
     },
     agency: 'Agenturen bekommen beide Apps unter ihrer Marke: die Web-App automatisch mit Name und Icon, die Android-APK baust du mit dem dokumentierten Skript selbst.',
@@ -394,6 +401,10 @@ const de: Copy = {
       ['Gibt es eine Gebühr pro Nutzer?', 'Nein. Cloud Team & Company und Cloud Agentur haben unbegrenzt Nutzer zum gleichen Preis.'],
       ['Was bedeutet AGPL für meine Agentur?', 'Du darfst {b} frei nutzen, anpassen und für Kunden betreiben. Wer eine veränderte Fassung als Dienst anbietet, muss den geänderten Quellcode den Nutzern zugänglich machen.'],
       ['Gibt es eine Demo?', 'Ja, mit erfundenen Daten. Sie wird jede Nacht zurückgesetzt und verschickt nichts nach außen.'],
+      ['Was ist Jarvis?', 'Der eingebaute Agent als Sprach-Begleiter im Fokus-Modus: Du fragst per Stimme oder Text und bekommst Antworten mit Live-Zahlen, morgens auf Wunsch ein Wachstums-Briefing, Check-ins und Meldungen, wenn etwas passiert. Jarvis bereitet Entwürfe und nächste Schritte vor; was verschickt, geändert oder bezahlt wird, wartet auf deinen Klick.'],
+      ['Wer pflegt die Daten – ich oder die Agenten?', 'Beide, in derselben Datenbank. Verbinde Claude, ChatGPT, Codex, Hermes oder eigene Agenten über MCP oder die REST-API und lass sie Kontakte, Deals, Notizen, Aufgaben, Rechnungen und Projekte anlegen und aktualisieren – mit den Rechten ihres Schlüssels oder Logins, jede Änderung im Protokoll und rückgängig zu machen.'],
+      ['Brauche ich KI, um {b} zu nutzen?', 'Nein. Alle Funktionen laufen ohne KI-Anbieter; „Was brennt?“, die Briefings und die Check-ins werden aus deinen Zahlen berechnet, die KI formuliert sie nur. Für KI bringst du deinen eigenen Schlüssel mit – oder für deine persönlichen Chats dein eigenes Abo.'],
+      ['Kann ich mein ChatGPT- oder Claude-Abo nutzen?', 'Für deine eigenen Chats ja – auf den offiziellen Wegen: Claude über die unveränderte Claude-Code-CLI auf deinem eigenen Rechner (die Bridge), ChatGPT mit OpenAIs „Mit ChatGPT anmelden“ bei selbst gehosteten Installationen (bei gehosteten Diensten aus, bis OpenAI zustimmt). Automationen, geplante Agenten und andere Personen nutzen immer API-Schlüssel.'],
     ],
   },
   foot: { imprint: 'Impressum', privacy: 'Datenschutz', source: 'Quellcode (AGPL-3.0)', robot: 'The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.', madeIn: 'Open Source aus Deutschland', noTracking: 'Diese Seite setzt keine Cookies und lädt nichts von Dritten.' },
@@ -402,39 +413,44 @@ const de: Copy = {
 const en: Copy = {
   lang: 'en',
   locale: 'en-GB',
-  title: '{b} – the open-source alternative to GoHighLevel: CRM, funnels, automation, AI',
-  description: 'CRM, inbox, funnels, automations and AI in one app. Free to self-host (AGPL), cloud from €49.99 a month – no per-seat fee.',
-  nav: { features: 'Features', stack: 'Stack', calc: 'Calculator', compare: 'Compare', apps: 'Apps', pricing: 'Pricing', faq: 'FAQ', switchLang: 'DE', switchLangLabel: 'Deutsche Version', login: 'Sign in' },
+  title: '{b} – the free, open-source growth OS: CRM, funnels, automations and AI agents',
+  description: 'The free, open-source growth OS for solopreneurs, agencies and small agentic businesses: CRM, funnels, inbox, automations and Jarvis, an AI business developer. Free to self-host (AGPL), cloud from €49.99 a month – no per-seat fee.',
+  nav: { agents: 'Agents', why: 'Why {b}', features: 'Features', academy: 'Academy', calc: 'Calculator', compare: 'Compare', pricing: 'Pricing', faq: 'FAQ', switchLang: 'DE', switchLangLabel: 'Deutsche Version', login: 'Sign in' },
   hero: {
     eyebrow: 'Open source · Self-host free · Cloud from €49.99',
-    h1: 'Your platform for',
-    rotate: ['sales & CRM', 'funnels & websites', 'email marketing', 'online courses', 'bookings', 'invoicing', 'AI agents'],
-    sub: 'Sick of all-in-one platforms that drain your wallet? {b} is open source – self-host it for free or run it in our cloud from €49.99. CRM, funnels, automation and AI in one, with MCP for Claude and Codex.',
-    subStrong: 'Own your stack.',
-    badges: ['Open source (AGPL)', 'MCP for Claude, Codex, ChatGPT, Cursor', 'Hosted in Frankfurt', 'GDPR'],
+    h1: 'The free, open-source growth OS for solopreneurs, agencies & small agentic businesses',
+    h1Hl: 'growth OS',
+    h1Tail: 'for solopreneurs, agencies & small agentic businesses',
+    sub: 'Jarvis, your AI business developer, reads your numbers in the morning, spots the deal you forgot and prepares the follow-up – you confirm with one click. CRM, funnels, inbox, automations, courses and invoices in one app that every AI agent can work with.',
+    subStrong: 'One single source of truth – yours.',
+    badges: ['Open source (AGPL)', 'MCP for Claude, ChatGPT, Codex & Cursor', 'Your Claude or ChatGPT plan for your own chats', 'Hosted in Frankfurt', 'GDPR'],
     ctaDemo: 'Try the live demo',
     ctaSelf: 'Self-host in 1 command',
     ctaCloud: 'Start in the cloud',
     star: 'on GitHub',
     starCount: (n) => `${n} stars`,
     mockLabel: 'Real screens from the demo',
-    mockAlt: ['Workflow editor with a trigger and steps', 'Shared inbox with an e-mail conversation', 'Website builder with a page preview', 'Pipeline with deals in every stage'],
   },
   ai: {
     h2: 'Built for AI agents',
-    lead: 'Your CRM as a toolbox for Claude, Codex, ChatGPT and Cursor – with the same permissions and the same audit log as a person.',
+    lead: 'The built-in agent, your own agents and every MCP client work with the same tools – with the same permissions and the same audit log as a person.',
     items: [
-      ['MCP server built in', 'One endpoint, /mcp, with OAuth 2.1 (PKCE) or API keys. Every action runs with your permissions and lands in the audit log.'],
-      ['Connected in a minute', 'One-click keys and ready commands for Codex, Claude Code and Cursor; OAuth sign-in for ChatGPT and Claude.ai.'],
-      ['Agent in the app', 'The built-in AI agent finds contacts, updates deals, creates tasks – and asks before it sends, deletes or pays.'],
-      ['Your model, your subscription', 'Bring your own key for any model (BYOK) – or use your ChatGPT or Claude subscription the official ways: as a connector inside ChatGPT/Claude, or through the local bridge with the official CLIs.'],
+      ['HyperLevel Agent on every page', 'Ctrl/⌘+J: finds, summarises, creates and updates with your rights. Every step as a card with undo; it asks before it sends, deletes or pays.'],
+      ['Your own AI co-workers', 'Role, instructions, tools, knowledge, schedules and inbox auto-replies – or describe the agent and let AI build it as a draft.'],
+      ['MCP server built in', 'One endpoint, /mcp, with OAuth 2.1 (PKCE) or API keys – for Claude, ChatGPT, Codex, Cursor, Hermes and any other MCP client.'],
+      ['AI steps in every workflow', 'Classify, extract, summarise, translate, detect sentiment, run an agent, generate images, video and speech.'],
+      ['A voice agent on the phone', 'Answers calls and makes them (over Twilio), qualifies and books appointments – speaking with your own voice provider.'],
+      ['Drafts, not surprises', 'Reply drafts for e-mail, SMS and WhatsApp wait in the inbox – you check them and send with one click.'],
+      ['Any model, with a fallback chain', 'Bring your own key for any model (BYOK). If one fails, the agent retries and then moves on to the next model.'],
+      ['Your ChatGPT or Claude plan', 'For your own chats: Claude Code on your computer through the bridge, or “Sign in with ChatGPT” on self-hosted installs. Automations use API keys.'],
     ],
     tools: (n) => `${n} MCP tools`,
+    toolsNote: 'Counted live. Every tool goes through the regular REST API – permissions, validation and the audit log apply unchanged.',
     snippetLabel: 'Connect Codex or Claude Code',
     snippetNote: 'From the docs (docs/ai-tools.md). Without a key, both sign in via OAuth.',
     docs: 'Guide for every AI tool',
   },
-  proof: { title: 'Counted, not claimed', areas: 'areas', tools: 'MCP tools', integrations: 'integrations', tests: 'automated tests', note: 'Numbers from the running code and from the repository at build time.' },
+  proof: { title: 'Counted, not claimed', tools: 'MCP tools', triggers: 'workflow triggers', actions: 'workflow actions', integrations: 'integrations', tests: 'automated tests', note: 'Counted in the running code; the tests in the repository at build time.' },
   calc: {
     h2: 'How much do you save?',
     lead: 'The link keeps your result – share it.',
@@ -470,19 +486,23 @@ const en: Copy = {
   features: {
     h2: 'Everything you otherwise pay five subscriptions for',
     lead: 'One Node app, one SQLite file, unlimited sub-accounts.',
-    items: [
-      ['CRM & pipelines', 'Contacts, companies, deals, tasks, custom objects and lead scoring.'],
-      ['Unified inbox', 'E-mail, SMS, WhatsApp, Messenger, Instagram and phone in one list.'],
-      ['Funnels & websites', 'Page builder with templates, blog, A/B tests and an accessibility check.'],
-      ['Automations', 'Workflows with triggers, conditions, waits – and an AI workflow builder.'],
-      ['AI agent & MCP', 'Claude, ChatGPT and others work your CRM over MCP, with your permissions.'],
-      ['Calendars & booking', 'Online booking, team calendars, round robin, pay at booking.'],
-      ['Courses & community', 'Member area, quizzes, certificates, community and webinars.'],
-      ['Invoices & light bookkeeping', 'Quotes, invoices, dunning, SEPA, DATEV export.'],
-      ['Helpdesk', 'Tickets, SLAs, knowledge base and customer portal.'],
-      ['Agency & white-label', 'Sub-accounts, client logins, custom domains, snapshots, SaaS mode.'],
-      ['Telephony & voice', 'Browser phone, queues, IVR and an AI phone agent.'],
-      ['Apps', 'Android app with 13 widgets and a web app for iPhone and iPad.'],
+    items: (n) => [
+      ['CRM & smart lists', 'Contacts, companies, deals, custom objects, lead scoring and saved lists with your own columns – private or shared.'],
+      ['Unified inbox', 'E-mail, SMS, WhatsApp, Messenger, Instagram, live chat and calls in one list – with team assignment and AI drafts.'],
+      ['Funnels & websites', 'Builder with templates, blog, A/B tests, SEO and accessibility checks – or describe the page and let AI draft it.'],
+      ['Automations', `${n.triggers} triggers and ${n.actions} actions, AI steps, a visual editor, test runs and versions – or describe it and review the AI's draft.`],
+      ['Forms & surveys', 'One question at a time, logic jumps, scoring, payments – and fields that write into the contact, company, deal or your own objects.'],
+      ['Calendars & booking', 'Booking pages, team calendars with round robin, pay at booking, recurring appointments, service menus and several reminders.'],
+      ['Rentals & event tickets', 'Rent out items by the day or night without overbooking, sell tickets with up to 20 ticket types, QR codes and check-in.'],
+      ['Courses & community', 'Member area with your own video, quizzes and certificates, a community with paid tiers, webinars.'],
+      ['Client portal', 'Clients see their appointments and the files you share with them – and can upload documents themselves if you allow it.'],
+      ['Invoices & light bookkeeping', 'Quotes, invoices with gapless numbers, XRechnung and ZUGFeRD, dunning, SEPA, DATEV export.'],
+      ['Helpdesk', 'Tickets with SLAs, knowledge base and help center, CSAT and NPS.'],
+      ['Projects & time', 'Lists, boards, Gantt, time tracking and timesheets that turn into invoice drafts.'],
+      ['Living Boards & Canvas', 'Dashboards you put together by asking, infinite whiteboards with live CRM cards – and agents that draw along.'],
+      ['Agency & white-label', 'Unlimited sub-accounts, client logins, your brand and domains, snapshots, SaaS mode to resell.'],
+      ['Telephony & voice', 'Browser phone, call menus and queues, power dialer, call intelligence and an AI phone agent.'],
+      ['Apps & sign-in', 'Android app with 13 widgets, a web app for iPhone and iPad; sign in with Google, Microsoft, GitHub, Apple or a passkey.'],
     ],
     more: 'Every feature in the README',
   },
@@ -496,6 +516,7 @@ const en: Copy = {
       ['SEPA', 'Direct debit mandates and transfer files – without Stripe, too.'],
       ['DATEV', 'Booking batches and receipts for your tax advisor.'],
       ['Servers in the EU', 'Self-hosted on your server; the cloud runs in Frankfurt am Main.'],
+      ['German & English', 'The interface in German and English, chosen per person; the most used areas are translated, more follow.'],
     ],
   },
   move: {
@@ -675,18 +696,13 @@ const en: Copy = {
       steps: ['Open the web app in Safari (scan the QR code).', 'Tap “Share” at the bottom.', 'Choose “Add to Home Screen”, then “Add”.', 'Start it from the home screen and sign in.'],
       works: 'What works',
       worksItems: ['Push notifications from iOS 16.4', 'Badge count on the icon', 'Starts offline with the app shell', 'Full screen without the browser bar'],
-      note: 'A web app for iPhone and iPad, not an App Store app.',
+      note: 'A web app for iPhone and iPad, not an App Store app – there is no native iOS app yet.',
     },
     xr: {
       title: 'XR headsets and display glasses (beta)',
       sub: "In the headset's browser – no app store",
-      items: [
-        'Spatial mode: large targets for gaze, pinch and controllers, readable glass',
-        'Workspace: 2–4 pages side by side for ultrawide monitors and the giant virtual screens of display glasses',
-        'Boards and Canvas as floating panels in WebXR – without WebXR as a 3D preview in the browser',
-        'For Meta Quest, Apple Vision Pro, Android XR and display glasses',
-      ],
-      note: 'Beta: tested in the browser and with a simulated WebXR headset, not yet on every real headset. Spatial mode and the 3D preview work everywhere.',
+      text: 'Spatial mode, a workspace with 2–4 pages side by side and boards as floating panels in WebXR.',
+      more: 'More about XR',
       docs: 'How XR works',
     },
     agency: 'Agencies get both apps under their own brand: the web app automatically with name and icon; the Android APK you build yourself with the documented script.',
@@ -710,6 +726,10 @@ const en: Copy = {
       ['Is there a per-seat fee?', 'No. Cloud Team & Company and Cloud Agency have unlimited users at the same price.'],
       ['What does the AGPL mean for my agency?', 'You may use, adapt and run {b} for clients freely. If you offer a modified version as a service, you have to make the modified source available to its users.'],
       ['Is there a demo?', 'Yes, with made-up data. It resets every night and sends nothing out.'],
+      ['What is Jarvis?', 'The built-in agent as a voice companion in focus mode: you ask by voice or text and get answers with live numbers, a growth briefing in the morning if you want one, check-ins and alerts when something happens. Jarvis prepares drafts and next steps; anything that is sent, changed or paid waits for your click.'],
+      ['Who maintains the data – me or the agents?', 'Both, in the same database. Connect Claude, ChatGPT, Codex, Hermes or your own agents over MCP or the REST API and let them create and update contacts, deals, notes, tasks, invoices and projects – with the rights of the key or login they use, every change in the audit log and undoable.'],
+      ['Do I need AI to use {b}?', 'No. Every feature works without an AI provider; the hotspots, briefings and check-ins are computed from your numbers, and AI only phrases them. For AI you bring your own key – or, for your personal chats, your own subscription.'],
+      ['Can I use my ChatGPT or Claude subscription?', "For your own chats, yes – the official ways: Claude through the unmodified Claude Code CLI on your own computer (the bridge), ChatGPT with OpenAI's “Sign in with ChatGPT” on self-hosted installs (off on hosted services until OpenAI approves). Automations, scheduled agents and other people always use API keys."],
     ],
   },
   foot: { imprint: 'Legal notice', privacy: 'Privacy', source: 'Source code (AGPL-3.0)', robot: 'The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.', madeIn: 'Open source from Germany', noTracking: 'This page sets no cookies and loads nothing from third parties.' },

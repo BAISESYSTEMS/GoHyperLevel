@@ -474,8 +474,8 @@
    "label_de": "KI-Telefonagent",
    "label_en": "AI voice agent",
    "coverage": "partial",
-   "coverage_note_de": "Nur eingehende Anrufe (immer, außerhalb der Zeiten oder bei Nichtannahme): bucht Termine, nimmt Nachrichten auf, leitet weiter. Keine ausgehenden KI-Anrufe. Eigenes Twilio-Konto und eigene TTS/STT-Schlüssel nötig.",
-   "coverage_note_en": "Inbound calls only (always, after hours or on no answer): books appointments, takes messages, transfers. No outbound AI calls. Requires your own Twilio account and TTS/STT keys.",
+   "coverage_note_de": "Eingehende und ausgehende KI-Anrufe: bucht Termine, nimmt Nachrichten auf, leitet weiter; ausgehend aus einem Workflow (qualifizieren, buchen, erinnern). Eigenes Twilio-Konto und eigene TTS/STT-Schlüssel nötig.",
+   "coverage_note_en": "Inbound and outbound AI calls: books appointments, takes messages, transfers; outbound from a workflow (qualify, book, remind). Requires your own Twilio account and TTS/STT keys.",
    "tools": [
     {
      "name": "Goodcall",
@@ -730,8 +730,8 @@
    "label_de": "Bewertungsmanagement",
    "label_en": "Reputation management",
    "coverage": "partial",
-   "coverage_note_de": "Nur Google: Bewertungsanfragen per E-Mail/SMS, Google-Bewertungen lesen und beantworten, KI-Antwortentwürfe, Widget. Kein Facebook, Yelp oder Trustpilot, kein Listings-Management.",
-   "coverage_note_en": "Google only: review requests by email/SMS, read and reply to Google reviews, AI reply drafts, widget. No Facebook, Yelp or Trustpilot, no listings management.",
+   "coverage_note_de": "Bewertungsanfragen per E-Mail/SMS (auch in Massen), Bewertungen von Google, Facebook, Trustpilot, ProvenExpert, Yelp und Tripadvisor in einer Liste, KI-Antwortentwürfe, Widget. Kein Listings-Management.",
+   "coverage_note_en": "Review requests by email/SMS (also in bulk), reviews from Google, Facebook, Trustpilot, ProvenExpert, Yelp and Tripadvisor in one list, AI reply drafts, widget. No listings management.",
    "tools": [
     {
      "name": "Birdeye",
@@ -781,8 +781,8 @@
    "label_de": "Dokumente signieren & Angebote",
    "label_en": "Document signing & quotes",
    "coverage": "partial",
-   "coverage_note_de": "Verträge mit E-Signatur (gezeichnet oder getippt, Audit-Trail) und Angebote mit Varianten, die online angenommen werden. Nur ein Unterzeichner pro Vertrag, kein Drag-and-drop-Angebotsbaukasten.",
-   "coverage_note_en": "Contracts with e-signature (drawn or typed, audit trail) and quotes with variants accepted online. One signer per contract only, no drag-and-drop proposal builder.",
+   "coverage_note_de": "Verträge mit E-Signatur (gezeichnet oder getippt, Audit-Trail, mehrere Unterzeichner mit Reihenfolge) und Angebote mit Varianten, die online angenommen werden. Kein Drag-and-drop-Angebotsbaukasten.",
+   "coverage_note_en": "Contracts with e-signature (drawn or typed, audit trail, several signers in order) and quotes with variants accepted online. No drag-and-drop proposal builder.",
    "tools": [
     {
      "name": "DocuSign",
@@ -1252,8 +1252,8 @@
    "label_de": "MCP-Server für Claude, ChatGPT & Codex",
    "label_en": "MCP server for Claude, ChatGPT & Codex",
    "coverage": "unique",
-   "coverage_note_de": "MCP-Server mit 240+ Werkzeugen und OAuth 2.1 – als Open Source und selbst hostbar nur hier. Einen MCP-Server haben auch HighLevel, HubSpot, ActiveCampaign, Kajabi, Pipedrive und Brevo.",
-   "coverage_note_en": "MCP server with 240+ tools and OAuth 2.1 – open source and self-hostable only here. HighLevel, HubSpot, ActiveCampaign, Kajabi, Pipedrive and Brevo have an MCP server too.",
+   "coverage_note_de": "MCP-Server mit 350+ Werkzeugen und OAuth 2.1 – als Open Source und selbst hostbar nur hier. Einen MCP-Server haben auch HighLevel, HubSpot, ActiveCampaign, Kajabi, Pipedrive und Brevo.",
+   "coverage_note_en": "MCP server with 350+ tools and OAuth 2.1 – open source and self-hostable only here. HighLevel, HubSpot, ActiveCampaign, Kajabi, Pipedrive and Brevo have an MCP server too.",
    "tools": [],
    "price_display_de": "einzigartig",
    "price_display_en": "unique",
@@ -1311,11 +1311,11 @@
  "excluded_rows": [
   {
    "label": "E-Commerce-Shop / Storefront (z. B. Shopify)",
-   "reason": "Kein Warenkorb, kein Versand/Fulfilment; Checkout ist eine Weiterleitung zu Stripe. Nur Einzelprodukt-Kauflinks und Checkout-Seiten."
+   "reason": "Ein Onlineshop mit Warenkorb, Checkout auf der eigenen Seite und Versand ist inzwischen eingebaut (docs/store.md); für die Zeile fehlen noch recherchierte Vergleichspreise."
   },
   {
    "label": "SEO-Tools & Local Listings (z. B. Semrush, Yext)",
-   "reason": "Keine Keyword-/SEO-Audit-Tools und kein Listings-/Citations-Management; nur SEO-Felder, Sitemaps und strukturierte Daten auf eigenen Seiten."
+   "reason": "Ein SEO-Check je Seite und für beliebige Adressen ist eingebaut, aber keine Keyword-Recherche und kein Listings-/Citations-Management; dazu SEO-Felder, Sitemaps und strukturierte Daten auf eigenen Seiten."
   },
   {
    "label": "Gehostete Telefonie (z. B. Aircall, sipgate, LC Phone)",
@@ -1323,7 +1323,7 @@
   },
   {
    "label": "Office: Dokumente, Tabellen, Präsentationen (z. B. Google Workspace, Microsoft 365)",
-   "reason": "Das Office-Modul ist in dieser Version noch nicht veröffentlicht."
+   "reason": "Das Office-Modul ist inzwischen eingebaut (docs/office.md), die Browser-Editoren werden optional selbst installiert; für die Zeile fehlen noch recherchierte Vergleichspreise."
   }
  ],
  "totals": {

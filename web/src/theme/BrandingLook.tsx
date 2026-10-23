@@ -22,6 +22,7 @@ import type { Branding } from '../session';
 import { Check, Field, Input, Select, Spinner, act, useLoad } from '../ui';
 import { THEME_LIST, themeById } from './themes';
 import { isHex } from './color';
+import { PRODUCT_ICON } from './brand-icon';
 
 /**
  * Agentur → White-Label, the look part: logos (light/dark), the square mark for the narrow sidebar, favicon,
@@ -98,13 +99,14 @@ export function LogoPreview({ shown }: { shown: Branding }) {
   const name = shown.name || 'HyperLevel';
   const wide = shown.logo_dark_url || shown.logo_url;
   const mark = shown.mark_dark_url || shown.mark_url;
-  const letter = <span>{name.slice(0, 1).toUpperCase()}</span>;
+  // No logo yet: the HyperLevel icon, as in the real sidebar (never an initial).
+  const icon = <img src={PRODUCT_ICON} alt="" style={{ width: 24, height: 24, flex: 'none' }} />;
   return (
     <div className="row" style={{ alignItems: 'flex-start', gap: 12 }} data-tour="branding-live">
       <div className="ap-live" style={{ flex: '1 1 180px', gridTemplateColumns: '120px 1fr' }} aria-label="Vorschau der Seitenleiste">
         <div className="ap-live-side" style={{ alignItems: 'flex-start' }}>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center', fontWeight: 700, fontSize: 13, minWidth: 0 }}>
-            {wide ? <img src={wide} alt="" style={{ height: 22, width: 'auto', maxWidth: 84, flex: 'none' }} /> : mark ? <img src={mark} alt="" style={{ width: 24, height: 24, flex: 'none' }} /> : letter}
+            {wide ? <img src={wide} alt="" style={{ height: 22, width: 'auto', maxWidth: 84, flex: 'none' }} /> : mark ? <img src={mark} alt="" style={{ width: 24, height: 24, flex: 'none' }} /> : icon}
             {shown.show_name !== 'no' && <span style={{ background: 'none', width: 'auto', height: 'auto', display: 'inline', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'inherit' }}>{name}</span>}
           </div>
           <i style={{ width: 80 }} />
@@ -119,7 +121,7 @@ export function LogoPreview({ shown }: { shown: Branding }) {
         </div>
       </div>
       <div className="ap-live" style={{ flex: '0 0 96px', gridTemplateColumns: '48px 1fr', height: 150 }} aria-label="Vorschau der schmalen Seitenleiste">
-        <div className="ap-live-side">{mark || wide ? <img src={mark || wide} alt="" style={{ width: 28, height: 28, flex: 'none', objectFit: mark ? 'contain' : 'cover', objectPosition: 'left' }} /> : letter}<i style={{ width: 22 }} /><i style={{ width: 22 }} /><i style={{ width: 22 }} /></div>
+        <div className="ap-live-side">{mark || wide ? <img src={mark || wide} alt="" style={{ width: 28, height: 28, flex: 'none', objectFit: mark ? 'contain' : 'cover', objectPosition: 'left' }} /> : icon}<i style={{ width: 22 }} /><i style={{ width: 22 }} /><i style={{ width: 22 }} /></div>
         <div className="ap-live-main" />
       </div>
     </div>

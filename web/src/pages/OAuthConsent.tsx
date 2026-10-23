@@ -3,6 +3,7 @@ import { api } from '../api';
 import { Icon } from '../icons';
 import { useSession } from '../session';
 import { BASE, Spinner, act, useLoad } from '../ui';
+import { PRODUCT_ICON } from '../theme/brand-icon';
 
 /**
  * Consent screen of the MCP OAuth server (/app/oauth-consent?request=…): an app such as ChatGPT,
@@ -34,7 +35,7 @@ export function OAuthConsent() {
     <div className="login oauth-consent">
       <div className="card" data-tour="oauth-consent">
         <div className="consent-brand">
-          {session.branding.logo_url ? <img src={session.branding.logo_url} alt="" /> : <span className="logo">{(brand || 'G').slice(0, 1).toUpperCase()}</span>}
+          <img src={session.branding.logo_url || session.branding.mark_url || PRODUCT_ICON} alt="" />
           <span>{brand}</span>
         </div>
         {!d ? (

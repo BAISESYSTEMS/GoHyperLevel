@@ -25,34 +25,72 @@ sub-domain – is sent to `/app`, so no client ever sees the project's marketing
 rewritten to their site before routing and are not affected.
 
 **The product name** comes from *Agentur → Branding*; the shipped default ("HyperLevel") shows as **HyperLevel**. There is
-no separate brand variable.
+no separate brand variable. **The mark** (`web/public/icon.svg`) stands wherever the brand shows: header, footer, the app
+download buttons, the favicon (`/icon.svg`, `/favicon.ico`, `apple-touch-icon.png`) and the social cards – never a bare letter.
 
 ## What it shows
 
-1. **Hero** – "Sick of all-in-one platforms that drain your wallet?" / "Schluss mit All-in-One-Plattformen, die dein
-   Konto leerräumen.", the three calls to action (live demo, self-host in one command, cloud), the GitHub link with the
-   star count, a badge row and a crossfade of four real screens of the demo (workflow editor, inbox, website builder,
-   pipeline; still with `prefers-reduced-motion`).
-2. **Counted, not claimed** – feature areas, MCP tools and built-in integrations counted from the running code, automated
-   tests counted from the repository at build time.
-3. **Replaces your stack** – the visual centrepiece: per function the tools it replaces (plain text chips, no logos), the
-   cheapest entry price in the vendor's currency, and *Inklusive* / ◐ *Teilweise* (with the limit as a note, e.g. "Voice
-   AI: inbound calls only") / *Nur bei HyperLevel*; a total bar ("your tool stack" per currency – dollars are not
+The home page leads with the agentic side, in this order:
+
+1. **Hero** – the tagline "The free, open-source growth OS for solopreneurs, agencies & small agentic businesses" /
+   "Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen" (the
+   product in large type, *growth OS* / *Wachstums-Betriebssystem* in gold, who it is for as a smaller second line), a sub
+   line on Jarvis and "one single source of truth", the three calls to action (live demo, self-host in one command,
+   cloud), the GitHub link with the star count, a badge row (MCP, your own Claude/ChatGPT plan for your own chats …) and a
+   crossfade of up to four real screens – `shot-jarvis.webp` first when it exists, then pipeline, inbox, workflow editor,
+   website builder (still with `prefers-reduced-motion`).
+2. **Integrates with your favorite tools** – an endless row of integration marks right under the hero
+   (`server/services/landing-logos.ts`): only integrations that exist, each with where it lives (`via`: a key of the
+   integrations catalogue or a file and a word in it – `tests/landing.test.ts` checks every one against the running app).
+   No vendor the page compares against (competitors.json, replaces.json) and no AI lab's mark – Claude, OpenAI and Gemini are
+   plain words; Zoom, DATEV, Outlook, Microsoft Teams, Mollie and Norman too. Marks from simple-icons 13.21.0 (CC0), inline
+   SVG in one hidden sprite, monochrome in the hero's muted ink, the brand colour on the icon on hover (where it keeps 3:1
+   on the ink). CSS only: the list twice in a row slides by its own width, hover or keyboard focus (the row is a focusable
+   region) pauses it, edges fade out, `prefers-reduced-motion` shows a still, wrapped grid; the copy of the list is
+   `aria-hidden`. Under it: "Logos are trademarks of their owners and show available integrations."
+3. **Counted, not claimed** – MCP tools, workflow triggers, workflow actions and integrations counted from the running
+   code (the triggers and actions the way the workflow catalogue counts them), automated tests counted from the repository
+   at build time.
+4. **One single source of truth** (`#agentisch`) – agents fill the CRM: Claude, ChatGPT, Codex, Hermes, Cursor, Jarvis,
+   your own agents and your team read and write the same database over MCP and the REST API, with the same permissions,
+   audit log and undo; read-only keys; inside the app the agent asks before anything is sent, deleted or paid, and every MCP
+   tool tells external clients whether it reads, writes or sends (so the client can ask). A small HTML diagram, no picture.
+5. **Jarvis** (`#jarvis`) – the voice companion and business developer of focus mode ([living-boards.md](living-boards.md#fokus-modus-mit-companion)):
+   growth briefing with top‑3 opportunities and risks in € (opt-in), weekly review, check-ins and event alerts, drafts that
+   wait for a click (voice never confirms), conversation mode, the fallback chain. An example conversation drawn in HTML
+   (no numbers, labelled as an example).
+6. **What makes it different** (`#warum`) – nine cards: €0 per seat, one source of truth, Jarvis, your own Claude or ChatGPT
+   plan (personal chats only – Claude through Claude Code on your computer via the bridge, ChatGPT with "Sign in with
+   ChatGPT" on self-hosted installs; automations use API keys), XR, designs (live counts of themes and icon packs), the
+   Academy, open & customizable, German & English/GDPR/e-invoices. Each title links to its section or docs page.
+7. **Built for AI agents** (`#ki-agenten`) – the live MCP tool count, the Codex/Claude Code snippet from
+   [ai-tools.md](ai-tools.md) and eight cards (the agent on every page, custom agents, MCP, AI workflow steps, the voice
+   agent, drafts, BYOK with fallback chain, your own subscription).
+8. **The Academy** (`#akademie`), **designs** (`#designs`) and **XR** (`#xr`) – spotlights with text and, once the screenshot
+   exists, the picture beside it (`shot-academy.webp`, `shot-themes.webp`, `shot-xr.webp`). The Academy shows its numbers as
+   tiles (14 chapters, 120+ module tours, 10 course lessons – `ACADEMY` in `landing-agentic-copy.ts`, checked against
+   `web/src/tour/catalog.ts` by the test); XR says exactly what [xr.md](xr.md) says, including that it is a beta not yet
+   tested on real hardware.
+9. **Replaces your stack** – per function the tools it replaces (plain text chips, no logos), the
+   cheapest entry price in the vendor's currency, and *Inklusive* / ◐ *Teilweise* (with the limit as a note, e.g. "no
+   listings management") / *Nur bei HyperLevel*; a total bar ("your tool stack" per currency – dollars are not
    converted unless the research brings an ECB-based total with its source) against "€0 self-hosted · from €49.99 cloud".
    Stacked cards on phones. From `web/public/landing/replaces.json`; left out while the file is missing.
-4. **Savings calculator** – two modes: a *typical tool mix* (HubSpot Starter, ClickFunnels, Kajabi, Calendly,
+10. **Savings calculator** – two modes: a *typical tool mix* (HubSpot Starter, ClickFunnels, Kajabi, Calendly,
    Mailchimp/ActiveCampaign – entry prices from the comparison research) and *coming from HighLevel* (plan, sub-accounts,
    white-label mobile app). Self-hosted or cloud on our side. It is a GET form: the URL carries the input, the server
    renders the result (and puts it into `og:title`), so a shared link shows the same number. A small inline script makes
    it live and keeps the share links (plain X, LinkedIn and Reddit intent URLs) in step.
-5. Features (from the README), **Built for AI agents** (MCP with OAuth 2.1, Codex/Claude Code snippet from
-   [ai-tools.md](ai-tools.md), the in-app agent, BYOK and subscriptions the official ways – see [agent.md](agent.md)),
-   DACH strengths (GDPR, GoBD-minded invoicing, XRechnung/ZUGFeRD, SEPA, DATEV, hosting in Frankfurt), the HighLevel
+11. Features (sixteen cards from the README, the automation card with the live trigger and action counts), DACH strengths
+   (GDPR, GoBD-minded invoicing, XRechnung/ZUGFeRD, SEPA, DATEV, hosting in Frankfurt, German & English), the HighLevel
    importer in three steps, HighLevel side by side, the comparison matrix, **Cloud or self-hosted?**, pricing,
-   **white-label on the Agency plan**, apps, the one-command install with a copy button, FAQ.
-6. **Apps** – the Android APK from this server (`/downloads/gohigh.apk`, version, size and SHA-256 from the latest upload,
+   **white-label on the Agency plan**, apps, **Open source – and open for contributions** (links to CONTRIBUTING.md, the
+   good first issues and the repository, the CLA note), the one-command install with a copy button, FAQ (with Jarvis, who
+   maintains the data, AI optional, own subscription).
+12. **Apps** – the Android APK from this server (`/downloads/hyperlevel.apk`, version, size and SHA-256 from the latest upload,
    QR code to `/android`, how to allow unknown sources), the iPhone/iPad web app (add to home screen, what works) and XR
-   headsets and display glasses (beta, see [xr.md](xr.md)). No
+   headsets and display glasses (a short card pointing to the XR spotlight). The download buttons carry the HyperLevel
+   mark (`/icon.svg`); the iPhone/iPad card says there is no native iOS app yet. No
    store badges: neither app is in a store. The Android robot is used under CC BY 3.0 (attribution in the footer and in
    NOTICE); iPhone/iPad get a neutral device icon, never the Apple logo.
 
@@ -92,17 +130,21 @@ Everything on the page must be backed by the code or a dated source. When someth
 | HighLevel prices (Starter 97 $, Unlimited 297 $, Agency Pro 497 $, white-label mobile app 497 $ add-on) | `server/services/landing-calc.ts` (`HL_PRICES`, `HL_AS_OF`) | gohighlevel.com/pricing, read 2026-10-09 |
 | USD → EUR | `EUR_USD` in the same file | ECB reference rate of 2026-10-09: 1 € = 1.1206 $ |
 | Our prices | the cloud settings (with cloud mode) or the list prices in `server/services/cloud.ts` | [cloud.md](cloud.md) |
-| Other vendors (matrix, tool mix) | `web/public/landing/competitors.json` – every cell with a source URL, `as_of` date | the research file (our own cells corrected against the code: SaaS mode self-hosted only, no Office module in this release) |
-| "Replaces your stack" | `web/public/landing/replaces.json` – every tool price with a source URL | the stack research |
-| Counts | live: `PERMISSIONS`, MCP tools, integrations catalogue; tests: `stats.json` from `scripts/landing-stats.mjs` | the code |
-| Texts (DE + EN) | `server/services/landing-copy.ts` – one interface, so a missing translation is a type error | – |
+| Other vendors (matrix, tool mix) | `web/public/landing/competitors.json` – every cell with a source URL, `as_of` date | the research file; our own cells re-checked against the code on 2026-10-22 (SaaS mode self-hosted only; store with cart, PayPal and Mollie, reviews from several platforms, outbound AI calls, several signers, list and calendar views, visual workflow editor and Funnel AI exist; Office is *partial* – the browser editors are an optional install; 350+ MCP tools) |
+| "Replaces your stack" | `web/public/landing/replaces.json` – every tool price with a source URL | the stack research; our own notes re-checked on 2026-10-22 (outbound AI calls, review platforms, several signers, 350+ MCP tools; store and Office exist but have no researched comparison prices yet, so they stay out of the table) |
+| Counts | live: MCP tools, workflow triggers and actions (as the workflow catalogue counts them), integrations catalogue, themes and icon packs (`server/services/appearance-model.ts`); tests: `stats.json` from `scripts/landing-stats.mjs` | the code |
+| Academy numbers | `ACADEMY` in `server/services/landing-agentic-copy.ts` (14 chapters, 120+ module tours without the course, 10 lessons, 10 groups) | `web/src/tour/catalog.ts` – the test fails when they drift |
+| Integration marks | `LOGOS` in `server/services/landing-logos.ts`, each with `via` | the integrations catalogue (plus what modules add) or the named file |
+| Texts (DE + EN) | `server/services/landing-copy.ts` and `landing-agentic-copy.ts` – one interface each, so a missing translation is a type error | – |
 
 Rules the copy follows: factual comparative advertising (no logos of other vendors, no claims that cannot be shown, every
 price with source and date, the disclaimer under every comparison and in the footer: *HyperLevel is an independent
 open-source project and is not affiliated with HighLevel Inc. or the other vendors named*). Gaps are said plainly: SaaS
 mode is part of self-hosting, not of the cloud; our branded app is an installable web app plus a self-built Android APK,
 not a store app; the HighLevel importer moves contacts, custom fields, tags, pipelines, deals, calendars and appointments,
-not funnels or workflows. Testimonials are left out until real quotes exist.
+not funnels or workflows. Testimonials are left out until real quotes exist. Your own ChatGPT or Claude subscription is
+always "for your own chats" (automations use API keys), XR always "beta", Jarvis's growth briefing always "you switch it
+on". "Built with Claude" appears as plain words in the footer, never as a logo.
 
 ## The comparison research
 
@@ -147,9 +189,15 @@ MCP row says that other vendors have MCP servers too.
 ## Images
 
 `npm run landing:assets` (after `npm run build`) seeds a fictional demo, sets the product name to HyperLevel, takes
-the four screens at 1440×900 and converts them to WebP in Chromium, renders the social cards `og-en.png` and `og-de.png`
-(1200×630, the page's own font) plus `og-waitlist-en.png` and `og-waitlist-de.png` for the cloud waitlist mode ("Cloud bald
-verfügbar", no cloud price), and refreshes `stats.json`. Everything lands in `web/public/landing/`, which the build
+the four hero screens at 1440×900 (`shot-workflow|inbox|funnel|pipeline.webp`) plus `shot-jarvis.webp` (focus mode with
+Jarvis' briefing, first in the hero), `shot-academy.webp` (the Academy with a running tour – in German, like its tours),
+`shot-themes.webp` (four looks side by side: standard, dark with duotone icons, area colours, a white-label logo) and
+`shot-xr.webp` (a board in the 3D preview), converts them to WebP in Chromium (each well under 250 KB), renders the social
+cards `og-en.png` and `og-de.png` (1200×630, the page's own font, the HyperLevel mark and the tagline) plus
+`og-waitlist-en.png` and `og-waitlist-de.png` for the cloud waitlist mode ("Cloud bald verfügbar", no cloud price), and
+refreshes `stats.json` (`--no-shots`: only the cards and the stats). Every screenshot is shown only while its file exists, at
+the width and height read from the file's header; a picture that fails to load anyway hides its figure (the page's script),
+and the spotlight text then takes the full width. Everything lands in `web/public/landing/`, which the build
 copies to `dist-web/landing/`. The font is Inter Tight as a variable font (SIL OFL 1.1, served from the same folder – no font CDN); headings use weight 600, text 400.
 
 ## Security, speed, accessibility
@@ -167,8 +215,10 @@ copies to `dist-web/landing/`. The font is Inter Tight as a variable font (SIL O
 
 ## For developers
 
-`server/modules/landing.ts` (routes, data, cache) with the pure parts in `server/services/landing-calc.ts`,
-`landing-compare.ts`, `landing-copy.ts`, `landing-waitlist-copy.ts` (waitlist mode) and `landing-page.ts`. The waitlist form comes
+`server/modules/landing.ts` (routes, data, cache, screenshot sizes) with the pure parts in `server/services/landing-calc.ts`,
+`landing-compare.ts`, `landing-copy.ts`, `landing-waitlist-copy.ts` (waitlist mode), `landing-page.ts`, `landing-agentic.ts`
+with `landing-agentic-copy.ts` (one source of truth, Jarvis, the reasons, Academy, designs, XR, open source) and
+`landing-logos.ts` (the integrations row). The waitlist form comes
 from `app.services.cloudWaitlist.view()` (`server/modules/cloud-waitlist.ts`). Hooks: `app.services.robotsExtra` (lines for
 `/robots.txt`, used for the `Sitemap:` line), `app.services.landingFetch` (test hook for the GitHub call),
 `app.services.landing` (`refreshStars`, `stats`, `matrix`).
