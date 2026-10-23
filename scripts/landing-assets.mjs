@@ -143,8 +143,8 @@ if (!args.includes('--no-shots')) {
 // --- social cards ----------------------------------------------------------------------------------------------------------
 const font = readFileSync(join(out, 'inter-tight-latin-wght-normal.woff2')).toString('base64');
 const CARDS = {
-  en: { eyebrow: 'Open source · Self-host free · Cloud from €49.99', h1: 'The free, open-source growth OS for solopreneurs, agencies & small agentic businesses', sub: 'CRM, funnels, automations and Jarvis, your AI business developer.', badges: ['Self-host: $0', 'Cloud from €49.99', 'MCP: Claude, ChatGPT, Codex, Cursor'] },
-  de: { eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €', h1: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen', sub: 'CRM, Funnels, Automationen und Jarvis, dein KI-Business-Developer.', badges: ['Selbst gehostet: 0 €', 'Cloud ab 49,99 €', 'Gehostet in Frankfurt'] },
+  en: { eyebrow: 'Open source · Self-host free · Cloud from €49.99', h1: 'The free, open-source growth OS for agentic solopreneurs, agencies, small businesses & startups', sub: 'CRM, funnels, automations and Jarvis, your AI business developer.', badges: ['Self-host: $0', 'Cloud from €49.99', 'MCP: Claude, ChatGPT, Codex, Cursor'] },
+  de: { eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €', h1: 'Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups', sub: 'CRM, Funnels, Automationen und Jarvis, dein KI-Business-Developer.', badges: ['Selbst gehostet: 0 €', 'Cloud ab 49,99 €', 'Gehostet in Frankfurt'] },
 };
 // Cloud waitlist mode (docs/landing.md#cloud-waitlist-mode): the cloud is not on offer yet, so no cloud price and no "hosted in".
 const CARDS_WAITLIST = {

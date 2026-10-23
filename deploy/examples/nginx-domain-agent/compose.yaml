@@ -8,6 +8,7 @@
 # .env (shared with HyperLevel):
 #   PGHL_AGENT_TOKEN=<long random string>   – same value for HyperLevel and the agent
 #   PGHL_SERVER_IP=203.0.113.10              – this server's public IP(s), comma-separated
+#   PGHL_AGENT_PREFIX=pghl-                 – optional: a second instance on this host needs its own prefix (e.g. ghyl-)
 services:
   domain-agent:
     image: debian:bookworm-slim
@@ -19,6 +20,7 @@ services:
       PGHL_AGENT_TOKEN: ${PGHL_AGENT_TOKEN:?set PGHL_AGENT_TOKEN}
       PGHL_SERVER_IP: ${PGHL_SERVER_IP:?set PGHL_SERVER_IP}
       PGHL_APP_PORT: ${GOHIGH_PORT:-4700}
+      PGHL_AGENT_PREFIX: ${PGHL_AGENT_PREFIX:-pghl-}
     volumes:
       - ./deploy/examples/nginx-domain-agent/domain-agent.py:/agent/domain-agent.py:ro
       - /usr/local/lib/gohigh:/host-lib
@@ -28,5 +30,5 @@ services:
       - >-
         cp /agent/domain-agent.py /host-lib/domain-agent.py &&
         exec nsenter -t 1 -m -u -n -i --
-        env PGHL_AGENT_TOKEN="$$PGHL_AGENT_TOKEN" PGHL_SERVER_IP="$$PGHL_SERVER_IP" PGHL_APP_PORT="$$PGHL_APP_PORT"
+        env PGHL_AGENT_TOKEN="$$PGHL_AGENT_TOKEN" PGHL_SERVER_IP="$$PGHL_SERVER_IP" PGHL_APP_PORT="$$PGHL_APP_PORT" PGHL_AGENT_PREFIX="$$PGHL_AGENT_PREFIX"
         python3 /usr/local/lib/gohigh/domain-agent.py

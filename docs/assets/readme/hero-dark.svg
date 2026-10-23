@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520" role="img" aria-label="HyperLevel – the free, open-source growth OS for solopreneurs, agencies and small agentic businesses">
-  <title>HyperLevel – the free, open-source growth OS for solopreneurs, agencies and small agentic businesses</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520" role="img" aria-label="HyperLevel – the free, open-source growth OS for agentic solopreneurs, agencies, small businesses and startups">
+  <title>HyperLevel – the free, open-source growth OS for agentic solopreneurs, agencies, small businesses and startups</title>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#050816"/>
@@ -130,7 +130,7 @@
       <circle cx="50" cy="77" r="5" fill="#fff"/>
     </g></g>
     <text class="t" x="640" y="262" text-anchor="middle" font-size="92" font-weight="800" letter-spacing="-3" fill="url(#word)">HyperLevel</text>
-    <text class="t" x="640" y="316" text-anchor="middle" font-size="27" font-weight="600" fill="#e2e8f0">The free, open-source growth OS for solopreneurs, agencies &amp; small agentic businesses</text>
+    <text class="t" x="640" y="316" text-anchor="middle" font-size="23" font-weight="600" fill="#e2e8f0">The free, open-source growth OS for agentic solopreneurs, agencies, small businesses &amp; startups</text>
     <text class="t" x="640" y="356" text-anchor="middle" font-size="19" fill="#94a3b8">CRM · funnels · inbox · automations · AI agent · courses · invoices — one app, your server, 0 € per seat</text>
 
     <!-- terminal pill -->

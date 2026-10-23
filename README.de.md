@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-dark.svg">
-  <img src="docs/assets/readme/hero-light.svg" alt="HyperLevel – das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen" width="100%">
+  <img src="docs/assets/readme/hero-light.svg" alt="HyperLevel – das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups" width="100%">
 </picture>
 
 <h3>Dein ganzes Business in einer Open-Source-App.<br>Kostenlos für alle. Selbst gehostet. Für immer deins.</h3>
@@ -17,8 +17,9 @@
 
 </div>
 
-**Eine einzige Quelle der Wahrheit – gefüllt von deinen Agenten, nicht von dir.** Niemand tippt mehr Daten ins CRM:
-Claude, ChatGPT, Codex, Hermes oder eigene Agenten legen Kontakte, Deals, Notizen, Aufgaben und Rechnungen über MCP und die
+**Kein weiteres AIOS – die Business-Schicht für deins.** Behalte deinen Agenten oder dein AIOS und stöpsle es einfach an:
+HyperLevel ist der Universaladapter mit **einer einzigen Quelle der Wahrheit**. Niemand tippt mehr Daten ins CRM –
+Claude, ChatGPT, Codex, Cursor, Hermes oder dein eigener Harness legen Kontakte, Deals, Notizen, Aufgaben und Rechnungen über MCP und die
 REST-API an und halten sie aktuell. Alle Agenten und alle Menschen arbeiten auf derselben Datenbank – mit denselben Rechten,
 demselben Protokoll und demselben Rückgängig.
 

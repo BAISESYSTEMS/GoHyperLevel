@@ -6,6 +6,20 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.67] – 2026-10-23
+
+### Added
+- Landingpage: aufklappbarer Funktionsvergleich unter den Preisen (Selbst gehostet, Solo, Team & Company, Agentur) mit Häkchen –
+  passend zu den Berechtigungen der Tarife (White-Label, Kunden-Accounts, Domains und App nur Agentur, SaaS-Modus nur selbst gehostet).
+
+### Changed
+- Domain-Agent: `PGHL_AGENT_PREFIX` gibt jeder Instanz auf einem Server ihr eigenes Datei-Präfix (Standard `pghl-`), damit zwei
+  Agenten (z. B. eine private Instanz und eine Cloud-Instanz) nie die nginx-Seiten des anderen entfernen.
+- Positionierung „Kein weiteres AIOS – die Business-Schicht für deins“: Landingpage-Abschnitt, Hero-Badge und README sagen, dass sich
+  jeder bestehende Agent oder AIOS-Harness per MCP und REST einfach andockt (Universaladapter).
+- Zielgruppe überall „for agentic solopreneurs, agencies, small businesses & startups“ / „für agentische Solopreneure, Agenturen,
+  kleine Unternehmen und Startups“: Hero-Zeile, Seitenbeschreibungen, Social-Karten (neu gerendert), README und README-Banner.
+
 ## [1.0.66] – 2026-10-23
 
 ### Changed

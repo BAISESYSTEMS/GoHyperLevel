@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { escapeHtml as h } from '../core/template.js';
 import { yearlyCents } from './cloud.js';
 import { COPY, type Copy, type Lang } from './landing-copy.js';
+import { PLAN_COMPARE_CSS, planCompare } from './landing-plan-compare.js';
 import { CALC_DEFAULT, EUR_USD, HL_AS_OF, HL_PRICES, HL_SOURCE, SUBS_MAX, calcQuery, calculate, shareLinks, type CalcInput, type OurPrices } from './landing-calc.js';
 import { OUR_ID, matrixCss, matrixHtml, mixTools, type Matrix, type MixTool } from './landing-compare.js';
 import { WHY_SWITCH } from './landing-switch.js';
@@ -387,6 +388,7 @@ table.cmp{border-collapse:separate;border-spacing:0;min-width:760px;width:100%;f
 .plan .btn{width:100%}
 .plan.wl .btn.line{border-color:var(--accent);color:var(--on-dark)}
 .vat{font-size:14px;color:var(--muted);margin:16px 0 0}
+${PLAN_COMPARE_CSS}
 /* white-label */
 .wlbox{background:var(--ink);color:var(--on-dark);border-radius:24px;padding:26px}
 .wlbox .lead{color:var(--muted-dark)}
@@ -756,6 +758,7 @@ ${wl ? `<p class="planned">${h(wl.planned)}</p>` : ''}<p class="amt">${h(eurC(c,
   };
   return `<section id="preise" aria-labelledby="price-h"><div class="wrap"><h2 id="price-h">${h(c.pricing.h2)}</h2><p class="lead">${h(c.pricing.lead)}</p>
 <div class="plans"><div class="plan"><h3>${h(c.pricing.self.name)}</h3><p class="muted" style="margin:0">${h(c.pricing.self.tag)}</p><p class="amt">${h(c.pricing.self.price)}</p><p class="yr"></p><ul>${c.pricing.self.items.map((t) => `<li>${h(t)}</li>`).join('')}</ul><a class="btn ${wl ? 'primary' : 'ink'}" href="#installieren">${h(c.pricing.self.cta)}</a></div>${card('solo')}${card('team')}${card('agency')}</div>
+${planCompare(d.lang, [c.pricing.self.name, c.pricing.solo.name, c.pricing.team.name, c.pricing.agency.name])}
 <p class="vat">${h(c.pricing.vat)}</p></div></section>`;
 }
 

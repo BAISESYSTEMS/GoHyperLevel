@@ -45,9 +45,9 @@ const de: AgenticCopy = {
     more: 'Alle Integrationen',
   },
   ssot: {
-    kicker: 'Agentisch zuerst',
+    kicker: 'Kein weiteres AIOS – die Business-Schicht für deins',
     h2: 'Eine einzige Quelle der Wahrheit – gepflegt von deinen Agenten',
-    lead: 'Du musst keine Daten mehr selbst ins CRM tippen. Verbinde Claude, ChatGPT, Codex, Hermes oder deine eigenen Agenten über MCP oder die REST-API – sie legen Kontakte, Deals, Notizen, Aufgaben, Rechnungen und Projekte an und halten sie aktuell. Jeder Agent und jeder Mensch liest und schreibt dieselbe Datenbank: mit denselben Rechten, demselben Protokoll und demselben Rückgängig.',
+    lead: 'Du hast schon einen Agenten oder ein AIOS? Behalte es – {b} ist der Universaladapter darunter. Claude, ChatGPT, Codex, Cursor, Hermes, dein eigener Agent-Harness oder jedes System, das MCP oder REST spricht, stöpselt sich in Minuten an. Dann legt es Kontakte, Deals, Notizen, Aufgaben, Rechnungen und Projekte an und hält sie aktuell – du tippst nichts mehr selbst ins CRM. Jeder Agent und jeder Mensch liest und schreibt dieselbe Datenbank: mit denselben Rechten, demselben Protokoll und demselben Rückgängig.',
     flowLabel: 'So arbeiten Agenten und Menschen auf denselben Daten',
     agentsLabel: 'Wer daran arbeitet',
     agents: ['Claude', 'ChatGPT', 'Codex', 'Hermes', 'Cursor', 'Jarvis', 'Deine eigenen Agenten', 'Dein Team'],
@@ -169,9 +169,9 @@ const en: AgenticCopy = {
     more: 'All integrations',
   },
   ssot: {
-    kicker: 'Agentic first',
+    kicker: 'Not another AIOS – the business layer under yours',
     h2: 'One single source of truth – kept up to date by your agents',
-    lead: "You don't have to type data into your CRM any more. Connect Claude, ChatGPT, Codex, Hermes or your own agents over MCP or the REST API, and they create and maintain contacts, deals, notes, tasks, invoices and projects for you. Every agent and every person reads and writes the same database – with the same permissions, the same audit log and the same undo.",
+    lead: "Already run an agent or an AI OS? Keep it – {b} is the universal adapter underneath. Claude, ChatGPT, Codex, Cursor, Hermes, your own agent harness or anything that speaks MCP or REST plugs in within minutes. Then it creates and maintains contacts, deals, notes, tasks, invoices and projects for you – you stop typing data into your CRM. Every agent and every person reads and writes the same database – with the same permissions, the same audit log and the same undo.",
     flowLabel: 'How agents and people work on the same data',
     agentsLabel: 'Who works on it',
     agents: ['Claude', 'ChatGPT', 'Codex', 'Hermes', 'Cursor', 'Jarvis', 'Your own agents', 'Your team'],

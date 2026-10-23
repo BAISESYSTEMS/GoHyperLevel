@@ -30,11 +30,11 @@ interface WaitlistCopy {
 
 const WAITLIST: Record<Lang, WaitlistCopy> = {
   de: {
-    description: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen: CRM, Postfach, Funnels, Automationen und Jarvis als KI-Business-Developer – kostenlos selbst gehostet (AGPL), ohne Gebühr pro Nutzer. Eine gehostete Cloud ist geplant: Warteliste offen.',
+    description: 'Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups: CRM, Postfach, Funnels, Automationen und Jarvis als KI-Business-Developer – kostenlos selbst gehostet (AGPL), ohne Gebühr pro Nutzer. Eine gehostete Cloud ist geplant: Warteliste offen.',
     hero: {
       eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud bald verfügbar',
       sub: 'Jarvis, dein KI-Business-Developer, liest am Morgen deine Zahlen, findet den Deal, den du vergessen hast, und bereitet das Nachfassen vor – du bestätigst mit einem Klick. {b} ist Open Source und läuft kostenlos auf deinem eigenen Server; eine gehostete Cloud ist in Vorbereitung – trag dich auf die Warteliste ein.',
-      badges: ['Open Source (AGPL)', 'MCP für Claude, ChatGPT, Codex & Cursor', 'Dein Claude- oder ChatGPT-Abo für deine Chats', 'Dein Server, deine Daten', 'DSGVO'],
+      badges: ['Open Source (AGPL)', 'Dein Agent oder AIOS dockt per MCP & REST an', 'Dein Claude- oder ChatGPT-Abo für deine Chats', 'Dein Server, deine Daten', 'DSGVO'],
       ctaSelf: 'Kostenlos selbst hosten',
       ctaCloud: 'Cloud: auf die Warteliste',
     },
@@ -90,11 +90,11 @@ const WAITLIST: Record<Lang, WaitlistCopy> = {
     noteMarker: ' (Cloud: geplant, noch nicht verfügbar)',
   },
   en: {
-    description: 'The free, open-source growth OS for solopreneurs, agencies and small agentic businesses: CRM, inbox, funnels, automations and Jarvis, an AI business developer – free to self-host (AGPL), no per-seat fee. A hosted cloud is planned: the waitlist is open.',
+    description: 'The free, open-source growth OS for agentic solopreneurs, agencies, small businesses and startups: CRM, inbox, funnels, automations and Jarvis, an AI business developer – free to self-host (AGPL), no per-seat fee. A hosted cloud is planned: the waitlist is open.',
     hero: {
       eyebrow: 'Open source · Self-host free · Cloud coming soon',
       sub: 'Jarvis, your AI business developer, reads your numbers in the morning, spots the deal you forgot and prepares the follow-up – you confirm with one click. {b} is open source and runs free on your own server; a hosted cloud is being prepared – join the waitlist.',
-      badges: ['Open source (AGPL)', 'MCP for Claude, ChatGPT, Codex & Cursor', 'Your Claude or ChatGPT plan for your own chats', 'Your server, your data', 'GDPR'],
+      badges: ['Open source (AGPL)', 'Plug in your agent or AIOS via MCP & REST', 'Your Claude or ChatGPT plan for your own chats', 'Your server, your data', 'GDPR'],
       ctaSelf: 'Self-host for free',
       ctaCloud: 'Cloud: join the waitlist',
     },

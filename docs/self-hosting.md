@@ -173,6 +173,8 @@ Er fasst nur Dateien `pghl-*` an, lehnt Domains ab, die eine andere Seite auf de
 | --- | --- |
 | `PGHL_AGENT_TOKEN` | Gemeinsames Geheimnis zwischen App und Agent (beide Dienste) |
 | `PGHL_SERVER_IP` | Öffentliche IP(s) des Servers, komma-getrennt; wird Kunden auch als DNS-Ziel angezeigt |
+| `PGHL_APP_PORT` | Port der App auf dem Host (Standard 4700) |
+| `PGHL_AGENT_PREFIX` | Datei-Präfix der nginx-Seiten dieses Agenten (Standard `pghl-`) – eine zweite Instanz auf demselben Server bekommt ein eigenes (z. B. `ghyl-`), damit kein Agent die Seiten des anderen entfernt |
 
 Ohne Agent (Traefik, Caddy, Dokploy…) laufen eigene Domains genauso, nur trägst du sie im Proxy ein.
 

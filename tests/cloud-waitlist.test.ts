@@ -120,7 +120,7 @@ describe('cloud mode without Stripe (waitlist on by itself)', () => {
     const de = (await page('/de')).body;
     expect(de).not.toContain('Danke! Wir melden uns');
     expect(de).toContain('Kann ich die Cloud schon nutzen?');
-    expect(de).toContain('<meta name="description" content="Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen: CRM, Postfach, Funnels, Automationen und Jarvis als KI-Business-Developer – kostenlos selbst gehostet');
+    expect(de).toContain('<meta name="description" content="Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups: CRM, Postfach, Funnels, Automationen und Jarvis als KI-Business-Developer – kostenlos selbst gehostet');
     expect(de).toContain('0 € · Cloud geplant');
     expect(de).toContain('<meta property="og:image" content="http://localhost/landing/og-waitlist-de.png">');
     // a plan button preselects the plan

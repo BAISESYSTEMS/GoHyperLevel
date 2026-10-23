@@ -35,7 +35,7 @@ The home page leads with the agentic side, in this order:
 1. **Hero** – "Your platform for" / "Deine Plattform für" with rotating words in gold (AI agents, sales & CRM, funnels &
    websites, email marketing, online courses, bookings, invoicing – pure CSS, one word at a time, the first one only with
    `prefers-reduced-motion`; every language needs the same number of words), who it is for as a smaller line below
-   ("for solopreneurs, agencies, small businesses & startups" / "für Solopreneure, Agenturen, kleine Unternehmen und
+   ("for agentic solopreneurs, agencies, small businesses & startups" / "für agentische Solopreneure, Agenturen, kleine Unternehmen und
    Startups"; screen readers get the whole sentence from the heading's label), a sub
    line on Jarvis and "one single source of truth", the three calls to action (live demo, self-host in one command,
    cloud), the GitHub link with the star count, a badge row (MCP, your own Claude/ChatGPT plan for your own chats …) and a

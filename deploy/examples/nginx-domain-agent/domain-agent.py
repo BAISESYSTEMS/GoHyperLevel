@@ -9,7 +9,8 @@ nsenter) next to the host's nginx + certbot, and keeps one nginx site per custom
   4. gets a Let's Encrypt certificate with certbot --nginx,
   5. reports the result back, so the app can show it.
 
-It only ever touches files named pghl-*, never another site's config, and refuses a domain that
+It only ever touches files named pghl-* (PGHL_AGENT_PREFIX: another prefix per instance, so two instances on one host never
+remove each other's sites), never another site's config, and refuses a domain that
 another site on the server already serves. Domains are validated before they reach any command,
 and commands run without a shell.
 """
@@ -32,6 +33,8 @@ LIVE = os.environ.get('PGHL_LETSENCRYPT_LIVE', '/etc/letsencrypt/live')
 INTERVAL = int(os.environ.get('PGHL_AGENT_INTERVAL', '60'))
 RETRY_AFTER_ERROR = int(os.environ.get('PGHL_AGENT_RETRY', '1800'))
 ONCE = os.environ.get('PGHL_AGENT_ONCE') == '1'
+# One prefix per instance on the host: each agent only writes, lists and removes its own files.
+PREFIX = os.environ.get('PGHL_AGENT_PREFIX', 'pghl-')
 MARK = '# managed by gohigh domain agent'
 # Files written by earlier versions carry the project's former name; they stay ours.
 MARKS = (MARK, '# managed by private-ghl domain agent')
@@ -71,13 +74,13 @@ def resolves_here(domain):
 
 
 def site_file(domain):
-    return os.path.join(AVAILABLE, f'pghl-{domain}')
+    return os.path.join(AVAILABLE, f'{PREFIX}{domain}')
 
 
 def served_elsewhere(domain):
     """True when a site this agent doesn't manage already has the domain in its server_name."""
     for name in os.listdir(ENABLED):
-        if name.startswith('pghl-'):
+        if name.startswith(PREFIX):
             continue
         path = os.path.join(ENABLED, name)
         try:
@@ -132,13 +135,13 @@ server {{
 """
     with open(site_file(domain), 'w', encoding='utf-8') as f:
         f.write(conf)
-    link = os.path.join(ENABLED, f'pghl-{domain}')
+    link = os.path.join(ENABLED, f'{PREFIX}{domain}')
     if not os.path.lexists(link):
         os.symlink(site_file(domain), link)
 
 
 def remove_site(domain):
-    for p in (os.path.join(ENABLED, f'pghl-{domain}'), site_file(domain)):
+    for p in (os.path.join(ENABLED, f'{PREFIX}{domain}'), site_file(domain)):
         if os.path.lexists(p):
             os.remove(p)
 
@@ -204,9 +207,9 @@ def ensure(entry):
 
 def cleanup(wanted):
     for name in os.listdir(AVAILABLE):
-        if not name.startswith('pghl-'):
+        if not name.startswith(PREFIX):
             continue
-        domain = name[len('pghl-'):]
+        domain = name[len(PREFIX):]
         with open(os.path.join(AVAILABLE, name), encoding='utf-8', errors='ignore') as f:
             text = f.read()
             if not any(m in text for m in MARKS):

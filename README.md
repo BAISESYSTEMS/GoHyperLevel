@@ -3,7 +3,7 @@
 <a href="#quick-start">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-dark.svg">
-    <img src="docs/assets/readme/hero-light.svg" alt="HyperLevel – the free, open-source growth OS for solopreneurs, agencies and small agentic businesses" width="100%">
+    <img src="docs/assets/readme/hero-light.svg" alt="HyperLevel – the free, open-source growth OS for agentic solopreneurs, agencies, small businesses and startups" width="100%">
   </picture>
 </a>
 
@@ -23,7 +23,7 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
 <p>
   <a href="#quick-start"><b>Quick start</b></a> ·
   <a href="#features"><b>Features</b></a> ·
-  <a href="#made-for-solopreneurs-agencies--small-agentic-businesses"><b>Who it's for</b></a> ·
+  <a href="#made-for-agentic-solopreneurs-agencies-small-businesses--startups"><b>Who it's for</b></a> ·
   <a href="#how-it-compares"><b>Comparison</b></a> ·
   <a href="#ai--mcp"><b>AI & MCP</b></a> ·
   <a href="#open-for-contributions"><b>Contribute</b></a> ·
@@ -43,8 +43,9 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
 </div>
 
 > [!IMPORTANT]
-> **One single source of truth – filled by your agents, not by you.** Nobody types data into this CRM any more:
-> Claude, ChatGPT, Codex, Hermes or your own agents create and maintain contacts, deals, notes, tasks and invoices
+> **Not another AI OS – the business layer under yours.** Keep the agent or AIOS harness you already use and plug it in:
+> HyperLevel is the universal adapter with **one single source of truth**. Nobody types data into this CRM any more –
+> Claude, ChatGPT, Codex, Cursor, Hermes or your own harness create and maintain contacts, deals, notes, tasks and invoices
 > over MCP and the REST API. Every agent and every person works on the same database – with the same permissions,
 > the same audit log and the same undo. ([AI & MCP](#ai--mcp))
 
@@ -53,7 +54,7 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
 > meant to be extended. Pick a [good first issue](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22),
 > request a connector, translate the UI or ship a whole module – [here's how](#open-for-contributions).
 
-## Made for solopreneurs, agencies & small agentic businesses
+## Made for agentic solopreneurs, agencies, small businesses & startups
 
 <table>
   <tr>
@@ -76,7 +77,7 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
       </ul>
     </td>
     <td width="33%" valign="top">
-      <h3><img src="docs/assets/readme/icons/bot.svg" width="22" height="22" alt="" align="top"> Small agentic businesses</h3>
+      <h3><img src="docs/assets/readme/icons/bot.svg" width="22" height="22" alt="" align="top"> Small businesses & startups</h3>
       <ul>
         <li><b>340+ MCP tools</b> – Claude, ChatGPT, Codex or your own agents run sales, support and marketing with the same rights and audit log as a person.</li>
         <li><b>Safe by design</b>: confirmation cards before anything is sent, deleted or paid, undo, per-agent safety modes.</li>

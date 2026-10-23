@@ -211,8 +211,8 @@ describe('landing: copy', () => {
       expect(c.pricing.lead).toMatch(/White-Label|white-label/);
       expect(c.wl.saas).toMatch(/SaaS/);
     }
-    expect(COPY.en.hero.h1Tail).toBe('for solopreneurs, agencies, small businesses & startups');
-    expect(COPY.de.hero.h1Tail).toBe('für Solopreneure, Agenturen, kleine Unternehmen und Startups');
+    expect(COPY.en.hero.h1Tail).toBe('for agentic solopreneurs, agencies, small businesses & startups');
+    expect(COPY.de.hero.h1Tail).toBe('für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups');
     for (const c of Object.values(COPY)) {
       // one keyframe set for every language: the same number of rotating words, AI agents first
       expect(c.hero.rotate.length, c.lang).toBe(COPY.de.hero.rotate.length);
@@ -412,8 +412,8 @@ describe('landing page (PGHL_LANDING=1)', () => {
       expect(body, p).toContain(lang === 'de' ? 'nicht mit HighLevel Inc.' : 'not affiliated with HighLevel Inc.');
     }
     const home = await (await get('/')).text();
-    expect(home).toContain('<h1 aria-label="Your platform for AI agents, sales &amp; CRM, funnels &amp; websites, email marketing, online courses, bookings, invoicing – for solopreneurs, agencies, small businesses &amp; startups"><span aria-hidden="true">Your platform for<br><span class="rot"><span class="rot-in" style="--n:7"><b>AI agents</b>');
-    expect(home).toContain('<b>invoicing</b><b>AI agents</b></span></span><span class="tail">for solopreneurs, agencies, small businesses &amp; startups</span></span></h1>');
+    expect(home).toContain('<h1 aria-label="Your platform for AI agents, sales &amp; CRM, funnels &amp; websites, email marketing, online courses, bookings, invoicing – for agentic solopreneurs, agencies, small businesses &amp; startups"><span aria-hidden="true">Your platform for<br><span class="rot"><span class="rot-in" style="--n:7"><b>AI agents</b>');
+    expect(home).toContain('<b>invoicing</b><b>AI agents</b></span></span><span class="tail">for agentic solopreneurs, agencies, small businesses &amp; startups</span></span></h1>');
     expect(home).toMatch(/@keyframes rot\{0\.00%,10\.29%\{transform:translateY\(-0\.0%\)\}.*100%\{transform:translateY\(-87\.5%\)\}\}/);
     // the brand mark wherever the brand shows: header, footer, app downloads, favicon
     expect(home).toContain('<img class="mk" src="/icon.svg"');
@@ -430,7 +430,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
     for (const s of ['€49.99', '€99.99', '€199', 'or €479 a year', 'or €959 a year', 'or €1,910 a year', 'Stripe Tax', 'White-label on the Agency plan']) expect(home, s).toContain(s);
     const de = await (await get('/de')).text();
     expect(de).toContain('<span aria-hidden="true">Deine Plattform für<br><span class="rot"><span class="rot-in" style="--n:7"><b>KI-Agenten</b>');
-    expect(de).toContain('<span class="tail">für Solopreneure, Agenturen, kleine Unternehmen und Startups</span></span></h1>');
+    expect(de).toContain('<span class="tail">für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups</span></span></h1>');
     for (const s of ['49,99 €', '99,99 €', '199 €', 'zzgl. gesetzlicher USt.', 'Gehostet in Deutschland (Frankfurt am Main)']) expect(de.replace(/ /g, ' '), s).toContain(s);
     // The matrix from the research file, with the category chips' CSS in the head.
     expect(home).toContain('.cmpw:has(#cmp-c-crm:checked)');
@@ -584,5 +584,29 @@ describe('landing page off (default)', () => {
     } finally {
       await t.close();
     }
+  });
+});
+
+describe('pricing: the fold-out feature comparison', () => {
+  it('lists the same rows in both languages and matches the plans’ entitlements', async () => {
+    const { PLAN_COMPARE_COPY, planCompare } = await import('../server/services/landing-plan-compare.js');
+    const rows = (l: 'de' | 'en') => PLAN_COMPARE_COPY[l].groups.flatMap((g) => g.rows);
+    expect(rows('en').length).toBe(rows('de').length);
+    for (const l of ['de', 'en'] as const) {
+      const r = rows(l);
+      // white-label, client accounts, custom domains and the branded app: self-hosted and Agentur only
+      const wl = r.filter((x) => /white-label|domain|kunden-sub|client sub|app mit|app with/i.test(x[0]));
+      expect(wl.length, l).toBe(4);
+      for (const x of wl) expect(x.slice(1), x[0]).toEqual(['y', 'n', 'n', 'y']);
+      // the SaaS mode stays self-hosted
+      const saas = r.find((x) => /SaaS/.test(x[0]))!;
+      expect(saas.slice(1)).toEqual(['y', 'n', 'n', 'n']);
+      // Solo is one user
+      expect(r[0].slice(1)[1]).toBe('1');
+    }
+    const html = planCompare('en', ['Self-hosted', 'Cloud Solo', 'Cloud Team & Company', 'Cloud Agency']);
+    expect(html).toMatch(/^<details class="pc"><summary>Compare every feature<\/summary>/);
+    expect(html).toContain('<th scope="col" class="pc-wl">Cloud Agency</th>');
+    expect(html).toContain('<span class="sr">not included</span>');
   });
 });

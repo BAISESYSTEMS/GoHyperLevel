@@ -17,6 +17,7 @@ every domain against a strict pattern and runs commands without a shell. Removed
 | `PGHL_AGENT_TOKEN` | Shared secret between HyperLevel and the agent (set it for both) |
 | `PGHL_SERVER_IP` | Public IP(s) of the server, comma-separated – also shown to customers as DNS target |
 | `PGHL_APP_PORT` | Port HyperLevel listens on at the host (default 4700) |
+| `PGHL_AGENT_PREFIX` | File prefix of this agent's nginx sites (default `pghl-`) – give a second instance on the same host its own prefix (e.g. `ghyl-`), so neither agent removes the other's sites |
 
 Start: `docker compose -f docker-compose.yml -f deploy/examples/nginx-domain-agent/compose.yaml up -d`.
 With Caddy (`--profile caddy`) you don't need this – it issues certificates for custom domains on demand.
