@@ -129,7 +129,8 @@ export const landingModule: Module = {
     // --- GitHub stars: fetched in the background, never on the request path ------------------------------------------------
     const stars: { n?: number; at: number; busy?: Promise<void> } = { at: 0 };
     const refreshStars = (force = false): Promise<void> => {
-      if (stars.busy) return stars.busy;
+      // a forced refresh waits for a fetch already under way, then asks again (its answer may predate the change)
+      if (stars.busy) return force ? stars.busy.then(() => refreshStars(true)) : stars.busy;
       if (!force && Date.now() - stars.at < STARS_TTL) return Promise.resolve();
       const f: typeof fetch = app.services.landingFetch ?? fetch;
       stars.busy = f(STARS_API, { headers: { accept: 'application/vnd.github+json', 'user-agent': 'gohyperlevel-landing' }, signal: AbortSignal.timeout(5000) })

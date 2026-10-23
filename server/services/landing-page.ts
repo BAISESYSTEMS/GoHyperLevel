@@ -144,9 +144,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 .ic{width:24px;height:24px;flex:none}.ic.sm{width:18px;height:18px}
 .droid{color:#3ddc84}
 
-/* the hero tagline: the product in large type with its key words in a soft gold, who it is for as a smaller second line */
+/* the hero: rotating words in a soft gold (systeme.io style, pure CSS, one word at a time, reduced motion shows the first), who it is for as a smaller line */
 .hero h1{max-width:24ch}
-.hero h1 .hl{display:block;background:linear-gradient(92deg,#ffe3ad,#ffb547 55%,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.rot{display:inline-block;height:1.22em;overflow:hidden;vertical-align:top;color:var(--accent)}
+.rot-in{display:flex;flex-direction:column;animation:rot calc(var(--n) * 2.2s) cubic-bezier(.7,0,.2,1) infinite}
+.rot-in b{font-weight:inherit;height:1.22em;line-height:1.22em;white-space:nowrap;background:linear-gradient(92deg,#ffe3ad,#ffb547 55%,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+${rotFrames(COPY.de.hero.rotate.length)}
+@media (prefers-reduced-motion:reduce){.rot-in{animation:none}}
 .hero h1 .tail{display:block;max-width:30ch;margin-top:.45em;font-size:clamp(21px,2.5vw,31px);line-height:1.2;font-weight:500;letter-spacing:-.012em;color:#dfe3ec}
 /* a slow aurora behind the hero */
 .dark{position:relative;isolation:isolate;overflow:hidden}
@@ -484,14 +488,25 @@ function starLink(x: Ctx): string {
   return `<a class="gh" href="${GITHUB_URL}" rel="noopener">${ICON.star}<span>${h(c.hero.star)}</span>${d.stars !== undefined ? `<span class="cnt">· ${h(c.hero.starCount(num(c, d.stars)))}</span>` : ''}</a>`;
 }
 
-/** The tagline: `h1Hl` in the accent, `h1Tail` (its end) as the smaller second line; read as one sentence. */
+/** The rotation: each word holds for most of its slot, then slides up; the first word comes again at the end (n + 1 rows). */
+function rotFrames(n: number): string {
+  const slot = 100 / n;
+  const step = 100 / (n + 1);
+  const at = (i: number) => `{transform:translateY(-${(i * step).toFixed(1)}%)}`;
+  const holds = Array.from({ length: n }, (_, i) => `${(i * slot).toFixed(2)}%,${(i * slot + slot * 0.72).toFixed(2)}%${at(i)}`).join('');
+  return `@keyframes rot{${holds}100%${at(n)}}`;
+}
+
+/** The headline as one sentence for screen readers and the social card. */
+export function heroLabel(c: Copy): string {
+  return `${c.hero.h1} ${c.hero.rotate.join(', ')} – ${c.hero.h1Tail}`;
+}
+
+/** `h1` with the rotating words in the accent, `h1Tail` as the smaller line below. */
 function tagline(c: Copy): string {
-  const { h1, h1Hl, h1Tail } = c.hero;
-  const tail = h1Tail && h1.endsWith(h1Tail) ? h1Tail : '';
-  const main = h1.slice(0, h1.length - tail.length).trimEnd();
-  const at = h1Hl ? main.indexOf(h1Hl) : -1;
-  const big = at < 0 ? h(main) : `${h(main.slice(0, at))}<span class="hl">${h(h1Hl)}</span>${h(main.slice(at + h1Hl.length))}`;
-  return `${big}${tail ? ` <span class="tail">${h(tail)}</span>` : ''}`;
+  const { h1, rotate, h1Tail } = c.hero;
+  const words = [...rotate, rotate[0]].map((w) => `<b>${h(w)}</b>`).join('');
+  return `<span aria-hidden="true">${h(h1)}<br><span class="rot"><span class="rot-in" style="--n:${rotate.length}">${words}</span></span><span class="tail">${h(h1Tail)}</span></span>`;
 }
 
 function hero(x: Ctx): string {
@@ -505,7 +520,7 @@ function hero(x: Ctx): string {
     : '';
   return `<div class="hero"><div>
 <p class="kicker">${h(c.hero.eyebrow)}</p>
-<h1>${tagline(c)}</h1>
+<h1 aria-label="${h(heroLabel(c))}">${tagline(c)}</h1>
 <p class="sub">${h(c.hero.sub)} <strong>${h(c.hero.subStrong)}</strong></p>
 <div class="ctas">${
     d.waitlist
@@ -827,7 +842,7 @@ function head(x: Ctx, o: { title: string; description: string; path: string; ogT
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:type" content="website"><meta property="og:site_name" content="${h(d.brand)}"><meta property="og:locale" content="${c.locale.replace('-', '_')}">
 <meta property="og:title" content="${h(o.ogTitle ?? o.title)}"><meta property="og:description" content="${h(o.ogDescription ?? o.description)}">
-<meta property="og:url" content="${h(`${d.base}${o.path}`)}"><meta property="og:image" content="${h(og)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${h(c.hero.h1)}">
+<meta property="og:url" content="${h(`${d.base}${o.path}`)}"><meta property="og:image" content="${h(og)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${h(heroLabel(c))}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${h(o.ogTitle ?? o.title)}"><meta name="twitter:description" content="${h(o.ogDescription ?? o.description)}"><meta name="twitter:image" content="${h(og)}">
 <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="${FONT_FILE}" as="font" type="font/woff2" crossorigin>

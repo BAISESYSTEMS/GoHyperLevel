@@ -6,6 +6,16 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.66] – 2026-10-23
+
+### Changed
+- Landingpage: der Hero rotiert wieder („Deine Plattform für KI-Agenten / Vertrieb & CRM / Funnels & Websites …“), darunter
+  „für Solopreneure, Agenturen, kleine Unternehmen und Startups“ (EN: „for solopreneurs, agencies, small businesses & startups“).
+
+### Fixed
+- Landingpage: eine erzwungene Aktualisierung der GitHub-Sterne wartet auf einen schon laufenden Abruf und fragt danach neu
+  (vorher gab sie dessen ältere Antwort zurück – ein gelegentlich roter Test).
+
 ## [1.0.65] – 2026-10-23
 
 ### Changed

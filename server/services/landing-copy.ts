@@ -12,8 +12,8 @@ export interface Copy {
   title: string;
   description: string;
   nav: { agents: string; why: string; features: string; academy: string; calc: string; compare: string; pricing: string; faq: string; switchLang: string; switchLangLabel: string; login: string };
-  /** `h1` is the whole tagline; `h1Hl`, a part of it, is set in the accent colour; `h1Tail`, its end, as a smaller second line. */
-  hero: { eyebrow: string; h1: string; h1Hl: string; h1Tail: string; sub: string; subStrong: string; badges: string[]; ctaDemo: string; ctaSelf: string; ctaCloud: string; star: string; starCount: (n: string) => string; mockLabel: string };
+  /** `h1` leads into the `rotate` words (one at a time, in the accent colour); `h1Tail`, who it is for, is a smaller line below. */
+  hero: { eyebrow: string; h1: string; rotate: string[]; h1Tail: string; sub: string; subStrong: string; badges: string[]; ctaDemo: string; ctaSelf: string; ctaCloud: string; star: string; starCount: (n: string) => string; mockLabel: string };
   ai: { h2: string; lead: string; items: [string, string][]; tools: (n: string) => string; toolsNote: string; snippetLabel: string; snippetNote: string; docs: string };
   proof: { title: string; tools: string; triggers: string; actions: string; integrations: string; tests: string; note: string };
   calc: {
@@ -93,9 +93,9 @@ const de: Copy = {
   nav: { agents: 'Agenten', why: 'Warum {b}', features: 'Funktionen', academy: 'Akademie', calc: 'Rechner', compare: 'Vergleich', pricing: 'Preise', faq: 'FAQ', switchLang: 'EN', switchLangLabel: 'English version', login: 'Anmelden' },
   hero: {
     eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €',
-    h1: 'Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen',
-    h1Hl: 'Wachstums-Betriebssystem',
-    h1Tail: 'für Solopreneure, Agenturen und kleine agentische Unternehmen',
+    h1: 'Deine Plattform für',
+    rotate: ['KI-Agenten', 'Vertrieb & CRM', 'Funnels & Websites', 'E-Mail-Marketing', 'Online-Kurse', 'Terminbuchung', 'Rechnungen'],
+    h1Tail: 'für Solopreneure, Agenturen, kleine Unternehmen und Startups',
     sub: 'Jarvis, dein KI-Business-Developer, liest am Morgen deine Zahlen, findet den Deal, den du vergessen hast, und bereitet das Nachfassen vor – du bestätigst mit einem Klick. CRM, Funnels, Postfach, Automationen, Kurse und Rechnungen in einer App, mit der jeder KI-Agent arbeiten kann.',
     subStrong: 'Eine einzige Quelle der Wahrheit – deine.',
     badges: ['Open Source (AGPL)', 'MCP für Claude, ChatGPT, Codex & Cursor', 'Dein Claude- oder ChatGPT-Abo für deine Chats', 'Gehostet in Frankfurt', 'DSGVO'],
@@ -418,9 +418,9 @@ const en: Copy = {
   nav: { agents: 'Agents', why: 'Why {b}', features: 'Features', academy: 'Academy', calc: 'Calculator', compare: 'Compare', pricing: 'Pricing', faq: 'FAQ', switchLang: 'DE', switchLangLabel: 'Deutsche Version', login: 'Sign in' },
   hero: {
     eyebrow: 'Open source · Self-host free · Cloud from €49.99',
-    h1: 'The free, open-source growth OS for solopreneurs, agencies & small agentic businesses',
-    h1Hl: 'growth OS',
-    h1Tail: 'for solopreneurs, agencies & small agentic businesses',
+    h1: 'Your platform for',
+    rotate: ['AI agents', 'sales & CRM', 'funnels & websites', 'email marketing', 'online courses', 'bookings', 'invoicing'],
+    h1Tail: 'for solopreneurs, agencies, small businesses & startups',
     sub: 'Jarvis, your AI business developer, reads your numbers in the morning, spots the deal you forgot and prepares the follow-up – you confirm with one click. CRM, funnels, inbox, automations, courses and invoices in one app that every AI agent can work with.',
     subStrong: 'One single source of truth – yours.',
     badges: ['Open source (AGPL)', 'MCP for Claude, ChatGPT, Codex & Cursor', 'Your Claude or ChatGPT plan for your own chats', 'Hosted in Frankfurt', 'GDPR'],

@@ -211,11 +211,12 @@ describe('landing: copy', () => {
       expect(c.pricing.lead).toMatch(/White-Label|white-label/);
       expect(c.wl.saas).toMatch(/SaaS/);
     }
-    expect(COPY.en.hero.h1).toBe('The free, open-source growth OS for solopreneurs, agencies & small agentic businesses');
-    expect(COPY.de.hero.h1).toBe('Das freie Open-Source-Wachstums-Betriebssystem für Solopreneure, Agenturen und kleine agentische Unternehmen');
+    expect(COPY.en.hero.h1Tail).toBe('for solopreneurs, agencies, small businesses & startups');
+    expect(COPY.de.hero.h1Tail).toBe('für Solopreneure, Agenturen, kleine Unternehmen und Startups');
     for (const c of Object.values(COPY)) {
-      expect(c.hero.h1, c.lang).toContain(c.hero.h1Hl);
-      expect(c.hero.h1.endsWith(c.hero.h1Tail), c.lang).toBe(true);
+      // one keyframe set for every language: the same number of rotating words, AI agents first
+      expect(c.hero.rotate.length, c.lang).toBe(COPY.de.hero.rotate.length);
+      expect(c.hero.rotate[0], c.lang).toMatch(/KI-Agenten|AI agents/);
       expect(c.hero.sub, c.lang).toContain('Jarvis');
       expect(c.features.items({ triggers: '1', actions: '2' }).length, c.lang).toBe(COPY.de.features.items({ triggers: '1', actions: '2' }).length);
     }
@@ -411,7 +412,9 @@ describe('landing page (PGHL_LANDING=1)', () => {
       expect(body, p).toContain(lang === 'de' ? 'nicht mit HighLevel Inc.' : 'not affiliated with HighLevel Inc.');
     }
     const home = await (await get('/')).text();
-    expect(home).toContain('The free, open-source <span class="hl">growth OS</span> <span class="tail">for solopreneurs, agencies &amp; small agentic businesses</span></h1>');
+    expect(home).toContain('<h1 aria-label="Your platform for AI agents, sales &amp; CRM, funnels &amp; websites, email marketing, online courses, bookings, invoicing – for solopreneurs, agencies, small businesses &amp; startups"><span aria-hidden="true">Your platform for<br><span class="rot"><span class="rot-in" style="--n:7"><b>AI agents</b>');
+    expect(home).toContain('<b>invoicing</b><b>AI agents</b></span></span><span class="tail">for solopreneurs, agencies, small businesses &amp; startups</span></span></h1>');
+    expect(home).toMatch(/@keyframes rot\{0\.00%,10\.29%\{transform:translateY\(-0\.0%\)\}.*100%\{transform:translateY\(-87\.5%\)\}\}/);
     // the brand mark wherever the brand shows: header, footer, app downloads, favicon
     expect(home).toContain('<img class="mk" src="/icon.svg"');
     expect(home).toContain('<span class="fbrand"><img src="/icon.svg"');
@@ -426,7 +429,8 @@ describe('landing page (PGHL_LANDING=1)', () => {
     // Prices: list prices without cloud mode, VAT note, white-label headline of the Agentur plan.
     for (const s of ['€49.99', '€99.99', '€199', 'or €479 a year', 'or €959 a year', 'or €1,910 a year', 'Stripe Tax', 'White-label on the Agency plan']) expect(home, s).toContain(s);
     const de = await (await get('/de')).text();
-    expect(de).toContain('Das freie Open-Source-<span class="hl">Wachstums-Betriebssystem</span> <span class="tail">für Solopreneure, Agenturen und kleine agentische Unternehmen</span></h1>');
+    expect(de).toContain('<span aria-hidden="true">Deine Plattform für<br><span class="rot"><span class="rot-in" style="--n:7"><b>KI-Agenten</b>');
+    expect(de).toContain('<span class="tail">für Solopreneure, Agenturen, kleine Unternehmen und Startups</span></span></h1>');
     for (const s of ['49,99 €', '99,99 €', '199 €', 'zzgl. gesetzlicher USt.', 'Gehostet in Deutschland (Frankfurt am Main)']) expect(de.replace(/ /g, ' '), s).toContain(s);
     // The matrix from the research file, with the category chips' CSS in the head.
     expect(home).toContain('.cmpw:has(#cmp-c-crm:checked)');
@@ -498,7 +502,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
         return i;
       };
       // order of the page
-      const order = ['<h1>', 'class="logos"', 'class="proof"', 'id="agentisch"', 'id="jarvis"', 'id="warum"', 'id="ki-agenten"', 'id="akademie"', 'id="designs"', 'id="xr"', 'id="tool-stack"', 'id="rechner"', 'id="funktionen"', 'id="preise"', 'id="apps"', 'id="open-source"', 'id="installieren"', 'id="faq"'].map(at);
+      const order = ['<h1 aria-label=', 'class="logos"', 'class="proof"', 'id="agentisch"', 'id="jarvis"', 'id="warum"', 'id="ki-agenten"', 'id="akademie"', 'id="designs"', 'id="xr"', 'id="tool-stack"', 'id="rechner"', 'id="funktionen"', 'id="preise"', 'id="apps"', 'id="open-source"', 'id="installieren"', 'id="faq"'].map(at);
       expect([...order].sort((x, y) => x - y)).toEqual(order);
       expect(body).toContain(a.logos.h2);
       expect(body).toContain(h(a.ssot.h2));
