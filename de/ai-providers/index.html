@@ -1,0 +1,770 @@
+<!DOCTYPE html><html lang="de" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>AI providers (BYOK): bring your own key for any model | HyperLevel Docs</title><link rel="canonical" href="https://docs.gohyperlevel.com/de/ai-providers/"/><link rel="alternate" hreflang="en" href="https://docs.gohyperlevel.com/ai-providers/"/><link rel="alternate" hreflang="de" href="https://docs.gohyperlevel.com/de/ai-providers/"/><link rel="alternate" hreflang="x-default" href="https://docs.gohyperlevel.com/ai-providers/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.2"/><meta name="generator" content="Starlight v0.42.7"/><meta property="og:title" content="AI providers (BYOK): bring your own key for any model"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.gohyperlevel.com/de/ai-providers/"/><meta property="og:locale" content="de"/><meta property="og:description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:site_name" content="HyperLevel Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:image" content="https://docs.gohyperlevel.com/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.DdUizGEC.css"><style>@layer starlight.components{svg:where(.astro-hkc32dio){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Zum Inhalt springen</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/de" class="site-title sl-flex astro-6rvad3va"><img class="light:sl-hidden print:hidden astro-6rvad3va" alt src="/_astro/logo-dark.DcAxiGJs.svg" width="420" height="96"><img class="dark:sl-hidden print:block astro-6rvad3va" alt src="/_astro/logo.BXUvVMvj.svg" width="420" height="96"><span class="sr-only astro-6rvad3va" translate="no">HyperLevel Docs</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Suchen&quot;}"><button data-open-modal disabled aria-label="Suchen" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Suchen</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Strg</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Suchen" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Abbrechen</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Djc9ZKGJ.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Farbschema wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dunkel</option><option value="light" class="astro-2z5xp7gb">Hell</option><option value="auto" selected class="astro-2z5xp7gb">System</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Sprache wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/ai-providers/" class="astro-2z5xp7gb">English</option><option value="/de/ai-providers/" selected class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Hauptnavigation"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menü</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="19r8xt0" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Loslegen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/README.md#quick-start" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Quick start</span></a></li><li class="astro-rmhv4bp6"><a href="/de/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Installationswege</span></a></li><li class="astro-rmhv4bp6"><a href="/de/self-hosting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Self-hosting reference</span></a></li><li class="astro-rmhv4bp6"><a href="/de/demo-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Demo-Modus</span></a></li><li class="astro-rmhv4bp6"><a href="/de/cloud/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gehostete Cloud</span></a></li><li class="astro-rmhv4bp6"><a href="/de/landing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Landingpage</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">KI &amp; Agenten</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/agent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">HyperLevel Agent</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Werkzeuge: Claude Code, Codex, Cursor, ChatGPT</span></a></li><li class="astro-rmhv4bp6"><a href="/de/mcp-client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Externe MCP-Server</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-providers/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Anbieter mit eigenem Schlüssel</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI assistant</span></a></li><li class="astro-rmhv4bp6"><a href="/de/workflow-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Workflow-Builder</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Studio</span></a></li><li class="astro-rmhv4bp6"><a href="/de/genmedia/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Medien</span></a></li><li class="astro-rmhv4bp6"><a href="/de/site-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Funnel- &amp; Website-KI</span></a></li><li class="astro-rmhv4bp6"><a href="/de/voice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stimme</span></a></li><li class="astro-rmhv4bp6"><a href="/de/cognee/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wissensgedächtnis (Cognee)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">API &amp; Integrationen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">REST-API &amp; MCP</span></a></li><li class="astro-rmhv4bp6"><a href="/de/workflow-actions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Workflow-Aktionen &amp; Auslöser</span></a></li><li class="astro-rmhv4bp6"><a href="/de/integrations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Integrations: Zapier, Make, n8n, REST hooks</span></a></li><li class="astro-rmhv4bp6"><a href="/de/connectors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Konnektoren &amp; Composio</span></a></li><li class="astro-rmhv4bp6"><a href="/de/nango/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Nango</span></a></li><li class="astro-rmhv4bp6"><a href="/de/channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kanäle &amp; Anbieter</span></a></li><li class="astro-rmhv4bp6"><a href="/de/meta-channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">WhatsApp, Messenger &amp; Instagram</span></a></li><li class="astro-rmhv4bp6"><a href="/de/mailbox-sync/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Postfach-Abgleich</span></a></li><li class="astro-rmhv4bp6"><a href="/de/payment-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Zahlungsanbieter</span></a></li><li class="astro-rmhv4bp6"><a href="/de/stripe/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stripe</span></a></li><li class="astro-rmhv4bp6"><a href="/de/todoist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Todoist</span></a></li><li class="astro-rmhv4bp6"><a href="/de/social-comments/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social-Kommentare</span></a></li><li class="astro-rmhv4bp6"><a href="/de/comment-to-dm/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kommentar-zu-DM</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">CRM, Vertrieb &amp; Zusammenarbeit</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/sales/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Vertrieb</span></a></li><li class="astro-rmhv4bp6"><a href="/de/objects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Companies, custom objects &amp; lead scoring</span></a></li><li class="astro-rmhv4bp6"><a href="/de/custom-values/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Custom Values</span></a></li><li class="astro-rmhv4bp6"><a href="/de/projects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Projekte &amp; Zeiterfassung</span></a></li><li class="astro-rmhv4bp6"><a href="/de/team-inbox/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team-Postfach</span></a></li><li class="astro-rmhv4bp6"><a href="/de/team-calendars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team-Kalender</span></a></li><li class="astro-rmhv4bp6"><a href="/de/booking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Buchungsregeln</span></a></li><li class="astro-rmhv4bp6"><a href="/de/telephony/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Telefonie</span></a></li><li class="astro-rmhv4bp6"><a href="/de/reputation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bewertungen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/team-chat/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team-Chat</span></a></li><li class="astro-rmhv4bp6"><a href="/de/collaboration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Live collaboration</span></a></li><li class="astro-rmhv4bp6"><a href="/de/wiki/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wiki</span></a></li><li class="astro-rmhv4bp6"><a href="/de/canvas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Canvas</span></a></li><li class="astro-rmhv4bp6"><a href="/de/living-boards/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Living Boards</span></a></li><li class="astro-rmhv4bp6"><a href="/de/office/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Office</span></a></li><li class="astro-rmhv4bp6"><a href="/de/xr/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">XR</span></a></li><li class="astro-rmhv4bp6"><a href="/de/undo/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Rückgängig, Verlauf &amp; Papierkorb</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Marketing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/email-marketing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail marketing</span></a></li><li class="astro-rmhv4bp6"><a href="/de/email-builder/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail designer</span></a></li><li class="astro-rmhv4bp6"><a href="/de/email-tracking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-Mail-Tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/de/deliverability/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Zustellbarkeit</span></a></li><li class="astro-rmhv4bp6"><a href="/de/sites/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Website builder</span></a></li><li class="astro-rmhv4bp6"><a href="/de/forms/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Formulare</span></a></li><li class="astro-rmhv4bp6"><a href="/de/social-planner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social planner</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ads-manager/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werbeanzeigen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/growth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Growth: attribution, affiliates &amp; ad reports</span></a></li><li class="astro-rmhv4bp6"><a href="/de/referrals/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Empfehlungs- &amp; Partnerlinks</span></a></li><li class="astro-rmhv4bp6"><a href="/de/webinars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Webinare</span></a></li><li class="astro-rmhv4bp6"><a href="/de/video-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Video studio</span></a></li><li class="astro-rmhv4bp6"><a href="/de/consent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Einwilligungen &amp; Recht</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Verkaufen &amp; Abrechnen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/invoicing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Rechnungen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/dunning/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mahnwesen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/sepa/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SEPA</span></a></li><li class="astro-rmhv4bp6"><a href="/de/payment-plans/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Ratenzahlung</span></a></li><li class="astro-rmhv4bp6"><a href="/de/store/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Onlineshop &amp; Gutscheine</span></a></li><li class="astro-rmhv4bp6"><a href="/de/saas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SaaS mode</span></a></li><li class="astro-rmhv4bp6"><a href="/de/gewinnrechner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gewinnrechner</span></a></li><li class="astro-rmhv4bp6"><a href="/de/backoffice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Back-Office</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Kurse, Community &amp; Service</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/courses/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kurse</span></a></li><li class="astro-rmhv4bp6"><a href="/de/quizzes-certificates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quizze &amp; Zertifikate</span></a></li><li class="astro-rmhv4bp6"><a href="/de/community/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Community</span></a></li><li class="astro-rmhv4bp6"><a href="/de/academy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Academy</span></a></li><li class="astro-rmhv4bp6"><a href="/de/helpdesk/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Helpdesk: tickets, SLAs, knowledge base</span></a></li><li class="astro-rmhv4bp6"><a href="/de/bug-reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bug reports &amp; wishes</span></a></li><li class="astro-rmhv4bp6"><a href="/de/reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reports &amp; dashboards</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Apps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/android-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Android app</span></a></li><li class="astro-rmhv4bp6"><a href="/de/app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install the app &amp; push</span></a></li><li class="astro-rmhv4bp6"><a href="/de/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gray-Label- &amp; eigene Apps</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ios-web-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">iPhone, iPad &amp; Foldables</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Betrieb &amp; Sicherheit</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/backups/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Backups, Alarme &amp; Statusseite</span></a></li><li class="astro-rmhv4bp6"><a href="/de/incident-runbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Notfall-Runbook</span></a></li><li class="astro-rmhv4bp6"><a href="/de/performance/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Performance &amp; Dimensionierung</span></a></li><li class="astro-rmhv4bp6"><a href="/de/security/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sicherheit</span></a></li><li class="astro-rmhv4bp6"><a href="/de/security-review-2026-10/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sicherheitsprüfung Oktober 2026</span></a></li><li class="astro-rmhv4bp6"><a href="/de/auth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Anmeldung, SSO &amp; Passkeys</span></a></li><li class="astro-rmhv4bp6"><a href="/de/umzug/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Umzug: Importe aus anderen Systemen</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Anpassen &amp; Erweitern</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/theming/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Aussehen &amp; Themes</span></a></li><li class="astro-rmhv4bp6"><a href="/de/translating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sprache der Oberfläche &amp; Übersetzen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/werkstatt/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werkstatt, Plugins &amp; Marktplatz</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Die eigene Firma mit HyperLevel führen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/company-playbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Company Playbook</span></a></li><li class="astro-rmhv4bp6"><a href="/de/handbuch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handbuch</span></a></li><li class="astro-rmhv4bp6"><a href="/de/kurs-firma-fuehren/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kurs: Deine Firma führen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/partner-program/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Partner program</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Projekt</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/roadmap/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Roadmap</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CHANGELOG.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Changelog</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Mitmachen</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/SECURITY.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Sicherheitsrichtlinie</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/discussions" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">GitHub Discussions</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Farbschema wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dunkel</option><option value="light" class="astro-2z5xp7gb">Hell</option><option value="auto" selected class="astro-2z5xp7gb">System</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Sprache wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/ai-providers/" class="astro-2z5xp7gb">English</option><option value="/de/ai-providers/" selected class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">Auf dieser Seite<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Überblick</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#providers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Providers</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#text-models" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Text models</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#more-providers-gateways-and-open-model-inference" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">More providers: gateways and open-model inference</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#eu-hosting-dsgvo" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">EU hosting (DSGVO)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#image-video-and-audio" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Image, video and audio</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#speech-voice-layer" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Speech (voice layer)</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#add-a-connection" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Add a connection</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#model-lists-and-prices" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Model lists and prices</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#subscription-sign-in-mit-chatgpt-anmelden-mit-claude-verbinden" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Subscription sign-in (Mit ChatGPT anmelden, Mit Claude verbinden)</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#legal-position-researched-october-2026" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Legal position (researched October 2026)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#mit-chatgpt-anmelden--step-by-step" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Mit ChatGPT anmelden – step by step</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#safety-rules--a-subscription-is-personal" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Safety rules – a subscription is personal</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#the-local-bridge-claude-code-and-codex-cli" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">The local bridge (Claude Code and Codex CLI)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#settings-and-environment" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Settings and environment</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#skipped-and-partly-covered-providers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Skipped and partly covered providers</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#routing-which-model-for-what" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Routing: which model for what</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#denkstufe-reasoning-effort" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Denkstufe (reasoning effort)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#usage-and-costs" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Usage and costs</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#for-developers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">For developers</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">Auf dieser Seite</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Überblick</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#providers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Providers</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#text-models" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Text models</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#more-providers-gateways-and-open-model-inference" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">More providers: gateways and open-model inference</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#eu-hosting-dsgvo" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">EU hosting (DSGVO)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#image-video-and-audio" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Image, video and audio</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#speech-voice-layer" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Speech (voice layer)</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#add-a-connection" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Add a connection</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#model-lists-and-prices" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Model lists and prices</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#subscription-sign-in-mit-chatgpt-anmelden-mit-claude-verbinden" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Subscription sign-in (Mit ChatGPT anmelden, Mit Claude verbinden)</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#legal-position-researched-october-2026" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Legal position (researched October 2026)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#mit-chatgpt-anmelden--step-by-step" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Mit ChatGPT anmelden – step by step</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#safety-rules--a-subscription-is-personal" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Safety rules – a subscription is personal</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#the-local-bridge-claude-code-and-codex-cli" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">The local bridge (Claude Code and Codex CLI)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#settings-and-environment" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Settings and environment</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#skipped-and-partly-covered-providers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Skipped and partly covered providers</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#routing-which-model-for-what" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Routing: which model for what</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#denkstufe-reasoning-effort" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Denkstufe (reasoning effort)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#usage-and-costs" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Usage and costs</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#for-developers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">For developers</span></a></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">AI providers (BYOK): bring your own key for any model</h1><p class="sl-flex astro-gsljcgkv"><svg aria-hidden="true" class="astro-gsljcgkv astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-color: var(--sl-color-orange-high);--sl-icon-size: 1.5em;"><path d="M12 16a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm10.67 1.47-8.05-14a3 3 0 0 0-5.24 0l-8 14A3 3 0 0 0 3.94 22h16.12a3 3 0 0 0 2.61-4.53Zm-1.73 2a1 1 0 0 1-.88.51H3.94a1 1 0 0 1-.88-.51 1 1 0 0 1 0-1l8-14a1 1 0 0 1 1.78 0l8.05 14a1 1 0 0 1 .05 1.02v-.02ZM12 8a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1Z"/></svg><span class="astro-gsljcgkv">Dieser Inhalt ist noch nicht in deiner Sprache verfügbar.</span></p></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p><strong>Settings → KI-Anbieter (BYOK)</strong> (per sub-account) and <strong>Agency → KI-Anbieter (BYOK)</strong> (for all sub-accounts) are the one place where HyperLevel stores AI connections. Bring your own key for any text model – used by the <a href="/agent/">HyperLevel Agent</a>, the <a href="/ai-assistant/">KI-Assistent</a> (when routed, see below) and everything built on them – and for image, video and audio providers, which media modules use.</p>
+<ul>
+<li><strong>Your own ChatGPT or Claude subscription</strong> can be used instead of a key – personally, never shared: <a href="#subscription-sign-in-mit-chatgpt-anmelden-mit-claude-verbinden">Subscription sign-in</a>.</li>
+<li>Keys and extra headers are <strong>sealed</strong> (AES-256-GCM with the server secret) and <strong>never sent back to the browser</strong> – the page shows “…abcd” to people who may edit the connection and “••••” to everyone else.</li>
+<li>Costs run on your account with the provider. HyperLevel logs calls and estimated costs per connection.</li>
+<li>Any model id can always be typed in; where a provider has a model list, HyperLevel loads it live (cached 10 minutes).</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="providers">Providers</h2><a class="sl-anchor-link" href="#providers"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Providers”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="text-models">Text models</h3><a class="sl-anchor-link" href="#text-models"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Text models”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Base URL</th>
+<th>Auth</th>
+<th>Capabilities</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenAI</td>
+<td><code dir="auto">https://api.openai.com/v1</code></td>
+<td><code dir="auto">Authorization: Bearer sk-…</code></td>
+<td>text, vision, image, TTS, transcription, embeddings</td>
+<td><a href="https://platform.openai.com/api-keys">platform.openai.com/api-keys</a></td>
+</tr>
+<tr>
+<td>Anthropic (Claude)</td>
+<td><code dir="auto">https://api.anthropic.com</code> (Messages API)</td>
+<td><code dir="auto">x-api-key: sk-ant-…</code> + <code dir="auto">anthropic-version</code></td>
+<td>text, vision</td>
+<td><a href="https://console.anthropic.com/settings/keys">console.anthropic.com</a></td>
+</tr>
+<tr>
+<td>Google Gemini</td>
+<td><code dir="auto">https://generativelanguage.googleapis.com/v1beta/openai</code></td>
+<td>Bearer <code dir="auto">AIza…</code></td>
+<td>text, vision, image, embeddings</td>
+<td><a href="https://aistudio.google.com/apikey">aistudio.google.com/apikey</a></td>
+</tr>
+<tr>
+<td>OpenRouter</td>
+<td><code dir="auto">https://openrouter.ai/api/v1</code></td>
+<td>Bearer <code dir="auto">sk-or-…</code></td>
+<td>text, vision, image</td>
+<td><a href="https://openrouter.ai/settings/keys">openrouter.ai/settings/keys</a></td>
+</tr>
+<tr>
+<td>Groq</td>
+<td><code dir="auto">https://api.groq.com/openai/v1</code></td>
+<td>Bearer <code dir="auto">gsk_…</code></td>
+<td>text, transcription</td>
+<td><a href="https://console.groq.com/keys">console.groq.com/keys</a></td>
+</tr>
+<tr>
+<td>Together AI</td>
+<td><code dir="auto">https://api.together.xyz/v1</code></td>
+<td>Bearer</td>
+<td>text, vision, image, embeddings</td>
+<td><a href="https://api.together.ai/settings/api-keys">api.together.ai</a></td>
+</tr>
+<tr>
+<td>Fireworks AI</td>
+<td><code dir="auto">https://api.fireworks.ai/inference/v1</code></td>
+<td>Bearer <code dir="auto">fw_…</code></td>
+<td>text, vision, image, embeddings</td>
+<td><a href="https://fireworks.ai/account/api-keys">fireworks.ai</a></td>
+</tr>
+<tr>
+<td>DeepSeek</td>
+<td><code dir="auto">https://api.deepseek.com/v1</code></td>
+<td>Bearer <code dir="auto">sk-…</code></td>
+<td>text</td>
+<td><a href="https://platform.deepseek.com/api_keys">platform.deepseek.com</a></td>
+</tr>
+<tr>
+<td>Mistral AI</td>
+<td><code dir="auto">https://api.mistral.ai/v1</code></td>
+<td>Bearer</td>
+<td>text, vision, embeddings, transcription</td>
+<td><a href="https://console.mistral.ai/api-keys">console.mistral.ai</a></td>
+</tr>
+<tr>
+<td>xAI (Grok)</td>
+<td><code dir="auto">https://api.x.ai/v1</code></td>
+<td>Bearer <code dir="auto">xai-…</code></td>
+<td>text, vision, image</td>
+<td><a href="https://console.x.ai">console.x.ai</a></td>
+</tr>
+<tr>
+<td>Perplexity</td>
+<td><code dir="auto">https://api.perplexity.ai</code></td>
+<td>Bearer <code dir="auto">pplx-…</code></td>
+<td>text (with web search; tool calls not on every model)</td>
+<td><a href="https://www.perplexity.ai/settings/api">perplexity.ai/settings/api</a></td>
+</tr>
+<tr>
+<td>Cerebras</td>
+<td><code dir="auto">https://api.cerebras.ai/v1</code></td>
+<td>Bearer <code dir="auto">csk-…</code></td>
+<td>text</td>
+<td><a href="https://cloud.cerebras.ai">cloud.cerebras.ai</a></td>
+</tr>
+<tr>
+<td>Hugging Face (router)</td>
+<td><code dir="auto">https://router.huggingface.co/v1</code></td>
+<td>Bearer <code dir="auto">hf_…</code></td>
+<td>text, vision</td>
+<td><a href="https://huggingface.co/settings/tokens">huggingface.co/settings/tokens</a></td>
+</tr>
+<tr>
+<td>Azure OpenAI</td>
+<td><code dir="auto">https://&lt;resource&gt;.openai.azure.com</code> (deployments API, <code dir="auto">api-version</code> 2024-10-21) or <code dir="auto">…/openai/v1</code> (v1 API)</td>
+<td><code dir="auto">api-key: …</code></td>
+<td>text, vision, image, embeddings, TTS, transcription</td>
+<td>Azure portal; model = <strong>deployment name</strong></td>
+</tr>
+<tr>
+<td>Ollama</td>
+<td><code dir="auto">http://localhost:11434/v1</code></td>
+<td>none</td>
+<td>text, vision, embeddings</td>
+<td>local – pick a tool-capable model (llama3.1, qwen2.5) for the agent</td>
+</tr>
+<tr>
+<td>LM Studio</td>
+<td><code dir="auto">http://localhost:1234/v1</code></td>
+<td>none</td>
+<td>text, vision, embeddings</td>
+<td>local</td>
+</tr>
+<tr>
+<td>vLLM / LiteLLM proxy</td>
+<td>e.g. <code dir="auto">http://localhost:4000/v1</code></td>
+<td>Bearer (proxy key)</td>
+<td>text, vision, embeddings, image, TTS, transcription</td>
+<td>your proxy</td>
+</tr>
+<tr>
+<td>Custom (OpenAI-compatible)</td>
+<td>any <code dir="auto">…/v1</code></td>
+<td>Bearer, <code dir="auto">x-api-key</code>, <code dir="auto">Key …</code>, a custom header or none</td>
+<td>you choose</td>
+<td>your server</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Amazon Bedrock, Google Vertex AI and others</strong> are connected through a <a href="https://docs.litellm.ai/docs/simple_proxy">LiteLLM proxy</a> (or any OpenAI-compatible gateway): run LiteLLM with your cloud credentials, then add it here as “vLLM / LiteLLM-Proxy” with the proxy’s key. HyperLevel never stores cloud IAM credentials.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="more-providers-gateways-and-open-model-inference">More providers: gateways and open-model inference</h3><a class="sl-anchor-link" href="#more-providers-gateways-and-open-model-inference"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “More providers: gateways and open-model inference”</span></a></div>
+<p>Checked against each provider’s documentation and a live request to its model list or error answer in October 2026 (the <code dir="auto">verified</code> field of every preset). All speak the OpenAI Chat Completions format with <code dir="auto">Authorization: Bearer &lt;key&gt;</code> unless noted; prices are editable estimates, and where a provider’s model list states prices HyperLevel shows and uses those (<a href="#model-lists-and-prices">Model lists and prices</a>).</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Base URL</th>
+<th>Notes</th>
+<th>Key</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenRouter</strong> (kept prominent)</td>
+<td><code dir="auto">https://openrouter.ai/api/v1</code></td>
+<td>400+ models, prices per model in the list; HyperLevel sends <code dir="auto">HTTP-Referer</code> and <code dir="auto">X-OpenRouter-Title</code> (and the older <code dir="auto">X-Title</code>) for app attribution</td>
+<td><a href="https://openrouter.ai/settings/keys">openrouter.ai/settings/keys</a></td>
+<td><a href="https://openrouter.ai/docs/app-attribution">docs</a></td>
+</tr>
+<tr>
+<td>Requesty</td>
+<td><code dir="auto">https://router.requesty.ai/v1</code></td>
+<td>gateway, prices and vision/tool flags in the list; also sends <code dir="auto">HTTP-Referer</code>/<code dir="auto">X-Title</code></td>
+<td><a href="https://app.requesty.ai/sign-up">app.requesty.ai/sign-up</a></td>
+<td><a href="https://docs.requesty.ai/quickstart">docs</a></td>
+</tr>
+<tr>
+<td>Vercel AI Gateway</td>
+<td><code dir="auto">https://ai-gateway.vercel.sh/v1</code></td>
+<td>gateway, ids like <code dir="auto">anthropic/claude-sonnet-5.5</code>, prices in the list</td>
+<td><a href="https://vercel.com/dashboard/ai-gateway">vercel.com/dashboard/ai-gateway</a></td>
+<td><a href="https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions">docs</a></td>
+</tr>
+<tr>
+<td>Cloudflare Workers AI / AI Gateway</td>
+<td><code dir="auto">https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1</code></td>
+<td>replace <code dir="auto">{account_id}</code>; token needs <em>Workers AI → Read</em>; ids <code dir="auto">@cf/…</code> (Workers AI) or <code dir="auto">author/model</code> (other providers, billed through Cloudflare); no model list</td>
+<td><a href="https://dash.cloudflare.com/profile/api-tokens">dash.cloudflare.com</a></td>
+<td><a href="https://developers.cloudflare.com/ai-gateway/usage/rest-api/">docs</a></td>
+</tr>
+<tr>
+<td>Nebius Token Factory</td>
+<td><code dir="auto">https://api.tokenfactory.nebius.com/v1</code></td>
+<td>open models</td>
+<td><a href="https://tokenfactory.nebius.com/">tokenfactory.nebius.com</a></td>
+<td><a href="https://docs.tokenfactory.nebius.com/">docs</a></td>
+</tr>
+<tr>
+<td>Novita AI</td>
+<td><code dir="auto">https://api.novita.ai/openai/v1</code></td>
+<td>open models, prices in the list</td>
+<td><a href="https://novita.ai/settings/key-management">novita.ai</a></td>
+<td><a href="https://docs.novita.ai/guides/llm-api">docs</a></td>
+</tr>
+<tr>
+<td>Hyperbolic</td>
+<td><code dir="auto">https://api.hyperbolic.xyz/v1</code></td>
+<td>open models</td>
+<td><a href="https://app.hyperbolic.ai/settings">app.hyperbolic.ai</a></td>
+<td><a href="https://www.hyperbolic.ai/docs/inference/quickstart">docs</a></td>
+</tr>
+<tr>
+<td>SambaNova Cloud</td>
+<td><code dir="auto">https://api.sambanova.ai/v1</code></td>
+<td>fast inference, prices in the list</td>
+<td><a href="https://cloud.sambanova.ai/apis">cloud.sambanova.ai</a></td>
+<td><a href="https://docs.sambanova.ai/docs/en/features/openai-compatibility">docs</a></td>
+</tr>
+<tr>
+<td>Featherless</td>
+<td><code dir="auto">https://api.featherless.ai/v1</code></td>
+<td>20 000+ open models (list is searched, gated models hidden)</td>
+<td><a href="https://featherless.ai/account/api-keys">featherless.ai</a></td>
+<td><a href="https://featherless.ai/docs/api-overview-and-common-options">docs</a></td>
+</tr>
+<tr>
+<td>Venice</td>
+<td><code dir="auto">https://api.venice.ai/api/v1</code></td>
+<td>privacy-oriented; prices per million tokens in the list</td>
+<td><a href="https://venice.ai/settings/api">venice.ai/settings/api</a></td>
+<td><a href="https://docs.venice.ai/overview/getting-started">docs</a></td>
+</tr>
+<tr>
+<td>Moonshot AI (Kimi)</td>
+<td><code dir="auto">https://api.moonshot.ai/v1</code></td>
+<td>international platform; processing at Moonshot, not in the EU</td>
+<td><a href="https://platform.kimi.ai/console/api-keys">platform.kimi.ai</a></td>
+<td><a href="https://platform.kimi.ai/docs/guide/start-using-kimi-api">docs</a></td>
+</tr>
+<tr>
+<td>Zhipu GLM (Z.ai)</td>
+<td><code dir="auto">https://api.z.ai/api/paas/v4</code></td>
+<td>general API only – the “GLM Coding Plan” has its own access for coding tools and is <strong>not</strong> used here; no model list</td>
+<td><a href="https://z.ai/manage-apikey/apikey-list">z.ai</a></td>
+<td><a href="https://docs.z.ai/guides/overview/quick-start">docs</a></td>
+</tr>
+<tr>
+<td>Alibaba Qwen (Model Studio)</td>
+<td><code dir="auto">https://dashscope-intl.aliyuncs.com/compatible-mode/v1</code></td>
+<td>keys are regional; newer accounts use <code dir="auto">https://&lt;workspace&gt;.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1</code> or <code dir="auto">https://dashscope-us.aliyuncs.com/compatible-mode/v1</code> – edit the address; no model list</td>
+<td><a href="https://modelstudio.console.alibabacloud.com/">Model Studio</a></td>
+<td><a href="https://www.alibabacloud.com/help/en/model-studio/compatibility-of-openai-with-dashscope">docs</a></td>
+</tr>
+<tr>
+<td>MiniMax</td>
+<td><code dir="auto">https://api.minimax.io/v1</code></td>
+<td>no model list; M3.1-Flash-Preview is not on this API (M Plan / MiniMax Code only)</td>
+<td><a href="https://platform.minimax.io/user-center/basic-information/interface-key">platform.minimax.io</a></td>
+<td><a href="https://platform.minimax.io/docs/api-reference/text-openai-api">docs</a></td>
+</tr>
+<tr>
+<td>Cohere (compatibility API)</td>
+<td><code dir="auto">https://api.cohere.ai/compatibility/v1</code></td>
+<td>chat with tools, embeddings; unsupported: <code dir="auto">n</code>, <code dir="auto">logit_bias</code>, <code dir="auto">parallel_tool_calls</code></td>
+<td><a href="https://dashboard.cohere.com/api-keys">dashboard.cohere.com</a></td>
+<td><a href="https://docs.cohere.com/docs/compatibility-api">docs</a></td>
+</tr>
+<tr>
+<td>AI21 (Jamba)</td>
+<td><code dir="auto">https://api.ai21.com/studio/v1</code></td>
+<td><code dir="auto">jamba-large</code>, <code dir="auto">jamba-mini</code>; at most 4096 output tokens</td>
+<td><a href="https://docs.ai21.com/docs/create-api-key">docs.ai21.com</a></td>
+<td><a href="https://docs.ai21.com/reference/jamba-1-6-api-ref">docs</a></td>
+</tr>
+<tr>
+<td><strong>kie.ai (chat)</strong></td>
+<td><code dir="auto">https://api.kie.ai/anthropic</code> (Anthropic Messages API, <code dir="auto">Authorization: Bearer</code>)</td>
+<td>Claude models with Anthropic’s ids, same key as the kie.ai media preset. kie.ai’s GPT and Gemini chat models have <strong>one address per model</strong> (<code dir="auto">https://api.kie.ai/&lt;model&gt;/v1/chat/completions</code>) – add them as <em>Benutzerdefiniert</em> if you need them</td>
+<td><a href="https://kie.ai/api-key">kie.ai/api-key</a></td>
+<td><a href="https://docs.kie.ai/ai-agent/claude-code.md">docs</a></td>
+</tr>
+</tbody>
+</table>
+<p>Mistral AI (<code dir="auto">https://api.mistral.ai/v1</code>) and the OpenAI-compatible providers of the table above are unchanged; Mistral’s list was re-checked and the EU endpoint was added (next section).</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="eu-hosting-dsgvo">EU hosting (DSGVO)</h3><a class="sl-anchor-link" href="#eu-hosting-dsgvo"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “EU hosting (DSGVO)”</span></a></div>
+<p>The cards <strong>IONOS</strong>, <strong>STACKIT</strong>, <strong>OVHcloud</strong>, <strong>Scaleway</strong> and <strong>Mistral AI – EU-Endpunkt</strong> carry an <strong>EU-Hosting</strong> badge and the filter <em>EU-Hosting</em> in the gallery. The badge appears only where the provider’s own documentation says where data is processed – hover it for the statement and the page it comes from:</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Base URL</th>
+<th>What the provider says</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IONOS AI Model Hub</td>
+<td><code dir="auto">https://openai.inference.de-txl.ionos.com/v1</code></td>
+<td>“data processing is confined within Germany”; inputs are not used for training. Token from the Data Center Designer (<em>Management → Token Manager</em>); new customers need a Public Cloud contract first</td>
+<td><a href="https://docs.ionos.com/cloud/ai/ai-model-hub/ai-model-hub.md">docs</a></td>
+</tr>
+<tr>
+<td>STACKIT AI Model Serving</td>
+<td><code dir="auto">https://api.openai-compat.model-serving.eu01.onstackit.cloud/v1</code></td>
+<td>“fully hosted in European data centers and strictly GDPR-compliant”; requests are not stored. Auth token from the STACKIT portal</td>
+<td><a href="https://stackit.com/en/products/data-ai">stackit.com</a></td>
+</tr>
+<tr>
+<td>OVHcloud AI Endpoints</td>
+<td><code dir="auto">https://oai.endpoints.kepler.ai.cloud.ovh.net/v1</code></td>
+<td>infrastructure “located in Gravelines, France”; data “not stored or shared”. The product page lists availability as “Worldwide (non-EU)” – check that your country is covered</td>
+<td><a href="https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-capabilities">docs</a></td>
+</tr>
+<tr>
+<td>Scaleway Generative APIs</td>
+<td><code dir="auto">https://api.scaleway.ai/v1</code></td>
+<td>“Hosted in European data centers”</td>
+<td><a href="https://www.scaleway.com/en/docs/generative-apis/quickstart.md">docs</a></td>
+</tr>
+<tr>
+<td>Mistral AI – EU-Endpunkt</td>
+<td><code dir="auto">https://api.eu.mistral.ai/v1</code></td>
+<td>regional inference in data centers in the EU and EFTA; <strong>+10 %</strong> price; no Agents, Batch or Files API, function calling only; account, billing and API keys stay with Mistral outside that region</td>
+<td><a href="https://docs.mistral.ai/inference/regional-inference.md">docs</a></td>
+</tr>
+</tbody>
+</table>
+<p><em>Mistral AI</em> (global endpoint) is <strong>not</strong> badged: “Mistral does not commit to a specific inference location for requests sent to this endpoint”. The badge is information, not legal advice: it does not cover where a provider keeps account data, and you still need a data-processing agreement with the provider. IONOS and STACKIT also sell dedicated models; this list covers their shared, pay-per-token endpoints.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="image-video-and-audio">Image, video and audio</h3><a class="sl-anchor-link" href="#image-video-and-audio"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Image, video and audio”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Base URL</th>
+<th>Auth</th>
+<th>Capabilities</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fal.ai</td>
+<td><code dir="auto">https://fal.run</code> (queue: <code dir="auto">https://queue.fal.run</code>)</td>
+<td><code dir="auto">Authorization: Key &lt;key&gt;</code></td>
+<td>image, video, TTS, music, transcription</td>
+<td><a href="https://fal.ai/dashboard/keys">fal.ai/dashboard/keys</a></td>
+</tr>
+<tr>
+<td>kie.ai</td>
+<td><code dir="auto">https://api.kie.ai</code></td>
+<td>Bearer</td>
+<td>image, video, music</td>
+<td><a href="https://kie.ai/api-key">kie.ai/api-key</a></td>
+</tr>
+<tr>
+<td>Replicate</td>
+<td><code dir="auto">https://api.replicate.com/v1</code></td>
+<td>Bearer <code dir="auto">r8_…</code></td>
+<td>image, video, TTS, music, transcription</td>
+<td><a href="https://replicate.com/account/api-tokens">replicate.com</a></td>
+</tr>
+<tr>
+<td>Stability AI</td>
+<td><code dir="auto">https://api.stability.ai</code></td>
+<td>Bearer <code dir="auto">sk-…</code></td>
+<td>image, music</td>
+<td><a href="https://platform.stability.ai/account/keys">platform.stability.ai</a></td>
+</tr>
+<tr>
+<td>ElevenLabs</td>
+<td><code dir="auto">https://api.elevenlabs.io</code></td>
+<td><code dir="auto">xi-api-key: …</code></td>
+<td>TTS, music, transcription</td>
+<td><a href="https://elevenlabs.io/app/settings/api-keys">elevenlabs.io</a></td>
+</tr>
+<tr>
+<td>Runway</td>
+<td><code dir="auto">https://api.dev.runwayml.com/v1</code></td>
+<td>Bearer + <code dir="auto">X-Runway-Version</code></td>
+<td>video, image</td>
+<td><a href="https://dev.runwayml.com/">dev.runwayml.com</a></td>
+</tr>
+<tr>
+<td>Luma AI</td>
+<td><code dir="auto">https://api.lumalabs.ai/dream-machine/v1</code></td>
+<td>Bearer</td>
+<td>video, image</td>
+<td><a href="https://lumalabs.ai/api/keys">lumalabs.ai/api/keys</a></td>
+</tr>
+<tr>
+<td>Custom (HTTP)</td>
+<td>any</td>
+<td>any style</td>
+<td>you choose</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="speech-voice-layer">Speech (voice layer)</h3><a class="sl-anchor-link" href="#speech-voice-layer"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Speech (voice layer)”</span></a></div>
+<p>Providers for the <a href="/voice/">voice layer</a> – the phone agent’s own voice, push-to-talk, spoken replies, voicemail transcription. They are ordinary media connections with the capabilities <em>Sprachausgabe</em> (<code dir="auto">audio_tts</code>) and <em>Transkription</em> (<code dir="auto">stt</code>); cards marked <strong>Live</strong> can stream into a phone call.</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Base URL</th>
+<th>Auth</th>
+<th>Capabilities</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deepgram (Nova &amp; Aura)</td>
+<td><code dir="auto">https://api.deepgram.com</code> (EU: <code dir="auto">api.eu.deepgram.com</code>)</td>
+<td><code dir="auto">Authorization: Token …</code></td>
+<td>STT, TTS</td>
+<td>STT and TTS</td>
+</tr>
+<tr>
+<td>Cartesia (Sonic)</td>
+<td><code dir="auto">https://api.cartesia.ai</code></td>
+<td><code dir="auto">X-API-Key</code> + <code dir="auto">Cartesia-Version</code></td>
+<td>TTS, STT</td>
+<td>TTS</td>
+</tr>
+<tr>
+<td>AssemblyAI</td>
+<td><code dir="auto">https://api.assemblyai.com</code> (EU: <code dir="auto">api.eu.assemblyai.com</code>)</td>
+<td><code dir="auto">Authorization: &lt;key&gt;</code></td>
+<td>STT</td>
+<td>STT</td>
+</tr>
+<tr>
+<td>Azure Speech</td>
+<td>your resource address, e.g. <code dir="auto">https://germanywestcentral.api.cognitive.microsoft.com</code></td>
+<td><code dir="auto">Ocp-Apim-Subscription-Key</code></td>
+<td>TTS, STT</td>
+<td>TTS</td>
+</tr>
+<tr>
+<td>Google Cloud Speech</td>
+<td><code dir="auto">https://texttospeech.googleapis.com</code></td>
+<td><code dir="auto">X-Goog-Api-Key</code></td>
+<td>TTS, STT</td>
+<td>TTS</td>
+</tr>
+<tr>
+<td>Local speech server</td>
+<td>e.g. <code dir="auto">http://localhost:8880/v1</code> (Kokoro-FastAPI, openedai-speech, Speaches, whisper.cpp)</td>
+<td>optional</td>
+<td>TTS, STT</td>
+<td>TTS</td>
+</tr>
+</tbody>
+</table>
+<p>OpenAI, ElevenLabs and Gemini gained speech capabilities and voices too (see the table in <a href="/voice/#providers">voice.md</a>). The auth style <em>Token</em> (<code dir="auto">Authorization: Token &lt;key&gt;</code>) is new for Deepgram.</p>
+<p>Media connections only store the key, address and default models; the generation itself is done by the media modules, which read the connection with <code dir="auto">app.services.aiConnections.resolve(locationId, 'image' | 'video' | 'audio_tts' | 'audio_music' | 'stt')</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="add-a-connection">Add a connection</h2><a class="sl-anchor-link" href="#add-a-connection"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Add a connection”</span></a></div>
+<ol>
+<li>Click a provider card. Enter the key (and the address for Azure, local servers and custom ones).</li>
+<li>Choose capabilities and a <strong>default model per capability</strong> – pick from the live list (<strong>Liste laden</strong>) or type any id.</li>
+<li><strong>Verbindung testen</strong> loads the model list (no tokens) and, for text, sends one tiny request with a test tool to check that tool calling works (the agent needs it). Unsaved changes in the form are tested too; the result is stored on the connection (<em>geprüft</em>, <em>Hinweis</em>, <em>Fehler</em>).</li>
+<li><strong>Erweitert:</strong> auth style and header name (media providers: also the key as URL parameter), extra headers (e.g. <code dir="auto">OpenAI-Organization</code>; values sealed, empty = keep), prices per million tokens (for cost tracking and the monthly limit), the Azure API version; for media providers a <strong>webhook secret</strong> (kie.ai: <code dir="auto">webhookHmacKey</code>) so signed callbacks can be checked, and for <em>Benutzerdefiniert (HTTP)</em> an optional request template.</li>
+</ol>
+<p><strong>Local networks.</strong> Addresses on <code dir="auto">localhost</code>, private IPs or <code dir="auto">.local</code>/<code dir="auto">.internal</code> names are refused unless an <strong>agency admin</strong> ticks “Lokales Netz erlauben” on that connection (e.g. Ollama on the same server). Every request to a user-entered address resolves DNS and refuses private targets otherwise (no DNS rebinding), and redirects are not followed. Internet addresses must use <code dir="auto">https://</code>.</p>
+<p><strong>Who may do what.</strong> People with the <em>Einstellungen</em> area manage the sub-account’s connections and routing. Agency connections and the agency routing: admins only. Members see agency connections (name, provider, capabilities), never their keys.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="model-lists-and-prices">Model lists and prices</h2><a class="sl-anchor-link" href="#model-lists-and-prices"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Model lists and prices”</span></a></div>
+<p><strong>Modelle &amp; Preise</strong> on a connection card (and the live list in the connection form) loads the provider’s <code dir="auto">GET /models</code> (cached 10 minutes) with a search box – the list of Featherless alone has more than 20 000 models, so the server filters before it sends (at most 1500 rows). Where the provider’s list says so, every row shows context size, vision and tool support and the <strong>price per million input and output tokens</strong> (US dollars):</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Where the list states prices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenRouter</td>
+<td><code dir="auto">pricing.prompt</code> / <code dir="auto">pricing.completion</code> (per token, free models and routers handled)</td>
+</tr>
+<tr>
+<td>Vercel AI Gateway</td>
+<td><code dir="auto">pricing.input</code> / <code dir="auto">pricing.output</code> (per token), language models only</td>
+</tr>
+<tr>
+<td>Requesty</td>
+<td><code dir="auto">input_price</code> / <code dir="auto">output_price</code> (per token), <code dir="auto">supports_vision</code>, <code dir="auto">supports_tool_calling</code></td>
+</tr>
+<tr>
+<td>Novita AI</td>
+<td><code dir="auto">pricing.prompt.price_per_m_decimal</code> (per million)</td>
+</tr>
+<tr>
+<td>Venice</td>
+<td><code dir="auto">model_spec.pricing.input.usd</code> (per million) and capabilities</td>
+</tr>
+<tr>
+<td>SambaNova, OVHcloud, Featherless</td>
+<td><code dir="auto">pricing.prompt</code> / <code dir="auto">pricing.completion</code> (per token); OVHcloud’s embeddings, speech and image models are left out, Featherless’ gated models too</td>
+</tr>
+</tbody>
+</table>
+<p>The other providers send ids only (Together, Groq, … state prices in their console). The cost estimate of a call uses, in this order: the prices typed into the connection (<em>Erweitert</em>), the price the provider’s list stated for that model (once the list was loaded in this server process), the preset’s rough estimate. <strong>Verbindung testen</strong> works for providers without a model list too: a 404 on <code dir="auto">/models</code> is not an error, HyperLevel then checks with one tiny chat request.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="subscription-sign-in-mit-chatgpt-anmelden-mit-claude-verbinden">Subscription sign-in (Mit ChatGPT anmelden, Mit Claude verbinden)</h2><a class="sl-anchor-link" href="#subscription-sign-in-mit-chatgpt-anmelden-mit-claude-verbinden"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Subscription sign-in (Mit ChatGPT anmelden, Mit Claude verbinden)”</span></a></div>
+<p>At the top of <strong>Einstellungen → KI-Anbieter → Mit deinem Abo</strong> two big cards let a person use their own subscription instead of an API key.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Mit ChatGPT anmelden</th>
+<th>Mit Claude verbinden</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What</td>
+<td>ChatGPT Plus / Pro / Team plan as a model for <em>your own</em> agent chats, assistant actions and Werkstatt builds</td>
+<td>Claude Pro / Max through <strong>Claude Code on your own computer</strong> (the <a href="#the-local-bridge-claude-code-and-codex-cli">bridge</a>)</td>
+</tr>
+<tr>
+<td>How</td>
+<td>OpenAI’s official “Sign in with ChatGPT” for open-source apps: sign in at OpenAI, paste the address the browser lands on</td>
+<td>one command on your computer, a pairing code (and QR code), live status, your model</td>
+</tr>
+<tr>
+<td>Where the login lives</td>
+<td>sealed in HyperLevel’s database, per user</td>
+<td>only on your computer – HyperLevel never sees it</td>
+</tr>
+<tr>
+<td>Status</td>
+<td><strong>implemented</strong> (default on for self-hosted installs, off on a hosted service until OpenAI approves)</td>
+<td><strong>bridge</strong> is the supported way; <strong>no OAuth sign-in exists, on purpose</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="legal-position-researched-october-2026">Legal position (researched October 2026)</h3><a class="sl-anchor-link" href="#legal-position-researched-october-2026"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Legal position (researched October 2026)”</span></a></div>
+<p><strong>ChatGPT – allowed for open-source and self-hosted apps, with OpenAI’s own flow.</strong> OpenAI documents a flow for exactly this: <em>“ChatGPT plan usage is available to open-source projects, personal projects that run locally, and selected private apps.”</em> An open-source app registers itself dynamically (<code dir="auto">client_id=dynamic_agent_client</code>, its name and an installation id, no client secret and no partner key), and the user authorizes it for <code dir="auto">chatgpt.tokens.use.direct</code>. The tokens pay for Responses API requests at <code dir="auto">https://api.openai.com/v1/responses</code> out of the user’s plan (<code dir="auto">store: false</code>, <code dir="auto">stream: true</code>, no <code dir="auto">max_output_tokens</code>/<code dir="auto">temperature</code>; function tools grouped in a namespace). <em>“If you’re building a paid or remotely hosted app, join the waitlist to request access before offering it to users.”</em> So:</p>
+<ul>
+<li><strong>Self-hosted HyperLevel</strong> (AGPL, your own server, your own team): the feature is on by default; an agency admin can switch it off.</li>
+<li><strong>HyperLevel run as a paid or hosted service for other people</strong> (set <code dir="auto">PGHL_HOSTED=1</code>): the feature is <strong>off</strong> until the operator has OpenAI’s approval and sets <code dir="auto">PGHL_CHATGPT_SIGNIN_APPROVED=1</code>. The cloud edition’s operator needs that approval before turning it on.</li>
+<li>HyperLevel does <strong>not</strong> borrow the Codex CLI’s client id (as some other tools do) and does not talk to ChatGPT’s <code dir="auto">backend-api</code>; OpenAI’s documentation says that route is not the supported one.</li>
+<li>OpenAI asks apps to say clearly when the plan is in use and to link to <em>chatgpt.com → Settings → Usage</em>: both are in the chat (“Dein ChatGPT-Abo · Nutzung ↗”) and on the card.</li>
+</ul>
+<p>Sources: <a href="https://developers.openai.com/siwc/token-sharing-open-source">overview</a> · <a href="https://developers.openai.com/siwc/token-sharing-open-source/sign-in">registration and sign-in</a> · <a href="https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions">accounts, sessions, refresh, revoke</a> · <a href="https://developers.openai.com/siwc/token-sharing-open-source/preview-limitations">preview limitations</a> · <a href="https://developers.openai.com/siwc/token-sharing-open-source/errors-and-recovery">errors</a> · <a href="https://developers.openai.com/cookbook/articles/sign-in-with-chatgpt">cookbook</a> · <a href="https://github.com/openai/sign-in-with-chatgpt-devkit">reference implementation</a>.</p>
+<p><strong>Claude – not allowed for third parties, so there is no flow.</strong> Anthropic’s Claude Code documentation says: <em>“Anthropic does not permit third-party developers to offer Claude.ai login into their own applications, or to route requests through Free, Pro, or Max plan credentials on behalf of their users. Moreover, developers may not collect, store, or intermediate Claude.ai credentials or session tokens — sign-in to a Claude account must complete through Anthropic’s own flow.”</em> Developers should use API keys from the Claude Console. The same page confirms that an end user may sign in to the <strong>unmodified Claude Code</strong> with their own subscription. The <a href="https://www.anthropic.com/legal/consumer-terms">Consumer Terms</a> (effective 8 Oct 2025) also forbid automated access except with an API key and sharing account credentials. HyperLevel therefore ships <strong>no</strong> “Mit Claude anmelden”, never stores a Claude.ai token, and offers two compliant ways: Claude Code on your own computer (recommended) or an <strong>Anthropic API key</strong> from the Console. The button is called <em>Mit Claude verbinden</em> on purpose: the sign-in happens in Claude Code, not in HyperLevel. Sources: <a href="https://code.claude.com/docs/en/legal-and-compliance#authentication-and-credential-use">Legal and compliance → Authentication and credential use</a>, <a href="https://code.claude.com/docs/en/authentication">Authentication</a>.</p>
+<p><strong>How other tools handle it</strong> (for comparison): OpenCode is a launch partner of OpenAI’s flow above; Hermes Agent signs in with a device-code login using the Codex CLI’s client and supports Claude only through an API key or – on a Max plan with extra usage credits – by presenting itself as Claude Code, which Anthropic’s wording above does not allow third parties to do. HyperLevel follows the documented routes only.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="mit-chatgpt-anmelden--step-by-step">Mit ChatGPT anmelden – step by step</h3><a class="sl-anchor-link" href="#mit-chatgpt-anmelden--step-by-step"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Mit ChatGPT anmelden – step by step”</span></a></div>
+<ol>
+<li><em>Anmeldung starten</em> – HyperLevel builds the authorize URL (PKCE S256, fresh <code dir="auto">state</code> and <code dir="auto">nonce</code>, <code dir="auto">resource=https://api.openai.com/v1</code>, scopes <code dir="auto">openid profile email offline_access resource.invoke chatgpt.tokens.use.direct</code>, <code dir="auto">ext_agent_host_id</code> = one <code dir="auto">urn:uuid:…</code> per installation, <code dir="auto">agent_name_hint</code> = the app name on the very first sign-in only). The PKCE verifier stays on the server.</li>
+<li><em>ChatGPT öffnen</em> – the person signs in at OpenAI, picks the workspace and allows the use of their plan.</li>
+<li>OpenAI only allows a <strong>loopback redirect on <code dir="auto">127.0.0.1</code></strong> (<code dir="auto">http://127.0.0.1:1455/auth/callback</code>) – on a web server that is the person’s own computer, where nothing listens. The browser shows “Seite nicht erreichbar”; the person <strong>pastes the whole address</strong> from the address bar. (OpenAI describes the same situation for remote machines: complete the sign-in where the browser is, then hand over.) The code in it is single use and worthless without the verifier.</li>
+<li>HyperLevel validates <code dir="auto">state</code>, exchanges the code (the same redirect URI and resource, no secret), <strong>verifies the ID token</strong> (RS256 against OpenAI’s JWKS, issuer, audience = the issued client id, expiry, nonce), checks that the plan scope was granted, loads the model list (<code dir="auto">GET /v1/models</code>) and picks the first model. If the person declined the plan scope, the tokens are revoked and dropped and the next attempt asks for consent again (<code dir="auto">prompt=consent</code>).</li>
+</ol>
+<p><strong>Plan and expiry</strong> are shown on the card: the account’s e-mail, the plan when OpenAI’s ID token names it (otherwise “wird von ChatGPT verwaltet”), <em>Anmeldung gültig bis</em> (refresh tokens live 30 days from the last use and renew with every refresh), and when the current access token (1 hour) runs out. <strong>Refresh is automatic</strong>: two minutes before expiry, one refresh at a time per person (the refresh token rotates), the new tokens are stored before anything else. An unusable refresh token (<code dir="auto">invalid_grant</code>, <code dir="auto">refresh_token_reused</code>, expired, revoked in ChatGPT) ends the sign-in with the status <em>Abgelaufen</em> – the person signs in again and the saved client registration is reused. A temporary outage keeps the sign-in. HyperLevel never refreshes in the background for people who do not use it: a sign-in unused for 30 days expires.</p>
+<p><strong>Disconnect</strong> revokes the refresh token at OpenAI’s revocation endpoint (the answer says whether OpenAI confirmed), deletes the tokens and keeps only the registration (client id) for the next sign-in. People can also remove the app in ChatGPT under <em>Settings → Usage</em>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="safety-rules--a-subscription-is-personal">Safety rules – a subscription is personal</h3><a class="sl-anchor-link" href="#safety-rules--a-subscription-is-personal"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Safety rules – a subscription is personal”</span></a></div>
+<ul>
+<li><strong>Only the owner’s browser session</strong> can use it. Not other users, <strong>not the agency admin</strong>, not API keys, agency keys, MCP or app tokens (<code dir="auto">403</code>), not a custom agent (its model cannot be set to the subscription), not anyone with access to the database (tokens are sealed with the server secret, AES-256-GCM, and never sent to the browser or written to a log).</li>
+<li><strong>Only for what the owner switched on</strong> (three switches on the card): <em>Meine KI-Agent-Chats</em> – only chats the owner types in the browser (<code dir="auto">connection: "sub:chatgpt"</code>, shown as “Mein ChatGPT-Abo” in the model picker); <em>Meine KI-Assistent-Aktionen</em> – reply suggestions, summaries and the AI helpers in Canvas, Boards, Wiki and Ads that the owner triggers; <em>Meine Werkstatt-Aufträge</em> – builds the owner starts, <strong>only with a model that passes the Werkstatt model gate</strong> (a separate Werkstatt model can be chosen; otherwise the sub-account’s routing and its gate apply).</li>
+<li><strong>Never anything unattended</strong>: workflows, schedules, auto-replies, the chat bot, e-mail drafts, the phone agent, video recycling, app dictation, MCP calls and background jobs always use the sub-account’s own connections. (<code dir="auto">resolveFor</code> requires a person, <code dir="auto">automatic = false</code> and a browser session; <code dir="auto">aiRun</code> accepts only the listed assistant purposes.)</li>
+<li>The token is only ever sent to <code dir="auto">https://api.openai.com/v1/…</code>.</li>
+<li><strong>Usage limits</strong>: calls count on the person’s ChatGPT plan (on Plus one five-hour limit is shared by all apps), on the sub-account’s monthly token limit and appear in the usage log with cost 0. When ChatGPT answers that the limit is reached, HyperLevel says so and links to <em>chatgpt.com/settings/usage</em>.</li>
+<li><strong>Admins</strong> switch the feature off per agency (checkbox on the card, <code dir="auto">PUT /api/ai-subscriptions/admin</code>); everything stops at once, saved sign-ins stay sealed and work again when it is switched back on.</li>
+<li><strong>Audit log</strong> (<em>Agentur → Protokoll</em>): <code dir="auto">ai.subscription.start</code>, <code dir="auto">.connect</code> (“ChatGPT-Abo verbunden (Plan: ChatGPT Plus)”), <code dir="auto">.disconnect</code> (“… Widerruf bei OpenAI bestätigt”), <code dir="auto">.expired</code>, <code dir="auto">.admin</code>. Never a token, an authorization code, an address with a code in it or an e-mail address.</li>
+</ul>
+<p><strong>Honest status.</strong> The flow is implemented from OpenAI’s published specification and reference code and covered by tests with a faked OpenAI (PKCE, registration, loopback paste, token rotation, revocation, ID-token verification, the Responses stream and its error codes). It has not been run against a live ChatGPT account in this repository’s tests; connect one real account once before relying on it, in particular the namespaced tool format of the Responses route, which OpenAI documents only briefly.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="the-local-bridge-claude-code-and-codex-cli">The local bridge (Claude Code and Codex CLI)</h3><a class="sl-anchor-link" href="#the-local-bridge-claude-code-and-codex-cli"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The local bridge (Claude Code and Codex CLI)”</span></a></div>
+<p><em>Mit Claude verbinden</em> (and <em>Oder: über die Codex CLI auf deinem Rechner</em> under the ChatGPT card) opens the bridge dialog:</p>
+<ol>
+<li>Install and sign in to <strong>Claude Code</strong> (<code dir="auto">npm i -g @anthropic-ai/claude-code</code>, then <code dir="auto">claude</code>) or the <strong>Codex CLI</strong> (<code dir="auto">npm i -g @openai/codex</code>, <code dir="auto">codex login</code>) on your own computer.</li>
+<li><em>Verbindungs-Code erzeugen</em> – a code that is valid 10 minutes and once, with a <strong>copyable one-line command</strong> (macOS/Linux and Windows PowerShell tabs): it downloads <code dir="auto">gohigh-bridge.mjs</code> from your HyperLevel, pairs and starts it. A <strong>QR code</strong> carries the pairing command so it can be scanned with a phone and sent to the computer. (Node 18+ and curl are all it needs; the script has no dependencies.)</li>
+<li><strong>Live status</strong> (refreshes every 4 seconds while the dialog is open): ● <em>Verbunden</em> / ○ <em>Offline</em>, the computer’s name, last seen, version, and per computer the program (Claude Code or Codex CLI) and the <strong>model</strong> – passed to the CLI as <code dir="auto">--model</code> / <code dir="auto">-m</code> (leave empty for the CLI’s default; only ids that look like model ids are passed on).</li>
+<li>In the agent chat choose the model <strong>“Mein Abo über die Bridge”</strong>.</li>
+</ol>
+<p><strong>Limits, said plainly in the dialog:</strong> it only works while your computer is on and the bridge runs; it is for you personally (not for automations, workflows or other people); it counts on your Claude or ChatGPT plan. The CLI works with HyperLevel’s tools only (file, shell and web tools are switched off), with your rights and your agent’s confirmations in the web chat. The bridge reconnects by itself after network trouble or a restart of HyperLevel (1 s, then longer, up to a minute) and keeps waiting while an agency admin has switched it off; an unpaired bridge stops with a clear message. <code dir="auto">node gohigh-bridge.mjs status</code> checks the pairing. An agency admin has to allow the bridge first (the dialog has the switch for admins).</p>
+<p><strong>Start it at login</strong> (optional):</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.w36nc.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53"># Linux: ~/.config/systemd/user/gohigh-bridge.service   →   systemctl --user enable --now gohigh-bridge</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">[Unit]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">Description=HyperLevel Bridge</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">After=network-online.target</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">[Service]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">ExecStart=/usr/bin/env node %h/gohigh-bridge.mjs</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">Restart=always</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">RestartSec=5</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">[Install]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">WantedBy=default.target</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="# Linux: ~/.config/systemd/user/gohigh-bridge.service   →   systemctl --user enable --now gohigh-bridge[Unit]Description=HyperLevel BridgeAfter=network-online.target[Service]ExecStart=/usr/bin/env node %h/gohigh-bridge.mjsRestart=alwaysRestartSec=5[Install]WantedBy=default.target"><div></div></button></div></figure></div>
+<p>macOS: a LaunchAgent (<code dir="auto">~/Library/LaunchAgents/org.gohigh.bridge.plist</code>) with <code dir="auto">ProgramArguments</code> = <code dir="auto">node</code>, the script path and <code dir="auto">KeepAlive</code> = true. Windows: Task Scheduler → <em>At log on</em> → <code dir="auto">node C:\path\gohigh-bridge.mjs</code>. If <code dir="auto">claude</code> or <code dir="auto">codex</code> is not on that service’s <code dir="auto">PATH</code>, set <code dir="auto">GOHIGH_CLAUDE_BIN</code> / <code dir="auto">GOHIGH_CODEX_BIN</code>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="settings-and-environment">Settings and environment</h3><a class="sl-anchor-link" href="#settings-and-environment"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Settings and environment”</span></a></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agency switch</td>
+<td><em>Einstellungen → KI-Anbieter → Mit deinem Abo</em> → “Mit ChatGPT anmelden für diese Agentur erlauben” (admins)</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_SUBSCRIPTION_SIGNIN=off</code></td>
+<td>Operator switch: no subscription sign-in on this server</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_HOSTED=1</code></td>
+<td>This installation is run as a hosted or paid service for others: ChatGPT sign-in is off until approved</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_CHATGPT_SIGNIN_APPROVED=1</code></td>
+<td>OpenAI has approved this hosted service (<a href="https://openai.com/form/sign-in-with-chatgpt-interest/">interest form</a>) – turns the sign-in back on</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="skipped-and-partly-covered-providers">Skipped and partly covered providers</h2><a class="sl-anchor-link" href="#skipped-and-partly-covered-providers"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Skipped and partly covered providers”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lambda Inference API</strong></td>
+<td><strong>Skipped.</strong> Third-party sources report that Lambda announced the wind-down of its Inference API in May 2026 in favour of self-hosted deployments on Lambda GPUs; <code dir="auto">api.lambda.ai</code> did not answer from our environment and <code dir="auto">docs.lambda.ai</code> could not be verified. Use the <em>vLLM / LiteLLM</em> preset with a Lambda GPU instance instead.</td>
+</tr>
+<tr>
+<td>kie.ai GPT and Gemini chat models</td>
+<td>Each model has its own address (<code dir="auto">https://api.kie.ai/&lt;model&gt;/v1/chat/completions</code>), which does not fit one preset. The Claude models (Anthropic API at <code dir="auto">/anthropic</code>) are a preset; the others work as <em>Benutzerdefiniert</em> connections.</td>
+</tr>
+<tr>
+<td>Cloudflare AI Gateway <code dir="auto">/compat</code> URL</td>
+<td>Deprecated for single-model calls by Cloudflare; the preset uses the REST endpoint (<code dir="auto">…/accounts/{account_id}/ai/v1</code>) that serves Workers AI and third-party models.</td>
+</tr>
+<tr>
+<td>Alibaba Qwen, Zhipu GLM, MiniMax, Cohere, AI21</td>
+<td>Verified (see the table above) but they have no usable <code dir="auto">GET /models</code>; the suggestions are fixed and every id can be typed.</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="routing-which-model-for-what">Routing: which model for what</h2><a class="sl-anchor-link" href="#routing-which-model-for-what"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Routing: which model for what”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Usage</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KI-Agent (Chat &amp; Werkzeuge)</td>
+<td>the HyperLevel Agent (unless a custom agent or the chat picks another)</td>
+</tr>
+<tr>
+<td>Schnelle KI-Texte</td>
+<td>the KI-Assistent’s <code dir="auto">aiRun</code>: reply suggestions, chat bot, e-mail drafts, workflow “KI-Text”, phone agent, video recycling, mobile capture</td>
+</tr>
+<tr>
+<td>Zusammenfassungen</td>
+<td>the KI-Assistent’s summaries (falls back to “Schnelle KI-Texte”)</td>
+</tr>
+<tr>
+<td>Workflows</td>
+<td>the <a href="/workflow-ai/">KI-Workflow-Builder</a> (<em>Mit KI erstellen / ändern</em> in Automationen; falls back to “Schnelle KI-Texte”, then to the KI-Assistent’s own provider) – a strong model pays off here</td>
+</tr>
+<tr>
+<td>Funnel &amp; Website AI</td>
+<td>the <a href="/site-ai/">Funnel &amp; Website AI</a> (<em>Mit KI erstellen</em> in Funnels &amp; Websites, the builder’s AI panel, the AI writer for blog posts and e-mail text blocks; falls back to “Schnelle KI-Texte”, then to the KI-Assistent’s own provider)</td>
+</tr>
+<tr>
+<td>Werkstatt</td>
+<td>plans, builds and changes of plugins and core specifications (falls back to “Schnelle KI-Texte”); only a top model passes the Werkstatt’s model gate</td>
+</tr>
+<tr>
+<td>Werkstatt: Zweitmeinung</td>
+<td>the second reviewer before a plugin goes to the Marktplatz (Pro) – no fallback, and a different model than the one that built it</td>
+</tr>
+<tr>
+<td>Embeddings, Bilder, Videos, Sprachausgabe, Musik, Transkription</td>
+<td>media and search modules</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ersatzmodelle</strong> (text usages): under the model of a routed text usage up to five fallback model ids of the same connection – tried in order when the model is busy or broken (5xx, 429, overloaded, kie.ai <em>no_available_account</em>, timeout), then the other text connections. Empty = the provider’s default order (kie.ai: <code dir="auto">claude-sonnet-5-5 → claude-sonnet-5 → claude-haiku-5-5</code>). Details: <a href="/agent/#ersatzmodelle">agent.md</a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="denkstufe-reasoning-effort">Denkstufe (reasoning effort)</h2><a class="sl-anchor-link" href="#denkstufe-reasoning-effort"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Denkstufe (reasoning effort)”</span></a></div>
+<p><em>Einstellungen → KI-Anbieter → Denkstufe</em> sets how hard the models think: one default (built in: <code dir="auto">xhigh</code>) and an optional
+level per capability (agent, Werkstatt, review, quick texts, summaries, phone agent), for the agency and – overriding it –
+per sub-account (<code dir="auto">GET|PUT /api/ai-effort</code>, <a href="/api/#werkstatt-plugins-and-marktplatz">docs/api.md</a>). The adapters send it as
+<code dir="auto">output_config.effort</code> (Anthropic), <code dir="auto">reasoning.effort</code> (OpenAI Responses), <code dir="auto">reasoning_effort</code> (Chat Completions) or
+<code dir="auto">reasoning: { effort }</code> (OpenRouter); a model that cannot take the level gets its highest one and the log says so
+(„xhigh → high, vom Modell nicht unterstützt“). The Werkstatt never goes below <code dir="auto">high</code>. Details and the model table:
+<a href="/werkstatt/#denkstufe-reasoning-effort">docs/werkstatt.md</a>, <code dir="auto">server/services/ai-effort.ts</code>.</p>
+<p><code dir="auto">resolve(locationId, usage)</code> picks, first match wins: the connection asked for explicitly → the <strong>sub-account’s routing</strong> → the <strong>sub-account’s own connections</strong> with that capability → the <strong>agency routing</strong> → <strong>agency connections</strong> → keys the KI-Assistent already has (implicit, read-only: its Anthropic key, the OpenAI provider of the KI-Werkzeuge, <code dir="auto">PGHL_ANTHROPIC_API_KEY</code>, <code dir="auto">PGHL_OPENAI_API_KEY</code>).</p>
+<p><strong>Quick texts stay with the KI-Assistent until you route them.</strong> Only an explicit routing for <em>Schnelle KI-Texte</em> / <em>Zusammenfassungen</em> (sub-account or agency) moves <code dir="auto">aiRun</code> to a registry connection – then every existing consumer works with any text provider: OpenAI and Azure with JSON schema, the others with JSON mode plus an instruction; the JSON object is cut out of the reply. Settings → KI-Assistent shows a note when its texts are routed. Monthly limit and usage log stay per sub-account.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="usage-and-costs">Usage and costs</h2><a class="sl-anchor-link" href="#usage-and-costs"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Usage and costs”</span></a></div>
+<p>Each call through a connection is counted per day and sub-account (calls, tokens, estimated cost); the page shows the current month per connection. Agent and quick-text calls also land in the KI-Assistent’s usage log and count on its monthly limit. Media providers bill per generation – their costs are shown by the provider.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="for-developers">For developers</h2><a class="sl-anchor-link" href="#for-developers"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “For developers”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="ts"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const </span><span style="--0:#82AAFF;--1:#3B61B0">reg</span><span style="--0:#C792EA;--1:#8844AE"> = </span><span style="--0:#D6DEEB;--1:#403F53">app</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">services</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#7FDBCA;--1:#096E72">aiConnections</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">reg</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">list</span><span style="--0:#D6DEEB;--1:#403F53">(locationId, capability</span><span style="--0:#C792EA;--1:#8844AE">?</span><span style="--0:#D6DEEB;--1:#403F53">)              </span><span style="--0:#919F9F;--1:#5D6376">// connections the sub-account can use, without secrets</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">reg</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">resolve</span><span style="--0:#D6DEEB;--1:#403F53">(locationId, capabilityOrUsage, id</span><span style="--0:#C792EA;--1:#8844AE">?</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#919F9F;--1:#5D6376">// → { connectionId, provider, baseUrl, apiKey, headers, authStyle, model, label, wire, capabilities, options, webhookSecret? } | null</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">await</span><span style="--0:#D6DEEB;--1:#403F53"> reg</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">models</span><span style="--0:#D6DEEB;--1:#403F53">(connectionId, locationId</span><span style="--0:#C792EA;--1:#8844AE">?</span><span style="--0:#D6DEEB;--1:#403F53">, { refresh?, q? }) </span><span style="--0:#919F9F;--1:#5D6376">// → { models, details: [{id, name?, context?, in?, out?, free?, vision?, tools?}], total, live, cached, free_text: true, error? }</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">reg</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">fetchFor</span><span style="--0:#D6DEEB;--1:#403F53">(resolved)                          </span><span style="--0:#919F9F;--1:#5D6376">// fetch with the SSRF guard for user-entered addresses</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">reg</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">recordUsage</span><span style="--0:#D6DEEB;--1:#403F53">(connectionId, locationId, usage, costMicros)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="const reg = app.services.aiConnections;reg.list(locationId, capability?)              // connections the sub-account can use, without secretsreg.resolve(locationId, capabilityOrUsage, id?) // → { connectionId, provider, baseUrl, apiKey, headers, authStyle, model, label, wire, capabilities, options, webhookSecret? } | nullawait reg.models(connectionId, locationId?, { refresh?, q? }) // → { models, details: [{id, name?, context?, in?, out?, free?, vision?, tools?}], total, live, cached, free_text: true, error? }reg.fetchFor(resolved)                          // fetch with the SSRF guard for user-entered addressesreg.recordUsage(connectionId, locationId, usage, costMicros)"><div></div></button></div></figure></div>
+<p>The personal subscription lives in <code dir="auto">app.services.aiSubscriptions</code> (<code dir="auto">modules/ai-subscriptions.ts</code>) and is deliberately <strong>not</strong> part of <code dir="auto">resolve()</code>: <code dir="auto">resolveFor({user, locationId, usage: 'agent' | 'assistant' | 'werkstatt', automatic, via})</code> returns a <code dir="auto">Resolved</code> with <code dir="auto">provider: 'chatgpt_plan'</code>, <code dir="auto">wire: 'responses'</code>, <strong>no key and no headers</strong> (<code dir="auto">fetchFor(resolved)</code> adds the access token per request, refreshing when needed, and refuses any URL outside <code dir="auto">https://api.openai.com/v1/</code>), or <code dir="auto">null</code>; <code dir="auto">providerFor({locationId, purpose, userId})</code> is what <code dir="auto">aiRun</code> asks (through <code dir="auto">app.services.aiProvider(locationId, purpose, userId)</code>); <code dir="auto">chatModelsFor(user, locationId)</code> feeds the chat’s model picker. The wire <code dir="auto">responses</code> (<code dir="auto">services/chatgpt-responses.ts</code>) registers itself in <code dir="auto">services/agent-llm.ts</code> (<code dir="auto">extraWires</code>), so <code dir="auto">chatWithTools</code> and <code dir="auto">completeText</code> need nothing else. Pure protocol code: <code dir="auto">services/chatgpt-oauth.ts</code>; model-list parsing with prices: <code dir="auto">services/ai-model-info.ts</code>; the extra presets: <code dir="auto">services/ai-presets-extra.ts</code> (<code dir="auto">eu</code>, <code dir="auto">tags</code>, <code dir="auto">infoKind</code>, <code dir="auto">referral</code>, <code dir="auto">verified</code> fields). Test hooks: <code dir="auto">app.services.aiSubscriptionsFetch</code> (every request to <code dir="auto">auth.openai.com</code> and <code dir="auto">api.openai.com</code>), <code dir="auto">app.services.aiConnectionsFetch</code>; tests: <code dir="auto">tests/ai-subscriptions.test.ts</code>, <code dir="auto">tests/chatgpt-oauth.test.ts</code>, <code dir="auto">tests/ai-providers-catalog.test.ts</code> (fixtures: <code dir="auto">tests/fixtures/ai-models/</code>), <code dir="auto">tests/bridge-connect.test.ts</code>, fake service <code dir="auto">tests/chatgpt-fakes.ts</code>.</p>
+<p><code dir="auto">headers</code> already contains the auth header in the connection’s style, the preset’s fixed headers and the user’s extra headers. <code dir="auto">authStyle</code> says how the key is sent: <code dir="auto">bearer</code>, <code dir="auto">key</code> (<code dir="auto">Authorization: Key &lt;key&gt;</code>, fal.ai), <code dir="auto">header:&lt;name&gt;</code> (e.g. <code dir="auto">header:xi-api-key</code>, <code dir="auto">header:x-api-key</code>, <code dir="auto">header:api-key</code>), <code dir="auto">query:&lt;name&gt;</code> (custom HTTP only – the caller appends <code dir="auto">?&lt;name&gt;=&lt;key&gt;</code>; the key is then <em>not</em> in <code dir="auto">headers</code>) or <code dir="auto">none</code>. <code dir="auto">wire</code> is <code dir="auto">openai</code> (Chat Completions), <code dir="auto">anthropic</code> (Messages API) or <code dir="auto">http</code> (media). <code dir="auto">webhookSecret</code> is the provider’s callback signing secret (kie.ai <code dir="auto">webhookHmacKey</code>), stored sealed and write-only like the key; <code dir="auto">options.template</code> is the request template of a <em>Benutzerdefiniert (HTTP)</em> connection (JSON object with <code dir="auto">url</code>, <code dir="auto">method</code>, <code dir="auto">headers</code>, <code dir="auto">body</code>, <code dir="auto">result_path</code>, <code dir="auto">poll</code> …, at most 16 KB – the KI-Studio docs describe it). <code dir="auto">list()</code> entries carry <code dir="auto">id</code>, <code dir="auto">provider</code>, <code dir="auto">label</code>, <code dir="auto">capabilities</code>, <code dir="auto">models</code> and <code dir="auto">model</code> (the default for the capability asked for). Tables: <code dir="auto">ai_connections</code>, <code dir="auto">ai_routing</code>, <code dir="auto">ai_connection_usage</code>. Presets: <code dir="auto">server/services/ai-presets.ts</code>. Test hook: <code dir="auto">app.services.aiConnectionsFetch</code>.</p>
+<p>API (session or sub-account key, area <em>Einstellungen</em>): <code dir="auto">GET /api/ai-connections/presets</code>, <code dir="auto">GET /api/ai-connections</code> (connections, routing, usage), <code dir="auto">POST /api/ai-connections</code> <code dir="auto">{scope: location|agency, provider, label, base_url, api_key, auth_style: bearer|x-api-key|key|header|query|none, auth_header, extra_headers, webhook_secret, capabilities, models: {text, image, …}, enabled, options: {price_in, price_out, api_version, allow_private, template}}</code>, <code dir="auto">PATCH/DELETE /api/ai-connections/:id</code>, <code dir="auto">GET /api/ai-connections/:id/models?refresh=1</code>, <code dir="auto">POST /api/ai-connections/test</code> <code dir="auto">{id | draft…, deep?, capability?, model?}</code>, <code dir="auto">PUT /api/ai-connections/routing</code> <code dir="auto">{scope, usage, connection_id, model, fallbacks?: [model…] | "a, b"}</code> (fallbacks kept while the routing stays on the same connection).</p>
+<p>Subscription sign-in (browser session only – API keys get <code dir="auto">403</code>): <code dir="auto">GET /api/ai-subscriptions</code> (availability, the caller’s own ChatGPT connection without secrets, uses, bridge status), <code dir="auto">GET /api/ai-subscriptions/overview</code> (availability and the caller’s own connection – used by the MCP tool), <code dir="auto">POST /api/ai-subscriptions/chatgpt/start</code> → <code dir="auto">{authorize_url, redirect_uri, expires_at}</code>, <code dir="auto">POST …/chatgpt/complete</code> <code dir="auto">{callback: "&lt;pasted address&gt;"}</code>, <code dir="auto">PATCH …/chatgpt</code> <code dir="auto">{model?, werkstatt_model?, uses?: {agent, assistant, werkstatt}}</code>, <code dir="auto">GET …/chatgpt/models</code>, <code dir="auto">POST …/chatgpt/test</code> <code dir="auto">{deep?}</code>, <code dir="auto">DELETE …/chatgpt</code>; admins: <code dir="auto">GET|PUT /api/ai-subscriptions/admin</code> <code dir="auto">{chatgpt: boolean}</code>. Bridge additions: <code dir="auto">PATCH /api/agent/bridge/devices/:id</code> takes <code dir="auto">model</code>; <code dir="auto">POST /api/agent/bridge/code</code> returns <code dir="auto">command_oneline</code>, <code dir="auto">command_windows</code>, <code dir="auto">qr_svg</code>, <code dir="auto">expires_in_s</code>. MCP tool <strong><code dir="auto">ghl_ai_providers</code></strong> (<code dir="auto">location_id</code>, <code dir="auto">filter: eu|cheap|fast|local|gateway</code>, <code dir="auto">search</code>): providers, the sub-account’s connections without keys, effective routing and the sign-in availability – no secrets.</p>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/edit/main/docs/ai-providers.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Seite bearbeiten</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/de/mcp-client/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Vorherige Seite<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Externe MCP-Server</span></span></a><a href="/de/ai-assistant/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Nächste Seite<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">AI assistant</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

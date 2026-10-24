@@ -1,0 +1,460 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>XR: Raum-Modus, Arbeitsfläche and boards in the headset | HyperLevel Docs</title><link rel="canonical" href="https://docs.gohyperlevel.com/xr/"/><link rel="alternate" hreflang="en" href="https://docs.gohyperlevel.com/xr/"/><link rel="alternate" hreflang="de" href="https://docs.gohyperlevel.com/de/xr/"/><link rel="alternate" hreflang="x-default" href="https://docs.gohyperlevel.com/xr/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.2"/><meta name="generator" content="Starlight v0.42.7"/><meta property="og:title" content="XR: Raum-Modus, Arbeitsfläche and boards in the headset"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.gohyperlevel.com/xr/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:site_name" content="HyperLevel Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:image" content="https://docs.gohyperlevel.com/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.DdUizGEC.css"><style>@layer starlight.components{svg:where(.astro-hkc32dio){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/" class="site-title sl-flex astro-6rvad3va"><img class="light:sl-hidden print:hidden astro-6rvad3va" alt src="/_astro/logo-dark.DcAxiGJs.svg" width="420" height="96"><img class="dark:sl-hidden print:block astro-6rvad3va" alt src="/_astro/logo.BXUvVMvj.svg" width="420" height="96"><span class="sr-only astro-6rvad3va" translate="no">HyperLevel Docs</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Djc9ZKGJ.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/xr/" class="astro-2z5xp7gb">English</option><option value="/de/xr/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="04e4z3h" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Get started</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/README.md#quick-start" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Quick start</span></a></li><li class="astro-rmhv4bp6"><a href="/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deploy options</span></a></li><li class="astro-rmhv4bp6"><a href="/self-hosting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Self-hosting reference</span></a></li><li class="astro-rmhv4bp6"><a href="/demo-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Demo mode</span></a></li><li class="astro-rmhv4bp6"><a href="/cloud/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Hosted cloud</span></a></li><li class="astro-rmhv4bp6"><a href="/landing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Landing page</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">AI &amp; agents</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/agent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">HyperLevel Agent</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI tools: Claude Code, Codex, Cursor, ChatGPT</span></a></li><li class="astro-rmhv4bp6"><a href="/mcp-client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">External MCP servers</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI providers – bring your own key</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI assistant</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI workflow builder</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Studio</span></a></li><li class="astro-rmhv4bp6"><a href="/genmedia/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI media generation</span></a></li><li class="astro-rmhv4bp6"><a href="/site-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Funnel &amp; website AI</span></a></li><li class="astro-rmhv4bp6"><a href="/voice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Voice</span></a></li><li class="astro-rmhv4bp6"><a href="/cognee/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Knowledge memory (Cognee)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">API &amp; integrations</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">REST API &amp; MCP</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-actions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Workflow actions &amp; triggers</span></a></li><li class="astro-rmhv4bp6"><a href="/integrations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Integrations: Zapier, Make, n8n, REST hooks</span></a></li><li class="astro-rmhv4bp6"><a href="/connectors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Connectors &amp; Composio</span></a></li><li class="astro-rmhv4bp6"><a href="/nango/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Nango</span></a></li><li class="astro-rmhv4bp6"><a href="/channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Channels &amp; providers</span></a></li><li class="astro-rmhv4bp6"><a href="/meta-channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">WhatsApp, Messenger &amp; Instagram</span></a></li><li class="astro-rmhv4bp6"><a href="/mailbox-sync/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mailbox sync</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment providers</span></a></li><li class="astro-rmhv4bp6"><a href="/stripe/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stripe</span></a></li><li class="astro-rmhv4bp6"><a href="/todoist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Todoist</span></a></li><li class="astro-rmhv4bp6"><a href="/social-comments/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social comments</span></a></li><li class="astro-rmhv4bp6"><a href="/comment-to-dm/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Comment to DM</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">CRM, sales &amp; teamwork</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/sales/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sales</span></a></li><li class="astro-rmhv4bp6"><a href="/objects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Companies, custom objects &amp; lead scoring</span></a></li><li class="astro-rmhv4bp6"><a href="/custom-values/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Custom values</span></a></li><li class="astro-rmhv4bp6"><a href="/projects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Projects &amp; time tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/team-inbox/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team inbox</span></a></li><li class="astro-rmhv4bp6"><a href="/team-calendars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team calendars</span></a></li><li class="astro-rmhv4bp6"><a href="/booking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Booking rules</span></a></li><li class="astro-rmhv4bp6"><a href="/telephony/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Telephony</span></a></li><li class="astro-rmhv4bp6"><a href="/reputation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reputation</span></a></li><li class="astro-rmhv4bp6"><a href="/team-chat/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team chat</span></a></li><li class="astro-rmhv4bp6"><a href="/collaboration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Live collaboration</span></a></li><li class="astro-rmhv4bp6"><a href="/wiki/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wiki</span></a></li><li class="astro-rmhv4bp6"><a href="/canvas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Canvas</span></a></li><li class="astro-rmhv4bp6"><a href="/living-boards/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Living Boards</span></a></li><li class="astro-rmhv4bp6"><a href="/office/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Office</span></a></li><li class="astro-rmhv4bp6"><a href="/xr/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">XR</span></a></li><li class="astro-rmhv4bp6"><a href="/undo/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Undo, history &amp; trash</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Marketing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/email-marketing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail marketing</span></a></li><li class="astro-rmhv4bp6"><a href="/email-builder/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail designer</span></a></li><li class="astro-rmhv4bp6"><a href="/email-tracking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/deliverability/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deliverability</span></a></li><li class="astro-rmhv4bp6"><a href="/sites/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Website builder</span></a></li><li class="astro-rmhv4bp6"><a href="/forms/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Forms</span></a></li><li class="astro-rmhv4bp6"><a href="/social-planner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social planner</span></a></li><li class="astro-rmhv4bp6"><a href="/ads-manager/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Ads manager</span></a></li><li class="astro-rmhv4bp6"><a href="/growth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Growth: attribution, affiliates &amp; ad reports</span></a></li><li class="astro-rmhv4bp6"><a href="/referrals/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Referrals &amp; partner links</span></a></li><li class="astro-rmhv4bp6"><a href="/webinars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Webinars</span></a></li><li class="astro-rmhv4bp6"><a href="/video-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Video studio</span></a></li><li class="astro-rmhv4bp6"><a href="/consent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Consent &amp; legal</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Selling &amp; billing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/invoicing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Invoicing</span></a></li><li class="astro-rmhv4bp6"><a href="/dunning/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Dunning</span></a></li><li class="astro-rmhv4bp6"><a href="/sepa/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SEPA</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-plans/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment plans</span></a></li><li class="astro-rmhv4bp6"><a href="/store/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Online store &amp; gift cards</span></a></li><li class="astro-rmhv4bp6"><a href="/saas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SaaS mode</span></a></li><li class="astro-rmhv4bp6"><a href="/gewinnrechner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Profit calculator</span></a></li><li class="astro-rmhv4bp6"><a href="/backoffice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Back office</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Courses, community &amp; service</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/courses/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Courses</span></a></li><li class="astro-rmhv4bp6"><a href="/quizzes-certificates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quizzes &amp; certificates</span></a></li><li class="astro-rmhv4bp6"><a href="/community/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Community</span></a></li><li class="astro-rmhv4bp6"><a href="/academy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Academy</span></a></li><li class="astro-rmhv4bp6"><a href="/helpdesk/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Helpdesk: tickets, SLAs, knowledge base</span></a></li><li class="astro-rmhv4bp6"><a href="/bug-reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bug reports &amp; wishes</span></a></li><li class="astro-rmhv4bp6"><a href="/reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reports &amp; dashboards</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Apps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/android-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Android app</span></a></li><li class="astro-rmhv4bp6"><a href="/app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install the app &amp; push</span></a></li><li class="astro-rmhv4bp6"><a href="/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gray-label &amp; own-brand apps</span></a></li><li class="astro-rmhv4bp6"><a href="/ios-web-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">iPhone, iPad &amp; foldables</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Operate &amp; secure</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/backups/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Backups, alerts &amp; status page</span></a></li><li class="astro-rmhv4bp6"><a href="/incident-runbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Incident runbook</span></a></li><li class="astro-rmhv4bp6"><a href="/performance/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Performance &amp; sizing</span></a></li><li class="astro-rmhv4bp6"><a href="/security/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security</span></a></li><li class="astro-rmhv4bp6"><a href="/security-review-2026-10/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security review, October 2026</span></a></li><li class="astro-rmhv4bp6"><a href="/auth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sign-in, SSO &amp; passkeys</span></a></li><li class="astro-rmhv4bp6"><a href="/umzug/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Switch-over importers (Umzug)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Customize &amp; extend</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/theming/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Appearance &amp; themes</span></a></li><li class="astro-rmhv4bp6"><a href="/translating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">UI language &amp; translating</span></a></li><li class="astro-rmhv4bp6"><a href="/werkstatt/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werkstatt, plugins &amp; Marktplatz</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Run your company on HyperLevel</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/company-playbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Company playbook</span></a></li><li class="astro-rmhv4bp6"><a href="/handbuch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handbook (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/kurs-firma-fuehren/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Course: run your company (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/partner-program/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Partner program</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Project</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/roadmap/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Roadmap</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CHANGELOG.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Changelog</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/SECURITY.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Security policy</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/discussions" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">GitHub Discussions</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/xr/" class="astro-2z5xp7gb">English</option><option value="/de/xr/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#what-was-tested-and-what-was-not" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">What was tested, and what was not</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#devices" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Devices</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#how-the-device-is-recognised" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">How the device is recognised</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#raum-modus" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Raum-Modus</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#arbeitsfläche" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Arbeitsfläche</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#in-xr-öffnen" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">In XR öffnen</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#the-scene" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">The scene</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#moving-things" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Moving things</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#talking-to-the-board" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Talking to the board</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#how-it-is-drawn-and-what-that-means" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">How it is drawn, and what that means</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#api" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">API</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#install-it-as-an-app" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Install it as an app</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#testing-with-the-webxr-emulator" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Testing with the WebXR emulator</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#code-map" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Code map</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#what-was-tested-and-what-was-not" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">What was tested, and what was not</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#devices" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Devices</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#how-the-device-is-recognised" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">How the device is recognised</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#raum-modus" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Raum-Modus</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#arbeitsfläche" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Arbeitsfläche</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#in-xr-öffnen" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">In XR öffnen</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#the-scene" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">The scene</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#moving-things" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Moving things</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#talking-to-the-board" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Talking to the board</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#how-it-is-drawn-and-what-that-means" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">How it is drawn, and what that means</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#api" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">API</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#install-it-as-an-app" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Install it as an app</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#testing-with-the-webxr-emulator" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Testing with the WebXR emulator</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#code-map" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Code map</span></a></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">XR: Raum-Modus, Arbeitsfläche and boards in the headset</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>HyperLevel is built to be used with eyes and a pinch, with controllers, and on the huge virtual screens of display glasses. XR is
+three things that work together and one that makes them installable:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it is</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Raum-Modus</strong></td>
+<td>A spatial UI mode: 60 px targets, roomy spacing, a larger type scale, a soft glow on gaze and focus, no hover-only actions, translucent glass that stays readable</td>
+<td>Einstellungen → Darstellung → <em>Raum-Modus</em>; <code dir="auto">&lt;html data-spatial="1"&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Arbeitsfläche</strong></td>
+<td>2–4 pages side by side (Inbox | Kontakt | Board | Agent) for 21:9 and 32:9 screens, resizable with keyboard splitters, saved per person</td>
+<td>Menu → <em>Arbeitsfläche</em> (<code dir="auto">/app/workspace</code>)</td>
+</tr>
+<tr>
+<td><strong>In XR öffnen</strong></td>
+<td>A Living Board as floating panels on a curved wall, a Canvas as a large plane, in a WebXR session or – without WebXR – as a 3D preview in the browser; grab and move, push-to-talk to the board</td>
+<td>the button on a board and on a canvas</td>
+</tr>
+<tr>
+<td><strong>Installable</strong></td>
+<td>The web app manifest asks for its own window and large launcher icons</td>
+<td><code dir="auto">/manifest.webmanifest</code>, <code dir="auto">icon-1024.png</code></td>
+</tr>
+</tbody>
+</table>
+<p>Nothing here needs a setting by the self-hoster, a new service or a new npm package. WebXR needs a <strong>secure context</strong>: serve HyperLevel
+over HTTPS (or open it on <code dir="auto">localhost</code>).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-was-tested-and-what-was-not">What was tested, and what was not</h2><a class="sl-anchor-link" href="#what-was-tested-and-what-was-not"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What was tested, and what was not”</span></a></div>
+<p>Be clear about this when you decide what to promise customers.</p>
+<ul>
+<li><strong>Tested in this repository:</strong> the pure logic (detection, tokens, layouts, geometry, painters, scene interaction, push-to-talk),
+the API (isolation, permissions), the Raum-Modus audit of hit sizes in headless Chromium on the main screens, the 3D preview in
+headless Chromium (WebGL2, mouse orbit, grabbing, saving), and the <strong>immersive code path against a fake WebXR device</strong> (a stereo
+pair of views, one controller with a ray, <code dir="auto">selectstart</code>/<code dir="auto">selectend</code>) – it starts a session, draws both eyes, grabs and saves.</li>
+<li><strong>Not tested on hardware:</strong> a real Quest, Vision Pro, Android XR headset or display glasses. User-agent strings, the exact menu
+names for installing the app and the behaviour of hand tracking can differ from what is written here. The manual switch
+(<em>Raum-Modus: An</em>) and the 3D preview always work; report anything else with the device and software version.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="devices">Devices</h2><a class="sl-anchor-link" href="#devices"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Devices”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Browser</th>
+<th>Raum-Modus</th>
+<th>Arbeitsfläche</th>
+<th>In XR öffnen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apple Vision Pro</strong></td>
+<td>Safari (visionOS)</td>
+<td>automatic: Safari with <code dir="auto">navigator.xr</code> on an Apple platform (macOS and iOS Safari have no WebXR)</td>
+<td>yes, in a large Safari window</td>
+<td>WebXR <code dir="auto">immersive-vr</code> in visionOS Safari (where the <em>WebXR Device API</em> flag is not on by default: Settings → Apps → Safari → Advanced → Feature Flags); eyes + pinch arrive as <code dir="auto">select</code> events</td>
+</tr>
+<tr>
+<td><strong>Meta Quest 2/3/Pro</strong></td>
+<td>Meta Quest Browser (<code dir="auto">OculusBrowser</code>)</td>
+<td>automatic</td>
+<td>yes</td>
+<td><code dir="auto">immersive-vr</code> and <code dir="auto">immersive-ar</code> (passthrough) with controllers or hands (pinch = <code dir="auto">select</code>)</td>
+</tr>
+<tr>
+<td><strong>Android XR</strong> (Galaxy XR, …)</td>
+<td>Chrome</td>
+<td>automatic (platform / user agent naming Android XR, best effort)</td>
+<td>yes</td>
+<td><code dir="auto">immersive-vr</code> / <code dir="auto">immersive-ar</code></td>
+</tr>
+<tr>
+<td><strong>Pico</strong>, <strong>Wolvic</strong></td>
+<td>PicoBrowser, Wolvic</td>
+<td>automatic</td>
+<td>yes</td>
+<td>WebXR as the browser offers it</td>
+</tr>
+<tr>
+<td><strong>Xreal, Viture and other display glasses</strong></td>
+<td>the browser of the phone / Mac / PC they are connected to</td>
+<td>manual (<em>An</em>): they are plain external screens</td>
+<td>the main use: 21:9 / 32:9</td>
+<td>the 3D preview (mouse or touchpad orbit)</td>
+</tr>
+<tr>
+<td>Desktop browser</td>
+<td>any with WebGL2</td>
+<td>manual</td>
+<td>yes (≥ 1000 px wide)</td>
+<td>3D preview; a headset connected to the PC gives <em>In XR öffnen</em></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="how-the-device-is-recognised">How the device is recognised</h3><a class="sl-anchor-link" href="#how-the-device-is-recognised"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “How the device is recognised”</span></a></div>
+<p><code dir="auto">web/src/xr/detect.ts</code> (pure, tested with the strings below):</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Device</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">OculusBrowser</code>, <code dir="auto">Meta Quest</code>, <code dir="auto">Quest 3</code>, <code dir="auto">VR Safari</code></td>
+<td>Meta Quest</td>
+</tr>
+<tr>
+<td><code dir="auto">PicoBrowser</code>, <code dir="auto">PICO 4</code></td>
+<td>Pico</td>
+</tr>
+<tr>
+<td><code dir="auto">Wolvic</code>, <code dir="auto">FirefoxReality</code></td>
+<td>Wolvic</td>
+</tr>
+<tr>
+<td><code dir="auto">Android XR</code>, <code dir="auto">Galaxy XR</code>, <code dir="auto">SM-I###</code> or <code dir="auto">XR</code> beside <code dir="auto">Android</code> in the user agent, or <code dir="auto">navigator.userAgentData.platform</code> = Android XR</td>
+<td>Android XR</td>
+</tr>
+<tr>
+<td><code dir="auto">visionOS</code>, <code dir="auto">Vision Pro</code> in the user agent</td>
+<td>Apple Vision Pro</td>
+</tr>
+<tr>
+<td>Safari on Apple <strong>and</strong> <code dir="auto">navigator.xr</code></td>
+<td>Apple Vision Pro</td>
+</tr>
+</tbody>
+</table>
+<p>A WebXR object on any other browser (a PC with a headset, the WebXR emulator) is <strong>not</strong> a reason to switch the Raum-Modus on by
+itself; it only makes <em>In XR öffnen</em> appear. <em>Automatisch</em> is the default; <em>An</em> and <em>Aus</em> are the person’s word and are stored with
+the account like theme and density (<code dir="auto">spatial</code> in <code dir="auto">GET/PATCH /api/appearance</code>). An agency cannot lock it: it describes the device a
+person wears, not the brand.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="raum-modus">Raum-Modus</h2><a class="sl-anchor-link" href="#raum-modus"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Raum-Modus”</span></a></div>
+<p>It is <strong>theme tokens and one stylesheet</strong>, not a second version of each page:</p>
+<ul>
+<li><code dir="auto">web/src/xr/tokens.ts</code> derives, per theme and mode, <code dir="auto">--sp-glass</code> (the panel colour with an alpha), <code dir="auto">--sp-glass-strong</code>,
+<code dir="auto">--sp-glass-solid</code>, <code dir="auto">--sp-edge</code>, <code dir="auto">--sp-glow</code>, <code dir="auto">--sp-glow-strong</code>, <code dir="auto">--sp-hover</code> and <code dir="auto">--sp-shadow</code> from the theme and the accent.
+The alpha is chosen so that text, muted text and links reach 4.5:1 (7:1 in the <em>Kontrast</em> theme) <strong>even over pure black or pure
+white</strong>, because translucent glass shows whatever is behind it; the edge is ≥ 3:1 against the panel, the hover tint keeps the text
+at ≥ 4.5:1. <code dir="auto">tests/xr-spatial.test.ts</code> checks every theme in both modes. The tokens exist only while the mode is on.</li>
+<li><code dir="auto">web/src/xr/spatial.css</code> is <strong>a chunk of its own</strong> (loaded by the theme store while <code dir="auto">data-spatial="1"</code>): the first download of
+everybody else does not grow. It sets <code dir="auto">--sp-hit: 60px</code> as the floor for buttons, inputs, tabs, rows and nav entries; roomy
+<code dir="auto">--dn-*</code> density tokens (the store sets <code dir="auto">data-density="comfortable"</code> while the mode is on – your own density comes back when you
+switch it off); the glass surfaces; a soft glow on <code dir="auto">:hover</code> (gaze) and a stronger ring on <code dir="auto">:focus-visible</code>, both faded in, never
+abrupt; <code dir="auto">prefers-reduced-motion</code> (colour only, no movement) and <code dir="auto">prefers-contrast: more</code> (opaque surfaces, 2 px edges, thicker focus).</li>
+<li><strong>No hover-only actions.</strong> Everything a pointer used to reveal (card tools, row actions, “+” buttons, chat message tools) is simply
+visible. <code dir="auto">tests/xr-spatial.test.ts</code> scans the app’s CSS for hover-reveal rules and fails if a new one is not switched on in
+<code dir="auto">spatial.css</code> – add one line there when you write one.</li>
+<li><strong>A type scale for text that sets its own size.</strong> Pages declare 11–13 px captions; <code dir="auto">web/src/xr/type-scale.ts</code> reads the loaded
+style sheets (also the ones of pages that load later) and writes <code dir="auto">html[data-spatial='1'] .x { font-size: max(14px, calc(12px * var(--sp-type))) }</code>
+for every rule with a size between 10 and 17 px. New pages are covered without anybody touching it.</li>
+<li><strong>Little controls.</strong> A checkbox is drawn larger (34 px, 60 px footprint) and, alone in a table cell or row, the whole cell toggles
+it (<code dir="auto">web/src/xr/spatial.ts</code>); the × of a tag reaches 60 px with an invisible margin.</li>
+<li><strong>Less dragging.</strong> Every draggable card gets <em>Verschieben nach …</em> (<code dir="auto">web/src/xr/MoveMenu.tsx</code>: a list of places, each a large target):
+deals in the pipeline, tickets, tasks on the planner board, and widgets of a board in edit mode (to the top, a row up or down, left,
+right, wider, narrower, taller, shorter). The drag handles stay.</li>
+<li>The audited screens: Dashboard, Inbox, Contacts and a contact, Pipeline (and its deal dialog), Tasks, Planner (list and project),
+Boards (view and edit), Canvas (list and editor), the Agent drawer, Darstellung and Kalender – every visible control is at least 60 px
+(checkboxes: the label or cell; tag ×: 44 px + invisible margin).</li>
+</ul>
+<p>Print is untouched (the generated theme CSS is <code dir="auto">@media screen</code>).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="arbeitsfläche">Arbeitsfläche</h2><a class="sl-anchor-link" href="#arbeitsfläche"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Arbeitsfläche”</span></a></div>
+<p><em>Menu → Arbeitsfläche.</em> Two to four panels side by side; default <strong>Posteingang | Kontakt | Board | KI-Agent</strong>.</p>
+<ul>
+<li>Each panel is a real page of the app with its own route. The title opens a chooser of pages; ◀ ▶ swap a panel with its neighbour
+(the alternative to dragging), ↗ opens the panel’s page in the main window, ✕ closes it. <em>Seite hinzufügen</em> adds a panel (up to four).</li>
+<li><strong>Splitters</strong> between the panels: drag them, or focus one (Tab) and use ← → (Shift: large steps), Home / End; double-click makes the
+pair equally wide. They are <code dir="auto">role="separator"</code> with <code dir="auto">aria-valuenow</code>; no panel gets narrower than 12 % of the width.</li>
+<li><strong>Where a link opens:</strong> in the panel that already shows that kind of page. A contact link in the inbox updates the Kontakt panel
+instead of replacing the inbox. Links from the menu or the top bar navigate normally.</li>
+<li><strong>Selection sync</strong> (<em>Auswahl verknüpfen</em>, on by default): picking a conversation in the inbox or a deal in the pipeline shows the
+contact in the Kontakt panel (<code dir="auto">web/src/xr/selection.ts</code>; pages call <code dir="auto">publishSelection({ contactId })</code> – a no-op outside the Arbeitsfläche).</li>
+<li><strong>The agent</strong> panel is the same chat as the drawer, without the drawer; it takes its context from the panel you touched last.</li>
+<li><strong>Saved per person</strong> on the server (<code dir="auto">/api/xr/workspace</code>): the pages and widths. A selection (this contact, that conversation) is not
+saved; the place you work in (a board, a canvas, a project) is. The browser keeps a copy only for a quick first paint.</li>
+<li><strong>Below 1000 px</strong> of work area (a phone, a narrow window) it falls back to normal single-page navigation: tabs for the pages, one
+page at a time.</li>
+<li>Dialogs still open over the whole window; the page chooser is a dialog with ✕ and Esc like every other.</li>
+</ul>
+<p>The rules (adding, moving, sizes, where a link opens) are plain functions in <code dir="auto">web/src/xr/workspace-layout.ts</code>, tested in
+<code dir="auto">tests/xr-workspace.test.ts</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="in-xr-öffnen">In XR öffnen</h2><a class="sl-anchor-link" href="#in-xr-öffnen"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “In XR öffnen”</span></a></div>
+<p>On a <strong>board</strong> (next to <em>Verlauf</em>) and in the <strong>Canvas editor</strong> (next to <em>Export</em>). With a WebXR session available the button reads
+<em>In XR öffnen</em> and the layer offers <em>In XR starten</em> (<code dir="auto">immersive-vr</code>) and <em>Mit Durchblick (AR)</em> (<code dir="auto">immersive-ar</code>); without it the button
+reads <em>3D-Vorschau</em> and the same scene runs in the browser with a mouse-orbit camera. Where there is not even WebGL2 the button is
+not shown. Esc and ✕ close the layer. Everything lives in a lazy chunk (<code dir="auto">XrViewer</code>, ≈ 48 KB / 18 KB gzip) that downloads when the
+button is pressed.</p>
+<p><img src="/assets/xr.png" alt="A board as floating panels on a curved wall – the 3D preview in the browser"></p>
+<div class="sl-heading-wrapper level-h3"><h3 id="the-scene">The scene</h3><a class="sl-anchor-link" href="#the-scene"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The scene”</span></a></div>
+<ul>
+<li><strong>Board:</strong> the board’s grid becomes a <strong>curved wall</strong> around you: a widget’s column decides its angle on a circle of 2.2 m, its row
+the height, and every panel turns to face you. Tall boards are scaled to fit. Panels show the widget’s <em>view</em> (the same data the
+browser board shows, read with <strong>your own rights</strong> from <code dir="auto">/api/boards/:id/data</code>). The board’s realtime stream (SSE) keeps it current:
+a change by someone else or the agent redraws the panels and the control panel says who changed what. Data refreshes every minute.</li>
+<li><strong>Canvas:</strong> one large plane (up to 3.2 m wide) with the picture the server draws for the PNG export – every shape, sticky, card and
+connector as in the browser – slightly curved, redrawn two seconds after a change (SSE). View and move only; drawing stays in the browser.</li>
+<li><strong>Control panel</strong> (below the wall): board name, <em>Live</em> and who changed it last, what was understood, a proposal waiting for
+<em>Übernehmen</em> / <em>Verwerfen</em>, and the buttons <em>Sprechen</em>, <em>Neu anordnen</em>, <em>Beenden</em> (canvas: <em>Aktualisieren</em>, <em>Hell / Dunkel</em>, <em>Beenden</em>).</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="moving-things">Moving things</h3><a class="sl-anchor-link" href="#moving-things"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Moving things”</span></a></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Controller / hand</th>
+<th>Browser preview</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point</td>
+<td>the ray from the controller (pinch ray with hands, gaze + pinch on visionOS)</td>
+<td>mouse</td>
+</tr>
+<tr>
+<td>Grab a panel</td>
+<td>trigger / pinch (<code dir="auto">selectstart</code>) on it – anywhere on it</td>
+<td>press on it</td>
+</tr>
+<tr>
+<td>Move</td>
+<td>the panel follows the ray on the same distance and keeps facing you</td>
+<td>drag</td>
+</tr>
+<tr>
+<td>Closer / further</td>
+<td>thumbstick forward / back</td>
+<td>wheel while dragging</td>
+</tr>
+<tr>
+<td>Bigger / smaller</td>
+<td>thumbstick right / left</td>
+<td>Shift + wheel while dragging</td>
+</tr>
+<tr>
+<td>Let go</td>
+<td><code dir="auto">selectend</code> – the new place is saved</td>
+<td>release</td>
+</tr>
+<tr>
+<td>Orbit the camera</td>
+<td>–</td>
+<td>drag on empty space, arrow keys, wheel = zoom, Home = reset</td>
+</tr>
+</tbody>
+</table>
+<p>Letting go saves <strong>only the panels you moved</strong> to your own spatial layout (<code dir="auto">PUT /api/boards/:id/xr-layout</code>, <code dir="auto">PUT /api/canvas/:id/xr-layout</code>);
+the others stay on the arc wherever the board puts them. <em>Neu anordnen</em> deletes your layout. The layout belongs to you alone and
+never changes the board; a person who may only <em>view</em> a board still arranges their own view.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="talking-to-the-board">Talking to the board</h3><a class="sl-anchor-link" href="#talking-to-the-board"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Talking to the board”</span></a></div>
+<p><em>Sprechen</em> is push-to-talk: hold it and speak, let go – or tap once to start and once to stop, the same as the board’s prompt bar. It
+uses the sub-account’s own speech recognition (<code dir="auto">/api/voice/transcribe</code>), so the button only appears where <em>Einstellungen → Stimme</em> is set up
+and the person may change the board. The words go through the same <code dir="auto">compose</code> route as typed ones, e.g. “Zeig mir die offenen Angebote”;
+a proposal appears on the control panel and <strong>only a pinch on <em>Übernehmen</em> applies it</strong> – spoken wishes never confirm anything
+themselves, and anything with an address or buttons always needs a person (as in the browser). A headset shows the microphone question
+only on the page, not inside the room, so the layer has a button <em>Mikrofon erlauben</em> and asks once before the session starts.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="how-it-is-drawn-and-what-that-means">How it is drawn, and what that means</h3><a class="sl-anchor-link" href="#how-it-is-drawn-and-what-that-means"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “How it is drawn, and what that means”</span></a></div>
+<ul>
+<li><strong>Plain WebGL2, no 3D library.</strong> <code dir="auto">web/src/xr/engine/renderer.ts</code> is a ~270-line renderer: textured quads (optionally bent around you)
+and lines for the rays and the floor ring. The same scene draws to a canvas (preview) and to a WebXR layer (one pass per eye). No new
+npm package, nothing to install, one lazy chunk. A 3D library was not needed for floating panels; it would have added a few hundred KB
+for features this does not use.</li>
+<li><strong>Widgets as pictures, not as the DOM.</strong> A browser cannot render HTML into a texture inside an immersive session, so each widget
+<em>view</em> (number, numbers, report chart, list, table, kanban, agenda, note, message, locked) is drawn by a simplified 2D-canvas renderer
+(<code dir="auto">web/src/xr/engine/textures.ts</code>) – faithful numbers, lists and bars/lines, plain text for notes. <strong>Limitations:</strong> embedded pages,
+plugin frames and quick-action buttons cannot be drawn (the panel says so and points to the browser); charts are bars and lines (pie,
+funnel and heatmap show as bars); no hover, no links, no editing of widget settings in XR; fonts are the system’s.</li>
+<li><strong>Input is <code dir="auto">select</code> events.</strong> Controllers, hands (pinch) and visionOS gaze + pinch all arrive as <code dir="auto">selectstart</code> / <code dir="auto">selectend</code> on an
+input source with a target ray; the thumbstick is <code dir="auto">gamepad.axes</code>. There is no text field in XR – use the voice button.</li>
+<li><strong>Frame of reference.</strong> <code dir="auto">local-floor</code> (or <code dir="auto">local</code>); panels hang relative to where your head was and which way it looked when the session
+began, so the wall is always in front of you.</li>
+<li><strong>Memory.</strong> All panel textures together stay below 12 million pixels (≈ 64 MB with mipmaps); a board of forty big widgets is drawn a bit
+less sharp rather than failing.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="api">API</h2><a class="sl-anchor-link" href="#api"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “API”</span></a></div>
+<p>Per-person layouts. Nothing here changes a board or a canvas; keys and MCP connections are refused (they have no person).</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Auth</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">GET/PUT/DELETE /api/boards/:id/xr-layout</code></td>
+<td>member with the Dashboard area and access to the board (view is enough)</td>
+<td><code dir="auto">{layout: {v: 1, radius, panels: {&lt;widgetId&gt;: {x, y, z, yaw, scale}}, hud?}}</code> – metres in your own frame (x right, y up, panels at negative z); entries of widgets that are not on the board are dropped</td>
+</tr>
+<tr>
+<td><code dir="auto">GET/PUT/DELETE /api/canvas/:id/xr-layout</code></td>
+<td>member with the Canvas area and access to the board</td>
+<td><code dir="auto">{layout: {v: 1, plane: {x, y, z, yaw, scale, curve}}}</code></td>
+</tr>
+<tr>
+<td><code dir="auto">GET/PUT/DELETE /api/xr/workspace</code></td>
+<td>signed-in person</td>
+<td><code dir="auto">{layout: {v: 1, panels: [{route, size}], sync}}</code> (1–4 panels, routes below <code dir="auto">/app</code>, widths add up to 1); <code dir="auto">GET</code> also returns <code dir="auto">default</code></td>
+</tr>
+<tr>
+<td><code dir="auto">GET/PATCH /api/appearance</code></td>
+<td>signed-in person</td>
+<td>the preference <code dir="auto">spatial</code>: <code dir="auto">auto</code> (default) | <code dir="auto">on</code> | <code dir="auto">off</code></td>
+</tr>
+</tbody>
+</table>
+<p>A missing board answers 404 like the board itself, a sub-account the person does not belong to is a 404/403 as everywhere. Numbers are
+clamped (±20 m, scale 0.25–3, radius 0.8–8 m), routes are validated (no <code dir="auto">..</code>, no encoded slashes, no query, nothing that leaves the app),
+each person keeps at most 200 layouts. Writes are in the audit log like every write; layouts of deleted boards and canvases are swept.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="install-it-as-an-app">Install it as an app</h2><a class="sl-anchor-link" href="#install-it-as-an-app"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Install it as an app”</span></a></div>
+<p><code dir="auto">/manifest.webmanifest</code> has <code dir="auto">display: standalone</code> with <code dir="auto">display_override: [standalone, minimal-ui]</code>, <code dir="auto">orientation: any</code>, a single window
+(<code dir="auto">launch_handler: navigate-existing</code>), a 1024 px icon (<code dir="auto">icon-1024.png</code>, also the large <code dir="auto">apple-touch-icon</code> for the visionOS home view) next
+to the 192/512/maskable ones, and a shortcut to the Arbeitsfläche. How to install, per device (also shown in the Raum-Modus card):</p>
+<ul>
+<li><strong>Vision Pro (Safari):</strong> Share → <em>Add to Home View</em> (“Zum Home-Bildschirm”).</li>
+<li><strong>Meta Quest (Browser):</strong> browser menu (⋮) → <em>Install app</em>.</li>
+<li><strong>Android XR (Chrome):</strong> menu (⋮) → <em>Install app</em> / <em>Add to Home screen</em>.</li>
+<li><strong>Display glasses:</strong> install on the phone / Mac / PC they are connected to.</li>
+</ul>
+<p>Menu wording changes between software versions.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="testing-with-the-webxr-emulator">Testing with the WebXR emulator</h2><a class="sl-anchor-link" href="#testing-with-the-webxr-emulator"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Testing with the WebXR emulator”</span></a></div>
+<p>You do not need a headset to test.</p>
+<ol>
+<li><strong>Browser preview:</strong> open a board, press <em>3D-Vorschau</em> – the same scene, mouse orbit, grab with the mouse, wheel for distance. Works in any
+browser with WebGL2.</li>
+<li><strong>Immersive Web Emulator</strong> (Meta’s browser extension for Chrome/Edge, also on the Chrome Web Store as “Immersive Web Emulator”): install
+it, open DevTools → <em>WebXR</em>, pick a device (Meta Quest 3), reload HyperLevel on <code dir="auto">localhost</code> or HTTPS, open a board, press <em>In XR öffnen</em> → <em>In XR starten</em>, and
+drive the emulated controllers from the DevTools panel (trigger = <code dir="auto">select</code>).</li>
+<li><strong>Quest on the desk:</strong> <code dir="auto">adb reverse tcp:4700 tcp:4700</code> and open <code dir="auto">http://localhost:4700/app</code> in the Quest Browser (localhost counts as secure);
+debug with <code dir="auto">chrome://inspect</code>.</li>
+<li><strong>Vision Pro simulator:</strong> Xcode → visionOS simulator → Safari → enable the WebXR feature flag, open your HTTPS address.</li>
+<li><strong>Raum-Modus on a desktop:</strong> Einstellungen → Darstellung → Raum-Modus → <em>An</em>. To test the <em>Automatisch</em> path, send the user agent of a headset
+(DevTools → Network conditions → User agent: <code dir="auto">… OculusBrowser/35.0 … VR Safari/537.36</code>).</li>
+<li><strong>The tests:</strong> <code dir="auto">npx vitest run tests/xr-*.test.ts</code> (logic, API, tokens, geometry, painters, scene); the layout API is also covered by the tenant isolation
+harness (<code dir="auto">tests/tenant-isolation.test.ts</code>, seeded in <code dir="auto">tests/security-fixtures.ts</code>).</li>
+</ol>
+<div class="sl-heading-wrapper level-h2"><h2 id="code-map">Code map</h2><a class="sl-anchor-link" href="#code-map"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Code map”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preference <code dir="auto">spatial</code>, shared validation</td>
+<td><code dir="auto">server/services/appearance-model.ts</code></td>
+</tr>
+<tr>
+<td>Layout model (poses, workspace, widths) and API</td>
+<td><code dir="auto">server/services/xr-model.ts</code>, <code dir="auto">server/modules/xr.ts</code></td>
+</tr>
+<tr>
+<td>Detection, tokens, stylesheet, type scale</td>
+<td><code dir="auto">web/src/xr/detect.ts</code>, <code dir="auto">tokens.ts</code>, <code dir="auto">spatial.css</code>, <code dir="auto">spatial.ts</code>, <code dir="auto">type-scale.ts</code>; applied in <code dir="auto">web/src/theme/store.ts</code>, <code dir="auto">css.ts</code>, <code dir="auto">web/public/theme-boot.js</code></td>
+</tr>
+<tr>
+<td>Raum-Modus card, “Verschieben nach …”, install hints</td>
+<td><code dir="auto">web/src/xr/SpatialCard.tsx</code>, <code dir="auto">MoveMenu.tsx</code>, <code dir="auto">install.ts</code></td>
+</tr>
+<tr>
+<td>Arbeitsfläche</td>
+<td><code dir="auto">web/src/xr/Workspace.tsx</code>, <code dir="auto">workspace-layout.ts</code>, <code dir="auto">selection.ts</code>, <code dir="auto">workspace.css</code>; panel routing in <code dir="auto">web/src/ui.tsx</code> (<code dir="auto">RouteScope</code>, <code dir="auto">setNavHook</code>)</td>
+</tr>
+<tr>
+<td>In XR öffnen</td>
+<td><code dir="auto">web/src/xr/XrButton.tsx</code>, <code dir="auto">XrViewer.tsx</code>, <code dir="auto">engine/*</code> (<code dir="auto">math</code>, <code dir="auto">geometry</code>, <code dir="auto">renderer</code>, <code dir="auto">scene</code>, <code dir="auto">runtime</code>, <code dir="auto">textures</code>, <code dir="auto">board-scene</code>, <code dir="auto">canvas-scene</code>, <code dir="auto">voice</code>)</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td><code dir="auto">tests/xr-api.test.ts</code>, <code dir="auto">xr-spatial.test.ts</code>, <code dir="auto">xr-workspace.test.ts</code>, <code dir="auto">xr-geometry.test.ts</code>, <code dir="auto">xr-scene.test.ts</code>, <code dir="auto">xr-voice.test.ts</code></td>
+</tr>
+</tbody>
+</table>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/edit/main/docs/xr.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/office/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Previous<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Office</span></span></a><a href="/undo/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Next<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Undo, history &amp; trash</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

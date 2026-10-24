@@ -1,0 +1,687 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Security review – October 2026 | HyperLevel Docs</title><link rel="canonical" href="https://docs.gohyperlevel.com/security-review-2026-10/"/><link rel="alternate" hreflang="en" href="https://docs.gohyperlevel.com/security-review-2026-10/"/><link rel="alternate" hreflang="de" href="https://docs.gohyperlevel.com/de/security-review-2026-10/"/><link rel="alternate" hreflang="x-default" href="https://docs.gohyperlevel.com/security-review-2026-10/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.2"/><meta name="generator" content="Starlight v0.42.7"/><meta property="og:title" content="Security review – October 2026"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.gohyperlevel.com/security-review-2026-10/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:site_name" content="HyperLevel Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:image" content="https://docs.gohyperlevel.com/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.DdUizGEC.css"><style>@layer starlight.components{svg:where(.astro-hkc32dio){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/" class="site-title sl-flex astro-6rvad3va"><img class="light:sl-hidden print:hidden astro-6rvad3va" alt src="/_astro/logo-dark.DcAxiGJs.svg" width="420" height="96"><img class="dark:sl-hidden print:block astro-6rvad3va" alt src="/_astro/logo.BXUvVMvj.svg" width="420" height="96"><span class="sr-only astro-6rvad3va" translate="no">HyperLevel Docs</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Djc9ZKGJ.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/security-review-2026-10/" class="astro-2z5xp7gb">English</option><option value="/de/security-review-2026-10/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="04e4z3h" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Get started</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/README.md#quick-start" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Quick start</span></a></li><li class="astro-rmhv4bp6"><a href="/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deploy options</span></a></li><li class="astro-rmhv4bp6"><a href="/self-hosting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Self-hosting reference</span></a></li><li class="astro-rmhv4bp6"><a href="/demo-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Demo mode</span></a></li><li class="astro-rmhv4bp6"><a href="/cloud/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Hosted cloud</span></a></li><li class="astro-rmhv4bp6"><a href="/landing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Landing page</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">AI &amp; agents</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/agent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">HyperLevel Agent</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI tools: Claude Code, Codex, Cursor, ChatGPT</span></a></li><li class="astro-rmhv4bp6"><a href="/mcp-client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">External MCP servers</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI providers – bring your own key</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI assistant</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI workflow builder</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Studio</span></a></li><li class="astro-rmhv4bp6"><a href="/genmedia/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI media generation</span></a></li><li class="astro-rmhv4bp6"><a href="/site-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Funnel &amp; website AI</span></a></li><li class="astro-rmhv4bp6"><a href="/voice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Voice</span></a></li><li class="astro-rmhv4bp6"><a href="/cognee/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Knowledge memory (Cognee)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">API &amp; integrations</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">REST API &amp; MCP</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-actions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Workflow actions &amp; triggers</span></a></li><li class="astro-rmhv4bp6"><a href="/integrations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Integrations: Zapier, Make, n8n, REST hooks</span></a></li><li class="astro-rmhv4bp6"><a href="/connectors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Connectors &amp; Composio</span></a></li><li class="astro-rmhv4bp6"><a href="/nango/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Nango</span></a></li><li class="astro-rmhv4bp6"><a href="/channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Channels &amp; providers</span></a></li><li class="astro-rmhv4bp6"><a href="/meta-channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">WhatsApp, Messenger &amp; Instagram</span></a></li><li class="astro-rmhv4bp6"><a href="/mailbox-sync/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mailbox sync</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment providers</span></a></li><li class="astro-rmhv4bp6"><a href="/stripe/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stripe</span></a></li><li class="astro-rmhv4bp6"><a href="/todoist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Todoist</span></a></li><li class="astro-rmhv4bp6"><a href="/social-comments/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social comments</span></a></li><li class="astro-rmhv4bp6"><a href="/comment-to-dm/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Comment to DM</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">CRM, sales &amp; teamwork</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/sales/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sales</span></a></li><li class="astro-rmhv4bp6"><a href="/objects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Companies, custom objects &amp; lead scoring</span></a></li><li class="astro-rmhv4bp6"><a href="/custom-values/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Custom values</span></a></li><li class="astro-rmhv4bp6"><a href="/projects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Projects &amp; time tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/team-inbox/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team inbox</span></a></li><li class="astro-rmhv4bp6"><a href="/team-calendars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team calendars</span></a></li><li class="astro-rmhv4bp6"><a href="/booking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Booking rules</span></a></li><li class="astro-rmhv4bp6"><a href="/telephony/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Telephony</span></a></li><li class="astro-rmhv4bp6"><a href="/reputation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reputation</span></a></li><li class="astro-rmhv4bp6"><a href="/team-chat/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team chat</span></a></li><li class="astro-rmhv4bp6"><a href="/collaboration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Live collaboration</span></a></li><li class="astro-rmhv4bp6"><a href="/wiki/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wiki</span></a></li><li class="astro-rmhv4bp6"><a href="/canvas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Canvas</span></a></li><li class="astro-rmhv4bp6"><a href="/living-boards/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Living Boards</span></a></li><li class="astro-rmhv4bp6"><a href="/office/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Office</span></a></li><li class="astro-rmhv4bp6"><a href="/xr/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">XR</span></a></li><li class="astro-rmhv4bp6"><a href="/undo/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Undo, history &amp; trash</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Marketing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/email-marketing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail marketing</span></a></li><li class="astro-rmhv4bp6"><a href="/email-builder/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail designer</span></a></li><li class="astro-rmhv4bp6"><a href="/email-tracking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/deliverability/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deliverability</span></a></li><li class="astro-rmhv4bp6"><a href="/sites/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Website builder</span></a></li><li class="astro-rmhv4bp6"><a href="/forms/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Forms</span></a></li><li class="astro-rmhv4bp6"><a href="/social-planner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social planner</span></a></li><li class="astro-rmhv4bp6"><a href="/ads-manager/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Ads manager</span></a></li><li class="astro-rmhv4bp6"><a href="/growth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Growth: attribution, affiliates &amp; ad reports</span></a></li><li class="astro-rmhv4bp6"><a href="/referrals/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Referrals &amp; partner links</span></a></li><li class="astro-rmhv4bp6"><a href="/webinars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Webinars</span></a></li><li class="astro-rmhv4bp6"><a href="/video-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Video studio</span></a></li><li class="astro-rmhv4bp6"><a href="/consent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Consent &amp; legal</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Selling &amp; billing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/invoicing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Invoicing</span></a></li><li class="astro-rmhv4bp6"><a href="/dunning/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Dunning</span></a></li><li class="astro-rmhv4bp6"><a href="/sepa/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SEPA</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-plans/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment plans</span></a></li><li class="astro-rmhv4bp6"><a href="/store/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Online store &amp; gift cards</span></a></li><li class="astro-rmhv4bp6"><a href="/saas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SaaS mode</span></a></li><li class="astro-rmhv4bp6"><a href="/gewinnrechner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Profit calculator</span></a></li><li class="astro-rmhv4bp6"><a href="/backoffice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Back office</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Courses, community &amp; service</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/courses/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Courses</span></a></li><li class="astro-rmhv4bp6"><a href="/quizzes-certificates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quizzes &amp; certificates</span></a></li><li class="astro-rmhv4bp6"><a href="/community/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Community</span></a></li><li class="astro-rmhv4bp6"><a href="/academy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Academy</span></a></li><li class="astro-rmhv4bp6"><a href="/helpdesk/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Helpdesk: tickets, SLAs, knowledge base</span></a></li><li class="astro-rmhv4bp6"><a href="/bug-reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bug reports &amp; wishes</span></a></li><li class="astro-rmhv4bp6"><a href="/reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reports &amp; dashboards</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Apps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/android-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Android app</span></a></li><li class="astro-rmhv4bp6"><a href="/app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install the app &amp; push</span></a></li><li class="astro-rmhv4bp6"><a href="/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gray-label &amp; own-brand apps</span></a></li><li class="astro-rmhv4bp6"><a href="/ios-web-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">iPhone, iPad &amp; foldables</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Operate &amp; secure</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/backups/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Backups, alerts &amp; status page</span></a></li><li class="astro-rmhv4bp6"><a href="/incident-runbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Incident runbook</span></a></li><li class="astro-rmhv4bp6"><a href="/performance/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Performance &amp; sizing</span></a></li><li class="astro-rmhv4bp6"><a href="/security/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security</span></a></li><li class="astro-rmhv4bp6"><a href="/security-review-2026-10/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security review, October 2026</span></a></li><li class="astro-rmhv4bp6"><a href="/auth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sign-in, SSO &amp; passkeys</span></a></li><li class="astro-rmhv4bp6"><a href="/umzug/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Switch-over importers (Umzug)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Customize &amp; extend</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/theming/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Appearance &amp; themes</span></a></li><li class="astro-rmhv4bp6"><a href="/translating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">UI language &amp; translating</span></a></li><li class="astro-rmhv4bp6"><a href="/werkstatt/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werkstatt, plugins &amp; Marktplatz</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Run your company on HyperLevel</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/company-playbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Company playbook</span></a></li><li class="astro-rmhv4bp6"><a href="/handbuch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handbook (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/kurs-firma-fuehren/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Course: run your company (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/partner-program/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Partner program</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Project</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/roadmap/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Roadmap</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CHANGELOG.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Changelog</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/SECURITY.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Security policy</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/discussions" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">GitHub Discussions</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/security-review-2026-10/" class="astro-2z5xp7gb">English</option><option value="/de/security-review-2026-10/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#summary" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Summary</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#findings" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Findings</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#checked-without-findings" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Checked without findings</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#follow-ups-not-in-this-change" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Follow-ups (not in this change)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#follow-up-review-versions-00370040" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Follow-up review: versions 0.0.37–0.0.40</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#open-findings-and-limits" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Open findings and limits</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#follow-up-fixes-after-0041" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Follow-up fixes (after 0.0.41)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#checked-without-findings-this-round" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Checked without findings (this round)</span></a></li></ul></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#summary" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Summary</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#findings" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Findings</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#checked-without-findings" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Checked without findings</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#follow-ups-not-in-this-change" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Follow-ups (not in this change)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#follow-up-review-versions-00370040" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Follow-up review: versions 0.0.37–0.0.40</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#open-findings-and-limits" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Open findings and limits</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#follow-up-fixes-after-0041" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Follow-up fixes (after 0.0.41)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#checked-without-findings-this-round" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Checked without findings (this round)</span></a></li></ul></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Security review – October 2026</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>Scope: the whole server (<code dir="auto">server/</code>, 863 routes: 153 public, 65 user, 89 admin, 556 sub-account), the public
+pages, the MCP endpoint, the mobile API, the Docker setup and dependencies – before the open-source release.
+Method: automated harnesses that enumerate the router (tenant isolation, stored XSS, secret leaks) plus manual
+review of authentication, CSRF, SSRF, file handling, secrets, webhooks, DoS and supply chain.
+Design and protections: <a href="/security/">security.md</a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="summary">Summary</h2><a class="sl-anchor-link" href="#summary"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Summary”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Found</th>
+<th>Fixed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Critical</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>High</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>18</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Info / hardening</td>
+<td>6</td>
+<td>5 (+1 documented)</td>
+</tr>
+</tbody>
+</table>
+<p>New test files: <code dir="auto">tests/tenant-isolation.test.ts</code>, <code dir="auto">tests/xss.test.ts</code>, <code dir="auto">tests/secret-leaks.test.ts</code>,
+<code dir="auto">tests/security.test.ts</code>, <code dir="auto">tests/privacy.test.ts</code> (shared fixtures: <code dir="auto">tests/security-fixtures.ts</code>).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="findings">Findings</h2><a class="sl-anchor-link" href="#findings"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Findings”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Location</th>
+<th>Finding</th>
+<th>Fix</th>
+<th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H-1</td>
+<td>High</td>
+<td><code dir="auto">modules/mcp.ts</code> (agency-key guard)</td>
+<td>Agency API keys could download full database backups (<code dir="auto">/api/admin/backup</code>, <code dir="auto">/api/admin/backups/*</code>) with password hashes and 2FA secrets, and pair mobile devices / start OAuth / manage push as the admin.</td>
+<td>Keys are refused on backups, OAuth, push and mobile pairing (besides users, me, keys, auth).</td>
+<td>tenant-isolation › agency keys manage data…</td>
+</tr>
+<tr>
+<td>H-2</td>
+<td>High</td>
+<td><code dir="auto">core/app.ts</code> <code dir="auto">clientIp</code></td>
+<td>Behind a proxy the left-most <code dir="auto">X-Forwarded-For</code> entry was trusted – any client could pick its address and dodge per-IP rate limits and login lockouts.</td>
+<td>Right-most entry added by our proxies (<code dir="auto">PGHL_PROXY_HOPS</code>).</td>
+<td>security › limits public writes … X-Forwarded-For</td>
+</tr>
+<tr>
+<td>H-3</td>
+<td>High</td>
+<td><code dir="auto">services/messaging.ts</code> (HTTP SMS gateway)</td>
+<td>Plain <code dir="auto">fetch</code> to the sub-account’s gateway URL, response body echoed into the message error: SSRF with response reading (cloud metadata, internal services) for any client login with settings access or a sub-account key.</td>
+<td><code dir="auto">safeFetch</code> with size and time limits.</td>
+<td>security › an HTTP SMS gateway cannot point at internal addresses</td>
+</tr>
+<tr>
+<td>H-4</td>
+<td>High</td>
+<td><code dir="auto">services/net.ts</code> <code dir="auto">isPrivateIp</code></td>
+<td>IPv4-mapped IPv6 literals in hex (<code dir="auto">http://[::ffff:7f00:1]/</code>) passed the SSRF guard → webhooks, REST hooks, workflow HTTP steps and uptime checks could reach localhost/metadata (blind, status reflected).</td>
+<td>Node <code dir="auto">BlockList</code> over all private/transition ranges (mapped addresses matched as IPv4, NAT64, 6to4, Teredo, site-local…).</td>
+<td>security › treats every spelling of internal addresses as private; refuses IPv4-mapped literals</td>
+</tr>
+<tr>
+<td>M-1</td>
+<td>Medium</td>
+<td><code dir="auto">modules/calendar-sync.ts</code></td>
+<td>iCal import used a host-name blocklist (bypass via DNS names, mapped IPv6, redirects) and plain <code dir="auto">fetch</code>; events from the response are stored.</td>
+<td><code dir="auto">safeFetch</code> (resolved-IP check, redirect re-check, 5 MB cap).</td>
+<td>security › iCal import URLs go through the guard</td>
+</tr>
+<tr>
+<td>M-2</td>
+<td>Medium</td>
+<td><code dir="auto">modules/docs.ts</code> <code dir="auto">POST /api/docs</code></td>
+<td>Documents are unique by URL agency-wide; the upsert ran with <code dir="auto">force</code> and moved another sub-account’s document (and returned it) to whoever posted the URL.</td>
+<td>Refused (409) when the URL belongs to another project or to the agency inbox – only an admin session may move it; response scoped.</td>
+<td>tenant-isolation › creating or upserting by url/email/slug…; security › a document link … is not moved</td>
+</tr>
+<tr>
+<td>M-3</td>
+<td>Medium</td>
+<td>settings JSON, <code dir="auto">users.totp_secret</code>, <code dir="auto">webhooks.secret</code>, <code dir="auto">rest_hooks.secret</code></td>
+<td>SMTP passwords, Twilio/SMS tokens, the inbound key, 2FA secrets and webhook signing secrets were stored in plain text.</td>
+<td>Sealed (AES-256-GCM), self-healing on read; key rotation tool <code dir="auto">npm run rotate-secret</code> with data key + previous keys.</td>
+<td>security › secrets at rest (5 tests), key rotation</td>
+</tr>
+<tr>
+<td>M-4</td>
+<td>Medium</td>
+<td><code dir="auto">modules/core.ts</code> login</td>
+<td>Wrong 2FA codes only counted per IP – a distributed guess of 6-digit codes (after a password leak) was not rate limited per account.</td>
+<td>Wrong codes count towards the account lockout and are audited.</td>
+<td>security › wrong 2FA codes from many addresses lock the account</td>
+</tr>
+<tr>
+<td>M-5</td>
+<td>Medium</td>
+<td><code dir="auto">core/csv.ts</code>, <code dir="auto">services/report-engine.ts</code></td>
+<td>CSV exports wrote cell values verbatim: a lead named <code dir="auto">=HYPERLINK(…)</code> from a public form became a formula in Excel (CSV injection).</td>
+<td>Cells starting with <code dir="auto">= + - @</code> TAB CR get a leading <code dir="auto">'</code> (plain numbers untouched).</td>
+<td>security › CSV exports neutralise spreadsheet formulas</td>
+</tr>
+<tr>
+<td>M-6</td>
+<td>Medium</td>
+<td><code dir="auto">services/markdown.ts</code>, <code dir="auto">services/community.ts</code></td>
+<td>Link/image patterns were quadratic (<code dir="auto">[a](</code> repeated: 50 KB ≈ 0.6 s) – community members could slow every page view of a feed.</td>
+<td>Linear patterns (one level of <code dir="auto">(…)</code> in URLs still works).</td>
+<td>security › markdown links/images are linear on hostile input</td>
+</tr>
+<tr>
+<td>M-7</td>
+<td>Medium</td>
+<td><code dir="auto">core/app.ts</code> request handling</td>
+<td>Bodies (up to 10 MB) were read before authentication on every route; public routes accepted 10 MB.</td>
+<td>Authentication on headers first; 1 MB public limit with registered exceptions (<code dir="auto">app.services.bodyLimits</code>); <code dir="auto">/mcp</code> large bodies only with a valid key.</td>
+<td>security › caps bodies …; MCP takes large bodies only with a valid key; mobile › APK upload</td>
+</tr>
+<tr>
+<td>M-8</td>
+<td>Medium</td>
+<td>public write routes</td>
+<td>Booking, reviews, surveys, contract signing, help-center feedback etc. had no limit besides the global 900 requests/min.</td>
+<td>120 public writes/min per address (provider webhooks and MCP excluded).</td>
+<td>security › limits public writes per address…</td>
+</tr>
+<tr>
+<td>M-9</td>
+<td>Medium</td>
+<td><code dir="auto">modules/contacts.ts</code> <code dir="auto">PATCH /api/custom-fields/:id</code></td>
+<td>The update was scoped, but the response read the field by id only – any sub-account could read another one’s custom field (IDOR).</td>
+<td>Response scoped, 404 for foreign ids.</td>
+<td>tenant-isolation (member/key); security › PATCH of another sub-account’s custom field</td>
+</tr>
+<tr>
+<td>M-10</td>
+<td>Medium</td>
+<td><code dir="auto">services/snapshots.ts</code>, <code dir="auto">modules/calendar-sync.ts</code></td>
+<td>Snapshots (agency templates, SaaS sign-ups, funnel copy) carried the calendar’s private feed token and imported iCal URLs into other sub-accounts; <code dir="auto">/cal/&lt;token&gt;.ics</code> then served the <em>source</em> calendar’s appointments (names, e-mails, phones) to the copy’s owner, and downloaded snapshot files leaked private Google/Outlook iCal URLs.</td>
+<td>Feed token, iCal URLs and status are stripped on export and on apply; an ambiguous token serves nothing and is replaced when its owner opens the feed.</td>
+<td>security › snapshots never carry a calendar feed token…</td>
+</tr>
+<tr>
+<td>L-1</td>
+<td>Low</td>
+<td><code dir="auto">modules/reports.ts</code>, <code dir="auto">objects-reports.ts</code></td>
+<td><code dir="auto">/api/reports/sources</code> listed custom objects and property names/options of every sub-account.</td>
+<td>Sources/fields carry their sub-accounts and are filtered per caller (<code dir="auto">scopeSources</code>).</td>
+<td>tenant-isolation (member/key)</td>
+</tr>
+<tr>
+<td>L-2</td>
+<td>Low</td>
+<td><code dir="auto">core/util.ts</code></td>
+<td>scrypt N=2^14, p=1 (below OWASP); synchronous hashing blocked the event loop.</td>
+<td>N=2^15, r=8, p=3, async with concurrency cap, upgrade at login.</td>
+<td>security › hashes passwords with scrypt …</td>
+</tr>
+<tr>
+<td>L-3</td>
+<td>Low</td>
+<td>login</td>
+<td>Unknown e-mails skipped scrypt (timing reveals existing accounts).</td>
+<td>Dummy verification.</td>
+<td>security › hashes passwords … (verifyPasswordAsync with no hash)</td>
+</tr>
+<tr>
+<td>L-4</td>
+<td>Low</td>
+<td><code dir="auto">startSession</code></td>
+<td>A session id the browser brought to the login stayed valid (fixation, shared devices).</td>
+<td>Deleted at login.</td>
+<td>security › a session id brought to the login never survives it</td>
+</tr>
+<tr>
+<td>L-5</td>
+<td>Low</td>
+<td><code dir="auto">PATCH /api/users/:id</code></td>
+<td>A password set by the admin left the user’s other sessions alive.</td>
+<td>Other sessions revoked (devices already were).</td>
+<td>security › a password set by the admin signs that person out everywhere</td>
+</tr>
+<tr>
+<td>L-6</td>
+<td>Low</td>
+<td><code dir="auto">POST /api/me/password</code></td>
+<td>Current-password check not throttled (stolen session could guess it).</td>
+<td>Account-style lockout.</td>
+<td>security › guessing the current password … is throttled</td>
+</tr>
+<tr>
+<td>L-7</td>
+<td>Low</td>
+<td>conversations, tickets, workflows, video-recycle, portals</td>
+<td>Inbound SMS/mail keys, support-mail key, workflow webhook keys, signed clip URLs and portal CSRF tokens compared with <code dir="auto">!==</code>.</td>
+<td><code dir="auto">safeEqual</code> (constant time).</td>
+<td>security › constant-time secret comparison</td>
+</tr>
+<tr>
+<td>L-8</td>
+<td>Low</td>
+<td><code dir="auto">modules/attribution.ts</code> <code dir="auto">safeBack</code></td>
+<td>Consent redirect allowed control characters – <code dir="auto">/\t/evil.example</code> becomes <code dir="auto">//evil.example</code> in browsers (open redirect).</td>
+<td>Control characters refused.</td>
+<td>security › the consent redirect stays on the site</td>
+</tr>
+<tr>
+<td>L-9</td>
+<td>Low</td>
+<td><code dir="auto">modules/core.ts</code> uploads, <code dir="auto">modules/forms.ts</code></td>
+<td>Stored extension came from the client’s file name (<code dir="auto">evil.html</code>); form uploads were not checked by content.</td>
+<td>Shared magic-byte check (<code dir="auto">core/files.ts</code>), extension from the checked type.</td>
+<td>security › stores uploads …; form uploads must match their type</td>
+</tr>
+<tr>
+<td>L-10</td>
+<td>Low</td>
+<td><code dir="auto">core/app.ts</code> <code dir="auto">serveStatic</code></td>
+<td>Prefix check let a sibling folder with the same name prefix through; a malformed <code dir="auto">%</code> gave a 500.</td>
+<td>Path must be inside the web folder (<code dir="auto">root + sep</code>); 400 on bad encoding.</td>
+<td>security › sends HSTS … (sibling folder)</td>
+</tr>
+<tr>
+<td>L-11</td>
+<td>Low</td>
+<td>list endpoints</td>
+<td><code dir="auto">limit=-1</code> became <code dir="auto">LIMIT -1</code> (= unlimited) on several lists incl. public chat history and help-center search.</td>
+<td><code dir="auto">clampLimit</code> (1…max).</td>
+<td>security › clamps page sizes</td>
+</tr>
+<tr>
+<td>L-12</td>
+<td>Low</td>
+<td><code dir="auto">services/net.ts</code></td>
+<td>Redirects kept <code dir="auto">Authorization</code>/<code dir="auto">Cookie</code> when leaving the origin; only an idle timeout (slow-drip responses).</td>
+<td>Credentials dropped cross-origin; hard deadline.</td>
+<td>security › does not forward credentials when a redirect leaves the origin</td>
+</tr>
+<tr>
+<td>L-13</td>
+<td>Low</td>
+<td><code dir="auto">core/app.ts</code></td>
+<td>No <code dir="auto">Permissions-Policy</code>, no COOP on the app, server pages without any CSP, Node default timeouts (slowloris).</td>
+<td>Headers added, baseline CSP, header/request/keep-alive timeouts.</td>
+<td>security › sends HSTS …; public pages … get a baseline CSP</td>
+</tr>
+<tr>
+<td>L-14</td>
+<td>Low</td>
+<td>outgoing webhooks / REST hooks</td>
+<td>Signature <code dir="auto">sha256(secret + body)</code> is a secret-prefix construction (length-extension prone).</td>
+<td>Additional <code dir="auto">x-pghl-signature-256: sha256=&lt;HMAC&gt;</code>; old header kept for existing receivers.</td>
+<td>security › keeps webhook signing secrets sealed and signs with HMAC-SHA256</td>
+</tr>
+<tr>
+<td>L-15</td>
+<td>Low</td>
+<td><code dir="auto">services/messaging.ts</code></td>
+<td>Mail header values relied on nodemailer to drop line breaks.</td>
+<td><code dir="auto">oneLine()</code> for subject, to, reply-to, from name.</td>
+<td>security › email headers never carry line breaks</td>
+</tr>
+<tr>
+<td>L-16</td>
+<td>Low</td>
+<td><code dir="auto">services/route-call.ts</code></td>
+<td>In-process calls could switch to another sub-account without a membership check (no exploitable caller found).</td>
+<td>Same membership check as <code dir="auto">x-location-id</code>.</td>
+<td>security › callRoute refuses to switch …</td>
+</tr>
+<tr>
+<td>L-17</td>
+<td>Low</td>
+<td><code dir="auto">modules/video-recycle.ts</code></td>
+<td>Autopilot stored a foreign website id as blog target (later calls were scoped, so no data access).</td>
+<td>Must be a website of the sub-account.</td>
+<td>tenant-isolation (member/key)</td>
+</tr>
+<tr>
+<td>L-18</td>
+<td>Low</td>
+<td><code dir="auto">maskSettings</code></td>
+<td>The inbound webhook key was readable via <code dir="auto">GET /api/location</code> by members without the settings area.</td>
+<td>Masked like other secrets.</td>
+<td>security › stores SMTP/SMS credentials … sealed</td>
+</tr>
+<tr>
+<td>I-1</td>
+<td>Info</td>
+<td>security module</td>
+<td>Exports, downloads and backups were not audited; rights changes had no detail.</td>
+<td><code dir="auto">app.afterRead</code> hook → <code dir="auto">export:*</code> entries; <code dir="auto">users.rights.update</code> with changed fields; lockouts and 2FA failures audited.</td>
+<td>privacy › exports …; logs rights changes</td>
+</tr>
+<tr>
+<td>I-2</td>
+<td>Info</td>
+<td>contacts</td>
+<td>No GDPR access/erasure across modules (form files were never deleted, tickets and partner data stayed).</td>
+<td><code dir="auto">modules/privacy.ts</code>: export/erase per contact and agency-wide by e-mail, UI buttons, MCP tools, hooks.</td>
+<td>privacy.test.ts</td>
+</tr>
+<tr>
+<td>I-3</td>
+<td>Info</td>
+<td><code dir="auto">Dockerfile</code>, <code dir="auto">compose.yaml</code>, <code dir="auto">deploy/hostinger.compose.yaml</code></td>
+<td>Container ran as root; the Hostinger variant kept the git token in <code dir="auto">.git/config</code> on the volume.</td>
+<td><code dir="auto">USER node</code>, <code dir="auto">cap_drop: [ALL]</code>, <code dir="auto">no-new-privileges</code>; remote removed after clone.</td>
+<td>build</td>
+</tr>
+<tr>
+<td>I-4</td>
+<td>Info</td>
+<td><code dir="auto">core/db.ts</code></td>
+<td>Deleted rows stayed readable in free pages of the database file.</td>
+<td><code dir="auto">secure_delete = FAST</code>, <code dir="auto">trusted_schema = OFF</code>.</td>
+<td>full suite</td>
+</tr>
+<tr>
+<td>I-5</td>
+<td>Info</td>
+<td><code dir="auto">objects-reports.ts</code></td>
+<td>A deferred report-source rebuild crashed when the app closed right after start (CLI, tests).</td>
+<td>Guarded.</td>
+<td>security › key rotation</td>
+</tr>
+<tr>
+<td>I-6</td>
+<td>Info</td>
+<td>dependencies</td>
+<td><code dir="auto">npm audit</code>: 2 moderate, dev-only (<code dir="auto">vitest</code>/<code dir="auto">@vitest/mocker</code>, GHSA-82fw-gwwq-j7x9 – file read through the Vitest browser/UI server). Production: 0. Lockfile: 260 packages, all with integrity hashes from registry.npmjs.org.</td>
+<td>Documented; needs the vitest 5 major upgrade (no new installs in this change). Never expose a Vitest UI/browser server.</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="checked-without-findings">Checked without findings</h2><a class="sl-anchor-link" href="#checked-without-findings"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Checked without findings”</span></a></div>
+<ul>
+<li>SQL: all queries parameterised; identifiers interpolated only from code or validated keys (<code dir="auto">KEY_RE</code>, allow-lists).</li>
+<li>XSS: 5,000+ public page renders over 27 page types with a stored payload – all escaped; funnel/blog pages
+are sandboxed (<code dir="auto">CSP: sandbox</code>, no <code dir="auto">allow-same-origin</code>); admin previews of owner HTML run in sandboxed iframes.</li>
+<li>Webhooks: Stripe (5-minute tolerance), Twilio, Meta (unsigned refused), Todoist, OpenShorts, inbound HMAC –
+all verified with constant-time comparison.</li>
+<li>Portals: magic links (32 bytes, 30 minutes, single use), <code dir="auto">Origin</code> check plus per-session form token, strict CSP,
+<code dir="auto">X-Frame-Options: DENY</code>; <code dir="auto">next</code>/<code dir="auto">back</code> parameters restricted to portal paths.</li>
+<li>MCP: every tool goes through the REST API with the caller’s key (same rights, guards and audit); the
+isolation harness found no tool returning another sub-account’s data.</li>
+<li>Mobile tokens: only <code dir="auto">/api/mobile/*</code>, own rate limit, revoked with password changes.</li>
+<li>CORS, session cookie flags, invite links, <code dir="auto">cspExtra</code> (only code-defined https/wss origins).</li>
+<li>File serving: uploads, form files, community images, lesson downloads, backups and academy docs resolve
+names through the database or strict patterns.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="follow-ups-not-in-this-change">Follow-ups (not in this change)</h2><a class="sl-anchor-link" href="#follow-ups-not-in-this-change"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Follow-ups (not in this change)”</span></a></div>
+<ul>
+<li>Upgrade Vitest to 5.x (dev-only advisory).</li>
+<li>Optional <code dir="auto">PGHL_SETUP_TOKEN</code> for the first-run setup page (today: bootstrap the admin via environment).</li>
+<li>Nonce-based CSP for the remaining server pages with inline scripts (booking, forms, invoices).</li>
+<li>Pin GitHub Actions by commit SHA once the CI workflows land (open-source branch).</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="follow-up-review-versions-00370040">Follow-up review: versions 0.0.37–0.0.40</h2><a class="sl-anchor-link" href="#follow-up-review-versions-00370040"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Follow-up review: versions 0.0.37–0.0.40”</span></a></div>
+<p>Scope: everything added since the review above – record-level access and sales (sequences, quotes, duplicates), the hosted cloud mode,
+Rechnung 2.0, the consent ledger, forms in depth, the website builder 2.0, courses with hosted video, telephony (IVR, queues, power dialer,
+call intelligence), the 24 importers, the Cognee memory, the community extras and the iOS web app. Method: reading the new modules like an
+attacker (what can a restricted person, a tenant, the operator or an anonymous visitor reach that the author did not think of), then
+extending the existing harnesses – the leak harness of <code dir="auto">tests/record-access-leaks.test.ts</code> got seeds for the data that hangs on a contact in
+the conversation area – and one regression test per finding in <code dir="auto">tests/sec-review-access.test.ts</code>, <code dir="auto">tests/sec-review-cloud.test.ts</code> and
+<code dir="auto">tests/sec-review-public.test.ts</code> (each fails on the code before the fix). Severity assumes the feature is switched on (record access, cloud mode).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Location</th>
+<th>Finding and exploit sketch</th>
+<th>Fix</th>
+<th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-1</td>
+<td>High</td>
+<td><code dir="auto">modules/dialer.ts</code>, <code dir="auto">modules/record-access.ts</code></td>
+<td><strong>The power dialer handed out contacts the rules hide.</strong> A person limited to their own contacts creates a call list from a tag or smart list (the list is built server-side, so the “named records” check never sees the contacts) and presses <em>Nächster Kontakt</em>: the answer carries name, phone, e-mail, tags, the last three notes and the last calls of any contact. The entries, callbacks and the list endpoint listed everyone too.</td>
+<td>The dialer asks <code dir="auto">app.services.recordAccess.contactFilter</code> before it picks an entry; lists, entries and callbacks drop what the person may not open; entry routes answer 404.</td>
+<td>access › the power dialer neither lists nor hands out …</td>
+</tr>
+<tr>
+<td>R-2</td>
+<td>High</td>
+<td><code dir="auto">modules/telephony.ts</code>, <code dir="auto">call-intel.ts</code>, <code dir="auto">voice-ai.ts</code>, <code dir="auto">browser-phone.ts</code></td>
+<td><strong>Call log and conversation intelligence were outside the rules.</strong> <code dir="auto">GET /api/calls</code> (also <code dir="auto">?q=</code> over voicemail transcripts), <code dir="auto">/api/calls/:id</code>, <code dir="auto">/recording</code> (the audio), <code dir="auto">/notes</code>, <code dir="auto">/api/call-intel*</code> (full transcripts, summaries, objections, scores), <code dir="auto">/api/voice-ai/calls*</code> and <code dir="auto">/api/phone/calls/:id/*</code> answered for every call of the sub-account to anybody with the <em>Konversationen</em> area. Calls are found by id <strong>or Twilio sid</strong>.</td>
+<td><code dir="auto">CHILD_ROUTES</code> in <code dir="auto">modules/record-access.ts</code> now covers these paths (id and sid) and <code dir="auto">CONTACT_LISTS</code> filters the lists; a hidden phone field also hides the call’s numbers.</td>
+<td>access › the call log …; a call cannot be opened …; call intelligence …; the AI phone agent’s sessions …</td>
+</tr>
+<tr>
+<td>R-3</td>
+<td>Medium</td>
+<td><code dir="auto">modules/email-import.ts</code>, <code dir="auto">channels.ts</code>, <code dir="auto">meta-channels.ts</code>, <code dir="auto">mailbox-mail.ts</code>, <code dir="auto">teaminbox.ts</code></td>
+<td>Drafts of all threads (<code dir="auto">/api/conversations/drafts</code>: contact, subject, text), media files of a message (`/api/messages/channels</td>
+<td>meta/media/:id<code dir="auto">), mailbox attachments (</code>/api/mail/attachments/:messageId/:index<code dir="auto">) and **</code>POST /api/inbox/bulk`** (assign, close, snooze by conversation id) ignored the rules: a restricted person could read drafts and files of, and change, conversations they cannot open.</td>
+<td>Media and attachments are child routes of their conversation; drafts are filtered per conversation and contact; the inbox bulk route filters its <code dir="auto">ids</code> like the other bulk routes.</td>
+</tr>
+<tr>
+<td>R-4</td>
+<td>Medium</td>
+<td><code dir="auto">modules/mk-segments.ts</code>, <code dir="auto">campaigns.ts</code>, <code dir="auto">services/mobile-read.ts</code>, <code dir="auto">record-access.ts</code></td>
+<td>Segment members, campaign recipients, the phone app’s call list (<code dir="auto">/api/mobile/calls</code>) and reports on the <em>Anrufe</em> source (grouped by contact) listed names, e-mails and numbers of contacts outside the person’s view. The extended leak harness found <code dir="auto">/api/mobile/calls</code> by itself.</td>
+<td>List filters, a contact clause in the app’s call query and a <code dir="auto">calls</code> entry in the report row scope.</td>
+<td>access › segment members and campaign recipients …; the phone app’s call list …; reports on the call log …</td>
+</tr>
+<tr>
+<td>R-5</td>
+<td>Medium</td>
+<td><code dir="auto">modules/cognee.ts</code></td>
+<td>The knowledge memory holds notes, contacts and conversations as text; “ask the memory” (also the MCP tool <code dir="auto">ghl_memory_recall</code> and the in-app agent) only checked the member’s <em>areas</em>, so a person who sees only their own contacts could ask about every note, contact and conversation of the sub-account.</td>
+<td>For a narrowed person the recall refuses <code dir="auto">contacts</code>, <code dir="auto">notes</code> and <code dir="auto">conversations</code> (wiki, tickets, courses and remembered notes stay); <code dir="auto">/api/cognee/info</code> stops offering them.</td>
+<td>access › the Cognee memory</td>
+</tr>
+<tr>
+<td>C-1</td>
+<td>High</td>
+<td><code dir="auto">modules/reports.ts</code></td>
+<td><strong>The operator read every customer’s data through reports.</strong> <code dir="auto">POST /api/reports/run</code> with <code dir="auto">scope: "all"</code> as an admin ran over all sub-accounts – contacts, invoices, deals, grouped by contact name – without the customer’s support consent (the consent guard only watched the sub-account of the request). Same for boards that use the report engine.</td>
+<td>Admin report scopes (run, sources) skip customers not open for support (<code dir="auto">hiddenLocations</code>).</td>
+<td>cloud › reports across all sub-accounts …</td>
+</tr>
+<tr>
+<td>C-2</td>
+<td>Medium</td>
+<td><code dir="auto">modules/security.ts</code></td>
+<td><code dir="auto">GET /api/admin/audit</code> listed the audit trail of every customer (summaries carry names of contacts, invoices, pages).</td>
+<td>Entries of customers not open for support are left out.</td>
+<td>cloud › the operator’s audit log …</td>
+</tr>
+<tr>
+<td>C-3</td>
+<td>Medium</td>
+<td><code dir="auto">modules/core.ts</code> (users), <code dir="auto">modules/cloud.ts</code></td>
+<td><strong>User management was a back door to a customer’s account.</strong> An operator admin could set a customer login’s password (<code dir="auto">PATCH /api/users/:id</code>), reset its 2FA or passkeys, sign it out, delete it, or create a login of their own with the customer’s sub-account in <code dir="auto">locations</code> – opening the account without the consent. <code dir="auto">GET /api/users</code> listed all customers’ people.</td>
+<td>The cloud guard refuses these writes for customers’ logins and sub-accounts without consent; the list leaves the customers’ people out.</td>
+<td>cloud › user management …</td>
+</tr>
+<tr>
+<td>C-4</td>
+<td>Medium</td>
+<td><code dir="auto">modules/funnels.ts</code>, <code dir="auto">tickets.ts</code>, <code dir="auto">agency.ts</code>, <code dir="auto">cloud.ts</code></td>
+<td><strong>A site or help center could claim somebody else’s login host.</strong> The check for a site’s custom domain looked only at other sites; a tenant could point <code dir="auto">login.client.example</code>, the agency’s white-label domain or <code dir="auto">&lt;other-customer&gt;.&lt;cloud domain&gt;</code> at their own page. A host decides which pages the server serves, so the claimed login address showed the claimer’s page (phishing with a valid certificate – the TLS “ask” endpoint approves every claimed host) and the real login stopped working.</td>
+<td>One check, <code dir="auto">app.services.domainTaken</code>: the app’s own address, agency and client login domains, sites, help centers, and (cloud) the service’s domain and all its sub-domains for everybody but the operator.</td>
+<td>cloud › a site or help center cannot take over a login domain …</td>
+</tr>
+<tr>
+<td>C-5</td>
+<td>Medium</td>
+<td><code dir="auto">modules/cloud.ts</code>, <code dir="auto">services/course-video.ts</code>, <code dir="auto">community-posts-ext.ts</code></td>
+<td>The storage fair-use meter counted only media uploads. Course videos (2 GB each, unlimited number), community videos, call audio and meeting recordings were free: a trial account without a card could fill the shared disk.</td>
+<td><code dir="auto">storageUsedBytes</code> counts all of them; the uploads ask <code dir="auto">storageGate</code> when they start (course and community video) or in the guard (raw audio).</td>
+<td>cloud › the storage fair-use meter …</td>
+</tr>
+<tr>
+<td>P-1</td>
+<td>Low</td>
+<td><code dir="auto">modules/telephony.ts</code> <code dir="auto">verifyTwilio</code></td>
+<td>The Twilio signature covers the URL and the <em>form</em> fields. A request with another body type was verified as “URL only” while the handlers read the body – one signed request without fields (e.g. a status callback seen in a log) paired with a JSON body of the attacker’s choosing would have been accepted.</td>
+<td>Only form bodies are accepted.</td>
+<td>public › Twilio webhooks only take forms</td>
+</tr>
+<tr>
+<td>P-2</td>
+<td>Low</td>
+<td><code dir="auto">modules/agent-bridge.ts</code></td>
+<td>The 8-character pairing code of the local bridge (it hands out a device token) was drawn with <code dir="auto">Math.random</code>.</td>
+<td><code dir="auto">crypto.randomInt</code>.</td>
+<td>public › device pairing …</td>
+</tr>
+<tr>
+<td>P-3</td>
+<td>Low</td>
+<td><code dir="auto">modules/telephony-dni.ts</code></td>
+<td>A pool that shares numbers when all are busy wrote a session row for every anonymous visit and read all of them on every visit: a flood from a few addresses grows the table and slows every page with the number snippet.</td>
+<td>At most 5,000 running sessions per pool get a row; the rest still get a number.</td>
+<td>public › a pool that shares its numbers …</td>
+</tr>
+<tr>
+<td>P-4</td>
+<td>Low</td>
+<td><code dir="auto">services/community-posts-ext.ts</code></td>
+<td>A community member could start any number of 500 MB video uploads in sequence (only <em>open</em> uploads were counted); unattached ones live a day.</td>
+<td>Three videos’ worth per member and day; the team is not limited.</td>
+<td>access › community members and their videos</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="open-findings-and-limits">Open findings and limits</h3><a class="sl-anchor-link" href="#open-findings-and-limits"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Open findings and limits”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Finding</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O-1</td>
+<td>Low</td>
+<td><strong>Sign-up pre-hijack</strong> (<code dir="auto">cloud-signup.ts</code>): the password is chosen on the form <em>before</em> the address is proven. Somebody who enters a stranger’s address and their own password gets an account for that stranger the moment the stranger clicks the verification link in the (unsolicited) mail.</td>
+<td><strong>Fixed</strong> after 0.0.41 – see <a href="#follow-up-fixes-after-0041">follow-up fixes</a>.</td>
+</tr>
+<tr>
+<td>O-2</td>
+<td>Low</td>
+<td><strong>Public forms, booking and chat update an existing contact by e-mail or phone</strong> (<code dir="auto">upsertContact</code>): a visitor who enters a known phone number with their own e-mail address replaces the stored e-mail. This is how the CRM deduplicates; the owner sees the change in the timeline.</td>
+<td><strong>Fixed</strong> after 0.0.41 – see <a href="#follow-up-fixes-after-0041">follow-up fixes</a>.</td>
+</tr>
+<tr>
+<td>O-3</td>
+<td>Info</td>
+<td>Counters and aggregates (call statistics, counts in lists, reports on sources outside the five record types) are not narrowed by record access, and automations, keys and MCP connections see everything by design (<a href="/sales/#record-access-and-teams">sales.md</a>). A restricted person with the <em>Automationen</em> area can build an automation that reads more than they can see.</td>
+<td>Documented; give such people no automation area.</td>
+</tr>
+<tr>
+<td>O-4</td>
+<td>Info</td>
+<td>The operator runs the server and the database: the support consent covers the product surface (UI, API, MCP, reports, audit log, user management), not the file system.</td>
+<td>Said in the AVV text and <a href="/cloud/#isolation-and-support-access">cloud.md</a>.</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="follow-up-fixes-after-0041">Follow-up fixes (after 0.0.41)</h3><a class="sl-anchor-link" href="#follow-up-fixes-after-0041"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Follow-up fixes (after 0.0.41)”</span></a></div>
+<p>The two open low findings and two robustness items from the code-health review, each with a regression test that fails on the code
+before the fix (<code dir="auto">tests/sec-review-signup.test.ts</code> in cloud mode, <code dir="auto">tests/sec-review-followup.test.ts</code>).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Location</th>
+<th>Fix</th>
+<th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O-1</td>
+<td><code dir="auto">modules/cloud-signup.ts</code>, <code dir="auto">services/cloud-pages.ts</code></td>
+<td>No account and no password before the address is proven. The form’s password only counts when the verification link is opened in the browser that sent the form (a cookie set on submit – set for known and unknown addresses alike, after the same hashing work, so it is no oracle); in any other browser the link asks for the password and the form’s one is discarded. The link (24 h) is claimed by the first confirmation with a single <code dir="auto">UPDATE … WHERE verified_at IS NULL</code>; afterwards it only continues in the browser that confirmed. The confirmation – and a Google sign-up, whose address Google proved – closes every other open sign-up for the address (status <code dir="auto">superseded</code>, password, link and browser binding cleared), so neither an earlier password nor an earlier browser leads into the account. Provisioning refuses a sign-up without <code dir="auto">verified_at</code>, also when a completed Checkout names it.</td>
+<td>signup › a password typed into the form by somebody else never becomes the login; … a later verification … ends the earlier sign-ups; … no oracle; never provisions … not verified; Google proves the address too</td>
+</tr>
+<tr>
+<td>O-2</td>
+<td><code dir="auto">services/contacts.ts</code> (<code dir="auto">upsertContact(…, { publicInput: true })</code>), callers in <code dir="auto">forms.ts</code>, <code dir="auto">wfx-triggers.ts</code> (abandoned forms), <code dir="auto">calendars.ts</code>, <code dir="auto">teamcal-book.ts</code>, <code dir="auto">livechat.ts</code>, <code dir="auto">ai-assistant.ts</code>, <code dir="auto">voice-ai.ts</code> (booking), <code dir="auto">webinar-register.ts</code>, <code dir="auto">stripe.ts</code>, <code dir="auto">ads-leads.ts</code></td>
+<td>Unauthenticated input never changes a stored e-mail address or phone number (an empty one is filled). A phone number only finds a contact when the input has no e-mail address: <em>known number + another address</em> creates a new contact (timeline note, paired by the duplicate assistant) – the dedupe logic already treats a shared number as “probably the same person”, and the booking confirmation then reaches the person who booked. A differing number on a contact found by its e-mail address is noted as an <em>unverified alternative</em> on the timeline. The chat widget shows a visitor only the messages from the visitor’s own start, and the chat bot answers from that chat and the name only (no e-mails or SMS of the contact, no stored numbers, address or deals), so a known address typed into the widget no longer reveals earlier conversations. Checked without change: community join and affiliate sign-up (e-mail only, matched by it), the SEPA mandate page and quote acceptance (they write no contact fields).</td>
+<td>followup › a form with a known number and another address …; … known address and another number …; the public booking page …; a chat visitor …; nor does the chat bot …; the rule is an option</td>
+</tr>
+<tr>
+<td>U-1</td>
+<td><code dir="auto">modules/public-upload-quota.ts</code> (new), <code dir="auto">forms.ts</code>, <code dir="auto">cloud.ts</code></td>
+<td>Public form uploads had no disk quota per sub-account (only 12 MB per request and the per-minute brake). Now <code dir="auto">PGHL_PUBLIC_UPLOADS_MB</code> (default 2048 MB per sub-account) and, in the cloud, the plan’s media storage (form files joined the fair-use meter) – whichever is lower. Over the cap: 413 before anything is written; the sub-account is told by e-mail and bell/push at 90 % and 100 %, once per level until the usage drops below 90 %.</td>
+<td>followup › disk quota …; signup › public form uploads and the plan’s media storage</td>
+</tr>
+<tr>
+<td>D-1</td>
+<td><code dir="auto">services/werkstatt/ops.ts</code>, <code dir="auto">modules/accounting.ts</code>, <code dir="auto">accounting-reports.ts</code>, <code dir="auto">services/acc-autopost.ts</code></td>
+<td>The last UTC “today” spots: the plugin workshop’s sample data (a sample birthday “today” did not match the context’s local <code dir="auto">today</code> between 00:00 and 02:00 in Berlin), the accounting’s default report period and period year, and the booking date of Stripe refunds now use the sub-account’s time zone (<code dir="auto">todayYmd</code>).</td>
+<td>followup › today in the sub-account’s time zone (00:30 on 1 January, pinned clock)</td>
+</tr>
+</tbody>
+</table>
+<p>Remaining limits of these fixes: names and other non-identity fields from public input still update a matched contact (as before);
+two chat visitors on one contact (the real one and somebody who typed the address) both see the messages exchanged after the second
+one started – the team sees both in one conversation; the upload quota covers public forms (other uploads come from logged-in people and
+are covered by the cloud’s storage gate).</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="checked-without-findings-this-round">Checked without findings (this round)</h3><a class="sl-anchor-link" href="#checked-without-findings-this-round"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Checked without findings (this round)”</span></a></div>
+<ul>
+<li>Stripe (<code dir="auto">/hooks/stripe</code>, <code dir="auto">/hooks/stripe-agency</code>): constant-time HMAC, 5-minute tolerance, event ids de-duplicated before handling, every handler scopes by the location of the event; Checkout amounts always from the product row (forms with a payment field, quotes, invoices).</li>
+<li>Quote page <code dir="auto">/q/&lt;token&gt;</code>: 24 random bytes, the selection is validated against the stored document, amounts are recomputed on the server, acceptance is claimed with a single <code dir="auto">UPDATE … WHERE status IN ('sent','viewed')</code>.</li>
+<li>Consent: double-opt-in links (HMAC, expiry in the token and the row, a button instead of a GET), preference centre token per contact, redirect only to the sub-account’s own setting.</li>
+<li>Tracking: <code dir="auto">/t/c/&lt;id&gt;</code> redirects only to links the server wrote itself, trigger-link signatures cannot be extended (truncated HMAC), the pixel validates nothing it does not store.</li>
+<li>Hosted course video: signed token bound to video, member and sub-account <strong>and</strong> the member’s session <strong>and</strong> a running enrolment, same-origin only, HLS names from a strict pattern, ffmpeg arguments built from server-made paths.</li>
+<li><code dir="auto">/uploads-opt/&lt;w&gt;/&lt;file&gt;</code>: widths from a fixed list, file names through the uploads table, at most two conversions at a time, one cached copy per width and format.</li>
+<li>Web push endpoints are checked against the push services’ hosts at subscription <em>and</em> at delivery; Slack/SNS/Meta media hosts are checked before any fetch; the importers’ absolute <code dir="auto">next</code> links still go through <code dir="auto">safeFetch</code>.</li>
+<li>Output: a second stored-XSS sweep that also fails on a raw quote or apostrophe next to the payload (attribute breakout) over 5,200 public pages – clean. CSV exports (call analysis, funnel and course statistics, consent proof, payouts, member lists) neutralise formulas.</li>
+<li>Sales data in the leak harness: deal lines, a sent quote, a meeting note, a sequence enrolment with its events and a consent proof on a foreign contact are seeded as well; none of the 500+ routes hands them to a person limited to their own records (sequence <em>templates</em> are account-wide by design, like workflows – the enrolment is the contact’s data).</li>
+<li>Tenant export: credential columns and sealed values are stripped by name and by shape; no table with a push private key or provider credential is exported unsealed.</li>
+</ul>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/edit/main/docs/security-review-2026-10.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/security/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Previous<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Security</span></span></a><a href="/auth/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Next<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Sign-in, SSO &amp; passkeys</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>
