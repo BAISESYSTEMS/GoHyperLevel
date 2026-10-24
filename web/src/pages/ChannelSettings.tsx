@@ -72,7 +72,9 @@ function TelegramCard() {
   const [f, setF] = useState({ bot_token: '', welcome: '', start_tags: '' });
   const [campaign, setCampaign] = useState('');
   const [res, setRes] = useState<Result>();
-  useEffect(() => s.data && setF({ bot_token: '', welcome: s.data.welcome ?? '', start_tags: (s.data.start_tags ?? []).join(', ') }), [s.data]);
+  useEffect(() => {
+    if (s.data) setF({ bot_token: '', welcome: s.data.welcome ?? '', start_tags: (s.data.start_tags ?? []).join(', ') });
+  }, [s.data]);
   if (!s.data) return <div className="card"><Spinner /></div>;
   const d = s.data;
   const save = async () => {
@@ -139,7 +141,9 @@ function DiscordCard() {
   const s = useLoad(() => api.get('/api/settings/channels/discord'), []);
   const [f, setF] = useState({ bot_token: '', channel_ids: '', reply_in_channel: false, command_reply: '' });
   const [res, setRes] = useState<Result>();
-  useEffect(() => s.data && setF({ bot_token: '', channel_ids: (s.data.channel_ids ?? []).join(', '), reply_in_channel: !!s.data.reply_in_channel, command_reply: s.data.command_reply ?? '' }), [s.data]);
+  useEffect(() => {
+    if (s.data) setF({ bot_token: '', channel_ids: (s.data.channel_ids ?? []).join(', '), reply_in_channel: !!s.data.reply_in_channel, command_reply: s.data.command_reply ?? '' });
+  }, [s.data]);
   if (!s.data) return <div className="card"><Spinner /></div>;
   const d = s.data;
   const gw = d.gateway?.status;
@@ -206,7 +210,9 @@ function SlackCard() {
   const s = useLoad(() => api.get('/api/settings/channels/slack'), []);
   const [f, setF] = useState({ mode: 'bot', bot_token: '', signing_secret: '', channel: '', webhook_url: '', channels: [] as string[] });
   const [res, setRes] = useState<Result>();
-  useEffect(() => s.data && setF({ mode: s.data.mode, bot_token: '', signing_secret: '', webhook_url: '', channel: s.data.channel ?? '', channels: s.data.channels ?? [] }), [s.data]);
+  useEffect(() => {
+    if (s.data) setF({ mode: s.data.mode, bot_token: '', signing_secret: '', webhook_url: '', channel: s.data.channel ?? '', channels: s.data.channels ?? [] });
+  }, [s.data]);
   if (!s.data) return <div className="card"><Spinner /></div>;
   const d = s.data;
   const save = async () => {
@@ -287,7 +293,9 @@ function SlackCard() {
 function PushCard() {
   const s = useLoad(() => api.get('/api/settings/channels/push'), []);
   const [f, setF] = useState({ enabled: false, button: '', title: '', text: '' });
-  useEffect(() => s.data && setF({ enabled: s.data.enabled, button: s.data.button, title: s.data.title, text: s.data.text }), [s.data]);
+  useEffect(() => {
+    if (s.data) setF({ enabled: s.data.enabled, button: s.data.button, title: s.data.title, text: s.data.text });
+  }, [s.data]);
   if (!s.data) return <div className="card"><Spinner /></div>;
   const d = s.data;
   return (

@@ -1,76 +1,78 @@
-# Live-Zusammenarbeit überall
+**English** · [Deutsch](collaboration.de.md)
 
-Wer aus dem Team ist gerade wo in der App? HyperLevel zeigt es auf jeder Seite – ohne dass eine Seite dafür etwas tun muss:
+# Live collaboration everywhere
 
-- **Avatare in der oberen Leiste:** die Kolleginnen und Kollegen, die gerade dieselbe Seite offen haben. Der Hinweis beim Darüberfahren sagt „Anna – bearbeitet gerade“, ein gelber Punkt am Avatar zeigt, dass dort jemand tippt.
-- **Im Seitenmenü:** kleine Avatare neben dem Menüpunkt, in dem jemand gerade arbeitet (abschaltbar: „Team im Menü zeigen“). Ein Klick auf einen Avatar zeigt Name und Seite, **Hingehen** öffnet dieselbe Seite. Per Tastatur: vom Menüpunkt mit Tab auf den Knopf „Wer ist bei …“ (er erscheint, sobald er den Fokus hat), Enter oder Leertaste öffnet die Liste, Esc schließt sie und gibt den Fokus zurück.
-- **„Team ist hier“:** der Knopf mit dem Personen-Symbol in der oberen Leiste listet alle, die im Sub-Account online sind, mit ihrer Seite und **Hingehen** – dort liegen auch die Schalter.
-- **„Anna hat hier gerade gespeichert“:** speichert jemand auf der Seite, die du offen hast, erscheint ein Hinweis mit **Neu laden** (lädt nur die Seite neu, nicht die ganze App).
-- **„Anna bearbeitet das gerade auch“:** tippt ihr beide auf derselben Seite, warnt ein gelber Hinweis – so überschreibt niemand die Änderung des anderen.
-- **Mauszeiger der anderen** mit Namen und Farbe: auf Canvas-Boards und Living Boards von Haus aus an, auf allen anderen Seiten nur, wenn beide Seiten es einschalten.
+Who on the team is where in the app right now? HyperLevel shows it on every page – without any page having to do anything for it:
 
-Alle Hinweise schließen mit ✕ oder Esc. Auf Touch-Geräten (Handy, Tablet ohne Maus) werden keine Mauszeiger gezeigt oder gesendet.
+- **Avatars in the top bar:** the colleagues who currently have the same page open. The hover hint says “Anna – editing right now”, and a yellow dot on the avatar shows that someone is typing there.
+- **In the side menu:** small avatars next to the menu item where someone is working right now (can be turned off: “Show the team in the menu”). A click on an avatar shows the name and page, and **Go there** opens the same page. By keyboard: from the menu item, press Tab to reach the “Who is in …” button (it appears as soon as it has focus), Enter or Space opens the list, Esc closes it and returns the focus.
+- **“Team is here”:** the button with the people icon in the top bar lists everyone who is online in the sub-account, with their page and **Go there** – the switches are there too.
+- **“Anna just saved here”:** if someone saves on the page you have open, a hint with **Reload** appears (it reloads only the page, not the whole app).
+- **“Anna is editing this too”:** if you both type on the same page, a yellow hint warns you – so nobody overwrites the other's change.
+- **Other people's mouse pointers** with name and color: on by default on Canvas boards and Living Boards, on all other pages only if both sides turn it on.
 
-## Wo es eigene Live-Funktionen gibt
+All hints close with ✕ or Esc. On touch devices (phone, tablet without a mouse), no mouse pointers are shown or sent.
 
-Einige Bereiche hatten schon vorher eigene Echtzeit – dort bleiben die Avatare oben, die allgemeinen Hinweise „gespeichert“ und „bearbeitet das gerade auch“ entfallen:
+## Where there are live features of their own
 
-| Bereich | Eigene Live-Funktion |
+Some areas already had their own real-time features before – there the avatars at the top stay, and the general hints “saved” and “is editing this too” do not apply:
+
+| Area | Live feature of its own |
 | --- | --- |
-| Konversationen | „Anna schreibt gerade…“ und Kollisions-Hinweis je Konversation ([team-inbox.md](team-inbox.md)) |
-| Canvas | eigene Mauszeiger, Auswahl und Personenliste je Board ([canvas.md](canvas.md)); neu: **Folgen** – ein Klick auf eine Person in der Kopfzeile, und deine Ansicht bleibt auf ihrem Mauszeiger, bis du selbst verschiebst, zoomst oder ✕ drückst |
-| Team-Chat | Anwesenheit und „tippt …“ ([team-chat.md](team-chat.md)) |
-| Living Boards | Änderungen kommen sofort bei allen an ([living-boards.md](living-boards.md)); neu: Mauszeiger der anderen, bezogen auf das Raster des Boards |
+| Conversations | “Anna is typing…” and a collision hint per conversation ([team-inbox.md](team-inbox.md)) |
+| Canvas | own mouse pointers, selection and a people list per board ([canvas.md](canvas.md)); new: **Follow** – one click on a person in the header, and your view stays on their pointer until you pan, zoom or press ✕ yourself |
+| Team chat | presence and “typing …” ([team-chat.md](team-chat.md)) |
+| Living Boards | changes arrive for everyone immediately ([living-boards.md](living-boards.md)); new: other people's pointers, relative to the board's grid |
 
-## Einstellungen
+## Settings
 
-Jede Person entscheidet selbst (gespeichert am Login, gilt in allen Sub-Accounts) im Popover **Team ist hier**:
+Each person decides for themselves (saved on the login, applies in all sub-accounts) in the **Team is here** popover:
 
-| Schalter | Standard | Wirkung |
+| Switch | Default | Effect |
 | --- | --- | --- |
-| Team im Menü zeigen | an | Avatare neben den Menüpunkten |
-| Mauszeiger anderer zeigen | Nur auf Boards und Canvas | *Auf allen Seiten* oder *Aus*. Dein Zeiger geht nur an Leute, die ihren Zeiger auch teilen – und nur, solange ihr auf derselben Seite seid. *Aus* gilt auch im Canvas: keine fremden Zeiger, deiner wird nicht gesendet |
-| Unsichtbar | aus | Niemand sieht dich: keine Anwesenheit, kein Mauszeiger, kein „hat gespeichert“. Du siehst weiterhin, wer wo ist – aber keine fremden Mauszeiger (wer selbst nicht zu sehen ist, schaut niemandem unbemerkt auf den Zeiger) |
+| Show the team in the menu | on | Avatars next to the menu items |
+| Show other people's cursors | Only on boards and Canvas | *On every page* or *Off*. Your pointer goes only to people who share their pointer too – and only while you are on the same page. *Off* also applies in the Canvas: no pointers of others, and yours is not sent |
+| Invisible | off | Nobody sees you: no presence, no mouse pointer, no “saved”. You still see who is where – but no other people's mouse pointers (someone who cannot be seen themselves does not watch anyone's pointer unnoticed) |
 
-**Für den ganzen Sub-Account** schaltet jemand mit dem Bereich *Einstellungen* die Live-Zusammenarbeit im selben Popover ein oder aus. Ausgeschaltet nimmt der Server keine Anwesenheit mehr an, vergisst die vorhandene sofort, die Teamliste bleibt leer und offene Tabs zeigen nichts mehr an.
+**For the whole sub-account**, someone with the *Settings* area turns live collaboration on or off in the same popover. When it is off, the server accepts no more presence, forgets the existing presence immediately, the team list stays empty and open tabs show nothing any more.
 
-## Datenschutz und Betriebsrat
+## Privacy and works council
 
-Anwesenheitsanzeigen können in Deutschland eine technische Einrichtung zur Leistungs- und Verhaltenskontrolle sein (§ 87 Abs. 1 Nr. 6 BetrVG) – wo es einen Betriebsrat gibt, gehört die Funktion vor dem Einschalten in die Abstimmung mit ihm. HyperLevel ist deshalb so gebaut, dass sich daraus keine Überwachung machen lässt:
+In Germany, presence indicators can be a technical facility for monitoring performance and behavior (§ 87 para. 1 no. 6 BetrVG, the Works Constitution Act) – wherever there is a works council, the feature should be agreed with it before you turn it on. HyperLevel is therefore built so that it cannot be turned into surveillance:
 
-- **Nur der Live-Zustand.** Anwesenheit, Seite, „bearbeitet gerade“ und Mauszeiger liegen ausschließlich im Arbeitsspeicher des Servers. Es gibt keine Tabelle, keinen Verlauf, keine Statistik, keinen Export und keine Protokollzeile (auch nicht im Audit-Log oder im Rückgängig-Journal). Ein Tab, der sich 45 Sekunden nicht meldet, ist vergessen; ein Neustart des Servers vergisst alles. Nur das Ein- und Ausschalten für den ganzen Sub-Account ist eine Einstellung wie jede andere und steht im Audit-Log (`presence.settings.update`, „Live-Zusammenarbeit eingeschaltet/ausgeschaltet“, mit Person und Zeit).
-- **Keine Zeitstempel nach außen.** Die Teamliste sagt nur „online“ und wo – nicht, seit wann.
-- **Unsichtbar** ist jederzeit möglich, und das Umschalten wird nirgends protokolliert.
-- **Abschaltbar je Sub-Account.**
-- **Ein versteckter Tab meldet sich nach einer Minute ab** (keine Anwesenheit, während niemand vor dem Bildschirm sitzt).
-- Gespeichert werden nur die Schalter selbst: die drei persönlichen in der Tabelle `presence_prefs`, der Sub-Account-Schalter in den Einstellungen des Sub-Accounts.
+- **Live state only.** Presence, page, “editing right now” and mouse pointers exist solely in the server's memory. There is no table, no history, no statistics, no export and no log line (not in the audit log or the undo journal either). A tab that has not reported for 45 seconds is forgotten; a server restart forgets everything. Only turning it on and off for the whole sub-account is a setting like any other and appears in the audit log (`presence.settings.update`, “Live collaboration switched on/off”, with person and time).
+- **No timestamps to the outside.** The team list says only “online” and where – not since when.
+- **Invisible** is possible at any time, and switching it is not logged anywhere.
+- **Can be turned off per sub-account.**
+- **A hidden tab signs off after one minute** (no presence while nobody sits in front of the screen).
+- Only the switches themselves are stored: the three personal ones in the table `presence_prefs`, the sub-account switch in the sub-account's settings.
 
-## Wer was sieht
+## Who sees what
 
-- **Nur derselbe Sub-Account.** Wer in Sub-Account A arbeitet, ist nur für Leute sichtbar, die gerade ebenfalls in A sind – nie sub-account-übergreifend, auch nicht für Agentur-Admins, die gerade woanders sind.
-- **Die Seite nur mit Recht auf den Bereich.** Ein Mitglied ohne Bereich *Buchhaltung* sieht bei einer Kollegin in der Buchhaltung nur „online“, nicht wo. Welche Seite zu welchem Bereich gehört, steht in `PRESENCE_ROUTES` (`server/services/presence-model.ts`) – dieselben Bereiche wie im Menü; unbekannte Seiten zeigen nur „online“. Die Agentur-Übersicht sehen nur Admins, die Personal-Seite nur Leute mit dem Bereich *Personal*.
-- **Kein Datensatz-Name.** Weitergegeben wird nur die Adresse (`/contacts/<id>`), nie ein Text aus dem Browser eines anderen – den Menünamen („Kontakte“) setzt die App des Lesers selbst ein. So kann weder der Name eines Kontakts oder Deals noch sonst ein Text bei den anderen landen. Wer den Datensatz nicht öffnen darf, kommt mit **Hingehen** auch nicht hinein.
-- **Nur Personen.** Eine Anmeldung im Browser (auch in der WebView der Android-App) oder das Geräte-Token der App. API-Schlüssel, MCP-Verbindungen und KI-Apps (OAuth), Agentur-Schlüssel, der KI-Agent, Plugins und die Werkstatt bekommen 403 – wie beim Live-Stream des Team-Posteingangs.
-- **Versteckte Logins** (der Betreiber im Cloud-Modus) erscheinen nie – und bekommen, wie Unsichtbare, keine fremden Mauszeiger.
-- **Der Stream endet mit der Anmeldung.** Abmelden, eine widerrufene Sitzung („Andere Geräte abmelden“, neues Passwort), eine Änderung oder Löschung der Person, das Entfernen aus dem Sub-Account oder das Löschen des Sub-Accounts beenden den Live-Stream sofort; eine abgelaufene Sitzung spätestens bei der nächsten Prüfung (alle 20 Sekunden). Der Server schickt dann `bye`, der Tab meldet sich nicht mehr und verbindet sich erst wieder, wenn er wieder angesehen wird.
+- **Only the same sub-account.** Whoever works in sub-account A is visible only to people who are also in A right now – never across sub-accounts, not even to agency admins who are somewhere else at the moment.
+- **The page only with permission for the area.** A member without the *Accounting* area sees only “online” for a colleague in accounting, not where. Which page belongs to which area is defined in `PRESENCE_ROUTES` (`server/services/presence-model.ts`) – the same areas as in the menu; unknown pages show only “online”. Only admins see the agency overview, and only people with the *HR* area see the HR page.
+- **No record names.** Only the address (`/contacts/<id>`) is passed on, never any text from someone else's browser – the reader's own app inserts the menu name (“Contacts”). That way neither the name of a contact or deal nor any other text can end up with the others. Whoever may not open the record does not get in with **Go there** either.
+- **People only.** A sign-in in the browser (also in the WebView of the Android app) or the device token of the app. API keys, MCP connections and AI apps (OAuth), agency keys, the AI agent, plugins and the Werkstatt get 403 – as with the live stream of the team inbox.
+- **Hidden logins** (the operator in cloud mode) never appear – and, like invisible people, receive no other people's mouse pointers.
+- **The stream ends with the sign-in.** Signing out, a revoked session (“Sign out all others”, new password), a change to or deletion of the person, removal from the sub-account or deletion of the sub-account end the live stream immediately; an expired session at the latest at the next check (every 20 seconds). The server then sends `bye`, the tab stops reporting and only reconnects when it is looked at again.
 
-## Für Entwickler
+## For developers
 
-Modul `server/modules/presence.ts`, Zustand in `server/services/presence-hub.ts` (im Speicher, ein Prozess), reine Logik in `server/services/presence-model.ts` (Server und Browser nutzen dieselbe Datei). Oberfläche in `web/src/presence/`: `store.ts` (winziger gemeinsamer Zustand, Teil des ersten Downloads), `client.ts` (die eine Verbindung je Tab), `Presence.tsx` (`PresenceLayer`, `PresenceBar`, `NavDots`, eigener Chunk), `canvas.tsx` (Personen und **Folgen** im Canvas).
+Module `server/modules/presence.ts`, state in `server/services/presence-hub.ts` (in memory, one process), pure logic in `server/services/presence-model.ts` (server and browser use the same file). Interface in `web/src/presence/`: `store.ts` (tiny shared state, part of the first download), `client.ts` (the one connection per tab), `Presence.tsx` (`PresenceLayer`, `PresenceBar`, `NavDots`, its own chunk), `canvas.tsx` (people and **Follow** in the Canvas).
 
-| Route | Zweck |
+| Route | Purpose |
 | --- | --- |
-| `GET /api/presence/stream?clientId=&locationId=` | SSE je Tab und Sub-Account. Ereignisse: `hello` (`enabled`, `prefs`, `peers`), `presence` (ein Tab eines Kollegen), `gone`, `saved` (`name`, `page`), `cursor` (`name`, `color`, `pts`), `settings` (`enabled`), `bye` (`reason`: `signed_out` – Anmeldung beendet oder kein Zugang mehr –, `tabs` – ein neuerer Tab derselben Person hat den Platz übernommen; danach endet der Stream, der Browser soll nicht von selbst neu verbinden). Server voll: 503 statt Stream |
-| `POST /api/presence` | Herzschlag alle 15 s und bei jedem Seitenwechsel: `{clientId, page, editing?, saved?, leaving?, x?, y?}` oder gebündelt `pts: [[x, y], …]` (höchstens 10); ein `title` älterer Browser wird ignoriert. Höchstens 300 je Person und Minute (sonst 429). Ohne Audit-Zeile und Journal (`ctx.skipAfterWrite`) |
-| `GET /api/presence/team` | online im Sub-Account, eine Zeile je Person: `user_id`, `name`, `color`, `page` (oder `null`), `title` (immer `null`), `editing` |
-| `GET`/`PUT /api/presence/prefs` | eigene Schalter `invisible`, `menu`, `cursors` (`boards`, `all`, `off`); ohne Audit-Zeile |
-| `GET`/`PUT /api/presence/settings` | Schalter des Sub-Accounts `{enabled}` (Bereich *Einstellungen*); jede Änderung eine Audit-Zeile `presence.settings.update` |
+| `GET /api/presence/stream?clientId=&locationId=` | SSE per tab and sub-account. Events: `hello` (`enabled`, `prefs`, `peers`), `presence` (a colleague's tab), `gone`, `saved` (`name`, `page`), `cursor` (`name`, `color`, `pts`), `settings` (`enabled`), `bye` (`reason`: `signed_out` – sign-in ended or no access any more –, `tabs` – a newer tab of the same person has taken the slot; the stream ends afterwards, and the browser should not reconnect by itself). Server full: 503 instead of a stream |
+| `POST /api/presence` | Heartbeat every 15 s and on every page change: `{clientId, page, editing?, saved?, leaving?, x?, y?}` or bundled `pts: [[x, y], …]` (at most 10); a `title` from an older browser is ignored. At most 300 per person and minute (otherwise 429). Without an audit line and journal (`ctx.skipAfterWrite`) |
+| `GET /api/presence/team` | online in the sub-account, one row per person: `user_id`, `name`, `color`, `page` (or `null`), `title` (always `null`), `editing` |
+| `GET`/`PUT /api/presence/prefs` | own switches `invisible`, `menu`, `cursors` (`boards`, `all`, `off`); without an audit line |
+| `GET`/`PUT /api/presence/settings` | switch of the sub-account `{enabled}` (area *Settings*); every change is an audit line `presence.settings.update` |
 
-- **Seite:** die Adresse unterhalb von `/app`, streng geprüft (beginnt mit `/`, höchstens 200 Zeichen, nur `A-Za-z0-9/_-.:~`, Query und Anker werden abgeschnitten).
-- **Mauszeiger:** `x` als Anteil der Breite (0…1), `y` in Pixeln ab Oberkante inklusive Scrollweg, gemessen am Element `[data-presence-surface]` der Seite (Living Boards: das Raster) oder sonst am Seiteninhalt. Der Browser nimmt etwa 20 Positionen je Sekunde und schickt sie gebündelt rund dreimal je Sekunde (das API-Limit von 900 Anfragen je Minute gilt je Adresse – ein Büro teilt sich eine); der Server leitet höchstens alle 50 ms eine Sendung je Tab weiter und begrenzt die Werte.
-- **„Gespeichert“:** `web/src/api.ts` meldet nach jedem erfolgreichen schreibenden Aufruf das Ereignis `pghl:saved`; `client.ts` zählt ihn nur, wenn die Person in den letzten 10 s im Seiteninhalt geklickt oder getippt hat und der Tab sichtbar ist, filtert eigene Dinge (Anwesenheit, Agent, Einstellungen, lesende POSTs wie Vorschau, Suche, Prüfung, Zielgruppen-Zählung, KI-Entwürfe, Abfragen laufender Jobs) heraus und schickt höchstens alle 3 s ein `saved` (der Server höchstens alle 2 s).
-- **„Bearbeitet gerade“:** `input`/`change` im Seiteninhalt (`.content`), nach 20 s ohne Eingabe wieder aus; Suchfelder (`type="search"`, `role="searchbox"`) und Bereiche mit `data-presence-ignore` zählen nicht – Filterfelder einer Liste markiert man am besten so.
-- **Eine neue Seite** braucht nichts – außer einem Eintrag in `PRESENCE_ROUTES` mit ihrem Bereich (`tests/presence.test.ts` prüft, dass jeder Menüpunkt einen hat). `own: true` schaltet die allgemeinen Hinweise ab (die Seite hat eigene Echtzeit), `cursor: 'board'` macht die Mauszeiger dort zum Standard, `cursor: 'own'` überlässt sie der Seite.
-- **Abschied:** beim Schließen des Tabs endet der Stream (der Server vergisst den Tab sofort); zusätzlich geht ein `leaving` per `fetch(…, {keepalive: true})` – `sendBeacon` kann den CSRF-Header `x-pghl` nicht mitschicken.
-- **Grenzen:** ein HyperLevel-Prozess hält den Zustand (wie Canvas und Team-Chat); höchstens 1000 Streams (darüber 503 – der Browser versucht es nach 30 s, 60 s … höchstens 5 min wieder) und 10 Tabs je Person (der 11. übernimmt den Platz des ältesten, der `bye` bekommt und erst wieder verbindet, wenn er angesehen wird – kein Hin und Her); 300 Meldungen je Person und Minute. Nach einem Neustart verbinden sich die Tabs mit 5–10 s Abstand (`retry` mit Zufallsanteil) wieder.
-- Haken in `app.services`: `presenceHub` (u. a. `now` als Uhr für Tests, `sweep()`), `presence` (`hub`, `enabled`, `prefsOf`).
+- **Page:** the address below `/app`, strictly validated (starts with `/`, at most 200 characters, only `A-Za-z0-9/_-.:~`, query and anchor are cut off).
+- **Mouse pointer:** `x` as a fraction of the width (0…1), `y` in pixels from the top edge including the scroll offset, measured against the element `[data-presence-surface]` of the page (Living Boards: the grid) or otherwise against the page content. The browser takes about 20 positions per second and sends them bundled roughly three times per second (the API limit of 900 requests per minute applies per address – an office shares one); the server forwards at most one transmission per tab every 50 ms and limits the values.
+- **“Saved”:** `web/src/api.ts` fires the event `pghl:saved` after every successful writing call; `client.ts` counts it only if the person clicked or typed in the page content within the last 10 s and the tab is visible, filters out its own things (presence, agent, settings, read-only POSTs such as preview, search, check, audience counting, AI drafts, polling of running jobs) and sends a `saved` at most every 3 s (the server at most every 2 s).
+- **“Editing right now”:** `input`/`change` in the page content (`.content`), off again after 20 s without input; search fields (`type="search"`, `role="searchbox"`) and areas with `data-presence-ignore` do not count – filter fields of a list are best marked this way.
+- **A new page** needs nothing – except an entry in `PRESENCE_ROUTES` with its area (`tests/presence.test.ts` checks that every menu item has one). `own: true` turns off the general hints (the page has its own real-time features), `cursor: 'board'` makes mouse pointers the default there, `cursor: 'own'` leaves them to the page.
+- **Goodbye:** when the tab closes, the stream ends (the server forgets the tab immediately); in addition a `leaving` goes out via `fetch(…, {keepalive: true})` – `sendBeacon` cannot send the CSRF header `x-pghl`.
+- **Limits:** one HyperLevel process holds the state (like Canvas and team chat); at most 1000 streams (above that 503 – the browser retries after 30 s, 60 s … at most 5 min) and 10 tabs per person (the 11th takes the place of the oldest, which gets `bye` and only reconnects when it is looked at – no back and forth); 300 reports per person and minute. After a restart, the tabs reconnect 5–10 s apart (`retry` with a random component).
+- Hooks in `app.services`: `presenceHub` (among others `now` as a clock for tests, `sweep()`), `presence` (`hub`, `enabled`, `prefsOf`).

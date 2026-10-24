@@ -1,145 +1,147 @@
-# E-Mail-Marketing: Tests, Segmente, Vorlagen und Zustellbarkeit
+**English** · [Deutsch](email-marketing.de.md)
 
-Kampagnen mit der Tiefe von Klaviyo, ActiveCampaign oder Brevo – ohne zusätzliche Dienste. Alles liegt unter **Kampagnen**: der Reiter *Kampagnen* (mit A/B-Test, Erinnerung und Sendezeit im Entwurf), *Segmente*, *Vorlagengalerie*, *Vorlagen*, *Zustellbarkeit* und *Trigger-Links*. Die Seiten sind einzeln nachladbar, der Rest der App wird davon nicht größer.
+# E-mail marketing: tests, segments, templates and deliverability
 
-- [Einfach-Modus](#einfach-modus)
-- [A/B-Tests](#ab-tests)
-- [Erinnerung an Nicht-Öffner](#erinnerung-an-nicht-öffner)
-- [Zur besten Zeit senden](#zur-besten-zeit-senden)
-- [Segmente nach Verhalten](#segmente-nach-verhalten)
-- [WhatsApp-Kampagnen mit Vorlagen](#whatsapp-kampagnen-mit-vorlagen)
-- [Warenkorbabbruch](#warenkorbabbruch)
-- [Vorlagengalerie](#vorlagengalerie)
-- [Zustellbarkeit](#zustellbarkeit)
-- [Einstellungs-Center im Footer](#einstellungs-center-im-footer)
-- [REST-API und MCP](#rest-api-und-mcp)
-- [Für Entwickler](#für-entwickler)
+Campaigns with the depth of Klaviyo, ActiveCampaign or Brevo – without extra services. Everything is under **Campaigns**: the tab *Campaigns* (with A/B test, reminder and send time in the draft), *Segments*, *Template gallery*, *Templates*, *Deliverability* and *Trigger links*. The pages load on their own, so the rest of the app doesn't get any bigger.
 
-## Einfach-Modus
+- [Simple mode](#simple-mode)
+- [A/B tests](#ab-tests)
+- [Reminder to non-openers](#reminder-to-non-openers)
+- [Send at the best time](#send-at-the-best-time)
+- [Segments by behavior](#segments-by-behavior)
+- [WhatsApp campaigns with templates](#whatsapp-campaigns-with-templates)
+- [Abandoned cart](#abandoned-cart)
+- [Template gallery](#template-gallery)
+- [Deliverability](#deliverability)
+- [Preference center in the footer](#preference-center-in-the-footer)
+- [REST API and MCP](#rest-api-and-mcp)
+- [For developers](#for-developers)
 
-Im [Einfach-Modus](theming.md#einfach-modus) zeigt der Kampagnen-Entwurf nur Name, Kanal, Betreff, Inhalt, Smart List,
-Tags, Test und Versand. Hinter **Weitere Felder** liegen: Absendername und *Text ist HTML*, Segment sowie „Mit einem dieser
-Tags“/„Ohne Tags“, **A/B-Test & Erinnerung an Nicht-Öffner** und **Sendezeit je Kontakt & Geschwindigkeit**. Jeder Bereich
-öffnet sich von selbst, sobald darin etwas eingestellt ist. Im E-Mail-Designer liegen Farben, Abstände, Ausrichtung und
-Button-Aussehen eines Blocks, eines Abschnitts und der ganzen Mail unter **Darstellung** (offen, sobald etwas vom Standard
-abweicht). Profi zeigt alles wie bisher.
+## Simple mode
 
-## A/B-Tests
+In [simple mode](theming.md#einfach-modus), the campaign draft shows only name, channel, subject, content, smart list,
+tags, test and sending. Behind **More fields** you find: sender name and *Text is HTML*, segment as well as “With any of these
+tags”/“Without tags”, **A/B test & reminder to non-openers** and **Send time per contact & speed**. Each area
+opens by itself as soon as something is set in it. In the e-mail designer, colors, spacing, alignment and
+button look of a block, a section and the whole e-mail are under **Appearance** (open as soon as something differs from the
+default). Pro mode shows everything as before.
 
-Im Entwurf einer **E-Mail-Kampagne** → Karte **A/B-Test** → *Betreff oder Inhalt testen*.
+## A/B tests
 
-| Einstellung | Bedeutung |
+In the draft of an **e-mail campaign** → card **A/B test** → *Test subject or content*.
+
+| Setting | Meaning |
 | --- | --- |
-| Varianten | A (Original) und 1–3 weitere. Jede Variante hat einen **Betreff**, optional einen **Absendernamen** (die Adresse bleibt gleich) und optional **eigenen Inhalt** (im E-Mail-Designer; *Eigenen Inhalt gestalten* startet mit einer Kopie des Originals). Eine Variante muss sich in etwas vom Original unterscheiden. |
-| Testgruppe | 5–50 % der Empfänger (Standard 20 %), zu gleichen Teilen auf die Varianten verteilt. Die Gruppen sind zufällig, aber wiederholbar (derselbe Entwurf ergibt dieselbe Verteilung). Jede Variante braucht mindestens 2 Empfänger, sonst geht die Kampagne ohne Test an alle (der Grund steht im Ergebnis). |
-| Gewinner nach | **Öffnungen** (Personen), **Klicks** oder **Umsatz** (bezahlte Rechnungen des Kontakts in den 14 Tagen nach der Mail). Verglichen wird je Empfänger, nicht die Rohzahl. Maschinelle Öffnungen (Apple Mail, Gmail-Bildproxy, Scanner) zählen nie. |
-| Wartezeit | 1 Stunde bis 14 Tage (Standard 24 Stunden). |
+| Variants | A (original) and 1–3 more. Each variant has a **subject**, optionally a **sender name** (the address stays the same) and optionally **its own content** (in the e-mail designer; *Design its own content* starts with a copy of the original). A variant has to differ from the original in something. |
+| Test group | 5–50% of the recipients (default 20%), split equally among the variants. The groups are random but repeatable (the same draft gives the same distribution). Each variant needs at least 2 recipients, otherwise the campaign goes to everyone without a test (the reason is shown in the result). |
+| Winner by | **Opens** (people), **clicks** or **revenue** (paid invoices of the contact in the 14 days after the e-mail). The comparison is per recipient, not the raw count. Machine opens (Apple Mail, Gmail image proxy, scanners) never count. |
+| Wait time | 1 hour to 14 days (default 24 hours). |
 
-**Ablauf:** Beim Senden gehen die Test-Mails an die Testgruppe, alle anderen Empfänger warten (Status *wartet auf Gewinner*, die Kampagne zeigt *A/B-Test läuft*). Nach der Wartezeit bestimmt der Server den Gewinner und sendet ihn an alle, die gewartet haben. Bei Gleichstand entscheidet das nächste Maß (Klicks, dann Öffnungen), dann der kleinere Buchstabe; ohne ein einziges Ereignis geht das Original raus.
+**Flow:** when sending, the test e-mails go to the test group and all other recipients wait (status *waiting for the winner*, the campaign shows *A/B test running*). After the wait time, the server determines the winner and sends it to everyone who waited. On a tie, the next measure decides (clicks, then opens), then the smaller letter; without a single event, the original goes out.
 
-**Ergebnis:** In der Kampagne zeigt die Karte *A/B-Test: Ergebnis* je Variante Gesendet, Geöffnet, Geklickt, Käufer, Umsatz und eine Einschätzung gegen das Original („deutlich besser“, „kein klarer Unterschied“, „noch zu früh“, Wahrscheinlichkeit besser zu sein). Solange der Test wartet, lässt sich der Gewinner **sofort bestimmen** (automatisch oder mit „B senden“ eine Variante festlegen). Danach ist die Entscheidung endgültig. Im Entwurf schickt *Testen* auf Wunsch eine bestimmte Variante an einen Testkontakt.
+**Result:** in the campaign, the card *A/B test: result* shows for each variant sent, opened, clicked, buyers, revenue and an assessment against the original (“clearly better”, “no clear difference”, “too early”, probability of being better). While the test is waiting, you can **determine the winner right away** (automatically, or fix a variant with “Send B”). After that, the decision is final. In the draft, *Test* sends a specific variant to a test contact if you want.
 
-## Erinnerung an Nicht-Öffner
+## Reminder to non-openers
 
-Karte **Erinnerung an Nicht-Öffner** im Entwurf (oder später an einer laufenden oder gesendeten Kampagne): neuer **Betreff**, Zeitpunkt (1 Stunde bis 30 Tage, Standard 72 Stunden nach dem Ende des Versands), optional ein anderer Absendername.
+Card **Reminder to non-openers** in the draft (or later on a running or sent campaign): new **subject**, time (1 hour to 30 days, default 72 hours after sending ends), optionally a different sender name.
 
-- Erinnert wird, wer die Mail bekommen hat und sie **nicht als Person geöffnet oder angeklickt** hat. Dass ein Mail-Programm Bilder im Hintergrund lädt, zählt nicht als Öffnung – diese Leser werden also nicht fälschlich übersprungen.
-- Aus der Erinnerung wird eine eigene Kampagne (mit dem Hinweis *Erinnerung* in der Liste). Sie geht nur einmal raus und erinnert nicht noch einmal. Wer sich inzwischen abgemeldet hat, „Nicht stören“ gesetzt oder die Einwilligung widerrufen hat, wird übersprungen wie bei jeder Kampagne.
-- An einer fertig gesendeten Kampagne gibt es zusätzlich **Jetzt an Nicht-Öffner senden**. Ohne Nicht-Öffner entsteht keine Erinnerung (der Grund steht in der Karte).
+- Those who received the e-mail and **did not open or click it as a person** are reminded. A mail program loading images in the background doesn't count as an open – so these readers are not skipped by mistake.
+- The reminder becomes a campaign of its own (marked *Reminder* in the list). It goes out only once and doesn't remind again. Anyone who has unsubscribed in the meantime, set “Do not disturb” or withdrawn consent is skipped, as with any campaign.
+- On a campaign that has finished sending, there is also **Send to non-openers now**. Without non-openers, no reminder is created (the reason is shown in the card).
 
-## Zur besten Zeit senden
+## Send at the best time
 
-Unter *Versand* → **Sendezeit** → *Zur besten Zeit je Kontakt*. Innerhalb von 24 Stunden bekommt jeder Kontakt die Mail in der Stunde, in der er Mails sonst öffnet.
+Under *Sending* → **Send time** → *At the best time per contact*. Within 24 hours, each contact gets the e-mail in the hour in which they usually open e-mails.
 
-- Grundlage sind die **Öffnungen von Personen** (Tabelle `email_events`, keine maschinellen) der letzten Monate – je Kontakt eine Stundenverteilung in der Zeitzone des Projekts, mit Glättung über die Nachbarstunden (eine einzelne Öffnung um 3 Uhr nachts macht keine Bestzeit).
-- **Fallback:** Kontakte ohne eigene Daten bekommen die beliebteste Stunde des ganzen Projekts, ohne Daten überhaupt die *Standard-Sendestunde* (*Zustellbarkeit → Einstellungen*, Standard 10 Uhr).
-- Der Versand verteilt sich mit einem festen, je Kontakt unterschiedlichen Minutenversatz (kein Schwall zur vollen Stunde). Wer schon in seiner Stunde ist, bekommt die Mail sofort; alle anderen in der nächsten passenden Stunde, spätestens nach 24 Stunden. Die Zeit wird einmal beim Start berechnet (bei A/B-Tests beim Senden des Gewinners).
-- *Verteilung anzeigen* zeigt vorab, wie viele Empfänger auf welche Stunde fallen und wie viele Daten es gibt. Zeitumstellungen werden je Monat berücksichtigt; mitten im Monat kann eine Stunde abweichen.
-- Kombinierbar mit Planung (*Geplant für*) und mit dem Aufwärmplan.
+- The basis is the **opens by people** (table `email_events`, no machine opens) of the last months – per contact an hourly distribution in the project's time zone, smoothed over the neighboring hours (a single open at 3 a.m. doesn't make a best time).
+- **Fallback:** contacts without data of their own get the most popular hour of the whole project, and with no data at all the *default sending hour* (*Deliverability → Settings*, default 10 a.m.).
+- Sending is spread with a fixed minute offset that differs per contact (no rush on the full hour). Anyone already in their hour gets the e-mail immediately; all others in the next matching hour, after 24 hours at the latest. The time is calculated once at the start (for A/B tests when the winner is sent).
+- *Show distribution* shows beforehand how many recipients fall on which hour and how much data there is. Daylight saving changes are taken into account per month; in the middle of a month an hour may be off.
+- Can be combined with scheduling (*Scheduled for*) and with the warm-up plan.
 
-## Segmente nach Verhalten
+## Segments by behavior
 
-**Kampagnen → Segmente** (REST: `/api/segments`). Ein Segment ist eine gespeicherte Zielgruppe aus **Bedingungen**, verknüpft mit *alle* (UND) oder *mindestens eine* (ODER) – Gruppen lassen sich bis zu 4 Ebenen verschachteln (höchstens 60 Bedingungen), jede Bedingung und jede Gruppe kann mit *nicht* umgekehrt werden. Unten zeigt das Segment **live**, wie viele Kontakte passen, mit Beispielen.
+**Campaigns → Segments** (REST: `/api/segments`). A segment is a saved audience made of **conditions**, combined with *all* (AND) or *at least one* (OR) – groups can be nested up to 4 levels (at most 60 conditions), and every condition and every group can be reversed with *not*. At the bottom, the segment shows **live** how many contacts match, with examples.
 
-| Bedingung | Beispiel |
+| Condition | Example |
 | --- | --- |
-| E-Mail-Verhalten | hat geöffnet / geklickt / nicht geöffnet / erhalten – irgendeine oder eine bestimmte Kampagne, in den letzten N Tagen |
-| Kauf | hat (ein bestimmtes Produkt) gekauft / nicht gekauft, in den letzten N Tagen |
-| Seite besucht | Einstiegsseite eines Besuchs enthält `/preise`, in den letzten N Tagen (aus der Besucher-Erfassung der [Attribution](growth.md): Funnels, Websites, Links mit UTM) |
-| Formular | hat ein bestimmtes Formular ausgefüllt / nicht ausgefüllt |
-| Tag, Kontaktfeld | Tag vorhanden; Feld ist / enthält / beginnt mit / leer / größer als / vor einem Datum …, auch benutzerdefinierte Felder |
-| Einwilligung | Einwilligung für E-Mail, SMS oder WhatsApp liegt vor / fehlt (das Urteil der Versandregel) |
-| Letzte Aktivität, angelegt | innerhalb der letzten / länger her als N Tage; noch nie aktiv |
-| Interesse an Mails | aktiv in den letzten N Tagen / öffnet nie, obwohl mindestens X Mails ankamen |
-| Adressprüfung, Nicht stören | Adresse ist in Ordnung / riskant / ungültig / ungeprüft; hat „Nicht stören“ |
-| Anderes Segment | ist Mitglied in einem anderen gespeicherten Segment |
+| E-mail behavior | has opened / clicked / not opened / received – any campaign or a specific one, in the last N days |
+| Purchase | has bought (a specific product) / not bought, in the last N days |
+| Page visited | entry page of a visit contains `/preise`, in the last N days (from the visitor tracking of [attribution](growth.md): funnels, websites, links with UTM) |
+| Form | has submitted / not submitted a specific form |
+| Tag, contact field | tag present; field is / contains / starts with / empty / greater than / before a date …, also custom fields |
+| Consent | consent for e-mail, SMS or WhatsApp exists / is missing (the verdict of the send gate) |
+| Last activity, created | within the last / longer ago than N days; never active |
+| Interest in e-mails | active in the last N days / never opens although at least X e-mails arrived |
+| Address check, Do not disturb | address is OK / risky / invalid / unchecked; has “Do not disturb” |
+| Other segment | is a member of another saved segment |
 
-**Schnellstarts** im Dialog: *Geklickt, aber nicht gekauft*, *Lange nicht geöffnet*, *Neu im Verteiler*, *Preisseite besucht, nicht gekauft*, *Aktive Leser*.
+**Quick starts** in the dialog: *Clicked but did not buy*, *Not opened for a long time*, *New on the list*, *Visited the pricing page, did not buy*, *Active readers*.
 
-**Verwenden:**
-- **In Kampagnen:** Karte *Empfänger* → *Segment (Verhalten)*. Das Segment wird mit Tags und Smart List kombiniert (alles muss zutreffen). Die Versandregel gilt wie immer: Einwilligung, „Nicht stören“ und Adressprüfung bleiben davor.
-- **In Workflows:** Auslöser **Kontakt tritt einem Segment bei** und **… verlässt ein Segment** (`segment.entered`, `segment.left`). Dafür beim Segment *Beitritt und Austritt beobachten* einschalten; die Mitgliedschaft wird alle 5 Minuten neu berechnet. Beim Einschalten (und nach einer geänderten Definition) werden die heutigen Mitglieder nur gemerkt und lösen nichts aus.
-- *Kampagne starten* legt aus dem Segment sofort einen Entwurf an; *Kontakte ansehen* listet die Mitglieder.
+**Using them:**
+- **In campaigns:** card *Recipients* → *Segment (behaviour)*. The segment is combined with tags and smart list (everything has to apply). The send gate applies as always: consent, “Do not disturb” and address check still come first.
+- **In workflows:** triggers **Contact enters a segment** and **… leaves a segment** (`segment.entered`, `segment.left`). For this, turn on *Watch joins and leaves* on the segment; membership is recalculated every 5 minutes. When you turn it on (and after a changed definition), today's members are only noted and trigger nothing.
+- *Start campaign* creates a draft from the segment right away; *View contacts* lists the members.
 
-Ein Segment lässt sich nicht löschen, solange es von einem Entwurf, einer geplanten oder laufenden Kampagne, einem aktiven Workflow oder einem anderen Segment verwendet wird. Wird es trotzdem entfernt, erreicht eine Kampagne damit niemanden (nie alle).
+A segment can't be deleted while it is used by a draft, a scheduled or running campaign, an active workflow or another segment. If it is removed anyway, a campaign reaches nobody with it (never everyone).
 
-## WhatsApp-Kampagnen mit Vorlagen
+## WhatsApp campaigns with templates
 
-Kanal **WhatsApp** in der Kampagne. Gesendet wird eine von Meta **freigegebene Vorlage** (die Verbindung und die Vorlagen kommen aus *Einstellungen → Kanäle*, siehe [meta-channels.md](meta-channels.md)). Die Werte für die Platzhalter der Vorlage dürfen Merge-Felder enthalten (`{{contact.first_name|du}}`).
+Channel **WhatsApp** in the campaign. What is sent is a **template approved** by Meta (the connection and the templates come from *Settings → Channels*, see [meta-channels.md](meta-channels.md)). The values for the template's placeholders may contain merge fields (`{{contact.first_name|du}}`).
 
-- Die **Kategorie** liest der Server bei Meta, sie kommt nie aus dem Browser. **Marketing**-Vorlagen sind Werbung: Es bekommen nur Kontakte mit gültiger **WhatsApp-Einwilligung** die Nachricht (die [Versandregel](consent.md)). **Service-Vorlagen (Utility)** brauchen keine Werbeeinwilligung – „Nicht stören“ und fehlende Nummern bleiben aber ausgeschlossen. **Einmalcode-Vorlagen (Authentication)** lassen sich nicht als Kampagne senden.
-- Fehlende oder nicht freigegebene Vorlagen, nicht ausgefüllte Platzhalter und fehlende Verbindung werden vor dem Versand mit einer klaren Meldung abgelehnt. Die Empfängerzahl zeigt, wie viele wegen fehlender Einwilligung übersprungen werden.
-- Geschwindigkeit, Planung und Segmente gelten wie bei E-Mail; A/B-Test, Erinnerung und Sendezeit gibt es nur für E-Mail.
+- The server reads the **category** from Meta; it never comes from the browser. **Marketing** templates are advertising: only contacts with valid **WhatsApp consent** get the message (the [send gate](consent.md)). **Service templates (Utility)** need no advertising consent – “Do not disturb” and missing numbers stay excluded, though. **One-time-code templates (Authentication)** can't be sent as a campaign.
+- Missing or unapproved templates, unfilled placeholders and a missing connection are rejected before sending with a clear message. The recipient count shows how many are skipped because of missing consent.
+- Speed, scheduling and segments apply as with e-mail; A/B test, reminder and send time exist only for e-mail.
 
-## Warenkorbabbruch
+## Abandoned cart
 
-Auslöser **Checkout abgebrochen (Warenkorbabbruch)** (`checkout.abandoned`) und die Workflow-Vorlage **Warenkorbabbruch-Serie** (*Automationen → Neuer Workflow*).
+Trigger **Checkout abandoned (abandoned cart)** (`checkout.abandoned`) and the workflow template **Abandoned cart series** (*Automations → New workflow*).
 
-- Stripe meldet `checkout.session.expired`, wenn eine unbezahlte Bezahlseite nach 24 Stunden abläuft. **Dieses Ereignis im Stripe-Webhook aktivieren** (siehe [stripe.md](stripe.md)). Berücksichtigt werden nur Produkt-Käufe dieses Projekts, keine Rechnungslinks.
-- Der Kontakt wird an seiner E-Mail-Adresse erkannt (vom Checkout oder vom Kauf-Link). Unbekannte Adressen legen nur dann einen Kontakt an, wenn *Zustellbarkeit → Einstellungen → Warenkorbabbruch* das erlaubt – Standard: nein. Wer das Produkt inzwischen gekauft hat, bekommt nichts.
-- Auch der **Online-Shop** ([store.md](store.md#abandoned-carts)) meldet `checkout.abandoned`: ein Warenkorb mit E-Mail und ohne bezahlte Bestellung nach der eingestellten Zeit (Standard 60 Minuten). `{{event.recovery_url}}` führt dann zur Kasse mit dem Warenkorb, `{{event.source}}` ist `store`.
-- Der Kontakt bekommt den Tag `warenkorbabbruch` (der Kauf entfernt ihn wieder). Das Ereignis enthält `{{event.product_name}}`, `{{event.recovery_url}}` (Link zur Kaufseite), `{{event.amount_cents}}` und `{{event.currency}}`.
-- Die Vorlage sendet drei E-Mails aus der Vorlagengalerie (E-Commerce: *Warenkorb: du hast etwas vergessen*, *noch unsicher?*, *letzte Erinnerung*) nach 0, 2 und 5 Tagen. Nach jeder Wartezeit prüft ein Ziel, ob der Tag noch da ist; wer inzwischen gekauft hat, verlässt die Serie. Werbe-Mails brauchen auch hier eine gültige Einwilligung.
+- Stripe reports `checkout.session.expired` when an unpaid payment page expires after 24 hours. **Enable this event in the Stripe webhook** (see [stripe.md](stripe.md)). Only product purchases of this project are considered, no invoice links.
+- The contact is recognized by their e-mail address (from the checkout or the purchase link). Unknown addresses create a contact only if *Deliverability → Settings → Abandoned cart* allows it – default: no. Anyone who has bought the product in the meantime gets nothing.
+- The **online store** ([store.md](store.md#abandoned-carts)) also reports `checkout.abandoned`: a cart with an e-mail address and no paid order after the set time (default 60 minutes). `{{event.recovery_url}}` then leads to the checkout with the cart, `{{event.source}}` is `store`.
+- The contact gets the tag `warenkorbabbruch` (the purchase removes it again). The event contains `{{event.product_name}}`, `{{event.recovery_url}}` (link to the purchase page), `{{event.amount_cents}}` and `{{event.currency}}`.
+- The template sends three e-mails from the template gallery (E-commerce: *Warenkorb: du hast etwas vergessen* (“Cart: you forgot something”), *noch unsicher?* (“still unsure?”), *letzte Erinnerung* (“last reminder”)) after 0, 2 and 5 days. After each wait, a goal checks whether the tag is still there; anyone who has bought in the meantime leaves the series. Advertising e-mails need valid consent here too.
 
-## Vorlagengalerie
+## Template gallery
 
-**Kampagnen → Vorlagengalerie**: 60 fertige, responsive deutsche Vorlagen in 13 Kategorien – Newsletter, Angebot & Rabatt, Willkommen, Event & Einladung, Webinar, Kurs & Training, Rechnung & Zahlung, Feiertage & Saison, B2B & Vertrieb, Coach & Beratung, Handwerk & Dienstleistung, E-Commerce, Feedback & Reaktivierung.
+**Campaigns → Template gallery**: 60 ready-made, responsive German templates in 13 categories – Newsletter, Offer & discount, Welcome, Event & invitation, Webinar, Course & training, Invoice & payment, Holidays & seasons, B2B & sales, Coach & consulting, Trades & services, E-commerce, Feedback & reactivation.
 
-- **Suche** über Name, Beschreibung und Stichwörter (mit Umlaut-Toleranz: „gruesse“ findet „Grüße“); die Zahlen an den Kategorien gehören zur Suche.
-- Ein Klick öffnet die **Vorschau** (Computer und Smartphone, mit Beispieldaten). *Neue Kampagne damit anlegen* oder *Als eigene Vorlage speichern* (erscheint unter *Vorlagen*). Im Kampagnen-Entwurf übernimmt *Aus der Galerie wählen* die Vorlage in die aktuelle Kampagne (optional mit dem Betreff der Vorlage).
-- Die Vorlagen sind ganz normale Designs des [E-Mail-Designers](email-builder.md): danach lässt sich alles ändern. Sie haben Vorschautext, Footer mit Adresse und Abmeldelink, ausreichenden Kontrast und große Tippflächen. *Sie* / *du* und *Service* (Rechnung, Bestellung – keine Werbung) stehen an der Vorlage.
+- **Search** across name, description and keywords (umlaut-tolerant: “gruesse” finds “Grüße”); the numbers on the categories belong to the search.
+- A click opens the **preview** (computer and smartphone, with sample data). *Create a new campaign with it* or *Save as your own template* (appears under *Templates*). In the campaign draft, *Choose from the gallery* takes the template into the current campaign (optionally with the template's subject).
+- The templates are completely ordinary designs of the [e-mail designer](email-builder.md): you can change everything afterwards. They have preview text, a footer with address and unsubscribe link, sufficient contrast and large tap targets. *Sie* / *du* (formal/informal address) and *Service* (invoice, order – not advertising) are noted on the template.
 
-## Zustellbarkeit
+## Deliverability
 
-**Kampagnen → Zustellbarkeit** (die Prüfung von SPF, DKIM und DMARC der Absender-Domain steht in [deliverability.md](deliverability.md)).
+**Campaigns → Deliverability** (the check of SPF, DKIM and DMARC of the sender domain is in [deliverability.md](deliverability.md)).
 
-**Reputation.** Bounce-, Beschwerde- und Abmelderate der Kampagnen-Mails – gesamt, **je Kampagne, je Empfänger-Domain und je Woche** (30 Tage bis 1 Jahr):
+**Reputation.** Bounce, complaint and unsubscribe rate of the campaign e-mails – overall, **per campaign, per recipient domain and per week** (30 days to 1 year):
 
-| Wert | Warnung ab | kritisch ab |
+| Value | Warning from | Critical from |
 | --- | --- | --- |
-| Bounces | 2 % | 5 % |
-| Spam-Beschwerden | 0,1 % | 0,3 % |
-| Abmeldungen | 0,5 % | 1 % |
+| Bounces | 2% | 5% |
+| Spam complaints | 0.1% | 0.3% |
+| Unsubscribes | 0.5% | 1% |
 
-Unter 100 versendeten Mails sind Raten kaum aussagekräftig („zu wenig Daten“); nur mehrere Beschwerden warnen schon früh. Zu jeder Warnung steht, was zu tun ist. Abmeldungen werden der letzten Kampagnen-Mail zugerechnet, die der Kontakt in den 7 Tagen davor bekam. In der Kampagne und im Versandfenster erscheint die Warnung ebenfalls.
+Below 100 e-mails sent, rates are hardly meaningful (“too little data”); only several complaints warn early. Each warning says what to do. Unsubscribes are attributed to the last campaign e-mail the contact received in the 7 days before. The warning also appears in the campaign and in the sending window.
 
-**Aufwärmplan.** Neue Absender-Domains brauchen Zeit. Der Plan (*Behutsam* ca. 6 Wochen ab 20 Mails/Tag, *Standard* ca. 4 Wochen ab 50, *Zügig* ca. 2,5 Wochen ab 100) begrenzt die **Kampagnen-Mails pro Tag** und steigert das Limit täglich bis zum normalen Betrieb. Kampagnen halten sich beim Senden daran; was nicht mehr passt, geht am nächsten Tag raus, und Kontakte, die zuletzt Mails geöffnet haben, kommen zuerst. Werden die Werte kritisch, **halbiert sich das Limit**. *Pausieren* hebt die Begrenzung auf, bis man fortsetzt.
+**Warm-up plan.** New sender domains need time. The plan (*Gentle* about 6 weeks from 20 e-mails/day, *Standard* about 4 weeks from 50, *Fast* about 2.5 weeks from 100) limits the **campaign e-mails per day** and raises the limit daily until normal operation. Campaigns stick to it when sending; whatever no longer fits goes out the next day, and contacts who opened e-mails most recently come first. If the values become critical, **the limit is halved**. *Pause* lifts the limit until you resume.
 
-**Listenhygiene.**
-- **Wiederholte Soft Bounces:** Ab 3 (einstellbar 2–10) Zustellfehlern in Folge (90 Tage) wird die Adresse auf „Nicht stören“ gesetzt – automatisch jede Stunde oder per Klick (*Alle ausschließen*).
-- **Sunset-Segment:** Kontakte, die seit N Monaten (Standard 6) Mails bekommen, aber nie öffnen oder klicken, in einem automatisch angelegten Segment *Sunset: lange nicht geöffnet* – optional zusätzlich mit dem Tag `inaktiv`. Erst eine Reaktivierungs-Mail senden, dann bereinigen.
+**List hygiene.**
+- **Repeated soft bounces:** from 3 (adjustable 2–10) delivery failures in a row (90 days), the address is set to “Do not disturb” – automatically every hour or with a click (*Exclude all*).
+- **Sunset segment:** contacts who have been receiving e-mails for N months (default 6) but never open or click, in an automatically created segment *Sunset: not opened for a long time* – optionally also with the tag `inaktiv`. Send a reactivation e-mail first, then clean up.
 
-**Adressprüfung.** Prüft Schreibweise, ob die Domain Mails empfangen kann (**MX**, mit A-Eintrag als Rückfall, „Null-MX“ = ungültig), **Wegwerf-Domains**, **Funktionsadressen** (`info@`, `support@` …) und schlägt bei Tippfehlern in bekannten Domains (`gmial.com`) eine Korrektur vor. Ergebnis: *in Ordnung*, *riskant* (kommt an, ist aber eine schlechte Wette) oder *ungültig* (bounct). Neue Kontakte werden im Hintergrund geprüft; Kampagnen lassen ungültige Adressen aus (einstellbar auch für Wegwerf- und Funktionsadressen). Ein DNS-Ausfall macht eine Adresse nie ungültig. *Ungültige markieren* versieht sie mit dem Tag *E-Mail prüfen*; *Adressen von Hand prüfen* testet bis zu 200 Adressen sofort. Die DNS-Abfragen laufen nur auf dem laufenden Server (Tests und Offline-Läufe prüfen Schreibweise und Wortlisten).
+**Address check.** Checks spelling, whether the domain can receive e-mail (**MX**, with an A record as a fallback, “null MX” = invalid), **disposable domains**, **role addresses** (`info@`, `support@` …) and suggests a correction for typos in well-known domains (`gmial.com`). Result: *OK*, *risky* (arrives, but is a bad bet) or *invalid* (bounces). New contacts are checked in the background; campaigns leave out invalid addresses (adjustable for disposable and role addresses too). A DNS outage never makes an address invalid. *Tag invalid ones* gives them the tag *E-Mail prüfen* (“check e-mail”); *Check addresses by hand* tests up to 200 addresses immediately. The DNS queries only run on the running server (tests and offline runs check spelling and word lists).
 
-**Einstellungen:** Soft-Bounce-Grenze, automatisches Ausschließen, Monate bis „inaktiv“, Regeln der Adressprüfung, Standard-Sendestunde, Warenkorbabbruch für unbekannte Adressen.
+**Settings:** soft-bounce limit, automatic exclusion, months until “inactive”, rules of the address check, default sending hour, abandoned cart for unknown addresses.
 
-## Einstellungs-Center im Footer
+## Preference center in the footer
 
-Das [Einstellungs-Center](consent.md) (Themen und Kanäle wählen statt komplett abmelden) wird in Kampagnen-Mails automatisch **neben „Abmelden“** verlinkt, solange *Einstellungen → Einwilligung → Werbe-Mails verlinken die Einstellungsseite* an ist. Im Designer lässt sich der Linktext im Footer-Block ändern (*Einstellungs-Link*); wer einen eigenen Link mit `{{preferences_url}}` setzt, bekommt keinen zweiten. Der Abmeldelink bleibt in jedem Fall; Tracking leitet beide Links nicht um.
+The [preference center](consent.md) (choose topics and channels instead of unsubscribing completely) is linked automatically in campaign e-mails **next to “Unsubscribe”** as long as *Settings → Consent → Advertising e-mails link the preferences page* is on. In the designer, the link text can be changed in the footer block (*Preferences link*); if you set your own link with `{{preferences_url}}`, you don't get a second one. The unsubscribe link stays in any case; tracking doesn't redirect either link.
 
-## Bedingte Inhalte
+## Conditional content
 
-In jeder E-Mail, SMS, Workflow-Nachricht und jedem Dokument mit Platzhaltern lassen sich Abschnitte an Bedingungen knüpfen – im E-Mail-Designer einfach in einen Textblock schreiben:
+In every e-mail, SMS, workflow message and document with placeholders, you can tie sections to conditions – in the e-mail designer, simply write it into a text block:
 
 ```
 {{#if contact.tags has "VIP"}}Dein VIP-Rabatt: 20 %{{else}}Jetzt 10 % sichern{{/if}}
@@ -147,46 +149,46 @@ In jeder E-Mail, SMS, Workflow-Nachricht und jedem Dokument mit Platzhaltern las
 {{#if contact.custom.budget >= 5000}}…{{/if}}   {{#unless contact.phone}}Bitte Telefonnummer nachtragen.{{/unless}}
 ```
 
-- **Operatoren:** `==`, `!=`, `contains`/`enthält` (Text enthält), `has`/`hat` (Liste enthält – z. B. Tags), `>`, `>=`, `<`, `<=` (Zahlen); ohne Operator muss das Feld nur gefüllt sein, `not`/`!` davor kehrt um. Groß-/Kleinschreibung zählt nicht. Vor einem Wort-Operator steht ein Leerzeichen (`contact.tags has "VIP"`, nicht `contact.tagshas "VIP"`).
-- Blöcke dürfen verschachtelt sein und `{{else}}` haben; ein unvollständiger Block bleibt unverändert stehen (die Nachricht geht nie kaputt). Vorlagen über 2 Mio. Zeichen werden nicht ausgewertet und gehen unverändert raus.
-- Auf Websites gibt es dasselbe mit den Parametern des Links: `{{#if url.quelle == "facebook"}}…{{/if}}` ([sites.md](sites.md#seo--zugang)).
-- Technik: `services/template-conditions.ts` (Parser, rein, linear: handgeschriebener Tag-Scanner statt Regex mit Backtracking, damit eine präparierte Vorlage den Server nicht blockiert), eingehängt über `templatePass` in `core/template.ts` von `modules/template-conditions.ts`; Tests in `tests/gaps-sites-marketing.test.ts` und `tests/sec-w10b-template.test.ts`.
+- **Operators:** `==`, `!=`, `contains`/`enthält` (text contains), `has`/`hat` (list contains – e.g. tags), `>`, `>=`, `<`, `<=` (numbers); without an operator the field only has to be filled, `not`/`!` in front reverses it. Case doesn't matter. A word operator is preceded by a space (`contact.tags has "VIP"`, not `contact.tagshas "VIP"`).
+- Blocks may be nested and have `{{else}}`; an incomplete block stays as it is (the message never breaks). Templates over 2 million characters are not evaluated and go out unchanged.
+- On websites there is the same with the parameters of the link: `{{#if url.quelle == "facebook"}}…{{/if}}` ([sites.md](sites.md#seo--access)).
+- Technically: `services/template-conditions.ts` (parser, pure, linear: a hand-written tag scanner instead of a regex with backtracking, so a crafted template can't block the server), hooked in through `templatePass` in `core/template.ts` by `modules/template-conditions.ts`; tests in `tests/gaps-sites-marketing.test.ts` and `tests/sec-w10b-template.test.ts`.
 
-## REST-API und MCP
+## REST API and MCP
 
-| Endpunkt | Zweck |
+| Endpoint | Purpose |
 | --- | --- |
-| `GET /api/campaigns/:id/ab` | Ergebnisse des A/B-Tests (Varianten, Raten, Einschätzung, Stand) |
-| `POST /api/campaigns/:id/ab/winner` `{key?}` | Gewinner jetzt bestimmen (ohne `key` automatisch), solange der Test wartet |
-| `POST/DELETE /api/campaigns/:id/resend` | Erinnerung an Nicht-Öffner einrichten (`{subject, after_hours, sender_name?, now?}`) oder entfernen |
-| `GET /api/campaigns/:id/sto` | Verteilung der Sendestunden für die aktuelle Empfängerauswahl |
-| `PATCH /api/campaigns/:id` | zusätzlich `ab`, `resend`, `send_mode` (`now`/`sto`), `sender_name`, `wa_template` `{name, language, values}`; `filter.segment_id` |
-| `GET/POST /api/segments`, `GET/PATCH/DELETE /api/segments/:id`, `GET /api/segments/meta`, `POST /api/segments/count`, `GET /api/segments/:id/contacts`, `POST /api/segments/:id/count` | Segmente; `count` zählt eine ungespeicherte Definition `{definition}` |
-| `GET /api/email-gallery?q=&category=`, `GET /api/email-gallery/:key`, `POST /api/email-gallery/:key/use` `{target: 'template'\|'campaign', campaign_id?, name?}` | Vorlagengalerie |
-| `GET/POST/PUT/DELETE /api/deliverability/warmup` | Aufwärmplan (`{plan: conservative\|standard\|fast, domain?}`, `{paused}`) |
-| `GET /api/deliverability/reputation?days=` | Raten je Kampagne, Domain, Woche mit Schwellen und Warnungen |
-| `GET/PUT /api/deliverability/settings` | Einstellungen von Hygiene, Adressprüfung, Sendezeit, Warenkorbabbruch |
-| `GET /api/deliverability/hygiene`, `POST …/hygiene/suppress`, `POST …/hygiene/sunset` | Soft Bounces und Sunset |
-| `POST /api/email-validation/check` `{emails}`, `GET …/summary`, `POST …/scan`, `GET …/issues?verdict=`, `POST …/tag` | Adressprüfung |
+| `GET /api/campaigns/:id/ab` | Results of the A/B test (variants, rates, assessment, status) |
+| `POST /api/campaigns/:id/ab/winner` `{key?}` | Determine the winner now (automatically without `key`), while the test is waiting |
+| `POST/DELETE /api/campaigns/:id/resend` | Set up the reminder to non-openers (`{subject, after_hours, sender_name?, now?}`) or remove it |
+| `GET /api/campaigns/:id/sto` | Distribution of the sending hours for the current recipient selection |
+| `PATCH /api/campaigns/:id` | additionally `ab`, `resend`, `send_mode` (`now`/`sto`), `sender_name`, `wa_template` `{name, language, values}`; `filter.segment_id` |
+| `GET/POST /api/segments`, `GET/PATCH/DELETE /api/segments/:id`, `GET /api/segments/meta`, `POST /api/segments/count`, `GET /api/segments/:id/contacts`, `POST /api/segments/:id/count` | Segments; `count` counts an unsaved definition `{definition}` |
+| `GET /api/email-gallery?q=&category=`, `GET /api/email-gallery/:key`, `POST /api/email-gallery/:key/use` `{target: 'template'\|'campaign', campaign_id?, name?}` | Template gallery |
+| `GET/POST/PUT/DELETE /api/deliverability/warmup` | Warm-up plan (`{plan: conservative\|standard\|fast, domain?}`, `{paused}`) |
+| `GET /api/deliverability/reputation?days=` | Rates per campaign, domain, week with thresholds and warnings |
+| `GET/PUT /api/deliverability/settings` | Settings for hygiene, address check, send time, abandoned cart |
+| `GET /api/deliverability/hygiene`, `POST …/hygiene/suppress`, `POST …/hygiene/sunset` | Soft bounces and sunset |
+| `POST /api/email-validation/check` `{emails}`, `GET …/summary`, `POST …/scan`, `GET …/issues?verdict=`, `POST …/tag` | Address check |
 
-MCP-Tools: `ghl_campaign_ab_results` (A/B-Ergebnis und Erinnerung), `ghl_list_segments`, `ghl_segment_count`, `ghl_save_segment`, `ghl_email_gallery` (Liste, Suche, Vorlage übernehmen), `ghl_deliverability_report`. Rechte: Bereich *Kampagnen*; Segmente und Galerie dürfen alle mit Lesezugriff ansehen.
+MCP tools: `ghl_campaign_ab_results` (A/B result and reminder), `ghl_list_segments`, `ghl_segment_count`, `ghl_save_segment`, `ghl_email_gallery` (list, search, take over a template), `ghl_deliverability_report`. Permissions: area *Campaigns*; segments and gallery can be viewed by everyone with read access.
 
-## Für Entwickler
+## For developers
 
-Logik und Datenbank sind getrennt, jede Funktion hat ihr Modul – keine Funktion steckt in `server.ts` oder im Zustand.
+Logic and database are separate, every function has its own module – no function lives in `server.ts` or in state.
 
-| Datei | Inhalt |
+| File | Contents |
 | --- | --- |
-| `server/services/mk-ab.ts`, `mk-resend.ts` | Konfiguration, Aufteilung, Gewinner (rein) und die Zahlen aus der Datenbank |
-| `server/services/mk-sto.ts` | Stundenverteilung, Glättung, Bestzeit, Sendezeit je Kontakt |
-| `server/services/mk-segments.ts`, `modules/mk-segments.ts` | Definition prüfen, in **eine** SQL-Bedingung übersetzen, zählen, Beobachtung |
-| `server/services/campaign-run.ts` | Versandschleife: Zielgruppe, Aufteilung, Aufwärm-Limit, Sendezeit, WhatsApp, Gewinner, Erinnerung |
-| `server/services/mk-warmup.ts`, `mk-reputation.ts`, `mk-hygiene.ts`, `mk-validate.ts`, `modules/mk-deliverability.ts` | Zustellbarkeit |
-| `server/services/mk-whatsapp.ts` | Prüfung der WhatsApp-Vorlage einer Kampagne |
-| `server/services/mk-gallery*.ts`, `modules/mk-gallery.ts` | Vorlagen (Bausteine, Themen, 60 Designs), Suche, Vorschau |
-| `server/modules/mk-abandoned.ts` | Auslöser `checkout.abandoned` über `app.services.stripeTaps` und die Workflow-Vorlage |
-| `web/src/pages/Segments.tsx`, `EmailGallery.tsx`, `Deliverability*.tsx`, `CampaignAb.tsx`, `CampaignExtras.tsx` | Oberfläche (Segmente, Galerie und Zustellbarkeit werden erst beim Öffnen des Reiters geladen) |
+| `server/services/mk-ab.ts`, `mk-resend.ts` | Configuration, split, winner (pure) and the numbers from the database |
+| `server/services/mk-sto.ts` | Hourly distribution, smoothing, best time, send time per contact |
+| `server/services/mk-segments.ts`, `modules/mk-segments.ts` | Validate the definition, translate it into **one** SQL condition, count, watching |
+| `server/services/campaign-run.ts` | Sending loop: audience, split, warm-up limit, send time, WhatsApp, winner, reminder |
+| `server/services/mk-warmup.ts`, `mk-reputation.ts`, `mk-hygiene.ts`, `mk-validate.ts`, `modules/mk-deliverability.ts` | Deliverability |
+| `server/services/mk-whatsapp.ts` | Check of a campaign's WhatsApp template |
+| `server/services/mk-gallery*.ts`, `modules/mk-gallery.ts` | Templates (building blocks, themes, 60 designs), search, preview |
+| `server/modules/mk-abandoned.ts` | Trigger `checkout.abandoned` through `app.services.stripeTaps` and the workflow template |
+| `web/src/pages/Segments.tsx`, `EmailGallery.tsx`, `Deliverability*.tsx`, `CampaignAb.tsx`, `CampaignExtras.tsx` | Interface (segments, gallery and deliverability are only loaded when the tab is opened) |
 
-**Jeder Empfänger genau einmal:** Vor dem Senden wird der Empfänger belegt (Status *wird gesendet*); ein zweiter Versandlauf zur selben Zeit – „Senden“ und der Zeitplaner – überspringt ihn. Fertig ist die Kampagne erst, wenn nichts mehr wartet und nichts mehr unterwegs ist. Eine Nachricht, die bei einem Neustart des Servers unterwegs war, wird nicht wiederholt (der Anbieter kann sie schon angenommen haben): nach 30 Minuten steht sie als *Fehler* mit „Versand unterbrochen“ in der Liste.
+**Every recipient exactly once:** before sending, the recipient is reserved (status *sending*); a second sending run at the same time – “Send” and the scheduler – skips them. A campaign is only finished when nothing is waiting and nothing is in flight any more. A message that was in flight during a server restart is not repeated (the provider may have accepted it already): after 30 minutes it appears in the list as *Error* with “Versand unterbrochen” (“sending interrupted”).
 
-Tests: `tests/mk-*.test.ts` (A/B-Gewinner, Erinnerung, Sendezeit, Segmente und Zählung, Warenkorbabbruch, Aufwärm-Limits, Schwellen, Adressprüfung, WhatsApp, Galerie, Einstellungs-Link) und die Mandanten-Isolation in `tests/tenant-isolation.test.ts` (Seeds in `tests/security-fixtures.ts`).
+Tests: `tests/mk-*.test.ts` (A/B winner, reminder, send time, segments and counting, abandoned cart, warm-up limits, thresholds, address check, WhatsApp, gallery, preferences link) and tenant isolation in `tests/tenant-isolation.test.ts` (seeds in `tests/security-fixtures.ts`).

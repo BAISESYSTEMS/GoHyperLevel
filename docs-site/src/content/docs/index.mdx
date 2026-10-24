@@ -1,0 +1,45 @@
+---
+title: HyperLevel documentation
+description: Run, use and extend HyperLevel – the open-source business OS your AI agents run on.
+template: splash
+hero:
+  tagline: CRM, funnels, inbox, automations, courses, helpdesk and invoices in one open-source app – run by you and your AI agents over MCP and the REST API.
+  actions:
+    - text: Quick start
+      link: https://github.com/BAISESYSTEMS/GoHyperLevel#quick-start
+      icon: right-arrow
+    - text: Live demo
+      link: https://demo.gohyperlevel.com/demo
+      icon: external
+      variant: minimal
+    - text: GitHub
+      link: https://github.com/BAISESYSTEMS/GoHyperLevel
+      icon: github
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Self-host in minutes" icon="rocket">
+		Docker Compose, Hostinger, Coolify, Railway or plain Node.js – free under AGPL, unlimited users, 0 € per seat.
+	</Card>
+	<Card title="Built for AI agents" icon="seti:json">
+		340+ MCP tools and a full REST API. Claude, ChatGPT, Cursor or your own agent work with the same permissions, audit log and undo as your team.
+	</Card>
+	<Card title="Everything in one app" icon="puzzle">
+		CRM and pipelines, unified inbox, funnels and websites, workflows, courses and community, helpdesk, invoices and more.
+	</Card>
+	<Card title="Built to be modified" icon="pencil">
+		Every module is open. Fork it, extend it, send a pull request – contributions are very welcome.
+	</Card>
+</CardGrid>
+
+## Where to start
+
+<CardGrid>
+	<LinkCard title="Deploy options" href="/deploy/" description="Docker Compose, Hostinger, Coolify, Railway/Render, Node.js" />
+	<LinkCard title="Connect your AI agent" href="/ai-tools/" description="Claude Code, Codex, Cursor and ChatGPT via MCP" />
+	<LinkCard title="REST API & MCP" href="/api/" description="Endpoints, authentication, OpenAPI at /api/openapi.json" />
+	<LinkCard title="Security" href="/security/" description="How HyperLevel protects your data" />
+</CardGrid>

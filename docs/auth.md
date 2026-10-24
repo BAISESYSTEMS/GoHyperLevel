@@ -37,7 +37,7 @@ These routes are separate from the MCP OAuth server for ChatGPT/Claude.ai connec
 ## Google
 
 Uses the agency's Google OAuth app from **Agentur → Integrationen → Google & Microsoft (OAuth)** – the
-same one the calendar sync uses ([setup](self-hosting.md#google--microsoft-verbinden-oauth)).
+same one the calendar sync uses ([setup](self-hosting.md#connect-google--microsoft-oauth)).
 
 1. Google Cloud Console → *APIs & Services → Credentials* → your OAuth client (type *Web application*) →
    add `https://<base>/auth/sso/google/callback` to *Authorized redirect URIs*.
@@ -278,4 +278,4 @@ URLs, so this works without App Links on any self-hosted domain.
 
 ## API
 
-Endpoints are listed in [docs/api.md](api.md#anmeldung-sso--passkeys).
+Endpoints are listed in [docs/api.md](api.md#sign-in-sso--passkeys).

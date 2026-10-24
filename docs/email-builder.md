@@ -1,44 +1,46 @@
-# E-Mail-Designer (Drag & Drop)
+**English** · [Deutsch](email-builder.de.md)
 
-> 60 fertige deutsche Vorlagen stehen in der **Vorlagengalerie**; A/B-Tests, Segmente und Zustellbarkeit beschreibt [E-Mail-Marketing](email-marketing.md).
+# Email designer (drag & drop)
 
-Gestalte E-Mails wie in GoHighLevel: Blöcke links auf die Fläche ziehen, rechts einstellen, fertig. Der Designer steckt in
+> 60 ready-made German templates are in the **Template gallery**; A/B tests, segments and deliverability are described in [E-mail marketing](email-marketing.md).
 
-- **Kampagnen** → Kampagne öffnen → *Inhalt* → **Mit E-Mail-Designer gestalten**,
-- **Kampagnen → Vorlagen** → Vorlage (E-Mail) → **Mit E-Mail-Designer gestalten**,
-- **Automationen** → Schritt **E-Mail senden** → **Mit E-Mail-Designer gestalten**.
+Design e-mails the way you do in GoHighLevel: drag blocks onto the canvas on the left, adjust them on the right, done. The designer is available in
 
-Im [Einfach-Modus](theming.md#einfach-modus) liegen Ausrichtung, Abstände, Farben und Schriftgröße eines Blocks (beim Button auch Farben, Ecken und volle Breite, beim Bild die Breite), der Hintergrund und die Abstände eines Abschnitts und das Aussehen der ganzen Mail unter **Darstellung** – offen, sobald etwas vom Standard abweicht.
+- **Campaigns** → open a campaign → *Content* → **Design with the email designer**,
+- **Campaigns → Templates** → template (e-mail) → **Design with the email designer**,
+- **Automations** → step **Send email** → **Design with the email designer**.
 
-Einfache Text- oder HTML-Mails funktionieren weiter wie bisher; *Als Text schreiben* schaltet ein Design wieder ab. Es sind keine Zugangsdaten nötig – versendet wird über den Versand, der unter **Einstellungen → E-Mail & SMS** eingerichtet ist (ohne SMTP werden Mails nur gespeichert).
+In [simple mode](theming.md#einfach-modus), alignment, spacing, colors and font size of a block (for a button also colors, corners and full width, for an image the width), the background and spacing of a section, and the look of the whole e-mail are under **Appearance** – open as soon as something differs from the default.
 
-## Bedienung
+Plain text or HTML e-mails keep working as before; *Write as text* switches a design off again. No credentials are needed – e-mails go out through the sending method set up under **Settings → Email & SMS** (without SMTP, e-mails are only saved).
 
-| Bereich | Was es gibt |
+## Using the designer
+
+| Area | What you get |
 | --- | --- |
-| Links: Blöcke | **Layout** (Abschnitt mit 1, 2 oder 3 Spalten), **Inhalt**: Überschrift, Text, Bild, Button, Trennlinie, Abstand, Social Media, Video, HTML, Footer. Ziehen (oder antippen = hinter der Auswahl einfügen). **Meine Abschnitte**: gespeicherte, wiederverwendbare Abschnitte. **Vorlagen**: 6 Startvorlagen (Newsletter, Angebot, Event-Einladung, Bewertungsanfrage, Willkommen, Schlichter Brief). |
-| Mitte: Fläche | Blöcke verschieben (auch zwischen Spalten und Abschnitten), Abschnitte am Griff ziehen; Werkzeugleiste an Block/Abschnitt: hoch, runter, duplizieren, löschen. |
-| Rechts: Einstellungen | Je Block Inhalt und Darstellung (Abstände, Ausrichtung, Farben, Schriftgröße), je Abschnitt Spaltenaufteilung (50/50, 33/67, 67/33, 33/33/33), Hintergrund und Innenabstand. Ohne Auswahl: Breite (Standard 600 px), Hintergrund, Inhaltsfarbe, Schrift, Text- und Linkfarbe, Vorschautext (Preheader) und die Prüfung (Fehler/Hinweise). **Platzhalter einfügen** setzt `{{contact.first_name}}` & Co. an die Cursor-Stelle. |
-| Oben | Betreff, Rückgängig/Wiederholen (Strg+Z / Strg+Y), Desktop/Handy, **Vorschau** (mit Beispieldaten „Max Mustermann“), **Text** (die Text-Version), **Test** (Testmail an eine Adresse, Betreff mit `[TEST]`), Speichern, ✕ bzw. Esc schließt. Entf löscht den gewählten Block. |
+| Left: blocks | **Layout** (a section with 1, 2 or 3 columns), **Content**: heading, text, image, button, divider, spacer, social media, video, HTML, footer. Drag them (or tap = insert after the selection). **My sections**: saved, reusable sections. **Templates**: 6 starter templates (Newsletter, Offer, Event invitation, Review request, Welcome, Plain letter). |
+| Middle: canvas | Move blocks (also between columns and sections), drag sections by their handle; toolbar on a block/section: up, down, duplicate, delete. |
+| Right: settings | For each block its content and appearance (spacing, alignment, colors, font size), for each section the column split (50/50, 33/67, 67/33, 33/33/33), background and inner padding. With nothing selected: width (default 600 px), background, content color, font, text and link color, preview text (preheader) and the check (errors/hints). **Insert placeholder** puts `{{contact.first_name}}` & co. at the cursor. |
+| Top | Subject, undo/redo (Ctrl+Z / Ctrl+Y), desktop/phone, **Preview** (with sample data “Max Mustermann”), **Text** (the text version), **Test** (test e-mail to one address, subject with `[TEST]`), Save, ✕ or Esc closes. Del deletes the selected block. |
 
-Text-Blöcke kennen **fett** (`**fett**`), *kursiv* (`*kursiv*`), Links (`[Text](https://…)`) und Listen (Zeilen mit `- ` oder `1. `) – die Werkzeugleiste fügt das ein. Bilder kommen aus den Uploads (oder per Adresse), Video-Blöcke zeigen ein Vorschaubild (bei YouTube automatisch) mit Link zum Video.
+Text blocks support **bold** (`**bold**`), *italic* (`*italic*`), links (`[text](https://…)`) and lists (lines starting with `- ` or `1. `) – the toolbar inserts them. Images come from the uploads (or by address); video blocks show a thumbnail (automatic for YouTube) that links to the video.
 
-**Footer:** Firmenname, Adresse (Standard `{{location.address}}` aus *Einstellungen → Firma*), Hinweistext, Abmeldelink und optional ein **Einstellungs-Link** (Text frei wählbar; ohne eigenen Eintrag ergänzt der Versand „Einstellungen“ neben „Abmelden“, solange das [Einstellungs-Center](consent.md) verlinkt wird). In **Kampagnen ist der Footer Pflicht** – ohne Footer oder ohne Adresse startet der Versand nicht. Fehlt er in Vorlagen oder Workflow-Mails, wird automatisch ein kleiner Footer mit Firma, Adresse und Abmeldelink angehängt.
+**Footer:** company name, address (default `{{location.address}}` from *Settings → Company*), notice text, unsubscribe link and an optional **preferences link** (the text is up to you; without your own entry, sending adds “Einstellungen” (settings) next to “Abmelden” (unsubscribe) as long as the [preference center](consent.md) is linked). In **campaigns the footer is mandatory** – without a footer or without an address, sending does not start. If it is missing in templates or workflow e-mails, a small footer with company, address and unsubscribe link is appended automatically.
 
-## Was beim Speichern passiert
+## What happens when you save
 
-Das Design wird als JSON (`design`) neben dem Text gespeichert. Der **Server** erzeugt daraus
+The design is saved as JSON (`design`) next to the text. The **server** turns it into
 
-- das fertige HTML (`body`, `is_html = 1`): Tabellen-Layout mit Inline-Styles, Outlook-Buttons (VML), Spalten stehen auf dem Handy untereinander, Dunkelmodus-Hinweise, Alternativtexte, escapter Text, nur `http(s)`-, `mailto:`- und `tel:`-Links, HTML-Blöcke ohne Skripte/Formulare/iframes,
-- die Text-Version (`body_text`), aus dem Design gebaut (Links als „Text (Adresse)“, Buttons als „Beschriftung: Adresse“).
+- the finished HTML (`body`, `is_html = 1`): table layout with inline styles, Outlook buttons (VML), columns stacked on phones, dark-mode hints, alt texts, escaped text, only `http(s)`, `mailto:` and `tel:` links, HTML blocks without scripts/forms/iframes,
+- the text version (`body_text`), built from the design (links as “text (address)”, buttons as “label: address”).
 
-Platzhalter bleiben im HTML stehen und werden erst beim Versand je Empfänger ersetzt (Werte HTML-sicher). Der persönliche Abmeldelink steht im gespeicherten HTML als `%%unsubscribe_url%%` und wird beim Versand eingesetzt; im Text kannst du ihn mit `{{unsubscribe_url}}` selbst verlinken. Öffnungs-/Klick-Tracking und Trigger-Links funktionieren wie bei allen anderen Mails.
+Placeholders stay in the HTML and are only replaced per recipient when sending (values are HTML-safe). The personal unsubscribe link is stored in the saved HTML as `%%unsubscribe_url%%` and filled in when sending; in the text you can link it yourself with `{{unsubscribe_url}}`. Open/click tracking and trigger links work as with all other e-mails.
 
-Weil der Server rendert, verschicken API, MCP und Workflows immer das fertige HTML – sie müssen nichts über Designs wissen.
+Because the server renders, the API, MCP and workflows always send the finished HTML – they don't need to know anything about designs.
 
 ## API
 
-Felder an `POST /api/templates`, `PATCH /api/templates/:id`, `POST /api/campaigns`, `PATCH /api/campaigns/:id` und an Workflow-Schritten `send_email` (in `steps`):
+Fields on `POST /api/templates`, `PATCH /api/templates/:id`, `POST /api/campaigns`, `PATCH /api/campaigns/:id` and on workflow steps `send_email` (in `steps`):
 
 ```json
 {
@@ -59,20 +61,20 @@ Felder an `POST /api/templates`, `PATCH /api/templates/:id`, `POST /api/campaign
 }
 ```
 
-- Blocktypen: `heading` (`text`, `level` 1–3), `text` (`text`), `image` (`src`, `alt`, `href`, `width`), `button` (`label`, `href`, `background`, `textColor`, `radius`, `fullWidth`), `divider` (`color`, `thickness`, `width` %), `spacer` (`height`), `social` (`variant: icons|text`, `items: [{network, url}]`, Netzwerke: facebook, instagram, linkedin, x, youtube, tiktok, whatsapp, website, email), `video` (`url`, `thumbnail`, `caption`, `alt`), `html` (`html`), `footer` (`company`, `address`, `text`, `unsubscribeLabel`). `style` je Block: `paddingY`, `paddingX`, `align`, `color`, `background`, `fontSize`.
-- Fehlende Werte bekommen Standardwerte, Farben müssen `#rgb`/`#rrggbb` sein, Zahlen werden begrenzt; unbekannte Blocktypen → 400.
-- Antwort enthält `design` (bereinigt), `body` (HTML) und `body_text`. `design: null` schaltet zurück auf eine einfache Mail; ein neuer `body` ohne `design` verwirft das Design ebenfalls.
-- `GET /api/templates/:id` liefert eine Vorlage samt Design.
+- Block types: `heading` (`text`, `level` 1–3), `text` (`text`), `image` (`src`, `alt`, `href`, `width`), `button` (`label`, `href`, `background`, `textColor`, `radius`, `fullWidth`), `divider` (`color`, `thickness`, `width` %), `spacer` (`height`), `social` (`variant: icons|text`, `items: [{network, url}]`, networks: facebook, instagram, linkedin, x, youtube, tiktok, whatsapp, website, email), `video` (`url`, `thumbnail`, `caption`, `alt`), `html` (`html`), `footer` (`company`, `address`, `text`, `unsubscribeLabel`). `style` per block: `paddingY`, `paddingX`, `align`, `color`, `background`, `fontSize`.
+- Missing values get defaults, colors must be `#rgb`/`#rrggbb`, numbers are clamped; unknown block types → 400.
+- The response contains `design` (cleaned up), `body` (HTML) and `body_text`. `design: null` switches back to a plain e-mail; a new `body` without `design` also discards the design.
+- `GET /api/templates/:id` returns a template including its design.
 
-Rund um den Designer:
+Around the designer:
 
-| Endpunkt | Zweck |
+| Endpoint | Purpose |
 | --- | --- |
-| `GET /api/email-builder/starters` | Startvorlagen `[{key, name, description, subject, design}]` |
-| `POST /api/email-builder/render` `{design, campaign?}` | HTML, Text und Prüfung `issues: [{level: error\|warning, text}]`, ohne zu speichern |
-| `POST /api/email-builder/test` `{design, subject, to, contact_id?}` | Testmail (Platzhalter mit Beispiel- oder Kontaktdaten, höchstens 20 je 10 Minuten) |
-| `GET/POST /api/email-builder/sections`, `DELETE /api/email-builder/sections/:id` | Gespeicherte Abschnitte `{name, section}` |
+| `GET /api/email-builder/starters` | Starter templates `[{key, name, description, subject, design}]` |
+| `POST /api/email-builder/render` `{design, campaign?}` | HTML, text and the check `issues: [{level: error\|warning, text}]`, without saving |
+| `POST /api/email-builder/test` `{design, subject, to, contact_id?}` | Test e-mail (placeholders filled with sample or contact data, at most 20 per 10 minutes) |
+| `GET/POST /api/email-builder/sections`, `DELETE /api/email-builder/sections/:id` | Saved sections `{name, section}` |
 
-MCP: `ghl_list_email_templates` (Vorlagen + Startvorlagen) und `ghl_save_email_template` (`name`, `subject`, `body` oder `design` oder `starter`).
+MCP: `ghl_list_email_templates` (templates + starter templates) and `ghl_save_email_template` (`name`, `subject`, `body` or `design` or `starter`).
 
-Rechte: alles unter *Kampagnen & Vorlagen*; Startvorlagen und Abschnitte sind für alle Logins des Sub-Accounts lesbar (auch für den Workflow-Editor).
+Permissions: everything under *Campaigns & templates*; starter templates and sections can be read by all logins of the sub-account (including the workflow editor).

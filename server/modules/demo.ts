@@ -9,13 +9,14 @@ import { blockedConnections, installOutboundGuard, outboundGuardActive } from '.
 /**
  * Demo mode (PGHL_DEMO_MODE=1) for a public try-it-out instance:
  *
- * - fills an empty database with fictional demo data (services/demo-seed.ts) and resets it every night
- *   (PGHL_DEMO_RESET_HOUR, default 3 o'clock in PGHL_TIMEZONE/Europe/Berlin);
+ * - fills an empty database with fictional demo data (services/demo-seed.ts) and resets it at each reset hour
+ *   (PGHL_DEMO_RESET_HOURS, e.g. "3,11,19", else PGHL_DEMO_RESET_HOUR, default 3 o'clock in PGHL_TIMEZONE/Europe/Berlin);
  * - nothing leaves the server: every outgoing connection (e-mail, SMS, WhatsApp, social, payments,
  *   webhooks, AI, push …) is refused at the socket level and only logged (services/outbound-guard.ts);
  * - writes that would lock others out or configure real providers are refused with a clear message;
  * - the login page shows the demo login, every page a banner (GET /api/version → demo); public pages (websites, forms …) a
- *   note not to enter real data, and `X-Robots-Tag: noindex`;
+ *   note not to enter real data, and `X-Robots-Tag: noindex` – and only to a visitor inside the demo (a demo session), so a
+ *   page built in the demo cannot be sent to strangers as a phishing page;
  * - own domains (websites, client logins, help centre) cannot be connected – no certificate for a stranger's domain.
  *
  * Safety: a database that already has users but was not seeded by demo mode is never wiped.
@@ -50,7 +51,14 @@ const DOMAIN_WRITES: [path: RegExp, pick: (body: any) => unknown][] = [
 ];
 
 /** Shown on every public page of a demo (websites, forms, booking …): nobody should type real data or passwords into it. */
-export const DEMO_PAGE_NOTE = 'Demo-Instanz: Alle Daten werden jede Nacht gelöscht. Bitte hier keine echten Daten oder Passwörter eingeben.';
+export const DEMO_PAGE_NOTE = 'Demo-Instanz: Alle Daten werden mehrmals täglich gelöscht. Bitte hier keine echten Daten oder Passwörter eingeben.';
+
+/** What a public demo page shows to someone outside the demo (no demo session): a link to it proves nothing and asks for nothing. */
+export const DEMO_OUTSIDE_NOTE = 'Diese Seite gehört zur öffentlichen HyperLevel-Demo und ist nur innerhalb der Demo sichtbar.';
+const demoOutsideHtml = () =>
+  `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>HyperLevel Demo</title></head>` +
+  `<body style="margin:0;min-height:100vh;display:grid;place-items:center;font:16px/1.5 system-ui,sans-serif;background:#f6f7f9;color:#1d2433">` +
+  `<main style="max-width:32rem;padding:2rem;text-align:center"><p>${DEMO_OUTSIDE_NOTE}</p><p><a href="/demo" style="color:#2563eb">Demo öffnen</a></p></main></body></html>`;
 const demoNoteHtml = () =>
   `<div role="note" data-pghl-demo style="position:relative;z-index:2147483647;margin:0;padding:8px 14px;background:#fff7d6;color:#3d2e00;border-bottom:1px solid #e9d27a;font:600 14px/1.4 system-ui,sans-serif;text-align:center">${DEMO_PAGE_NOTE}</div>`;
 
@@ -86,6 +94,20 @@ export function demoBlocks(ctx: Pick<Ctx, 'method' | 'path' | 'body'> & { demoSe
 function localDayHour(at: Date, timeZone: string): { day: string; hour: number } {
   const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23' }).formatToParts(at).map((p) => [p.type, p.value]));
   return { day: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour) };
+}
+
+/** The reset hours: PGHL_DEMO_RESET_HOURS ("3,11,19"), else PGHL_DEMO_RESET_HOUR, default 3; sorted, invalid entries dropped. */
+export function demoResetHours(env: NodeJS.ProcessEnv = process.env): number[] {
+  const raw = String(env.PGHL_DEMO_RESET_HOURS ?? env.PGHL_DEMO_RESET_HOUR ?? '3');
+  const hours = [...new Set(raw.split(',').map((s) => s.trim()).filter(Boolean).map(Number))].filter((h) => Number.isInteger(h) && h >= 0 && h <= 23);
+  return hours.length ? hours.sort((a, b) => a - b) : [3];
+}
+
+/** The reset that is due at `at`: the local day plus the latest reset hour that has passed; null before the first one of the day. */
+export function dueResetSlot(at: Date, timeZone: string, hours: number[]): string | null {
+  const { day, hour } = localDayHour(at, timeZone);
+  const passed = hours.filter((h) => h <= hour);
+  return passed.length ? `${day}@${Math.max(...passed)}` : null;
 }
 
 /** Empties every data table (keeps the migrations and the demo bookkeeping) and the upload folders. */
@@ -129,7 +151,9 @@ export const demoModule: Module = {
     const getState = (key: string) => app.db.get<{ value: string }>('SELECT value FROM demo_state WHERE key = ?', key)?.value;
     const setState = (key: string, value: string) => app.db.run('INSERT INTO demo_state (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value', key, value);
     const tz = () => process.env.PGHL_TIMEZONE || 'Europe/Berlin';
-    const resetHour = () => Math.min(23, Math.max(0, Number(process.env.PGHL_DEMO_RESET_HOUR ?? 3) || 0));
+    const resetHours = () => demoResetHours();
+    /** The slot stored after a reset: the one due now, or just the day before the first reset hour has passed. */
+    const currentSlot = () => dueResetSlot(new Date(), tz(), resetHours()) ?? localDayHour(new Date(), tz()).day;
 
     let busy: Promise<unknown> | null = null;
     let refused = false;
@@ -146,7 +170,7 @@ export const demoModule: Module = {
         wipeData(app);
         const r = await seedDemo(app, demoCredentials());
         setState(SEEDED_KEY, now());
-        setState(RESET_KEY, localDayHour(new Date(), tz()).day);
+        setState(RESET_KEY, currentSlot());
         console.log(`[demo] Demo-Daten ${reason}: ${r.locations.length} Sub-Accounts, ${r.ok} Schritte${r.failed.length ? `, ${r.failed.length} übersprungen` : ''}`);
         if (r.failed.length) console.warn('[demo] übersprungen:', r.failed.slice(0, 20).join(' | '));
         return r;
@@ -157,7 +181,7 @@ export const demoModule: Module = {
       enabled,
       reset,
       blocked: blockedConnections,
-      info: () => (enabled ? { enabled: true, login: demoCredentials(), reset_hour: resetHour(), timezone: tz(), last_reset: getState(SEEDED_KEY) ?? null } : null),
+      info: () => (enabled ? { enabled: true, login: demoCredentials(), reset_hour: resetHours()[0], reset_hours: resetHours(), timezone: tz(), last_reset: getState(SEEDED_KEY) ?? null } : null),
     };
 
     if (!enabled) return;
@@ -171,12 +195,22 @@ export const demoModule: Module = {
     });
 
     // Public pages (websites, forms, booking, help centre …) carry a visible note and stay out of search engines – a page a
-    // visitor builds in the demo must not pass for a real one.
+    // visitor builds in the demo must not pass for a real one. Only a visitor inside the demo (a live demo session) sees them:
+    // a link to a demo page sent to a stranger shows a neutral notice, so nobody can host a phishing page on the demo.
+    const inDemo = (ctx: Ctx) => {
+      const sid = ctx.cookies[SESSION_COOKIE];
+      return !!sid && !!app.db.get('SELECT 1 FROM sessions WHERE token_hash = ? AND expires_at > ?', sha256(sid), now());
+    };
     app.services.htmlTransforms = [
       ...(app.services.htmlTransforms ?? []),
-      (_ctx: Ctx, r: RawResult) => {
-        r.body = withDemoNote(String(r.body));
+      (ctx: Ctx, r: RawResult) => {
+        if (inDemo(ctx)) r.body = withDemoNote(String(r.body));
+        else {
+          r.status = 403;
+          r.body = demoOutsideHtml();
+        }
         r.headers['x-robots-tag'] = 'noindex, nofollow';
+        r.headers['cache-control'] = 'private, no-store';
       },
     ];
 
@@ -218,10 +252,10 @@ export const demoModule: Module = {
       wait.unref();
     }
 
-    // Nightly reset once the configured hour has passed in the demo's time zone.
+    // A reset each time one of the reset hours has passed in the demo's time zone (once a night by default).
     app.onTick(async () => {
-      const { day, hour } = localDayHour(new Date(), tz());
-      if (hour < resetHour() || getState(RESET_KEY) === day || !getState(SEEDED_KEY)) return;
+      const slot = dueResetSlot(new Date(), tz(), resetHours());
+      if (!slot || getState(RESET_KEY) === slot || !getState(SEEDED_KEY)) return;
       await reset('zurückgesetzt');
     });
   },

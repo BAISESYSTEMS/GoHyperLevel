@@ -61,7 +61,7 @@ export const CRM_TOURS: Tour[] = [
     routes: ['conversations'],
     keywords: 'inbox posteingang nachricht whatsapp sms email chat antworten entwurf',
     learned: ['Konversationen filtern (neu, markiert, Entwürfe, Kanal)', 'Eine Konversation öffnen und antworten', 'Antwortvorschläge des KI-Assistenten nutzen', 'Wo E-Mail-Entwürfe landen'],
-    docs: { label: 'WhatsApp, Messenger & Instagram', file: 'meta-channels' },
+    docs: { label: 'WhatsApp, Messenger & Instagram', file: 'meta-channels.de' },
     steps: [
       { title: 'Ein Posteingang für alles', route: 'conversations', target: 'page-head', text: 'Hier landen E-Mails, SMS, Website-Chat, WhatsApp, Messenger, Instagram und Anrufe aller Kontakte – sortiert nach der neuesten Nachricht.' },
       { title: 'Filtern', target: 'inbox-filters', text: 'Suche, „Neu“ (ungelesen), ★ markiert, **Entwürfe** (z. B. vom KI-Assistenten oder aus dem E-Mail-Import) und darunter der Kanal-Filter.' },
@@ -83,7 +83,7 @@ export const CRM_TOURS: Tour[] = [
     routes: ['calls'],
     keywords: 'telefon anruf voicemail verpasst zurückrufen twilio browser telefon wählen',
     learned: ['Verpasste Anrufe und Voicemails finden', 'Aufnahmen und Transkriptionen anhören', 'Zurückrufen – übers Handy oder im Browser', 'Wo die Telefonie eingerichtet wird'],
-    docs: { label: 'Telefonie einrichten', file: 'self-hosting', anchor: 'telefonie-twilio' },
+    docs: { label: 'Telefonie einrichten', file: 'self-hosting.de', anchor: 'telefonie-twilio' },
     steps: [
       { title: 'Die Anrufliste', route: 'calls', target: 'page-head', text: 'Alle ein- und ausgehenden Anrufe über deine Twilio-Nummer – mit Kontakt, Dauer, Voicemail und Aufnahme.' },
       { title: 'Noch nicht eingerichtet?', target: 'calls-setup', optional: true, text: 'Solange Twilio fehlt, steht hier, was noch zu tun ist. Eingerichtet wird unter **Einstellungen → Telefonie**.', missing: 'Die Telefonie ist eingerichtet – sehr gut.' },
@@ -130,7 +130,7 @@ export const CRM_TOURS: Tour[] = [
     routes: ['settings/account', 'calendars'],
     keywords: 'google kalender outlook ical sync abgleich doppelt gebucht oauth',
     learned: ['Den eigenen Google-/Outlook-Kalender per Klick verbinden', 'Welche Kalender Buchungen blockieren und wohin neue Termine geschrieben werden', 'Die iCal-Alternative ohne OAuth-App'],
-    docs: { label: 'Google & Microsoft verbinden', file: 'self-hosting', anchor: 'google--microsoft-verbinden-oauth' },
+    docs: { label: 'Google & Microsoft verbinden', file: 'self-hosting.de', anchor: 'google--microsoft-verbinden-oauth' },
     steps: [
       { title: 'Pro Person verbunden', route: 'settings/account', target: 'calendar-connections', text: 'Jede Person verbindet ihren eigenen Kalender unter **Mein Konto**. Termine dort blockieren die Buchungsseiten, gebuchte Termine landen automatisch im Kalender.' },
       { title: 'Verbinden', target: 'calendar-connections', text: 'Mit „Mit Google verbinden“ bzw. „Mit Microsoft verbinden“ meldest du dich beim Anbieter an. Danach wählst du, welche Kalender belegte Zeiten liefern und in welchen neue Termine geschrieben werden.' },
@@ -208,7 +208,7 @@ export const CRM_TOURS: Tour[] = [
     practice: true,
     keywords: 'aufgabe todo erledigt fällig überfällig todoist',
     learned: ['Eine Aufgabe mit Fälligkeit anlegen', 'Aufgaben abhaken, wieder öffnen und erledigte ansehen', 'Dass überfällige Aufgaben rot erscheinen und im Dashboard auftauchen'],
-    docs: { label: 'Todoist-Abgleich', file: 'todoist' },
+    docs: { label: 'Todoist-Abgleich', file: 'todoist.de' },
     steps: [
       { title: 'Deine Aufgaben', route: 'tasks', target: 'page-head', text: 'Alle offenen Aufgaben dieses Sub-Accounts – auch die, die an Kontakten hängen oder von Workflows angelegt wurden.' },
       { title: 'Neue Aufgabe', target: 'tasks-title', kind: 'fill', text: 'Was ist zu tun? Ein kurzer, klarer Satz reicht.', do: 'Tippe eine Aufgabe ein, z. B. „Angebot nachfassen“.', demo: { fill: 'Angebot nachfassen' } },

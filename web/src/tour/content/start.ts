@@ -36,7 +36,7 @@ export const START_TOURS: Tour[] = [
     routes: ['academy'],
     keywords: 'akademie tour guide übung sandbox handbuch abzeichen übergabe',
     learned: ['Den Gesamt-Guide starten und fortsetzen', 'Modul-Touren suchen und wiederholen', 'In der **Übungs-Firma** gefahrlos üben', 'Das Handbuch drucken oder als PDF speichern'],
-    docs: { label: 'Akademie', file: 'academy' },
+    docs: { label: 'Akademie', file: 'academy.de' },
     steps: [
       { title: 'Der Gesamt-Guide', route: 'academy', target: 'academy-journey', text: '„Firma übernehmen“ führt dich in 14 Kapiteln durch alles, was du zum Führen der Firma brauchst. Jedes Kapitel lässt sich einzeln machen und später fortsetzen.' },
       { title: 'Modul-Touren', target: 'academy-tours', text: 'Für jeden Bereich gibt es eine kurze Tour mit 5–15 Schritten. Erledigte bekommen ein ✓, angefangene ein „Weitermachen“.' },

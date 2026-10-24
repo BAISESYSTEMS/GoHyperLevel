@@ -281,7 +281,7 @@ describe('landing: the agentic sections', () => {
   });
 
   it('renders a spotlight with its picture only when the screenshot exists, and reads WebP and PNG sizes', () => {
-    const x = (shots: AgenticCtx['shots']): AgenticCtx => ({ a: AGENTIC.en, shots, nums: { tools: '354', themes: '19', iconPacks: '6' }, gh: 'https://github.com/BAISESYSTEMS/hyperlevel' });
+    const x = (shots: AgenticCtx['shots']): AgenticCtx => ({ a: AGENTIC.en, shots, nums: { tools: '354', themes: '19', iconPacks: '6' }, gh: 'https://github.com/BAISESYSTEMS/GoHyperLevel' });
     const without = academySection(x([]));
     expect(without).toContain('class="spot nofig"');
     expect(without).not.toContain('<img');
@@ -337,7 +337,7 @@ describe('landing: the agentic sections', () => {
     expect(LOGOS.map((l) => l.name)).toEqual(expect.arrayContaining(['Claude', 'OpenAI', 'Gemini']));
     expect(LOGOS.some((l) => /anthropic|claude|openai/i.test(l.icon?.id ?? ''))).toBe(false);
     for (const lang of ['de', 'en'] as const) {
-      const out = logosHtml(AGENTIC[lang].logos, 'https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md');
+      const out = logosHtml(AGENTIC[lang].logos, 'https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/integrations.md');
       expect(out).toContain(lang === 'de' ? 'Verbindet sich mit deinen Lieblings-Tools' : 'Integrates with your favorite tools');
       expect(out).toContain(lang === 'de' ? 'Marken ihrer Inhaber' : 'trademarks of their owners');
       // the list once for screen readers, its copy for the endless slide hidden from them
@@ -383,6 +383,8 @@ describe('landing page (PGHL_LANDING=1)', () => {
   beforeAll(async () => {
     process.env.PGHL_LANDING = '1';
     t = await startTestApp();
+    // Never ask the real GitHub API from a test: the public repository's star count would show up on the page.
+    t.app.services.landingFetch = async () => new Response('not found', { status: 404 });
     await t.setup();
     const dir = join(t.app.config.webDir, 'landing');
     mkdirSync(dir, { recursive: true });
@@ -424,7 +426,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
     expect(home).toMatch(/<meta property="og:image" content="http:\/\/localhost\/landing\/og-en\.png">/);
     expect(home).toContain('<link rel="alternate" hreflang="de" href="http://localhost/de">');
     expect(home).toContain('codex mcp add gohyperlevel --url https://localhost/mcp');
-    expect(home).toContain('curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash');
+    expect(home).toContain('curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash');
     expect(home).toContain('https://demo.gohyperlevel.com');
     // Prices: list prices without cloud mode, VAT note, white-label headline of the Agentur plan.
     for (const s of ['€49.99', '€99.99', '€199', 'or €479 a year', 'or €959 a year', 'or €1,910 a year', 'Stripe Tax', 'White-label on the Agency plan']) expect(home, s).toContain(s);
@@ -509,7 +511,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
       expect(body).toContain(h(a.jarvis.h2));
       expect(body.match(/<li class="card"><span class="usp-i">/g)).toHaveLength(9);
       expect(body).toContain(`<b>${ACADEMY.chapters}</b>`);
-      expect(body).toContain('https://github.com/BAISESYSTEMS/hyperlevel/blob/main/CONTRIBUTING.md');
+      expect(body).toContain('https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md');
       expect(body).toContain('label%3A%22good+first+issue%22');
       expect(body).toContain(`· ${a.builtWith}</span>`);
       // live numbers: themes and icon packs from the appearance model, workflow counts like the catalogue

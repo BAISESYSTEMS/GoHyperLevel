@@ -13,7 +13,7 @@ export const AI_TOURS: Tour[] = [
     routes: ['settings/ai'],
     keywords: 'ki ai claude assistent chatbot antwortvorschlag wissen anthropic limit',
     learned: ['Den Anthropic-Schlüssel hinterlegen (er wird nie wieder angezeigt)', 'Modell, Name und Tonfall wählen', 'Wissen pflegen, damit Antworten stimmen', 'Chat-Bot und Monatslimit einstellen'],
-    docs: { label: 'KI-Assistent', file: 'ai-assistant' },
+    docs: { label: 'KI-Assistent', file: 'ai-assistant.de' },
     steps: [
       { title: 'KI-Assistent', route: 'settings/ai', target: 'ai-status', text: 'Oben siehst du, ob der Assistent an ist, welches Modell läuft und wie viel diesen Monat schon verbraucht wurde.' },
       { title: 'Der Schlüssel', target: 'ai-key', text: 'Den Anthropic-API-Schlüssel bekommst du in der Anthropic Console. Er wird verschlüsselt gespeichert und **nie wieder angezeigt** – die Kosten laufen über dein Anthropic-Konto.' },
@@ -38,7 +38,7 @@ export const AI_TOURS: Tour[] = [
     routes: ['settings/telephony'],
     keywords: 'ki telefon agent voice anruf annehmen termin buchen stimme',
     learned: ['Wann der Agent abnimmt (immer, außerhalb der Zeiten, wenn niemand abnimmt)', 'Begrüßung, Persona und Anweisungen', 'Was nach dem Anruf passiert (Zusammenfassung, Aufgabe, Termin)', 'Dass Telefonie und KI-Assistent vorher eingerichtet sein müssen'],
-    docs: { label: 'KI-Telefonagent', file: 'self-hosting', anchor: 'ki-telefonagent' },
+    docs: { label: 'KI-Telefonagent', file: 'self-hosting.de', anchor: 'ki-telefonagent' },
     steps: [
       { title: 'Der KI-Telefonagent', route: 'settings/telephony', target: 'voice-ai', text: 'Claude nimmt Anrufe mit deutscher Stimme an, beantwortet Fragen mit dem Wissen des KI-Assistenten, bucht Termine aus freien Zeiten und verbindet bei Bedarf an einen Menschen.' },
       { title: 'Voraussetzungen', target: 'tel-twilio', text: 'Er braucht eine eingerichtete Telefonie (Twilio) und einen eingeschalteten KI-Assistenten.' },

@@ -11,7 +11,7 @@ import { KINDS, activeLock, lockMessage, type LockRow, type OfficeKind } from '.
 /**
  * Storage of Office files: the rows (`office_files`, `office_versions` – a version is never changed, a trigger refuses it) and the
  * bytes of every version on disk under `<data>/office-files/` (names from a random id and the checked type, never from the client).
- * Size limit per file and quota per sub-account come from the environment (docs/office.md#grenzen).
+ * Size limit per file and quota per sub-account come from the environment (docs/office.md#limits).
  */
 
 const MB = 1024 * 1024;

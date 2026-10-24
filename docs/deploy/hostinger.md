@@ -10,7 +10,7 @@ Any Hostinger **KVM** VPS (KVM 1 is enough without the Video-Studio) runs HyperL
 3. SSH in and run:
 
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash
    ```
 
 4. Open `https://crm.your-domain.com` and sign in with the printed login. Open ports 80 and 443 in the VPS

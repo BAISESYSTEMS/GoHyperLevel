@@ -1,64 +1,66 @@
-# App installieren & Push-Benachrichtigungen
+**English** · [Deutsch](app.de.md)
 
-Zwei Wege aufs Handy: die installierbare Web-App (unten) oder die native [Android-App](#android-app).
+# Installing the app & push notifications
 
-Die Oberfläche ist eine installierbare Web-App (PWA): eigenes Symbol auf dem Home-Bildschirm bzw. im Startmenü, eigenes Fenster ohne Browserleiste, startet auch offline (mit den zuletzt geladenen Daten), und sie meldet Neues per Push aufs Gerät.
+Two ways onto your phone: the installable web app (below) or the native [Android app](#android-app).
 
-## Installieren
+The interface is an installable web app (PWA): its own icon on the home screen or in the start menu, its own window without a browser bar, it starts offline too (with the data loaded last), and it reports news to your device by push.
 
-- **Chrome / Edge (Windows, Mac, Linux, Android):** Unten erscheint „App installieren“ – oder das Installieren-Symbol rechts in der Adressleiste. Auch unter **Einstellungen → Mein Konto** gibt es den Knopf, solange der Browser es anbietet.
-- **iPhone / iPad:** In Safari auf *Teilen* → **„Zum Home-Bildschirm“**. Push gibt es auf iOS ab 16.4 und nur in der so installierten App.
+## Installing
 
-Name, Farbe und Symbol kommen aus dem Branding (Agentur → White-Label; auf einer Kunden-Login-Domain das Kunden-Branding). Das Symbol (blaue Fläche mit zwei Pfeilen) liegt als `icon.svg` und PNG in 192/512 px sowie als „maskable“-Variante bei.
+- **Chrome / Edge (Windows, Mac, Linux, Android):** “Install app” appears at the bottom – or use the install icon on the right of the address bar. There is also a button under **Settings → My account** as long as the browser offers it.
+- **iPhone / iPad:** In Safari, tap *Share* → **“Add to Home Screen”**. On iOS, push works from 16.4 and only in the app installed this way.
 
-## Benachrichtigungen einschalten
+Name, color and icon come from the branding (Agency → white label; on a client login domain, the client branding). The icon (blue square with two arrows) comes as `icon.svg` and as PNG in 192/512 px, plus a “maskable” variant.
 
-**Einstellungen → Mein Konto → Benachrichtigungen:** Haken bei „Benachrichtigungen auf diesem Gerät“, Browser-Nachfrage erlauben, „Test-Benachrichtigung senden“. Das gilt pro Gerät; alle Geräte mit Benachrichtigungen stehen darunter und lassen sich einzeln entfernen.
+## Turning on notifications
 
-Was benachrichtigt (abschaltbar, gilt für alle deine Geräte):
+**Settings → My account → Notifications:** tick “Notifications on this device”, allow the browser prompt, “Send a test notification”. This applies per device; all devices with notifications are listed below and can be removed one by one.
 
-| Art | Wann | An wen |
+What notifies you (can be turned off, applies to all your devices):
+
+| Kind | When | To whom |
 | --- | --- | --- |
-| Neue Nachrichten | eingehende E-Mail, SMS, Live-Chat (je Unterhaltung höchstens alle 30 Sekunden) | dem Kontakt zugewiesene Person, sonst alle mit Zugriff auf Konversationen des Sub-Accounts |
-| Website nicht erreichbar / wieder online | Website-Überwachung im Projekt-Steckbrief | alle mit Zugriff auf den Sub-Account |
-| Aufgaben | dir zugewiesen (von jemand anderem, per Workflow, API oder MCP); morgens ab 8 Uhr: was heute fällig ist | die zugewiesene Person |
-| Zahlungen und Käufe | Rechnung über Stripe bezahlt, Produkt gekauft | alle mit Zugriff auf Rechnungen |
+| New messages | incoming e-mail, SMS, live chat (at most once every 30 seconds per conversation) | the person assigned to the contact, otherwise everyone with access to the sub-account's conversations |
+| Website down / back online | website monitoring in the project profile | everyone with access to the sub-account |
+| Tasks | assigned to you (by someone else, by workflow, API or MCP); every morning from 8 o'clock: what is due today | the assigned person |
+| Payments and purchases | invoice paid through Stripe, product purchased | everyone with access to invoices |
 
-Ein Klick auf die Benachrichtigung öffnet die passende Seite (und wechselt in den richtigen Sub-Account).
+A click on the notification opens the matching page (and switches to the right sub-account).
 
-## Technik & Betrieb
+## Technical details & operations
 
-- Push braucht **HTTPS** (oder `localhost`). Es werden keine fremden Dienste eingebunden: Die App spricht Web Push (VAPID + verschlüsselte Nachrichten nach RFC 8291) direkt mit den Push-Diensten der Browser (Google, Mozilla, Apple, Microsoft).
-- Die VAPID-Schlüssel entstehen beim ersten Start und liegen in der Datenbank (der private Teil verschlüsselt). Ein Backup enthält sie – nach einem Umzug funktionieren bestehende Abos weiter.
-- Optional `PGHL_PUSH_CONTACT=mailto:du@example.com` setzen – diese Kontaktadresse bekommen die Push-Dienste (Standard: E-Mail des ersten Admins).
-- Der Service Worker (`/sw.js`, Bereich `/app`) cacht nur die App selbst und – für den Offline-Start – die letzten API-Antworten des eigenen Kontos; beim Abmelden wird dieser Zwischenspeicher gelöscht. Öffentliche Seiten (Buchung, Formulare, Rechnungen, Funnels) bleiben unberührt. Er hält nur Dateien vor, die wirklich sind, was ihr Name sagt (nie eine HTML-Seite unter einem Skriptnamen, nie eine Fehlerantwort), und liefert die Offline-Startseite nur aus, wenn alle Dateien, die sie braucht, im Zwischenspeicher liegen. Startet die Oberfläche nicht, ersetzt `/boot-guard.js` die leere Seite nach 10 Sekunden durch „Die App konnte nicht starten“ (Neu laden, Offline-Daten löschen) – siehe [Android-App](android-app.md#wenn-die-seite-leer-bleibt-fehlersuche).
-- Andere Module schicken eigene Benachrichtigungen über `app.services.pushNotify({ locationId | userIds, kind, title, body, url, tag })`.
+- Push needs **HTTPS** (or `localhost`). No third-party services are involved: the app speaks Web Push (VAPID + encrypted messages per RFC 8291) directly with the browsers' push services (Google, Mozilla, Apple, Microsoft).
+- The VAPID keys are created on first start and stored in the database (the private part encrypted). A backup contains them – after a move, existing subscriptions keep working.
+- Optionally set `PGHL_PUSH_CONTACT=mailto:du@example.com` – the push services receive this contact address (default: the first admin's e-mail address).
+- The service worker (`/sw.js`, scope `/app`) caches only the app itself and – for the offline start – the latest API responses of your own account; when you sign out, this cache is deleted. Public pages (booking, forms, invoices, funnels) are left alone. It only keeps files that really are what their name says (never an HTML page under a script name, never an error response), and serves the offline start page only if all the files it needs are in the cache. If the interface does not start, `/boot-guard.js` replaces the blank page after 10 seconds with “The app could not start” (Reload, Clear offline data) – see [Android app](android-app.md#if-the-page-stays-blank-troubleshooting).
+- Other modules send their own notifications through `app.services.pushNotify({ locationId | userIds, kind, title, body, url, tag })`.
 
-## Android-App
+## Android app
 
-Neben der Web-App gibt es eine native Android-App (Paket `org.gohigh.android` – bei eigenem Build deine Paket-ID –, Name und Farben aus dem Branding, z. B. „HyperLevel“). Sie zeigt Posteingang, Aufgaben, Termine, Deals, Anrufe, Zahlen und Projekte **aller** Sub-Accounts, auf die man Zugriff hat, bringt Home-Bildschirm-Widgets mit und meldet Neues als Benachrichtigung. Alles Weitere öffnet sie als Web-Ansicht dieser Oberfläche.
+Besides the web app there is a native Android app (package `org.gohigh.android` – your own package ID if you build it yourself –, name and colors from the branding, e.g. “HyperLevel”). It shows the inbox, tasks, appointments, deals, calls, figures and projects of **all** sub-accounts you have access to, brings home screen widgets and reports news as notifications. Everything else it opens as a web view of this interface.
 
-### Installieren
+### Installing
 
-- Auf dem Handy **`https://<deine-domain>/android`** öffnen (oder den QR-Code auf dieser Seite mit der Kamera scannen) → **App herunterladen** → `hyperlevel.apk` öffnen → für den Browser „Apps aus dieser Quelle zulassen“ → **Installieren**. Warnt Google Play Protect: „Weitere Details“ → „Trotzdem installieren“ (die App kommt nicht aus dem Play Store).
-- In der App mit den gewohnten Zugangsdaten anmelden (auch mit Zwei-Faktor-Code). Updates meldet die App selbst.
-- Unter **Einstellungen → Mein Konto** steht oben die Karte **„App fürs Handy“** mit dem Link auf `/android`.
+- On your phone, open **`https://<your-domain>/android`** (or scan the QR code on that page with the camera) → **Download app** → open `hyperlevel.apk` → for the browser, “Allow apps from this source” → **Install**. If Google Play Protect warns: “More details” → “Install anyway” (the app does not come from the Play Store).
+- Sign in to the app with your usual credentials (also with a two-factor code). The app reports updates itself.
+- Under **Settings → My account**, the **“App for your phone”** card at the top links to `/android`.
 
-### Koppeln & Geräte
+### Pairing & devices
 
-Nach der Anmeldung in der App tauscht diese ihre Sitzung einmalig gegen einen **Geräte-Schlüssel** (`ghm_…`). Er bleibt nur auf dem Handy; der Server speichert ihn als SHA-256 und zeigt ihn nie wieder. Der Schlüssel gilt nur für die App-Schnittstelle (`/api/mobile/*`) und handelt als der angemeldete Nutzer – Agentur-Admins sehen alle Sub-Accounts, Kunden-Logins nur ihre eigenen und nur ihre freigegebenen Bereiche; der SaaS-Tarif (ausgeblendete Bereiche, pausiertes Konto = nur lesen) gilt genauso wie im Browser.
+After you sign in to the app, it exchanges its session once for a **device key** (`ghm_…`). It stays only on the phone; the server stores it as a SHA-256 hash and never shows it again. The key is valid only for the app interface (`/api/mobile/*`) and acts as the signed-in user – agency admins see all sub-accounts, client logins only their own and only the areas shared with them; the SaaS plan (hidden areas, paused account = read-only) applies exactly as in the browser.
 
-**Einstellungen → Mein Konto → Geräte (App)** listet alle gekoppelten Handys (Name, App-Version, zuletzt genutzt, IP) mit **Abmelden**. Abgemeldet werden die Geräte außerdem bei *Passwort ändern*, *Alle anderen abmelden* und wenn ein Admin das Passwort des Logins neu setzt (*Team*) oder ihn überall abmeldet (`POST /api/users/:id/sessions/revoke`). Ein abgemeldetes Gerät bekommt `401` und bittet um neue Anmeldung. Jede Änderung aus der App steht im Änderungsprotokoll mit dem Weg **„App“**; je Gerät gelten höchstens 300 Anfragen pro Minute.
+**Settings → My account → Devices (app)** lists all paired phones (name, app version, last used, IP) with **Sign out**. Devices are also signed out on *Change password*, *Sign out all others*, and when an admin resets the login's password (*Team*) or signs it out everywhere (`POST /api/users/:id/sessions/revoke`). A signed-out device gets `401` and asks for a new sign-in. Every change made from the app appears in the change log with the channel **“App”**; each device is limited to 300 requests per minute.
 
-### Widgets & Benachrichtigungen
+### Widgets & notifications
 
-- **Widgets** lesen `GET /api/mobile/summary` (neue Leads heute/7 Tage, offene Deals und Wert, gewonnen im Monat, Umsatz heute/Monat mit 30-Tage-Verlauf, offene Rechnungen, ungelesene Unterhaltungen, Aufgaben heute/überfällig, Termine heute, verpasste Anrufe heute, Sterne, Websites online/offline, Leads der letzten 14 Tage), dazu Posteingang, Aufgaben, Termine, Deals, Anrufe, Bewertungen, Zahlungen und Social-Posts – je wahlweise für alle Sub-Accounts oder einen. „Heute“ ist der Tag in der Zeitzone des jeweiligen Sub-Accounts.
-- **Benachrichtigungen** holt die App selbst über `GET /api/mobile/feed?since=<cursor>` (kein Push-Dienst nötig): neue eingehende Nachrichten (je Unterhaltung höchstens alle 30 Sekunden), verpasste Anrufe, neue Leads/Kontakte, bezahlte Rechnungen, Website nicht erreichbar/wieder online, fällige Aufgaben (zur Uhrzeit bzw. um 8 Uhr am Fälligkeitstag, nur für die zugewiesene Person) und neue Bewertungen. Der erste Abruf liefert nur den Cursor – keine alten Meldungen. Gespeichert wird das nur, wenn mindestens ein Handy gekoppelt ist, und 14 Tage lang.
-- Ein Tipp auf eine Meldung öffnet die passende Seite in der App, z. B. `/app/conversations?c=<id>&loc=<sub-account>`. **`?loc=`** wechselt dabei vorher in den Sub-Account (wenn man ihn sehen darf); `?c=` öffnet eine Unterhaltung direkt.
+- **Widgets** read `GET /api/mobile/summary` (new leads today/7 days, open deals and value, won this month, revenue today/month with a 30-day curve, open invoices, unread conversations, tasks today/overdue, appointments today, missed calls today, stars, websites online/offline, leads of the last 14 days), plus inbox, tasks, appointments, deals, calls, reviews, payments and social posts – each for all sub-accounts or just one. “Today” is the day in the time zone of the respective sub-account.
+- **Notifications** are fetched by the app itself through `GET /api/mobile/feed?since=<cursor>` (no push service needed): new incoming messages (at most once every 30 seconds per conversation), missed calls, new leads/contacts, paid invoices, website down/back online, due tasks (at the due time, or at 8 o'clock on the due date, only for the assigned person) and new reviews. The first fetch returns only the cursor – no old notifications. This is stored only if at least one phone is paired, and for 14 days.
+- A tap on a notification opens the matching page in the app, e.g. `/app/conversations?c=<id>&loc=<sub-account>`. **`?loc=`** first switches to the sub-account (if you may see it); `?c=` opens a conversation directly.
 
-### Neue App-Version veröffentlichen (Agentur)
+### Publishing a new app version (agency)
 
-**Einstellungen → Mein Konto → Geräte (App) → Neue App-Version hochladen:** signierte Release-APK wählen, Versionscode (`versionCode`, muss mindestens so hoch sein wie der aktuelle; derselbe Code ersetzt den Build), Versionsname und „Was ist neu?“ eintragen. Per Skript geht das mit Admin-Anmeldung oder einem Agentur-Schlüssel (schreiben):
+**Settings → My account → Devices (app) → Upload new app version:** choose the signed release APK, enter the version code (`versionCode`, must be at least as high as the current one; the same code replaces the build), version name and “What's new?”. By script this works with an admin sign-in or an agency key (write):
 
 ```bash
 curl -X PUT https://crm.example.com/api/mobile/app \
@@ -67,8 +69,8 @@ curl -X PUT https://crm.example.com/api/mobile/app \
   --data-binary @app-release.apk
 ```
 
-Die Datei (bis 200 MB) liegt unter `<PGHL_DATA_DIR>/mobile-app/` (die letzten drei Versionen), die SHA-256-Prüfsumme rechnet der Server aus. Sofort danach gibt es sie unter `/android`, `/downloads/hyperlevel.apk` (Alias `/downloads/gohigh.apk`) und `GET /api/mobile/app` (Update-Prüfung der App, mit `min_supported_code` – ältere Apps verlangen dann ein Update; optional Header `x-min-supported-code`).
+The file (up to 200 MB) is stored under `<PGHL_DATA_DIR>/mobile-app/` (the last three versions), and the server computes the SHA-256 checksum. Right after that it is available at `/android`, `/downloads/hyperlevel.apk` (alias `/downloads/gohigh.apk`) and `GET /api/mobile/app` (the app's update check, with `min_supported_code` – older apps then require an update; optionally the header `x-min-supported-code`).
 
 ### App Links
 
-`/.well-known/assetlinks.json` bestätigt Android, dass Links auf diese Domain in der App aufgehen dürfen. Standard ist das Release-Zertifikat der App (`51:33:42:92:…:05:DF`) – dafür ist nichts zu tun. Ein anderer Signatur-Schlüssel: unter *Neue App-Version hochladen* den SHA-256-Fingerabdruck eintragen (mehrere mit Komma), per `PUT /api/agency/mobile-app` `{cert_sha256, package_name, min_supported_code}` oder über die Umgebung `PGHL_ANDROID_CERT_SHA256` (gilt, solange in der Agentur nichts eingetragen ist). Die Datei muss auf jeder Domain erreichbar sein, deren Links die App öffnen soll (Haupt-Adresse und Agentur-App-Domain).
+`/.well-known/assetlinks.json` confirms to Android that links to this domain may open in the app. The default is the app's release certificate (`51:33:42:92:…:05:DF`) – nothing to do for that. For a different signing key: enter the SHA-256 fingerprint under *Upload new app version* (several, separated by commas), via `PUT /api/agency/mobile-app` `{cert_sha256, package_name, min_supported_code}`, or through the environment variable `PGHL_ANDROID_CERT_SHA256` (applies as long as nothing is entered in the agency). The file must be reachable on every domain whose links the app should open (main address and agency app domain).

@@ -1,35 +1,37 @@
-# Partnerprogramm
+**English** · [Deutsch](partner-program.de.md)
 
-> **Konditionen vorläufig.** Prozentsätze, Laufzeiten und Voraussetzungen können sich bis zum offiziellen Start
-> noch ändern. Verbindlich ist, was bei der Anmeldung im Partnerbereich steht.
+# Partner program
 
-HyperLevel ist Open Source (AGPL-3.0) und lässt sich kostenlos selbst betreiben. Das Partnerprogramm richtet sich
-an alle, die HyperLevel weiterempfehlen, für Kunden betreiben oder beim Umstieg helfen. Es gibt drei Wege:
+> **Terms are preliminary.** Percentages, durations and requirements may still change before the official launch.
+> What counts is what you see when you sign up in the partner area.
+
+HyperLevel is open source (AGPL-3.0) and free to self-host. The partner program is for anyone who recommends
+HyperLevel, runs it for clients or helps with a switch. There are three ways to take part:
 
 ## Affiliates
 
-- **25 % wiederkehrende Provision für 12 Monate** auf die Zahlungen der geworbenen Kunden der gehosteten
+- **25% recurring commission for 12 months** on the payments of the customers you refer to the hosted
   HyperLevel Cloud ([docs/cloud.md](cloud.md)).
-- Läuft über das eingebaute Affiliate-Modul ([Affiliate-Manager](growth.md#affiliate-manager)): öffentliche
-  Anmeldung, eigener Partner-Link `?ref=<code>`, Partnerbereich mit Klicks, Leads und Provisionen, Auszahlung nach
-  Freigabe. Provisionen entstehen nur aus bezahlten Rechnungen und werden bei Erstattungen storniert.
-- Nicht verwechseln mit den [Partner-Links](referrals.md) neben den Schlüssel-Feldern: Das sind Empfehlungslinks zu
-  Drittanbietern, die jeder Selbst-Hoster ersetzen oder abschalten kann.
+- It runs through the built-in affiliate module ([Affiliate manager](growth.md#affiliate-manager)): public
+  sign-up, your own partner link `?ref=<code>`, a partner area with clicks, leads and commissions, and payout after
+  approval. Commissions only arise from paid invoices and are reversed on refunds.
+- Do not confuse this with the [partner links](referrals.md) next to the key fields: those are referral links to
+  third-party providers, which every self-hoster can replace or turn off.
 
-## Agentur-Partner
+## Agency partners
 
-- Für Agenturen, die HyperLevel ihren Kunden anbieten – auf dem Plan **Cloud Agentur** ([docs/cloud.md](cloud.md))
-  mit White-Label (eigener Name, Logo, Farbe, Login-Domain) und Kunden-Sub-Accounts, oder selbst gehostet.
-- Die Agentur rechnet mit ihren Kunden selbst ab; Preise und Pakete legt sie selbst fest.
+- For agencies that offer HyperLevel to their clients – on the **Cloud Agentur** plan ([docs/cloud.md](cloud.md))
+  with white-label (your own name, logo, color, login domain) and client sub-accounts, or self-hosted.
+- The agency bills its clients itself and sets its own prices and packages.
 
-## Umzugs- und Einrichtungspartner
+## Umzug and setup partners
 
-- Für Freelancer und Dienstleister, die beim Umstieg von GoHighLevel, HubSpot & Co. helfen
-  ([Umzug](umzug.md)) oder HyperLevel einrichten und betreiben ([Selbst hosten](self-hosting.md)).
-- Partner legen ihre Preise selbst fest und arbeiten auf eigene Rechnung.
+- For freelancers and service providers who help with the switch from GoHighLevel, HubSpot and similar tools
+  ([Umzug](umzug.md)) or who set up and run HyperLevel ([Self-hosting](self-hosting.md)).
+- Partners set their own prices and work on their own account.
 
-## Mitmachen
+## Get involved
 
-Anfragen über [GitHub Discussions](https://github.com/BAISESYSTEMS/hyperlevel/discussions) (Kategorie
-„Partner“) oder per E-Mail an die im Partnerbereich genannte Adresse. Beiträge zum Code laufen unabhängig davon über
-[CONTRIBUTING.md](../CONTRIBUTING.md).
+Send requests through [GitHub Discussions](https://github.com/BAISESYSTEMS/GoHyperLevel/discussions) (category
+“Partner”) or by e-mail to the address shown in the partner area. Code contributions go through
+[CONTRIBUTING.md](../CONTRIBUTING.md), independently of this.

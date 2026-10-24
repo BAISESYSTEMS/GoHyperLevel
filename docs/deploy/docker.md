@@ -5,7 +5,7 @@
 On a server with Docker and a DNS record (`A`/`AAAA`) for your domain pointing at it:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash
 ```
 
 The script asks for the domain and your admin e-mail, generates a strong admin password and `PGHL_SECRET`,
@@ -23,7 +23,7 @@ Options: `GOHIGH_DIR` (install folder), `GOHIGH_REF` (branch or tag, e.g. `v0.0.
 ## By hand
 
 ```bash
-git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
+git clone https://github.com/BAISESYSTEMS/GoHyperLevel.git hyperlevel && cd hyperlevel
 cp .env.example .env          # set PGHL_BASE_URL and PGHL_DOMAIN (and optionally the first admin)
 docker compose --profile caddy up -d
 ```

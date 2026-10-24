@@ -127,7 +127,7 @@ export const JOURNEY: Tour[] = [
     practice: true,
     keywords: 'marketing kampagne newsletter workflow social attribution affiliate werbung lead scoring mql sql bericht',
     learned: ['Was gerade an Kampagnen und Workflows läuft', 'Wo Newsletter und Vorlagen gestaltet werden', 'Social-Posts planen', 'Woher Kunden kommen und was Werbung kostet', 'Welche Leads kaufbereit sind (Lead-Scoring)'],
-    docs: { label: 'Attribution, Affiliates & Werbung', file: 'growth' },
+    docs: { label: 'Attribution, Affiliates & Werbung', file: 'growth.de' },
     steps: [
       { title: 'Was läuft gerade?', text: 'Bei einer Übernahme zuerst schauen, was automatisch passiert: aktive Workflows, geplante Kampagnen, geplante Social-Posts. Erst verstehen, dann ändern.' },
       { title: 'Kampagnen', route: 'campaigns', target: 'page-head', perm: 'campaigns', text: 'Newsletter per E-Mail oder SMS. Geplante Kampagnen gehen von selbst raus – prüfe, ob sie noch passen.' },
@@ -202,7 +202,7 @@ export const JOURNEY: Tour[] = [
     practice: true,
     keywords: 'umsatz rechnung angebot stripe produkt kauf link norman buchhaltung vertrag',
     learned: ['Offene und bezahlte Rechnungen im Blick', 'Rechnungsdaten und Stripe prüfen', 'Produkte, Kauf-Links und Abos', 'Wie Rechnungen in die Buchhaltung (Norman) kommen', 'Verträge online unterschreiben lassen'],
-    docs: { label: 'Stripe & Zahlungen', file: 'stripe' },
+    docs: { label: 'Stripe & Zahlungen', file: 'stripe.de' },
     steps: [
       { title: 'Rechnungen', route: 'invoices', target: 'page-head', perm: 'payments', text: 'Oben: wie viel offen ist und wie viel bezahlt. Einmal pro Woche: Überfälliges nachfassen.' },
       { title: 'Die Liste', target: 'invoices-list', optional: true, perm: 'payments', text: 'Status je Rechnung. Ein blaues **Norman**-Badge heißt: die Rechnung ist schon in der Buchhaltung.', missing: 'Noch keine Rechnungen.' },
@@ -226,7 +226,7 @@ export const JOURNEY: Tour[] = [
     minutes: 10,
     keywords: 'bewertung google profil rezension antworten',
     learned: ['Bewertungsanfragen senden', 'Google-Rezensionen lesen und beantworten', 'Das Bewertungs-Widget'],
-    docs: { label: 'Google-Bewertungen', file: 'self-hosting', anchor: 'google-bewertungen' },
+    docs: { label: 'Google-Bewertungen', file: 'self-hosting.de', anchor: 'google-bewertungen' },
     steps: [
       { title: 'Bewertungen', route: 'reviews', target: 'reviews-stats', perm: 'reviews', text: 'Durchschnitt und Verteilung. Ziel: regelmäßig neue Bewertungen – sie sind das stärkste Verkaufsargument.' },
       { title: 'Anfragen', target: 'reviews-request', perm: 'reviews', text: 'Nach jedem abgeschlossenen Auftrag eine Anfrage senden – am besten automatisch per Workflow nach dem Termin.' },
@@ -246,7 +246,7 @@ export const JOURNEY: Tour[] = [
     minutes: 20,
     keywords: 'service support helpdesk ticket sla zuweisung wissensdatenbank hilfe center csat nps health score',
     learned: ['Wo Kundenanfragen landen und wer sie bearbeitet', 'SLA-Fristen, Teams und Zuweisung prüfen', 'Wissensdatenbank und Hilfe-Center aktuell halten', 'Zufriedenheit messen und gefährdete Kunden erkennen'],
-    docs: { label: 'Service: Tickets, SLAs & mehr', file: 'helpdesk' },
+    docs: { label: 'Service: Tickets, SLAs & mehr', file: 'helpdesk.de' },
     steps: [
       { title: 'Service im Überblick', text: 'Macht die Firma Kundenservice, läuft er über Tickets: jede Anfrage mit Nummer, Zuständigkeit und Frist. Bei einer Übernahme zuerst klären: Wer bearbeitet Tickets – und welche Fristen wurden Kunden versprochen?' },
       { title: 'Offene Tickets', route: 'tickets', target: 'tickets-filters', perm: 'helpdesk', text: 'Filtere auf „Nicht zugewiesen“ und „SLA: Überschritten“. Was dort steht, ist die dringendste Baustelle – verteile es zuerst.' },
@@ -271,7 +271,7 @@ export const JOURNEY: Tour[] = [
     minutes: 20,
     keywords: 'ki claude assistent telefonagent mcp',
     learned: ['Was der KI-Assistent darf und was nicht', 'Wissen und Limit pflegen', 'Wie der KI-Telefonagent arbeitet', 'Wie Claude über MCP mit der Firma arbeitet'],
-    docs: { label: 'KI-Assistent', file: 'ai-assistant' },
+    docs: { label: 'KI-Assistent', file: 'ai-assistant.de' },
     steps: [
       { title: 'KI-Assistent', route: 'settings/ai', target: 'ai-status', perm: 'settings', text: 'Claude schlägt im Posteingang Antworten vor, fasst zusammen und kann im Website-Chat antworten. Oben: an/aus, Modell, Verbrauch.' },
       { title: 'Schlüssel & Kosten', target: 'ai-key', perm: 'settings', text: 'Der Anthropic-Schlüssel läuft über ein Anthropic-Konto der Firma – prüfe, wem es gehört und wohin die Rechnung geht.' },

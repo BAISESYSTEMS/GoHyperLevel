@@ -150,7 +150,10 @@ export function checkOrphans(root = repoRoot, files = markdownFiles(root)) {
   return pages.filter((p) => !linked.has(p)).map((p) => ({ file: p, line: 0, rule: 'page is not linked from any README or docs page', match: p }));
 }
 
-/** Every docs page (except the export-ignored notes) is linked from README.md – the README is the index of the documentation. */
+/**
+ * Every docs page (except the export-ignored notes) is linked from README.md – the README is the index of the documentation.
+ * A German version `<page>.de.md` counts as linked when its English page is (the language switcher on top of it leads there).
+ */
 export function checkReadmeIndex(root = repoRoot, files = markdownFiles(root)) {
   const ignored = exportIgnored(root);
   const linked = new Set();
@@ -161,7 +164,7 @@ export function checkReadmeIndex(root = repoRoot, files = markdownFiles(root)) {
   }
   return files
     .filter((f) => /^docs\/(?:deploy\/)?[^/]+\.md$/.test(f) && !ignored.has(f) && f !== 'docs/deploy/README.md' && !f.startsWith('docs/deploy/'))
-    .filter((f) => !linked.has(f))
+    .filter((f) => !linked.has(f) && !(f.endsWith('.de.md') && linked.has(f.replace(/\.de\.md$/, '.md'))))
     .map((f) => ({ file: 'README.md', line: 0, rule: 'docs page is not linked from README.md (add it to the Documentation table)', match: f }));
 }
 

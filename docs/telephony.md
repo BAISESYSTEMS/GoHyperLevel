@@ -1,8 +1,8 @@
 # Telephony: menus, queues, numbers, power dialer and call intelligence
 
-**Anrufe** is the call log of a sub-account – and, on top of the Twilio setup in [self-hosting](self-hosting.md#telefonie-twilio), a small call centre:
+**Anrufe** is the call log of a sub-account – and, on top of the Twilio setup in [self-hosting](self-hosting.md#telephony-twilio), a small call centre:
 
-- a **telephone menu** (IVR) with greeting, keys, business hours and holidays, voicemail per branch and hand-over to a person, a ring group, a queue or the [AI phone agent](self-hosting.md#ki-telefonagent),
+- a **telephone menu** (IVR) with greeting, keys, business hours and holidays, voicemail per branch and hand-over to a person, a ring group, a queue or the [AI phone agent](self-hosting.md#ai-phone-agent),
 - **ring groups and queues** (all at once, in order, round robin; hold music, longest wait, overflow) and **call transfer** with notes during the call,
 - **numbers**: buy and release them from Twilio inside the app, point each one somewhere, **tracking numbers** per campaign and **dynamic number insertion** (a number per visitor source on your website),
 - a **power dialer** for call lists that respects *Nicht stören*, consent and calling hours on the server,
@@ -28,8 +28,8 @@ Everything works per sub-account with the sub-account's own Twilio credentials, 
 
 ## Set up
 
-1. **Twilio** as described in [self-hosting](self-hosting.md#telefonie-twilio) (*Einstellungen → Telefonie*: Account SID, Auth Token, numbers). Numbers bought inside the app get their webhooks set automatically; for numbers bought elsewhere use *Verbinden* in the same settings page.
-2. **Browser phone** (optional, [docs](self-hosting.md#browser-telefon-twilio-voice-sdk)): needed to ring people in groups and to hand a call to a colleague's browser. People who are offline, away or on another call are skipped.
+1. **Twilio** as described in [self-hosting](self-hosting.md#telephony-twilio) (*Einstellungen → Telefonie*: Account SID, Auth Token, numbers). Numbers bought inside the app get their webhooks set automatically; for numbers bought elsewhere use *Verbinden* in the same settings page.
+2. **Browser phone** (optional, [docs](self-hosting.md#browser-phone-twilio-voice-sdk)): needed to ring people in groups and to hand a call to a colleague's browser. People who are offline, away or on another call are skipped.
 3. **A public `https://` address** (`PGHL_BASE_URL`): Twilio calls `/hooks/twilio/…`, every webhook is signed and checked.
 4. **For call intelligence:** a speech-to-text connection (*Einstellungen → KI-Verbindungen*, capability *Sprache zu Text*) and – for summary, action items and scores – the [AI assistant](ai-assistant.md).
 5. **For dynamic number insertion:** the pool's script on your website (funnels and landing pages of the sub-account get it automatically).

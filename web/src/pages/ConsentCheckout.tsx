@@ -17,7 +17,9 @@ export function CheckoutLaw() {
   const { data, reload } = useLoad(() => api.get('/api/checkout-law/settings'), []);
   const list = useLoad(() => api.get<any[]>('/api/checkout-law/acceptances?limit=100'), []);
   const [s, setS] = useState<any>();
-  useEffect(() => data && setS(data.settings), [data]);
+  useEffect(() => {
+    if (data) setS(data.settings);
+  }, [data]);
   if (!s) return <Spinner />;
   const set = (patch: any) => setS({ ...s, ...patch });
   const save = async () => {

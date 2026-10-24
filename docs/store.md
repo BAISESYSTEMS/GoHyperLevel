@@ -109,7 +109,7 @@ hours) – the buyer picks it at the checkout and it shows on the packing slip; 
 
 ## Abandoned carts
 
-A cart with an e-mail (typed at the checkout) and no paid order after *Warenkorbabbruch nach* minutes (default 60) fires the **existing trigger `checkout.abandoned`** – the same as an expired Stripe checkout ([email-marketing.md](email-marketing.md#warenkorbabbruch)): the contact gets the tag `warenkorbabbruch`, the event carries `product_name`, `amount_cents` and `recovery_url` (the checkout with the cart). It fires once per cart, not for people who ordered meanwhile, and creates contacts for unknown addresses only when that is allowed under *Kampagnen → Zustellbarkeit*. A paid order removes the tag. Reminder mails are marketing and need consent, as always.
+A cart with an e-mail (typed at the checkout) and no paid order after *Warenkorbabbruch nach* minutes (default 60) fires the **existing trigger `checkout.abandoned`** – the same as an expired Stripe checkout ([email-marketing.md](email-marketing.md#abandoned-cart)): the contact gets the tag `warenkorbabbruch`, the event carries `product_name`, `amount_cents` and `recovery_url` (the checkout with the cart). It fires once per cart, not for people who ordered meanwhile, and creates contacts for unknown addresses only when that is allowed under *Kampagnen → Zustellbarkeit*. A paid order removes the tag. Reminder mails are marketing and need consent, as always.
 
 **Online-Shop → Abgebrochene Warenkörbe** lists the carts of the last 7/30/90 days with an e-mail address and no paid order of that
 address since: contact, items, net value, whether the reminder already ran, and the link that restores the cart (to send by hand).

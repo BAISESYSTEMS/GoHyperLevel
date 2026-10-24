@@ -4,6 +4,8 @@ import { hashPassword, id, now } from '../core/util.js';
 import { createLocation } from '../modules/core.js';
 import { submitForm } from '../modules/forms.js';
 import { FIRST, LAST, PLANS, demoPhone } from './demo-seed-data.js';
+import { seedCampaigns, seedCommunity, seedCourses, seedKnowledge, seedSites, seedSupportHistory, seedWorkflowRuns } from './demo-seed-depth.js';
+import { runJobs, seedDealHistory, seedRevenueHistory, seedSaasBook, seedSubscriptions, type DealRef, type Job } from './demo-seed-history.js';
 import {
   seedAgencyObjects,
   seedCallScript,
@@ -32,6 +34,11 @@ import { callRoute } from './route-call.js';
  * companies with coloured tags and custom fields, deals in every stage, quotes, tasks and notes, four weeks of appointments
  * back and forth (with a recurring series), inbox threads over e-mail, SMS and WhatsApp, invoices in every state, workflows,
  * websites, forms, reviews, tickets and more; the showcases per business live in services/demo-seed-extras.ts.
+ *
+ * The company looks established: twelve months of history (services/demo-seed-history.ts – paid invoices that grow month by month,
+ * subscriptions with real MRR for the SaaS start-up, a few cancellations, deals won and lost every month) and depth
+ * (services/demo-seed-depth.ts – courses with progress, landing pages with visits, campaigns with opens and clicks, workflow runs,
+ * helpdesk tickets with customer ratings, a wiki, team chat and community). Texts and numbers: services/demo-seed-content.ts.
  *
  * Everything goes through the app's own routes (in-process via callRoute, as the demo admin), so the data always matches
  * what the real screens create; only what needs a payment or an outside service (store orders, WhatsApp) is written
@@ -161,9 +168,10 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     const loc = createLocation(app.db, plan.name, 'Europe/Berlin', { email: plan.email, address: plan.address, website: plan.website, phone: demoPhone(900 + pi * 10) });
     result.locations.push({ id: loc.id, name: loc.name });
     const L = loc.id;
+    const dated = new Set<string>();
     const call = <T = any>(method: string, path: string, body?: Record<string, any>) => run<T>(L, method, path, body);
     const contacts: any[] = [];
-    const k: Kit = { app, me, L, plan, contacts, contact: (i) => contacts[i % Math.max(contacts.length, 1)], call, step, inDays, ymd, rand };
+    const k: Kit = { app, me, L, plan, contacts, contact: (i) => contacts[i % Math.max(contacts.length, 1)], call, step, inDays, ymd, rand, nowMs: base.getTime(), dated };
     const contact = k.contact;
 
     // The demo websites are fictional (.example) – no uptime checks against them.
@@ -222,21 +230,34 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     ] as const).entries())
       await call('POST', '/api/notes', { contact_id: contact(i * 3).id, title, body, color, pinned });
 
+    // --- products (the price list the invoices, subscriptions and the store are made of) ---------
+    const products: any[] = [];
+    for (const [name, description, price_cents] of plan.products) {
+      const p = await call('POST', '/api/products', { name, description, price_cents, tax_rate: 19 });
+      if (p?.id) products.push(p);
+    }
+
     // --- pipeline & deals ----------------------------------------------------------------------
     const pipelines = (await call<any[]>('GET', '/api/pipelines')) ?? [];
     const pipe = pipelines.find((p) => p.name === plan.pipeline) ?? pipelines[0];
-    const deals: { id: string; name: string; value: number; status: string }[] = [];
+    const deals: DealRef[] = [];
+    // invoices of the history are created oldest first (see runJobs), so the invoice numbers follow the dates
+    const invoiceJobs: Job[] = [];
     if (pipe) {
-      for (const [i, [name, euros]] of plan.deals.entries()) {
-        const stage = pipe.stages[i % pipe.stages.length];
-        const o = await call('POST', '/api/opportunities', { contact_id: contact(i).id, pipeline_id: pipe.id, stage_id: stage?.id, name, value: euros, source: pick(plan.sources) });
-        if (!o?.id) continue;
-        let status = 'open';
-        if (i % 5 === 4) status = 'won';
-        else if (i % 7 === 6) status = 'lost';
-        // A lost deal always says why (opportunities.ts); without it the PATCH was refused and the demo showed no lost deals at all.
-        if (status !== 'open') await call('PATCH', `/api/opportunities/${o.id}`, status === 'lost' ? { status, lost_reason: LOST_REASONS[i % LOST_REASONS.length] } : { status });
-        deals.push({ id: o.id, name, value: euros, status });
+      if (plan.key === 'saas') deals.push(...(await seedSaasBook(k, products, pipe, invoiceJobs)));
+      else {
+        for (const [i, [name, euros]] of plan.deals.entries()) {
+          const stage = pipe.stages[i % pipe.stages.length];
+          const o = await call('POST', '/api/opportunities', { contact_id: contact(i).id, pipeline_id: pipe.id, stage_id: stage?.id, name, value: euros, source: pick(plan.sources) });
+          if (!o?.id) continue;
+          let status = 'open';
+          if (i % 5 === 4) status = 'won';
+          else if (i % 7 === 6) status = 'lost';
+          // A lost deal always says why (opportunities.ts); without it the PATCH was refused and the demo showed no lost deals at all.
+          if (status !== 'open') await call('PATCH', `/api/opportunities/${o.id}`, status === 'lost' ? { status, lost_reason: LOST_REASONS[i % LOST_REASONS.length] } : { status });
+          deals.push({ id: o.id, name, value: euros, status });
+        }
+        await seedDealHistory(k, pipe, deals);
       }
     }
 
@@ -286,7 +307,7 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
         f.settings = JSON.parse(f.settings);
         f.settings.notify_team = false;
         const msgs = ['Ich hätte gern ein Angebot.', 'Habt ihr nächste Woche einen Termin frei?', 'Wie läuft die Zusammenarbeit ab?', 'Bitte um Rückruf am Nachmittag.', 'Gibt es auch Pakete für Vereine?'];
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 10; i++) {
           const first = FIRST[(i * 5 + 3 + pi) % FIRST.length];
           const last = LAST[(i * 3 + 17 + pi) % LAST.length];
           await step('form submit', () =>
@@ -303,13 +324,15 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
       for (const [title, intro] of plan.posts)
         await call('POST', `/api/funnels/${site.id}/posts`, { title, content: `${intro}\n\n## Das Wichtigste in Kürze\n\n- Erfundener Demo-Beitrag\n- Wird täglich zurückgesetzt\n- Kann frei bearbeitet werden`, status: 'published', author: me.name, tags: ['Tipps'] });
 
-    // --- products, invoices (draft, sent, overdue, paid, XRechnung) & offers -----------------------
-    const products: any[] = [];
-    for (const [name, description, price_cents] of plan.products) {
-      const p = await call('POST', '/api/products', { name, description, price_cents, tax_rate: 19 });
-      if (p?.id) products.push(p);
-    }
+    // --- landing pages, a booking page and a webinar funnel besides the website – all with visits ---
+    await seedSites(k);
+
+    // --- invoices (draft, sent, overdue, paid, XRechnung), subscriptions & offers -----------------------
     if (products.length) {
+      // twelve months of paid invoices and the subscriptions come first (oldest first), then this quarter's invoices in every state
+      seedRevenueHistory(k, products, invoiceJobs);
+      seedSubscriptions(k, products, invoiceJobs);
+      await runJobs(invoiceJobs);
       for (let i = 0; i < 12; i++) {
         const p = products[i % products.length];
         const qty = 1 + (i % 3 === 2 ? 1 : 0);
@@ -335,6 +358,14 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
       ['Rückruf', 'sms', 'Bitte um Rückruf, bin ab 14 Uhr erreichbar.'],
       ['Neue Idee', 'email', 'Wir überlegen, das Angebot zu erweitern. Habt ihr dafür einen Vorschlag?'],
       ['Parkplatz?', 'sms', 'Gibt es bei euch Parkplätze vor der Tür?'],
+      ['Preise für Gruppen', 'email', 'Guten Tag, wir sind eine Gruppe von zwölf Personen. Gibt es dafür ein Paket oder einen Rabatt?'],
+      ['Erinnerung Termin', 'sms', 'Danke für die Erinnerung, ich bin morgen pünktlich da.'],
+      ['Wie läuft der Ablauf?', 'email', 'Hallo, können Sie mir kurz erklären, wie die Zusammenarbeit abläuft und was ich vorbereiten muss?'],
+      ['Feedback', 'email', 'Ich wollte Ihnen ein kurzes Feedback geben: alles hat bestens geklappt, wir empfehlen Sie weiter!'],
+      ['Öffnungszeiten über Feiertage', 'sms', 'Habt ihr über die Feiertage geöffnet?'],
+      ['Unterlagen nachgereicht', 'email', 'Anbei die fehlenden Unterlagen – geben Sie bitte kurz Bescheid, ob alles angekommen ist.'],
+      ['Wechsel des Tarifs', 'email', 'Wir möchten gern auf das größere Paket wechseln. Was müssen wir dafür tun?'],
+      ['Zahlung erfolgt', 'email', 'Die Überweisung ist heute rausgegangen. Bitte kurz bestätigen, wenn sie da ist.'],
     ];
     for (const [i, [subject, channel, body]] of threads.entries()) {
       const c = contact(i * 2 + 1);
@@ -344,14 +375,7 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     await seedInboxExtras(k);
 
     // --- campaigns & templates -------------------------------------------------------------------
-    const sent = await call('POST', '/api/campaigns', {
-      name: 'Newsletter Herbst',
-      channel: 'email',
-      subject: `Neuigkeiten von ${plan.name}`,
-      body: 'Hallo {{contact.first_name|du}},\n\nhier sind unsere Neuigkeiten aus dem Herbst – mit einem kleinen Rabatt für dich.\n\nBis bald!',
-      filter: { tags: ['Newsletter'] },
-    });
-    if (sent?.id) await call('POST', `/api/campaigns/${sent.id}/send`, {});
+    await seedCampaigns(k);
     await call('POST', '/api/campaigns', { name: 'Winter-Aktion (Entwurf)', channel: 'email', subject: 'Unser Winter-Angebot', body: 'Hallo {{contact.first_name|du}},\n\nnur bis Ende Dezember …', filter: { tags: [tagNames[0]] } });
     await call('POST', '/api/templates', { name: 'Terminbestätigung', channel: 'email', subject: 'Dein Termin bei {{location.name}}', body: 'Hallo {{contact.first_name}},\n\nwir freuen uns auf dich!' });
 
@@ -359,19 +383,21 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     const meta = await call('GET', '/api/workflows/meta');
     for (const [i, r] of (meta?.recipes ?? []).entries()) {
       const w = await call('POST', '/api/workflows', { recipe: r.key });
-      if (!w?.id || i > 1) continue;
+      if (!w?.id || i > 5) continue;
       await call('PATCH', `/api/workflows/${w.id}`, { status: 'active' });
       if (i === 0) await seedWorkflowCanvas(k, w.id);
     }
+    await seedWorkflowRuns(k);
 
     // --- reviews: own review requests and other platforms ----------------------------------------
-    const reviewCount = plan.key === 'physio' || plan.key === 'shop' ? 7 : 3;
+    const reviewCount = plan.key === 'physio' || plan.key === 'shop' ? 24 : 18;
     for (let i = 0; i < reviewCount; i++) {
       const req = await call('POST', '/api/reviews/request', { contact_id: contact(i + 4).id, channel: 'email' });
       const tokenValue = req?.token ?? app.db.get('SELECT token FROM review_requests WHERE location_id = ? ORDER BY created_at DESC LIMIT 1', L)?.token;
       if (tokenValue && i < reviewCount - 1) {
-        const comments = ['Sehr freundlich und kompetent!', 'Schnell, zuverlässig, tolle Beratung.', 'Hat mir super geholfen.', 'Alles bestens, gerne wieder.', 'Etwas Wartezeit, sonst top.', 'Klare Empfehlung!'];
-        await run(L, 'POST', `/api/public/reviews/${tokenValue}`, { rating: i === 4 ? 3 : i % 3 === 0 ? 4 : 5, comment: comments[i % comments.length], public: true });
+        const comments = ['Sehr freundlich und kompetent!', 'Schnell, zuverlässig, tolle Beratung.', 'Hat mir super geholfen.', 'Alles bestens, gerne wieder.', 'Etwas Wartezeit, sonst top.', 'Klare Empfehlung!', 'Immer wieder gern – das ganze Team ist klasse.', 'Fair, ehrlich und pünktlich.'];
+        // mostly five stars, a few fours and one three: an average of about 4.7
+        await run(L, 'POST', `/api/public/reviews/${tokenValue}`, { rating: i % 8 === 3 ? 4 : i % 17 === 9 ? 3 : 5, comment: comments[i % comments.length], public: true });
       }
     }
     await seedReviewPlatforms(k);
@@ -384,6 +410,7 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
       ['Website lädt langsam', 'Die Startseite braucht seit gestern sehr lange.', 'dringend'],
     ];
     for (const [i, [subject, description, priority]] of ticketSpecs.slice(0, plan.tickets).entries()) await call('POST', '/api/tickets', { subject, description, contact_id: contact(i + 6).id, priority });
+    await seedSupportHistory(k);
     if (!plan.hq) {
       const kb = await call('POST', '/api/kb/categories', { name: 'Erste Schritte', description: 'Antworten auf die häufigsten Fragen.' });
       for (const [title, body] of [
@@ -402,42 +429,54 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     await seedProject(k);
     await seedOffice(k);
     await seedWebinar(k);
+    await seedCourses(k);
+    await seedKnowledge(k);
+    await seedCommunity(k);
     await seedStore(k, products);
     if (plan.key === 'coach') await seedCreator(k);
     if (plan.key === 'agency') await seedAgencyObjects(k);
     for (const key of plan.reports) await call('POST', `/api/reports/templates/${key}`, {});
 
-    // --- spread the history over the last three months -------------------------------------------
-    await step('backdate', () => backdate(app, L, base, rand));
+    // --- spread the history over the last twelve months -------------------------------------------
+    await step('backdate', () => backdate(app, L, base, rand, dated));
   }
 
   await app.events.flush();
   return result;
 }
 
-/** Moves created_at (and related timestamps) of the seeded rows into the past, so charts and lists look lived-in. */
-function backdate(app: App, locationId: string, base: Date, rand: () => number) {
+/**
+ * Moves created_at (and related timestamps) of the seeded rows into the past, so charts and lists look lived-in: contacts and
+ * companies over the last year (more of them recently – the business grows), the rest over weeks or months. Rows whose dates
+ * the history set explicitly (`dated`: deals, tickets, reviews …) and the messages of sent campaigns keep them.
+ */
+function backdate(app: App, locationId: string, base: Date, rand: () => number, dated: Set<string>) {
   const db = app.db;
   const iso = (daysBack: number) => new Date(base.getTime() - daysBack * 864e5 - Math.floor(rand() * 8 * 3600e3)).toISOString();
   const hasColumn = (table: string, column: string) => db.all(`PRAGMA table_info(${table})`).some((c: any) => c.name === column);
-  /** bias > 1 puts more rows into the recent past (charts of the last 30 days look busier). */
+  /**
+   * The rows in the order they were made, the first the oldest: evenly spread over `maxDays` (stratified, so the last 30 days
+   * always hold their fair share). bias > 1 puts more rows into the recent past (the business grows, charts look busier).
+   */
   const spread = (table: string, maxDays: number, extra: string[] = [], bias = 1) => {
     if (!hasColumn(table, 'created_at') || !hasColumn(table, 'location_id')) return;
-    for (const row of db.all(`SELECT id FROM ${table} WHERE location_id = ?`, locationId)) {
-      const t = iso(Math.floor(Math.pow(rand(), bias) * maxDays));
+    const rows = db.all(`SELECT id FROM ${table} WHERE location_id = ? ORDER BY rowid`, locationId).filter((r: any) => !dated.has(r.id));
+    for (const [i, row] of rows.entries()) {
+      const t = iso(Math.floor(Math.pow(1 - (i + rand()) / rows.length, bias) * maxDays));
       const cols = ['created_at', ...extra.filter((c) => hasColumn(table, c))];
       db.run(`UPDATE ${table} SET ${cols.map((c) => `${c} = ?`).join(', ')} WHERE id = ?`, ...cols.map(() => t), row.id);
     }
   };
   db.tx(() => {
-    spread('contacts', 90, ['updated_at'], 1.8);
-    spread('companies', 90, ['updated_at']);
-    spread('notes', 40, ['updated_at']);
-    spread('form_submissions', 30);
+    spread('contacts', 365, ['updated_at'], 1.7);
+    spread('companies', 365, ['updated_at'], 1.4);
+    spread('notes', 60, ['updated_at'], 1.3);
+    spread('form_submissions', 60, [], 1.4);
     spread('tickets', 20, ['updated_at']);
-    spread('review_requests', 45);
-    // Won/lost deals closed within the last weeks; open ones were created over the last two months.
+    spread('review_requests', 330, [], 1.3);
+    // Open deals were created over the last two months, closed ones within the last weeks (the history's deals are dated already).
     for (const o of db.all('SELECT id, status FROM opportunities WHERE location_id = ?', locationId)) {
+      if (dated.has(o.id)) continue;
       const created = iso(10 + Math.floor(rand() * 75));
       const updated = o.status === 'open' ? created : iso(Math.floor(rand() * 40));
       db.run('UPDATE opportunities SET created_at = ?, updated_at = ? WHERE id = ?', created, updated, o.id);
@@ -449,9 +488,21 @@ function backdate(app: App, locationId: string, base: Date, rand: () => number) 
       db.run(`UPDATE invoices SET created_at = ?${hasColumn('invoices', 'issued_at') && !frozen ? ', issued_at = ?' : ''} WHERE id = ?`, ...(hasColumn('invoices', 'issued_at') && !frozen ? [issued, issued] : [issued]), inv.id);
       if (inv.status === 'paid') db.run('UPDATE invoices SET paid_at = ? WHERE id = ?', new Date(Math.min(Date.parse(issued) + (2 + Math.floor(rand() * 10)) * 864e5, base.getTime())).toISOString(), inv.id);
     }
-    // Inbox: messages within the last week, conversations sorted accordingly.
-    for (const m of db.all('SELECT id FROM messages WHERE location_id = ? ORDER BY created_at', locationId)) db.run('UPDATE messages SET created_at = ? WHERE id = ?', iso(Math.floor(rand() * 7)), m.id);
+    // Appointments were booked a few days before they take place (the dashboard counts what was booked recently).
+    for (const a of db.all('SELECT id, start_at FROM appointments WHERE location_id = ?', locationId)) {
+      const booked = Math.min(Date.parse(a.start_at) - (1 + Math.floor(rand() * 12)) * 864e5, base.getTime() - Math.floor(rand() * 5 * 3600e3));
+      db.run('UPDATE appointments SET created_at = ? WHERE id = ?', new Date(booked).toISOString(), a.id);
+    }
+    // Inbox: every conversation happened on one day (most of them recently), its messages a little apart; campaign mails keep their send date.
+    const sentMails = new Set(db.all('SELECT r.message_id AS m FROM campaign_recipients r JOIN campaigns c ON c.id = r.campaign_id WHERE c.location_id = ? AND r.message_id IS NOT NULL', locationId).map((r: any) => r.m));
     for (const c of db.all('SELECT id FROM conversations WHERE location_id = ?', locationId)) {
+      const day = Math.floor(Math.pow(rand(), 2.4) * 75);
+      let at = base.getTime() - day * 864e5 - Math.floor(rand() * 10 * 3600e3);
+      for (const m of db.all('SELECT id FROM messages WHERE conversation_id = ? ORDER BY rowid', c.id)) {
+        if (sentMails.has(m.id)) continue;
+        db.run('UPDATE messages SET created_at = ? WHERE id = ?', new Date(Math.min(at, base.getTime())).toISOString(), m.id);
+        at += (20 + Math.floor(rand() * 160)) * 60e3;
+      }
       const last = db.get('SELECT MAX(created_at) t FROM messages WHERE conversation_id = ?', c.id)?.t;
       if (last) db.run('UPDATE conversations SET last_message_at = ? WHERE id = ?', last, c.id);
     }

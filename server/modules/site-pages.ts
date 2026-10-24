@@ -5,7 +5,7 @@ import { now } from '../core/util.js';
 import type { Tool } from './mcp.js';
 
 /**
- * Seitenverwaltung: einzelne Seiten offline nehmen und die Reihenfolge ändern – docs/sites.md#seo--zugang. An offline page answers
+ * Seitenverwaltung: einzelne Seiten offline nehmen und die Reihenfolge ändern – docs/sites.md#seo--access. An offline page answers
  * with the site's own 404 (the domain and every other page stay online) and is marked `noindex` while offline (its earlier setting
  * comes back with it). The order is the pages' `position` – the first page is the start page.
  */

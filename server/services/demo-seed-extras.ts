@@ -24,6 +24,10 @@ export interface Kit {
   inDays: (d: number, hour: number, minute?: number) => string;
   ymd: (d: number) => string;
   rand: () => number;
+  /** The moment the seed counts from (its `now` option): nothing is dated after it. */
+  nowMs: number;
+  /** Ids of rows whose dates the history already set (demo-seed-history.ts) – the final backdating leaves them alone. */
+  dated: Set<string>;
 }
 
 const SALUTATION = (c: any) => `${c.first_name} ${c.last_name}`.trim();
@@ -102,10 +106,10 @@ export async function seedReviewPlatforms(k: Kit) {
   for (const [pi, platform] of k.plan.platforms.entries()) {
     const src = await k.call('POST', '/api/review-sources', { source: 'import', platform_label: platform, label: platform, profile_url: `https://bewertungen.example.org/${k.plan.key}/${pi}` });
     if (!src?.id) continue;
-    const rows = Array.from({ length: 4 + ((pi + k.plan.key.length) % 3) }, (_, i) => {
-      const rating = i === 3 ? 3 : i % 4 === 1 ? 4 : 5;
+    const rows = Array.from({ length: 9 + ((pi + k.plan.key.length) % 4) }, (_, i) => {
+      const rating = i % 6 === 2 ? 4 : i % 13 === 7 ? 3 : 5;
       const who = SALUTATION(k.contact(pi * 5 + i)).replace(/,/g, '');
-      return `${who},${rating},"${texts[(i + pi) % texts.length]}",${k.ymd(-(3 + i * 9 + pi * 4))}`;
+      return `${who},${rating},"${texts[(i + pi) % texts.length]}",${k.ymd(-(3 + i * 27 + pi * 5))}`;
     });
     await k.call('POST', `/api/review-sources/${src.id}/import`, { csv: ['author,rating,text,date', ...rows].join('\n') });
   }
@@ -172,7 +176,7 @@ export async function seedWebinar(k: Kit) {
     schedule: { ondemand: { enabled: true } },
   });
   if (w?.id) await k.call('PATCH', `/api/webinars/${w.id}`, { status: 'published' });
-  if (w?.id) for (let i = 0; i < 6; i++) await k.call('POST', `/api/webinars/${w.id}/registrations`, { contact_id: k.contact(i + 7).id });
+  if (w?.id) for (let i = 0; i < 16; i++) await k.call('POST', `/api/webinars/${w.id}/registrations`, { contact_id: k.contact(i + 7).id });
 }
 
 /** The online store: open, products published, orders in every state and a gift card. */
@@ -213,20 +217,8 @@ export async function seedStore(k: Kit, products: any[]) {
   await k.call('POST', '/api/gift-cards', { amount_cents: 2500, note: 'Gewinnspiel Instagram' });
 }
 
-/** Online coach: a course with enrolments, a community with posts and an affiliate programme. */
+/** Online coach: a community with posts and an affiliate programme (the courses come from demo-seed-depth.ts). */
 export async function seedCreator(k: Kit) {
-  const course = await k.call('POST', '/api/courses', { title: 'Fit in 30 Tagen', description: 'Vier Wochen, zwölf Videos, ein Plan – für Einsteiger.' });
-  if (course?.id) {
-    for (const [mi, [title, lessons]] of ([
-      ['Woche 1: Grundlagen', ['Willkommen & dein Plan', 'Richtig aufwärmen', 'Ganzkörper-Basics (15 Min.)']],
-      ['Woche 2: Kraft aufbauen', ['Ganzkörper-Workout (20 Min.)', 'Mobilität am Morgen', 'Ernährung: einfache Wochenplanung']],
-    ] as const).entries()) {
-      const mod = await k.call('POST', `/api/courses/${course.id}/modules`, { title });
-      if (mod?.id) for (const t of lessons) await k.call('POST', `/api/courses/${course.id}/lessons`, { module_id: mod.id, title: t, body: 'Erfundene Demo-Lektion.', duration_min: 10 + mi * 5, published: true });
-    }
-    await k.call('PATCH', `/api/courses/${course.id}`, { status: 'published' });
-    for (let i = 0; i < 12; i++) await k.call('POST', `/api/courses/${course.id}/enrollments`, { contact_id: k.contact(i).id });
-  }
   const group = await k.call('POST', '/api/community/groups', { name: 'FitWerk Community', description: 'Austausch, Fragen und Erfolge der Teilnehmer.' });
   if (group?.id)
     for (const [title, body, pinned] of [

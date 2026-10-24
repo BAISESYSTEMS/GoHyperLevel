@@ -35,7 +35,7 @@ Every connection is synced **once a day** (a failed fetch is retried after an ho
 
 *Bewertungen → Weitere Plattformen → + Plattform verbinden*, choose the platform, fill in the fields:
 
-- **Facebook:** pick one of the pages connected under *Einstellungen → Kanäle* (several pages: [meta-channels.md](meta-channels.md#mehrere-seiten-und-instagram-konten)). No extra key – the page token is used.
+- **Facebook:** pick one of the pages connected under *Einstellungen → Kanäle* (several pages: [meta-channels.md](meta-channels.md#multiple-pages-and-instagram-accounts)). No extra key – the page token is used.
 - **Trustpilot:** the domain as listed on Trustpilot (or the business unit ID) and the **API key** from the Trustpilot developer portal. For replies add the **API secret** and the e-mail and password of a business user with access to the account (HyperLevel fetches a short-lived token with the password grant for each reply; the password is sealed like every key).
 - **ProvenExpert:** *API-ID* and *API-Key* from ProvenExpert (*Integration → API*), optionally your profile link.
 - **Yelp:** the business ID or alias (the last part of `yelp.com/biz/<alias>`) and a Fusion API key.

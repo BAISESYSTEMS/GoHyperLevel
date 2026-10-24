@@ -321,7 +321,7 @@ Skool has no public API, so nothing can be pulled automatically. The route that 
 
 ## Privacy and safety notes
 
-- Members are contacts; they can export or delete their data like any contact ([api.md](api.md#datenschutz-dsgvo)). Community data is part of
+- Members are contacts; they can export or delete their data like any contact ([api.md](api.md#privacy-gdpr)). Community data is part of
   the privacy export of a contact – direct messages (both sides of each conversation), blocks and reports included. Erasing a member
   deletes its conversations (for the other side too), its blocks, and the bell entries of other members about it or its posts.
 - Other members never see e-mail addresses, and the map and heatmap show only what a member chose to show.

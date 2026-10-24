@@ -12,7 +12,7 @@ export const FEEDBACK_TOURS: Tour[] = [
     routes: ['feedback', 'wishes'],
     keywords: 'fehler melden bug feedback screenshot problem wunsch wunschliste roadmap abstimmen idee was ist neu changelog support',
     learned: ['Einen Fehler mit Screenshot und Diagnosedaten melden', 'Diagnosedaten ansehen und einzeln entfernen', 'Antworten und Status unter „Meine Meldungen“ verfolgen', 'Für Wünsche abstimmen und selbst einen einreichen', 'Roadmap und „Was ist neu“ lesen'],
-    docs: { label: 'Fehler & Wünsche', file: 'bug-reports', anchor: 'fehler-melden' },
+    docs: { label: 'Fehler & Wünsche', file: 'bug-reports.de', anchor: 'fehler-melden' },
     steps: [
       { title: 'Etwas klappt nicht?', target: 'feedback-button', text: 'Über **Feedback** oben rechts meldest du Fehler, stellst Fragen und reichst Wünsche ein. Ein roter Punkt zeigt Antworten des Teams und Neues aus „Was ist neu“.' },
       { title: 'Das Menü', target: 'feedback-button', kind: 'click', text: 'Hier geht es auch zu „Meine Meldungen“, zur Wunschliste und zu „Was ist neu“.', do: 'Klicke auf **Feedback**.', demo: { click: true, label: 'Zeig’s mir' } },

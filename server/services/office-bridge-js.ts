@@ -1,7 +1,7 @@
 /**
  * The load/save bridge that runs inside an editor page (/office/app/<kind>/), before the editor's own code. The editors are
  * unmodified upstream WebAssembly builds that know only the browser's file picker, drag & drop and downloads – no API to hand them
- * a file or to get one back (docs/office.md#wie-die-editoren-laden-und-speichern). So the bridge:
+ * a file or to get one back (docs/office.md#how-the-editors-load-and-save). So the bridge:
  *
  * - LOAD: waits until the editor has started, then drops the file on its canvas as a synthetic drag & drop (a real `File` in a
  *   `DataTransfer` – exactly what the editor receives when a person drops a file). The PDF editor instead reads `?file=` itself.

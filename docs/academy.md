@@ -1,46 +1,48 @@
-# Akademie – geführte Touren
+**English** · [Deutsch](academy.de.md)
 
-Die **Akademie** (Menüpunkt *Akademie*, ganz unten über *Einstellungen*) bringt jedem bei, wie man die Firma mit der App führt – direkt in der echten Oberfläche: Die Tour markiert das Feld oder den Knopf, erklärt ihn in ein, zwei Sätzen, sagt, was du klicken oder tippen sollst, wartet, bis du es gemacht hast (oder du klickst „Weiter“), und geht weiter – auch über mehrere Seiten.
+# Academy – guided tours
 
-![Die Akademie mit laufender Tour: der erste Schritt zeigt auf den Gesamt-Guide mit 14 Kapiteln](assets/academy.png)
+The **Academy** (menu item *Academy*, at the very bottom above *Settings*) teaches everyone how to run the company with the app – right in the real interface: the tour highlights the field or button, explains it in a sentence or two, tells you what to click or type, waits until you have done it (or you click “Next”), and moves on – across several pages if needed.
 
-## Was es gibt
+![The Academy with a running tour: the first step points at the complete guide with 14 chapters](assets/academy.png)
 
-- **Gesamt-Guide „Firma übernehmen“** – 14 Kapitel für eine Nachfolgerin oder einen Nachfolger, zusammen rund fünf Stunden, jedes Kapitel einzeln und jederzeit fortsetzbar: Zugang & Sicherheit → Agentur-Überblick → Tagesroutine (mit Tickets und eigenem Dashboard) → Kunden & Projekte (mit Firmen, eigenen Objekten und Eigenschaften) → Marketing (mit Lead-Scoring und Marketing-Dashboard) → Websites & Funnels → Kurse & Community → Umsatz → Reputation → Service & Support → KI → Einstellungen & Integrationen (mit Integrations-Katalog, Zapier/Make/n8n, HubSpot-Import und Android-App) → Betrieb → Abschluss-Checkliste.
-- **Kurs „Deine Firma mit HyperLevel führen“** – zehn Lektionen für Gründerinnen und Gründer, die ihre eigene Firma mit der App führen (Firmen-Setup, Vertrieb, Marketing, Kundenservice, Finanzen, Projekte & Zeit, KI & Automatisierung, Kennzahlen & Wochen-Routine, Datenschutz & Compliance, Skalieren), jede mit einer 10-Minuten-Aufgabe in der echten Oberfläche; eigene Gruppe und Abzeichen in der Akademie. Gedruckte Fassung: [kurs-firma-fuehren.md](kurs-firma-fuehren.md) (erzeugt aus `web/src/tour/content/company.ts` über `web/src/tour/company-course.ts`), das Betriebs-Handbuch dazu: [company-playbook.md](company-playbook.md).
-- **Modul-Touren** – über 110 Touren, für jeden Bereich eine mit 5–15 Schritten, in zehn Gruppen: Erste Schritte, Kunden & Tagesgeschäft, Marketing, Websites & Kurse & Community, Umsatz, Reputation, Service & Support, KI, Einstellungen & Kanäle sowie Agentur & Betrieb. Die vollständige Liste mit Schrittzahl und Dauer steht im [Anhang des Handbuchs](handbuch.md#anhang-alle-modul-touren) und in der Akademie selbst.
-- **„?“ oben rechts** – auf jeder Seite: die Touren, die zu genau dieser Seite passen, „Weitermachen“ und der Gesamt-Guide.
-- **Fortschritt & Abzeichen** – je Person auf dem Server gespeichert: angefangene Touren, erledigte Touren (✓), letzter Schritt. Wer die Seite neu lädt, ist sofort wieder in der laufenden Tour.
-- **Übungs-Firma** (nur Agentur) – ein eigener Sub-Account „Übungs-Firma (Akademie)“ mit erfundenen Kontakten (und den Firmen dazu), Deals, Aufgaben, Termin, Formular, Website, Produkten, Rechnung, Kampagne, Workflow, zwei Tickets, einem Hilfe-Artikel, dem eigenen Objekt „Projekte“ mit zwei Datensätzen, Verknüpfungs-Labels und einem Lead-Scoring-Modell (alle E-Mails `…@example.com`). E-Mail und SMS stehen dort auf „Nur speichern“ – es wird nichts verschickt. Touren mit Übungen bieten am Anfang an, dorthin zu wechseln. Anlegen und Löschen in der Akademie; solange du drin bist, zeigt ein gelber Hinweis oben, dass alles nur Übung ist.
-- **Übergabe-Status** (nur Agentur) – was eingerichtet ist und was fehlt (E-Mail-/SMS-Versand, Rechnungsdaten, Kanäle, Telefonie, Browser-Telefon, KI-Assistent, KI-Telefonagent, Stripe, Google, Website-Chat, Social Planner, Service – Zuweisung, Support-Postfach, Hilfe-Center und offene Tickets ohne Zuständige –, HubSpot-Umzug, White-Label, Domains, OAuth, Postfächer, Supabase, Todoist, SaaS, Backups, Agentur-Schlüssel, Android-App mit gekoppelten Handys), **wer Zugang hat** (mit 2FA-Status) und **offene Punkte** (Admins ohne 2FA, fehlende Pflicht-Einrichtungen, ausgefallene Websites, überfällige Aufgaben). Gelesen wird aus den vorhandenen Status-Endpunkten – Passwörter, Tokens und Schlüssel werden nie angezeigt.
-- **Handbuch** – der ganze Gesamt-Guide als Dokument (*Akademie → Handbuch*), zum Drucken oder „Als PDF speichern“. Dieselbe Fassung liegt als Markdown in [handbuch.md](handbuch.md).
-- **Anleitungen in der App** – am Ende jeder Tour führt „Mehr dazu“ zur passenden Anleitung aus `docs/`, direkt in der App (nur angemeldet; Kunden-Logins sehen nur die Anleitungen ohne Server-Details).
+## What is included
 
-## Einstieg
+- **Complete guide “Take over the company”** – 14 chapters for a successor, about five hours in total, each chapter on its own and resumable at any time: Access & security → Agency overview → Daily routine (with tickets and your own dashboard) → Customers & projects (with companies, custom objects and properties) → Marketing (with lead scoring and the marketing dashboard) → Websites & funnels → Courses & community → Revenue → Reputation → Service & support → AI → Settings & integrations (with the integrations catalog, Zapier/Make/n8n, HubSpot import and the Android app) → Operations → Final checklist.
+- **Course “Run your company with HyperLevel”** – ten lessons for founders who run their own company with the app (company setup, sales, marketing, customer service, finance, projects & time, AI & automation, metrics & weekly routine, privacy & compliance, scaling), each with a 10-minute task in the real interface; its own group and badges in the Academy. Printed version: [kurs-firma-fuehren.md](kurs-firma-fuehren.md) (generated from `web/src/tour/content/company.ts` via `web/src/tour/company-course.ts`), and the operating handbook that goes with it: [company-playbook.md](company-playbook.md).
+- **Module tours** – more than 110 tours, one for every area with 5–15 steps, in ten groups: Getting started, Customers & daily business, Marketing, Websites & courses & community, Revenue, Reputation, Service & support, AI, Settings & channels, and Agency & operations. The full list with step count and duration is in the [appendix of the handbook](handbuch.md#anhang-alle-modul-touren) and in the Academy itself.
+- **“?” at the top right** – on every page: the tours that fit exactly this page, “Continue” and the complete guide.
+- **Progress & badges** – saved per person on the server: tours started, tours finished (✓), last step. If you reload the page, you are straight back in the running tour.
+- **Practice company** (agency only) – a separate sub-account “Practice company (Academy)” with made-up contacts (and their companies), deals, tasks, an appointment, a form, a website, products, an invoice, a campaign, a workflow, two tickets, a help article, the custom object “Projects” with two records, association labels and a lead-scoring model (all e-mails `…@example.com`). E-mail and SMS are set to “Save only” there – nothing is sent. Tours with exercises offer to switch there at the start. Create and delete it in the Academy; as long as you are inside, a yellow notice at the top tells you that everything is just practice.
+- **Handover status** (agency only) – what is set up and what is missing (e-mail/SMS sending, invoice details, channels, telephony, browser phone, AI assistant, AI phone agent, Stripe, Google, website chat, social planner, service – assignment, support mailbox, help center and open tickets without an assignee –, HubSpot move, white label, domains, OAuth, mailboxes, Supabase, Todoist, SaaS, backups, agency keys, Android app with paired phones), **who has access** (with 2FA status) and **open items** (admins without 2FA, missing required setup, websites that are down, overdue tasks). It reads from the existing status endpoints – passwords, tokens and keys are never shown.
+- **Handbook** – the whole complete guide as a document (*Academy → Handbook*), for printing or “Save as PDF”. The same version is available as Markdown in [handbuch.md](handbuch.md).
+- **Guides in the app** – at the end of every tour, “More on this” leads to the matching guide from `docs/`, right in the app (signed in only; customer logins only see the guides without server details).
 
-Die Akademie wird dort angeboten, wo man sie braucht:
+## Getting started
 
-- **Willkommenskarte „In 10 Minuten startklar – Academy starten“** – auf der Startseite (Dashboard und Agentur-Übersicht), bis die erste Tour („So findest du dich zurecht“) erledigt ist; in der Demo immer (alle Besucher teilen sich einen Login). ✕ blendet sie in diesem Browser aus. Neue Logins sehen sie zusätzlich oben im Dialog „Was willst du tun?“ des Einfach-Modus – „Academy starten“ übernimmt die gewählten Ziele und öffnet die Tour.
-- **„Lernen“ / „Tour starten“** – in den leeren Ansichten der Hauptbereiche (Kontakte, Konversationen, Kalender, Formulare, Websites & Funnels, Workflows, Kampagnen), im Seitenkopf von Dashboard, Agentur und Einstellungen und im Demo-Banner („Geführte Tour starten“). Der Link startet die Tour, die zur Seite passt; gibt es keine, öffnet er die Akademie.
-- **Hilfe-Menü „?“** – bis die erste Tour erledigt ist, steht dort „Lernen: In 10 Minuten startklar“.
-- **Menü** – im Einfach-Modus gehört *Akademie* zu den festen Einträgen (neben Dashboard, Konversationen, Kontakte, Kalender, Aufgaben).
+The Academy is offered where you need it:
 
-Technisch: `web/src/tour/learn.tsx` (klein, lädt die Tour-Engine erst beim Klick; `Empty` hat dafür das Prop `learn`) und `web/src/tour/welcome.tsx`.
+- **Welcome card “Ready in 10 minutes – start the Academy”** – on the home page (dashboard and agency overview) until the first tour (“Find your way around”) is done; in the demo always (all visitors share one login). ✕ hides it in this browser. New logins also see it at the top of the “What do you want to do?” dialog of simple mode – “Start the Academy” takes over the chosen goals and opens the tour.
+- **“Learn” / “Start tour”** – in the empty views of the main areas (contacts, conversations, calendar, forms, websites & funnels, workflows, campaigns), in the page header of dashboard, agency and settings, and in the demo banner (“Start guided tour”). The link starts the tour that fits the page; if there is none, it opens the Academy.
+- **Help menu “?”** – until the first tour is done, it shows “Learn: Ready in 10 minutes”.
+- **Menu** – in simple mode, *Academy* is one of the fixed entries (next to dashboard, conversations, contacts, calendar, tasks).
 
-## Bedienung
+Technically: `web/src/tour/learn.tsx` (small, loads the tour engine only on click; `Empty` has the prop `learn` for it) and `web/src/tour/welcome.tsx`.
 
-- **Weiter / Zurück** blättern, **Überspringen** springt im Gesamt-Guide zum nächsten Kapitel (sonst beendet es die Tour), **✕** oder **Esc** pausiert – der Fortschritt bleibt. Ist gerade ein Dialog offen, schließt Esc zuerst den Dialog.
-- Schritte mit 👉 warten auf dich: auf einen Klick, eine Eingabe, einen Seitenwechsel oder eine Erfolgsmeldung („Gespeichert“). „Weiter“ geht immer.
-- **Mach’s für mich** füllt bei manchen Schritten ein Beispiel ein (z. B. einen Namen) – nur bei harmlosen Eingaben, nie beim Senden oder Löschen.
-- Auf dem Handy erscheint die Erklärung als Leiste unten; das Menü klappt die Tour bei Bedarf selbst auf.
-- Kunden-Logins sehen nur Touren und Schritte für die Bereiche, die sie nutzen dürfen; Agentur-Touren und -Schritte nur Admins.
+## Using the Academy
 
-## Für Entwickler
+- **Next / Back** page through the tour, **Skip** jumps to the next chapter in the complete guide (otherwise it ends the tour), **✕** or **Esc** pauses – your progress is kept. If a dialog is open, Esc closes the dialog first.
+- Steps with 👉 wait for you: for a click, an input, a page change or a success message (“Saved”). “Next” always works.
+- **Do it for me** fills in an example in some steps (e.g. a name) – only for harmless inputs, never when sending or deleting.
+- On a phone, the explanation appears as a bar at the bottom; the menu opens itself for the tour when needed.
+- Customer logins only see tours and steps for the areas they may use; agency tours and steps only admins.
 
-- Touren sind reine Daten in `web/src/tour/content/*.ts` (Typen in `web/src/tour/types.ts`), die Engine in `web/src/tour/engine.tsx`, die Seite in `web/src/pages/Academy.tsx`, der Server in `server/modules/academy.ts`.
-- Ein Schritt zeigt auf ein Element über `data-tour="schlüssel"` (bei `Link`, `Field`, `Stat`, `Check` und `Empty` über das Prop `tour`). Automatisch vorhanden: `nav-<route>` (Menü), `tab-<key>` (jeder Reiter), `page-head` / `page-title` / `page-actions` (Seitenkopf), `modal` / `modal-foot`, `search`, `jump`, `help`, `project-switcher`, `account`. Attribute nur ergänzen, nie das Layout ändern.
-- Schritt-Arten: `info`, `click` (weiter nach Klick aufs Element), `navigate` (`to`: Route; `to: 'forms/'` = irgendeine Unterseite), `fill` (wartet auf einen Wert; bei einer Auswahlliste auf die Option aus `demo.fill`), `wait` (`toast`, `appear` oder `route`). `route` öffnet die Seite vor dem Schritt, `optional` erlaubt ein fehlendes Element (dann erklärt `missing`), `admin`/`perm` blenden Schritte aus, `demo` ist „Mach’s für mich“.
-- `tests/academy.test.ts` prüft, dass jedes Ziel als `data-tour` im Code existiert, Routen und Reiter echt sind, Anleitungs-Links auf vorhandene Überschriften zeigen und `docs/handbuch.md` aktuell ist. Seiten sind alle `case '…':` aus `web/src/main.tsx` (auch ohne Menüeintrag, z. B. `properties`). Werden Kapitel umnummeriert, ändern sich ihre IDs – eine Migration in `server/modules/academy.ts` zieht den gespeicherten Fortschritt mit (siehe `002-journey-service-chapter`). Nach Änderungen am Gesamt-Guide das Handbuch neu erzeugen:
+## For developers
+
+- Tours are plain data in `web/src/tour/content/*.ts` (types in `web/src/tour/types.ts`), the engine is in `web/src/tour/engine.tsx`, the page in `web/src/pages/Academy.tsx`, the server in `server/modules/academy.ts`.
+- A step points at an element via `data-tour="key"` (on `Link`, `Field`, `Stat`, `Check` and `Empty` via the prop `tour`). Available automatically: `nav-<route>` (menu), `tab-<key>` (every tab), `page-head` / `page-title` / `page-actions` (page header), `modal` / `modal-foot`, `search`, `jump`, `help`, `project-switcher`, `account`. Only add attributes, never change the layout.
+- Step kinds: `info`, `click` (continues after a click on the element), `navigate` (`to`: route; `to: 'forms/'` = any subpage), `fill` (waits for a value; for a select list, for the option from `demo.fill`), `wait` (`toast`, `appear` or `route`). `route` opens the page before the step, `optional` allows a missing element (then `missing` explains), `admin`/`perm` hide steps, `demo` is “Do it for me”.
+- `tests/academy.test.ts` checks that every target exists as `data-tour` in the code, routes and tabs are real, guide links point to existing headings and `docs/handbuch.md` is up to date. Pages are all `case '…':` in `web/src/main.tsx` (also without a menu entry, e.g. `properties`). If chapters are renumbered, their IDs change – a migration in `server/modules/academy.ts` carries the saved progress along (see `002-journey-service-chapter`). After changes to the complete guide, regenerate the handbook:
 
   ```
   node --import tsx -e "import('./web/src/tour/handbook.ts').then((m) => require('node:fs').writeFileSync('docs/handbuch.md', m.handbookMarkdown('HyperLevel')))"
@@ -48,11 +50,11 @@ Technisch: `web/src/tour/learn.tsx` (klein, lädt die Tour-Engine erst beim Klic
 
 ### API
 
-| Methode | Pfad | Zweck |
+| Method | Path | Purpose |
 | --- | --- | --- |
-| GET | `/api/academy` | Fortschritt je Tour, laufende Tour, Übungs-Firma |
-| PUT | `/api/academy/tours/:id` | `{step, total, active?, done?}` – Position speichern; `active` = läuft (wird nach dem Neuladen fortgesetzt) |
-| DELETE | `/api/academy/tours/:id` | Tour zurücksetzen |
-| DELETE | `/api/academy/active` | Keine Tour läuft mehr |
-| POST / DELETE | `/api/academy/sandbox` | Übungs-Firma anlegen (mit Demo-Daten) / löschen – nur Admins |
-| GET | `/api/academy/docs`, `/api/academy/docs/:name` | Anleitungen aus `docs/` (Admins alle, Kunden-Logins eine Auswahl) |
+| GET | `/api/academy` | Progress per tour, running tour, practice company |
+| PUT | `/api/academy/tours/:id` | `{step, total, active?, done?}` – save the position; `active` = running (continues after a reload) |
+| DELETE | `/api/academy/tours/:id` | Reset a tour |
+| DELETE | `/api/academy/active` | No tour is running any more |
+| POST / DELETE | `/api/academy/sandbox` | Create (with demo data) / delete the practice company – admins only |
+| GET | `/api/academy/docs`, `/api/academy/docs/:name` | Guides from `docs/` (admins all, customer logins a selection) |

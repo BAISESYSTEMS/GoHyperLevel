@@ -84,7 +84,7 @@ function Overview({ go }: { go: (t: string) => void }) {
     [h.stripe_connected, 'Stripe ist verbunden', 'Schlüssel unter Agentur → SaaS → Einstellungen'],
     [h.webhook_set, 'Webhook-Secret ist hinterlegt', 'ohne Webhook entstehen keine Konten nach der Zahlung'],
     [h.signup_open, 'Anmeldung ist offen', 'Einstellungen → Anmeldung'],
-    [h.mail_ready, 'Absender für System-Mails vorhanden', 'Einstellungen → Domain & Mail'],
+    [h.mail_ready, 'System-Mails werden wirklich verschickt (Absender mit SMTP oder Mail-Dienst, nicht „nur speichern“)', 'Einstellungen → Domain & Mail'],
     [!h.legal_open, 'Rechtstexte sind vollständig ausgefüllt', `${h.legal_open} Dokument(e) mit offenen Platzhaltern`],
     [!!h.cloud_domain, 'Cloud-Domain für <name>.domain gesetzt', 'optional – sonst pfadbasiert'],
     [!h.saas_signup_open, 'Die SaaS-Anmeldeseite (/signup) ist aus', 'im Cloud-Modus laufen Anmeldungen über /start'],

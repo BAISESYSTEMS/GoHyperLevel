@@ -23,7 +23,7 @@ export function pageCtx(app: App): PageCtx {
   return {
     brand: { name: cloudBrand(app), logo_url: b.logo_url, color: b.color },
     status_url: s.status_url,
-    docs_url: s.docs_url || 'https://github.com/BAISESYSTEMS/hyperlevel#readme',
+    docs_url: s.docs_url || 'https://github.com/BAISESYSTEMS/GoHyperLevel#readme',
     support_email: cloudSupport(app),
     legal: LEGAL_DOCS.map((doc) => ({ doc, version: legalCurrent(app, doc).version })),
   };

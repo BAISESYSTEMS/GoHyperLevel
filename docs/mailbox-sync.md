@@ -1,7 +1,7 @@
 # Mailbox sync: Gmail and Outlook / Microsoft 365
 
 HyperLevel can work with a mailbox **natively through the official APIs** of Google (Gmail API) and Microsoft (Graph) –
-no IMAP, no SMTP passwords. (The older [IMAP sync](self-hosting.md#e-mail-postfach-gmail-anbinden) stays for any other
+no IMAP, no SMTP passwords. (The older [IMAP sync](self-hosting.md#connect-an-e-mail-mailbox-gmail) stays for any other
 provider.)
 
 - **Inbox, sent mail and drafts** become conversations and messages: the contact is matched by e-mail address, threads,
@@ -226,7 +226,7 @@ What that means for you:
 | **Internal app (Google Workspace)** | everyone is in one Workspace organisation; set the consent screen's user type to *Internal* | none | only accounts of that organisation; tokens do not expire |
 | **Production, verified** | many external customers connect their Gmail | verification **and** CASA | cost, time, yearly re-assessment |
 | **Send only** (`gmail.send`, access level *Send only*) | you only need to send through Gmail (workflow e-mails) | sensitive-scope verification, no CASA | no sync, no reading |
-| **IMAP with an app password** (the older [IMAP sync](self-hosting.md#e-mail-postfach-gmail-anbinden)) | small setups, no OAuth app wanted | none | no push, no labels/flags both ways, no threaded replies |
+| **IMAP with an app password** (the older [IMAP sync](self-hosting.md#connect-an-e-mail-mailbox-gmail)) | small setups, no OAuth app wanted | none | no push, no labels/flags both ways, no threaded replies |
 
 For a self-hosting agency the usual answer is *Testing* (reconnect weekly) or *Internal*. An unverified production app is
 limited to 100 users with a warning screen. The consent screen needs an app name, support e-mail and an authorised domain;

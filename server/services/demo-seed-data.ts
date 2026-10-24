@@ -3,6 +3,9 @@
  * it looks after – a physiotherapy practice, an electrician, an online coach, a small SaaS start-up and a local shop with an
  * online store. Pure data. Names are invented; e-mail addresses use example.com/.org/.net or a `.example` domain, phone
  * numbers the test range +49 30 1234 xxx.
+ *
+ * Keep the contacts of all sub-accounts (plans plus the form senders) under 400: the background job that scores contacts
+ * handles 200 per tick and tests/scheduler-sweep.test.ts gives the demo data two ticks.
  */
 
 export type PlanKey = 'agency' | 'physio' | 'craft' | 'coach' | 'saas' | 'shop';
@@ -75,7 +78,7 @@ export const PLANS: LocPlan[] = [
     ],
     sources: ['Website', 'Google', 'Empfehlung', 'LinkedIn', 'Formular: Kontaktformular', 'Messe', 'Live-Chat'],
     tags: [['Interessent', '#f59e0b'], ['Kunde', '#16a34a'], ['Newsletter', '#0ea5e9'], ['VIP', '#a855f7'], ['Website', '#2563eb'], ['SEO', '#14b8a6']],
-    contacts: 32,
+    contacts: 52,
     fields: [
       { key: 'branche', label: 'Branche', type: 'select', options: ['Handwerk', 'Gastronomie', 'Gesundheit', 'Handel', 'Dienstleistung'] },
       { key: 'monatsbudget', label: 'Monatsbudget (€)', type: 'number', range: [300, 4000] },
@@ -115,6 +118,7 @@ export const PLANS: LocPlan[] = [
     platforms: ['Google', 'Branchenportal'],
     tickets: 4,
     script: 'Erstgespräch Website',
+    webinar: 'Mehr Anfragen über Google',
     pm: { name: 'Relaunch Bäckerei Morgenrot', template: 'website-projekt' },
     office: [['docx', 'Angebot Relaunch Bäckerei Morgenrot'], ['xlsx', 'Kampagnenbudget Q4']],
     reports: ['sales', 'marketing', 'revenue'],
@@ -132,7 +136,7 @@ export const PLANS: LocPlan[] = [
     ],
     sources: ['Google', 'Empfehlung', 'Website', 'Arzt-Überweisung', 'Instagram'],
     tags: [['Patient', '#16a34a'], ['Rücken', '#ef4444'], ['Knie', '#f97316'], ['Prävention', '#14b8a6'], ['Newsletter', '#0ea5e9']],
-    contacts: 34,
+    contacts: 58,
     fields: [
       { key: 'krankenkasse', label: 'Krankenkasse', type: 'select', options: ['Gesetzlich', 'Privat', 'Selbstzahler'] },
       { key: 'behandlungen_offen', label: 'Offene Behandlungen', type: 'number', range: [0, 10] },
@@ -162,9 +166,11 @@ export const PLANS: LocPlan[] = [
       ['Physiotherapie Selbstzahler (45 Min.)', 'Einzelbehandlung', 6500],
       ['Präventionskurs Rücken (8 Termine)', 'Von Krankenkassen bezuschusst', 16000],
       ['Massage (30 Min.)', 'Klassische Massage', 3900],
+      ['Prävention Flatrate (Monat)', 'Kurse und Trainingsfläche ohne Zusatzkosten', 3900],
     ],
     platforms: ['Google', 'Arztportal', 'Facebook'],
     tickets: 3,
+    webinar: 'Rückenschmerzen im Büro – was wirklich hilft',
     reports: ['revenue'],
   },
   {
@@ -182,7 +188,7 @@ export const PLANS: LocPlan[] = [
     ],
     sources: ['Google', 'Empfehlung', 'Website', 'Handwerkerportal', 'Fahrzeugwerbung'],
     tags: [['Neubau', '#2563eb'], ['Altbau', '#a16207'], ['Photovoltaik', '#eab308'], ['Wartung', '#64748b'], ['Gewerbe', '#7c3aed']],
-    contacts: 28,
+    contacts: 48,
     fields: [
       { key: 'objektart', label: 'Objektart', type: 'select', options: ['Einfamilienhaus', 'Mehrfamilienhaus', 'Gewerbe', 'Wohnung'] },
       { key: 'baujahr', label: 'Baujahr', type: 'number', range: [1955, 2024] },
@@ -213,10 +219,12 @@ export const PLANS: LocPlan[] = [
       ['Stunde Elektromeister', 'Arbeitszeit inkl. Werkzeug', 7800],
       ['Wallbox 11 kW inkl. Montage', 'Montage, Anschluss und Anmeldung beim Netzbetreiber', 149000],
       ['E-Check Wohnung', 'Prüfung nach DGUV V3 mit Protokoll', 18900],
+      ['Wartungsvertrag Elektroanlage (Monat)', 'Jährliche Prüfung und Notdienst mit Vorrang', 4900],
     ],
     platforms: ['Google', 'Handwerkerportal'],
     tickets: 2,
     script: 'Anfrage Photovoltaik',
+    webinar: 'Photovoltaik für Hausbesitzer',
     pm: {
       name: 'Neubau Lindenstraße 14',
       tasks: [
@@ -243,7 +251,7 @@ export const PLANS: LocPlan[] = [
     companies: [['Hafenlogistik Nord GmbH', 'Logistik', 'Hamburg']],
     sources: ['Instagram', 'YouTube', 'Podcast', 'Empfehlung', 'Affiliate', 'Webinar'],
     tags: [['Mitglied', '#16a34a'], ['Interessent', '#f59e0b'], ['Newsletter', '#0ea5e9'], ['Challenge', '#ef4444'], ['VIP', '#a855f7']],
-    contacts: 30,
+    contacts: 54,
     fields: [
       { key: 'ziel', label: 'Ziel', type: 'select', options: ['Abnehmen', 'Muskelaufbau', 'Fit bleiben', 'Rücken stärken'] },
       { key: 'trainingstage', label: 'Trainingstage pro Woche', type: 'number', range: [1, 6] },
@@ -287,7 +295,7 @@ export const PLANS: LocPlan[] = [
     ],
     sources: ['Website', 'Product Hunt', 'Google', 'Empfehlung', 'Partner'],
     tags: [['Testphase', '#f59e0b'], ['Kunde', '#16a34a'], ['Warteliste', '#64748b'], ['Partner', '#7c3aed'], ['Newsletter', '#0ea5e9']],
-    contacts: 28,
+    contacts: 64,
     fields: [
       { key: 'teamgroesse', label: 'Teamgröße', type: 'number', range: [3, 120] },
       { key: 'tarif', label: 'Tarif', type: 'select', options: ['Starter', 'Team', 'Business'] },
@@ -315,6 +323,9 @@ export const PLANS: LocPlan[] = [
     products: [
       ['Taktwerk Team (Monat)', 'Bis 25 Mitarbeitende', 9900],
       ['Taktwerk Business (Monat)', 'Unbegrenzt, mit Schnittstellen', 39900],
+      ['Taktwerk Starter (Monat)', 'Bis 8 Mitarbeitende, ein Standort', 4900],
+      ['Taktwerk Team (Jahr)', 'Bis 25 Mitarbeitende, 2 Monate geschenkt', 99000],
+      ['Taktwerk Business (Jahr)', 'Unbegrenzt, mit Schnittstellen, 2 Monate geschenkt', 399000],
     ],
     platforms: ['Google', 'Software-Vergleichsportal'],
     tickets: 4,
@@ -337,7 +348,7 @@ export const PLANS: LocPlan[] = [
     ],
     sources: ['Laden', 'Online-Shop', 'Instagram', 'Google', 'Markt'],
     tags: [['Stammkunde', '#16a34a'], ['Abo', '#2563eb'], ['Gastro', '#a16207'], ['Newsletter', '#0ea5e9'], ['Barista-Kurs', '#db2777']],
-    contacts: 30,
+    contacts: 50,
     fields: [
       { key: 'lieblingsroestung', label: 'Lieblingsröstung', type: 'select', options: ['Espresso', 'Filter', 'Entkoffeiniert'] },
       { key: 'zubereitung', label: 'Zubereitung', type: 'select', options: ['Siebträger', 'Handfilter', 'Vollautomat', 'French Press'] },
@@ -363,6 +374,7 @@ export const PLANS: LocPlan[] = [
     ],
     platforms: ['Google', 'Facebook'],
     tickets: 2,
+    webinar: 'Online-Verkostung: Drei Röstungen im Vergleich',
     reports: ['revenue'],
     store: true,
   },

@@ -148,8 +148,8 @@ describe('the repository documentation', () => {
 
   it('the numbers about the Akademie are real (chapters exactly, tours never more than exist)', () => {
     const claims = (file: string, re: RegExp) => [...read(file).matchAll(re)].map((m) => Number(m[1]));
-    for (const file of ['README.de.md', 'docs/academy.md', 'docs/handbuch.md']) for (const n of claims(file, /\b(\d+) Kapitel\b/g)) expect(n, `${file}: Kapitel`).toBe(JOURNEY.length);
-    for (const file of ['README.de.md', 'docs/academy.md']) for (const n of claims(file, /\b(\d+)\+? Modul-Touren\b/g)) expect(n, `${file}: Modul-Touren`).toBeLessThanOrEqual(MODULE_TOURS.length);
+    for (const file of ['README.de.md', 'docs/academy.de.md', 'docs/handbuch.md']) for (const n of claims(file, /\b(\d+) Kapitel\b/g)) expect(n, `${file}: Kapitel`).toBe(JOURNEY.length);
+    for (const file of ['README.de.md', 'docs/academy.de.md']) for (const n of claims(file, /\b(\d+)\+? Modul-Touren\b/g)) expect(n, `${file}: Modul-Touren`).toBeLessThanOrEqual(MODULE_TOURS.length);
   });
 
   it('the appearance and Android numbers are real', () => {
@@ -231,27 +231,30 @@ describe('what the running app has, against what the docs say', () => {
 /** The pages written in German – their wording stays German, with one spelling of the product terms. */
 const GERMAN_PAGES = [
   'README.de.md',
-  'docs/academy.md',
-  'docs/ai-assistant.md',
-  'docs/android-app.md',
-  'docs/app.md',
-  'docs/bug-reports.md',
-  'docs/collaboration.md',
-  'docs/email-builder.md',
-  'docs/email-marketing.md',
-  'docs/growth.md',
+  'docs/academy.de.md',
+  'docs/ai-assistant.de.md',
+  'docs/android-app.de.md',
+  'docs/app.de.md',
+  'docs/bug-reports.de.md',
+  'docs/collaboration.de.md',
+  'docs/email-builder.de.md',
+  'docs/email-marketing.de.md',
+  'docs/growth.de.md',
   'docs/handbuch.md',
-  'docs/helpdesk.md',
-  'docs/integrations.md',
-  'docs/meta-channels.md',
-  'docs/objects.md',
-  'docs/reports.md',
-  'docs/saas.md',
-  'docs/self-hosting.md',
-  'docs/sites.md',
-  'docs/stripe.md',
-  'docs/todoist.md',
-  'docs/video-studio.md',
+  'docs/helpdesk.de.md',
+  'docs/integrations.de.md',
+  'docs/meta-channels.de.md',
+  'docs/objects.de.md',
+  'docs/office.de.md',
+  'docs/partner-program.de.md',
+  'docs/reports.de.md',
+  'docs/saas.de.md',
+  'docs/self-hosting.de.md',
+  'docs/sites.de.md',
+  'docs/social-planner.de.md',
+  'docs/stripe.de.md',
+  'docs/todoist.de.md',
+  'docs/video-studio.de.md',
 ];
 
 describe('German pages', () => {

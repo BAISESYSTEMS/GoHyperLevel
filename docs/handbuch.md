@@ -163,7 +163,7 @@ Kampagnen mit dem E-Mail-Designer, Social Planner, Workflows, Attribution, Affil
 - Woher Kunden kommen und was Werbung kostet
 - Welche Leads kaufbereit sind (Lead-Scoring)
 
-Mehr dazu: [Attribution, Affiliates & Werbung](growth.md)
+Mehr dazu: [Attribution, Affiliates & Werbung](growth.de.md)
 
 ---
 
@@ -236,7 +236,7 @@ Rechnungen & Angebote, Stripe, Produkte & Kauf-Links, Buchhaltung mit Norman, Ve
 - Wie Rechnungen in die Buchhaltung (Norman) kommen
 - Verträge online unterschreiben lassen
 
-Mehr dazu: [Stripe & Zahlungen](stripe.md)
+Mehr dazu: [Stripe & Zahlungen](stripe.de.md)
 
 ---
 
@@ -256,7 +256,7 @@ Bewertungen sammeln, Google-Profil verbinden, auf Rezensionen antworten. *(ca. 1
 - Google-Rezensionen lesen und beantworten
 - Das Bewertungs-Widget
 
-Mehr dazu: [Google-Bewertungen](self-hosting.md#google-bewertungen)
+Mehr dazu: [Google-Bewertungen](self-hosting.de.md#google-bewertungen)
 
 ---
 
@@ -282,7 +282,7 @@ Tickets und SLAs, Zuweisung, Support-Postfach, Wissensdatenbank, Zufriedenheit (
 - Wissensdatenbank und Hilfe-Center aktuell halten
 - Zufriedenheit messen und gefährdete Kunden erkennen
 
-Mehr dazu: [Service: Tickets, SLAs & mehr](helpdesk.md)
+Mehr dazu: [Service: Tickets, SLAs & mehr](helpdesk.de.md)
 
 ---
 
@@ -305,7 +305,7 @@ KI-Assistent im Posteingang und Chat, KI-Telefonagent und die Claude-Werkzeuge (
 - Wie der KI-Telefonagent arbeitet
 - Wie Claude über MCP mit der Firma arbeitet
 
-Mehr dazu: [KI-Assistent](ai-assistant.md)
+Mehr dazu: [KI-Assistent](ai-assistant.de.md)
 
 ---
 

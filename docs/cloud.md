@@ -361,7 +361,7 @@ feature; the difference is who runs the server:
 | --- | --- | --- |
 | Start | an account in minutes, no server, Docker or Linux | one command on your server ([deploy](deploy/README.md)) |
 | Updates, security patches | the operator installs them | yours ([self-hosting.md → Updates](self-hosting.md#updates)) |
-| Backups | the operator's hourly encrypted off-site backups with a monthly restore test ([backups.md](backups.md)); your own ZIP export any time | yours ([self-hosting.md → Backup](self-hosting.md#betrieb-backup-und-leistung), [backups.md](backups.md)) |
+| Backups | the operator's hourly encrypted off-site backups with a monthly restore test ([backups.md](backups.md)); your own ZIP export any time | yours ([self-hosting.md → Backup](self-hosting.md#operations-backup-and-performance), [backups.md](backups.md)) |
 | TLS, domains, mail deliverability | handled; custom domains on the Agentur plan | yours ([deliverability.md](deliverability.md)) |
 | Where the data is | the operator's server – gohyperlevel.com: planned in Frankfurt am Main, Germany (not open yet, [waitlist](#waitlist-mode)); AVV at signup | your server |
 | White-label, SaaS mode | white-label on the Agentur plan; no SaaS mode | both included |

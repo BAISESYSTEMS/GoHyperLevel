@@ -1,94 +1,96 @@
-# Berichte & Dashboards
+**English** · [Deutsch](reports.de.md)
 
-Eigene Auswertungen über alle Bereiche – wie das Reporting von HubSpot: frei zusammengestellte Berichte, mehrere Dashboards mit Raster zum Ziehen und Vergrößern, Vorlagen, Teilen, TV-Modus und regelmäßige E-Mails. Menü **Berichte** (direkt unter *Dashboard*; vom Dashboard aus auch über **Eigene Dashboards**). Es braucht keine Zugangsdaten und kein zusätzliches Paket – alle Diagramme zeichnet die App selbst.
+# Reports & dashboards
 
-## Bericht erstellen
+Your own analyses across all areas – like HubSpot's reporting: freely assembled reports, several dashboards with a grid you can drag and resize, templates, sharing, TV mode and regular e-mails. Menu **Reports** (right below *Dashboard*; from the dashboard also through **Custom dashboards**). It needs no credentials and no extra package – the app draws all charts itself.
 
-**Berichte → Bericht erstellen** (oder **+ Bericht**). Links wird eingestellt, rechts zeigt die Vorschau sofort das Ergebnis.
+## Creating a report
 
-1. **Datenquelle** wählen (siehe Tabelle unten).
-2. **Darstellung**: Kennzahl (mit Vergleich zur Vorperiode), Linie, Fläche, Säulen, Gestapelt, Balken, Kreis, Ring, Trichter (z. B. Pipeline-Phasen), Heatmap (z. B. Wochentag × Uhrzeit), Tabelle (sortierbar per Klick auf die Spalte). Beim Wechsel setzt der Builder passende Gruppierungen (Linie → nach Datum, Heatmap → Wochentag und Stunde, Trichter → Phase).
-3. **Kennzahlen** (bis 6): Anzahl, berechnete Kennzahlen der Quelle (Win-Rate, gewichtete Umsatzprognose, MRR, No-Show-Rate …), Summe/Ø/Min./Max. von Zahlenfeldern, „eindeutig zählen“. Diagramme zeigen die erste Kennzahl (bzw. alle mit derselben Einheit), die Tabelle alle.
-4. **Gruppieren nach** (bis 2): jedes Feld; Datumsfelder nach Tag, Woche, Monat, Quartal, Jahr, Wochentag oder Uhrzeit – immer in der Zeitzone des Sub-Accounts. Leere Tage/Wochen erscheinen als 0. Bei zwei Gruppen wird die zweite zu den Reihen (gestapelt), mehr als 8 Reihen werden zu „Andere“ zusammengefasst.
-5. **Filter** (bis 20): ist / ist nicht / ist eines von / enthält / beginnt mit / leer, Zahlen größer/kleiner/zwischen, Datum im Zeitraum (z. B. „Letzte 30 Tage“) / vor / nach, Ja/Nein, „hat Tag“.
-6. **Zeitraum**: welches Datumsfeld (z. B. *Erstellt am*, *Gewonnen am*, *Bezahlt am*) und welcher Zeitraum: Heute, Gestern, Diese/Letzte Woche, Letzte 7/30/90/365 Tage, Dieser/Letzter Monat, Dieses/Letztes Quartal, Dieses/Letztes Jahr, Letzte 12 Monate, Gesamter Zeitraum oder von–bis. **Mit Vorperiode vergleichen** stellt jedem Wert den Zeitraum davor gegenüber; „Dieser Monat“ (bis heute) wird mit denselben Tagen des Vormonats verglichen, „Letzte 30 Tage“ mit den 30 Tagen davor. **Zeitraum im Dashboard beibehalten** hält den Bericht unabhängig vom Dashboard-Zeitraum (z. B. „Offener Pipeline-Wert“ über alle Daten).
-7. **Sub-Accounts**: „Nur dieser“ oder „Alle meine Sub-Accounts“ (Agentur-Sicht; jede Quelle hat dafür die Gruppe *Sub-Account*).
-8. **Höchstens (Top N)**: nur die größten N Gruppen.
+**Reports → Create report** (or **+ Report**). You set things up on the left, and the preview on the right shows the result right away.
 
-Oben: **Tabelle/Diagramm** umschalten, **CSV** (für Excel: Semikolon, Dezimalkomma), **Zum Dashboard** (bestehendes oder neues), **In Bibliothek speichern** (Name, Beschreibung, sichtbar für mich / Team dieses Sub-Accounts / alle Admins). Gespeicherte Berichte liegen unter **Bibliothek**; fremde Berichte lassen sich als Kopie speichern.
+1. Choose the **data source** (see the table below).
+2. **Chart type**: Number (with comparison to the previous period), Line, Area, Columns, Stacked, Bars, Pie, Donut, Funnel (e.g. pipeline stages), Heatmap (e.g. weekday × time of day), Table (sortable by clicking the column). When you switch, the builder sets matching groupings (Line → by date, Heatmap → weekday and hour, Funnel → stage).
+3. **Measures** (up to 6): Count, calculated measures of the source (win rate, weighted revenue forecast, MRR, no-show rate …), sum/avg./min./max. of number fields, “Count unique”. Charts show the first measure (or all with the same unit), the table shows all.
+4. **Group by** (up to 2): any field; date fields by day, week, month, quarter, year, weekday or time of day – always in the sub-account's time zone. Empty days/weeks show as 0. With two groupings, the second becomes the series (stacked); more than 8 series are combined into “Other”.
+5. **Filters** (up to 20): is / is not / is one of / contains / starts with / is empty; for numbers greater/less/between; for dates in the period (e.g. “Last 30 days”) / before / after; yes/no; “has tag”.
+6. **Period**: which date field (e.g. *Created on*, *Won on*, *Paid on*) and which period: Today, Yesterday, This/Last week, Last 7/30/90/365 days, This/Last month, This/Last quarter, This/Last year, Last 12 months, All time, or from–to. **Compare with the previous period** sets the preceding period against every value; “This month” (up to today) is compared with the same days of the previous month, “Last 30 days” with the 30 days before. **Keep this period on the dashboard** keeps the report independent of the dashboard period (e.g. “Open pipeline value” across all data).
+7. **Sub-accounts**: “This sub-account only” or “All my sub-accounts (agency)” (agency view; every source has the group *Sub-account* for this).
+8. **At most (top N)**: only the N largest groups.
 
-### Datenquellen
+At the top: switch between **Table/Chart**, **CSV** (for Excel: semicolon, decimal comma), **Go to dashboard** (existing or new), **Save to library** (name, description, visible to only me / team of this sub-account / all admins). Saved reports live under **Library**; other people's reports can be saved as a copy.
 
-| Quelle | Inhalt | Beispiele |
+### Data sources
+
+| Source | Contents | Examples |
 | --- | --- | --- |
-| Kontakte | Quelle, Zuständig, Stadt, Tags, „hat Opportunity“, „ist Kunde“, erste/letzte Quelle (Attribution) | Leads je Quelle, Lead → Deal |
-| Opportunities | Pipeline, Phase, Status, Wert, Währung, gewichteter Wert, Wahrscheinlichkeit, Verlustgrund, Erwarteter Abschluss (auch „überfällig“), Erstellt/Gewonnen/Verloren/Abgeschlossen am, Tage bis Abschluss, Kontaktfelder | Pipeline-Wert je Phase, Win-Rate, Umsatzprognose (auch je Abschlussmonat), Verlustgründe, Deal-Geschwindigkeit |
-| Aufgaben | Zuständig, offen/erledigt, überfällig, fällig/erledigt am | Aufgaben je Nutzer, Erledigungsquote |
-| Termine | Kalender, Status, Herkunft, Dauer, Vorlauf | No-Show-Rate, Show-Rate, Absagequote |
-| Nachrichten | Kanal, Richtung, Status, gesendet von, geöffnet/geklickt (nur Menschen), maschinell geöffnet | Nachrichten je Kanal, Öffnungsrate |
-| Konversationen | ungelesen, markiert, begonnen am | neue Gespräche je Woche |
-| Anrufe | Richtung, Status, angenommen, Mitarbeiter, Dauer | Anrufe je Nutzer, Annahmequote, Gesprächsminuten |
-| Rechnungen & Zahlungen | Art, Status, überfällig (ab dem Tag nach dem Fälligkeitstag, in der Zeitzone des Sub-Accounts), Abo-Rechnung, Brutto/Netto/Steuer, Kunde | bezahlter Umsatz, offene/überfällige Beträge |
-| Umsatz je Produkt | Rechnungspositionen mit Menge und Netto-Umsatz | Umsatz je Produkt |
-| Abos (MRR) | wiederkehrende Rechnungen auf den Monat umgerechnet | MRR, ARR, MRR je Intervall |
-| Kampagnen | Empfänger je Kampagne | gesendet, Öffnungs-/Klickrate (nur Menschen; Apple Mail, Proxys und Scanner stehen getrennt als „Maschinell geöffnet/geklickt“ – [docs/email-tracking.md](email-tracking.md)) |
-| Formular-Einsendungen | Formular, Kontaktfelder | Einsendungen, Conversion zu Deal/Kunde |
-| Attribution | Kontaktpunkte nach Art, Kanal, Quelle, Medium, Kampagne, Funnel | eindeutige Besucher je Kanal |
-| Affiliate-Provisionen | Partner, Programm, Status, Betrag | Provision je Partner |
-| Kurs-Einschreibungen | Kurs, Status, begonnen/abgeschlossen | Abschlussquote |
+| Contacts | Source, Owner, City, Tags, “Has opportunity”, “Is customer”, first/last source (attribution) | Leads per source, Lead → deal |
+| Opportunities | Pipeline, Stage, Status, Value, Currency, Weighted value, Probability, Loss reason, Expected close (also “overdue”), Created/Won/Lost/Closed on, Days to close, contact fields | Pipeline value per stage, win rate, revenue forecast (also per close month), loss reasons, deal velocity |
+| Tasks | Owner, open/done, overdue, due/done on | Tasks per user, completion rate |
+| Appointments | Calendar, Status, Origin, Duration, Lead time | No-show rate, show rate, cancellation rate |
+| Messages | Channel, Direction, Status, Sent by, opened/clicked (people only), opened by machines | Messages per channel, open rate |
+| Conversations | unread, starred, started on | new conversations per week |
+| Calls | Direction, Status, answered, Team member, Duration | Calls per user, answer rate, call minutes |
+| Invoices & payments | Type, Status, overdue (from the day after the due date, in the sub-account's time zone), Subscription invoice, gross/net/tax, customer | paid revenue, open/overdue amounts |
+| Revenue per product | Invoice lines with quantity and net revenue | Revenue per product |
+| Subscriptions (MRR) | recurring invoices converted to a month | MRR, ARR, MRR per interval |
+| Campaigns | Recipients per campaign | sent, open/click rate (people only; Apple Mail, proxies and scanners are listed separately as “Opened/Clicked by machines” – [docs/email-tracking.md](email-tracking.md)) |
+| Form submissions | Form, contact fields | Submissions, conversion to deal/customer |
+| Attribution (touchpoints) | Touchpoints by type, channel, source, medium, campaign, funnel | unique visitors per channel |
+| Affiliate commissions | Partner, programme, status, amount | Commission per partner |
+| Course enrolments | Course, status, started/completed | Completion rate |
 
-Dazu kommen „Firmen“, je eigenem Objekt eine Quelle mit seinen Eigenschaften und „Lead-Scores“ ([docs/objects.md](objects.md#snapshots-supabase-berichte-import)). Weitere Module (z. B. Tickets) können eigene Quellen anmelden, siehe [architecture.md](architecture.md#berichte-eigene-datenquellen).
+In addition there are “Companies”, a source for each custom object with its properties, and “Lead scores” ([docs/objects.md](objects.md#snapshots-supabase-reports-import)). Other modules (e.g. tickets) can register sources of their own, see [architecture.md](architecture.md#reports-custom-data-sources).
 
-### Eigene Kontaktfelder
+### Custom contact fields
 
-Die eigenen Felder der Kontakte (*Einstellungen → Eigene Felder*) stehen in der Quelle **Kontakte** unter **Eigene Felder** bereit: **Zahlenfelder** als Kennzahl (Summe, Ø, Min, Max – z. B. „Summe Budget je Paket“, auch als Dashboard-Baustein), **Auswahl**, **Ja/Nein**, **Datum** und Textfelder zum Gruppieren und Filtern. Jedes Feld gilt nur in den Sub-Accounts, in denen es angelegt ist; neue oder geänderte Felder sind sofort da. Technik: `server/modules/report-custom-fields.ts` (ergänzt die Quelle `contacts` in `app.services.reportSources`, Feldschlüssel `cf_<schlüssel>`).
+The custom fields of contacts (*Settings → Custom fields*) are available in the **Contacts** source under **Custom fields**: **number fields** as a measure (sum, avg., min, max – e.g. “Sum of budget per package”, also as a dashboard building block), **choice**, **yes/no**, **date** and text fields for grouping and filtering. Each field applies only in the sub-accounts where it was created; new or changed fields are available immediately. Technical details: `server/modules/report-custom-fields.ts` (extends the `contacts` source in `app.services.reportSources`, field key `cf_<key>`).
 
-### Phasen-Wahrscheinlichkeit (gewichtete Prognose)
+### Stage probability (weighted forecast)
 
-**Opportunities → Pipeline bearbeiten**: rechts neben jeder Stufe die Wahrscheinlichkeit in %, mit der ein Deal dort gewonnen wird. Leer = automatisch nach Position (bei 4 Stufen 20/40/60/80 %). Gewonnene Deals zählen 100 %, verlorene 0 %. Die **Umsatzprognose (gewichtet)** ist die Summe aus Wert × Wahrscheinlichkeit aller offenen Deals. Gewinn- und Verlustdatum merkt sich die App ab jetzt beim Statuswechsel; ältere Deals nutzen ihre letzte Änderung.
+**Opportunities → Edit pipeline**: to the right of each stage, the probability in % that a deal is won there. Empty = automatic by position (with 4 stages 20/40/60/80%). Won deals count as 100%, lost ones as 0%. The **revenue forecast (weighted)** is the sum of value × probability across all open deals. From now on the app records the won and lost date when the status changes; older deals use their last change.
 
-### Erwarteter Abschluss, Verlustgrund und Währung
+### Expected close, loss reason and currency
 
-Jeder Deal hat ein **erwartetes Abschlussdatum** (optional), eine **Währung** (Standard EUR) und – wenn er auf „Verloren“ steht – einen **Verlustgrund**. Das Datum treibt die Prognose nach Monat (Vertrieb-Dashboard: *Prognose je erwartetem Abschlussmonat*, Living-Boards-Vorlage `forecast_by_close_month`), der Filter *Abschluss überfällig* zeigt offene Deals, deren Termin verstrichen ist. Die Gründe wählt man aus der Liste der Pipeline (**Opportunities → Pipeline bearbeiten → Verlustgründe**, ein Grund pro Zeile; leer = Standardliste) oder schreibt einen eigenen. *Verlorene Deals nach Grund* (Dashboard Vertrieb, Board-Vorlage `lost_reasons`) gruppiert nach `lost_reason` mit Anzahl und `calc:lost_value`. Beträge in verschiedenen Währungen werden **nicht umgerechnet**: Summen im Kanban stehen je Währung nebeneinander, in Berichten trennt die Gruppierung `currency` sie.
+Every deal has an optional **expected close date**, a **currency** (default EUR) and – when it is set to “Lost” – a **loss reason**. The date drives the forecast by month (Sales dashboard: *Forecast per expected close month*, Living Boards template `forecast_by_close_month`); the filter *Close overdue* shows open deals whose date has passed. You pick the reasons from the pipeline's list (**Opportunities → Edit pipeline → Loss reasons**, one reason per line; empty = default list) or write your own. *Lost deals by reason* (Sales dashboard, board template `lost_reasons`) groups by `lost_reason` with count and `calc:lost_value`. Amounts in different currencies are **not converted**: totals in the kanban appear side by side per currency, and in reports the grouping `currency` separates them.
 
-Der Verlustgrund ist **Pflicht** beim Wechsel auf „Verloren“ – in der Oberfläche, per API (`lost_reason`), MCP (`ghl_update_opportunity`), REST-Hook `move_stage` und mobiler App. Workflow-Schritte haben ein Feld „Verlustgrund“; bleibt es leer, steht dort „Per Automation“ (mobile App ohne Angabe: „Per App“). Ein Wechsel zurück auf Offen löscht den Grund; vor diesem Update verlorene Deals bleiben ohne Grund bearbeitbar.
+The loss reason is **required** when switching to “Lost” – in the interface, through the API (`lost_reason`), MCP (`ghl_update_opportunity`), the REST hook `move_stage` and the mobile app. Workflow steps have a field “Loss reason”; if it stays empty, “Per Automation” is entered there (mobile app without an entry: “Per App”). Switching back to Open deletes the reason; deals lost before this update remain editable without a reason.
 
 ## Dashboards
 
-**Berichte → Dashboards** zeigt dein Standard-Dashboard (oder das erste); oben links wechselst du zwischen allen Dashboards, die du sehen darfst.
+**Reports → Dashboards** shows your default dashboard (or the first one); at the top left you switch between all dashboards you may see.
 
-- **Filterzeile**: Zeitraum (gilt für alle Widgets ohne festen Zeitraum), Sub-Account oder alle, Auto-Update (1/5/15/60 Minuten), *Mit Vorperiode*, neu laden.
-- **Bearbeiten**: Widgets am Griff ziehen, an der Ecke unten rechts vergrößern (12-Spalten-Raster, die anderen rücken nach), Titel direkt ändern, ✕ entfernt. Mit der Tastatur: Griff fokussieren, Pfeiltasten verschieben, mit Umschalt die Größe ändern. **+ Widget** holt einen gespeicherten Bericht oder öffnet den Builder; der Stift an einem Widget bearbeitet es im Builder (**Widget aktualisieren**).
-- **Teilen**: nur ich, Team dieses Sub-Accounts oder alle Admins. Geteilte Dashboards sind für andere nur lesbar, und jede Person sieht **nur Zahlen aus den Sub-Accounts und Bereichen, auf die sie selbst Zugriff hat**. Dort auch **Als mein Standard-Dashboard**.
-- **TV-Modus**: Vollbild für den Bildschirm im Büro, aktualisiert sich mindestens jede Minute; Esc oder ✕ beendet ihn.
-- Auf dem Handy stehen die Widgets untereinander.
+- **Filter row**: period (applies to all widgets without a fixed period), sub-account or all, Auto refresh (1/5/15/60 minutes), *With previous period*, reload.
+- **Editing**: drag widgets by the handle, resize them at the bottom-right corner (12-column grid, the others move along), change the title directly, ✕ removes. With the keyboard: focus the handle, move with the arrow keys, resize with Shift. **+ Widget** fetches a saved report or opens the builder; the pencil on a widget edits it in the builder (**Update widget**).
+- **Sharing**: only me, team of this sub-account or all admins. Shared dashboards are read-only for others, and each person sees **only numbers from the sub-accounts and areas they have access to themselves**. This is also where **As my default dashboard** is.
+- **TV mode**: full screen for the screen in the office, refreshes at least every minute; Esc or ✕ ends it.
+- On a phone, the widgets are stacked.
 
-### Vorlagen
+### Templates
 
-**Berichte → Vorlagen → Dashboard aus Vorlage** legt mit einem Klick an:
+**Reports → Templates → Dashboard from template** creates with one click:
 
-- **Vertrieb**: offener Pipeline-Wert, gewichtete Umsatzprognose, Win-Rate, Deal-Geschwindigkeit, Pipeline-Wert je Phase (Trichter), Prognose je Phase, gewonnener Umsatz je Monat, Deals je Zuständigem.
-- **Marketing**: neue Leads, Lead → Deal, Formular-Einsendungen, Öffnungsrate, Leads je Quelle, Leads je Woche, Kampagnen-Performance, Formular-Conversion.
-- **Umsatz**: MRR, bezahlter Umsatz, offene und überfällige Rechnungen, Umsatz je Monat und Produkt, offene Rechnungen je Kunde, MRR je Intervall.
-- **Aktivität**: Anrufe, ausgehende Nachrichten, erledigte Aufgaben, Annahmequote, Anrufe/Nachrichten/Aufgaben je Nutzer, Heatmap eingehender Nachrichten.
-- **Termine**: Termine, No-Show-, Show- und Absagequote, Termine je Kalender und je Woche, No-Show-Rate je Kalender, Heatmap.
+- **Sales**: open pipeline value, weighted revenue forecast, win rate, deal velocity, pipeline value per stage (funnel), forecast per stage, won revenue per month, deals per owner.
+- **Marketing**: new leads, lead → deal, form submissions, open rate, leads per source, leads per week, campaign performance, form conversion.
+- **Revenue**: MRR, paid revenue, open and overdue invoices, revenue per month and product, open invoices per customer, MRR per interval.
+- **Activity**: calls, outgoing messages, completed tasks, answer rate, calls/messages/tasks per user, heatmap of incoming messages.
+- **Appointments**: appointments, no-show, show and cancellation rate, appointments per calendar and per week, no-show rate per calendar, heatmap.
 
-## Zeitpläne (Bericht per E-Mail)
+## Schedules (report by e-mail)
 
-Auf einem Dashboard **Per E-Mail**: täglich, wöchentlich (Wochentag) oder monatlich (Tag 1–28) zur gewählten Uhrzeit an bis zu 20 Adressen. Die E-Mail enthält die Kennzahlen mit Veränderung zur Vorperiode und jedes Diagramm als Tabelle mit Balken (ohne Bilder, liest sich in jedem Mailprogramm) plus Link zum Dashboard. Standard-Zeitraum: gestern / letzte Woche / letzter Monat. Gesendet wird über den E-Mail-Versand des Sub-Accounts (**Einstellungen → E-Mail**, SMTP); ohne SMTP wird nur protokolliert. Die Zahlen werden mit den Rechten der Person berechnet, die den Zeitplan angelegt hat. **Berichte → Zeitpläne**: Vorschau, jetzt senden, bearbeiten, pausieren, löschen; dort steht auch das Ergebnis des letzten Versands.
+On a dashboard, **By email**: daily, weekly (weekday) or monthly (day 1–28) at the chosen time, to up to 20 addresses. The e-mail contains the measures with the change from the previous period and every chart as a table with bars (no images, readable in any mail program) plus a link to the dashboard. Default period: yesterday / last week / last month. It is sent through the sub-account's e-mail delivery (**Settings → E-mail**, SMTP); without SMTP it is only logged. The numbers are calculated with the permissions of the person who created the schedule. **Reports → Schedules**: preview, send now, edit, pause, delete; the result of the last send is shown there too.
 
-## Sicherheit & Grenzen
+## Security & limits
 
-- Jede Abfrage ist auf die Sub-Accounts des Nutzers beschränkt (Admins: alle, Kunden-Logins: ihre eigenen, API-Schlüssel eines Sub-Accounts: nur dieser); Kunden-Logins brauchen das Recht *Dashboard* und das Recht des jeweiligen Bereichs (z. B. *Rechnungen & Produkte* für Umsatz-Quellen).
-- SaaS-Tarife: Bereiche, die der Tarif eines Sub-Accounts nicht enthält, fehlen auch in dessen Berichten.
-- Alle Werte gehen als Parameter an die Datenbank, Feldnamen nur aus der festen Liste der Quelle. Höchstens 1000 Gruppen je Bericht, nach 8 Sekunden bricht eine Abfrage ab („Zeitraum oder Filter einschränken“).
+- Every query is restricted to the user's sub-accounts (admins: all, client logins: their own, API keys of a sub-account: only that one); client logins need the *Dashboard* permission and the permission of the respective area (e.g. *Invoices & products* for revenue sources).
+- SaaS plans: areas that a sub-account's plan does not include are also missing from its reports.
+- All values are passed to the database as parameters, field names only from the source's fixed list. At most 1000 groups per report, and a query aborts after 8 seconds (“Narrow the period or filter”).
 
 ## API & MCP
 
-REST unter `/api/reports/*` (siehe [api.md](api.md)), MCP-Werkzeuge `ghl_run_report` (freier Bericht: Quelle, Kennzahlen, Gruppierungen, Filter, Zeitraum, Vergleich, Agentur-Sicht), `ghl_list_dashboards` und `ghl_get_dashboard` (alle Widgets mit Zahlen, optional anderer Zeitraum).
+REST under `/api/reports/*` (see [api.md](api.md)), MCP tools `ghl_run_report` (free-form report: source, measures, groupings, filters, period, comparison, agency view), `ghl_list_dashboards` and `ghl_get_dashboard` (all widgets with numbers, optionally another period).
 
 ```bash
-# Pipeline-Wert offener Deals je Phase
+# Pipeline value of open deals per stage
 curl -X POST https://crm.example.com/api/reports/run -H "Authorization: Bearer $KEY" -H 'content-type: application/json' \
   -d '{"query":{"source":"opportunities","measures":["sum:value","calc:forecast"],"group_by":["stage"],"filters":[{"field":"status","op":"eq","value":"open"}],"range":"all"}}'
 ```

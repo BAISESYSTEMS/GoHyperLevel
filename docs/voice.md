@@ -35,7 +35,7 @@ Keys are sealed in the registry and never shown again; costs run on your account
 
 1. **Settings → KI-Anbieter:** add the provider(s) and tick the capabilities *Sprachausgabe* and/or *Transkription*. Under *Wofür welches Modell?* the usages *Sprachausgabe (TTS)* and *Transkription* choose the default connection per sub-account or for the whole agency.
 2. **Settings → Stimme:** choose provider, voice, language, speed; press **Abspielen** (*Stimme testen*) and **Mikrofon testen**.
-3. For the phone agent: set *Stimme und Zuhören am Telefon* to **Eigener Anbieter**. Twilio and the AI phone agent are set up as before ([self-hosting](self-hosting.md#ki-telefonagent)); nothing changes in Twilio's console.
+3. For the phone agent: set *Stimme und Zuhören am Telefon* to **Eigener Anbieter**. Twilio and the AI phone agent are set up as before ([self-hosting](self-hosting.md#ai-phone-agent)); nothing changes in Twilio's console.
 
 | Setting | Meaning |
 | --- | --- |

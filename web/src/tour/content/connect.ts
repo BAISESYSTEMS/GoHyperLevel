@@ -13,7 +13,7 @@ export const CONNECT_TOURS: Tour[] = [
     routes: ['apps', 'agency/integrations'],
     keywords: 'integration integrationen apps katalog marketplace zapier make n8n stripe twilio google status einrichten',
     learned: ['Den Stand aller Integrationen auf einen Blick sehen', 'Eine Integration finden und einrichten', 'Was die Agentur für alle Sub-Accounts einrichtet'],
-    docs: { label: 'Integrationen', file: 'integrations' },
+    docs: { label: 'Integrationen', file: 'integrations.de' },
     steps: [
       { title: 'Apps & Integrationen', route: 'apps', target: 'page-head', text: 'Alles, was dieser Sub-Account verbunden hat – und was noch geht: eingebaute Integrationen, Zapier, Make, n8n, REST-Hooks, eingehende Webhooks und Umzüge aus HubSpot oder GoHighLevel.' },
       { title: 'Der Stand', target: 'integ-summary', text: 'Wie viele Integrationen eingerichtet, unvollständig oder noch offen sind. Der Status kommt aus den Einstellungen – nach außen wird dafür nichts abgefragt.' },
@@ -104,7 +104,7 @@ export const CONNECT_TOURS: Tour[] = [
     routes: ['settings/api'],
     keywords: 'zapier make n8n rest hook webhook api schlüssel automatisierung auslöser aktion zustellung',
     learned: ['Zapier, Make oder n8n mit einem eigenen API-Schlüssel verbinden', 'Abos (Auslöser → Ziel-URL) prüfen, pausieren und testen', 'Fehlgeschlagene Zustellungen im Protokoll finden', 'Wo die API-Referenz liegt'],
-    docs: { label: 'REST-Hooks', file: 'integrations', anchor: 'rest-hooks' },
+    docs: { label: 'REST-Hooks', file: 'integrations.de', anchor: 'rest-hooks' },
     steps: [
       { title: 'Ein Schlüssel je Tool', route: 'settings/api', target: 'settings-apikeys', text: 'Zapier, Make und n8n melden sich mit einem API-Schlüssel dieses Sub-Accounts an. Leg für jedes Tool einen eigenen an – dann siehst du, wer was nutzt, und kannst gezielt sperren.' },
       { title: 'Klassische Webhooks', target: 'settings-webhooks', text: 'Ausgehende Webhooks schicken Ereignisse an eine feste Adresse – praktisch für eigene Programme.' },
@@ -127,7 +127,7 @@ export const CONNECT_TOURS: Tour[] = [
     practice: true,
     keywords: 'webhook empfangen eingehend inbound feldzuordnung mapping shop typeform calendly json signatur hmac auslöser',
     learned: ['Einen Workflow mit dem Auslöser „Webhook empfangen“ anlegen', 'Die geheime URL im anderen Tool eintragen und Test-Daten empfangen', 'JSON-Felder den Kontaktfeldern zuordnen', 'Die URL mit Limit und Signatur absichern'],
-    docs: { label: 'Eingehende Webhooks', file: 'integrations', anchor: 'eingehende-webhooks' },
+    docs: { label: 'Eingehende Webhooks', file: 'integrations.de', anchor: 'eingehende-webhooks' },
     steps: [
       { title: 'Daten von außen', route: 'workflows', target: 'page-head', text: 'Shops, Typeform, Calendly oder die eigene Website können oft nur „Webhook an URL senden“. Mit dem Auslöser „Webhook empfangen“ wird daraus ein Kontakt – und ein Workflow startet.' },
       { title: 'Neuer Workflow', target: 'workflows-new', kind: 'click', text: 'Zum Üben legen wir einen leeren Workflow an.', do: 'Klicke auf **+ Workflow**.' },
@@ -152,7 +152,7 @@ export const CONNECT_TOURS: Tour[] = [
     routes: ['settings/import'],
     keywords: 'hubspot import umzug migration private app token probelauf ghl gohighlevel',
     learned: ['Eine Private App in HubSpot anlegen und den Token eintragen', 'Teile wählen und erst einen Probelauf machen', 'Den Import starten, pausieren und fortsetzen', 'Was nach dem Import zu prüfen ist'],
-    docs: { label: 'HubSpot-Import', file: 'integrations', anchor: 'hubspot-import' },
+    docs: { label: 'HubSpot-Import', file: 'integrations.de', anchor: 'hubspot-import' },
     steps: [
       { title: 'Umzug aus HubSpot', route: 'settings/import', target: 'hs-import', text: 'Holt Kontakte, Firmen, Deals mit Pipelines, Notizen, Aufgaben, Anrufe/E-Mails/Meetings, Tickets und Listen aus HubSpot. Mehrfach ausführbar – ein zweiter Lauf aktualisiert statt zu verdoppeln.' },
       { title: 'Private App in HubSpot', target: 'hs-import', text: 'In HubSpot unter Einstellungen → Integrationen → Private Apps eine App mit Lese-Rechten anlegen (die Scopes stehen in der Anleitung). Sie liefert einen Token, der mit „pat-“ beginnt.' },
@@ -174,7 +174,7 @@ export const CONNECT_TOURS: Tour[] = [
     routes: ['settings/account'],
     keywords: 'app android handy smartphone widget benachrichtigung koppeln gerät qr code apk download mobil',
     learned: ['Die Android-App über die Download-Seite (QR-Code) installieren', 'Wie das Koppeln funktioniert – ohne gespeichertes Passwort', 'Gekoppelte Handys sehen und abmelden', 'Widgets und Benachrichtigungen nutzen'],
-    docs: { label: 'Android-App', file: 'app', anchor: 'android-app' },
+    docs: { label: 'Android-App', file: 'app.de', anchor: 'android-app' },
     steps: [
       { title: 'Die Android-App', route: 'settings/account', target: 'app-card', text: 'Die App zeigt Posteingang, Aufgaben, Termine, Deals, Anrufe, Zahlen und Projekte aller Sub-Accounts, auf die du Zugriff hast – mit Widgets und Benachrichtigungen.' },
       { title: 'Installieren', target: 'app-card', text: '„Zur App“ öffnet die Download-Seite. Am einfachsten scannst du den QR-Code dort mit der Handy-Kamera, lädst die App und erlaubst die Installation – sie kommt nicht aus dem Play Store.' },
@@ -219,7 +219,7 @@ export const CONNECT_TOURS: Tour[] = [
     routes: ['apps/books'],
     keywords: 'lexware lexoffice sevdesk buchhaltung steuerberater beleg rechnung gutschrift sync abgleich zahlung api schlüssel google ads offline conversion gclid',
     learned: ['Lexware Office oder sevDesk mit dem API-Schlüssel verbinden und testen', 'Was bei jeder festgeschriebenen Rechnung übertragen wird – und warum nie doppelt', 'Fehler im Protokoll finden und erneut versuchen', 'Gewonnene Deals als Offline-Conversion an Google Ads melden – nur mit Einwilligung'],
-    docs: { label: 'Lexware Office & sevDesk', file: 'integrations', anchor: 'lexware-office-und-sevdesk-live-sync' },
+    docs: { label: 'Lexware Office & sevDesk', file: 'integrations.de', anchor: 'lexware-office-und-sevdesk-live-sync' },
     steps: [
       { title: 'Buchhaltung verbinden', route: 'apps/books', target: 'books-sync', text: 'Die Rechnung schreibst du in {brand} – deine Buchhaltung bekommt sie automatisch: jede festgeschriebene Rechnung und Gutschrift geht sofort rüber, Zahlungseingänge kommen alle zwei Stunden zurück.' },
       { title: 'Lexware Office', target: 'books-lexware', text: 'Mit dem API-Schlüssel aus Lexware Office (Einstellungen → Erweiterungen → Public API) verbinden. Jede Rechnung wird dort als Beleg mit deiner Nummer, dem Kunden, einem Posten je Steuersatz und deinem PDF gebucht.' },

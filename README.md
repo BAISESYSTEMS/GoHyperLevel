@@ -14,14 +14,16 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
 
 <p>
   <a href="LICENSE"><img alt="License: AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-2563eb?style=for-the-badge"></a>
-  <a href="https://github.com/BAISESYSTEMS/hyperlevel/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/BAISESYSTEMS/hyperlevel/ci.yml?branch=main&style=for-the-badge&label=CI"></a>
-  <a href="https://github.com/BAISESYSTEMS/hyperlevel/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/BAISESYSTEMS/hyperlevel?style=for-the-badge&color=8b5cf6"></a>
+  <a href="https://github.com/BAISESYSTEMS/GoHyperLevel/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/BAISESYSTEMS/GoHyperLevel/ci.yml?branch=main&style=for-the-badge&label=CI"></a>
+  <a href="https://github.com/BAISESYSTEMS/GoHyperLevel/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/BAISESYSTEMS/GoHyperLevel?style=for-the-badge&color=8b5cf6"></a>
   <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-22c55e?style=for-the-badge"></a>
-  <a href="https://github.com/BAISESYSTEMS/hyperlevel/pkgs/container/hyperlevel"><img alt="Docker image" src="https://img.shields.io/badge/docker-ghcr.io-0ea5e9?style=for-the-badge&logo=docker&logoColor=white"></a>
+  <a href="https://github.com/BAISESYSTEMS/GoHyperLevel/pkgs/container/hyperlevel"><img alt="Docker image" src="https://img.shields.io/badge/docker-ghcr.io-0ea5e9?style=for-the-badge&logo=docker&logoColor=white"></a>
 </p>
 
 <p>
   <a href="#quick-start"><b>Quick start</b></a> ·
+  <a href="https://docs.gohyperlevel.com"><b>Docs</b></a> ·
+  <a href="https://demo.gohyperlevel.com/demo"><b>Live demo</b></a> ·
   <a href="#features"><b>Features</b></a> ·
   <a href="#made-for-agentic-solopreneurs-agencies-small-businesses--startups"><b>Who it's for</b></a> ·
   <a href="#how-it-compares"><b>Comparison</b></a> ·
@@ -51,7 +53,7 @@ the tools solopreneurs, agencies and small businesses rent for hundreds a month,
 
 > [!TIP]
 > **Open for contributions – come build with us.** Every module, every screen and every workflow step is open source and
-> meant to be extended. Pick a [good first issue](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22),
+> meant to be extended. Pick a [good first issue](https://github.com/BAISESYSTEMS/GoHyperLevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22),
 > request a connector, translate the UI or ship a whole module – [here's how](#open-for-contributions).
 
 ## Made for agentic solopreneurs, agencies, small businesses & startups
@@ -142,13 +144,13 @@ sub-accounts.
 On any Linux server with Docker and a domain pointing at it – **one command**, with automatic HTTPS:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash
 ```
 
 Or by hand, in **three commands**:
 
 ```bash
-git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
+git clone https://github.com/BAISESYSTEMS/GoHyperLevel.git hyperlevel && cd hyperlevel
 cp .env.example .env                    # set PGHL_BASE_URL and PGHL_DOMAIN
 docker compose --profile caddy up -d    # HyperLevel + Caddy (Let's Encrypt)
 ```
@@ -166,7 +168,7 @@ PGHL_DATA_DIR=./demo-data npm start     # http://localhost:4700 · demo@example.
 ```
 
 <p>
-  <a href="https://render.com/deploy?repo=https://github.com/BAISESYSTEMS/hyperlevel"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height="32"></a>
+  <a href="https://render.com/deploy?repo=https://github.com/BAISESYSTEMS/GoHyperLevel"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height="32"></a>
 </p>
 
 More ways to deploy – Coolify, Railway, Render, Hostinger, plain Node: **[docs/deploy](docs/deploy/README.md)**.
@@ -250,7 +252,7 @@ reset, nothing ever leaves the server).
 | Stock & purchasing | Articles with variants, SKU and EAN, storage places, goods receipt/issue/transfer, automatic goods issue when invoices are paid, minimum-stock alerts (push + workflow trigger), stock-taking with differences, purchase orders to supplier contacts with goods receipt, stock valuation at moving-average cost – see [docs/backoffice.md](docs/backoffice.md#2-stock-and-purchasing) |
 | HR basics | Employees (HyperLevel logins or not), absences with request → approval, vacation account (pro rata, carry-over, public holidays per Bundesland), team calendar, onboarding/offboarding checklists, salary and other sensitive fields behind a second gate with audit log, a hook for time tracking – see [docs/backoffice.md](docs/backoffice.md#3-hr-basics) |
 | Wiki | **Team knowledge** per sub-account: spaces with nested pages (drag & drop), Markdown editor with live preview, checklists you can tick, tables and callouts, **live CRM cards** (contacts, deals, tasks, tickets, Canvas boards, project documents) with the viewer's own rights, @mentions and comments, version history with restore, favourites, full-text search (SQLite FTS5), templates (meeting notes, SOP, project brief, onboarding handbook), Markdown import, Markdown/PDF export, read-only share links and one-click **publishing to the help center**, AI summarise/rewrite/draft (suggestion only), agents read and write pages over MCP – see [docs/wiki.md](docs/wiki.md) |
-| Office | **Documents, spreadsheets, presentations and PDFs** per sub-account (Word .docx, Excel .xlsx, PowerPoint .pptx, PDF), optionally linked to a contact, deal or project: create or upload, every save an **immutable version** with its author (a person, the HyperLevel Agent on behalf of a person, or an API key) and restore, comments with @mentions, an **edit lock** with auto-expiry ("Anna is editing – open read-only") and live presence; open-source **browser editors** (WebAssembly, optional, served with a strict CSP in a sandboxed iframe; a small load/save bridge hands them the file and takes the saved bytes back as a new version) and headless **engines** for the agent – 5 MCP tools to list, read, create, edit (engine commands or spreadsheet range writes on a temp copy) and export to PDF, respecting the lock; the editors and engines are installed from pinned upstream releases with `deploy/office/` – see [docs/office.md](docs/office.md) (DE) |
+| Office | **Documents, spreadsheets, presentations and PDFs** per sub-account (Word .docx, Excel .xlsx, PowerPoint .pptx, PDF), optionally linked to a contact, deal or project: create or upload, every save an **immutable version** with its author (a person, the HyperLevel Agent on behalf of a person, or an API key) and restore, comments with @mentions, an **edit lock** with auto-expiry ("Anna is editing – open read-only") and live presence; open-source **browser editors** (WebAssembly, optional, served with a strict CSP in a sandboxed iframe; a small load/save bridge hands them the file and takes the saved bytes back as a new version) and headless **engines** for the agent – 5 MCP tools to list, read, create, edit (engine commands or spreadsheet range writes on a temp copy) and export to PDF, respecting the lock; the editors and engines are installed from pinned upstream releases with `deploy/office/` – see [docs/office.md](docs/office.md) |
 | Team chat | **Internal messenger** per sub-account (and agency-wide): public/private channels, direct messages and groups, threads, reactions, files, pins, search, typing and presence over SSE, unread counters, push and Android notifications; private channels and DMs are readable by their members only; record cards for CRM links, **`/aufgabe`** (creates a task), **`/kontakt`**, **`/agent`** (the HyperLevel Agent answers in the channel, changes wait for the asker's click); retention setting, optional one-way Slack copy, MCP tools for public channels – see [docs/team-chat.md](docs/team-chat.md) |
 | Live collaboration | **See where the team is – on every page.** Avatars of the colleagues on the same page in the top bar ("Anna – editing"), avatars next to the menu entry each colleague is in, *Team ist hier* with *Go there*, "Anna just saved here – reload" and "Anna is editing this too" banners, live cursors (on by default on Canvas and Living Boards, opt-in elsewhere; follow a person on Canvas). Live state only – no history, no logs; invisible mode per person, a switch per sub-account, a colleague's page only for people who may open that area ([docs/collaboration.md](docs/collaboration.md), DE) |
 | Werkstatt & Marktplatz | **Wishes build themselves.** *Bauen lassen* on a wish: the AI proposes a plan – **Stufe 1 "Einrichtung"** (workflows, fields, objects, reports, agents, templates, forms from existing building blocks, undoable) or **Stufe 2 "Mini-App"** (a sandboxed plugin: menu page, contact/deal panel, dashboard widget, workflow action, scheduled job) – with permissions and cost estimate; the requester confirms, an admin approves by policy (app, push and e-mail notification), the build runs live with log, cost tracking and a monthly budget per sub-account (works with Anthropic, OpenAI or any OpenAI-compatible provider such as OpenRouter) – **only with a top model** (GPT-6 Sol, Astra, Claude Opus 5.5, Fable 5.5; configurable) and a **Denkstufe** of at least *high*. In the **HyperLevel Agent chat** a wish becomes a plan card, a live build and a sandboxed preview, and "make the cards darker" makes version 2 with a diff summary. The plugin is **private first**, then sub-account, agency-wide or the **Marktplatz** (categories, search, live preview, ratings, install per sub-account with a consent screen, updates, kill switch, JSON export/import) after an **AI security review**, a **second opinion by another top model** (Pro) and an admin's approval; every version carries seals (static, tests, review, signature, model · Denkstufe), health monitoring switches slow or failing plugins off and rolls back with one click; Ed25519-signed plugin bundles, „ungeprüft“ warning otherwise (Marktplatz install/publish, signed installs, second opinion and the percent rollout are marked **Pro** behind a license stub – the plugin runtime and local builds stay AGPL). Real isolation: sandboxed iframe + postMessage bridge that checks scopes and the user's own permissions; server logic in a permission-restricted child process (or declarative steps). **Core proposals** open a GitHub issue for `@codex`/`@claude`; **feature flags** roll core features out in stages; MCP tools `ghl_list_plugins`, `ghl_install_plugin`, `ghl_build_from_wish`, `ghl_plugin_status`, `ghl_change_plugin`, `ghl_discard_plugin`, `ghl_plugin_overview`, `ghl_plugin_admin` – see [docs/werkstatt.md](docs/werkstatt.md) |
@@ -272,7 +274,7 @@ reset, nothing ever leaves the server).
 | Online store & gift cards | **A store with a cart on your own website – HighLevel-style, with German invoicing behind it.** Products with **variants and stock from the inventory** (size, colour … with SKU), collections, the site blocks *Produktliste* and *Produktdetail*, a cart (browser + server session) and an **on-page checkout** (address, shipping method, VAT, gift card, payment, the legally worded order button); **flat-rate and weight-based shipping** per country with free-from amounts; tax from the invoice tax modes (DE rates, § 19, export, intra-community supply). Every paid order becomes a **finalised invoice with a gap-free number (GoBD)**, takes the goods out of stock, mails the confirmation with the invoice and fires *order placed / paid / shipped*; order list with fulfilment status, **tracking numbers mailed to the buyer**, refunds; abandoned carts fire the existing `checkout.abandoned`. **Gift cards** with a code and an append-only balance ledger – sold in the store or issued by hand, redeemed in the checkout, on invoices and in booking payments, taxed on redemption (multi-purpose vouchers, § 3 Abs. 15 UStG), optional expiry. Snapshots, DSGVO export/erase, 3 MCP tools – see [docs/store.md](docs/store.md) |
 | Payment providers | **Stripe, PayPal and Mollie side by side** behind one small provider registry (create checkout, webhook → payment, refund): **PayPal** Orders API v2 with verified webhooks and Pay Later, **Mollie** Payments API (iDEAL, SEPA bank transfer, cards, Klarna – popular in DACH and the Netherlands). Credentials per sub-account, checked on save and stored sealed. Invoices, buy links, bookings, forms and the store offer every connected provider (a pay page with provider choice and gift-card field); payments are booked through the invoice payment logic (never more than is open, differences flagged) – see [docs/payment-providers.md](docs/payment-providers.md) |
 | Quizzes, assignments, certificates | **Proof of learning inside your courses.** Quizzes as a lesson type (single/multiple choice, true/false, short text auto-graded or reviewed by hand; pass mark, attempts, a gate that keeps the next lesson closed); assignments with a text and/or private file hand-in and a review queue (passed / revise / failed, with feedback); **certificates** as PDF (drawn on the server, no library) from a template per course, issued at course completion, after a quiz or by hand, with a public verification page and revoke. Member-area pages for all three, 5 workflow triggers + the action *Zertifikat ausstellen*, 6 MCP tools, mobile review list – see [docs/quizzes-certificates.md](docs/quizzes-certificates.md) |
-| Social comments inbox | **Facebook, Instagram, YouTube and LinkedIn comments as an inbox channel** – reply publicly, hide, AI reply suggestion; Facebook/Instagram through the Meta webhook (several pages and Instagram accounts per sub-account, routed by page ID, replies with the right page token), YouTube/LinkedIn through Nango – see [docs/social-comments.md](docs/social-comments.md) and [docs/meta-channels.md](docs/meta-channels.md#mehrere-seiten-und-instagram-konten) |
+| Social comments inbox | **Facebook, Instagram, YouTube and LinkedIn comments as an inbox channel** – reply publicly, hide, AI reply suggestion; Facebook/Instagram through the Meta webhook (several pages and Instagram accounts per sub-account, routed by page ID, replies with the right page token), YouTube/LinkedIn through Nango – see [docs/social-comments.md](docs/social-comments.md) and [docs/meta-channels.md](docs/meta-channels.md#multiple-pages-and-instagram-accounts) |
 | Comment to DM | **"Comment *guide*, get the link" for Instagram and Facebook.** Rules with keywords (whole word, case/accents/emoji-insensitive), one post or all, **rotating public replies**, a **private reply** (once per comment, as Meta requires) with a link button and up to three buttons, contact creation, tags and a workflow; story-reply rules; per-rule and per-account hourly limits, retries, signature-checked webhook, subscribe button, test box, event list. Plus the workflow action *Nachricht mit Buttons senden* (quick replies and button templates on Instagram/Messenger, reply or link buttons on WhatsApp). Meta app permissions and App Review are explained – see [docs/comment-to-dm.md](docs/comment-to-dm.md) |
 | AI workflow builder | **Describe it, review it, save it as a draft.** *Mit KI erstellen* / *Mit KI ändern* in Automationen: the AI (your own key, **routed under the use "Workflows"** in the AI provider registry – any text provider) gets the live workflow catalogue and the ids of your sub-account, answers in JSON that is **checked against the catalogue** (types, required fields, options, real ids; up to three attempts with the errors fed back), and you see a preview with a diff (new / changed / moved / removed). It is saved as a **draft** only – a new workflow inactive, a change as the workflow's draft – and **never published**. MCP tool `ghl_workflow_generate` – see [docs/workflow-ai.md](docs/workflow-ai.md) |
 | Undo, history & trash | **Nothing is final.** Every change to the main records is journaled *before* it happens – tasks (core list and project planner), contacts, companies, deals, pipelines, notes, appointments, conversations and drafts, tickets, products, invoice drafts, forms, funnels, tags – and workflows, wiki pages and canvas boards through their own version histories. After each change a toast offers **Rückgängig** (8 s, pauses on hover/focus; also after ticking a task); **Ctrl/⌘ + Z** takes back your last change (not while typing; Ctrl+Shift+Z repeats it); the **Verlauf** panel in the top bar and the command palette lists your changes by day with search, a filter by kind, **before → after** for the key fields and *Wiederherstellen*; the **Papierkorb** (per sub-account) restores deleted records for 30 days (setting, daily cleanup) with everything that went with them – a deleted contact comes back with the **same ids**, its notes, tasks, deals and conversations – and admins can *endgültig löschen*. Bulk actions are one group and one click. If the record changed since, you get a **409 with a diff** and decide (*Trotzdem wiederherstellen* / *Abbrechen*); an undo is an entry too, so it can be **redone**. Own changes for everyone, anyone's for admins, member areas and sub-account isolation apply; erasing a contact for GDPR empties the journal of it. Never pretends: sent e-mails/SMS, payments and ads cannot be unsent – the entry says *"E-Mail wurde bereits gesendet – nur der Status wird zurückgesetzt"* and restores only the data. A task's completion undone reopens it and the Todoist sync follows (no loop). *Erledigt heute* filter in Aufgaben; big hit targets for XR; MCP tools `ghl_undo_list` (filter by person, API key, MCP, HyperLevel Agent) and `ghl_undo`, mobile endpoints `/api/mobile/undo/*`, **Rückgängig** on the agent's tool cards, about +0.3 ms per write – see [docs/undo.md](docs/undo.md) |
@@ -315,31 +317,31 @@ German feature reference with every detail: [README.de.md](README.de.md).
 ## How it compares
 
 An honest look – HyperLevel wins on cost, ownership and openness; the SaaS giants win on ecosystem, hosted
-telephony and certifications.
+telephony and certifications. Zoho is the broadest suite, but most areas are separate apps with their own plans.
 
-| | **HyperLevel** | GoHighLevel | HubSpot (Pro tiers) |
-| --- | --- | --- | --- |
-| Price | **0 €** self-hosted (your server) · hosted cloud planned from €49 / month, never per seat (waitlist) | $97 – $497 / month | from ~€800 / month, per seat & contacts |
-| Open source & self-hosted | ✅ AGPL-3.0, your server | ❌ SaaS only | ❌ SaaS only |
-| Data ownership | ✅ one SQLite file you control | Vendor | Vendor |
-| Unlimited users / contacts / sub-accounts | ✅ | ✅ on higher plans | ❌ priced per seat & contact tier |
-| White-label & SaaS reselling | ✅ included | ✅ (SaaS mode on $497 plan) | ❌ |
-| CRM, pipelines, custom objects | ✅ | ✅ | ✅ (most mature) |
-| Unified inbox (e-mail, SMS, WhatsApp, Messenger, Instagram) | ✅ bring your own providers | ✅ incl. hosted phone/e-mail | ✅ (SMS/WhatsApp on higher tiers) |
-| Funnels, websites, blog, A/B tests | ✅ | ✅ | ✅ (CMS Hub) |
-| Courses & communities | ✅ | ✅ | ⚠️ memberships only |
-| Project management (subtasks, boards, Gantt, time tracking) | ✅ list, board, calendar, Gantt with critical path, timesheets → invoices | ⚠️ tasks only | ⚠️ projects & tasks (Pro), no Gantt or timesheets |
-| Helpdesk with SLAs & knowledge base | ✅ | ⚠️ basic | ✅ (Service Hub) |
-| Workflows & campaigns | ✅ | ✅ | ✅ |
-| AI assistant & voice agent | ✅ bring your own key | ✅ paid add-ons | ✅ Breeze AI |
-| MCP server for AI clients | ✅ 340+ tools, self-hosted | ✅ vendor-hosted | ✅ vendor-hosted |
-| Mobile apps | ✅ installable web app (iPhone, iPad, Android) + native Android app, ❌ native iOS app | ✅ iOS & Android | ✅ iOS & Android |
-| Integration marketplace | ⚠️ Zapier/Make/n8n + ~20 built-in | ✅ large | ✅ huge |
-| Ready-made hosted cloud (sign up, pay, work) | ◐ cloud mode in the box (`PGHL_CLOUD_MODE=1`): pricing page, signup, trial, Stripe billing, isolation, operator console – you or a hosting partner run it (list prices Solo 49,99 €, Team & Company 99,99 €, Agentur 199 € incl. white-label per month, net); our own hosted cloud is not open yet – waitlist on gohyperlevel.com | ✅ | ✅ |
-| Hosted e-mail/SMS/phone numbers | ❌ use your SMTP/Twilio/gateway | ✅ | ⚠️ partly |
-| Compliance certifications (SOC 2 …) | ❌ you operate it | ✅ | ✅ |
-| Support | Community, docs, academy | Vendor support | Vendor support |
-| Scale | One instance (SQLite) – thousands of contacts per sub-account, not millions | Cloud | Cloud |
+| | **HyperLevel** | GoHighLevel | HubSpot (Pro tiers) | Zoho (CRM / One) |
+| --- | --- | --- | --- | --- |
+| Price | **0 €** self-hosted (your server) · hosted cloud planned from €49 / month, never per seat (waitlist) | $97 – $497 / month | from ~€800 / month, per seat & contacts | €14 – €52 / user / month (CRM, annual) · Zoho One €37 / employee, for all employees |
+| Open source & self-hosted | ✅ AGPL-3.0, your server | ❌ SaaS only | ❌ SaaS only | ❌ SaaS only |
+| Data ownership | ✅ one SQLite file you control | Vendor | Vendor | Vendor (EU data centres in Amsterdam/Dublin) |
+| Unlimited users / contacts / sub-accounts | ✅ | ✅ on higher plans | ❌ priced per seat & contact tier | ❌ priced per seat, no sub-accounts |
+| White-label & SaaS reselling | ✅ included | ✅ (SaaS mode on $497 plan) | ❌ | ❌ |
+| CRM, pipelines, custom objects | ✅ | ✅ | ✅ (most mature) | ✅ (up to 500 custom modules) |
+| Unified inbox (e-mail, SMS, WhatsApp, Messenger, Instagram) | ✅ bring your own providers | ✅ incl. hosted phone/e-mail | ✅ (SMS/WhatsApp on higher tiers) | ⚠️ WhatsApp in the CRM; SMS and phone through Zoho Voice (extra) |
+| Funnels, websites, blog, A/B tests | ✅ | ✅ | ✅ (CMS Hub) | ⚠️ separate apps (Sites, LandingPage), no funnel builder |
+| Courses & communities | ✅ | ✅ | ⚠️ memberships only | ⚠️ Zoho Learn / Connect, team-focused |
+| Project management (subtasks, boards, Gantt, time tracking) | ✅ list, board, calendar, Gantt with critical path, timesheets → invoices | ⚠️ tasks only | ⚠️ projects & tasks (Pro), no Gantt or timesheets | ✅ Zoho Projects (separate app, in Zoho One) |
+| Helpdesk with SLAs & knowledge base | ✅ | ⚠️ basic | ✅ (Service Hub) | ✅ Zoho Desk (separate app) |
+| Workflows & campaigns | ✅ | ✅ | ✅ | ✅ (campaigns in Zoho Campaigns) |
+| AI assistant & voice agent | ✅ bring your own key | ✅ paid add-ons | ✅ Breeze AI | ✅ Zia agents, bring your own key · no native voice agent |
+| MCP server for AI clients | ✅ 340+ tools, self-hosted | ✅ vendor-hosted | ✅ vendor-hosted | ✅ vendor-hosted |
+| Mobile apps | ✅ installable web app (iPhone, iPad, Android) + native Android app, ❌ native iOS app | ✅ iOS & Android | ✅ iOS & Android | ✅ iOS & Android |
+| Integration marketplace | ⚠️ Zapier/Make/n8n + ~20 built-in | ✅ large | ✅ huge | ✅ large |
+| Ready-made hosted cloud (sign up, pay, work) | ◐ cloud mode in the box (`PGHL_CLOUD_MODE=1`): pricing page, signup, trial, Stripe billing, isolation, operator console – you or a hosting partner run it (list prices Solo 49,99 €, Team & Company 99,99 €, Agentur 199 € incl. white-label per month, net); our own hosted cloud is not open yet – waitlist on gohyperlevel.com | ✅ | ✅ | ✅ |
+| Hosted e-mail/SMS/phone numbers | ❌ use your SMTP/Twilio/gateway | ✅ | ⚠️ partly | ⚠️ Zoho Mail; phone numbers via Zoho Voice (own subscription) |
+| Compliance certifications (SOC 2 …) | ❌ you operate it | ✅ | ✅ | ✅ |
+| Support | Community, docs, academy | Vendor support | Vendor support | Vendor support |
+| Scale | One instance (SQLite) – thousands of contacts per sub-account, not millions | Cloud | Cloud | Cloud |
 
 Prices are public list prices at the time of writing and change often – check the vendors' sites.
 GoHighLevel and HubSpot are trademarks of their owners; HyperLevel is not affiliated with them.
@@ -424,16 +426,16 @@ Read more in [docs/architecture.md](docs/architecture.md) (German) and [CONTRIBU
 
 ## Documentation
 
-Pages marked (DE) are written in German, like the app; all others are English.
+**[Documentation home](docs/README.md)** ([Deutsch](docs/README.de.md)) – all guides grouped by topic. Pages marked (DE) are only in German so far; most others also have a German version (*Deutsch* at the top of the page).
 
 | | |
 | --- | --- |
-| API & integrations | [REST API & MCP (DE)](docs/api.md) · OpenAPI at `/api/openapi.json` · [AI tools: Codex, ChatGPT, Claude](docs/ai-tools.md) · [workflow actions & triggers](docs/workflow-actions.md) · [AI workflow builder](docs/workflow-ai.md) · [integrations, REST hooks, HubSpot import (DE)](docs/integrations.md) · [connectors & Composio](docs/connectors.md) · [Nango](docs/nango.md) · [external MCP servers](docs/mcp-client.md) · [channels & providers](docs/channels.md) · [Funnel & Website AI](docs/site-ai.md) · [custom values](docs/custom-values.md) · [AI Studio](docs/ai-studio.md) |
+| API & integrations | [REST API & MCP](docs/api.md) · OpenAPI at `/api/openapi.json` · [AI tools: Codex, ChatGPT, Claude](docs/ai-tools.md) · [workflow actions & triggers](docs/workflow-actions.md) · [AI workflow builder](docs/workflow-ai.md) · [integrations, REST hooks, HubSpot import (DE)](docs/integrations.md) · [connectors & Composio](docs/connectors.md) · [Nango](docs/nango.md) · [external MCP servers](docs/mcp-client.md) · [channels & providers](docs/channels.md) · [Funnel & Website AI](docs/site-ai.md) · [custom values](docs/custom-values.md) · [AI Studio](docs/ai-studio.md) |
 | Features | [invoicing](docs/invoicing.md) · [SEPA direct debit & transfer files](docs/sepa.md) · [back office](docs/backoffice.md) · [sales](docs/sales.md) · [telephony](docs/telephony.md) · [voice](docs/voice.md) · [team inbox](docs/team-inbox.md) · [team calendars](docs/team-calendars.md) · [booking rules](docs/booking.md) · [mailbox sync](docs/mailbox-sync.md) · [e-mail deliverability](docs/deliverability.md) · [e-mail tracking](docs/email-tracking.md) · [consent & legal](docs/consent.md) · [courses](docs/courses.md) · [forms](docs/forms.md) · [quizzes & certificates](docs/quizzes-certificates.md) · [webinars](docs/webinars.md) · [community](docs/community.md) · [payment plans](docs/payment-plans.md) · [dunning](docs/dunning.md) · [comment to DM](docs/comment-to-dm.md) · [ads manager](docs/ads-manager.md) · [Gewinnrechner](docs/gewinnrechner.md) · [Living Boards](docs/living-boards.md) · [canvas](docs/canvas.md) · [wiki](docs/wiki.md) · [Office](docs/office.md) · [team chat](docs/team-chat.md) · [projects & time](docs/projects.md) · [undo](docs/undo.md) · [Werkstatt & Marktplatz](docs/werkstatt.md) · [switching over (Umzug)](docs/umzug.md) · [AI media](docs/genmedia.md) · [AI providers](docs/ai-providers.md) · [HyperLevel Agent](docs/agent.md) · [knowledge memory](docs/cognee.md) · [sign-in & SSO](docs/auth.md) · [partner links](docs/referrals.md) · [XR](docs/xr.md) · [iPhone & iPad](docs/ios-web-app.md) · [company playbook (HQ)](docs/company-playbook.md) · [social comments](docs/social-comments.md) · [social planner: client approval & evergreen](docs/social-planner.md) · [reputation & review platforms](docs/reputation.md) · [online store & gift cards](docs/store.md) · [payment providers](docs/payment-providers.md) |
-| Features (DE) | [handbook](docs/handbuch.md) · [live collaboration](docs/collaboration.md) · [academy](docs/academy.md) · [helpdesk](docs/helpdesk.md) · [reports](docs/reports.md) · [objects & lead scoring](docs/objects.md) · [growth](docs/growth.md) · [e-mail marketing](docs/email-marketing.md) · [e-mail designer](docs/email-builder.md) · [websites](docs/sites.md) · [SaaS](docs/saas.md) · [Stripe](docs/stripe.md) · [WhatsApp & Meta](docs/meta-channels.md) · [video studio](docs/video-studio.md) · [AI assistant](docs/ai-assistant.md) · [app & push](docs/app.md) · [Android app](docs/android-app.md) · [Todoist](docs/todoist.md) · [bug reports & wishes](docs/bug-reports.md) · [course: running your company](docs/kurs-firma-fuehren.md) · [apps & push relay](docs/apps.md) |
-| Deploy & operate | [docs/deploy](docs/deploy/README.md) · [.env.example](.env.example) · [demo mode](docs/demo-mode.md) · [self-hosting reference (DE)](docs/self-hosting.md) · [hosted cloud](docs/cloud.md) · [backups, alerts & status page](docs/backups.md) · [incident runbook](docs/incident-runbook.md) · [landing page](docs/landing.md) · [performance & sizing](docs/performance.md) · [security](docs/security.md) · [security review](docs/security-review-2026-10.md) · [architecture (DE)](docs/architecture.md) |
+| Features | [handbook (DE)](docs/handbuch.md) · [live collaboration](docs/collaboration.md) · [academy](docs/academy.md) · [helpdesk](docs/helpdesk.md) · [reports](docs/reports.md) · [objects & lead scoring](docs/objects.md) · [growth](docs/growth.md) · [e-mail marketing](docs/email-marketing.md) · [e-mail designer](docs/email-builder.md) · [websites](docs/sites.md) · [SaaS](docs/saas.md) · [Stripe](docs/stripe.md) · [WhatsApp & Meta](docs/meta-channels.md) · [video studio](docs/video-studio.md) · [AI assistant](docs/ai-assistant.md) · [app & push](docs/app.md) · [Android app](docs/android-app.md) · [Todoist](docs/todoist.md) · [bug reports & wishes](docs/bug-reports.md) · [course: running your company (DE)](docs/kurs-firma-fuehren.md) · [apps & push relay](docs/apps.md) |
+| Deploy & operate | [docs/deploy](docs/deploy/README.md) · [.env.example](.env.example) · [demo mode](docs/demo-mode.md) · [self-hosting reference](docs/self-hosting.md) ([Deutsch](docs/self-hosting.de.md)) · [hosted cloud](docs/cloud.md) · [backups, alerts & status page](docs/backups.md) · [incident runbook](docs/incident-runbook.md) · [landing page](docs/landing.md) · [performance & sizing](docs/performance.md) · [security](docs/security.md) · [security review](docs/security-review-2026-10.md) · [architecture](docs/architecture.md) |
 | Customize | [appearance, themes, icon packs, logos](docs/theming.md) · [UI language & translating](docs/translating.md) |
-| Project | [roadmap](docs/roadmap.md) · [changelog](CHANGELOG.md) · [contributing](CONTRIBUTING.md) · [contributor license agreement](CLA.md) · [security policy](SECURITY.md) · [partner program (DE)](docs/partner-program.md) |
+| Project | [roadmap](docs/roadmap.md) · [changelog](CHANGELOG.md) · [contributing](CONTRIBUTING.md) · [contributor license agreement](CLA.md) · [security policy](SECURITY.md) · [partner program](docs/partner-program.md) |
 
 ## Open for contributions
 
@@ -441,15 +443,15 @@ HyperLevel is built in the open and **we'd love your help** – whether you fix 
 
 | You want to … | Start here |
 | --- | --- |
-| <img src="docs/assets/readme/icons/bug.svg" width="20" height="20" alt="" align="top"> Report a bug or suggest a feature | [Open an issue](https://github.com/BAISESYSTEMS/hyperlevel/issues/new/choose) |
-| <img src="docs/assets/readme/icons/sprout.svg" width="20" height="20" alt="" align="top"> Make your first contribution | [Good first issues](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22) · [help wanted](https://github.com/BAISESYSTEMS/hyperlevel/issues?q=is%3Aopen+label%3A%22help+wanted%22) |
-| <img src="docs/assets/readme/icons/plug.svg" width="20" height="20" alt="" align="top"> Add an integration | [Connector request](https://github.com/BAISESYSTEMS/hyperlevel/issues/new?template=connector_request.yml) · [how connectors work](docs/connectors.md) |
+| <img src="docs/assets/readme/icons/bug.svg" width="20" height="20" alt="" align="top"> Report a bug or suggest a feature | [Open an issue](https://github.com/BAISESYSTEMS/GoHyperLevel/issues/new/choose) |
+| <img src="docs/assets/readme/icons/sprout.svg" width="20" height="20" alt="" align="top"> Make your first contribution | [Good first issues](https://github.com/BAISESYSTEMS/GoHyperLevel/issues?q=is%3Aopen+label%3A%22good+first+issue%22) · [help wanted](https://github.com/BAISESYSTEMS/GoHyperLevel/issues?q=is%3Aopen+label%3A%22help+wanted%22) |
+| <img src="docs/assets/readme/icons/plug.svg" width="20" height="20" alt="" align="top"> Add an integration | [Connector request](https://github.com/BAISESYSTEMS/GoHyperLevel/issues/new?template=connector_request.yml) · [how connectors work](docs/connectors.md) |
 | <img src="docs/assets/readme/icons/puzzle.svg" width="20" height="20" alt="" align="top"> Build a module | [CONTRIBUTING.md](CONTRIBUTING.md) – dev setup, tests, the module/registry rules |
 | <img src="docs/assets/readme/icons/languages.svg" width="20" height="20" alt="" align="top"> Translate the UI | [docs/translating.md](docs/translating.md) |
-| <img src="docs/assets/readme/icons/chat.svg" width="20" height="20" alt="" align="top"> Ask, discuss, show what you built | [GitHub Discussions](https://github.com/BAISESYSTEMS/hyperlevel/discussions) |
+| <img src="docs/assets/readme/icons/chat.svg" width="20" height="20" alt="" align="top"> Ask, discuss, show what you built | [GitHub Discussions](https://github.com/BAISESYSTEMS/GoHyperLevel/discussions) |
 
 ```bash
-git clone https://github.com/BAISESYSTEMS/hyperlevel.git && cd hyperlevel
+git clone https://github.com/BAISESYSTEMS/GoHyperLevel.git hyperlevel && cd hyperlevel
 npm ci && npm run build && npm run demo:seed -- --data-dir ./demo-data
 PGHL_DATA_DIR=./demo-data npm run dev     # hack away – demo@example.com / demo1234
 ```
@@ -458,8 +460,8 @@ Please read the [Code of Conduct](CODE_OF_CONDUCT.md). Pull requests need a one-
 Assistant asks on your first PR). Found a vulnerability? Please report it privately: [SECURITY.md](SECURITY.md).
 Recommending, hosting or setting up HyperLevel for others: [partner program](docs/partner-program.md).
 
-<a href="https://github.com/BAISESYSTEMS/hyperlevel/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=BAISESYSTEMS/hyperlevel" alt="Contributors">
+<a href="https://github.com/BAISESYSTEMS/GoHyperLevel/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=BAISESYSTEMS/GoHyperLevel" alt="Contributors">
 </a>
 
 > **Partner links:** Some "Konto anlegen" links are referral links of the maintainer; replace or disable them under **Agentur → Partner-Links** or with `PGHL_REFERRALS_DISABLED=1`. They are always labelled "Partner-Link" and only clicks per provider are counted – details in [docs/referrals.md](docs/referrals.md).
@@ -474,10 +476,10 @@ publish your changes under the same license. Third-party notices: [NOTICE](NOTIC
 
 <div align="center">
 
-<a href="https://star-history.com/#BAISESYSTEMS/hyperlevel&Date">
+<a href="https://star-history.com/#BAISESYSTEMS/GoHyperLevel&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=BAISESYSTEMS/hyperlevel&type=Date&theme=dark">
-    <img alt="Star history" src="https://api.star-history.com/svg?repos=BAISESYSTEMS/hyperlevel&type=Date" width="600">
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=BAISESYSTEMS/GoHyperLevel&type=Date&theme=dark">
+    <img alt="Star history" src="https://api.star-history.com/svg?repos=BAISESYSTEMS/GoHyperLevel&type=Date" width="600">
   </picture>
 </a>
 

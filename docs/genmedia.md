@@ -125,7 +125,7 @@ APIs that answer with the file itself (many TTS services) need no result path: a
 
 ## API
 
-See [docs/api.md → KI-Studio](api.md#ki-studio-media-generation) for the REST endpoints and [Mobile-App](api.md#mobile-app) for `POST /api/mobile/genmedia`.
+See [docs/api.md → KI-Studio](api.md#ai-studio-media-generation) for the REST endpoints and [Mobile-App](api.md#mobile-app) for `POST /api/mobile/genmedia`.
 
 ## To verify with real keys
 

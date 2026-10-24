@@ -214,7 +214,7 @@ Extra arguments: `GOHIGH_CLAUDE_ARGS`, `GOHIGH_CODEX_ARGS`; other binaries: `GOH
 
 - **MCP:** `ghl_list_agents` and `ghl_run_agent` (`location_id`, `agent_id`, `prompt`) run a custom agent within the caller's scope: sub-account keys see shared agents only; the agent runs as its owner (limited to that sub-account); confirmations become approvals.
 - **Mobile app** (bearer `ghm_…`, see [docs/api.md](api.md#mobile-app)): `GET /api/mobile/agent?location=`, `POST /api/mobile/agent` `{location_id, message, agent_id?, conversation_id?}` → `{conversation_id, status, text, tools, confirmation, approvals}`, `POST /api/mobile/agent/confirm` `{location_id, pending_id, token, approve}`, `GET /api/mobile/agent/conversations/:id?location=`.
-- **REST** (session; `x-location-id`): `POST /api/agent/chat` (SSE), `POST /api/agent/confirm` (SSE), `POST /api/agent/run` (JSON; with an API key the agent runs as its owner), conversations, files, approvals, agents – the full list is in [docs/api.md](api.md#ki-agent).
+- **REST** (session; `x-location-id`): `POST /api/agent/chat` (SSE), `POST /api/agent/confirm` (SSE), `POST /api/agent/run` (JSON; with an API key the agent runs as its owner), conversations, files, approvals, agents – the full list is in [docs/api.md](api.md#ai-agent).
 
 Stream events (`data: {…}`): `start`, `text` (`delta`), `tool` (`id, name, title, klass, args, status`), `tool_result` (`id, status: ok|error|blocked|rejected|deferred, links, preview|error`), `confirm` (`pending_id, token, tool, title, klass, args, args_hash, summary, target`), `navigate` (`to`), `usage`, `bridge`, `error`, `done` (`status: done|awaiting|stopped|error|limit`).
 

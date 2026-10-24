@@ -548,7 +548,7 @@ export const booksSyncModule: Module = {
           setup: { location: 'apps/books' },
           description: 'Festgeschriebene Rechnungen und Gutschriften automatisch übertragen (Kontakt, Positionen, Steuersätze' + (p === 'lexware' ? ', PDF' : '') + '), Zahlungseingänge zurückholen.',
           credentials: `${KEY_HELP[p].label} unter Apps → Buchhaltung.`,
-          docs: 'docs/integrations.md#lexware-office-und-sevdesk-live-sync',
+          docs: 'docs/integrations.md#lexware-office-and-sevdesk-live-sync',
         },
         location: probe(p),
       })),

@@ -47,7 +47,9 @@ export function CmpEditor() {
   const { data, reload } = useLoad(() => api.get('/api/cmp/settings'), []);
   const log = useLoad(() => api.get('/api/cmp/log?limit=50'), []);
   const [s, setS] = useState<any>();
-  useEffect(() => data && setS(data.settings), [data]);
+  useEffect(() => {
+    if (data) setS(data.settings);
+  }, [data]);
   if (!s) return <Spinner />;
   const set = (patch: any) => setS({ ...s, ...patch });
   const cat = (k: string, patch: any) => set({ categories: { ...s.categories, [k]: { ...s.categories[k], ...patch } } });

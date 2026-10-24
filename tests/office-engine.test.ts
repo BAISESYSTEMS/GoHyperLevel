@@ -8,7 +8,7 @@ import { fakeEngines, type FakeEngines } from './office-fakes.js';
 import { client, type Call } from './security-fixtures.js';
 
 /**
- * The agent's side of Office (docs/office.md#ki-agent-und-mcp) against fake engines (tests/office-fakes.ts – no real binaries):
+ * The agent's side of Office (docs/office.md#ai-agent-and-mcp) against fake engines (tests/office-fakes.ts – no real binaries):
  * reading, editing on a copy and storing a new version authored by the agent, range writes, PDF export, the engine's limits
  * (time, output, error text, environment), "engine not installed", the edit lock, and the MCP tools.
  */

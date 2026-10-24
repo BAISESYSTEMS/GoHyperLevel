@@ -17,7 +17,7 @@ It complements [Kommentar-zu-DM](comment-to-dm.md): those rules answer keywords 
 
 The button *Kommentare abonnieren* on [Kommentar-zu-DM](comment-to-dm.md#set-up-the-meta-app-self-hosters) subscribes the page to `feed` and the Instagram account to `comments` through the API. Facebook and Instagram are on by default; YouTube and LinkedIn start with the comments that arrive **after** you switch them on (no flood of old comments). The [Postiz](integrations.md) connection HyperLevel uses only publishes posts – its public API has no comment endpoint – so LinkedIn and YouTube comments come through Nango.
 
-With several Facebook pages ([meta-channels.md](meta-channels.md#mehrere-seiten-und-instagram-konten)) each comment remembers the page or Instagram account it was written on, and the reply and hide calls use **that page's token**.
+With several Facebook pages ([meta-channels.md](meta-channels.md#multiple-pages-and-instagram-accounts)) each comment remembers the page or Instagram account it was written on, and the reply and hide calls use **that page's token**.
 
 ## In the inbox
 

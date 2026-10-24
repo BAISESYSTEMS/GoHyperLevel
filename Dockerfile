@@ -25,7 +25,7 @@ FROM node:${NODE_VERSION}-alpine AS runtime
 LABEL org.opencontainers.image.title="HyperLevel" \
       org.opencontainers.image.description="The open-source, self-hosted alternative to GoHighLevel and HubSpot" \
       org.opencontainers.image.licenses="AGPL-3.0-only" \
-      org.opencontainers.image.source="https://github.com/BAISESYSTEMS/hyperlevel"
+      org.opencontainers.image.source="https://github.com/BAISESYSTEMS/GoHyperLevel"
 ENV NODE_ENV=production \
     PGHL_DATA_DIR=/data \
     PGHL_BEHIND_PROXY=1 \

@@ -42,7 +42,7 @@ export const SITES_TOURS: Tour[] = [
     routes: ['funnels'],
     keywords: 'website baukasten vorlage template abschnitt spalte zeile drag drop responsive handy tablet design farben schrift kopfzeile fußzeile menü komponente symbol sprachen hreflang',
     learned: ['Eine Vorlage ansehen und mit Formular, Kalender und Rechtstexten anlegen', 'Abschnitte, Zeilen und Spalten ziehen und für Handy und Tablet einstellen', 'Farben, Schrift, Kopfzeile, Fußzeile und Menüs einmal festlegen', 'Einen Baustein als Komponente auf mehreren Seiten verwenden'],
-    docs: { label: 'Website-Baukasten', file: 'sites', anchor: 'der-editor' },
+    docs: { label: 'Website-Baukasten', file: 'sites.de', anchor: 'der-editor' },
     steps: [
       { title: 'Vorlagen', route: 'funnels', target: 'funnels-templates', perm: 'funnels', text: '23 deutsche Vorlagen für Coaches, Handwerk, Agenturen, SaaS, Restaurants, Praxen, Immobilien, Kanzleien, Webinare, Kursverkauf, Lead-Magnete und Link-in-Bio. Jede kommt mit Beispieltexten, Formular und – wo nötig – Impressum und Datenschutz.' },
       { title: 'Eine Website öffnen', target: 'funnels-list', kind: 'click', optional: true, text: 'Öffne eine Website, um den Editor zu sehen.', do: 'Klicke auf eine Karte.', missing: 'Noch keine Website – lege eine über „Vorlagen ansehen“ an.' },
@@ -66,7 +66,7 @@ export const SITES_TOURS: Tour[] = [
     routes: ['funnels'],
     keywords: 'cms sammlung collection team projekte produkte stimmen detailseite weiterleitung redirect 301 404 barrierefreiheit bfsg wcag erklärung statistik funnel absprung conversion',
     learned: ['Eine Sammlung mit Feldern und Einträgen anlegen und als Liste zeigen', 'Weiterleitungen mit Muster (/blog/*) anlegen und testen', 'Die Barrierefreiheit prüfen und die Erklärung entwerfen', 'Die Statistik je Funnel-Schritt lesen'],
-    docs: { label: 'Website-Baukasten', file: 'sites', anchor: 'inhalte-cms' },
+    docs: { label: 'Website-Baukasten', file: 'sites.de', anchor: 'inhalte-cms' },
     steps: [
       { title: 'Eine Website öffnen', route: 'funnels', target: 'funnels-list', kind: 'click', optional: true, text: 'Diese Funktionen gehören zu einer Website.', do: 'Öffne eine Website.', missing: 'Lege zuerst eine Website an (Tour „Website-Baukasten“).' },
       { title: 'Inhalte (CMS)', target: 'tab-cms', kind: 'click', optional: true, text: 'Eine Sammlung ist eine Liste gleichartiger Einträge – Team, Projekte, Produkte, Kundenstimmen, Stellen.', do: 'Klicke auf **Inhalte (CMS)**.', missing: 'Das ist ein Funnel – Sammlungen gibt es nur bei Websites.' },

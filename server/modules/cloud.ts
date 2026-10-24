@@ -257,7 +257,7 @@ export const billingLink = (app: App) => appLink(app, '/app/settings/cloud');
 export const fmtDay = (iso: string | null | undefined) => (iso ? new Date(iso).toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin' }) : '');
 
 /** The sub-account the system mails go out of: the operator's choice, the SaaS one, else the oldest non-tenant sub-account. */
-function mailSender(app: App) {
+export function mailSender(app: App) {
   const s = cloudSettings(app);
   for (const lid of [s.mail_location_id, saasSettings(app).mail_location_id]) {
     const l = lid ? app.location(lid) : undefined;

@@ -274,7 +274,9 @@ export function Reports({ path }: { path: string[] }) {
   const { meta, error } = useReportMeta();
   const [section, id] = path;
   const tab = section === 'd' || !section ? '' : section === 'r' ? 'new' : section;
-  useEffect(() => window.scrollTo?.(0, 0), [section, id]);
+  useEffect(() => {
+    window.scrollTo?.(0, 0);
+  }, [section, id]);
   return (
     <div className="rpt">
       <PageHead title={t('Berichte')} sub={t('Eigene Auswertungen über alle Bereiche – als Dashboard, Bericht oder E-Mail.')}>

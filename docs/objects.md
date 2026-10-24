@@ -1,101 +1,103 @@
-# Firmen, eigene Objekte, Verknüpfungen & Lead-Scoring
+**English** · [Deutsch](objects.de.md)
 
-Das relationale CRM wie bei HubSpot: neben Kontakten und Deals gibt es **Firmen**, **eigene Objekte** (z. B. Fahrzeuge, Verträge, Immobilien), **Verknüpfungen** zwischen beliebigen Datensätzen mit Labels, eine Seite **Eigenschaften** für alle Felder und **Lead-Scoring**. Es gibt nichts einzurichten und keine Zugangsdaten – alles läuft im eigenen Server.
+# Companies, custom objects, associations & lead scoring
 
-## Firmen
+The relational CRM as in HubSpot: besides contacts and deals there are **companies**, **custom objects** (e.g. vehicles, contracts, properties), **associations** between any records with labels, a **Properties** page for all fields, and **lead scoring**. There is nothing to set up and no credentials – everything runs on your own server.
 
-Menü **Firmen** (unter Kontakte).
+## Companies
 
-- **Felder:** Name, Domain, Branche, Größe (1-10 … 1000+, eine Zahl wird eingeordnet), Telefon, Webseite, Adresse/PLZ/Ort/Land, Zuständig, Lebenszyklusphase (Abonnent, Lead, MQL, SQL, Opportunity, Kunde, Fürsprecher, Sonstiges), Beschreibung – plus eigene Eigenschaften (siehe unten).
-- **Keine Dubletten:** jede Domain gibt es nur einmal. Anlegen mit einer vorhandenen Domain aktualisiert die vorhandene Firma (API, Import, Workflows). Doppelte Firmen (gleicher Name) führt **Zusammenführen** auf der Firmenseite zusammen – Kontakte, Deals, Notizen und leere Felder wandern mit.
-- **Kontakte ↔ Firmen:** viele-zu-viele, je Kontakt genau eine **primäre Firma**. Das Feld „Firma“ am Kontakt zeigt immer deren Namen und bleibt so mit älteren Funktionen (Platzhalter `{{contact.company}}`, Exporte, Supabase) kompatibel:
-  - Tippt man am Kontakt einen Firmennamen ein (Formular, API, Import), wird die Firma mit diesem Namen primär – gibt es sie nicht, wird sie angelegt (abschaltbar).
-  - Leert man das Feld, bleibt die Verknüpfung, nur „primär“ fällt weg. Wird die primäre Verknüpfung gelöst oder die Firma gelöscht, rückt die nächste Firma nach (sonst wird das Feld leer).
-  - Umbenennen einer Firma ändert das Feld bei allen Kontakten mit dieser primären Firma.
-  - Änderungen ohne Ereignis (CSV-Import, Workflow „Feld setzen“) holt der Hintergrund-Job in wenigen Minuten nach.
-- **Automatisch per E-Mail-Domain:** Kontakte mit `…@firma.de` werden mit der Firma `firma.de` verknüpft (beim Anlegen des Kontakts und wenn eine Firma ihre Domain bekommt) – nie bei Freemail-Adressen (gmail.com, web.de, gmx.de, t-online.de, outlook.com, icloud.com …). Optional legt HyperLevel für unbekannte Firmen-Domains selbst eine Firma an. Einstellungen über das Zahnrad in der Firmenliste („Alle Kontakte jetzt abgleichen“ prüft danach alle Kontakte).
-- **Deals:** neue Opportunities werden mit der primären Firma ihres Kontakts verknüpft; weitere Firmen lassen sich im Deal-Dialog verknüpfen.
-- **Firmenseite:** Eigenschaften (nach Gruppen), Kennzahlen (Kontakte, Deal-Wert ohne verlorene, offene Aufgaben), **Aktivität** aus Firmen-Änderungen *und* allen verknüpften Kontakten, Notizen, Aufgaben (erscheinen auch unter *Aufgaben*), alle Verknüpfungen mit Labels.
-- **Liste:** Suche, Filter auf jedes Feld (auch eigene Eigenschaften, Anzahl Kontakte/Deals, Deal-Wert), Spalten wählen und sortieren, **gespeicherte Ansichten** je Nutzer (optional fürs Team sichtbar), CSV-Import (Spalten werden erkannt, gleiche Domain – sonst gleicher Name – aktualisiert; Dateien in UTF-8 oder – wie aus Excel „CSV (Trennzeichen-getrennt)“ – Windows-1252) und CSV-Export.
-- **Kontaktlisten & Smart Lists** filtern nach Eigenschaften der verknüpften Firmen (Kontakte → „Firma: …“), z. B. alle Kontakte von Firmen der Branche „Software“; das Filter landet mit in der Smart List und damit auch in Kampagnen.
+Menu **Companies** (under Contacts).
 
-## Eigene Objekte
+- **Fields:** name, domain, industry, size (1-10 … 1000+, a number is sorted into a bracket), phone, website, address/postcode/city/country, owner, lifecycle stage (subscriber, lead, MQL, SQL, opportunity, customer, evangelist, other), description – plus custom properties (see below).
+- **No duplicates:** every domain exists only once. Creating a company with an existing domain updates the existing company (API, import, workflows). Duplicate companies (same name) are combined with **Merge** on the company page – contacts, deals, notes and empty fields move along.
+- **Contacts ↔ companies:** many-to-many, with exactly one **primary company** per contact. The “Company” field on the contact always shows its name and so stays compatible with older features (placeholder `{{contact.company}}`, exports, Supabase):
+  - If you type a company name on the contact (form, API, import), the company with that name becomes primary – if it doesn't exist, it is created (can be turned off).
+  - If you clear the field, the association stays, only “primary” is dropped. If the primary association is removed or the company is deleted, the next company moves up (otherwise the field becomes empty).
+  - Renaming a company changes the field on all contacts that have this company as primary.
+  - Changes without an event (CSV import, workflow “Set field”) are picked up by the background job within a few minutes.
+- **Automatically by e-mail domain:** contacts with `…@firma.de` are linked to the company `firma.de` (when the contact is created and when a company gets its domain) – never for free-mail addresses (gmail.com, web.de, gmx.de, t-online.de, outlook.com, icloud.com …). Optionally HyperLevel creates a company itself for unknown company domains. Settings are behind the gear icon in the company list (“Match all contacts now” then checks all contacts).
+- **Deals:** new opportunities are linked to the primary company of their contact; further companies can be linked in the deal dialog.
+- **Company page:** properties (by group), metrics (contacts, deal value excluding lost, open tasks), **activity** from company changes *and* all linked contacts, notes, tasks (they also appear under *Tasks*), all associations with labels.
+- **List:** search, filters on every field (including custom properties, number of contacts/deals, deal value), choose and sort columns, **saved views** per user (optionally visible to the team), CSV import (columns are detected, same domain – otherwise same name – updates; files in UTF-8 or – as from Excel “CSV (comma delimited)” – Windows-1252) and CSV export.
+- **Contact lists & smart lists** filter by properties of the linked companies (Contacts → “Company: …”), e.g. all contacts of companies in the industry “Software”; the filter becomes part of the smart list and so also of campaigns.
 
-Menü **Objekte** zeigt alle Objekte; eigene Objekte stehen zusätzlich direkt darunter in der Seitenleiste.
+## Custom objects
 
-- **Objekt anlegen:** Name in Einzahl und Mehrzahl, Symbol, Beschreibung und die **Anzeige-Eigenschaft** (der Name eines Datensatzes in Listen und Verknüpfungen, z. B. „Kennzeichen“ – optional eindeutig). Weitere Eigenschaften gleich im selben Dialog oder später. Der interne Name beginnt immer mit `p_` (z. B. `p_fahrzeuge`) und kollidiert so nie mit Typen anderer Module.
-- **Eigenschaften** haben einen Typ: Text, mehrzeiliger Text, Zahl, Währung (€), Datum, Datum & Uhrzeit, Auswahl, Mehrfachauswahl, Checkbox, URL, E-Mail, Telefon, Nutzer, Datei (Upload) – und optional **Pflichtfeld** und **eindeutig**. Werte werden beim Speichern je Typ geprüft und vereinheitlicht (z. B. „1.234,50“ → 1234.5, „03.10.2026“ → 2026-10-03, „24.12.2026 18:00“ → 18 Uhr in der Zeitzone des Sub-Accounts, Optionen ohne Groß-/Kleinschreibung; einen Tag wie den 31.02. gibt es nicht).
-- **Datensätze:** Liste mit Suche, Filtern (je Typ passende Vergleiche), Spalten, Sortierung und gespeicherten Ansichten je Nutzer; Datensatzseite mit Eigenschaften, Aktivität (jede Änderung mit alt → neu), Notizen und Verknüpfungen; CSV-Import (Spaltenköpfe = Namen der Eigenschaften, eindeutige Eigenschaften aktualisieren statt doppelt anzulegen, Fehler mit Zeilennummer) und Export.
-- Ein Objekt löschen entfernt auch seine Datensätze, Eigenschaften, Ansichten und Verknüpfungen (die Oberfläche fragt nach).
+Menu **Objects** shows all objects; custom objects are also listed directly below it in the sidebar.
 
-## Verknüpfungen
+- **Create an object:** name in singular and plural, icon, description and the **display property** (the name of a record in lists and associations, e.g. “License plate” – optionally unique). Further properties right in the same dialog or later. The internal name always starts with `p_` (e.g. `p_fahrzeuge`) and so never collides with types from other modules.
+- **Properties** have a type: text, multi-line text, number, currency (€), date, date & time, select, multi-select, checkbox, URL, e-mail, phone, user, file (upload) – and optionally **required** and **unique**. Values are checked and normalized per type when saved (e.g. “1.234,50” → 1234.5, “03.10.2026” → 2026-10-03, “24.12.2026 18:00” → 6 pm in the sub-account's time zone, options case-insensitive; a day like 31 February does not exist).
+- **Records:** list with search, filters (comparisons that fit each type), columns, sorting and saved views per user; record page with properties, activity (every change with old → new), notes and associations; CSV import (column headers = names of the properties, unique properties update instead of creating duplicates, errors with line number) and export.
+- Deleting an object also removes its records, properties, views and associations (the interface asks first).
 
-Jeder Datensatz kann mit jedem anderen verknüpft werden: Kontakte, Firmen, Deals, Aufgaben, Datensätze eigener Objekte, **Tickets** des Helpdesks – und Typen, die andere Module anmelden. Das Feld **Verknüpfungen** steht auf Kontakt-, Firmen- und Datensatzseiten und im Deal-Dialog: suchen, verknüpfen, Labels setzen, primär markieren, lösen.
+## Associations
 
-- **Labels** beschreiben die Beziehung, z. B. Kontakt ↔ Firma „Entscheider“, „Rechnungsempfänger“, Kontakt ↔ Fahrzeug „Fahrer“. Labels legt man unter *Eigenschaften* beim jeweiligen Objekt an; ein gelöschtes Label verschwindet von allen Verknüpfungen.
-- Wird ein Datensatz gelöscht (Kontakt, Deal, Aufgabe, Firma, Datensatz, auch über einen gelöschten Sub-Account oder eine gelöschte Pipeline), verschwinden seine Verknüpfungen automatisch.
-- Ereignisse `association.created` / `association.removed` gehen an Webhooks.
+Every record can be associated with any other: contacts, companies, deals, tasks, records of custom objects, helpdesk **tickets** – and types that other modules register. The **Associations** field appears on contact, company and record pages and in the deal dialog: search, associate, set labels, mark as primary, remove.
 
-## Eigenschaften
+- **Labels** describe the relationship, e.g. contact ↔ company “Decision maker”, “Billing contact”, contact ↔ vehicle “Driver”. You create labels under *Properties* for the respective object; a deleted label disappears from all associations.
+- If a record is deleted (contact, deal, task, company, record, also via a deleted sub-account or a deleted pipeline), its associations disappear automatically.
+- The events `association.created` / `association.removed` go to webhooks.
 
-Menü **Objekte → Eigenschaften** (oder *Einstellungen → Felder & Tags → Alle Eigenschaften*): eine Seite für die eigenen Felder von **Kontakten** (die bisherigen eigenen Felder – unverändert nutzbar, jetzt mit Gruppe und Beschreibung), **Firmen**, **Deals** und jedem **eigenen Objekt**.
+## Properties
 
-- Eigenschaften in **Gruppen** ordnen (die Gruppen gliedern die Eigenschaften auf Firmen- und Datensatzseiten), Bezeichnung, Typ, Optionen, Beschreibung (Hilfetext unter dem Feld), Pflicht, eindeutig. Standard-Eigenschaften werden zum Nachschlagen angezeigt.
-- Kontakt-Eigenschaften bieten die Typen, die die Kontaktseite kann (Text, mehrzeilig, Zahl, Datum, Auswahl, Checkbox, E-Mail, Telefon, URL); Pflicht/eindeutig gibt es dort nicht.
-- **Deal-Eigenschaften** bearbeitest du im Deal-Dialog der Pipeline.
-- Beim Löschen einer Eigenschaft von Firmen, Deals oder Objekten werden ihre Werte entfernt; Kontaktfelder behalten ihre Werte (wie bisher). „Eindeutig“ lässt sich nur einschalten, wenn es keine doppelten Werte gibt.
+Menu **Objects → Properties** (or *Settings → Fields & tags → All properties*): one page for the custom fields of **contacts** (the existing custom fields – usable unchanged, now with group and description), **companies**, **deals** and every **custom object**.
+
+- Arrange properties in **groups** (the groups structure the properties on company and record pages), label, type, options, description (help text under the field), required, unique. Standard properties are shown for reference.
+- Contact properties offer the types the contact page supports (text, multi-line, number, date, select, checkbox, e-mail, phone, URL); there is no required/unique there.
+- You edit **deal properties** in the pipeline's deal dialog.
+- When you delete a property of companies, deals or objects, its values are removed; contact fields keep their values (as before). “Unique” can only be turned on if there are no duplicate values.
 
 ## Workflows
 
-- **Auslöser:** „Firma angelegt“, „Firma geändert“, „Firmen-Eigenschaft geändert“ (Eigenschaft und optional neuer Wert, z. B. Phase = `customer`), „Datensatz (eigenes Objekt) angelegt/geändert“, „Eigenschaft eines Datensatzes geändert“ (je Objekt). Workflows laufen je Kontakt – gestartet werden die **mit dem Datensatz verknüpften Kontakte**, optional nur mit einem Label (z. B. nur „Entscheider“) oder nur die, deren primäre Firma es ist. Platzhalter: `{{event.company.name}}`, `{{event.company.custom.<schlüssel>}}`, `{{event.record.display}}`, `{{event.record.properties.<schlüssel>}}`, `{{event.property}}`, `{{event.value}}`.
-- **Aktionen:** „Firma/Datensatz anlegen“ (Werte mit Platzhaltern, Firma per Domain ohne Dublette, gleich mit dem Kontakt verknüpfen – mit Label und als primäre Firma), „Firma/Datensatz ändern“ (den Datensatz aus dem Auslöser, alle mit dem Kontakt verknüpften oder die primäre Firma), „Datensätze verknüpfen“ (über eine Eigenschaft finden, z. B. Firma mit Domain = `{{contact.email}}` – E-Mail-Adressen werden zur Domain –, optional anlegen, wenn keine passt; oder den Datensatz aus dem Auslöser).
+- **Triggers:** “Company created”, “Company updated”, “Company property changed” (property and optionally a new value, e.g. stage = `customer`), “Record (custom object) created/updated”, “Record property changed” (per object). Workflows run per contact – the **contacts associated with the record** are started, optionally only with a certain label (e.g. only “Decision maker”) or only those whose primary company it is. Placeholders: `{{event.company.name}}`, `{{event.company.custom.<key>}}`, `{{event.record.display}}`, `{{event.record.properties.<key>}}`, `{{event.property}}`, `{{event.value}}`.
+- **Actions:** “Create company/record” (values with placeholders, company by domain without a duplicate, associate right away with the contact – with a label and as primary company), “Update company/record” (the record from the trigger, all records associated with the contact, or the primary company), “Associate records” (find via a property, e.g. company with domain = `{{contact.email}}` – e-mail addresses become the domain –, optionally create if none matches; or the record from the trigger).
 
-## Lead-Scoring
+## Lead scoring
 
-Menü **Lead-Scoring** (Marketing). Ein oder mehrere **Modelle** je Sub-Account; eines ist der **Haupt-Score** (Spalte, Filter und Sortierung in der Kontaktliste).
+Menu **Lead scoring** (Marketing). One or more **models** per sub-account; one is the **main score** (column, filter and sorting in the contact list).
 
-- **Eigenschaften (Fit):** Punkte, wenn ein Kontakt passt – Kontaktfelder (Quelle, E-Mail, Ort …), eigene Felder, Tags, Herkunft aus der Attribution (erste/letzte Quelle, Medium, Kampagne, Anzahl Besuche) und **Eigenschaften der verknüpften Firmen** (Branche, Größe, Phase, eigene Firmen-Eigenschaften). Vergleiche: ist, ist nicht, enthält, ist leer/nicht leer, größer/kleiner als.
-- **Aktivität (Engagement):** Punkte je Ereignis – E-Mail geöffnet, Link geklickt, Formular ausgefüllt, Seitenbesuch (Attribution), Termin gebucht, Nachricht erhalten (jeder Kanal oder nur Chat, WhatsApp, SMS, E-Mail-Antwort), Telefonat geführt, Deal angelegt; je Kriterium optional **Höchstpunkte** und ein **Zeitraum** (z. B. nur Klicks der letzten 90 Tage). Auch frühere Aktivität zählt (gelesen aus den vorhandenen Daten).
-- **Negative Punkte** ziehen ab (Freemail, Wettbewerber-Domain …); der Score fällt nie unter 0, optional gibt es einen **Höchstwert** (z. B. 100).
-- **Zerfall:** z. B. −10 % je 30 Tage ohne Aktivität (letzte Öffnung, Klick, Einsendung, Buchung, Nachricht …).
-- **Schwellen** mit Namen, z. B. MQL ab 50, SQL ab 80 – erscheinen als Label am Kontakt und in der Liste.
-- **Neu berechnet** sofort bei passenden Ereignissen (neue Tags, Formulare, Klicks, Termine, Nachrichten, Firmenänderungen …) und jede Nacht (Zerfall, Zeiträume); „Neu berechnen“ geht jederzeit. Nach dem Ändern der Regeln wird sofort neu gerechnet.
-- **Am Kontakt:** Score mit Schwelle, Aufschlüsselung je Kriterium und **Verlauf** (wann, warum, ▲/▼).
-- **Kontaktliste:** Spalte „Score“ (sortierbar), Filter „Score: ab MQL/SQL“ – auch in Smart Lists und damit in Kampagnen. API: `GET /api/contacts?score_min=50`, `?score_label=SQL` (= SQL oder höher), `?sort=score`.
-- **Workflow-Auslöser:** „Lead-Score erreicht Schwelle“ (Modell, Schwelle – nur beim Steigen über die Schwelle) und „Lead-Score geändert“ (gestiegen/gefallen, Mindest-Score); Platzhalter `{{event.score}}`, `{{event.label}}`, `{{event.previous}}`.
+- **Properties (fit):** points when a contact fits – contact fields (source, e-mail, city …), custom fields, tags, origin from attribution (first/last source, medium, campaign, number of visits) and **properties of the linked companies** (industry, size, stage, custom company properties). Comparisons: is, is not, contains, is empty/not empty, greater/less than.
+- **Activity (engagement):** points per event – e-mail opened, link clicked, form submitted, page visit (attribution), appointment booked, message received (any channel or only chat, WhatsApp, SMS, e-mail reply), call held, deal created; per criterion optionally a **maximum of points** and a **period** (e.g. only clicks from the last 90 days). Earlier activity counts too (read from the existing data).
+- **Negative points** subtract (free mail, competitor domain …); the score never drops below 0, and there is an optional **cap** (e.g. 100).
+- **Decay:** e.g. −10% per 30 days without activity (last open, click, submission, booking, message …).
+- **Thresholds** with names, e.g. MQL from 50, SQL from 80 – they appear as a label on the contact and in the list.
+- **Recalculated** immediately on matching events (new tags, forms, clicks, appointments, messages, company changes …) and every night (decay, periods); “Recalculate” works at any time. After you change the rules, it is recalculated immediately.
+- **On the contact:** score with threshold, breakdown per criterion and **history** (when, why, ▲/▼).
+- **Contact list:** column “Score” (sortable), filter “Score: from MQL/SQL” – also in smart lists and so in campaigns. API: `GET /api/contacts?score_min=50`, `?score_label=SQL` (= SQL or higher), `?sort=score`.
+- **Workflow triggers:** “Lead score reaches threshold” (model, threshold – only when rising above the threshold) and “Lead score changed” (rose/fell, minimum score); placeholders `{{event.score}}`, `{{event.label}}`, `{{event.previous}}`.
 
-## Snapshots, Supabase, Berichte, Import
+## Snapshots, Supabase, reports, import
 
-- **Snapshots** nehmen die **Definitionen** mit: eigene Objekte, alle Eigenschaften mit Gruppen, Gruppen/Beschreibungen der Kontaktfelder, Verknüpfungs-Labels und Lead-Scoring-Modelle – nie Firmen, Datensätze oder Scores.
-- **Supabase-Spiegel:** zusätzliche Tabellen `ghl_companies` (mit `custom` als JSON), `ghl_object_records` (`object_type` = Schlüssel wie `p_fahrzeuge`, `object_label`, `display`, `properties` als JSON) und `ghl_associations` (mit Label-Namen). Das SQL steht wie gewohnt unter *Agentur → Integrationen → Supabase-Spiegel* (einmal neu ausführen).
-- **Berichte:** Datenquellen „Firmen“ (Branche, Größe, Phase, Zuständig, Ort, Angelegt am, Deal-Wert gesamt/gewonnen/offen, Anzahl Kontakte/Deals, eigene Firmen-Eigenschaften), je eigenem Objekt eine Quelle „<Mehrzahl> (Objekt)“ mit seinen Eigenschaften als Gruppierungen und Kennzahlen und „Lead-Scores“ (Modell, Schwelle, Score, Ø Score, Anteil über einer Schwelle, Kontaktfelder).
-- **HubSpot-Import** (*Apps → HubSpot*): Firmen landen in diesem Modul (ohne Dubletten auch beim erneuten Import – über die HubSpot-ID, sonst die Domain), ihre Kontakte werden verknüpft (erste Firma = primär).
+- **Snapshots** include the **definitions**: custom objects, all properties with groups, groups/descriptions of the contact fields, association labels and lead scoring models – never companies, records or scores.
+- **Supabase mirror:** additional tables `ghl_companies` (with `custom` as JSON), `ghl_object_records` (`object_type` = key such as `p_fahrzeuge`, `object_label`, `display`, `properties` as JSON) and `ghl_associations` (with label names). The SQL is, as usual, under *Agency → Integrations → Supabase mirror* (run it once more).
+- **Reports:** data sources “Companies” (industry, size, stage, owner, city, created on, deal value total/won/open, number of contacts/deals, custom company properties), for each custom object a source “<plural> (object)” with its properties as groupings and metrics, and “Lead scores” (model, threshold, score, average score, share above a threshold, contact fields).
+- **HubSpot import** (*Apps → HubSpot*): companies end up in this module (without duplicates even on a repeated import – via the HubSpot ID, otherwise the domain), their contacts are associated (first company = primary).
 
-## Rechte
+## Permissions
 
-Firmen, Datensätze, Verknüpfungen, Ansichten und Scores gehören zum Bereich **Kontakte & Aufgaben**; Objekte, Eigenschaften, Labels und Scoring-Modelle anlegen/ändern braucht **Einstellungen des Sub-Accounts** (die Listen sind für alle lesbar). „Nur lesen“-Agenturschlüssel können nichts ändern.
+Companies, records, associations, views and scores belong to the area **Contacts & tasks**; creating/changing objects, properties, labels and scoring models needs **sub-account settings** (the lists can be read by everyone). “Read only” agency keys cannot change anything.
 
 ## API & MCP
 
-Alle Endpunkte in [api.md](api.md#firmen-objekte--verknüpfungen). MCP-Werkzeuge: `ghl_list_companies`, `ghl_upsert_company`, `ghl_list_object_types`, `ghl_search_records`, `ghl_upsert_record`, `ghl_associate`, `ghl_lead_score`.
+All endpoints in [api.md](api.md#companies-objects--associations). MCP tools: `ghl_list_companies`, `ghl_upsert_company`, `ghl_list_object_types`, `ghl_search_records`, `ghl_upsert_record`, `ghl_associate`, `ghl_lead_score`.
 
 ```bash
-# Firma anlegen oder per Domain aktualisieren und zwei Kontakte verknüpfen
+# Create a company or update it by domain, and associate two contacts
 curl -X POST https://crm.example.com/api/companies -H "Authorization: Bearer $KEY" -H 'content-type: application/json' \
   -d '{"name":"Muster GmbH","domain":"muster.de","industry":"Software","custom":{"tier":"A"},"contact_ids":["…","…"]}'
 
-# Datensatz eines eigenen Objekts anlegen (eindeutige Eigenschaft = kein Duplikat) und mit einem Kontakt verknüpfen
+# Create a record of a custom object (unique property = no duplicate) and associate it with a contact
 curl -X POST https://crm.example.com/api/objects/p_fahrzeuge/records -H "Authorization: Bearer $KEY" -H 'content-type: application/json' \
   -d '{"properties":{"name":"HH-AB 123","marke":"VW","kilometer":"12.000"},"associations":[{"type":"contact","id":"…","label":"Fahrer"}]}'
 
-# Filtern: Firmen der Branche Software mit mehr als 10.000 € Deal-Wert, nach Deal-Wert absteigend
+# Filter: companies in the software industry with more than €10,000 deal value, sorted by deal value descending
 curl -G https://crm.example.com/api/companies -H "Authorization: Bearer $KEY" \
   --data-urlencode 'filters=[{"field":"industry","op":"eq","value":"Software"},{"field":"deals_value","op":"gt","value":10000}]' --data-urlencode 'sort=-deals_value'
 ```
 
-## Für Entwickler: andere Module anbinden
+## For developers: connecting other modules
 
-- `app.services.associations` – `registerType({type, label, plural, icon, table, get(locationId, id) → {id, name, sub?, link?}, search?})` meldet einen eigenen Datensatz-Typ an (mit `table` werden Verknüpfungen beim Löschen automatisch entfernt), außerdem `link(loc, a, b, {labels, primary})`, `unlink`, `list(loc, ref, {type, label})`, `ids`, `primary`, `setPrimary`, `removeAll`, `onChange`. Beispiel Helpdesk: `registerType({ type: 'ticket', label: 'Ticket', plural: 'Tickets', table: 'tickets', get: … })`.
-- `app.services.objectSchema` – Eigenschaften je Objekt (`defs`, `validate`, `createProperty`), Aktivität und Notizen je Datensatz.
-- `app.services.companies` – `upsert(loc, input)` → `{id, created, company}` (mit `external_source`/`external_id` idempotent für Importe), `linkContact`, `get`, `update`, `list`, `findByDomain`, `syncContact`; `app.services.customObjects` – `types`, `type`, `upsert`, `update`, `get`, `list`.
-- Neue Haken im Kern: `app.services.supabaseTables` (eigene Spiegel-Tabellen mit SQL), `app.services.workflowTriggerFilters` (Filter für eigene Auslöser), `app.services.contactSorts` (eigene Sortierungen der Kontaktliste).
+- `app.services.associations` – `registerType({type, label, plural, icon, table, get(locationId, id) → {id, name, sub?, link?}, search?})` registers a record type of your own (with `table`, associations are removed automatically on delete), plus `link(loc, a, b, {labels, primary})`, `unlink`, `list(loc, ref, {type, label})`, `ids`, `primary`, `setPrimary`, `removeAll`, `onChange`. Helpdesk example: `registerType({ type: 'ticket', label: 'Ticket', plural: 'Tickets', table: 'tickets', get: … })`.
+- `app.services.objectSchema` – properties per object (`defs`, `validate`, `createProperty`), activity and notes per record.
+- `app.services.companies` – `upsert(loc, input)` → `{id, created, company}` (idempotent for imports with `external_source`/`external_id`), `linkContact`, `get`, `update`, `list`, `findByDomain`, `syncContact`; `app.services.customObjects` – `types`, `type`, `upsert`, `update`, `get`, `list`.
+- New hooks in the core: `app.services.supabaseTables` (your own mirror tables with SQL), `app.services.workflowTriggerFilters` (filters for your own triggers), `app.services.contactSorts` (your own sort orders for the contact list).

@@ -10,7 +10,7 @@ import { MIME, fetchBytes, postBytes, randomChannel, type OfficeDetail, type Off
  * editor fetches its signed link itself); a save inside the editor comes back as bytes and is stored as a new version; an export of
  * another kind (a PDF of a document) is downloaded and offered to be kept in Office too. Messages are only taken from this iframe and
  * this channel. A save in the presentation editor's own format (.deckcraft) is converted to .pptx on the server. Limits of the bridge:
- * docs/office.md#wie-die-editoren-laden-und-speichern.
+ * docs/office.md#how-the-editors-load-and-save.
  */
 
 export interface EditorHandle {

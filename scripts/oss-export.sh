@@ -77,5 +77,5 @@ if [ "$INIT" = "1" ]; then
       git -c commit.gpgsign=false commit -q -m "HyperLevel $VERSION – initial public release"
   )
   echo "==> Fresh repository with one commit in $OUT"
-  echo "    Next: cd $OUT && git remote add origin git@github.com:BAISESYSTEMS/hyperlevel.git && git push -u origin main && git tag v$VERSION && git push origin v$VERSION"
+  echo "    Next: cd $OUT && git remote add origin git@github.com:BAISESYSTEMS/GoHyperLevel.git && git push -u origin main && git tag v$VERSION && git push origin v$VERSION"
 fi

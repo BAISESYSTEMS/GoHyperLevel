@@ -129,7 +129,7 @@ and the web app; the web side lives in `web/src/areas/`.
   editors below keep their everyday fields in view and fold the rest; a folded part opens by itself when it differs from
   what a new item starts with:
   - *Kampagnen*: sender name and raw HTML, segment and any/without tags, A/B test & follow-up, send time per contact & speed
-    ([email-marketing](email-marketing.md#einfach-modus)); *E-Mail-Designer*: the look of blocks, sections and the mail
+    ([email-marketing](email-marketing.md#simple-mode)); *E-Mail-Designer*: the look of blocks, sections and the mail
     (**Darstellung**).
   - *Workflows*: per step its name, error handling and fine-tuning; generated forms show required fields plus five
     ([workflow-actions](workflow-actions.md#the-editor)); the workflow's error handling.

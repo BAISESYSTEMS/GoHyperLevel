@@ -2,10 +2,11 @@ import dns from 'node:dns';
 import net from 'node:net';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { startTestApp } from './helpers.js';
-import { DEMO_PAGE_NOTE, demoBlocks, withDemoNote } from '../server/modules/demo.js';
+import { DEMO_OUTSIDE_NOTE, DEMO_PAGE_NOTE, demoBlocks, demoResetHours, dueResetSlot, withDemoNote } from '../server/modules/demo.js';
 import { deliverEmail, deliverSms } from '../server/services/messaging.js';
 import { safeFetch } from '../server/services/net.js';
 import { blockedConnections, installOutboundGuard, isLoopbackHost, outboundGuardActive, uninstallOutboundGuard } from '../server/services/outbound-guard.js';
+import { seedDemo } from '../server/services/demo-seed.js';
 import { PRODUCT_ICON } from '../web/src/theme/brand-icon.js';
 
 /** 'EDEMOBLOCKED' when the guard refused the call somewhere down the error chain (clients re-wrap errors). */
@@ -85,6 +86,20 @@ describe('demo mode write rules', () => {
     expect(w('POST', '/api/companies', { name: 'Acme', domain: 'acme.example' })).toBe(false);
   });
 
+  it('reads the reset hours and knows which reset is due', () => {
+    expect(demoResetHours({})).toEqual([3]);
+    expect(demoResetHours({ PGHL_DEMO_RESET_HOUR: '5' })).toEqual([5]);
+    expect(demoResetHours({ PGHL_DEMO_RESET_HOURS: '19, 3,11,3', PGHL_DEMO_RESET_HOUR: '5' })).toEqual([3, 11, 19]);
+    expect(demoResetHours({ PGHL_DEMO_RESET_HOURS: '24,x,-1' })).toEqual([3]);
+    // 2026-10-23 is summer time in Berlin (UTC+2).
+    const at = (utc: string) => new Date(utc);
+    expect(dueResetSlot(at('2026-10-23T00:30:00Z'), 'Europe/Berlin', [3, 11, 19])).toBeNull(); // 02:30
+    expect(dueResetSlot(at('2026-10-23T01:00:00Z'), 'Europe/Berlin', [3, 11, 19])).toBe('2026-10-23@3');
+    expect(dueResetSlot(at('2026-10-23T08:59:00Z'), 'Europe/Berlin', [3, 11, 19])).toBe('2026-10-23@3'); // 10:59
+    expect(dueResetSlot(at('2026-10-23T09:00:00Z'), 'Europe/Berlin', [3, 11, 19])).toBe('2026-10-23@11');
+    expect(dueResetSlot(at('2026-10-23T21:59:00Z'), 'Europe/Berlin', [3, 11, 19])).toBe('2026-10-23@19'); // 23:59
+  });
+
   it('marks public pages as a demo, once', () => {
     const out = withDemoNote('<html><body class="x"><h1>Hallo</h1></body></html>');
     expect(out).toMatch(/^<html><body class="x"><div role="note" data-pghl-demo[^>]*>Demo-Instanz/);
@@ -108,8 +123,8 @@ describe('demo mode (PGHL_DEMO_MODE=1)', () => {
       return (realConnect as any).apply(this, args);
     } as any;
     t = await startTestApp({ demoMode: true });
-    for (let i = 0; i < 600 && !(await t.api.get('/api/version')).data.demo?.last_reset; i++) await new Promise((r) => setTimeout(r, 50));
-  }, 45_000);
+    for (let i = 0; i < 1800 && !(await t.api.get('/api/version')).data.demo?.last_reset; i++) await new Promise((r) => setTimeout(r, 50));
+  }, 120_000);
 
   afterAll(async () => {
     await t.close();
@@ -212,17 +227,26 @@ describe('demo mode (PGHL_DEMO_MODE=1)', () => {
     expect((await t.api.put('/api/saas/settings', { signup_enabled: true })).status).toBe(403);
     // A website page of the demo carries the note and stays out of search engines.
     const site = (await t.api.get('/api/funnels')).data.find((f: any) => f.kind === 'website') ?? (await t.api.get('/api/funnels')).data[0];
-    const page = await t.api.raw(new URL(site.url).pathname);
+    const page = await t.api.raw(new URL(site.url).pathname, { headers: { cookie: t.api.cookie } });
     expect(page.status).toBe(200);
     expect(page.headers.get('x-robots-tag')).toBe('noindex, nofollow');
     expect(await page.text()).toContain(DEMO_PAGE_NOTE);
+    // Outside the demo (no demo session) the same link shows only a neutral notice – no phishing pages on the demo.
+    for (const headers of [{}, { cookie: 'pghl_session=nicht-gueltig' }]) {
+      const outside = await t.api.raw(new URL(site.url).pathname, { headers });
+      expect(outside.status).toBe(403);
+      expect(outside.headers.get('x-robots-tag')).toBe('noindex, nofollow');
+      const html = await outside.text();
+      expect(html).toContain(DEMO_OUTSIDE_NOTE);
+      expect(html).not.toContain(DEMO_PAGE_NOTE);
+    }
     // Connecting an own domain is refused.
     const r = await t.api.patch(`/api/funnels/${site.id}`, { domain: 'phish.example.org' });
     expect(r.status).toBe(403);
     expect(t.app.db.get('SELECT domain FROM funnels WHERE id = ?', site.id)?.domain ?? null).toBeNull();
   });
 
-  it('resets everything once a night', async () => {
+  it('resets everything once a night', { timeout: 180_000 }, async () => {
     const before = (await t.api.post('/api/contacts', { first_name: 'Wird', last_name: 'Gelöscht', email: 'weg@example.com' })).data.id;
     expect(t.app.db.get('SELECT id FROM contacts WHERE id = ?', before)).toBeTruthy();
     // Not yet due today: nothing happens.
@@ -264,5 +288,180 @@ describe('demo mode safety', () => {
     } finally {
       await t.close();
     }
+  });
+});
+
+describe('demo seed: a thriving company everywhere', () => {
+  let t: Awaited<ReturnType<typeof startTestApp>>;
+  let seed: Awaited<ReturnType<typeof seedDemo>>;
+  let ms = 0;
+  const n = (sql: string, ...p: any[]) => Number(t.app.db.get(sql, ...p)?.n ?? 0);
+  const loc = (name: string) => seed.locations.find((l) => l.name === name)!.id;
+
+  beforeAll(async () => {
+    t = await startTestApp();
+    const started = Date.now();
+    seed = await seedDemo(t.app, {});
+    ms = Date.now() - started;
+    console.info(`[demo seed] ${ms} ms, ${seed.ok} calls, ${seed.failed.length} failed`);
+    expect((await t.api.post('/api/auth/login', { email: seed.email, password: seed.password })).status).toBe(200);
+  }, 180_000);
+
+  afterAll(async () => {
+    await t.close();
+  });
+
+  it('is fast and free of route failures', () => {
+    expect(ms).toBeLessThan(60_000);
+    expect(seed.failed, seed.failed.join('\n')).toHaveLength(0);
+    expect(seed.ok).toBeGreaterThan(3000);
+  });
+
+  it('keeps the contacts under 400 (the health-score job scores 200 per tick; tests/scheduler-sweep.test.ts allows two ticks)', () => {
+    expect(n('SELECT COUNT(*) n FROM contacts')).toBeLessThanOrEqual(400);
+    expect(n('SELECT COUNT(*) n FROM contacts')).toBeGreaterThan(300);
+  });
+
+  it('runs twice without doubling anything (idempotent)', async () => {
+    const before = n('SELECT COUNT(*) n FROM invoices');
+    const again = await seedDemo(t.app, {});
+    expect(again.locations).toHaveLength(6);
+    expect(n('SELECT COUNT(*) n FROM invoices')).toBe(before);
+  });
+
+  it('shows a growing SaaS book in the CEO cockpit (MRR, ARR, subscriptions, trials, a little churn)', async () => {
+    const saas = loc('Taktwerk Software');
+    t.api.setLocation(saas);
+    const list = (await t.api.get('/api/reports/dashboards')).data.dashboards as any[];
+    const cockpit = list.find((d) => d.name === 'CEO-Cockpit (SaaS)');
+    expect(cockpit).toBeTruthy();
+    const full = (await t.api.get(`/api/reports/dashboards/${cockpit.id}`)).data;
+    const data = (await t.api.get(`/api/reports/dashboards/${cockpit.id}/data`)).data;
+    const value = (title: string) => {
+      const w = full.widgets.find((x: any) => x.title === title);
+      return data.widgets.find((x: any) => x.id === w.id).result.totals.v[0] as number;
+    };
+    expect(value('MRR')).toBeGreaterThan(4000);
+    expect(value('ARR')).toBeGreaterThan(48_000);
+    expect(value('ARR')).toBeCloseTo(value('MRR') * 12, 0);
+    expect(value('Aktive Abos')).toBeGreaterThanOrEqual(25);
+    expect(value('Laufende Testphasen')).toBeGreaterThanOrEqual(5);
+    expect(value('Kündigungen')).toBeGreaterThanOrEqual(1);
+    expect(value('Kündigungen')).toBeLessThan(8);
+    // the book grew over eleven months and a few subscriptions have ended
+    const subs = t.app.db.all(`SELECT created_at, json_extract(recurring, '$.active') a FROM invoices WHERE location_id = ? AND recurring IS NOT NULL ORDER BY created_at`, saas) as any[];
+    expect(subs.filter((s) => s.a === 0).length).toBeGreaterThanOrEqual(2);
+    expect(Date.parse(subs[0].created_at)).toBeLessThan(Date.now() - 250 * 864e5);
+    const half = Date.now() - 170 * 864e5;
+    expect(subs.filter((s) => Date.parse(s.created_at) > half).length).toBeGreaterThan(subs.filter((s) => Date.parse(s.created_at) <= half).length);
+    // every business has some recurring revenue, so the cockpit is never empty
+    for (const l of seed.locations) expect(n(`SELECT COUNT(*) n FROM invoices WHERE location_id = ? AND json_extract(recurring, '$.active') = 1`, l.id), l.name).toBeGreaterThanOrEqual(7);
+  });
+
+  it('has courses with modules, lessons, a quiz, members with progress and a learning path', async () => {
+    expect(n('SELECT COUNT(*) n FROM courses')).toBeGreaterThanOrEqual(8);
+    expect(n(`SELECT COUNT(*) n FROM courses WHERE status = 'published'`)).toBe(n('SELECT COUNT(*) n FROM courses'));
+    expect(n('SELECT COUNT(*) n FROM course_lessons')).toBeGreaterThanOrEqual(50);
+    expect(n('SELECT COUNT(*) n FROM quizzes')).toBeGreaterThanOrEqual(6);
+    expect(n('SELECT COUNT(*) n FROM course_progress')).toBeGreaterThan(300);
+    expect(n('SELECT COUNT(*) n FROM course_enrollments WHERE completed_at IS NOT NULL')).toBeGreaterThan(5);
+    expect(n('SELECT COUNT(*) n FROM course_reviews')).toBeGreaterThanOrEqual(8);
+    expect(n('SELECT COUNT(*) n FROM course_paths')).toBeGreaterThanOrEqual(1);
+    for (const l of seed.locations) expect(n('SELECT COUNT(*) n FROM courses WHERE location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(1);
+    expect(n('SELECT COUNT(*) n FROM courses WHERE location_id = ?', loc('FitWerk Coaching'))).toBe(3);
+    // the Courses screen reads exactly this list
+    t.api.setLocation(loc('FitWerk Coaching'));
+    const list = (await t.api.get('/api/courses')).data as any[];
+    expect(list).toHaveLength(3);
+    const enrol = (await t.api.get(`/api/courses/${list[0].id}/enrollments`)).data as any[];
+    expect(enrol.length).toBeGreaterThanOrEqual(12);
+    expect(enrol.some((e) => e.progress.percent >= 100)).toBe(true);
+    expect(enrol.some((e) => e.progress.percent > 0 && e.progress.percent < 100)).toBe(true);
+  });
+
+  it('shows healthy dashboard numbers in every sub-account: revenue, pipeline, won deals, leads, reviews', async () => {
+    for (const l of seed.locations) {
+      t.api.setLocation(l.id);
+      const d30 = (await t.api.get('/api/dashboard?days=30')).data;
+      const d365 = (await t.api.get('/api/dashboard?days=365')).data;
+      expect(d30.revenue.paid / 100, l.name).toBeGreaterThan(3000);
+      expect(d365.revenue.paid / 100, l.name).toBeGreaterThan(25_000);
+      expect(d365.revenue.paid, l.name).toBeGreaterThan(d30.revenue.paid * 3);
+      expect(d30.opportunities.open, l.name).toBeGreaterThanOrEqual(8);
+      expect(d30.opportunities.openValue, l.name).toBeGreaterThan(20_000);
+      expect(d30.opportunities.won, l.name).toBeGreaterThanOrEqual(2);
+      expect(d365.opportunities.won, l.name).toBeGreaterThanOrEqual(15);
+      expect(d365.opportunities.lost, l.name).toBeGreaterThanOrEqual(5);
+      expect(d30.appointments.booked, l.name).toBeGreaterThan(20);
+      expect(d30.messages.sent, l.name).toBeGreaterThan(30);
+      expect(d30.messages.received, l.name).toBeGreaterThanOrEqual(5);
+      expect(d30.forms.submissions, l.name).toBeGreaterThanOrEqual(4);
+      expect(d30.contacts.new, l.name).toBeGreaterThanOrEqual(8);
+      expect(d365.contacts.total, l.name).toBeGreaterThanOrEqual(50);
+      expect(d30.reviews.average.a, l.name).toBeGreaterThanOrEqual(4.5);
+      expect(d30.reviews.average.n, l.name).toBeGreaterThanOrEqual(15);
+    }
+  });
+
+  it('spreads paid invoices over twelve months with growth, plus an overdue, an open and a quote', () => {
+    const now = new Date().toISOString();
+    for (const l of seed.locations) {
+      const perMonth = t.app.db.all(`SELECT substr(paid_at, 1, 7) m, COUNT(*) c FROM invoices WHERE location_id = ? AND status = 'paid' AND kind = 'invoice' AND paid_at IS NOT NULL GROUP BY m ORDER BY m`, l.id) as any[];
+      expect(perMonth.length, l.name).toBeGreaterThanOrEqual(11);
+      const half = Math.floor(perMonth.length / 2);
+      const sum = (rows: any[]) => rows.reduce((a, r) => a + Number(r.c), 0);
+      expect(sum(perMonth.slice(half)), l.name).toBeGreaterThan(sum(perMonth.slice(0, half)));
+      expect(n(`SELECT COUNT(*) n FROM invoices WHERE location_id = ? AND status = 'sent' AND due_at < ?`, l.id, now), l.name).toBeGreaterThanOrEqual(1);
+      expect(n(`SELECT COUNT(*) n FROM invoices WHERE location_id = ? AND status = 'sent' AND due_at >= ?`, l.id, now), l.name).toBeGreaterThanOrEqual(1);
+      expect(n(`SELECT COUNT(*) n FROM invoices WHERE location_id = ? AND kind = 'estimate'`, l.id), l.name).toBeGreaterThanOrEqual(1);
+    }
+  });
+
+  it('keeps deals in several stages with won and lost deals in most months of the year', () => {
+    const soon = new Date(Date.now() + 36e5).toISOString();
+    for (const l of seed.locations) {
+      const months = (status: string) => (t.app.db.all(`SELECT substr(COALESCE(closed_at, updated_at), 1, 7) m FROM opportunities WHERE location_id = ? AND status = ? GROUP BY m`, l.id, status) as any[]).length;
+      expect(months('won'), l.name).toBeGreaterThanOrEqual(8);
+      expect(months('lost'), l.name).toBeGreaterThanOrEqual(5);
+      expect(n(`SELECT COUNT(DISTINCT stage_id) n FROM opportunities WHERE location_id = ? AND status = 'open'`, l.id), l.name).toBeGreaterThanOrEqual(3);
+      expect(n(`SELECT COUNT(*) n FROM opportunities WHERE location_id = ? AND status = 'lost' AND lost_reason = ''`, l.id), l.name).toBe(0);
+    }
+    // nothing is dated into the future
+    expect(n(`SELECT COUNT(*) n FROM opportunities WHERE created_at > ? OR COALESCE(closed_at, '') > ?`, soon, soon)).toBe(0);
+  });
+
+  it('has several websites and landing pages with visits and conversions per sub-account', () => {
+    for (const l of seed.locations) {
+      expect(n('SELECT COUNT(*) n FROM funnels WHERE location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(5);
+      expect(n(`SELECT COUNT(*) n FROM funnels WHERE location_id = ? AND kind = 'website'`, l.id), l.name).toBeGreaterThanOrEqual(1);
+      expect(n('SELECT COUNT(*) n FROM funnel_pages WHERE location_id = ? AND views > 0', l.id), l.name).toBeGreaterThanOrEqual(8);
+      expect(n('SELECT COUNT(*) n FROM site_conversions WHERE location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(30);
+    }
+    expect(n('SELECT COUNT(DISTINCT day) n FROM site_hits')).toBeGreaterThanOrEqual(55);
+  });
+
+  it('has campaigns with opens and clicks, active workflows with runs, ratings, a wiki, team chat and a community', async () => {
+    for (const l of seed.locations) {
+      expect(n(`SELECT COUNT(*) n FROM campaigns WHERE location_id = ? AND status = 'sent'`, l.id), l.name).toBeGreaterThanOrEqual(3);
+      expect(n(`SELECT COUNT(*) n FROM campaign_recipients r JOIN campaigns c ON c.id = r.campaign_id JOIN messages m ON m.id = r.message_id WHERE c.location_id = ? AND m.opened_at IS NOT NULL`, l.id), l.name).toBeGreaterThanOrEqual(10);
+      expect(n(`SELECT COUNT(*) n FROM campaign_recipients r JOIN campaigns c ON c.id = r.campaign_id JOIN messages m ON m.id = r.message_id WHERE c.location_id = ? AND m.clicked_at IS NOT NULL`, l.id), l.name).toBeGreaterThanOrEqual(1);
+      expect(n(`SELECT COUNT(*) n FROM workflows WHERE location_id = ? AND status = 'active'`, l.id), l.name).toBeGreaterThanOrEqual(4);
+      expect(n('SELECT COUNT(*) n FROM workflow_runs WHERE location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(100);
+      expect(n('SELECT COUNT(*) n FROM tickets WHERE location_id = ? AND csat_score IS NOT NULL', l.id), l.name).toBeGreaterThanOrEqual(3);
+      expect(n('SELECT COUNT(*) n FROM wiki_pages WHERE location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(5);
+      expect(n('SELECT COUNT(*) n FROM teamchat_messages m JOIN teamchat_channels c ON c.id = m.channel_id WHERE c.location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(10);
+      expect(n('SELECT COUNT(*) n FROM webinars WHERE location_id = ?', l.id), l.name).toBeGreaterThanOrEqual(1);
+    }
+    t.api.setLocation(loc('Taktwerk Software'));
+    const csat = (await t.api.get('/api/surveys/csat?days=365')).data.summary;
+    expect(csat.count).toBeGreaterThanOrEqual(10);
+    expect(csat.avg).toBeGreaterThanOrEqual(4);
+    expect(n('SELECT COUNT(*) n FROM community_posts')).toBeGreaterThanOrEqual(15);
+  });
+
+  it('stays fictional: only example addresses and the test phone range, nothing sent', () => {
+    expect(n(`SELECT COUNT(*) n FROM contacts WHERE email != '' AND email NOT LIKE '%@example.com' AND email NOT LIKE '%@example.org' AND email NOT LIKE '%@example.net' AND email NOT LIKE '%.example'`)).toBe(0);
+    expect(n(`SELECT COUNT(*) n FROM contacts WHERE phone != '' AND phone NOT LIKE '+49301234%'`)).toBe(0);
+    expect(n(`SELECT COUNT(*) n FROM messages WHERE direction = 'out' AND status NOT IN ('logged', 'failed')`)).toBe(0);
   });
 });

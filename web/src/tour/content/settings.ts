@@ -57,7 +57,7 @@ export const SETTINGS_TOURS: Tour[] = [
     routes: ['settings/account'],
     keywords: 'app installieren handy push benachrichtigung pwa home bildschirm',
     learned: ['Die App auf Handy oder Computer installieren', 'Push je Gerät einschalten', 'Auswählen, worüber du benachrichtigt wirst'],
-    docs: { label: 'Handy-App & Push', file: 'app' },
+    docs: { label: 'Handy-App & Push', file: 'app.de' },
     steps: [
       { title: 'Als App installieren', text: 'Im Browser: Menü → „App installieren“ bzw. auf dem iPhone „Teilen → Zum Home-Bildschirm“. Dann startet {brand} wie eine normale App.' },
       { title: 'Benachrichtigungen', route: 'settings/account', target: 'account-push', text: 'Push ist pro Gerät: Schalte es auf jedem Handy und Computer ein, auf dem du benachrichtigt werden willst.' },
@@ -129,7 +129,7 @@ export const SETTINGS_TOURS: Tour[] = [
     routes: ['settings/channels'],
     keywords: 'whatsapp messenger instagram meta facebook kanal webhook token vorlage',
     learned: ['Welche Daten aus der Meta-App wohin gehören', 'Warum Webhook und App-Secret nötig sind', 'Verbindung testen und abonnieren', 'Das 24-Stunden-Fenster und WhatsApp-Vorlagen'],
-    docs: { label: 'WhatsApp, Messenger & Instagram', file: 'meta-channels' },
+    docs: { label: 'WhatsApp, Messenger & Instagram', file: 'meta-channels.de' },
     steps: [
       { title: 'Kanäle', route: 'settings/channels', target: 'meta-webhook', text: 'Damit Nachrichten ankommen, trägst du diese Rückruf-URL und den Verify-Token in deiner Meta-App ein. Das App-Secret prüft jede Nachricht.' },
       { title: 'WhatsApp Business', target: 'meta-whatsapp', text: 'Telefonnummer-ID, WhatsApp-Business-Konto-ID (für Vorlagen) und ein dauerhafter Zugriffstoken. Tokens werden verschlüsselt gespeichert und nie wieder angezeigt.' },
@@ -171,7 +171,7 @@ export const SETTINGS_TOURS: Tour[] = [
     routes: ['settings/telephony'],
     keywords: 'telefon twilio nummer weiterleitung voicemail ansage geschäftszeiten browser telefon webrtc',
     learned: ['Twilio-Zugang und Nummer eintragen', 'Weiterleitung aufs Handy und Erreichbarkeit', 'Ansage, Voicemail und Aufzeichnung', 'Das Browser-Telefon einrichten'],
-    docs: { label: 'Telefonie einrichten', file: 'self-hosting', anchor: 'telefonie-twilio' },
+    docs: { label: 'Telefonie einrichten', file: 'self-hosting.de', anchor: 'telefonie-twilio' },
     steps: [
       { title: 'Twilio-Zugang', route: 'settings/telephony', target: 'tel-twilio', text: 'Account SID, Auth Token und deine Twilio-Nummer. Der Token wird verschlüsselt gespeichert und nie wieder angezeigt. Darunter stehen die Webhook-Adressen für die Twilio-Konsole.' },
       { title: 'Eingehende Anrufe', target: 'tel-incoming', text: 'Wohin Anrufe weitergeleitet werden (dein Handy), wie lange es klingelt und zu welchen Zeiten du erreichbar bist.' },
@@ -191,7 +191,7 @@ export const SETTINGS_TOURS: Tour[] = [
     routes: ['settings/chat'],
     keywords: 'live chat website chat widget einbau code blase',
     learned: ['Den Chat einschalten und gestalten', 'Den Einbau-Code für fremde Websites', 'Wo die Chats landen (Posteingang)'],
-    docs: { label: 'KI-Assistent im Live-Chat', file: 'ai-assistant', anchor: 'live-chat-bot' },
+    docs: { label: 'KI-Assistent im Live-Chat', file: 'ai-assistant.de', anchor: 'live-chat-bot' },
     steps: [
       { title: 'Live-Chat', route: 'settings/chat', target: 'settings-chat', text: 'Einschalten, Titel, Begrüßung, Farbe und ob vor der ersten Nachricht Name und E-Mail abgefragt werden.' },
       { title: 'Einbau-Code', target: 'settings-chat-embed', text: 'Für fremde Websites: diesen Code vor </body> einfügen. Bei eigenen Funnels reicht ein Haken in den Funnel-Einstellungen.' },

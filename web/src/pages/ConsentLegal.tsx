@@ -110,7 +110,9 @@ export function LegalWizard() {
   const services = useLoad(() => api.get('/api/legal/services'), []);
   const [p, setP] = useState<any>();
   const [open, setOpen] = useState<(typeof DOCS)[number] | null>(null);
-  useEffect(() => data && setP(data.profile), [data]);
+  useEffect(() => {
+    if (data) setP(data.profile);
+  }, [data]);
   if (!p) return <Spinner />;
   const set = (patch: any) => setP({ ...p, ...patch });
   const registered = ['ek', 'ug', 'gmbh', 'ag', 'verein'].includes(p.form);

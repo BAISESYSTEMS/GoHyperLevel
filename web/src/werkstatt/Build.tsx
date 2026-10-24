@@ -103,7 +103,9 @@ export function StatusBadge({ b }: { b: Pick<Build, 'status' | 'status_label'> }
 
 export function LogView({ log }: { log: NonNullable<Build['log']> }) {
   const end = useRef<HTMLDivElement>(null);
-  useEffect(() => end.current?.scrollIntoView({ block: 'nearest' }), [log.length]);
+  useEffect(() => {
+    end.current?.scrollIntoView({ block: 'nearest' });
+  }, [log.length]);
   return (
     <div className="wk-log" data-tour="wk-log" role="log">
       {log.map((l, i) => (

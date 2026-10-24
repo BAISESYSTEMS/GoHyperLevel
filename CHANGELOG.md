@@ -6,6 +6,42 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.68] – 2026-10-24
+
+### Changed
+- Demo-Modus: Zurücksetzen mehrmals am Tag (`PGHL_DEMO_RESET_HOURS`, z. B. `3,11,19`); `PGHL_DEMO_RESET_HOUR` gilt weiter als
+  einzelne Stunde.
+
+- Repository-Links zeigen auf `github.com/BAISESYSTEMS/GoHyperLevel` (README, Landingpage, Docs, Installskript, Issue-Vorlagen).
+- CI: Zeitlimit für Server & Web auf 45 Minuten – die Testsuite brauchte länger als 20 Minuten, jeder Lauf wurde abgebrochen.
+- Dokumentation: Website `docs-site/` (Astro + Starlight, für docs.gohyperlevel.com) mit Suche und Sprachumschalter Englisch/Deutsch,
+  gebaut aus `docs/` und bei jedem Push über GitHub Pages veröffentlicht (`.github/workflows/docs.yml`); Startseiten `docs/README.md` und `docs/README.de.md`. `docs/self-hosting.md` ist jetzt Englisch, die deutsche
+  Fassung liegt in `docs/self-hosting.de.md`.
+- Dokumentation auf Englisch: 24 weitere Seiten (u. a. API, Aufbau, Websites, E-Mail-Marketing, Helpdesk, Stripe, SaaS, Android-App)
+  sind jetzt Englisch, die deutsche Fassung liegt jeweils als `<seite>.de.md` daneben; Querverweise und Anker sind angepasst,
+  deutsche Seiten verlinken auf die deutschen Fassungen.
+- Schnellstart: `git clone … hyperlevel && cd hyperlevel` – nach der Umbenennung legte `git clone` den Ordner `GoHyperLevel` an,
+  das `cd hyperlevel` aus README, CONTRIBUTING und `docs/deploy/docker.md` lief ins Leere.
+- Demo: Die Demo-Firmen zeigen ein gesundes, wachsendes Jahr – 12 Monate Umsatz, Deals (gewonnen und verloren), 35 Abos mit
+  MRR/ARR, Testphasen und Kündigungen im CEO-Cockpit, 8 Kurse mit Lektionen, Quiz und Fortschritt, Buchungs-, Landing- und
+  Webinar-Funnels mit Besuchen, Kampagnen mit Öffnungen und Klicks, aktive Workflows, Tickets mit CSAT, Wiki, Team-Chat,
+  Communities und Webinare. Der Seed bleibt deterministisch und dauert rund 18 Sekunden (Test sichert < 60 s und 0 Fehler).
+- Vergleich: Zoho CRM / Zoho One auf der Landingpage (/vergleich, alle 63 Merkmale mit Quelle, „Warum wechseln“) und als Spalte
+  im README.
+- Tests: Die Landingpage fragt in Tests nie die echte GitHub-API (die Sternzahl des öffentlichen Repos erschien sonst auf der Seite).
+
+### Fixed
+- Absturz beim Verlassen einer Seite in aktuellen Chrome-Versionen („TypeError: d is not a function“, Bildschirm „Die App konnte
+  nicht starten“), zuerst auf Berichte und in der Werkstatt: `scrollTo`/`scrollIntoView` geben dort ein Promise zurück, und ein
+  einzeiliger Effekt reichte es an React als Aufräumfunktion weiter. Dasselbe bei `data && setX(…)`, wenn die Daten `null` waren
+  (Kanal-Einstellungen, Einwilligungen). Alle zehn Stellen haben jetzt einen Block; `tests/react-effects.test.ts` verhindert neue.
+- Cloud-Konsole: Der Punkt „System-Mails“ der Einrichtungs-Checkliste ist erst grün, wenn der Absender-Sub-Account wirklich
+  verschickt – vorher zählte jeder Sub-Account, auch mit dem Standard „nur speichern“, und Bestätigungsmails kamen nie an.
+
+### Security
+- Demo-Modus: Öffentliche Seiten (Websites, Formulare, Buchung, Helpcenter …) sieht nur, wer in der Demo angemeldet ist. Ein Link
+  auf eine Demo-Seite zeigt allen anderen nur einen neutralen Hinweis – die Demo taugt nicht als Phishing-Hoster.
+
 ## [1.0.67] – 2026-10-23
 
 ### Added
@@ -439,7 +475,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 - Einfach-Modus: a goal-based first-run setup "Was willst du tun?" (Leads & Vertrieb, Kurse & Community, Agentur, Rechnungen & Büro, Alles) for new logins and a one-time banner for existing ones; with goals chosen the sidebar shows at most ten core entries and everything else under a searchable "Mehr" with pinning, and areas used three times in 14 days move into the menu at the next session start (`/api/nav/usage`, docs/theming.md#einfach-modus).
 - Page heads keep one primary action in view; the rest – on phones everything else, and destructive actions always – goes into a "⋯" menu, so headers no longer wrap on phones.
 - A shared in-app confirm dialog (`confirmDialog`, ✕ and Esc, red for destructive questions) is available next to the native `confirmAsk`.
-- Academy front and centre ([docs/academy.md](docs/academy.md#einstieg)): a welcome card "In 10 Minuten startklar – Academy starten" on the start page, in the demo and in the goal setup; "Lernen"/"Tour starten" links in the empty states of the main areas, the page heads of Dashboard, Agentur and Einstellungen, the help menu and the demo banner ("Geführte Tour starten"); Akademie is a fixed entry of the Einfach-Modus menu (now at most eleven core entries).
+- Academy front and centre ([docs/academy.de.md](docs/academy.de.md#einstieg)): a welcome card "In 10 Minuten startklar – Academy starten" on the start page, in the demo and in the goal setup; "Lernen"/"Tour starten" links in the empty states of the main areas, the page heads of Dashboard, Agentur and Einstellungen, the help menu and the demo banner ("Geführte Tour starten"); Akademie is a fixed entry of the Einfach-Modus menu (now at most eleven core entries).
 - Much richer demo data ([docs/demo-mode.md](docs/demo-mode.md)): the agency "Nordlicht Digital" (white-label) with five client sub-accounts – physiotherapy practice, electrician, online coach, SaaS start-up on the HQ template, coffee roastery with online store – each with coloured tags, custom fields and values, saved lists, deals with quotes, four weeks of appointments back and forth with a recurring series, e-mail/SMS/WhatsApp threads with notes, invoices in every state including an XRechnung, store orders and gift cards, a workflow with a paused step on the canvas, reviews from several platforms, call scripts, projects with a Gantt chart and time entries, Office documents, a webinar and 90 days of history. Deterministic, a few seconds, no outside API; test phone numbers `+49 30 1234 xxx`.
 - Shorter name **HyperLevel** in the app (the domain stays gohyperlevel.com) and the original logo mark back in the sidebar and on the landing page; a saved branding with the old default name shows the new one.
 - Quick menu behind the logo (top left): switch Einfach/Profi mode, light/dark/system design and language in one place, with links to the design settings and the Academy.
@@ -469,7 +505,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   (polled every 15 minutes, only what comes after switching on) land in Konversationen as the channel *Kommentare*, one message
   per comment on the commenter's contact, with public reply, hide/show and an AI reply suggestion (UI slot `inbox.message`).
   Trigger `social_comment.received`, API `/api/social-comments`, MCP `ghl_social_comments`, i18n namespace `socialcomments`.
-- **Several Facebook pages and Instagram accounts per sub-account** ([docs/meta-channels.md](docs/meta-channels.md#mehrere-seiten-und-instagram-konten)):
+- **Several Facebook pages and Instagram accounts per sub-account** ([docs/meta-channels.de.md](docs/meta-channels.de.md#mehrere-seiten-und-instagram-konten)):
   the page part of the Meta config is now a list (`meta_pages`, migration `002-pages` moves existing configs and links existing
   identities to their page). Inbound messages are routed by page / Instagram account ID, the inbox shows the page as a
   sub-channel ("Messenger · Filiale Nord"), replies and other modules (`metaKit.graph(…, accountId)`) use that page's token.
@@ -681,7 +717,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   events (signup, trial, trial ending, subscribed, plan change, failed payment/dunning, cancellation, deletion) create or
   update one contact and one deal in the operator's HQ pipeline with plan, MRR, interval, source and the cloud account
   id; an erased account anonymises the contact. New hook `app.services.cloudEventTaps` in the cloud module.
-- **Office: documents, spreadsheets, presentations and PDFs** ([docs/office.md](docs/office.md), DE). A new area (menu
+- **Office: documents, spreadsheets, presentations and PDFs** ([docs/office.de.md](docs/office.de.md), DE). A new area (menu
   *Office*, permission area `office`) for Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and PDF files per sub-account,
   optionally linked to a contact, deal or project: create blank (or with starting text/rows) or upload, list with filters,
   download, rename, delete; every save is an **immutable version** with its author (a person, the GoHigh Agent on behalf
@@ -731,7 +767,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 - **Open-source readiness:** a [Contributor License Agreement](CLA.md) (Apache ICLA-based, allows dual licensing) signed
   through CLA Assistant Lite (`.github/workflows/cla.yml`, signatures stored in the repository), CONTRIBUTING with
   "questions go to Discussions" and no support guarantee, SECURITY with `security@gohyperlevel.com` and a supported-versions
-  table, and the [partner program](docs/partner-program.md) (Konditionen vorläufig). `npm run oss:check -- --require-files`
+  table, and the [partner program](docs/partner-program.de.md) (Konditionen vorläufig). `npm run oss:check -- --require-files`
   and the export now insist on `CLA.md`.
 - **Cloud list prices:** Solo 49,99 €, **Team & Company** 99,99 € (was "Team", 79 €; plan id `cloud-team` unchanged),
   Agentur 199 € (was 299 €) per month, net plus VAT. The pricing page says "zzgl. USt. – Stripe Tax" in its own line,
@@ -759,7 +795,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   placeholders, counts use plural forms, and percentages and decimals follow the language. Still German: the
   community and the other remaining pages, tours, handbook, public pages, e-mails, and content the server sends as data
   (workflow catalogue, gallery templates) – see [docs/translating.md](docs/translating.md#what-is-translated).
-- **Live collaboration everywhere** ([docs/collaboration.md](docs/collaboration.md), DE): every page of the app now
+- **Live collaboration everywhere** ([docs/collaboration.de.md](docs/collaboration.de.md), DE): every page of the app now
   shows who of the team is there – avatars in the top bar ("Anna – bearbeitet gerade"), avatars next to the menu entry
   each colleague is in (click → page and *Hingehen*), a *Team ist hier* popover with everybody online, "Anna hat hier
   gerade gespeichert – Neu laden" and "Anna bearbeitet das gerade auch" banners, and live cursors (on by default on
@@ -796,7 +832,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     nothing open is noted on the invoice's trail (`payment.mismatch`) and in the contact's activity for a refund; one payment
     reported several times is booked once. The PayPal.me link and SEPA collection already used the open amount (now tested); the
     accepted-quote page and the customer billing page (`/abo/…`) showed the total as open and now show what is open
-    ([docs/stripe.md](docs/stripe.md#was-beim-bezahlen-passiert)). Payment plans: an instalment is booked for at most the agreed
+    ([docs/stripe.de.md](docs/stripe.de.md#was-beim-bezahlen-passiert)). Payment plans: an instalment is booked for at most the agreed
     instalment, and one Stripe collects after the last (the end of the subscription did not get through) no longer becomes an
     invoice *Rate 4 von 3* – it is noted for a refund (`payment_plan.overpaid`) and the subscription is told to end again
     ([docs/payment-plans.md](docs/payment-plans.md#limits-and-good-to-know)).
@@ -823,7 +859,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     same campaign up meanwhile – both read the same "pending" recipients, so the first batch (and every batch of a
     WhatsApp campaign started with a double click) went out twice. A recipient is now claimed before its message is sent;
     a message that was on its way when the server restarted is not sent again but listed as failed with "Versand
-    unterbrochen" ([docs/email-marketing.md](docs/email-marketing.md#für-entwickler)).
+    unterbrochen" ([docs/email-marketing.de.md](docs/email-marketing.de.md#für-entwickler)).
   - **The same Mahnung twice:** *Jetzt senden* on a notice waiting for approval was not blocked while the mail was on its
     way, so a double click, two colleagues or a workflow step at the same moment mailed the customer the same notice (with
     its fees) twice. A notice that is being sent is refused a second time (409) ([docs/dunning.md](docs/dunning.md)).
@@ -846,7 +882,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     new Checkout page, so the customer (or a colleague) could pay the same invoice again by card. While a payment is in
     progress the invoice now says so instead and opens no second page; when the debit fails it can be paid again. A
     double click on *Jetzt bezahlen* also made two Checkout sessions; it now gets the same one
-    ([docs/stripe.md](docs/stripe.md)).
+    ([docs/stripe.de.md](docs/stripe.de.md)).
   - **Planned mails from a connected mailbox sent twice:** when Gmail or Outlook took a planned mail but the answer got
     lost (a timeout, a connection broken while waiting), the background job counted it as failed and sent it again five
     minutes later – up to three times. A send without any answer is no longer repeated but marked failed with a note to
@@ -856,7 +892,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     was paid, minutes after the buyer had left for Stripe's page – everybody who started meanwhile (or a double submit) got
     the discount too, so a code "for the first 10" could go out 50 times on launch day. A limited code is now held while a
     buyer pays with it (that Checkout page expires after 31 minutes, an abandoned one frees the code again)
-    ([docs/stripe.md](docs/stripe.md#order-bump-upsell-und-rabattcodes)).
+    ([docs/stripe.de.md](docs/stripe.de.md#order-bump-upsell-und-rabattcodes)).
   - **Team-Chat, inbox, Living Boards and canvas on a full server:** the stream was answered with 200 and an `error` event
     and ended at once, so every refused tab reconnected every three seconds (and the chat showed the same error toast each
     time). Like presence they now answer 503; the tab tries again when it is looked at again.
@@ -867,7 +903,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   - **Two satisfaction surveys for one ticket:** the CSAT survey was noted on the ticket only after it had been delivered, so a
     ticket solved, reopened by the customer's answer and solved again while the first survey was still on its way asked the
     customer a second time (and *Umfrage senden* clicked twice sent two). The survey is now noted before it is sent; a
-    second manual send while one is on its way is refused (409) ([docs/helpdesk.md](docs/helpdesk.md#zufriedenheit-csat--nps)).
+    second manual send while one is on its way is refused (409) ([docs/helpdesk.de.md](docs/helpdesk.de.md#zufriedenheit-csat--nps)).
   - **Community invites and discount codes used more often than allowed:** like the buy-link codes, a community code counted
     its use only when the purchase was paid and an invite only when the person was in – minutes after they had left for
     Stripe's page, so everybody who joined or pressed *Jetzt kaufen* meanwhile (or at the same moment) got the invite or the
@@ -892,7 +928,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     message had gone out, so two runs at the same time asked the same people twice, and a restart in the middle of a send
     sent that message again. Like campaigns, a recipient is now claimed before the send; one that was on its way when the
     server stopped is listed as failed with "Versand unterbrochen" instead of being sent again
-    ([docs/helpdesk.md](docs/helpdesk.md#zufriedenheit-csat--nps)).
+    ([docs/helpdesk.de.md](docs/helpdesk.de.md#zufriedenheit-csat--nps)).
 - **Team-Chat, inbox and Living Boards: no reconnect ping-pong with many tabs.** A person's 9th tab still makes room by
   closing the oldest one, but that tab is now told `bye` and waits until it is looked at again instead of reconnecting and
   pushing the next tab out (same as presence).
@@ -940,7 +976,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     preview said. The quantity now keeps four decimals ([docs/projects.md](docs/projects.md)).
   - **CSV files from Excel keep their umlauts:** the contact, company/object and community imports read the chosen file as
     UTF-8 only, but German Excel saves "CSV (Trennzeichen-getrennt)" in Windows-1252 – "Müller" was imported as "M�ller".
-    A file that is not valid UTF-8 is now read as Windows-1252 ([docs/objects.md](docs/objects.md)).
+    A file that is not valid UTF-8 is now read as Windows-1252 ([docs/objects.de.md](docs/objects.de.md)).
   - **Custom properties *Datum & Uhrzeit* and *Datum*:** a time without a zone ("24.12.2026 18:00" from a CSV import, the API
     or a migration) was read in the server's zone – UTC in the Docker image, so it showed as 19:00 in Berlin. It now means
     the sub-account's time zone. A date like "31.02.2026" was stored as is (JavaScript reads it as 3 March); it is refused now.
@@ -989,7 +1025,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     also fixes a Stripe partial refund after payout clawing back the original amount instead of what was paid, and a refund
     reversing a commission inside an open payout without changing the payout's sum); once clawed back, later corrections stay
     clawbacks (also when the payout is deleted), and a Storno takes the rest back at once. A refund and a credit note for the
-    same money no longer add up ([docs/growth.md](docs/growth.md#so-wird-gezählt)).
+    same money no longer add up ([docs/growth.de.md](docs/growth.de.md#so-wird-gezählt)).
   - **An invoice credited in full stayed open for good:** with nothing paid and Gutschriften over the whole amount it kept the
     status "sent" – out of the overdue counts since the first pass, but listed as *offen*, payable through the Stripe link
     and the SEPA run, open to a Storno on top (which would credit it twice) and grouped as *Offen* in reports. The credit
@@ -1002,7 +1038,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     them started a full cleanup pass over the sub-account's mapped records and a sync cycle of its own – 10 000 passes for
     10 000 contacts (about 45 s in the test, and as many cycles queued behind each other). The events of one bulk delete are
     now coalesced into one pass and one cycle ([docs/cognee.md](docs/cognee.md#erasure-and-deletion)).
-- **Live collaboration: no reconnect loops, steadier presence** ([docs/collaboration.md](docs/collaboration.md#für-entwickler)): a person's
+- **Live collaboration: no reconnect loops, steadier presence** ([docs/collaboration.de.md](docs/collaboration.de.md#für-entwickler)): a person's
   11th tab still replaces the oldest one, but that tab is now told `bye` and waits until it is looked at again instead of reconnecting
   and pushing the next tab out (endless ping-pong with 11+ tabs); a full server answers 503 instead of a stream that ends at once and
   was retried every few seconds; a stream refused with an error is retried after 30 s, 60 s … 5 min; reconnects after a restart are
@@ -1050,7 +1086,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   - **Web hook payloads kept the erased person:** REST hooks (Zapier, Make, n8n) store the last payloads of every event as
     samples – with the whole contact – and never age them out, the delivery log keeps them 30 days, and inbound web hooks
     keep the last five request bodies per workflow. Samples, deliveries (also those still waiting) and captured bodies that
-    carry the person now go with the erase ([docs/integrations.md](docs/integrations.md)).
+    carry the person now go with the erase ([docs/integrations.de.md](docs/integrations.de.md)).
   - **Community direct messages survived the erase and were missing from the export:** conversations point at members by id
     without a foreign key (one side can be the team), so an erased member's messages, its name and the conversation stayed
     for the other side, together with the other members' bell entries naming it ("Anna M. hat … kommentiert"). The erase now
@@ -1098,11 +1134,11 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     stopped. German courts count asking for feedback as advertising (BGH VI ZR 225/17), as the NPS already did: both now go
     through the gate as advertising (with unsubscribe link and header), a survey that may not go out is skipped with the
     reason (and no longer retried every minute), a review request that may not go out answers 400 / fails the step with the
-    reason ([docs/consent.md](docs/consent.md#the-send-gate), [docs/helpdesk.md](docs/helpdesk.md)).
+    reason ([docs/consent.md](docs/consent.md#the-send-gate), [docs/helpdesk.de.md](docs/helpdesk.de.md)).
   - **Meta Conversions API sent leads without their consent:** hashed e-mail, phone and name of every lead who came from a
     Meta ad went to Meta, whatever the contact had said – the Google Ads offline conversions next to it already required the
     consent *Tracking & Cookies → Marketing* (cookie banner or recorded by hand). CAPI now asks the same ledger; a lead or
-    purchase without it is listed as *blockiert* and never sent ([docs/growth.md](docs/growth.md)).
+    purchase without it is listed as *blockiert* and never sent ([docs/growth.de.md](docs/growth.de.md)).
   - **"Nicht stören" for WhatsApp alone did not stop WhatsApp:** the workflow step *DND je Kanal* stored it, but only e-mail
     and SMS asked for it – WhatsApp messages and templates (campaigns too) still went out. They are stopped now with the
     reason.
@@ -1112,10 +1148,10 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     ([docs/workflow-actions.md](docs/workflow-actions.md#triggers), `tests/retention-bookkeeping.test.ts`).
   - **Affiliate clicks kept the visitor's id and a hash of the address for good**, although they only serve to count a
     repeated click within 24 hours (leads come from the attribution touches). Both are cleared after two days; the click
-    stays for the numbers ([docs/growth.md](docs/growth.md)).
+    stays for the numbers ([docs/growth.de.md](docs/growth.de.md)).
   - **Web hook samples with whole contacts were kept for ever** when an event type or an inbound web hook went quiet (only a
     newer event replaced them). REST hook samples and the kept inbound request bodies now go after 30 days, like the
-    delivery log ([docs/integrations.md](docs/integrations.md)).
+    delivery log ([docs/integrations.de.md](docs/integrations.de.md)).
 - **API contract: what the docs, the OpenAPI description, the apps and the events promise** (`tests/api-contract.test.ts`,
   a contract pass in `tests/mcp-sweep.test.ts`):
   - **Appointments ignored the documented fields:** the OpenAPI description names `start_at`/`end_at` for
@@ -1154,7 +1190,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     event is a trigger or a listed internal event.
   - **Background jobs**: the 30-second invoice adoption read the whole invoice table (`status NOT IN ('draft')` cannot use the partial index
     `invoices_unadopted`); a failing job is named in the log (`[tick] <module>: …`).
-  - **Inbound webhooks** ([docs/integrations.md](docs/integrations.md#eingehende-webhooks)): a repeated SMS (`MessageSid`, gateway
+  - **Inbound webhooks** ([docs/integrations.de.md](docs/integrations.de.md#eingehende-webhooks)): a repeated SMS (`MessageSid`, gateway
     `messageId`) or forwarded mail (`Message-Id`) on `/hooks/:loc/sms|email` and the support mailbox was stored again (twice in the inbox, a
     second auto-reply); both workflow webhooks now take a repeated delivery id (`webhook-id`, `Idempotency-Key`, `X-GitHub-Delivery` …) once.
     `/hooks/workflow/:id` made empty contacts from a list, a text or a body without e-mail, phone or name (now 400), and the SMS URL accepted
@@ -1197,7 +1233,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
     (`settings.email.track_business_opens`, [docs/email-tracking.md](docs/email-tracking.md#settings)) leaves the pixel out of them.
   - **`/robots.txt` and `/favicon.ico`** on the app's domain answered with the web app's HTML page: now a real robots.txt (public
     pages open; the app, the API and personal links such as invoices, quotes, tracking and unsubscribe links closed) and the app icon
-    ([docs/self-hosting.md](docs/self-hosting.md#eigene-domains)). Websites on their own domain keep their own robots.txt.
+    ([docs/self-hosting.md](docs/self-hosting.md#own-domains)). Websites on their own domain keep their own robots.txt.
   - **Number-swap script** `/a/:loc/dni.js` (and the attribution snippet `t.js`) had no `Cache-Control` when switched off – both
     answers are now cached for 5 minutes.
   - **Booking confirmation as plain text**: an empty merge field on a line of its own (no meeting place) left two blank lines; such a
@@ -1206,7 +1242,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   - **Booking, webinar and review pages** stayed empty or did nothing without JavaScript; they now say so (like the forms).
 
 ### Security
-- **Live collaboration review** ([docs/collaboration.md](docs/collaboration.md#wer-was-sieht)):
+- **Live collaboration review** ([docs/collaboration.de.md](docs/collaboration.de.md#wer-was-sieht)):
   - **A presence stream no longer outlives its login.** Signing out, a revoked session ("sign out other devices", a new password), a
     changed or deleted person, removal from the sub-account or a deleted sub-account now end the stream at once (an expired session at
     the next 20-second check); before, an open tab kept receiving the team's whereabouts and cursors after its session was gone.
@@ -1269,7 +1305,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   Belegtransfer / DATEV Unternehmen online (Rechnungseingang = booked receipts, Rechnungsausgang = invoices and credit notes with their
   sent PDF), and the EXTF Buchungsstapel links each booking to its document with `BEDI "<GUID>"` in the *Beleglink* column. Options
   `index=0`, `process=archive` and `beleglink=0`.
-- **Lexware Office / sevDesk live sync** ([docs/integrations.md](docs/integrations.md#lexware-office-and-sevdesk-live-sync)), *Apps → Buchhaltung*:
+- **Lexware Office / sevDesk live sync** ([docs/integrations.de.md](docs/integrations.de.md#lexware-office-and-sevdesk-live-sync)), *Apps → Buchhaltung*:
   connection per sub-account (API key sealed, *Verbindung testen*, mapping options), every finalised invoice and credit note pushed
   automatically – customer upsert (stored link → customer number → e-mail → create), Lexware sales voucher with one item per tax rate,
   GoHigh's number and PDF; sevDesk invoice with all lines, tax rule and *marked sent*, credit notes as sevDesk credit notes – remote id in
@@ -1380,7 +1416,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 ## [0.0.40] – 2026-10-05
 
 ### Added
-- **E-mail marketing in depth** ([docs/email-marketing.md](docs/email-marketing.md)), all under *Kampagnen* with lazily loaded pages:
+- **E-mail marketing in depth** ([docs/email-marketing.de.md](docs/email-marketing.de.md)), all under *Kampagnen* with lazily loaded pages:
   - **A/B tests** of subject, sender name or content on a 5–50 % test share; winner by human opens, clicks or revenue after a waiting time
     (machine opens never count), automatic send of the winner, results with significance, manual winner while it waits.
   - **Resend to non-openers** after N hours with a new subject (once, human opens only) and **send-time optimisation** ("zur besten Zeit
@@ -1406,7 +1442,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   - **Call intelligence** (opt-in): transcript per speaker for recorded calls (two channels), uploaded meeting recordings and pasted transcripts; talk-time ratio, longest monologue, questions, filler words, speech rate, keywords; AI summary, next step, **action items → tasks**, topics, objections and sentiment; summary in the contact's timeline and call log; trigger *Gespräch ausgewertet*; MCP tools `ghl_call_analyses`/`ghl_call_analysis`; hook `callSummaries`. **Scorecards** with weighted criteria, AI pre-score with reason and quote, manager review and a coaching report.
   - **Recording notice and retention:** the notice before a recorded call (inbound: the caller; outbound: the called person), with your own wording; retention periods for recordings and voicemails, deleted at Twilio as well.
   - Academy tours *Telefonmenü, Zeitpläne und Warteschlangen*, *Nummern kaufen, zuordnen und Anrufe nach Quelle*, *Power-Dialer* and *Gespräche auswerten*.
-- **Website builder 2.0: sections, columns, design, 23 templates, CMS, accessibility and funnel analytics** ([docs/sites.md](docs/sites.md)):
+- **Website builder 2.0: sections, columns, design, 23 templates, CMS, accessibility and funnel analytics** ([docs/sites.de.md](docs/sites.de.md)):
   - **Layout and editor:** pages are built from **sections → rows → 1–4 columns → blocks** (the old flat lists keep working; *In Abschnitte umwandeln*
     keeps the look). The editor has a structure tree with **drag & drop** (plus ↑ ↓ / duplicate / remove buttons for touch and keyboard), undo/redo,
     an inspector (content · style · devices) and a **live preview for desktop, tablet and phone**. Per section, column and block: spacing, background
@@ -1675,7 +1711,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 - **Quiz, Aufgaben und Zertifikate (Seiten → Quiz & Zertifikate):** quizzes as a lesson type (auto-graded, manual review of short answers, attempts, gate), assignments with text and private file hand-in and a review queue, certificates as server-made PDF with a public verification page; member-area pages, triggers `quiz.passed`, `quiz.failed`, `assignment.submitted`, `assignment.reviewed`, `certificate.issued`, action *Zertifikat ausstellen*, MCP tools, mobile review list. [docs/quizzes-certificates.md](docs/quizzes-certificates.md)
 - **Kommentar-zu-DM (Marketing → Kommentar-zu-DM):** Instagram and Facebook comment keywords (and Instagram story replies) trigger a rotating public reply, one private reply with link and buttons, a contact, tags and a workflow; hourly limits per rule and account; trigger `igcomment.matched`; workflow action *Nachricht mit Buttons senden* for Instagram, Messenger and WhatsApp; MCP tool `ghl_ig_comment_rules`. [docs/comment-to-dm.md](docs/comment-to-dm.md)
 - **KI-Workflow-Builder (Automationen → Mit KI erstellen / ändern):** a plain-language description becomes a workflow; the AI works from the live catalogue and the sub-account's ids, the answer is checked against the catalogue (up to three attempts), the dialog shows a diff and saves a **draft only** – never published. New AI-provider use **Workflows** for routing the builder to its own connection; MCP tool `ghl_workflow_generate`. [docs/workflow-ai.md](docs/workflow-ai.md)
-- Akademie tours for all five features; mobile read endpoints `/api/mobile/creator/*`; hooks `stripeTaps`, `lessonGates`, `lessonExtras`, `lessonCompleteBlock`, `metaKit` (see [docs/architecture.md](docs/architecture.md)).
+- Akademie tours for all five features; mobile read endpoints `/api/mobile/creator/*`; hooks `stripeTaps`, `lessonGates`, `lessonExtras`, `lessonCompleteBlock`, `metaKit` (see [docs/architecture.de.md](docs/architecture.de.md)).
 - **Team-Posteingang (Konversationen):** assignee (person or helpdesk team), status (open / waiting / done), snooze until a time
   (auto-reopen on time and on a new inbound message) and priority per conversation; views with live counts (mine, unassigned,
   team, waiting, snoozed, SLA at risk, mentions, done), bulk assign / close / snooze, keyboard shortcuts (J K E A S N R X / ?).
@@ -1754,7 +1790,7 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
   report through the existing feedback API; the share sheet when the app is not connected). A WebView older than version
   92 gets a hint with a link to its Play Store page. It disappears by itself if the app comes up after all.
   **Einstellungen → Diagnose** shows WebView, server, last load status and errors (kept across restarts) and has
-  *App zurücksetzen (Web-Daten)*. See [docs/android-app.md](docs/android-app.md#wenn-die-seite-leer-bleibt-fehlersuche).
+  *App zurücksetzen (Web-Daten)*. See [docs/android-app.de.md](docs/android-app.de.md#wenn-die-seite-leer-bleibt-fehlersuche).
 - **Web boot guard** (`web/public/boot-guard.js`, plain ES5, first script of `index.html`): buffers early `error` /
   `unhandledrejection` events, failed script and stylesheet loads and CSP violations; the app sets
   `window.__pghlMounted = true` after its first render. Not mounted after 10 s (30 s while the download is still running

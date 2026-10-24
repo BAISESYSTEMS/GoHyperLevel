@@ -1,70 +1,72 @@
-# Stripe-Zahlungen
+**English** · [Deutsch](stripe.de.md)
 
-Jeder Sub-Account verbindet **sein eigenes Stripe-Konto**. Danach:
+# Stripe payments
 
-- **Rechnungen:** Auf dem Kunden-Link (`/i/…`) jeder offenen Rechnung erscheint **„Jetzt bezahlen (Karte, SEPA, Apple Pay …)“**. Der Knopf öffnet Stripe Checkout über den **offenen Betrag** und mit der E-Mail des Kunden: eine unberührte Rechnung mit allen Positionen (brutto, inkl. USt.); ist schon etwas bezahlt, per Gutschrift gutgeschrieben oder – bei einer Schlussrechnung – über Abschlagsrechnungen abgezogen, eine Zeile **„Restbetrag Rechnung RE-…“**, die nennt, was abgezogen ist (mit dem USt.-Hinweis wie bei den Positionen). Ist nichts mehr offen, gibt es keinen Knopf. Nach der Zahlung steht die Rechnung auf **bezahlt** (mit Datum und Stripe-Referenz), der Workflow-Auslöser **„Rechnung bezahlt“** startet, ausgehende Webhooks bekommen `invoice.paid` (mit `via: "Stripe"`).
-- **Produkte:** Jedes Produkt hat einen öffentlichen **Kauf-Link** `https://<domain>/buy/<produkt-id>` oder mit Kurzname `…/buy/online-kurs`. Nach dem Kauf: Kontakt wird angelegt oder per E-Mail erkannt, eine **bezahlte Rechnung** entsteht (und geht auf Wunsch automatisch per E-Mail raus), der Kontakt bekommt den Tag **`kauf:<kurzname>`** (z. B. für Kurs-Freischaltungen) und der Workflow-Auslöser **„Produkt gekauft“** startet (`product.purchased` mit `contactId`, `productId`, `invoiceId`).
-- **Abo-Produkte** (Intervall monatlich/jährlich) laufen als Stripe-Abo: jede Verlängerung erzeugt hier eine bezahlte Rechnung, bei Kündigung wird der Kauf-Tag wieder entfernt.
-- In **Rechnungen & Angebote** zeigt „Stripe verbunden“ den Status, „via Stripe“ markiert online bezahlte Rechnungen; in der Rechnung steht, wann und mit welcher Referenz bezahlt wurde (Link ins Stripe-Dashboard).
+Each sub-account connects **its own Stripe account**. After that:
 
-**Weitere Zahlungsanbieter:** Neben Stripe lassen sich **PayPal** (auch „Später bezahlen“) und **Mollie** (iDEAL, SEPA-Überweisung, Karten, Klarna) verbinden – unter *Einstellungen → Stripe & Zahlungen*. Dann fragt die Kaufseite „Bezahlen mit“, Rechnungen bekommen neben „Jetzt bezahlen“ einen zweiten Knopf zur Bezahlseite (dort lassen sich auch Gutscheine einlösen), und der [Online-Shop](store.md) bietet jeden verbundenen Anbieter an. Abos und Ratenzahlung bleiben bei Stripe. Einrichtung und Ablauf: [payment-providers.md](payment-providers.md).
+- **Invoices:** The customer link (`/i/…`) of every open invoice shows **“Pay now (card, SEPA, Apple Pay …)”**. The button opens Stripe Checkout for the **open amount** with the customer's e-mail address: an untouched invoice with all its line items (gross, incl. VAT); if part of it is already paid, credited with a credit note or – on a final invoice – deducted through partial invoices, a single line **“Remaining balance invoice RE-…”** that names what was deducted (with the VAT note, as on the line items). If nothing is open any more, there is no button. After payment the invoice is set to **paid** (with the date and Stripe reference), the workflow trigger **“Invoice paid”** fires, and outgoing webhooks receive `invoice.paid` (with `via: "Stripe"`).
+- **Products:** Every product has a public **buy link** `https://<domain>/buy/<product-id>` or, with a short name, `…/buy/online-kurs`. After a purchase: the contact is created or matched by e-mail address, a **paid invoice** is created (and sent by e-mail automatically if you want), the contact gets the tag **`kauf:<short-name>`** (e.g. for course unlocks) and the workflow trigger **“Product purchased”** fires (`product.purchased` with `contactId`, `productId`, `invoiceId`).
+- **Subscription products** (monthly/yearly interval) run as Stripe subscriptions: every renewal creates a paid invoice here, and when the customer cancels, the purchase tag is removed again.
+- In **Invoices & quotes**, “Stripe connected” shows the status and “via Stripe” marks invoices paid online; the invoice shows when it was paid and with which reference (link to the Stripe dashboard).
 
-## Einrichten (5 Minuten)
+**Other payment providers:** Besides Stripe you can connect **PayPal** (including “Pay later”) and **Mollie** (iDEAL, SEPA bank transfer, cards, Klarna) – under *Settings → Stripe & payments*. The buy page then asks “Pay with”, invoices get a second button next to “Pay now” that leads to the payment page (where gift cards can be redeemed too), and the [online store](store.md) offers every connected provider. Subscriptions and payment plans stay with Stripe. Setup and flow: [payment-providers.md](payment-providers.md).
 
-1. **Secret Key:** Stripe-Dashboard → *Entwickler* → *API-Schlüssel* → „Geheimer Schlüssel“ (`sk_live_…`, zum Ausprobieren erst `sk_test_…` im Testmodus). In der App unter **Einstellungen → Stripe** eintragen und speichern – die App prüft den Schlüssel sofort („Verbindung testen“ geht jederzeit).
-2. **Webhook:** Stripe-Dashboard → *Entwickler* → *Webhooks* → **„Endpunkt hinzufügen“**
-   - Endpunkt-URL: `https://<deine-domain>/hooks/stripe/<locationId>` – die fertige Adresse steht unter Einstellungen → Stripe zum Kopieren.
-   - Ereignisse: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`; für Abo-Produkte zusätzlich `invoice.paid` und `customer.subscription.deleted`. Optional `charge.refunded` (Workflow-Auslöser „Zahlung erstattet“), `invoice.payment_failed` und `checkout.session.async_payment_failed` (Auslöser „Zahlung fehlgeschlagen“, [docs/workflow-actions.md](workflow-actions.md#triggers)) sowie `customer.subscription.deleted` (Auslöser „Abo gekündigt / beendet“). `charge.refunded`: Erstattungen melden `payment.refunded` (Webhooks/Workflows) und stornieren Affiliate-Provisionen ([docs/growth.md](growth.md#affiliate-manager)).
-   - Für den Auslöser **Checkout abgebrochen (Warenkorbabbruch)** zusätzlich `checkout.session.expired` ([E-Mail-Marketing](email-marketing.md#warenkorbabbruch)): Stripe meldet damit eine unbezahlte Bezahlseite nach 24 Stunden.
-   - Für [Ratenzahlung](payment-plans.md) und das [Mahnwesen](dunning.md) zusätzlich: `invoice.payment_failed`, `invoice.payment_action_required`, `customer.subscription.updated` (und `invoice.paid`, `customer.subscription.deleted`, `checkout.session.completed` wie oben). Bei Ratenplänen und Abos unter *Einstellungen → Abos und E-Mails → Fehlgeschlagene Zahlungen* in Stripe die **Smart Retries** einstellen.
-   - Nach dem Anlegen das **Signing Secret** (`whsec_…`) des Endpunkts aufdecken und unter Einstellungen → Stripe eintragen.
-3. **Zahlungsarten:** Stripe-Dashboard → *Einstellungen* → *Zahlungsmethoden*. Checkout zeigt automatisch alles, was dort aktiv ist (Karte, SEPA-Lastschrift, Apple Pay, Google Pay, Klarna …). Apple Pay braucht bei Stripe Checkout keine eigene Domain-Prüfung.
+## Setup (5 minutes)
 
-Schlüssel und Signing Secret werden verschlüsselt gespeichert und nie wieder an den Browser geschickt (nur `sk_test_…abcd` als Hinweis). „Trennen“ löscht beides; „Jetzt bezahlen“ und Kauf-Links sind dann aus.
+1. **Secret key:** Stripe dashboard → *Developers* → *API keys* → “Secret key” (`sk_live_…`; to try things out, use `sk_test_…` in test mode first). Enter it in the app under **Settings → Stripe** and save – the app checks the key right away (“Test connection” works at any time).
+2. **Webhook:** Stripe dashboard → *Developers* → *Webhooks* → **“Add endpoint”**
+   - Endpoint URL: `https://<your-domain>/hooks/stripe/<locationId>` – the finished address is shown under Settings → Stripe, ready to copy.
+   - Events: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`; for subscription products also `invoice.paid` and `customer.subscription.deleted`. Optionally `charge.refunded` (workflow trigger “Payment refunded”), `invoice.payment_failed` and `checkout.session.async_payment_failed` (trigger “Payment failed”, [docs/workflow-actions.md](workflow-actions.md#triggers)) and `customer.subscription.deleted` (trigger “Subscription cancelled / ended”). `charge.refunded`: refunds report `payment.refunded` (webhooks/workflows) and reverse affiliate commissions ([docs/growth.md](growth.md#affiliate-manager)).
+   - For the trigger **Checkout abandoned (cart abandonment)**, also add `checkout.session.expired` ([E-mail marketing](email-marketing.md#abandoned-cart)): with it, Stripe reports an unpaid payment page after 24 hours.
+   - For [payment plans](payment-plans.md) and [dunning](dunning.md), also add: `invoice.payment_failed`, `invoice.payment_action_required`, `customer.subscription.updated` (and `invoice.paid`, `customer.subscription.deleted`, `checkout.session.completed` as above). For payment plans and subscriptions, set up **Smart Retries** in Stripe under *Settings → Subscriptions and emails → Failed payments*.
+   - After creating it, reveal the endpoint's **signing secret** (`whsec_…`) and enter it under Settings → Stripe.
+3. **Payment methods:** Stripe dashboard → *Settings* → *Payment methods*. Checkout automatically shows everything that is active there (card, SEPA direct debit, Apple Pay, Google Pay, Klarna …). Apple Pay needs no domain verification of its own with Stripe Checkout.
 
-## Kauf-Links
+The key and the signing secret are stored encrypted and never sent back to the browser (only `sk_test_…abcd` as a hint). “Disconnect” deletes both; “Pay now” and buy links are then off.
 
-Produkte → beim Produkt **„Kauf-Link“** kopieren, über das Zahnrad einstellen:
+## Buy links
 
-| Einstellung | Wirkung |
+Products → copy the **“Buy link”** on the product and adjust it with the gear icon:
+
+| Setting | Effect |
 | --- | --- |
-| Kurzname | `/buy/<kurzname>` statt der Produkt-ID (eindeutig über alle Sub-Accounts) |
-| Tag für Käufer | Standard `kauf:<kurzname>` (ohne Kurzname: aus dem Produktnamen) |
-| Weiterleitung nach dem Kauf | z. B. die Kurs- oder Danke-Seite (`https://…`); sonst zeigt die App eine Danke-Seite |
-| Kauf-Link aktiv | Aus = Seite nicht erreichbar |
+| Short name | `/buy/<short-name>` instead of the product ID (unique across all sub-accounts) |
+| Tag for buyers | Default `kauf:<short-name>` (without a short name: taken from the product name) |
+| Redirect after purchase | e.g. the course page or a thank-you page (`https://…`); otherwise the app shows a thank-you page |
+| Buy link active | Off = page not reachable |
 
-Der Link öffnet eine kleine Produktseite mit Preis (brutto) und „Jetzt kaufen“ – mit Order-Bump und Rabattcode-Feld, wenn eingestellt (siehe unten). `?email=kunde@example.com` am Link füllt die E-Mail in Stripe vor (praktisch aus Funnels oder Mails).
+The link opens a small product page with the price (gross) and “Buy now” – with an order bump and a discount code field if set up (see below). Adding `?email=kunde@example.com` to the link pre-fills the e-mail address in Stripe (handy from funnels or e-mails).
 
-## Order-Bump, Upsell und Rabattcodes
+## Order bump, upsell and discount codes
 
-Ebenfalls im Zahnrad-Dialog des Kauf-Links, gespeichert mit *Speichern*. Es braucht **keine weiteren Schlüssel und keine weiteren Webhook-Ereignisse**.
+Also in the gear dialog of the buy link, saved with *Save*. It needs **no further keys and no further webhook events**.
 
-| Einstellung | Wirkung |
+| Setting | Effect |
 | --- | --- |
-| Order-Bump | Ein zweites Produkt (Einmalkauf, gleiche Währung) als Häkchen auf der Kaufseite, mit eigenem Text. Angehakt → zweite Position in Stripe Checkout; die bezahlte Rechnung enthält beide Positionen (je mit eigenem Steuersatz). Der Kontakt bekommt beide Kauf-Tags, „Produkt gekauft“ startet für beide Produkte (das Bump-Ereignis trägt `via: "order_bump"`). Geht auch bei Abo-Produkten (der Bump wird einmalig mit der ersten Zahlung berechnet). |
-| One-Click-Upsell | Ein Produkt (Einmalkauf), das direkt nach dem Bezahlen angeboten wird. Dafür legt Checkout einen Stripe-Kunden an und speichert die Zahlungsart (`customer_creation=always`, `payment_intent_data.setup_future_usage=off_session`). „Ja, hinzufügen“ bucht ohne erneute Eingabe ab (PaymentIntent `off_session`, `confirm`), es entsteht eine eigene bezahlte Rechnung, Tag und „Produkt gekauft“ wie bei jedem Kauf. Verlangt die Bank eine Bestätigung (3-D Secure, `authentication_required`) oder wird die Karte abgelehnt, geht es über eine normale Stripe-Bezahlseite für das Upsell-Produkt weiter (Kunde und E-Mail vorausgefüllt). „Nein danke“ führt zur Danke-Seite bzw. zur Weiterleitung des Hauptprodukts. Das Angebot gilt eine Stunde und lässt sich nur einmal annehmen. Nur nach Einmalkäufen (nicht nach Abos). Im Dialog steht, wie oft es angeboten und angenommen wurde. |
-| Rabattcodes | Eigene Codes je Produkt: Prozent oder fester Betrag (brutto), optional Ablaufdatum und Höchstzahl an Einlösungen, abschaltbar. Käufer geben den Code auf der Kaufseite ein (sofortige Prüfung, Gesamtpreis aktualisiert sich); Checkout berechnet den reduzierten Preis, auf der Rechnung steht der Rabatt als eigene Zeile. Gilt für das Hauptprodukt, nur bei Einmalkäufen. Mit Höchstzahl ist eine Einlösung reserviert, solange ein Käufer damit auf der Stripe-Bezahlseite ist: die Seite läuft dann nach 31 Minuten ab, wird der Kauf nicht abgeschlossen, ist der Code wieder frei (eine SEPA-Zahlung hält ihn bis zur Antwort der Bank) – so geht ein Code „für die ersten 10“ auch bei vielen gleichzeitigen Käufern nur zehnmal raus. |
-| Stripe-Gutscheincodes erlauben | Zeigt auf der Stripe-Bezahlseite das Feld für Promotion Codes (`allow_promotion_codes`). Codes legst du im Stripe-Dashboard an (*Produktkatalog → Gutscheine*). Der von Stripe gewährte Rabatt kommt als Zeile „Gutschein (Stripe)“ auf die Rechnung. Wird ein eigener Rabattcode eingelöst, ist das Stripe-Feld aus. |
+| Order bump | A second product (one-time purchase, same currency) as a checkbox on the buy page, with its own text. When ticked → second line item in Stripe Checkout; the paid invoice contains both line items (each with its own tax rate). The contact gets both purchase tags, “Product purchased” fires for both products (the bump event carries `via: "order_bump"`). Also works for subscription products (the bump is charged once with the first payment). |
+| One-click upsell | A product (one-time purchase) offered right after payment. For this, Checkout creates a Stripe customer and saves the payment method (`customer_creation=always`, `payment_intent_data.setup_future_usage=off_session`). “Yes, add it” charges without re-entering anything (PaymentIntent `off_session`, `confirm`); it creates its own paid invoice, with tag and “Product purchased” as for any purchase. If the bank asks for confirmation (3-D Secure, `authentication_required`) or the card is declined, the customer continues on a normal Stripe payment page for the upsell product (customer and e-mail pre-filled). “No thanks” leads to the thank-you page or to the redirect of the main product. The offer is valid for one hour and can be accepted only once. Only after one-time purchases (not after subscriptions). The dialog shows how often it was offered and accepted. |
+| Discount codes | Your own codes per product: percent or fixed amount (gross), optionally with an expiry date and a maximum number of redemptions, and can be switched off. Buyers enter the code on the buy page (checked instantly, the total updates); Checkout charges the reduced price, and the invoice shows the discount as its own line. Applies to the main product, one-time purchases only. With a maximum, one redemption is reserved while a buyer is on the Stripe payment page: the page expires after 31 minutes, and if the purchase is not completed, the code is free again (a SEPA payment holds it until the bank responds) – so a code “for the first 10” goes out only ten times even with many simultaneous buyers. |
+| Allow Stripe coupon codes | Shows the field for promotion codes on the Stripe payment page (`allow_promotion_codes`). You create the codes in the Stripe dashboard (*Product catalog → Coupons*). The discount Stripe grants appears on the invoice as a “Coupon (Stripe)” line. If one of your own discount codes is redeemed, the Stripe field is off. |
 
-**Für das Upsell im Stripe-Dashboard:** nichts extra – Karten, Apple Pay, Google Pay und SEPA lassen sich für spätere Zahlungen speichern. Bei SEPA ist die Upsell-Zahlung erst „in Bearbeitung“; die App fragt alle 10 Minuten bei Stripe nach und stellt die Rechnung aus, sobald das Geld bestätigt ist.
+**For the upsell in the Stripe dashboard:** nothing extra – cards, Apple Pay, Google Pay and SEPA can be saved for later payments. With SEPA, the upsell payment is “processing” at first; the app asks Stripe every 10 minutes and issues the invoice as soon as the money is confirmed.
 
-**A/B-Tests:** Kauf-Links auf Funnel-Seiten mit laufendem A/B-Test bekommen automatisch die Besucher-ID (`?ab=…`); sie wandert über die Kaufseite in die Checkout-Metadaten, damit der Kauf der richtigen Variante zugerechnet wird.
+**A/B tests:** Buy links on funnel pages with a running A/B test automatically get the visitor ID (`?ab=…`); it travels through the buy page into the Checkout metadata so that the purchase is attributed to the right variant.
 
-## Was beim Bezahlen passiert
+## What happens when someone pays
 
-- Stripe meldet die Zahlung an `/hooks/stripe/<locationId>`. Die Signatur (`Stripe-Signature`, HMAC-SHA256 über Zeitstempel + Inhalt) wird geprüft; älter als 5 Minuten oder falsch → abgelehnt.
-- Jedes Ereignis wird nur einmal verarbeitet (Stripe wiederholt Webhooks bei Fehlern). Eine Rechnung wird nie zweimal „bezahlt“, ein Kauf erzeugt nie zwei Rechnungen.
-- Kommt der Kunde von Stripe zurück, fragt die App direkt bei Stripe nach – die Rechnung steht also auch dann sofort auf bezahlt, wenn der Webhook noch unterwegs ist.
-- **SEPA-Lastschrift** dauert ein paar Tage: bis Stripe das Geld bestätigt (`checkout.session.async_payment_succeeded`), steht die Zahlung auf „in Bearbeitung“. So lange zeigt die Rechnung statt „Jetzt bezahlen“ den Hinweis, dass eine Zahlung in Bearbeitung ist, und öffnet keine zweite Bezahlseite (sonst zahlt der Kunde doppelt); nach drei Wochen ohne Antwort gibt es den Knopf wieder. Scheitert sie, steht es in der Kontakt-Aktivität, und die Rechnung lässt sich wieder online bezahlen.
-- Ein Doppelklick auf „Jetzt bezahlen“ öffnet eine Bezahlseite, nicht zwei; wer innerhalb von 30 Minuten wiederkommt, bekommt dieselbe (solange der offene Betrag derselbe ist).
-- Gebucht wird, was ankommt – nie mehr, als offen ist: Der offene Betrag macht die Rechnung bezahlt, weniger wird als **Teilzahlung** gebucht (die Rechnung bleibt mit dem Rest offen). Kommt mehr an – etwa weil zwischen dem Öffnen der Bezahlseite und dem Bezahlen eine Überweisung oder Gutschrift einging –, wird nur der offene Betrag gebucht. Jede Abweichung (zu viel, zu wenig, andere Währung, Geld für eine Rechnung ohne offenen Betrag) steht im Protokoll der Rechnung (`payment.mismatch`) und in der Aktivität des Kontakts, damit eine Erstattung nicht vergessen wird. Dieselbe Zahlung (Webhook-Wiederholung, PaymentIntent-Ereignis, Rückkehr von Stripe) wird nur einmal gebucht.
-- Kauf-Links und Stripe-Zahlungen erzeugen **festgeschriebene** Rechnungen mit der nächsten Nummer des Rechnungs-Nummernkreises (GoBD, siehe [invoicing.md](invoicing.md)); ein Entwurf wird beim Bezahlen festgeschrieben. Eine Erstattung in Stripe storniert die Rechnung nicht von selbst – das machst du mit „Stornieren“ in der Rechnung (nur bei Termin-Buchungen mit Zahlung läuft das automatisch).
+- Stripe reports the payment to `/hooks/stripe/<locationId>`. The signature (`Stripe-Signature`, HMAC-SHA256 over timestamp + body) is verified; older than 5 minutes or wrong → rejected.
+- Each event is processed only once (Stripe repeats webhooks on errors). An invoice is never marked “paid” twice, and a purchase never creates two invoices.
+- When the customer returns from Stripe, the app asks Stripe directly – so the invoice shows as paid immediately even if the webhook is still on its way.
+- **SEPA direct debit** takes a few days: until Stripe confirms the money (`checkout.session.async_payment_succeeded`), the payment is “processing”. In the meantime the invoice shows a note that a payment is being processed instead of “Pay now”, and does not open a second payment page (the customer would pay twice); after three weeks without a response the button comes back. If it fails, that appears in the contact's activity, and the invoice can be paid online again.
+- A double click on “Pay now” opens one payment page, not two; anyone who comes back within 30 minutes gets the same one (as long as the open amount is the same).
+- What arrives is what gets booked – never more than is open: the open amount makes the invoice paid, anything less is booked as a **partial payment** (the invoice stays open with the remainder). If more arrives – for example because a bank transfer or credit note came in between opening the payment page and paying – only the open amount is booked. Every deviation (too much, too little, another currency, money for an invoice with nothing open) appears in the invoice's log (`payment.mismatch`) and in the contact's activity, so a refund is not forgotten. The same payment (webhook retry, PaymentIntent event, return from Stripe) is booked only once.
+- Buy links and Stripe payments create **finalized** invoices with the next number of the invoice number range (GoBD, see [invoicing.md](invoicing.md)); a draft is finalized when it is paid. A refund in Stripe does not cancel the invoice by itself – you do that with “Cancel invoice” on the invoice (only for appointment bookings with payment does this happen automatically).
 
-## Testen
+## Testing
 
-Im Testmodus (`sk_test_…`) mit der Testkarte `4242 4242 4242 4242`, beliebigem Ablaufdatum in der Zukunft und beliebiger Prüfziffer bezahlen. Lokal ohne öffentliche Adresse leitet die [Stripe CLI](https://docs.stripe.com/stripe-cli) die Webhooks weiter:
+In test mode (`sk_test_…`), pay with the test card `4242 4242 4242 4242`, any expiry date in the future and any security code. Locally, without a public address, the [Stripe CLI](https://docs.stripe.com/stripe-cli) forwards the webhooks:
 
 ```bash
 stripe listen --forward-to localhost:4700/hooks/stripe/<locationId>
-# zeigt ein whsec_… – das unter Einstellungen → Stripe eintragen
+# shows a whsec_… – enter it under Settings → Stripe
 ```

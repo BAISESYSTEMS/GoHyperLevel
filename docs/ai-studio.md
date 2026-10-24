@@ -42,7 +42,7 @@ the Einfach-Modus it sits under "Mehr" until someone uses it a few times, then t
   allowed because widgets are embedded on other sites.
 - **A host of its own**: `PGHL_APPS_ORIGIN=https://apps.example.com` makes the public URLs use that host; on it only `/apps/…` answers.
 - **Custom domain** (self-hosted installs): an optional domain per app – the host is rewritten to the app, listed for the Caddy
-  on-demand TLS "ask" endpoint (`/api/tls/ask`, [self-hosting](self-hosting.md#eigene-domains)) and reserved, so no funnel, help center or
+  on-demand TLS "ask" endpoint (`/api/tls/ask`, [self-hosting](self-hosting.md#own-domains)) and reserved, so no funnel, help center or
   login can claim it. In the cloud the domain field is refused (no DNS check for app domains yet) – use the `/apps/` address there.
 - Paths are checked segment by segment (no `..`, no hidden files, nothing outside `site/`); a path without an extension answers with
   `index.html` (single-page app routes). Editing the project does not change the public version until you publish again.

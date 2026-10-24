@@ -5,7 +5,7 @@
 # Project environment:
 #   PGHL_DOMAIN=crm.your-domain.com
 #   PGHL_BASE_URL=https://crm.your-domain.com
-#   PGHL_REPO_PATH=github.com/BAISESYSTEMS/hyperlevel.git   (your fork, optional)
+#   PGHL_REPO_PATH=github.com/BAISESYSTEMS/GoHyperLevel.git   (your fork, optional)
 #   PGHL_REF=main                                   (branch or tag, e.g. v0.0.18)
 #   PGHL_GIT_TOKEN=…                                (only for a private fork: token with read access)
 #   PGHL_ADMIN_EMAIL=… / PGHL_ADMIN_PASSWORD=…      (first start only)
@@ -26,7 +26,7 @@ services:
           apt-get update -qq && apt-get install -y -qq git ca-certificates >/dev/null;
           rm -rf /data/app.tmp;
           if [ -n "$${PGHL_GIT_TOKEN:-}" ]; then AUTH="x-access-token:$${PGHL_GIT_TOKEN}@"; else AUTH=""; fi;
-          git clone --depth 1 --branch "$${PGHL_REF:-main}" "https://$${AUTH}$${PGHL_REPO_PATH:-github.com/BAISESYSTEMS/hyperlevel.git}" /data/app.tmp;
+          git clone --depth 1 --branch "$${PGHL_REF:-main}" "https://$${AUTH}$${PGHL_REPO_PATH:-github.com/BAISESYSTEMS/GoHyperLevel.git}" /data/app.tmp;
           git -C /data/app.tmp remote remove origin;
           cd /data/app.tmp && npm ci --no-audit --no-fund && npm run build && npm prune --omit=dev;
           rm -rf /data/app && mv /data/app.tmp /data/app;

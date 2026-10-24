@@ -55,7 +55,7 @@ export const AGENCY_TOURS: Tour[] = [
     routes: ['agency/saas'],
     keywords: 'saas abo tarif plan stripe anmeldung signup limit mrr',
     learned: ['Übersicht mit MRR und Kündigungen lesen', 'Tarife mit Bereichen und Limits anlegen', 'Kunden-Abos verwalten', 'Agentur-Stripe und Anmeldeseite einstellen'],
-    docs: { label: 'SaaS-Modus', file: 'saas' },
+    docs: { label: 'SaaS-Modus', file: 'saas.de' },
     steps: [
       { title: 'SaaS-Modus', route: 'agency/saas', target: 'saas-tabs', text: 'Damit verkaufst du {brand} als eigenes Produkt: Kunden melden sich unter /signup an, zahlen per Stripe und bekommen einen Sub-Account aus einem Snapshot.' },
       { title: 'Übersicht', target: 'tab-overview', text: 'Monatlicher Umsatz (MRR), aktive Abos, Testphasen, Kündigungen und anstehende Verlängerungen.' },
@@ -146,7 +146,7 @@ export const AGENCY_TOURS: Tour[] = [
     routes: ['agency/integrations/setup'],
     keywords: 'integration oauth google microsoft imap postfach gmail postiz social',
     learned: ['Warum es eine Google-/Microsoft-App der Agentur braucht', 'Postfächer per IMAP abgleichen und Regeln setzen', 'Postiz für den Social Planner verbinden'],
-    docs: { label: 'Google & Microsoft verbinden', file: 'self-hosting', anchor: 'google--microsoft-verbinden-oauth' },
+    docs: { label: 'Google & Microsoft verbinden', file: 'self-hosting.de', anchor: 'google--microsoft-verbinden-oauth' },
     steps: [
       { title: 'Postiz', route: 'agency/integrations/setup', target: 'integrations-postiz', text: 'Die Postiz-Instanz veröffentlicht die Social-Posts. Hier verbindest du sie einmal mit Adresse und API-Schlüssel.' },
       { title: 'Kanäle zuordnen', target: 'integrations-postiz', text: 'Verbundene Social-Kanäle ordnest du den Sub-Accounts zu – jeder Kunde sieht im Social Planner nur seine eigenen.' },
@@ -166,7 +166,7 @@ export const AGENCY_TOURS: Tour[] = [
     routes: ['agency/integrations/setup'],
     keywords: 'todoist aufgaben sync abgleich token',
     learned: ['Den Todoist-Token eintragen', 'Richtung und Projekte wählen', 'Wann und wie abgeglichen wird'],
-    docs: { label: 'Todoist', file: 'todoist' },
+    docs: { label: 'Todoist', file: 'todoist.de' },
     steps: [
       { title: 'Todoist', route: 'agency/integrations/setup', target: 'todoist', text: 'Aufgaben aus {brand} erscheinen in deinem Todoist – je Sub-Account ein Projekt – und umgekehrt.' },
       { title: 'Token', target: 'todoist', text: 'Den API-Token findest du in Todoist unter Einstellungen → Integrationen → Entwickler. Er wird verschlüsselt gespeichert.' },
@@ -186,7 +186,7 @@ export const AGENCY_TOURS: Tour[] = [
     routes: ['agency/integrations/setup'],
     keywords: 'supabase spiegel datenbank export sync',
     learned: ['Wofür der Spiegel da ist', 'Adresse und Service-Key eintragen (bleibt geheim)', 'Wann gespiegelt wird'],
-    docs: { label: 'Supabase-Spiegel', file: 'self-hosting', anchor: 'supabase-spiegel' },
+    docs: { label: 'Supabase-Spiegel', file: 'self-hosting.de', anchor: 'supabase-spiegel' },
     steps: [
       { title: 'Supabase-Spiegel', route: 'agency/integrations/setup', target: 'supabase', text: 'Kopiert die wichtigsten Daten in Tabellen ghl_* deiner Supabase – für andere Projekte oder Auswertungen mit dem Supabase-MCP.' },
       { title: 'Einrichten', target: 'supabase', text: 'Adresse und Service-Key eintragen, die angezeigten Tabellen einmal in Supabase anlegen, einschalten. Der Key wird verschlüsselt gespeichert.' },

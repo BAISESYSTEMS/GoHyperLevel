@@ -45,7 +45,7 @@ export const REVENUE_TOURS: Tour[] = [
     practice: true,
     keywords: 'produkt preis kauf link buy order bump upsell rabattcode abo checkout',
     learned: ['Ein Produkt mit Preis und Intervall anlegen', 'Den Kauf-Link eines Produkts finden und einstellen', 'Order-Bump, Upsell und Rabattcodes', 'Was nach einem Kauf passiert'],
-    docs: { label: 'Kauf-Links', file: 'stripe', anchor: 'kauf-links' },
+    docs: { label: 'Kauf-Links', file: 'stripe.de', anchor: 'kauf-links' },
     steps: [
       { title: 'Produkte', route: 'products', target: 'page-head', text: 'Leistungen und Preise für Rechnungen, Angebote und Kauf-Links.' },
       { title: 'Neues Produkt', target: 'products-new', kind: 'click', text: 'Leg ein Produkt an – z. B. eine Leistung mit festem Preis.', do: 'Klicke auf **+ Produkt**.' },
@@ -67,7 +67,7 @@ export const REVENUE_TOURS: Tour[] = [
     routes: ['settings/stripe'],
     keywords: 'stripe zahlung karte sepa webhook secret key testmodus order bump upsell',
     learned: ['Wo der Stripe-Schlüssel eingetragen wird (und dass er nie wieder angezeigt wird)', 'Warum der Webhook wichtig ist', 'Testmodus vs. Live', 'Order-Bump, Upsell und Rabattcodes am Kauf-Link'],
-    docs: { label: 'Stripe einrichten', file: 'stripe' },
+    docs: { label: 'Stripe einrichten', file: 'stripe.de' },
     steps: [
       { title: 'Stripe', route: 'settings/stripe', target: 'stripe-settings', text: 'Jeder Sub-Account kann sein eigenes Stripe-Konto haben. Dann gibt es „Jetzt bezahlen“ auf Rechnungen und Kauf-Links für Produkte.' },
       { title: 'Secret Key', target: 'stripe-key', text: 'Aus dem Stripe-Dashboard → Entwickler → API-Schlüssel. Zum Ausprobieren erst einen Testschlüssel (sk_test_…). Gespeicherte Schlüssel werden **nie wieder angezeigt** – nur die letzten Zeichen.' },
@@ -107,7 +107,7 @@ export const REVENUE_TOURS: Tour[] = [
     routes: ['reviews'],
     keywords: 'bewertung rezension google sterne anfrage widget reputation',
     learned: ['Eine Bewertungsanfrage senden', 'Wie gute und kritische Bewertungen verteilt werden', 'Google-Bewertungen im Blick behalten', 'Das Bewertungs-Widget einbauen'],
-    docs: { label: 'Google-Bewertungen', file: 'self-hosting', anchor: 'google-bewertungen' },
+    docs: { label: 'Google-Bewertungen', file: 'self-hosting.de', anchor: 'google-bewertungen' },
     steps: [
       { title: 'Bewertungen', route: 'reviews', target: 'page-head', text: 'Zufriedene Kunden landen auf deinem Google-Profil, Kritik kommt erst einmal nur zu dir – so kannst du reagieren.' },
       { title: 'Zahlen', target: 'reviews-stats', text: 'Durchschnitt, Antworten auf Anfragen und die Verteilung der Sterne.' },
@@ -129,7 +129,7 @@ export const REVENUE_TOURS: Tour[] = [
     routes: ['settings/reviews'],
     keywords: 'google unternehmensprofil business profile rezension antworten beitrag places api',
     learned: ['Das Google-Unternehmensprofil per OAuth verbinden', 'Die Alternative über die Places API', 'Antworten und Google-Beiträge aus dem CRM'],
-    docs: { label: 'Google-Bewertungen', file: 'self-hosting', anchor: 'google-bewertungen' },
+    docs: { label: 'Google-Bewertungen', file: 'self-hosting.de', anchor: 'google-bewertungen' },
     steps: [
       { title: 'Bewertungs-Einstellungen', route: 'settings/reviews', target: 'review-settings', text: 'Der Link zu deinem öffentlichen Bewertungsprofil und ab wie vielen Sternen Kunden dorthin geschickt werden.' },
       { title: 'Unternehmensprofil verbinden', target: 'google-business', text: 'Mit „Mit Google verbinden“ meldest du dich mit dem Google-Konto an, das das Profil verwaltet, und wählst den Standort. Dann: alle Rezensionen, antworten, Beiträge.' },

@@ -14,7 +14,7 @@ export const SERVICE_TOURS: Tour[] = [
     practice: true,
     keywords: 'ticket helpdesk support anfrage sla zuständig kanban queue service hub antwort notiz',
     learned: ['Tickets filtern, sortieren und als Ansicht speichern', 'Ein Ticket von Hand anlegen', 'Dem Kunden antworten oder eine interne Notiz schreiben', 'Status, Zuständigkeit und SLA-Fristen im Blick behalten', 'Übersicht und Auslastung des Teams lesen'],
-    docs: { label: 'Service: Tickets', file: 'helpdesk', anchor: 'tickets' },
+    docs: { label: 'Service: Tickets', file: 'helpdesk.de', anchor: 'tickets' },
     steps: [
       { title: 'Das Service-Postfach', route: 'tickets', target: 'page-head', text: 'Jede Kundenanfrage wird ein Ticket mit Nummer, Status, Priorität und Zuständigkeit – egal ob sie per E-Mail, Chat, WhatsApp, Formular, Telefon oder aus dem Kundenportal kommt.' },
       { title: 'Filtern & sortieren', target: 'tickets-filters', text: 'Suche nach Betreff, Kontakt oder #Nummer. Daneben Status, Priorität, Zuständige („Mir zugewiesen“, „Nicht zugewiesen“), Team, Kategorie, SLA-Lage und Quelle. „SLA zuerst“ sortiert nach der nächsten Frist.' },
@@ -44,7 +44,7 @@ export const SERVICE_TOURS: Tour[] = [
     practice: true,
     keywords: 'wissensdatenbank hilfe center artikel faq kategorie markdown seo knowledge base help',
     learned: ['Kategorien und Artikel anlegen', 'Einen Artikel in Markdown schreiben, ansehen und veröffentlichen', 'Wo das öffentliche Hilfe-Center liegt und wie man es einschaltet', 'Dass veröffentlichte Artikel auch dem KI-Assistenten helfen'],
-    docs: { label: 'Wissensdatenbank & Hilfe-Center', file: 'helpdesk', anchor: 'wissensdatenbank--hilfe-center' },
+    docs: { label: 'Wissensdatenbank & Hilfe-Center', file: 'helpdesk.de', anchor: 'wissensdatenbank--hilfe-center' },
     steps: [
       { title: 'Antworten zum Selberlesen', route: 'help-center', target: 'page-head', text: 'Hier schreibst du Hilfe-Artikel. Kunden finden sie im öffentlichen Hilfe-Center, das Team bekommt sie beim Antworten auf Tickets vorgeschlagen.' },
       { title: 'Noch nicht öffentlich?', target: 'kb-notice', optional: true, text: 'Das Hilfe-Center schaltest du unter Einstellungen → Service → Portal & Hilfe-Center ein – mit Adresse, Titel, Farbe und SEO.', missing: 'Das Hilfe-Center ist schon öffentlich.' },
@@ -70,7 +70,7 @@ export const SERVICE_TOURS: Tour[] = [
     routes: ['surveys'],
     keywords: 'umfrage csat nps zufriedenheit weiterempfehlung health score ampel kündigung churn',
     learned: ['CSAT-Ergebnisse lesen: Durchschnitt, Verteilung und Kommentare', 'Eine NPS-Umfrage anlegen und senden', 'Den Health-Score in der Kontaktliste filtern', 'Am Kontakt sehen, warum die Ampel rot ist'],
-    docs: { label: 'Zufriedenheit (CSAT) & NPS', file: 'helpdesk', anchor: 'zufriedenheit-csat--nps' },
+    docs: { label: 'Zufriedenheit (CSAT) & NPS', file: 'helpdesk.de', anchor: 'zufriedenheit-csat--nps' },
     steps: [
       { title: 'Wie zufrieden sind Kunden?', route: 'surveys/csat', target: 'page-head', text: 'Zwei Umfragen: **CSAT** fragt nach jedem gelösten Ticket „Wie zufrieden warst du?“ (1–5), **NPS** fragt „Würdest du uns weiterempfehlen?“ (0–10).' },
       { title: 'CSAT auf einen Blick', target: 'csat-stats', text: 'Durchschnitt, Anteil zufriedener Kunden und Antwortquote. Die Umfrage geht automatisch raus, wenn ein Ticket gelöst wird.' },
@@ -94,7 +94,7 @@ export const SERVICE_TOURS: Tour[] = [
     routes: ['settings/helpdesk'],
     keywords: 'service einstellungen sla geschäftszeiten pipeline team queue zuweisung round robin support postfach textbaustein eingangsbestätigung portal hilfe center health',
     learned: ['SLA-Ziele je Priorität und Geschäftszeiten festlegen', 'Ticket-Pipelines und Teams anlegen', 'Neue Tickets automatisch zuweisen', 'Support-E-Mails zu Tickets machen', 'Textbausteine, Eingangsbestätigung, CSAT, Kundenportal und Health-Score einstellen'],
-    docs: { label: 'Service: SLAs & Zuweisung', file: 'helpdesk', anchor: 'slas' },
+    docs: { label: 'Service: SLAs & Zuweisung', file: 'helpdesk.de', anchor: 'slas' },
     steps: [
       { title: 'Service-Einstellungen', route: 'settings/helpdesk', target: 'tab-helpdesk', text: 'Alles rund um Tickets stellst du hier ein – je Sub-Account. Die Reiter gehen von SLA bis Health-Score.' },
       { title: 'SLA-Ziele', target: 'hd-sla', text: 'Je Priorität: Stunden bis zur ersten Antwort und bis zur Lösung (8 Std. = ein Arbeitstag). Wird ein Ziel knapp, warnt {brand} und kann eskalieren.' },

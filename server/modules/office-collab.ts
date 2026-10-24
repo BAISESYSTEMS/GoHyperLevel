@@ -6,7 +6,7 @@ import { LIMITS, LOCK_TTL_MS, activeLock, lockMessage, type LockRow } from '../s
 import { getFile } from '../services/office-store.js';
 
 /**
- * Office collaboration (docs/office.md#zusammenarbeit): the edit lock ("ausgecheckt" – one person edits, everybody else opens
+ * Office collaboration (docs/office.md#collaboration): the edit lock ("ausgecheckt" – one person edits, everybody else opens
  * read-only; it ends on its own after LOCK_TTL_MS unless the open editor renews it, an admin may take it over) and comments per
  * file or version with @mentions (push/bell notice to the mentioned people and the file's author). Who has a file open shows through
  * the app-wide presence (page `office/<id>`, services/presence-model.ts) – nothing about it is stored here.

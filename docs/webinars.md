@@ -140,7 +140,7 @@ Each session is a row (all "start right away" registrations form one row).
 
 ## API, MCP tools and the app
 
-Team routes (login with `x-location-id`, sub-account API key or agency key; area *Funnels & Websites*; every write is in the audit log): the full list is under [Webinare in docs/api.md](api.md#webinare-automated-webinars).
+Team routes (login with `x-location-id`, sub-account API key or agency key; area *Funnels & Websites*; every write is in the audit log): the full list is under [Webinare in docs/api.md](api.md#webinars-automated-webinars).
 
 **MCP tools** (read tools are read-only; registering sends a confirmation mail, so agents ask first):
 `ghl_webinar_list`, `ghl_webinar_get`, `ghl_webinar_register`, `ghl_webinar_stats`.

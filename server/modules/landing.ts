@@ -36,7 +36,7 @@ import { TOOLS } from './mcp.js';
  */
 
 const PRODUCT = 'HyperLevel';
-const STARS_API = 'https://api.github.com/repos/BAISESYSTEMS/hyperlevel';
+const STARS_API = 'https://api.github.com/repos/BAISESYSTEMS/GoHyperLevel';
 const STARS_TTL = 6 * 3600_000;
 /** Screenshots (scripts/landing-assets.mjs makes them): the hero's crossfade and the spotlights' pictures, by key. */
 const SHOTS: Record<ShotKey, string> = {

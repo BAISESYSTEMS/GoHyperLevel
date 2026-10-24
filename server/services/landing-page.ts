@@ -24,10 +24,10 @@ import { LOGOS_CSS, logosHtml } from './landing-logos.js';
  * what makes the product different, the agents, the Academy, designs and XR (landing-agentic.ts, texts in landing-agentic-copy.ts).
  */
 
-export const GITHUB_URL = 'https://github.com/BAISESYSTEMS/hyperlevel';
+export const GITHUB_URL = 'https://github.com/BAISESYSTEMS/GoHyperLevel';
 /** `/demo` signs the visitor in and opens the app – no login page in between (see modules/demo.ts). */
 export const DEMO_URL = 'https://demo.gohyperlevel.com/demo';
-export const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/hyperlevel/main/scripts/install.sh | bash';
+export const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash';
 export const FONT_FILE = '/landing/inter-tight-latin-wght-normal.woff2';
 
 export type PageKind = 'home' | 'compare' | 'highlevel';

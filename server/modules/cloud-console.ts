@@ -16,6 +16,7 @@ import {
   legalCurrent,
   legalText,
   logCloudEvent,
+  mailSender,
   phaseOf,
   saveCloudSettings,
   setLegal,
@@ -137,7 +138,8 @@ export const cloudConsoleModule: Module = {
           sites_domain: sitesDomain(),
           offsite_backup: !!app.services.offsiteBackup?.configured?.(),
           legal_open: LEGAL_DOCS.filter((d) => openPlaceholders(legalText(app, legalCurrent(app, d))).length).length,
-          mail_ready: !!(s.mail_location_id || saasSettings(app).mail_location_id) || !!db.get('SELECT 1 AS x FROM locations WHERE id NOT IN (SELECT location_id FROM cloud_locations) LIMIT 1'),
+          // A sender only counts when it really sends: the default provider "log" just stores the mail (no confirmation reaches anyone).
+          mail_ready: ((p) => !!p && p !== 'log')(mailSender(app)?.settings.email?.provider),
         },
       };
     });

@@ -4,7 +4,7 @@ import type { TaxGroup, TaxMode } from './invoice-model.js';
 /**
  * Live sync of finalised invoices to Lexware Office (formerly lexoffice) and sevDesk – the pure part: providers and their mapping
  * options, the payloads (contact, voucher / invoice / credit note), what the tools say about payments, retry timing and a rate
- * limiter. HTTP lives in books-sync-http.ts, the database side in modules/books-sync.ts. Docs: docs/integrations.md#lexware-office-und-sevdesk-live-sync.
+ * limiter. HTTP lives in books-sync-http.ts, the database side in modules/books-sync.ts. Docs: docs/integrations.md#lexware-office-and-sevdesk-live-sync.
  *
  * HyperLevel stays the issuer: its number, its frozen snapshot and its PDF are what the tool receives.
  *  - Lexware Office: a sales voucher (Beleg, `salesinvoice` / `salescreditnote`) with one item per tax rate, the HyperLevel number as

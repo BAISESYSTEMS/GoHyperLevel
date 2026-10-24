@@ -2,7 +2,7 @@
 
 [Coolify](https://coolify.io) builds HyperLevel from the repository and puts its proxy (with HTTPS) in front.
 
-1. **New resource → Public repository** → `https://github.com/BAISESYSTEMS/hyperlevel` (or your fork), branch `main`.
+1. **New resource → Public repository** → `https://github.com/BAISESYSTEMS/GoHyperLevel` (or your fork), branch `main`.
 2. **Build pack: Dockerfile** (the repository's `Dockerfile`). Port: **4700**.
 3. **Domain:** e.g. `https://crm.your-domain.com` (Coolify issues the certificate).
 4. **Persistent storage:** add a volume mounted at **`/data`**.

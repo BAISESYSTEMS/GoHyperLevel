@@ -14,7 +14,7 @@ export const MARKETING_TOURS: Tour[] = [
     practice: true,
     keywords: 'newsletter kampagne email sms massenmail empfänger planen trigger-link vorlage',
     learned: ['Eine Kampagne anlegen und den Inhalt gestalten', 'Empfänger über Tags und Smart Lists wählen', 'Erst testen, dann senden oder planen', 'Wofür Vorlagen und Trigger-Links da sind'],
-    docs: { label: 'E-Mail-Designer', file: 'email-builder' },
+    docs: { label: 'E-Mail-Designer', file: 'email-builder.de' },
     steps: [
       { title: 'Kampagnen', route: 'campaigns', target: 'page-head', text: 'Kampagnen sind Newsletter per E-Mail oder SMS an eine Auswahl deiner Kontakte. Abmeldelink und Absenderadresse kommen automatisch dazu.' },
       { title: 'Bisherige Kampagnen', target: 'campaigns-list', optional: true, text: 'Entwürfe, geplante und gesendete Kampagnen mit Zahl der Gesendeten und Fehler. Ein Klick öffnet die Auswertung mit Öffnungen und Klicks.', missing: 'Noch keine Kampagne – gleich legen wir eine an.' },
@@ -40,7 +40,7 @@ export const MARKETING_TOURS: Tour[] = [
     routes: ['campaigns'],
     keywords: 'ab test segment zielgruppe vorlagengalerie bestzeit sendezeit nicht-öffner erinnerung aufwärmen reputation bounce beschwerde adressprüfung whatsapp warenkorbabbruch',
     learned: ['Fertige Vorlagen suchen, ansehen und übernehmen', 'Zielgruppen nach Verhalten bauen – mit Live-Zahl', 'Betreffzeilen testen und Nicht-Öffner erinnern', 'Reputation, Aufwärmplan und Listenhygiene im Blick behalten'],
-    docs: { label: 'E-Mail-Marketing', file: 'email-marketing' },
+    docs: { label: 'E-Mail-Marketing', file: 'email-marketing.de' },
     steps: [
       { title: 'Mehr aus Kampagnen holen', route: 'campaigns', target: 'page-head', text: 'Vorlagen aus der Galerie, Segmente nach Verhalten, A/B-Tests, Bestzeit-Versand und Zustellbarkeit: So bekommst du mehr Öffnungen und Klicks – und landest trotzdem im Posteingang.' },
       { title: 'Vorlagengalerie', target: 'tab-gallery', kind: 'click', text: 'Über 40 fertige deutsche Vorlagen, nach Anlass sortiert.', do: 'Klicke auf den Reiter **Vorlagengalerie**.' },
@@ -69,7 +69,7 @@ export const MARKETING_TOURS: Tour[] = [
     practice: true,
     keywords: 'email designer builder vorlage newsletter gestalten drag drop block footer',
     learned: ['Den Designer öffnen (Vorlagen, Kampagnen, Workflow-Mails)', 'Blöcke hineinziehen und einstellen', 'Desktop-/Handy-Vorschau und Testmail nutzen', 'Speichern und schließen'],
-    docs: { label: 'E-Mail-Designer', file: 'email-builder' },
+    docs: { label: 'E-Mail-Designer', file: 'email-builder.de' },
     steps: [
       { title: 'Wo der Designer steckt', route: 'campaigns', target: 'tab-templates', kind: 'click', text: 'Der Designer öffnet sich überall, wo du E-Mails schreibst: in Vorlagen, Kampagnen und Workflow-Schritten. Wir nehmen eine Vorlage.', do: 'Klicke auf den Reiter **Vorlagen**.' },
       { title: 'Neue Vorlage', target: 'templates-new', kind: 'click', text: 'Eine Vorlage kannst du später im Posteingang, in Kampagnen und Workflows wiederverwenden.', do: 'Klicke auf **+ Vorlage**.' },
@@ -121,7 +121,7 @@ export const MARKETING_TOURS: Tour[] = [
     routes: ['social'],
     keywords: 'social media instagram facebook linkedin post planen postiz kalender',
     learned: ['Wie der Social Planner mit Postiz verbunden ist', 'Kanäle verbinden', 'Einen Post planen', 'Kalender, Liste und Statistik'],
-    docs: { label: 'Social Planner einrichten', file: 'self-hosting', anchor: 'social-planner-postiz' },
+    docs: { label: 'Social Planner einrichten', file: 'self-hosting.de', anchor: 'social-planner-postiz' },
     steps: [
       { title: 'Social Planner', route: 'social', target: 'page-head', text: 'Hier planst du Posts für alle Kanäle an einem Ort. Veröffentlicht wird über eine eigene Postiz-Instanz der Agentur.' },
       { title: 'Kanäle verbinden', target: 'social-connect', optional: true, text: 'Jeder Sub-Account verbindet seine eigenen Kanäle (Instagram, Facebook, LinkedIn, X, Google-Profil …).', missing: 'Postiz ist noch nicht verbunden – das macht die Agentur unter Agentur → Integrationen.' },
@@ -141,7 +141,7 @@ export const MARKETING_TOURS: Tour[] = [
     routes: ['video-studio'],
     keywords: 'video shorts reels tiktok youtube clips openshorts untertitel schneiden podcast webinar recycling blog newsletter autopilot rss',
     learned: ['Einen Job aus Link oder Datei starten', 'Clips prüfen: Score, Texte, Nachbearbeitung', 'Clips im Social Planner einplanen', 'Aus einem Video Blog, Newsletter und Social-Texte machen', 'Den Autopilot für YouTube-Kanal oder Podcast einstellen'],
-    docs: { label: 'Video-Studio einrichten', file: 'video-studio' },
+    docs: { label: 'Video-Studio einrichten', file: 'video-studio.de' },
     steps: [
       { title: 'Video-Studio', route: 'video-studio', target: 'page-head', text: 'Aus Podcasts, Webinaren oder Interviews werden kurze Hochkant-Clips mit Untertiteln. Geschnitten wird von OpenShorts, das die Agentur verbindet.' },
       { title: 'Neue Shorts', target: 'vs-new', optional: true, text: 'Link einfügen oder Video hochladen, Anzahl Clips und Untertitel-Stil wählen, Rechte bestätigen – fertig. Das Schneiden dauert ein paar Minuten.', missing: 'OpenShorts ist noch nicht verbunden – das macht die Agentur unter Agentur → Integrationen → Einrichtung.' },
@@ -164,7 +164,7 @@ export const MARKETING_TOURS: Tour[] = [
     routes: ['attribution'],
     keywords: 'attribution utm quelle kampagne werbung ads meta google cpl roas tracking einwilligung',
     learned: ['Den Bericht lesen: Leads, Deals und Umsatz je Quelle', 'Erster vs. letzter Kontaktpunkt', 'Werbekosten mit Leads verknüpfen (CPL, ROAS)', 'Tracking und Werbekonten einstellen'],
-    docs: { label: 'Attribution, Affiliates & Werbung', file: 'growth' },
+    docs: { label: 'Attribution, Affiliates & Werbung', file: 'growth.de' },
     steps: [
       { title: 'Woher kommt das Geschäft?', route: 'attribution/report', target: 'page-head', text: 'Attribution erfasst die Herkunft jedes Leads – auf deinem eigenen Server, ohne Google Analytics oder Meta-Pixel.' },
       { title: 'Zeitraum', target: 'range-picker', text: 'Von–bis oder schnell die letzten 7, 30 oder 90 Tage.' },
@@ -188,7 +188,7 @@ export const MARKETING_TOURS: Tour[] = [
     routes: ['affiliates'],
     keywords: 'affiliate partner empfehlung provision ref link auszahlung sepa',
     learned: ['Ein Partnerprogramm anlegen (Provision, Cookie-Laufzeit, Grenze)', 'Affiliates freischalten und ihre Links', 'Provisionen prüfen und freigeben', 'Auszahlungen als CSV oder SEPA-Datei'],
-    docs: { label: 'Affiliate-Manager', file: 'growth', anchor: 'affiliate-manager' },
+    docs: { label: 'Affiliate-Manager', file: 'growth.de', anchor: 'affiliate-manager' },
     steps: [
       { title: 'Partnerprogramm', route: 'affiliates', target: 'page-head', text: 'Partner bekommen einen eigenen Link (?ref=…). Kauft jemand über ihn, entsteht automatisch eine Provision.' },
       { title: 'Programme', target: 'tab-programs', kind: 'click', text: 'Zuerst braucht es ein Programm: Prozent oder Festbetrag, erster oder letzter Klick, Cookie-Laufzeit, Auszahlungsgrenze.', do: 'Klicke auf **Programme**.' },

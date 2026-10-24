@@ -100,7 +100,7 @@ subset like the recurring tasks (`FREQ=DAILY|WEEKLY|MONTHLY`, `INTERVAL`, `BYDAY
   following* or *all* sends one e-mail and one `appointment.status_changed` event (with `series: {id, scope, count}`).
 - **Conflicts.** Creating a series checks every date up to the horizon; with overlaps the answer is 409 with the dates and
   reasons, `force: true` creates it anyway. Dates written later by the tick are not checked again.
-- **Google/Outlook.** The two-way sync ([Google & Microsoft](self-hosting.md#google--microsoft-verbinden-oauth)) has no series support: every appointment of a
+- **Google/Outlook.** The two-way sync ([Google & Microsoft](self-hosting.md#connect-google--microsoft-oauth)) has no series support: every appointment of a
   series is written as a **single event** (moving one over there moves only that appointment – it becomes an exception here).
   The private `.ics` feed lists them as single events as well.
 
@@ -264,7 +264,7 @@ are part of the contact export; erasing a contact removes name and e-mail from i
 The KI-Telefonagent's booking logic – free times from the calendar's own rules (hours, buffers, notice, limits, Google/Outlook
 busy times, round robin / collective / seats of team calendars) and booking a free slot through the normal pipeline – is shared:
 
-- **Website chat bot of the [KI-Assistent](ai-assistant.md#termine-buchen):** *KI-Assistent → Live-Chat-Bot → Termine buchen*
+- **Website chat bot of the [KI-Assistent](ai-assistant.md#booking-appointments):** *KI-Assistent → Live-Chat-Bot → Termine buchen*
   switches it on. The bot gets the free times of the next two weeks, can look up a day and books once the visitor confirmed a
   time and gave name and e-mail (or phone). Its answer carries the confirmation.
 - **Agents' auto-replies in every inbox channel** (e-mail, SMS, website chat, WhatsApp, Messenger, Instagram) and the agent chat:

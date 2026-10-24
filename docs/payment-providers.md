@@ -68,7 +68,7 @@ There is **no webhook to set up**: HyperLevel sends Mollie its address (`https:/
 
 - **PayPal webhooks** are verified by PayPal itself (`/v1/notifications/verify-webhook-signature` with the webhook ID); unverified calls are refused with 400. Each event is processed once.
 - **Mollie webhooks** carry only a payment id; HyperLevel always reads the payment back from Mollie with the sub-account's key and checks that it belongs to the session – a forged call cannot pay anything.
-- **Stripe** stays as it is: signed webhooks per sub-account ([stripe.md](stripe.md#was-beim-bezahlen-passiert)).
+- **Stripe** stays as it is: signed webhooks per sub-account ([stripe.md](stripe.md#what-happens-when-someone-pays)).
 - The pay page and the gift-card field are rate-limited per address; gift-card codes have 80 bits of randomness.
 
 ## API

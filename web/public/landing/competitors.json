@@ -394,6 +394,62 @@
     }
    ],
    "source": "https://www.klicktipp.com/de/preise"
+  },
+  {
+   "id": "zoho",
+   "name": "Zoho CRM / Zoho One",
+   "url": "https://www.zoho.com/de/crm/",
+   "pricing": [
+    {
+     "plan": "CRM Free",
+     "price_month": 0,
+     "currency": "EUR",
+     "notes": "Up to 3 users, permanently free; 5,000 API credits per day. EUR prices as shown on zoho.com/de on 2026-10-24 (currency follows the visitor country), plus VAT"
+    },
+    {
+     "plan": "CRM Standard",
+     "price_month": 14,
+     "currency": "EUR",
+     "notes": "Per user per month, billed annually (20 EUR with monthly billing); 10 custom modules, 5 pipelines, scoring rules, workflows, WhatsApp Business (credits), mass email 250/day"
+    },
+    {
+     "plan": "CRM Professional",
+     "price_month": 23,
+     "currency": "EUR",
+     "notes": "Per user, annual (35 EUR monthly); adds quotes, sales orders, invoices, CPQ, blueprints, signals, mass dedupe; 25 custom modules"
+    },
+    {
+     "plan": "CRM Enterprise",
+     "price_month": 40,
+     "currency": "EUR",
+     "notes": "Per user, annual (50 EUR monthly); adds Zia AI, customer portals, sandbox, journey builder, territories, web-form A/B tests; 200 custom modules"
+    },
+    {
+     "plan": "CRM Ultimate",
+     "price_month": 52,
+     "currency": "EUR",
+     "notes": "Per user, annual (65 EUR monthly); highest limits (500 custom modules, 50 pipelines, 5 million API credits/day)"
+    },
+    {
+     "plan": "CRM Plus",
+     "price_month": 57,
+     "currency": "EUR",
+     "notes": "Per user, annual (69 EUR monthly); CRM plus Campaigns, Desk, Social, Survey, Projects, SalesIQ, Analytics etc. in one bundle; Enterprise-level CRM"
+    },
+    {
+     "plan": "Zoho One (all employees)",
+     "price_month": 37,
+     "currency": "EUR",
+     "notes": "Per employee per month, billed annually (45 EUR monthly); 45+ apps; licence must cover ALL employees; Zoho Voice (telephony) not included"
+    },
+    {
+     "plan": "Zoho One (flexible users)",
+     "price_month": 90,
+     "currency": "EUR",
+     "notes": "Per user per month, annual (105 EUR monthly); any number of users, no all-employee obligation; same 45+ apps"
+    }
+   ],
+   "source": "https://www.zoho.com/de/crm/zohocrm-pricing.html"
   }
  ],
  "categories": [
@@ -410,7 +466,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "AGPL-3.0, kompletter Quellcode offen",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/LICENSE"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/LICENSE"
       },
       "highlevel": {
        "v": "no",
@@ -461,6 +517,11 @@
        "v": "no",
        "note": "Proprietäre SaaS",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Proprietäre SaaS",
+       "source": "https://www.zoho.com/de/crm/zohocrm-pricing.html"
       }
      }
     },
@@ -472,7 +533,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kostenlos auf eigenem Server (Docker, ein Befehl); eine SQLite-Datei",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/self-hosting.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/self-hosting.md"
       },
       "highlevel": {
        "v": "no",
@@ -523,6 +584,11 @@
        "v": "no",
        "note": "Nur als Cloud-Dienst",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Nur als Cloud-Dienst; Rechenzentrum nach Anmeldeland (EU, US, IN u. a.), keine Eigeninstallation",
+       "source": "https://www.zoho.com/know-your-datacenter.html"
       }
      }
     },
@@ -534,7 +600,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Self-hosted 0 €; Cloud Solo 49,99 €/Monat (1 Nutzer, alle Funktionen außer White-Label)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -585,6 +651,11 @@
        "v": "yes",
        "note": "Standard 30 €/Monat für bis zu 2.500 Empfänger",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "CRM Free für 3 Nutzer; Standard 14 €/Nutzer/Monat bei Jahreszahlung (20 € monatlich); Zoho One ab 37 €/Mitarbeiter (Pflicht für alle Mitarbeiter)",
+       "source": "https://www.zoho.com/de/crm/zohocrm-pricing.html"
       }
      }
     },
@@ -596,7 +667,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Cloud Agentur 199 €/Monat mit unbegrenzt Kunden-Sub-Accounts und Nutzern; self-hosted 0 €",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -647,6 +718,11 @@
        "v": "partial",
        "note": "Agenturzugang (mehrere Kundenkonten mit einem Login) ab Deluxe; jedes Kundenkonto braucht eigenen Tarif",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Kein Sub-Account-Modell; Kunden-Orgs sind einzeln zu lizenzieren (bis 10 CRM-Orgs je Nutzer, ohne Datenabgleich)",
+       "source": "https://help.zoho.com/portal/en/kb/crm/organization-settings/multiple-organizations/articles/managing-multiple-crm-organizations"
       }
      }
     },
@@ -658,7 +734,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Im Agentur-Plan (199 €/Monat) enthalten, inkl. installierbarer App (PWA) mit eigener Marke; self-hosted inklusive",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -709,6 +785,11 @@
        "v": "no",
        "note": "Kein White-Label",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Kein White-Label-Tarif für CRM oder Zoho One; White-Label-Suite nur für ISPs im Workplace-Partnerprogramm",
+       "source": "https://www.zoho.com/partners/workplace-partnership-program.html"
       }
      }
     },
@@ -720,7 +801,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Team & Company und Agentur: unbegrenzt Nutzer ohne Platzgebühr (Solo = 1 Nutzer)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -771,6 +852,11 @@
        "v": "partial",
        "note": "Standard bis Deluxe: 1 Nutzer; beliebig viele Nutzer erst ab Enterprise (ab 170 €)",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Preis pro Nutzer (CRM 14–52 €); Zoho One pro Mitarbeiter 37 € bzw. 90 € pro Nutzer, ein Pauschalpreis je Firma existiert nicht",
+       "source": "https://www.zoho.com/de/one/pricing/"
       }
      }
     },
@@ -782,7 +868,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kontakte unbegrenzt; Fair-Use für E-Mail- und KI-Volumen in der Cloud",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -833,6 +919,11 @@
        "v": "no",
        "note": "Tarif nach Empfängerzahl (2.500 / 5.000 / 7.500 / bis 21 Mio.)",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "CRM-Preis pro Nutzer, nicht pro Kontakt; Marketing-Apps (Campaigns, Marketing Automation) rechnen nach Kontakten ab, in Zoho One 5.000 Kontakte je Lizenz inklusive",
+       "source": "https://www.zoho.com/one/plan-details.html"
       }
      }
     },
@@ -844,7 +935,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Cloud in Frankfurt (DE); self-hosted an jedem Standort",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "no",
@@ -895,6 +986,11 @@
        "v": "yes",
        "note": "Mailserver in Deutschland für alle Pakete",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "EU-Rechenzentren in Amsterdam und Dublin (zoho.eu), nicht Frankfurt; Supportzugriff aus Indien in seltenen Fällen auf Basis von Standardvertragsklauseln",
+       "source": "https://www.zoho.com/privacy/privacy-faq.html"
       }
      }
     },
@@ -906,7 +1002,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "AVV wird bei der Anmeldung akzeptiert und ist im Kundenbereich abrufbar",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/cloud.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/cloud.md"
       },
       "highlevel": {
        "v": "yes",
@@ -957,6 +1053,11 @@
        "v": "yes",
        "note": "AVV in allen Paketen inklusive",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Data Processing Addendum mit Standardvertragsklauseln (Zoho Netherlands); Liste der Unterauftragsverarbeiter öffentlich",
+       "source": "https://www.zoho.com/privacy/privacy-faq.html"
       }
      }
     }
@@ -975,7 +1076,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kontakte, Firmen (Domain-Abgleich, Merge), beliebige Verknüpfungen mit Labels",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/objects.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/objects.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1026,6 +1127,11 @@
        "v": "partial",
        "note": "Kontakte mit Tags im Marketing-CRM; kein Firmen-Objekt",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Leads, Kontakte, Firmen, Deals, Aufgaben, Anrufe in allen Editionen, auch im Gratis-CRM",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1037,7 +1143,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Eigene Objekte mit typisierten Feldern, Listen, CSV-Import und Triggern",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/objects.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/objects.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1088,6 +1194,11 @@
        "v": "no",
        "note": "Keine Custom Objects",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Eigene Module ab Standard: 10 (Standard), 25 (Professional), 200 (Enterprise), 500 (Ultimate)",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1099,7 +1210,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Mehrere Pipelines, Kanban und Listenansicht mit Smart Lists, gewichteter Forecast, Positionen",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1150,6 +1261,11 @@
        "v": "no",
        "note": "Keine Deal-Pipelines",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Mehrere Deal-Pipelines: 5 (Standard) bis 50 (Ultimate); Blueprints erzwingen Prozessschritte ab Professional",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1161,7 +1277,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Regeln für Merkmale und Engagement, Verfall, Schwellen, Trigger",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1212,6 +1328,11 @@
        "v": "no",
        "note": "Kein Lead-Scoring ausgewiesen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Bewertungsregeln ab Standard (10–50 Kriterien je Modul); KI-Scoring (Zia) ab Enterprise",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1223,7 +1344,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Abgleich per E-Mail, Telefon (jede Schreibweise) oder Name+Firma; Feld-für-Feld-Merge, rückgängig machbar",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1274,6 +1395,11 @@
        "v": "no",
        "note": "Kein Dubletten-Assistent ausgewiesen (Kontakte eindeutig per E-Mail)",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Finden und Zusammenführen in allen Editionen; Massen-Deduplizierung ab Professional",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     }
@@ -1292,7 +1418,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kampagnen an Tags, Smart Lists, Segmente; A/B, Versand an Nicht-Öffner; self-hosted mit eigenem SMTP/API-Versender",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/email-marketing.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/email-marketing.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1343,6 +1469,11 @@
        "v": "yes",
        "note": "Newsletter und Kampagnen, unbegrenzter Versand",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Im CRM nur Massenmail für Vertrieb (250–2.000/Tag je Org.); echte Kampagnen mit Zoho Campaigns / Marketing Automation, in CRM Plus und Zoho One enthalten",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1354,7 +1485,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Drag & Drop, Outlook-sicheres responsives HTML mit Dark Mode, 60 deutsche Vorlagen",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/email-builder.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/email-builder.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1405,6 +1536,11 @@
        "v": "yes",
        "note": "Drag-&-Drop-E-Mail-Builder mit KI",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Drag-&-Drop-Editor und Vorlagenbibliothek in Zoho Campaigns / Marketing Automation; im CRM nur Vorlagen (10 bis unbegrenzt)",
+       "source": "https://www.zoho.com/one/plan-details.html"
       }
      }
     },
@@ -1416,7 +1552,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Über eigenes Konto bei Twilio, seven.io, Vonage, Plivo, Bird oder eigenes Android-Handy; kein SMS-Guthaben inklusive",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/channels.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/channels.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1467,6 +1603,11 @@
        "v": "partial",
        "note": "Nur Enterprise, Kosten bei Twilio/Vonage separat",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Nur über Zusatzdienste: Zoho Voice (Zwei-Wege-SMS nur US/Kanada, Auslands-SMS einseitig), Campaigns mit eigenem Gateway (z. B. Twilio) oder Marktplatz-Apps; SMS-Guthaben extra",
+       "source": "https://help.zoho.com/portal/en/kb/zoho-voice/sms-services/articles/sms-for-zoho-crm-by-zoho-voice"
       }
      }
     },
@@ -1478,7 +1619,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "WhatsApp Cloud API: Vorlagen, Kampagnen, Buttons, Medien; ohne Aufpreis, Meta-App-Einrichtung manuell",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/meta-channels.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/meta-channels.md"
       },
       "highlevel": {
        "v": "addon",
@@ -1529,6 +1670,11 @@
        "v": "no",
        "note": "WhatsApp nicht ausgewiesen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "WhatsApp Business im CRM ab Standard; Versand verbraucht Guthaben; zusätzlich in Marketing Automation",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1540,7 +1686,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "Planen und Posten über einen separaten Postiz-Dienst (u. a. LinkedIn, IG, FB, TikTok, YouTube Shorts, GBP); einfache Statistik",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/integrations.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1591,6 +1737,11 @@
        "v": "no",
        "note": "Kein Social-Media-Planer",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Social (Planen, Inbox, Google-Bewertungen) als eigene App, in CRM Plus und Zoho One; im CRM nur eine Lite-Version mit Social-Tab",
+       "source": "https://www.zoho.com/social/"
       }
      }
     },
@@ -1602,7 +1753,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Mehrstufig, Logik, Scoring/Quiz, Zahlungsfeld, Signatur, 26 deutsche Vorlagen",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/forms.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/forms.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1653,6 +1804,11 @@
        "v": "partial",
        "note": "Beliebig viele Formulare; keine Quizze ausgewiesen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "Webformulare im CRM (5–100 je Modul), A/B-Tests ab Enterprise; mehrstufige Formulare mit Zahlung in Zoho Forms und Umfragen in Zoho Survey (eigene Apps); Quiz-Auswertung nicht geprüft",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1664,7 +1820,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Drag & Drop, 23 deutsche Vorlagen, CMS, eigene Domains mit TLS, Barrierefreiheits-Check; KI-Seitengenerator (Funnel- & Website-KI)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sites.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1715,6 +1871,11 @@
        "v": "partial",
        "note": "Landingpage-Builder mit KI (3–25 Seiten je Tarif); keine Websites",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Sites (Website/CMS), Zoho LandingPage und Zoho Commerce als eigene Apps, in Zoho One enthalten; kein Funnel-Builder im CRM",
+       "source": "https://www.zoho.com/one/plan-details.html"
       }
      }
     },
@@ -1726,7 +1887,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Blog je Website: Markdown-Editor, Planung, RSS, SEO, strukturierte Daten",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sites.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1777,6 +1938,11 @@
        "v": "no",
        "note": "Kein Blog",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Blog in Zoho Sites (unbegrenzte Beiträge) bzw. Zoho Commerce; nicht im CRM",
+       "source": "https://www.zoho.com/one/plan-details.html"
       }
      }
     },
@@ -1788,7 +1954,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Seiten (bis 4 Varianten), Funnel-Schritte, E-Mail (Betreff/Absender/Inhalt), Workflow-Splits",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sites.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sites.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1839,6 +2005,11 @@
        "v": "partial",
        "note": "Newsletter-A/B ab Premium, Kampagnen-A/B ab Deluxe",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "E-Mail-A/B-Tests in Campaigns / Marketing Automation, Webformular-A/B-Tests im CRM ab Enterprise, Seiten-Tests in PageSense (eigene Apps)",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1850,7 +2021,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Bewertungsanfragen (auch in Massen), Widget, KI-Antwortentwürfe; Google, Facebook, Trustpilot, ProvenExpert, Yelp und Tripadvisor über ihre APIs, weitere per Import; kein Listings-Management",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/reputation.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/reputation.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1901,6 +2072,11 @@
        "v": "no",
        "note": "Kein Bewertungsmanagement",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Publish (Bewertungen aus Google u. a. mit KI-Antworten) und Zoho Social (Google-Bewertungen beantworten) als eigene Apps; nicht im CRM",
+       "source": "https://www.zoho.com/publish/features/review-management.html"
       }
      }
     }
@@ -1919,7 +2095,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "160+ Trigger, 130+ Aktionen, visueller Canvas-Editor und Liste, Versionen, Testlauf, Fehlerbehandlung",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/workflow-actions.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/workflow-actions.md"
       },
       "highlevel": {
        "v": "yes",
@@ -1970,6 +2146,11 @@
        "v": "partial",
        "note": "Visueller Kampagnen-Builder, 3/6/10 Kampagnen je Tarif",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Workflow-Regeln (bis 2.500 je Org.), Blueprints, Taktungen, Journey Builder ab Enterprise; Zoho Flow für app-übergreifende Abläufe (in Zoho One enthalten)",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -1981,7 +2162,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "In-App-Agent und eigene KI-Mitarbeiter mit 350+ Werkzeugen, Freigabe vor Schreibzugriffen, Zeitpläne",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/agent.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/agent.md"
       },
       "highlevel": {
        "v": "addon",
@@ -2032,6 +2213,11 @@
        "v": "no",
        "note": "KI-Copywriter und KI-Builder, kein Agent mit Werkzeugzugriff",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Zia Agents / Agent Studio: eigene und vorgefertigte KI-Agenten mit Werkzeugzugriff (CRM, Desk, Books u. a.), als digitale Mitarbeiter einsetzbar; Modellnutzung über Guthaben",
+       "source": "https://www.zoho.com/crm/zia/agents.html"
       }
      }
     },
@@ -2043,7 +2229,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Antwortvorschläge, Website-Chatbot mit Übergabe, Agent-Auto-Reply für E-Mail, SMS, WhatsApp, Messenger, Instagram",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/ai-assistant.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/ai-assistant.md"
       },
       "highlevel": {
        "v": "addon",
@@ -2094,6 +2280,11 @@
        "v": "no",
        "note": "Keine Chat-KI",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Chat-Antworten über Zia Agents in Desk und Website-Chatbots in Zoho SalesIQ (eigene Apps, in CRM Plus / Zoho One); im CRM selbst Antwortentwürfe und Template-Assistent",
+       "source": "https://www.zoho.com/crm/ai-ready-crm.html"
       }
      }
     },
@@ -2105,7 +2296,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "KI-Telefonagent für eingehende und ausgehende Anrufe (bucht Termine, qualifiziert, erinnert); braucht eigenes Twilio-Konto",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/voice.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/voice.md"
       },
       "highlevel": {
        "v": "addon",
@@ -2156,6 +2347,11 @@
        "v": "no",
        "note": "Kein Voice-KI-Telefonagent",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "Kein eigener KI-Telefonagent ausgewiesen: Zoho Voice leitet Anrufe per SIP an externe Voice-KI (ElevenLabs, Retell) und analysiert Gespräche; „Zia Voice“ ist ein Sprachassistent für CRM-Fragen",
+       "source": "https://www.zoho.com/voice/help/external-voice-ai.html"
       }
      }
     },
@@ -2167,7 +2363,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "MCP-Server mit 350+ Tools, OAuth 2.1, Ein-Klick-Einrichtung für Claude, ChatGPT, Cursor, Codex",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/agent.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/agent.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2218,6 +2414,11 @@
        "v": "no",
        "note": "Kein MCP-Server ausgewiesen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Offizielle Zoho-CRM-MCP-Server (Daten, Datenoperationen, Modul-Anpassung, Automation) mit OAuth für Claude, Cursor, VS Code; Zoho MCP Console für weitere Apps; verbraucht API-Credits",
+       "source": "https://www.zoho.com/crm/developer/docs/mcp/overview.html"
       }
      }
     },
@@ -2229,7 +2430,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Rund 40 Text-KI-Anbieter inkl. EU-gehosteter (IONOS, STACKIT, OVH, Scaleway, Mistral) und lokaler Modelle (Ollama)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/ai-providers.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/ai-providers.md"
       },
       "highlevel": {
        "v": "no",
@@ -2280,6 +2481,11 @@
        "v": "no",
        "note": "Keine eigenen KI-Schlüssel",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Eigene API-Schlüssel für OpenAI, Gemini, Anthropic, Cohere u. a. in CRM-Smart-Prompts (ab Professional) und in Zia Agents; alternativ Zoho-eigene Modelle",
+       "source": "https://help.zoho.com/portal/en/kb/crm/zia-artificial-intelligence/generative-ai/articles/zia-models"
       }
      }
     },
@@ -2291,7 +2497,7 @@
       "gohyperlevel": {
        "v": "no",
        "note": "Telefonie nur mit eigenem Twilio-Konto; keine Nummernportierung, kein A2P-10DLC",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/telephony.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/telephony.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2342,6 +2548,11 @@
        "v": "no",
        "note": "Keine Telefonie",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Voice mit deutschen Nummern, Anbindung per Zoho Telephony; eigenes Abo (ab 49 $/Admin), nicht in Zoho One enthalten; Telefonie-Basis im CRM über Twilio",
+       "source": "https://www.zoho.com/voice/pricing.html"
       }
      }
     }
@@ -2360,7 +2571,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Einzel, Round Robin, Kollektiv, Klassen; Zahlung bei Buchung; Google/Outlook-Sync; Tages-, Wochen-, Monats- und Teamansicht",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/booking.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/booking.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2411,6 +2622,11 @@
        "v": "partial",
        "note": "Nur über native Integrationen zu Termin-Tools",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Kalenderbuchung im CRM ab Standard, Kalender-Sync; Zoho Bookings (eigene App, in Zoho One) für Services, Teams und Zahlung",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -2422,7 +2638,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Angebote mit Varianten und Optionen; Online-Annahme erzeugt Vertrag und Rechnung; kein Drag-&-Drop-Proposal-Designer",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2473,6 +2689,11 @@
        "v": "no",
        "note": "Keine Angebote",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Angebote, Aufträge, Rechnungen und Bestandsverwaltung im CRM ab Professional; CPQ mit Preisregeln",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -2484,7 +2705,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Verträge mit gezeichneter/getippter Signatur, SHA-256 und Audit-Trail; mehrere Unterzeichner mit Rolle und Reihenfolge",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sales.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sales.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2535,6 +2756,11 @@
        "v": "no",
        "note": "Keine E-Signatur",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Sign (eigene App, in Zoho One) mit CRM-Integration; im CRM selbst keine Signatur",
+       "source": "https://www.zoho.com/sign/"
       }
      }
     },
@@ -2546,7 +2772,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Storno, Gutschrift, Abschlag/Schluss, Skonto, wiederkehrende Rechnungen, PDF nach DIN 5008 mit GiroCode",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/invoicing.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/invoicing.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2597,6 +2823,11 @@
        "v": "no",
        "note": "Keine Rechnungsstellung",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Rechnungen im CRM ab Professional; vollwertig mit Zoho Invoice oder Zoho Books (eigene Apps, in Zoho One)",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -2608,7 +2839,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Stripe-Kauflinks mit Order-Bump, One-Click-Upsell, Gutscheinen",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/stripe.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/stripe.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2659,6 +2890,11 @@
        "v": "no",
        "note": "Keine eigene Zahlungsabwicklung; Anbindung an Digistore24, PayPal u. a.",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Online-Zahlung über Zoho Books, Invoice, Billing oder Checkout (Stripe, PayPal u. a.); im CRM keine eigene Zahlungsabwicklung",
+       "source": "https://www.zoho.com/de-de/books/help/settings/integrations.html"
       }
      }
     },
@@ -2670,7 +2906,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Abos und Ratenzahlung (2–60 Raten), Zugriff folgt Zahlung",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/payment-plans.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/payment-plans.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2721,6 +2957,11 @@
        "v": "no",
        "note": "Keine eigene Abo-Abrechnung",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Billing: Abos, wiederkehrende Rechnungen, Add-ons (eigene App, in Zoho One); Ratenzahlung nicht geprüft",
+       "source": "https://www.zoho.com/de-de/billing/"
       }
      }
     },
@@ -2732,7 +2973,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Abo-Fehlzahlungen mit Retry und Zugriffspause; Rechnungsmahnungen mit Gebühren und Verzugszinsen (§ 288 BGB)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/dunning.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/dunning.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2783,6 +3024,11 @@
        "v": "no",
        "note": "Kein Mahnwesen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Mahn- und Zahlungswiederholung in Zoho Billing bzw. Erinnerungen in Zoho Books (eigene Apps); Mahngebühren und Verzugszinsen nach deutschem Recht nicht geprüft",
+       "source": "https://www.zoho.com/de-de/billing/"
       }
      }
     },
@@ -2794,7 +3040,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Onlineshop mit Warenkorb, Varianten und Lagerbestand, Checkout auf der eigenen Seite, Versandkosten, Gutscheinkarten; jede Bestellung wird eine festgeschriebene Rechnung",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/store.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/store.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2845,6 +3091,11 @@
        "v": "no",
        "note": "Kein Shop",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Commerce (Onlineshop mit Warenkorb, in Zoho One enthalten); im CRM kein Shop",
+       "source": "https://www.zoho.com/de/commerce/"
       }
      }
     },
@@ -2856,7 +3107,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Stripe, PayPal und Mollie (iDEAL, SEPA-Überweisung, Karten, Klarna) nebeneinander; dazu SEPA-Lastschrift ohne Zahlungsanbieter",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/payment-providers.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/payment-providers.md"
       },
       "highlevel": {
        "v": "yes",
@@ -2907,6 +3158,11 @@
        "v": "no",
        "note": "Keine Zahlungsabwicklung (nur Integration von Zahlungsanbietern, 1–unbegrenzt Produkte)",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "In Zoho Books Deutschland Stripe und PayPal; Billing zusätzlich Verifone, GoCardless u. a.; Mollie nicht genannt",
+       "source": "https://www.zoho.com/de-de/books/help/settings/integrations.html"
       }
      }
     }
@@ -2925,7 +3181,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "XRechnung 3.0 (CII und UBL) mit eigener Prüfung, ZUGFeRD 2.3 / Factur-X; ohne KoSIT-Validator und Peppol-Versand",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/invoicing.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/invoicing.md"
       },
       "highlevel": {
        "v": "no",
@@ -2976,6 +3232,11 @@
        "v": "no",
        "note": "Keine Rechnungen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Books Deutschland: XRechnung 3.0.2 und ZUGFeRD 2.3 Export/Import, Versand über PEPPOL (Storecove); eigene App, in Zoho One enthalten",
+       "source": "https://www.zoho.com/de-de/books/accounting-software-features/xrechnung-und-zugferd/"
       }
      }
     },
@@ -2987,7 +3248,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Lückenlose Nummernkreise, SHA-256-Festschreibung, unveränderliches Audit-Log (GoBD-orientiert, nicht zertifiziert)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/invoicing.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/invoicing.md"
       },
       "highlevel": {
        "v": "no",
@@ -3038,6 +3299,11 @@
        "v": "no",
        "note": "Keine Rechnungen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Books / Invoice werben mit GoBD-Konformität (Archiv, Änderungsprotokoll, Rollen); Festschreibung und Nummernkreise nicht einzeln geprüft",
+       "source": "https://www.zoho.com/de-de/invoice/gobd-compliance/"
       }
      }
     },
@@ -3049,7 +3315,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Online-Mandate, pain.008-Lastschriftläufe, Vorabankündigung, Rückläufer – auch ohne Stripe",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/sepa.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/sepa.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3100,6 +3366,11 @@
        "v": "no",
        "note": "Keine Zahlungsabwicklung",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Books Deutschland: SEPA-Mandate und pain.008-Datei für die Bank; Einzug nicht automatisch, Zahlungseingang manuell abgleichen",
+       "source": "https://www.zoho.com/en-de/books/help/invoice/sepa-direct-debit.html"
       }
      }
     },
@@ -3111,7 +3382,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "DATEV-Export; Live-Sync mit Lexware Office und sevDesk",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/backoffice.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/backoffice.md"
       },
       "highlevel": {
        "v": "no",
@@ -3162,6 +3433,11 @@
        "v": "no",
        "note": "Keine Buchhaltungsfunktionen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Books: DATEV-Export (Buchungsstapel, optional mit Belegen; max. 6 Monate je Export); eigene App, in Zoho One",
+       "source": "https://www.zoho.com/books/help/accountant/export-datev.html"
       }
      }
     },
@@ -3173,7 +3449,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Double-Opt-in und Consent-Ledger je Kanal und Zweck, Nachweis-Export als PDF/CSV",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/consent.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/consent.md"
       },
       "highlevel": {
        "v": "partial",
@@ -3224,6 +3500,11 @@
        "v": "yes",
        "note": "Single- und Double-Opt-in, DSGVO-Fokus",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Double-Opt-in per Bestätigungslink in Zoho Campaigns / Marketing Automation (eigene Apps); DSGVO-Einstellungen im CRM; Nachweis-Export nicht ausgewiesen",
+       "source": "https://help.zoho.com/portal/en/kb/campaigns-3-0/user-guide/settings/consent-and-privacy/articles/v3-setting-up-double-opt-in"
       }
      }
     },
@@ -3235,7 +3516,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Deutsch ist die Hauptsprache; Englisch teilweise",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/translating.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/translating.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3286,6 +3567,11 @@
        "v": "yes",
        "note": "Deutscher Anbieter, deutsche Oberfläche",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "CRM-Oberfläche und Mobile-Apps auf Deutsch (28 Sprachen); einzelne Zia-KI-Funktionen nur auf Englisch",
+       "source": "https://help.zoho.com/portal/en/kb/crm/crm-reference/introduction-to-zoho-crm/articles/specifications-zoho-crm"
       }
      }
     }
@@ -3304,7 +3590,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kurse mit Drip, gehostetem Video (HLS), Quizzen, Zertifikaten, Kohorten",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/courses.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/courses.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3355,6 +3641,11 @@
        "v": "no",
        "note": "Keine Kurse",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "Zoho Learn (eigene App, in Zoho One) für Schulungen und Wissensdatenbank; kein Kurs-Shop mit Mitgliederbereich ausgewiesen",
+       "source": "https://www.zoho.com/learn/"
       }
      }
     },
@@ -3366,7 +3657,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Skool-ähnlich: Feed, Punkte/Level, kostenpflichtige Stufen, Events, Live-Calls (Jitsi)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/community.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/community.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3417,6 +3708,11 @@
        "v": "no",
        "note": "Keine Community",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "Zoho Connect (eigene App, in Zoho One): Gruppen, Foren, Feeds, vor allem als Team-Netzwerk; Foren auch in Zoho Desk",
+       "source": "https://www.zoho.com/connect/"
       }
      }
     },
@@ -3428,7 +3724,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Tickets mit SLAs, Eskalation, Wissensdatenbank/Help-Center, CSAT/NPS",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/helpdesk.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/helpdesk.md"
       },
       "highlevel": {
        "v": "no",
@@ -3479,6 +3775,11 @@
        "v": "no",
        "note": "Kein Ticketsystem",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Desk (Tickets, SLAs, Wissensdatenbank, Kundenportal) als eigene App mit Gratis-Tarif, in CRM Plus und Zoho One enthalten",
+       "source": "https://www.zoho.com/desk/"
       }
      }
     },
@@ -3490,7 +3791,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Liste, Board, Kalender, Gantt mit kritischem Pfad; Zeiterfassung mit Freigabe und Abrechnung",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/projects.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/projects.md"
       },
       "highlevel": {
        "v": "no",
@@ -3541,6 +3842,11 @@
        "v": "no",
        "note": "Kein Projektmanagement",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Projects (Gantt, Zeiterfassung, Abrechnung) als eigene App, in Zoho One enthalten",
+       "source": "https://www.zoho.com/projects/"
       }
      }
     },
@@ -3552,7 +3858,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "Automatisierte Evergreen-Webinare mit Q&A, Umfragen, Angebot; kein Live-Streaming",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/webinars.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/webinars.md"
       },
       "highlevel": {
        "v": "partial",
@@ -3603,6 +3909,11 @@
        "v": "partial",
        "note": "Nur über Integrationen zu Webinar-Tools",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Webinar (Live-Webinare mit Registrierung, Umfragen) als eigene App, in Zoho One; CRM-Integration ab Standard",
+       "source": "https://www.zoho.com/webinar/"
       }
      }
     },
@@ -3614,7 +3925,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "Dokumente, Tabellen, Präsentationen und PDFs mit Versionen, Kommentaren und Bearbeitungssperre; die Browser-Editoren sind optional und werden selbst installiert",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/office.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/office.md"
       },
       "highlevel": {
        "v": "no",
@@ -3665,6 +3976,11 @@
        "v": "no",
        "note": "Keine Office-Suite",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "addon",
+       "note": "Zoho Workplace: Writer, Sheet, Show, WorkDrive, Mail – eigene Apps, in Zoho One enthalten",
+       "source": "https://www.zoho.com/workplace/"
       }
      }
     }
@@ -3683,7 +3999,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Unbegrenzt, self-hosted und im Cloud-Agentur-Plan",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3734,6 +4050,11 @@
        "v": "no",
        "note": "Agenturzugang zu separaten Kundenkonten, keine Sub-Accounts im eigenen Tarif",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Keine Sub-Accounts; bis zu 10 CRM-Orgs je Nutzer, jede einzeln lizenziert und ohne Datenabgleich",
+       "source": "https://help.zoho.com/portal/en/kb/crm/organization-settings/multiple-organizations/articles/managing-multiple-crm-organizations"
       }
      }
     },
@@ -3745,7 +4066,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Seiten, Funnels, Formulare, Kalender, Workflows, Pipelines, Kurse; JSON-Export/-Import",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3796,6 +4117,11 @@
        "v": "no",
        "note": "Keine Account-Vorlagen ausgewiesen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "partial",
+       "note": "Sandbox ab Enterprise (3–7 Konfigurations-Sandboxes) überträgt Anpassungen in die Produktivumgebung; kein Ein-Klick-Klon kompletter Kunden-Accounts",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -3807,7 +4133,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Name, Logos, Farben, Login-Domain je Kunde, gebrandete PWA-Icons",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3858,6 +4184,11 @@
        "v": "no",
        "note": "Kein White-Label",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Nur eigenes Logo und Design im eigenen CRM; echte White-Label-Suite nur für ISPs im Workplace-Partnerprogramm",
+       "source": "https://www.zoho.com/partners/workplace-partnership-program.html"
       }
      }
     },
@@ -3869,7 +4200,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Eigene Pläne, Signup → Stripe → Sub-Account aus Snapshot, Usage-Rebilling mit Aufschlag; kein Weiterverkauf von Telefonie/E-Mail-Guthaben – selbst gehostet; in der Cloud (auch im Tarif Agentur) nicht enthalten",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/saas.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/saas.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3920,6 +4251,11 @@
        "v": "no",
        "note": "Kein SaaS-Modus",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "no",
+       "note": "Kein Weiterverkauf unter eigenem Namen und Preis; Partnerprogramm für Reseller mit Provision (belegt für Workplace/Mail)",
+       "source": "https://www.zoho.com/mail/email-partnership-program.html"
       }
      }
     },
@@ -3931,7 +4267,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Kurse, Community, Tickets, geteilte Projekt-Boards, eigene Termine und freigegebene Dateien (mit Uploads)",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/courses.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/courses.md"
       },
       "highlevel": {
        "v": "yes",
@@ -3982,6 +4318,11 @@
        "v": "no",
        "note": "Kein Kundenportal",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Kundenportale im CRM ab Enterprise (1.000 kostenlose Einladungen); weitere Portale in Zoho Desk",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     }
@@ -4000,7 +4341,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "REST-API für alle Bereiche, OpenAPI 3.1, Agentur- und Sub-Account-Schlüssel",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/api.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/api.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4051,6 +4392,11 @@
        "v": "partial",
        "note": "REST-API ab Premium",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "REST-API v8 mit OAuth 2.0 für alle Module; tägliche API-Credits nach Edition (Free 5.000, Standard 50.000 + 250 je Lizenz)",
+       "source": "https://www.zoho.com/crm/developer/docs/api/v8/"
       }
      }
     },
@@ -4062,7 +4408,7 @@
       "gohyperlevel": {
        "v": "yes",
        "note": "Signierte ausgehende Webhooks für jedes Ereignis, eingehende Webhook-Trigger mit HMAC",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/api.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/api.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4113,6 +4459,11 @@
        "v": "partial",
        "note": "Über API/Integrationen",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Webhooks als Workflow-Aktion in allen bezahlten Editionen (Aufrufe pro Tag nach Edition begrenzt)",
+       "source": "https://www.zoho.com/de/crm/complete-feature-list.html"
       }
      }
     },
@@ -4124,7 +4475,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "REST-Hooks plus Zapier-/Make-Apps und n8n-Node zum Selbst-Einrichten; nicht im öffentlichen Zapier-Verzeichnis",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/integrations/zapier/README.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/integrations/zapier/README.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4175,6 +4526,11 @@
        "v": "yes",
        "note": "Zapier, Make, Pabbly, n8n",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Zoho-CRM-Apps in Zapier, Make und n8n; Zoho Flow als eigene Automationsplattform (in Zoho One enthalten)",
+       "source": "https://zapier.com/apps/zoho-crm/integrations"
       }
      }
     },
@@ -4186,7 +4542,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "via PWA-Install (iPhone/iPad/Android), Android zusätzlich als APK – nicht in den App-Stores",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/ios-web-app.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/ios-web-app.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4237,6 +4593,11 @@
        "v": "no",
        "note": "Keine eigene App, nur mobil-responsive Seiten und E-Mails",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Zoho-CRM-App im App Store, offline nutzbar, auch auf Deutsch",
+       "source": "https://apps.apple.com/de/app/zoho-crm-sales-marketing/id444908810"
       }
      }
     },
@@ -4248,7 +4609,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "via PWA-Install (iPhone/iPad/Android), Android zusätzlich als APK – nicht in den App-Stores",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/android-app.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/android-app.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4299,6 +4660,11 @@
        "v": "no",
        "note": "Keine eigene App, nur mobil-responsive Seiten und E-Mails",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Zoho-CRM-App bei Google Play, offline nutzbar, auch auf Deutsch",
+       "source": "https://play.google.com/store/apps/details?id=com.zoho.crm"
       }
      }
     },
@@ -4310,7 +4676,7 @@
       "gohyperlevel": {
        "v": "partial",
        "note": "50+ eingebaute Integrationen, Composio (250+ Apps), Nango, MCP-Client; eigener Plugin-Marktplatz noch klein",
-       "source": "https://github.com/BAISESYSTEMS/hyperlevel/blob/main/docs/integrations.md"
+       "source": "https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/docs/integrations.md"
       },
       "highlevel": {
        "v": "yes",
@@ -4361,6 +4727,11 @@
        "v": "partial",
        "note": "Native Integrationen (Zahlung, Webinar, Termine), kein großer Marktplatz",
        "source": "https://www.klicktipp.com/de/preise"
+      },
+      "zoho": {
+       "v": "yes",
+       "note": "Zoho Marketplace mit CRM-Erweiterungen (gleichzeitig installierbar: 5 in Standard bis 50 in Ultimate) und über 1.000 Integrationen",
+       "source": "https://marketplace.zoho.com/"
       }
      }
     }

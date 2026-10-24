@@ -6,7 +6,7 @@ import { BRIDGE_JS } from '../server/services/office-bridge-js.js';
  * The load/save bridge of the Office editors (server/services/office-bridge-js.ts) in a minimal fake browser: it catches the
  * editor's save download (the file's own kind or the editor's native format – a long extension like ".deckcraft"), lets every
  * other download through and announces it, binds every message to the channel and to window.parent, and presses the right save
- * shortcut. The real editors were checked end to end in Chromium (docs/office.md#wie-die-editoren-laden-und-speichern).
+ * shortcut. The real editors were checked end to end in Chromium (docs/office.md#how-the-editors-load-and-save).
  */
 
 function fakeBrowser(attrs: Record<string, string>) {

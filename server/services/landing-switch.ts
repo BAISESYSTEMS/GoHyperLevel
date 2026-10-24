@@ -4,7 +4,8 @@ import type { Lang } from './landing-copy.js';
  * "Why switch from X" on /vergleich – one short, fair paragraph per vendor of the comparison research
  * (web/public/landing/competitors.json, as of 2026-10-09): what {b} adds, and where the other tool is better today.
  * Checked against the code (again on 2026-10-22: store with cart, PayPal and Mollie, visual workflow editor and Funnel AI now exist):
- * SaaS mode is self-hosted only, absences that rest only on a missing mention are worded as "not stated". Keys are the vendor ids of
+ * SaaS mode is self-hosted only, absences that rest only on a missing mention are worded as "not stated". Zoho was added on 2026-10-24
+ * (EUR prices as zoho.com/de shows them; Zoho Books/Voice/Desk etc. are rated "addon" – separate apps). Keys are the vendor ids of
  * the research file.
  */
 export const WHY_SWITCH: Record<string, Record<Lang, string>> = {
@@ -47,5 +48,9 @@ export const WHY_SWITCH: Record<string, Record<Lang, string>> = {
   klicktipp: {
     de: 'KlickTipp ist der bekannte deutsche E-Mail-Anbieter mit Servern in Deutschland, AVV und Double-Opt-in-Fokus, bleibt aber ein E-Mail-Werkzeug: bis Deluxe ein Nutzer, 3–10 Kampagnen, Preise nach Empfängerzahl, kein CRM mit Pipelines, keine Rechnungen, Kurse oder App, SMS erst ab Enterprise. {b} bietet dieselbe DSGVO-Sorgfalt (Double-Opt-in mit Nachweis-Export, Hosting in Frankfurt) plus CRM, unbegrenzte Workflows, WhatsApp, Funnels, Kurse, Rechnungen und Agentur-Sub-Accounts zum Festpreis. Ein Umzugs-Import für KlickTipp ist eingebaut.',
     en: 'KlickTipp is the well-known German e-mail provider with servers in Germany, a DPA and a double opt-in focus, but it stays an e-mail tool: one user up to Deluxe, 3–10 campaigns, prices by recipients, no CRM with pipelines, no invoicing, courses or app, SMS only with Enterprise. {b} offers the same GDPR care (double opt-in with proof export, hosting in Frankfurt) plus CRM, unlimited workflows, WhatsApp, funnels, courses, invoicing and agency sub-accounts at a flat price. A switching import for KlickTipp is built in.',
+  },
+  zoho: {
+    de: 'Zoho ist die breiteste Suite im Vergleich: CRM ab 14 € pro Nutzer und Monat, Zoho One mit über 45 Apps für 37 € pro Mitarbeiter – Helpdesk, Buchhaltung mit XRechnung, DATEV und SEPA, Projekte und Webinare. Dafür sind es getrennte Apps mit eigenen Kontingenten: Telefonie (Zoho Voice) und SMS-Guthaben kommen extra, Zoho One muss alle Mitarbeiter abdecken, Funnels, Kurse und Community sind nur Beiwerk, das Hosting steht in Amsterdam und Dublin, und es gibt weder Open Source, Self-Hosting noch White-Label oder Kunden-Sub-Accounts. {b} bringt CRM, Workflows, Funnels, Kurse, Community, Rechnungen nach deutschem Recht, SEPA und Helpdesk in einem Produkt, ohne Gebühr pro Nutzer ab 99,99 € und gehostet in Frankfurt. KI-Agenten, eigene KI-Schlüssel und einen MCP-Server hat Zoho ebenfalls. Bei Ökosystem, ausgereiften Einzel-Apps (Books, Desk, Projects, Campaigns), Marktplatz und Preis pro Platz für kleine Teams liegt Zoho vorn.',
+    en: 'Zoho is the broadest suite in the comparison: CRM from €14 per user and month, Zoho One with 45+ apps for €37 per employee – helpdesk, accounting with XRechnung, DATEV and SEPA, projects and webinars. The catch is separate apps with their own quotas: telephony (Zoho Voice) and SMS credit cost extra, Zoho One must cover all employees, funnels, courses and community are an afterthought, hosting is in Amsterdam and Dublin, and there is no open source, self-hosting, white-label or client sub-accounts. {b} puts CRM, workflows, funnels, courses, community, German-law invoicing, SEPA and a helpdesk into one product with no per-user fee from €99.99, hosted in Frankfurt. Zoho has AI agents, your own AI keys and an MCP server too. On ecosystem, mature single apps (Books, Desk, Projects, Campaigns), marketplace and price per seat for small teams, Zoho leads.',
   },
 };

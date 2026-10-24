@@ -2,7 +2,7 @@
 
 **Einstellungen → E-Mail-Zustellung** checks whether the domain you send mail from is set up the way Gmail, Yahoo, Microsoft and the others expect – **SPF, DKIM, DMARC and MX** – and shows the missing DNS records ready to copy, with German step-by-step instructions. The same verdict warns you in the send dialog of every campaign. Campaign and automation mails carry the one-click unsubscribe header (**RFC 8058**) automatically.
 
-Reputation (bounce, complaint and unsubscribe rates), the warm-up plan, list hygiene and address checks live next to it under *Kampagnen → Zustellbarkeit* – see [email-marketing.md](email-marketing.md#zustellbarkeit).
+Reputation (bounce, complaint and unsubscribe rates), the warm-up plan, list hygiene and address checks live next to it under *Kampagnen → Zustellbarkeit* – see [email-marketing.md](email-marketing.md#deliverability).
 
 It only *reads* public DNS (and, when you have connected your sending provider, that provider's own account of the domain). It never changes DNS, needs no DNS-provider login and no password.
 
@@ -88,7 +88,7 @@ Make sure `PGHL_BASE_URL` is your public `https://` address: it is part of every
 
 ## REST API and MCP tool
 
-Routes (area *Einstellungen*, except `/api/mail-domains/status` which needs *Kampagnen*; every write is in the audit log): see [E-Mail-Zustellung in docs/api.md](api.md#e-mail-zustellung-mail-domains). MCP: `ghl_mail_domain_check` adds the domain if needed, checks it and returns the verdict, the findings and the records to create (without a domain it checks the sender's).
+Routes (area *Einstellungen*, except `/api/mail-domains/status` which needs *Kampagnen*; every write is in the audit log): see [E-Mail-Zustellung in docs/api.md](api.md#email-delivery-mail-domains). MCP: `ghl_mail_domain_check` adds the domain if needed, checks it and returns the verdict, the findings and the records to create (without a domain it checks the sender's).
 
 ## For developers
 

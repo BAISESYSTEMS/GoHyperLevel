@@ -1,0 +1,11 @@
+/* HyperLevel brand: blue accent (as in the app and the README badges). */
+:root {
+	--sl-color-accent-low: #0b1f4d;
+	--sl-color-accent: #2563eb;
+	--sl-color-accent-high: #bfd4ff;
+}
+:root[data-theme='light'] {
+	--sl-color-accent-low: #dbe7ff;
+	--sl-color-accent: #2563eb;
+	--sl-color-accent-high: #0b2a6b;
+}

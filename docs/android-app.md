@@ -1,194 +1,196 @@
-# Android-App „HyperLevel“
+**English** · [Deutsch](android-app.de.md)
 
-Native App für Android 8 (API 26) und neuer. Sie zeigt die komplette Web-App und bringt alles Wichtige auf den
-Home-Bildschirm: 13 Widgets, Schnellaktionen als kleine Dialoge, Mitteilungen ohne Google-Dienste und Updates
-direkt vom eigenen Server. Entwickler-Infos: [android/README.md](../android/README.md).
+# Android app “HyperLevel”
 
-## Installieren
+A native app for Android 8 (API 26) and newer. It shows the complete web app and puts everything important on the
+home screen: 13 widgets, quick actions as small dialogs, notifications without Google services, and updates
+straight from your own server. Developer info: [android/README.md](../android/README.md).
 
-1. Auf dem Handy `https://crm.example.com/android` öffnen (Download-Seite mit QR-Code) und die APK laden.
-2. Android fragt einmalig nach „Apps aus dieser Quelle installieren“ – für den Browser erlauben.
-3. HyperLevel öffnen und wie gewohnt anmelden. Die App verbindet sich danach von selbst (Gerät erscheint unter
-   **Einstellungen → Mein Konto → Geräte (App)**) und fragt nach der Erlaubnis für Mitteilungen.
+## Installing
 
-Neue Versionen lädt der Admin hoch (`PUT /api/mobile/app`, siehe API-Doku). Die App prüft täglich und beim Start,
-zeigt „Update verfügbar“, lädt die APK, prüft die SHA-256-Prüfsumme und startet die Installation. Beim ersten Mal
-erlaubt man HyperLevel „Apps aus dieser Quelle installieren“.
+1. On your phone, open `https://crm.example.com/android` (download page with a QR code) and download the APK.
+2. Android asks once for “Install apps from this source” – allow it for the browser.
+3. Open HyperLevel and sign in as usual. The app then connects by itself (the device appears under
+   **Settings → My account → Devices (app)**) and asks for permission to send notifications.
 
-## Die App
+The admin uploads new versions (`PUT /api/mobile/app`, see the API docs). The app checks daily and at startup,
+shows “Update available”, downloads the APK, verifies the SHA-256 checksum and starts the installation. The first
+time, you allow HyperLevel to “Install apps from this source”.
 
-- **Web-App im Vollbild** (`/app`): Login bleibt gespeichert, Datei-Upload, Downloads (auch Exporte), Mikrofon für
-  das Browser-Telefon und die Mikrofon-Taste des KI-Agenten (Einstellungen → Stimme, [docs/voice.md](voice.md): die Berechtigung fragt die App beim ersten Mal, Wiedergabe ohne Extra-Tipp), externe Links im Browser-Tab, Zurück-Taste blättert zurück.
-- **Links** auf `https://crm.example.com/app/…` (Mails, Chat) öffnen direkt in der App (App Links).
-- **Schnellmenü** (runder Knopf unten links): Aufgabe, Kontakt, Notiz, Sprach-Notiz, Anruf, Neu laden, Link teilen,
-  Fehler melden, App-Einstellungen. Lange auf das App-Symbol drücken: Neue Aufgabe, Sprach-Notiz, Neuer Kontakt,
-  Posteingang, Fehler melden.
-- **App-Einstellungen**: Konto und Geräte (andere Geräte abmelden), Mitteilungen je Art, Widget-Aktualisierung
-  (15 Min. bis 2 Std.), Standard-Projekt für neue Einträge, Material-You-Farben, Hilfe & Feedback, **Diagnose**, Version,
-  Update-Suche, Abmelden. Siebenmal auf „Version“ tippen schaltet Entwickler-Optionen frei (Server-Adresse, Demo-Daten).
+## The app
 
-## Fehler melden & Wunschliste
+- **Web app in full screen** (`/app`): the login stays saved, file upload, downloads (exports too), microphone for
+  the browser phone and the microphone button of the AI agent (Settings → Voice, [docs/voice.md](voice.md): the app asks for the permission the first time, playback without an extra tap), external links in a browser tab, the back button goes back.
+- **Links** to `https://crm.example.com/app/…` (e-mails, chat) open directly in the app (App Links).
+- **Quick menu** (round button at the bottom left): task, contact, note, voice note, call, reload, share link,
+  report a bug, app settings. Long-press the app icon: New task, Voice note, New contact,
+  Inbox, Report a bug.
+- **App settings**: account and devices (sign out other devices), notifications by kind, widget refresh
+  (15 min to 2 h), default project for new entries, Material You colors, Help & feedback, **Diagnostics**, version,
+  update check, sign out. Tapping “Version” seven times unlocks developer options (server address, demo data).
 
-Seit Version 1.0.1. Gleiche Tickets wie in der Web-App (siehe [Fehler & Wünsche](bug-reports.md)).
+## Reporting bugs & the wish list
 
-- **Fehler melden**: im Schnellmenü, unter **App-Einstellungen → Hilfe & Feedback**, lange auf das App-Symbol drücken
-  oder – wenn eingeschaltet – das Handy schütteln („Schütteln zum Melden“, Standard aus). Die App macht vorher einen
-  Screenshot des aktuellen Bildschirms (auch der Web-Ansicht); das Formular zeigt ihn als Vorschau (✕ entfernt ihn,
-  „Bild auswählen“ nimmt stattdessen ein Bild aus der Galerie).
-- **Formular**: Fehler, Verbesserungswunsch oder Frage; was ist passiert, was hast du erwartet, Schritte, wie schlimm.
-  Mitgeschickt werden – sichtbar und einzeln entfernbar – Gerät und Android-Version, App-Version, die aktuelle Seite
-  und die letzten 20 fehlgeschlagenen Anfragen der App (Methode, Pfad, Status, Fehlertext – nie Inhalte oder Schlüssel).
-  Nach dem Senden zeigt die App die Ticketnummer.
-- **Meldungen**: die eigenen Meldungen mit Status und ungelesenen Antworten; Tipp öffnet die Meldung in der Web-App
-  (antworten, Infos ergänzen, wieder öffnen).
-- **Wunschliste**: alle Wünsche nach Stimmen, neu oder Status; Daumen stimmt ab (nochmal tippen nimmt die Stimme
-  zurück), „+ Wunsch“ reicht einen neuen Wunsch ein. Namen anderer Nutzer sind nicht zu sehen.
-- **Abstürze**: stürzt die App ab, schickt sie beim nächsten Start Fehlermeldung und Stacktrace an
-  `/api/mobile/client-errors`. Der Server behält sie nur, wenn „Fehler automatisch melden“ für den Nutzer an ist.
+Since version 1.0.1. The same tickets as in the web app (see [Bug reports & wishes](bug-reports.md)).
 
-## Wenn die Seite leer bleibt (Fehlersuche)
+- **Report a bug**: in the quick menu, under **App settings → Help & feedback**, by long-pressing the app icon
+  or – if turned on – by shaking the phone (“Shake to report”, off by default). Beforehand the app takes a
+  screenshot of the current screen (the web view too); the form shows it as a preview (✕ removes it,
+  “Choose image” picks an image from the gallery instead).
+- **Form**: bug, improvement wish or question; what happened, what you expected, steps, how bad it is.
+  Sent along – visible and removable one by one – are the device and Android version, the app version, the current page
+  and the last 20 failed requests of the app (method, path, status, error text – never contents or keys).
+  After sending, the app shows the ticket number.
+- **Reports**: your own reports with status and unread replies; a tap opens the report in the web app
+  (reply, add info, reopen).
+- **Wish list**: all wishes by votes, new or status; the thumb votes (tapping again takes the vote
+  back), “+ Wish” submits a new wish. The names of other users are not visible.
+- **Crashes**: if the app crashes, it sends the error message and stack trace to
+  `/api/mobile/client-errors` on the next start. The server keeps them only if “Report errors automatically” is on for the user.
 
-Seit Version 1.0.3 nutzt die App den ganzen Bildschirm: Die Web-Ansicht reicht bis unter die Kamera-Aussparung und die Navigationsleiste, die Seite hält ihre Inhalte über `--sal`/`--sar`/`--sab` davon frei. Seit Version 1.0.2 bleibt der Bildschirm nie still leer. Die App prüft selbst, ob die Web-Oberfläche gestartet ist, und
-sagt es, wenn nicht.
+## If the page stays blank (troubleshooting)
 
-**„Die Seite lädt nicht“** (nativer Bildschirm über der Web-Ansicht) erscheint, wenn
-- die Seite geladen wurde, aber nach etwa 6 Sekunden nichts anzeigt (die Web-App ist nicht gestartet),
-- die Web-App selbst „Die App konnte nicht starten“ meldet,
-- eine Seite auch nach 30 Sekunden nicht fertig geladen ist,
-- der Server mit einem Fehler antwortet (z. B. 502 beim Neustart des Servers); bei einem Zertifikatsfehler (Datum/Uhrzeit
-  des Handys falsch, fremdes WLAN) erscheint stattdessen „Keine Verbindung“ mit dem Grund,
-- der Web-Prozess der Anzeige ein zweites Mal innerhalb einer Minute ausfällt (beim ersten Mal lädt die App die Seite
-  mit einer neuen Web-Ansicht einfach neu; der Grund steht im Bildschirm).
+Since version 1.0.3 the app uses the whole screen: the web view extends under the camera cutout and the navigation bar, and the page keeps its content clear of them with `--sal`/`--sar`/`--sab`. Since version 1.0.2 the screen never stays silently blank. The app itself checks whether the web interface has started and
+says so if not.
 
-Der Bildschirm nennt den Grund, die **letzten Fehler** (Konsolenfehler der Seite, fehlgeschlagene Anfragen, Prüfungen)
-und die **WebView-Version**. Kommt die Seite doch noch, verschwindet er von selbst. Vier Knöpfe:
+**“The page is not loading”** (a native screen over the web view) appears when
+- the page was loaded but shows nothing after about 6 seconds (the web app has not started),
+- the web app itself reports “The app could not start”,
+- a page is still not finished loading after 30 seconds,
+- the server answers with an error (e.g. 502 while the server restarts); with a certificate error (phone date/time
+  wrong, foreign Wi-Fi), “No connection” appears instead, with the reason,
+- the display's web process fails a second time within a minute (the first time, the app simply reloads the page
+  with a new web view; the reason is shown on the screen).
 
-| Knopf | Was passiert |
+The screen names the reason, the **latest errors** (console errors of the page, failed requests, checks)
+and the **WebView version**. If the page does load after all, the screen disappears by itself. Four buttons:
+
+| Button | What happens |
 | --- | --- |
-| Neu laden | lädt die Seite neu – oder die Startseite, wenn es keine Seite zum Neuladen gibt |
-| Cache & Offline-Daten löschen | leert Cache, Web-Speicher und Service Worker der Web-Ansicht (die Anmeldung bleibt) und lädt neu |
-| Im Browser öffnen | öffnet die Seite im Browser-Tab – läuft sie dort, liegt es an der WebView des Handys |
-| Diagnose senden | schickt Gerät, App- und WebView-Version, Status und letzte Fehler als Fehlermeldung an das Team („Fehler & Wünsche“, Schwere hoch); ist die App nicht verbunden, öffnet sich stattdessen „Teilen“ |
+| Reload | reloads the page – or the start page if there is no page to reload |
+| Clear cache & offline data | empties the cache, web storage and service worker of the web view (the sign-in stays) and reloads |
+| Open in browser | opens the page in a browser tab – if it runs there, the problem is the phone's WebView |
+| Send diagnostics | sends device, app and WebView version, status and latest errors to the team as a bug report (“Bug reports & wishes”, severity high); if the app is not connected, “Share” opens instead |
 
-**Veraltete WebView.** Die Web-Oberfläche ist für Chrome/WebView **92 oder neuer** gebaut (2021). Ist die
-installierte Version älter, zeigt der Bildschirm einen Hinweis mit Knopf zur Play-Store-Seite von
-„Android System WebView“ (oder Chrome, je nachdem, welches die Web-Ansicht liefert). Auf Handys ohne Play Store
-(z. B. GrapheneOS, LineageOS) kommt die WebView mit den System-Updates bzw. aus dem eigenen App-Store.
+**Outdated WebView.** The web interface is built for Chrome/WebView **92 or newer** (2021). If the installed
+version is older, the screen shows a note with a button to the Play Store page of
+“Android System WebView” (or Chrome, depending on which one provides the web view). On phones without a Play Store
+(e.g. GrapheneOS, LineageOS), the WebView comes with the system updates or from the phone's own app store.
 
-**Einstellungen → Diagnose** zeigt dasselbe jederzeit: WebView (Paket und Version, rot wenn zu alt), Server,
-Status des letzten Starts („Geladen · vor 3 Min.“ oder der Grund des Fehlers) und die letzten Fehler. Der Status
-bleibt auch nach einem Neustart der App sichtbar. „Diagnose senden“ wie oben. **App zurücksetzen (Web-Daten)**
-löscht Cache, Offline-Daten und die Anmeldung in der Web-Ansicht (danach dort neu anmelden; Widgets und
-Mitteilungen bleiben verbunden, Daten auf dem Server bleiben) und lädt die Startseite neu.
+**Settings → Diagnostics** shows the same at any time: WebView (package and version, red if too old), server,
+status of the last start (“Loaded · 3 min ago” or the reason for the error) and the latest errors. The status
+stays visible even after the app restarts. “Send diagnostics” as above. **Reset app (web data)**
+deletes the cache, offline data and the sign-in in the web view (sign in there again afterwards; widgets and
+notifications stay connected, data on the server stays) and reloads the start page.
 
-**Auch im Browser:** startet die Web-App dort nicht (nach 10 Sekunden nichts gerendert, z. B. weil eine Datei fehlt
-oder der Browser zu alt ist), ersetzt eine einfache Seite die leere: „Die App konnte nicht starten“ mit dem
-Fehlertext, **Neu laden** und **Offline-Daten löschen** (meldet Service Worker ab, löscht Zwischenspeicher). Läuft ein
-Service Worker auf der leeren Seite, räumt sie vorher einmal selbst auf und lädt neu. Die gesammelten Fehler gehen
-– wenn der Nutzer automatische Fehlerberichte erlaubt hat – als Ticket „[Browser] App-Start fehlgeschlagen …“ an
-das Team (siehe [Fehler & Wünsche](bug-reports.md)). Wer abgemeldet ist, sendet nichts; dann hilft „Diagnose senden“
-in der App oder ein Blick in die Einstellungen → Diagnose.
+**In the browser too:** if the web app does not start there (nothing rendered after 10 seconds, e.g. because a file is missing
+or the browser is too old), a simple page replaces the blank one: “The app could not start” with the
+error text, **Reload** and **Clear offline data** (unregisters the service worker, deletes caches). If a
+service worker is running on the blank page, it first cleans up once by itself and reloads. The collected errors go
+– if the user has allowed automatic error reports – as a ticket “[Browser] App start failed …” to
+the team (see [Bug reports & wishes](bug-reports.md)). Users who are signed out send nothing; then “Send diagnostics”
+in the app or a look at Settings → Diagnostics helps.
 
-**Was die App sonst selbst repariert:** Stellt Android die App nach dem Beenden im Hintergrund wieder her und der
-gespeicherte Web-Zustand ist leer oder unbrauchbar, lädt sie die Startseite. „Neu laden“ im Schnellmenü funktioniert
-auch ohne geladene Seite.
+**What else the app repairs by itself:** If Android restores the app in the background after it was closed and the
+saved web state is empty or unusable, the app loads the start page. “Reload” in the quick menu works
+even without a loaded page.
 
-**Für Admins – neue Version ausliefern:** mit `x-min-supported-code` (siehe unten) kann man ältere Versionen zum Update
-zwingen. Ist die App leer, aber startet, bietet sie das Update beim Öffnen an (Dialog), auch über dem leeren Bildschirm.
+**For admins – shipping a new version:** with `x-min-supported-code` (see below) you can force older versions
+to update. If the app is blank but starts, it offers the update on opening (dialog), even over the blank screen.
 
 ## Widgets
 
-Lange auf den Home-Bildschirm drücken → Widgets → HyperLevel. Beim Hinzufügen wählt man das Projekt („Alle Projekte“
-oder ein Sub-Account) und je nach Widget weitere Optionen; später über „Widget bearbeiten“ änderbar. Widgets zeigen
-sofort die zuletzt geladenen Daten („vor 3 Min.“), aktualisieren sich im Hintergrund, nach jeder Aktion, beim Öffnen
-der App und über den ↻-Knopf.
+Long-press the home screen → Widgets → HyperLevel. When adding one, you choose the project (“All projects”
+or one sub-account) and, depending on the widget, further options; you can change them later via “Edit widget”. Widgets show
+the data loaded last right away (“3 min ago”), refresh in the background, after every action, when the app
+opens and with the ↻ button.
 
-| Widget | Größen | Was es kann |
+| Widget | Sizes | What it does |
 | --- | --- | --- |
-| Cockpit | 2×2 – 5×3 | Neue Leads heute, offene Deals €, Umsatz Monat, ungelesen, Aufgaben fällig, Termine, Umsatzkurve 30 Tage |
-| Posteingang | 3×2 – 5×4 | Neueste Unterhaltungen mit Kanal-Symbol und Ungelesen-Punkt; Tipp öffnet die Unterhaltung, ↩ antwortet direkt (Kanal wählbar). Option: nur ungelesene |
-| Aufgaben | 2×2 – 5×4 | Heute & überfällig (oder Woche / alle offenen) mit echten Häkchen; „+“ legt eine Aufgabe an (Fälligkeit, Projekt, Diktat) |
-| Termine | 3×2 – 5×3 | Heute und morgen; Tipp: anrufen, navigieren, Meeting öffnen, bestätigen, erschienen/nicht erschienen, absagen |
-| Pipeline | 4×2 – 5×3 | Phasen mit Anzahl und Wert, Top-Deals; Tipp: Phase wechseln, gewonnen/verloren |
-| Projekte | 3×2 – 5×4 | Alle Projekte mit Website-Status (grün/rot), offenen Aufgaben, ungelesenen Nachrichten |
-| Schnellaktionen | 4×1, 2×2, 4×2 | Kontakt, Aufgabe, Notiz, Anruf, Sprach-Notiz, Rechnung, Posteingang – Auswahl einstellbar |
-| Umsatz | 2×2 – 4×2 | Monat, heute, offene Rechnungen (überfällige), Kurve |
-| Anrufe | 3×2 – 5×3 | Verpasste Anrufe mit Mailbox-Hinweis und Rückruf (Handy oder über HyperLevel/Twilio) |
-| Bewertungen | 2×2 – 4×2 | Sterne, Anzahl, Veränderung 30 Tage, neue Bewertungen, neueste Bewertung |
-| Sprach-Notiz | 1×1, 2×1 | Ein Tipp, sprechen – wird Aufgabe (mit Fälligkeit) oder Notiz am genannten Kontakt |
-| Zahl | 1×1, 2×1 | Eine Kennzahl nach Wahl mit Trendpfeil (z. B. Leads heute, Umsatz Monat, ungelesen) |
-| Social | 3×2 – 4×3 | Nächste geplante Beiträge mit Zeit und Kanälen |
+| Cockpit | 2×2 – 5×3 | New leads today, open deals €, revenue this month, unread, tasks due, appointments, revenue curve 30 days |
+| Inbox | 3×2 – 5×4 | Latest conversations with channel icon and unread dot; a tap opens the conversation, ↩ replies directly (channel selectable). Option: unread only |
+| Tasks | 2×2 – 5×4 | Today & overdue (or week / all open) with real checkmarks; “+” creates a task (due date, project, dictation) |
+| Appointments | 3×2 – 5×3 | Today and tomorrow; tap: call, navigate, open meeting, confirm, showed up/no-show, cancel |
+| Pipeline | 4×2 – 5×3 | Stages with count and value, top deals; tap: change stage, won/lost |
+| Projects | 3×2 – 5×4 | All projects with website status (green/red), open tasks, unread messages |
+| Quick actions | 4×1, 2×2, 4×2 | Contact, task, note, call, voice note, invoice, inbox – selection adjustable |
+| Revenue | 2×2 – 4×2 | Month, today, open invoices (overdue), curve |
+| Calls | 3×2 – 5×3 | Missed calls with voicemail note and call back (phone or through HyperLevel/Twilio) |
+| Reviews | 2×2 – 4×2 | Stars, count, 30-day change, new reviews, latest review |
+| Voice note | 1×1, 2×1 | One tap, speak – becomes a task (with due date) or a note on the contact you name |
+| Number | 1×1, 2×1 | One key figure of your choice with a trend arrow (e.g. leads today, revenue this month, unread) |
+| Social | 3×2 – 4×3 | Next scheduled posts with time and channels |
 
-Abgemeldet zeigen Widgets „In HyperLevel anmelden“, nach einem Widerruf (Passwortwechsel, „Alle abmelden“, Gerät
-entfernt) „Neu anmelden“ – ein Tipp öffnet die App; ist der Web-Login noch gültig, verbindet sie sich sofort wieder.
+When signed out, widgets show “Sign in to HyperLevel”; after a revocation (password change, “Sign out all”, device
+removed), “Sign in again” – a tap opens the app; if the web login is still valid, it reconnects immediately.
 
-## Mitteilungen
+## Notifications
 
-Die App fragt `/api/mobile/feed` bei jeder Hintergrund-Aktualisierung ab (Standard alle 15 Minuten, Android kann
-das im Energiesparmodus strecken) und zeigt neue Ereignisse als Mitteilung – ohne Firebase. Kanäle: Nachrichten,
-Team-Chat (Direktnachrichten und Erwähnungen), Anrufe, Leads, Zahlungen, Websites, Aufgaben, Bewertungen, Meine Meldungen (Antworten und Statuswechsel bei
-eigenen Meldungen und Wünschen) – je Art in den App-Einstellungen abschaltbar, Töne in
-den System-Einstellungen. Tipp öffnet die passende Seite im richtigen Sub-Account. Beim ersten Abruf gibt es keine
-alten Meldungen.
+The app polls `/api/mobile/feed` on every background refresh (every 15 minutes by default; Android may
+stretch this in battery saver mode) and shows new events as a notification – without Firebase. Channels: messages,
+team chat (direct messages and mentions), calls, leads, payments, websites, tasks, reviews, My reports (replies and status changes on
+your own reports and wishes) – each kind can be turned off in the app settings, sounds in
+the system settings. A tap opens the matching page in the right sub-account. The first fetch brings no
+old notifications.
 
-## Datenschutz & Sicherheit
+## Privacy & security
 
-- Login nur auf dem eigenen Server; die App tauscht die Anmeldung einmal gegen einen Geräte-Schlüssel (`ghm_…`),
-  der nur für `/api/mobile/*` gilt, im Android Keystore verschlüsselt liegt und nicht ins Backup geht.
-- „Abmelden“ in der App widerruft den Schlüssel auf dem Server und löscht Login-Cookies und zwischengespeicherte Daten.
-- Updates nur per HTTPS und nur mit passender SHA-256-Prüfsumme; Android prüft zusätzlich die Signatur.
+- Login only on your own server; the app exchanges the sign-in once for a device key (`ghm_…`),
+  which is valid only for `/api/mobile/*`, is stored encrypted in the Android Keystore and is not included in backups.
+- “Sign out” in the app revokes the key on the server and deletes login cookies and cached data.
+- Updates only over HTTPS and only with a matching SHA-256 checksum; Android additionally verifies the signature.
 
-## Für Admins
+## For admins
 
-- **App Links**: der Server liefert `/.well-known/assetlinks.json` für die Paket-ID deines Builds (Standard
-  `org.gohigh.android`, sonst `PGHL_ANDROID_PACKAGE` bzw. Agentur-Einstellung) mit dem SHA-256 deines
-  Signatur-Zertifikats (`PGHL_ANDROID_CERT_SHA256` oder *Agentur → Android-App*). Ohne Fingerabdruck bleibt die Datei
-  leer und Links öffnen im Browser. Eigenen Build: siehe [android/README.md](../android/README.md).
-- **APK hochladen**: `PUT /api/mobile/app` mit `x-version-code`, `x-version-name`, `x-changelog`, optional
-  `x-min-supported-code` (ältere Versionen müssen dann aktualisieren).
-- Der Hintergrund-Refresh holt nur, was platzierte Widgets brauchen (gleiche Anfragen werden zusammengelegt).
+- **App Links**: the server serves `/.well-known/assetlinks.json` for the package ID of your build (default
+  `org.gohigh.android`, otherwise `PGHL_ANDROID_PACKAGE` or the agency setting) with the SHA-256 of your
+  signing certificate (`PGHL_ANDROID_CERT_SHA256` or *Agency → Android app*). Without a fingerprint the file stays
+  empty and links open in the browser. For your own build, see [android/README.md](../android/README.md).
+- **Upload an APK**: `PUT /api/mobile/app` with `x-version-code`, `x-version-name`, `x-changelog`, optionally
+  `x-min-supported-code` (older versions then have to update).
+- The background refresh fetches only what placed widgets need (identical requests are merged).
 
-## Öffentliche APK für alle
+## Public APK for everyone
 
-Die Startseite des Projekts ([landing.md](landing.md)) bietet die APK von gohyperlevel.com zum Herunterladen an: Knopf auf
-`/downloads/hyperlevel.apk` (früher `gohigh.apk`, bleibt als Alias) mit Version, Größe und SHA-256 der zuletzt hochgeladenen Datei, QR-Code zur Seite `/android`,
-Anleitung für „Apps aus dieser Quelle zulassen“. Download, Prüfsumme und Selbst-Update sind die vorhandenen Wege (siehe
-oben) – neu ist nur der Platz auf der Startseite.
+The project's home page ([landing.md](landing.md)) offers the APK from gohyperlevel.com for download: a button to
+`/downloads/hyperlevel.apk` (formerly `gohigh.apk`, kept as an alias) with the version, size and SHA-256 of the most recently uploaded file, a QR code to the `/android` page,
+and instructions for “Allow apps from this source”. Download, checksum and self-update are the existing routes (see
+above) – the only new thing is the spot on the home page.
 
-**Was heute fehlt:** (Server-Seite für die Gray-Label-App mit Server-Suche, nativer Push über das Relay und Branding nach dem Login: [apps.md](apps.md).) Die App fragt beim ersten Start **nicht** nach dem Server. Sie nutzt die beim Bau eingetragene
-Adresse (`-PgohighBaseUrl` bzw. `GOHIGH_BASE_URL`, ohne Angabe `https://crm.example.com`); umstellen lässt sie sich nur
-über die Entwickler-Optionen (siebenmal auf „Version“ tippen). Eine APK, die wirklich für alle funktioniert, braucht einen
-Startbildschirm mit zwei Wegen – „HyperLevel Cloud“ (die eingebaute Adresse) oder „Eigener Server“ (Adresse eingeben,
-die App prüft `GET /api/version` und speichert sie in `AppSettings.baseUrl`) – und den Hinweis, dass App Links nur für die
-eingebaute Domain gelten (`/.well-known/assetlinks.json` nennt das Zertifikat dieses Builds). Bis es den gibt:
+**What is missing today:** (Server side for the gray-label app with server search, native push through the relay and branding after login: [apps.md](apps.md).) On first start the app does **not** ask for the server. It uses the
+address entered at build time (`-PgohighBaseUrl` or `GOHIGH_BASE_URL`, `https://crm.example.com` if not given); it can only be changed
+through the developer options (tap “Version” seven times). An APK that really works for everyone needs a
+start screen with two paths – “HyperLevel Cloud” (the built-in address) or “Own server” (enter the address,
+the app checks `GET /api/version` and stores it in `AppSettings.baseUrl`) – and a note that App Links only work for the
+built-in domain (`/.well-known/assetlinks.json` names the certificate of this build). Until that exists:
 
-- auf gohyperlevel.com eine APK anbieten, die mit der **Cloud-Adresse** gebaut ist (sie verbindet sich mit der Cloud),
-- Self-Hoster laden die APK ihrer eigenen Instanz unter `/android` (dort lädt der Admin seinen eigenen Build hoch) oder
-  bauen sie mit ihrer Adresse,
-- Agenturen bauen ihre gebrandete APK selbst (eigene Paket-ID, Name und Icon im Quellcode, eigener Signatur-Schlüssel).
+- offer an APK on gohyperlevel.com that is built with the **cloud address** (it connects to the cloud),
+- self-hosters download the APK of their own instance at `/android` (where the admin uploads their own build) or
+  build it with their address,
+- agencies build their branded APK themselves (own package ID, name and icon in the source code, own signing key).
 
-Die Korrektur „ausgehende Anrufe zeigen die angerufene Nummer“ (Commit `f2781b2`) ist im Quellcode unter `android/` und
-kommt mit dem nächsten Build in die APK.
+The fix “outgoing calls show the number called” (commit `f2781b2`) is in the source code under `android/` and
+reaches the APK with the next build.
 
-**Bauen und ausliefern** (Android SDK 36, JDK 17 oder neuer; Signatur-Datei nie einchecken):
+**Building and shipping** (Android SDK 36, JDK 17 or newer; never check in the signing file):
 
 ```bash
 cd android
-export ANDROID_HOME=/pfad/zum/android-sdk
-export GOHIGH_BASE_URL=https://<cloud-adresse>          # die Adresse, mit der sich die öffentliche APK verbindet
-export GOHIGH_APPLICATION_ID=<paket-id>                 # z. B. com.gohyperlevel.app – muss zu PGHL_ANDROID_PACKAGE passen
-# versionCode/versionName in app/build.gradle.kts erhöhen (heute 4 / 1.0.3)
+export ANDROID_HOME=/path/to/android-sdk
+export GOHIGH_BASE_URL=https://<cloud-address>          # the address the public APK connects to
+export GOHIGH_APPLICATION_ID=<package-id>               # e.g. com.gohyperlevel.app – must match PGHL_ANDROID_PACKAGE
+# raise versionCode/versionName in app/build.gradle.kts (today 4 / 1.0.3)
 ./gradlew test lintDebug
-./gradlew assembleRelease -PsigningProps=/sicherer/ort/signing.properties
+./gradlew assembleRelease -PsigningProps=/safe/place/signing.properties
 $ANDROID_HOME/build-tools/36.0.0/apksigner verify --print-certs app/build/outputs/apk/release/app-release.apk
 sha256sum app/build/outputs/apk/release/app-release.apk
 
-# hochladen (Agentur-Schlüssel mit Schreibrecht oder als Admin angemeldet)
+# upload (agency key with write access, or signed in as admin)
 curl -X PUT https://gohyperlevel.com/api/mobile/app \
   -H "Authorization: Bearer pghla_…" -H "content-type: application/vnd.android.package-archive" \
   -H "x-version-code: 4" -H "x-version-name: 1.0.3" -H "x-changelog: Ausgehende%20Anrufe%20zeigen%20die%20Nummer" \
   --data-binary @app/build/outputs/apk/release/app-release.apk
 ```
 
-Danach `PGHL_ANDROID_PACKAGE` und `PGHL_ANDROID_CERT_SHA256` (Fingerabdruck aus `apksigner`) setzen, damit App Links
-funktionieren, und auf der Startseite prüfen, dass Version, Größe und Prüfsumme stimmen.
+Then set `PGHL_ANDROID_PACKAGE` and `PGHL_ANDROID_CERT_SHA256` (fingerprint from `apksigner`) so that App Links
+work, and check on the home page that the version, size and checksum are right.

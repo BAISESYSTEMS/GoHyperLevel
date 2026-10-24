@@ -1,224 +1,226 @@
-# Office – Dokumente, Tabellen, Präsentationen und PDF
+**English** · [Deutsch](office.de.md)
 
-Der Bereich **Office** (Menü *Office*) hält die Office-Dateien eines Sub-Accounts: Word-Dokumente (.docx),
-Excel-Tabellen (.xlsx), PowerPoint-Präsentationen (.pptx) und PDFs – jede Datei mit lückenloser Versionsgeschichte,
-Kommentaren, einer Bearbeitungssperre und optional verknüpft mit einem Kontakt, Deal oder Projekt. Bearbeitet wird
-im Browser (mit den optionalen Editoren, siehe [Einrichtung](#einrichtung-server)) und vom **HyperLevel Agent** bzw. jedem
-MCP-Client über fünf Werkzeuge.
+# Office – documents, spreadsheets, presentations and PDF
 
-Ohne Editoren und Engines funktioniert der Bereich trotzdem: Dateien anlegen, hochladen, herunterladen, als neue
-Version hochladen, Versionen wiederherstellen, kommentieren – und der Agent kann den reinen Text von Dokumenten,
-Tabellen und Präsentationen lesen und neue Dateien mit Starttext oder Startzeilen anlegen.
+The **Office** area (menu *Office*) holds the Office files of a sub-account: Word documents (.docx),
+Excel spreadsheets (.xlsx), PowerPoint presentations (.pptx) and PDFs – every file with a gapless version history,
+comments, an edit lock and optionally linked to a contact, deal or project. Files are edited
+in the browser (with the optional editors, see [Setup](#setup-server)) and by the **HyperLevel Agent** or any
+MCP client through five tools.
 
-## Bedienen
+Without editors and engines the area still works: create, upload, download, upload as a new
+version, restore versions, comment – and the agent can read the plain text of documents,
+spreadsheets and presentations and create new files with starter text or starter rows.
 
-- **Liste:** Filter *Alle · Dokumente · Tabellen · Präsentationen · PDF*, Suche im Dateinamen; je Datei die Verknüpfung,
-  Version, wer zuletzt geändert hat, eine Sperre („Anna bearbeitet“), offene Kommentare und wer die Datei gerade
-  geöffnet hat (Avatare). Oben *Dokument*, *Tabelle*, *Präsentation* (leer anlegen) und *Hochladen* (mehrere Dateien).
-- **Datei öffnen:** *Bearbeiten* öffnet den Editor im Browser und sperrt die Datei für andere, bis du auf *Fertig* klickst
-  (oder das Fenster schließt). *Schreibgeschützt öffnen* zeigt die Datei im Editor, ohne zu sperren und ohne zu speichern.
-- **Speichern:** *Speichern* in HyperLevel drückt die Speichern-Taste im Editor; Strg+S (bzw. ⌘S) im Editor tut dasselbe.
-  Jedes Speichern ist eine **neue Version** – nichts wird überschrieben.
-- **Versionen:** jede Version mit Nummer, Zeit, Autor („Anna Muster“, „KI-Agent (im Auftrag von Anna Muster)“ oder der
-  Name des API-Schlüssels), Größe und Notiz; *Herunterladen* und *Wiederherstellen* (die alte Fassung wird als neue
-  Version gespeichert).
-- **Kommentare** zur Datei oder zu einer bestimmten Version, Antworten, *Erledigt*; mit `@Vorname Nachname` erwähnte
-  Personen und der Ersteller der Datei bekommen eine Push-/Glocken-Nachricht (abschaltbar unter *Mein Konto*, Art
-  „Kommentare und Erwähnungen in Office-Dateien“).
-- **Mit KI bearbeiten:** der Wunsch („Ersetze den Preis durch 4.900 € und mache die Überschrift fett“) geht mit Datei-ID und
-  Version an den HyperLevel Agent; er liest die Datei, ändert sie mit der Office-Engine und speichert eine neue Version.
-  Bestätigungen laufen wie immer im Agent-Fenster.
-- **Details:** Kontakt, Deal und Projekt der Datei, Verknüpfen per Suche und Lösen. *Als PDF* (mit Engine) legt ein PDF
-  der aktuellen Version als neue Datei mit denselben Verknüpfungen an.
+## Using Office
 
-## Zusammenarbeit
+- **List:** filter *All · Documents · Spreadsheets · Presentations · PDF*, search in the file name; per file the link,
+  version, who changed it last, a lock (“Anna is editing”), open comments and who currently has the file
+  open (avatars). At the top *Document*, *Spreadsheet*, *Presentation* (create empty) and *Upload* (several files).
+- **Open a file:** *Edit* opens the editor in the browser and locks the file for others until you click *Done*
+  (or close the window). *Open read-only* shows the file in the editor without locking and without saving.
+- **Save:** *Save* in HyperLevel presses the save key in the editor; Ctrl+S (or ⌘S) in the editor does the same.
+  Every save is a **new version** – nothing is overwritten.
+- **Versions:** every version with number, time, author (“Anna Muster”, “AI agent (on behalf of Anna Muster)” or the
+  name of the API key), size and note; *Download* and *Restore* (the old version is saved as a new
+  version).
+- **Comments** on the file or on a specific version, replies, *Done*; people mentioned with `@First Last`
+  and the creator of the file get a push/bell notification (can be turned off under *My account*, type
+  “Comments and mentions in Office files”).
+- **Edit with AI:** the request (“Replace the price with €4,900 and make the heading bold”) goes with the file ID and
+  version to the HyperLevel Agent; it reads the file, changes it with the Office engine and saves a new version.
+  Confirmations run in the agent window as always.
+- **Details:** contact, deal and project of the file, linking by search and unlinking. *As PDF* (with an engine) creates a PDF
+  of the current version as a new file with the same links.
 
-- **Bearbeitungssperre („ausgecheckt“):** wer *Bearbeiten* klickt, hält die Sperre; der offene Editor erneuert sie jede
-  Minute, ohne Erneuerung endet sie nach 5 Minuten von selbst. Andere sehen „Anna bearbeitet gerade – schreibgeschützt“
-  und können schreibgeschützt öffnen; Speichern, neue Versionen, Löschen und Agent-Änderungen anderer werden mit 423
-  abgelehnt („Anna Muster bearbeitet die Datei gerade – sie ist bis 14:35 Uhr gesperrt …“). Admins können eine Sperre
-  übernehmen. API-Schlüssel und MCP-Verbindungen können keine Sperre halten.
-- **Wer ist da:** die Live-Zusammenarbeit der App ([collaboration.md](collaboration.md)) zeigt, wer welche Datei offen hat
-  (Seite `office/<id>`) – in der Liste, im Kopf der Datei und in der Seitenleiste.
-- **Konflikte:** wer auf einer älteren Version speichert, bekommt „Seit dem Öffnen gibt es eine neuere Version … Trotzdem
-  als neue Version speichern?“ (409); auch dann bleibt die andere Fassung in der Geschichte.
-- **Keine Echtzeit-Co-Bearbeitung:** zwei Personen tippen nicht gleichzeitig im selben Dokument – das verhindert die Sperre.
+## Collaboration
 
-## Einrichtung (Server)
+- **Edit lock (“checked out”):** whoever clicks *Edit* holds the lock; the open editor renews it every
+  minute, without renewal it ends by itself after 5 minutes. Others see “Anna is editing – read-only”
+  and can open read-only; saving, new versions, deleting and agent changes by others are rejected with 423
+  (“Anna Muster is editing the file right now – it is locked until 2:35 pm …”). Admins can take over a lock.
+  API keys and MCP connections can't hold a lock.
+- **Who is here:** the app's live collaboration ([collaboration.md](collaboration.md)) shows who has which file open
+  (page `office/<id>`) – in the list, in the file header and in the sidebar.
+- **Conflicts:** anyone saving on an older version gets “Since you opened it there is a newer version … Save as a new
+  version anyway?” (409); even then the other version stays in the history.
+- **No real-time co-editing:** two people don't type in the same document at the same time – the lock prevents that.
 
-Die Editoren (statische WebAssembly-Seiten) und Engines (Kommandozeilenprogramme) sind **eigenständige Open-Source-Programme**
-(MIT OR Apache-2.0, siehe [Herkunft, Lizenzen und Marken](#herkunft-lizenzen-und-marken)); sie gehören nicht zum Repository
-und nicht zum HyperLevel-Image. Drei Wege:
+## Setup (server)
 
-1. **Docker (empfohlen):** `docker compose -f docker-compose.yml -f deploy/office/docker-compose.office.yml up -d --build`
-   baut [deploy/office/Dockerfile](../deploy/office/Dockerfile) auf dem HyperLevel-Image auf, lädt die festgelegten Versionen,
-   prüft ihre SHA-256-Summen und setzt die Pfade. Das Image läuft auf Debian statt Alpine (die Engines brauchen glibc ≥ 2.35).
-2. **Ohne Docker:** `deploy/office/install.sh --web-dir /opt/office/web --bin-dir /opt/office/bin` (braucht curl, unzip, tar,
-   sha256sum; Linux x86_64 oder aarch64 mit glibc ≥ 2.35 für die Engines), danach die Variablen unten setzen. HyperLevel liest
-   sie bei jedem Aufruf – kein Neustart nötig.
-3. **Teilweise:** nur die Engines (`--only bin`, für Agent-Bearbeitung und PDF-Export) oder nur einzelne Arten (`--kinds docx,pdf`).
+The editors (static WebAssembly pages) and engines (command-line programs) are **standalone open-source programs**
+(MIT OR Apache-2.0, see [Origin, licenses and trademarks](#origin-licenses-and-trademarks)); they are not part of the repository
+and not part of the HyperLevel image. Three ways:
 
-| Variable | Bedeutung |
+1. **Docker (recommended):** `docker compose -f docker-compose.yml -f deploy/office/docker-compose.office.yml up -d --build`
+   builds [deploy/office/Dockerfile](../deploy/office/Dockerfile) on top of the HyperLevel image, downloads the pinned versions,
+   checks their SHA-256 sums and sets the paths. The image runs on Debian instead of Alpine (the engines need glibc ≥ 2.35).
+2. **Without Docker:** `deploy/office/install.sh --web-dir /opt/office/web --bin-dir /opt/office/bin` (needs curl, unzip, tar,
+   sha256sum; Linux x86_64 or aarch64 with glibc ≥ 2.35 for the engines), then set the variables below. HyperLevel reads
+   them on every call – no restart needed.
+3. **Partially:** only the engines (`--only bin`, for agent editing and PDF export) or only individual kinds (`--kinds docx,pdf`).
+
+| Variable | Meaning |
 | --- | --- |
-| `PGHL_OFFICE_DIR` | Ordner mit den Editoren: je Art ein Unterordner `docx/`, `xlsx/`, `pptx/`, `pdf/` mit dem Inhalt des jeweiligen Release-Zips (`index.html` + `.js` + `.wasm`). Fehlt er, zeigt der Bereich „Editor nicht installiert“ mit diesem Hinweis. |
-| `PGHL_OFFICE_BIN_DIR` | Ordner mit den Engines (`wordcraft-cli`, `gridcraft-cli`, `deckcraft-cli`, `pdfcraft-cli`). Fehlt einer, antworten Bearbeiten und PDF-Export dieser Art mit 503 „Office-Engine nicht installiert“; Lesen fällt auf den reinen Text zurück. |
-| `PGHL_OFFICE_SANDBOX` | `strict` (Standard): der Editor läuft in einem Sandbox-iframe **ohne** HyperLevels Origin – sein Code erreicht weder Cookies noch API. `same-origin` nur, falls ein Editor ohne eigenen Speicher nicht startet (siehe [Sicherheit](#sicherheit)). |
-| `PGHL_OFFICE_MAX_MB` | Größte Datei (jede Version) in MB, Standard 25. |
-| `PGHL_OFFICE_QUOTA_MB` | Speicher aller Versionen aller Office-Dateien je Sub-Account in MB, Standard 2048 (`0` = ohne Grenze); darüber wird mit 413 abgelehnt. |
+| `PGHL_OFFICE_DIR` | Folder with the editors: one subfolder per kind `docx/`, `xlsx/`, `pptx/`, `pdf/` with the contents of the respective release zip (`index.html` + `.js` + `.wasm`). If it is missing, the area shows “Editor not installed” with this hint. |
+| `PGHL_OFFICE_BIN_DIR` | Folder with the engines (`wordcraft-cli`, `gridcraft-cli`, `deckcraft-cli`, `pdfcraft-cli`). If one is missing, editing and PDF export of that kind answer with 503 “Office engine not installed”; reading falls back to plain text. |
+| `PGHL_OFFICE_SANDBOX` | `strict` (default): the editor runs in a sandboxed iframe **without** HyperLevel's origin – its code reaches neither cookies nor the API. `same-origin` only if an editor doesn't start without storage of its own (see [Security](#security)). |
+| `PGHL_OFFICE_MAX_MB` | Largest file (every version) in MB, default 25. |
+| `PGHL_OFFICE_QUOTA_MB` | Storage for all versions of all Office files per sub-account in MB, default 2048 (`0` = no limit); above it requests are rejected with 413. |
 
-Festgelegte Versionen und Prüfsummen: [deploy/office/versions.env](../deploy/office/versions.env) (Stand: Dokumente 0.3.0,
-Tabellen 0.3.0, Präsentationen 0.3.0, PDF 0.4.0, aus den `SHA256SUMS.txt` der Releases). Die Release-Dateien:
+Pinned versions and checksums: [deploy/office/versions.env](../deploy/office/versions.env) (as of: documents 0.3.0,
+spreadsheets 0.3.0, presentations 0.3.0, PDF 0.4.0, from the `SHA256SUMS.txt` of the releases). The release files:
 
-| Art | Editor (Release-Asset) | Engine (Release-Asset, darin `bin/<name>-cli`) |
+| Kind | Editor (release asset) | Engine (release asset, containing `bin/<name>-cli`) |
 | --- | --- | --- |
-| Dokumente | `wordcraft-web-0.3.0.zip` | `wordcraft-0.3.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
-| Tabellen | `gridcraft-web-0.3.0.zip` | `gridcraft-0.3.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
-| Präsentationen | `deckcraft-web-0.3.0.zip` | `deckcraft-0.3.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
+| Documents | `wordcraft-web-0.3.0.zip` | `wordcraft-0.3.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
+| Spreadsheets | `gridcraft-web-0.3.0.zip` | `gridcraft-0.3.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
+| Presentations | `deckcraft-web-0.3.0.zip` | `deckcraft-0.3.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
 | PDF | `pdfcraft-web-0.4.0.zip` | `pdfcraft-0.4.0-linux-x86_64.tar.gz` / `…-linux-aarch64.tar.gz` |
 
-Die Editoren sind 13–40 MB groß (WebAssembly); `install.sh` legt `.gz`/`.br` daneben, die HyperLevel ausliefert, wenn der
-Browser sie annimmt (etwa ein Drittel der Größe). Die Dateinamen tragen einen Hash und werden ein Jahr gecacht.
+The editors are 13–40 MB (WebAssembly); `install.sh` puts `.gz`/`.br` next to them, which HyperLevel serves if the
+browser accepts them (about a third of the size). The file names carry a hash and are cached for a year.
 
-## Wie die Editoren laden und speichern
+## How the editors load and save
 
-Die Web-Builds kennen nur Dateiauswahl, Ziehen & Ablegen und Downloads – keine Schnittstelle, um ihnen eine Datei zu geben
-oder eine zurückzubekommen. HyperLevel ändert am Upstream-Code nichts und legt stattdessen ein kleines Brücken-Skript vor den
-Editor (`/office/bridge.js`, mit Nonce in die Editor-Seite eingefügt):
+The web builds only know file selection, drag & drop and downloads – no interface to hand them a file
+or get one back. HyperLevel changes nothing in the upstream code and instead puts a small bridge script in front of the
+editor (`/office/bridge.js`, inserted into the editor page with a nonce):
 
-- **Laden:** sobald der Editor läuft (Ereignis `TrunkApplicationStarted` bzw. sein „Loading …“-Hinweis verschwindet), schickt
-  HyperLevel die Bytes der Version per `postMessage`, und die Brücke legt sie als synthetisches *Ziehen & Ablegen* auf die
-  Zeichenfläche – eine echte `File` in einem `DataTransfer`, genau das, was der Editor bei einem abgelegten File bekommt.
-  Der **PDF-Editor** hat einen eigenen Weg: er lädt `?file=<adresse>` selbst; HyperLevel gibt ihm dafür einen signierten,
-  10 Minuten gültigen Link (`/office/blob/<token>/<name>.pdf`).
-- **Speichern:** die Brücke merkt sich jedes Blob, aus dem die Seite eine Objekt-URL macht, und fängt den Klick auf den
-  versteckten Download-Link ab, den der Editor beim Speichern erzeugt. Eine Datei der eigenen Art geht an HyperLevel (neue
-  Version) statt in den Download-Ordner; alles andere (z. B. ein PDF-Export aus dem Dokument-Editor) wird normal
-  heruntergeladen, und HyperLevel bietet an, es zusätzlich in Office abzulegen.
-- **Speichern aus HyperLevel:** der Knopf drückt im Editor Strg/⌘+S (Tabellen: Strg/⌘+Umschalt+S – der Tabellen-Editor speichert
-  eine abgelegte Datei nur über *Speichern unter*). Der Präsentations-Editor speichert in seinem eigenen Format
-  (`.deckcraft`); HyperLevel wandelt es mit der Engine in `.pptx` um (`POST /api/office/files/:id/versions/convert`). Ohne Engine:
-  im Editor *File → Export → PowerPoint Presentation (.pptx)* (Menü des Editors, englisch) wählen – das fängt die Brücke als `.pptx` ab.
+- **Load:** as soon as the editor is running (event `TrunkApplicationStarted`, or its “Loading …” notice disappears),
+  HyperLevel sends the bytes of the version via `postMessage`, and the bridge drops them as a synthetic *drag & drop* onto the
+  canvas – a real `File` in a `DataTransfer`, exactly what the editor gets when a file is dropped.
+  The **PDF editor** has a way of its own: it loads `?file=<address>` itself; for that HyperLevel gives it a signed link
+  valid for 10 minutes (`/office/blob/<token>/<name>.pdf`).
+- **Save:** the bridge remembers every blob the page makes an object URL from, and intercepts the click on the
+  hidden download link the editor creates when saving. A file of its own kind goes to HyperLevel (new
+  version) instead of the download folder; anything else (e.g. a PDF export from the document editor) is
+  downloaded normally, and HyperLevel offers to also store it in Office.
+- **Saving from HyperLevel:** the button presses Ctrl/⌘+S in the editor (spreadsheets: Ctrl/⌘+Shift+S – the spreadsheet editor saves
+  a dropped file only through *Save as*). The presentation editor saves in its own format
+  (`.deckcraft`); HyperLevel converts it to `.pptx` with the engine (`POST /api/office/files/:id/versions/convert`). Without an engine:
+  choose *File → Export → PowerPoint Presentation (.pptx)* in the editor (the editor's menu, which is in English) – the bridge intercepts that as `.pptx`.
 
-Geprüft mit den Release-Builds oben in Chromium (Software-WebGL, Sandbox `strict`): alle vier laden die HyperLevel-Datei, und
-Speichern ergibt jeweils eine neue Version.
+Tested with the release builds above in Chromium (software WebGL, sandbox `strict`): all four load the HyperLevel file, and
+saving produces a new version each time.
 
-### Grenzen der Brücke
+### Limits of the bridge
 
-- Sie hängt am beobachtbaren Verhalten der Builds (Ablegen auf der Zeichenfläche, Download-Link mit `download`-Attribut,
-  Tastenkürzel). Ändert ein Upstream-Release das, kann Laden oder Speichern ausfallen – vor einem Versionswechsel in
-  `versions.env` einmal öffnen und speichern. Fällt die Brücke aus, bleibt *Herunterladen* / *Neue Version hochladen*.
-- Der Editor muss laufen, bevor die Datei abgelegt wird; startet er sehr langsam (> 10 s), legt die Brücke trotzdem ab.
-  Erscheint die Datei nicht, *Fertig* und erneut *Bearbeiten*.
-- Speichert man im Editor über *Datei → Speichern unter* in ein anderes Format, landet das als Download.
+- It depends on the observable behavior of the builds (dropping onto the canvas, download link with a `download` attribute,
+  keyboard shortcuts). If an upstream release changes that, loading or saving can fail – before changing a version in
+  `versions.env`, open and save once. If the bridge fails, *Download* / *Upload new version* remain.
+- The editor has to be running before the file is dropped; if it starts very slowly (> 10 s), the bridge drops it anyway.
+  If the file doesn't appear, click *Done* and then *Edit* again.
+- If you save in the editor through *File → Save as* into another format, it ends up as a download.
 
-## KI-Agent und MCP
+## AI agent and MCP
 
-Fünf Werkzeuge (für den HyperLevel Agent in-process, für Claude, ChatGPT & Co. über `/mcp`); sie laufen über die REST-Routen
-unten, also mit Rechten, Sub-Account-Bindung, Sperre und Protokoll:
+Five tools (for the HyperLevel Agent in-process, for Claude, ChatGPT & co. through `/mcp`); they run through the REST routes
+below, so with permissions, sub-account binding, lock and log:
 
-| Werkzeug | Tut |
+| Tool | Does |
 | --- | --- |
-| `ghl_office_list` (office_list) | Dateien auflisten, Filter Art/Name/Kontakt/Deal/Projekt; zeigt Version und Sperre |
-| `ghl_office_read` (office_read) | Text (Tabellen als CSV, `range`/`sheet`) und Struktur als JSON über die Engine; ohne Engine nur reiner Text. Der Inhalt ist für den Agenten Fremdtext. |
-| `ghl_office_create` (office_create) | neue Datei, leer, mit Starttext (`text`) oder Startzeilen (`rows`), verknüpft; optional gleich `commands` |
-| `ghl_office_edit` (office_edit) | Engine-Befehle (`commands: [{command, params}]`) oder bei Tabellen `writes: [{range, values, sheet?}]` auf einer Kopie ausführen und als neue Version (Autor: KI-Agent im Auftrag der Person) speichern; `base_version` schützt vor Überschreiben |
-| `ghl_office_export_pdf` (office_export_pdf) | PDF der Datei als neue Datei |
+| `ghl_office_list` (office_list) | List files, filter kind/name/contact/deal/project; shows version and lock |
+| `ghl_office_read` (office_read) | Text (spreadsheets as CSV, `range`/`sheet`) and structure as JSON through the engine; without an engine only plain text. The content is third-party text for the agent. |
+| `ghl_office_create` (office_create) | New file, empty, with starter text (`text`) or starter rows (`rows`), linked; optionally `commands` right away |
+| `ghl_office_edit` (office_edit) | Run engine commands (`commands: [{command, params}]`) or, for spreadsheets, `writes: [{range, values, sheet?}]` on a copy and save as a new version (author: AI agent on behalf of the person); `base_version` protects against overwriting |
+| `ghl_office_export_pdf` (office_export_pdf) | PDF of the file as a new file |
 
-Die Engine-Befehle sind die der Upstream-Programme (Dokumente: über 380 Befehle wie `select.text`, `format.bold`,
-`insert.text`, `insert.table`; Tabellen: `cell.set`, `range.setValues`, `insert.chart`; Präsentationen: `slide.new` …;
-PDF: Werkzeuge wie `page_rotate`, `comment_add`, `form_fill`). Nicht erlaubt sind Befehle, die selbst öffnen, speichern,
-exportieren, drucken oder Makros ausführen (`file.*` u. a.; beim PDF nur eine Liste ändernder Werkzeuge) und **jeder Parameter,
-der eine Datei, einen Ordner oder eine Adresse nennt** (`path`, `file`, `url`, `src`, `…Path`, `…Url` usw.) – Öffnen und
-Speichern übernimmt HyperLevel. Hat jemand die Datei gerade ausgecheckt, lehnt `office_edit` ab (423 mit Name und Uhrzeit) –
-nichts wird im Hintergrund zusammengeführt oder vorgemerkt; der Agent sagt es und versucht es auf Wunsch später.
+The engine commands are those of the upstream programs (documents: over 380 commands such as `select.text`, `format.bold`,
+`insert.text`, `insert.table`; spreadsheets: `cell.set`, `range.setValues`, `insert.chart`; presentations: `slide.new` …;
+PDF: tools such as `page_rotate`, `comment_add`, `form_fill`). Not allowed are commands that open, save,
+export, print or run macros themselves (`file.*` and others; for PDF, only a list of modifying tools) and **any parameter
+that names a file, a folder or an address** (`path`, `file`, `url`, `src`, `…Path`, `…Url` etc.) – opening and
+saving is handled by HyperLevel. If someone currently has the file checked out, `office_edit` refuses (423 with name and time) –
+nothing is merged or queued in the background; the agent says so and tries again later if you want.
 
-Die Engine läuft je Aufruf in einem eigenen Temp-Ordner mit einer Kopie der Datei: direkt gestartet (keine Shell,
-Argumente als Liste), mit minimaler Umgebung (keine HyperLevel-Geheimnisse), 60 s Zeitlimit, Ausgabe höchstens 8 MB,
-Ergebnis höchstens `PGHL_OFFICE_MAX_MB`; der Ordner wird danach gelöscht, Fehlermeldungen kommen ohne Temp-Pfade.
+The engine runs per call in a temp folder of its own with a copy of the file: started directly (no shell,
+arguments as a list), with a minimal environment (no HyperLevel secrets), 60 s time limit, output at most 8 MB,
+result at most `PGHL_OFFICE_MAX_MB`; the folder is deleted afterwards, and error messages come without temp paths.
 
-## Sicherheit
+## Security
 
-- **Editor-Seite** `/office/app/<art>/`: nur angemeldet, eigene Content-Security-Policy – `default-src 'none'`, Skripte nur
-  vom eigenen Server mit Nonce, `'wasm-unsafe-eval'` für WebAssembly, `connect-src 'self' blob:`, keine Frames,
-  `frame-ancestors 'self'`, keine Anfragen an Dritte. Die Build-Dateien selbst sind öffentliche Open-Source-Dateien
-  (`/office/app/<art>/<datei>`, nur Namen aus einem flachen Ordner, kein `index.html`, kein Pfad nach oben).
-- **Sandbox `strict`** (Standard): das iframe hat `sandbox="allow-scripts allow-downloads"` ohne `allow-same-origin` – der
-  Editor-Code bekommt einen undurchsichtigen Origin und kommt weder an HyperLevels Cookies noch an die API oder die
-  übergeordnete Seite. Die Brücke tauscht Nachrichten nur mit `window.parent` und nur mit einer zufälligen Kanal-ID aus
-  der Adresse; HyperLevel nimmt nur Nachrichten genau dieses iframes an. Der Preis: die Editoren können ihre eigenen
-  Einstellungen nicht im Browser speichern. `same-origin` fügt `allow-same-origin` hinzu – dann läuft der Editor-Code mit
-  HyperLevels Origin und damit mit den Rechten der angemeldeten Person; nur mit geprüften Releases (Prüfsummen) verwenden.
-- **Uploads** wie überall: Inhalt muss zum Typ passen (Office = ZIP, PDF = `%PDF-`), Speichername aus Zufalls-ID und
-  geprüftem Typ, Downloads mit `Content-Security-Policy: sandbox`.
-- **Rechte:** Bereich `office` (Kunden-Logins brauchen ihn); innerhalb des Sub-Accounts sehen alle mit dem Bereich alle
-  Office-Dateien. Jede schreibende Anfrage steht im Protokoll; Downloads gelten als Export.
-- **DSGVO:** Dateien, die mit einem Kontakt verknüpft sind, gehören zur Auskunft (Art. 15) und gehen beim Löschen des
-  Kontakts mit – alle Versionen auch auf der Platte, Kommentare und Sperren ebenso.
-- **Sub-Account löschen und Datenexport:** wird ein Sub-Account gelöscht (bzw. ein Cloud-Kunde), gehen alle seine
-  Office-Dateien mit – Zeilen, Kommentare, Sperren und jede Version unter `<data>/office-files/`. Der Datenexport eines
-  Cloud-Kunden enthält die Tabellen und alle Versionen (`dateien/office-files/`).
+- **Editor page** `/office/app/<kind>/`: signed in only, its own Content Security Policy – `default-src 'none'`, scripts only
+  from the own server with a nonce, `'wasm-unsafe-eval'` for WebAssembly, `connect-src 'self' blob:`, no frames,
+  `frame-ancestors 'self'`, no requests to third parties. The build files themselves are public open-source files
+  (`/office/app/<kind>/<file>`, only names from a flat folder, no `index.html`, no path going up).
+- **Sandbox `strict`** (default): the iframe has `sandbox="allow-scripts allow-downloads"` without `allow-same-origin` – the
+  editor code gets an opaque origin and reaches neither HyperLevel's cookies nor the API or the
+  parent page. The bridge exchanges messages only with `window.parent` and only with a random channel ID from
+  the address; HyperLevel accepts only messages from exactly this iframe. The price: the editors can't store their own
+  settings in the browser. `same-origin` adds `allow-same-origin` – then the editor code runs with
+  HyperLevel's origin and thus with the permissions of the signed-in person; use only with verified releases (checksums).
+- **Uploads** as everywhere: content has to match the type (Office = ZIP, PDF = `%PDF-`), storage name from a random ID and
+  the verified type, downloads with `Content-Security-Policy: sandbox`.
+- **Permissions:** area `office` (client logins need it); within the sub-account, everyone with the area sees all
+  Office files. Every write request is in the log; downloads count as an export.
+- **GDPR:** files linked to a contact are part of the access request (Art. 15) and go along when the
+  contact is deleted – all versions on disk too, comments and locks as well.
+- **Deleting a sub-account and data export:** when a sub-account is deleted (or a cloud customer), all its
+  Office files go along – rows, comments, locks and every version under `<data>/office-files/`. The data export of a
+  cloud customer contains the tables and all versions (`dateien/office-files/`).
 
-## Grenzen
+## Limits
 
-- **Alpha-Software:** die Upstream-Programme sind jung (Versionen 0.3/0.4); komplexe Dateien können anders aussehen als in
-  Microsoft Office. Jede Version bleibt erhalten, ein Fehler kostet also höchstens die letzte Änderung.
-- Keine Echtzeit-Co-Bearbeitung (siehe [Zusammenarbeit](#zusammenarbeit)), keine Freigabe einzelner Dateien an bestimmte
-  Personen, keine öffentlichen Links.
-- Ältere Formate (.doc, .xls, .ppt) werden nicht angenommen; .odt/.ods/.odp ebenfalls nicht (die Editoren könnten sie öffnen,
-  gespeichert wird aber im Office-Open-XML-Format).
-- Die Engines sind glibc-Programme für Linux x86_64/aarch64 – nicht für Alpine (musl) oder macOS-Server.
+- **Alpha software:** the upstream programs are young (versions 0.3/0.4); complex files can look different from
+  Microsoft Office. Every version is kept, so a bug costs at most the last change.
+- No real-time co-editing (see [Collaboration](#collaboration)), no sharing of individual files with specific
+  people, no public links.
+- Older formats (.doc, .xls, .ppt) are not accepted; neither are .odt/.ods/.odp (the editors could open them,
+  but saving is in the Office Open XML format).
+- The engines are glibc programs for Linux x86_64/aarch64 – not for Alpine (musl) or macOS servers.
 
-### Bekannte Grenzen
+### Known limits
 
-- **Tabellen-Editor 0.3.0:** der Browser-Build bricht beim Bearbeiten einer Zelle ab („time not implemented on this
-  platform“ – die Engine misst jede Änderung mit `std::time::Instant`, das es in WebAssembly nicht gibt). Öffnen, Ansehen
-  und Speichern gehen, jede Änderung im Editor (Zelle, Format) beendet ihn. Abhilfe bis zu einem Upstream-Release mit Fix:
-  [deploy/office/build-from-source.sh](../deploy/office/build-from-source.sh) `--kind xlsx` baut den Editor aus dem Quelltext
-  mit [dem Patch](../deploy/office/patches/README.md) (Rust + trunk nötig), oder Zellen über den Agenten bzw. die Engine
-  ändern lassen (die Kommandozeile ist nicht betroffen).
-- **Präsentationen ohne Engine:** Strg+S im Editor speichert `.deckcraft`; ohne Engine bitte *File → Export →
-  PowerPoint Presentation (.pptx)* (Menü des Editors).
+- **Spreadsheet editor 0.3.0:** the browser build aborts when you edit a cell (“time not implemented on this
+  platform” – the engine measures every change with `std::time::Instant`, which doesn't exist in WebAssembly). Opening, viewing
+  and saving work, every change in the editor (cell, format) ends it. Workaround until an upstream release with a fix:
+  [deploy/office/build-from-source.sh](../deploy/office/build-from-source.sh) `--kind xlsx` builds the editor from source
+  with [the patch](../deploy/office/patches/README.md) (Rust + trunk needed), or have cells changed through the agent or the engine
+  (the command line isn't affected).
+- **Presentations without an engine:** Ctrl+S in the editor saves `.deckcraft`; without an engine please choose *File → Export →
+  PowerPoint Presentation (.pptx)* (the editor's menu).
 
 ## API
 
-Alle Routen mit Anmeldung oder API-Schlüssel und Sub-Account (`x-location-id`), Bereich `office`:
+All routes with sign-in or API key and sub-account (`x-location-id`), area `office`:
 
-- `GET /api/office/status` – installierte Editoren und Engines, Sandbox-Modus, Grenzen, belegter Speicher
-- `GET/POST /api/office/files` – Liste (`?kind=&q=&contact_id=&deal_id=&project_id=&limit=`); anlegen: JSON
-  `{kind, name, text?, rows?, contact_id?, deal_id?, project_id?}` (leer/mit Startinhalt) oder `{name, data}` (Base64) bzw.
-  roh mit `content-type: application/octet-stream` und `?name=&kind=`
-- `GET/PATCH/DELETE /api/office/files/:id` – Details mit Versionen (PDF: `editor_file_url`), umbenennen/verknüpfen, löschen
-- `GET /api/office/files/:id/download` und `GET /api/office/files/:id/raw` – Inhalt (`?version=`), als Anhang bzw. für den Editor
-- `GET/POST /api/office/files/:id/versions` – Versionen; neue Version roh (`?message=&base_version=&force=1`) oder JSON
+- `GET /api/office/status` – installed editors and engines, sandbox mode, limits, storage used
+- `GET/POST /api/office/files` – list (`?kind=&q=&contact_id=&deal_id=&project_id=&limit=`); create: JSON
+  `{kind, name, text?, rows?, contact_id?, deal_id?, project_id?}` (empty/with starter content) or `{name, data}` (Base64) or
+  raw with `content-type: application/octet-stream` and `?name=&kind=`
+- `GET/PATCH/DELETE /api/office/files/:id` – details with versions (PDF: `editor_file_url`), rename/link, delete
+- `GET /api/office/files/:id/download` and `GET /api/office/files/:id/raw` – content (`?version=`), as an attachment or for the editor
+- `GET/POST /api/office/files/:id/versions` – versions; new version raw (`?message=&base_version=&force=1`) or JSON
   `{data, message, base_version, force}`
-- `POST /api/office/files/:id/versions/convert` – Speichern im Editor-Format (`?from=deckcraft`), wird zu .pptx
-- `POST /api/office/files/:id/versions/:version/restore` – Version wiederherstellen (als neue Version)
-- `GET/POST/DELETE /api/office/files/:id/lock` – Sperre lesen, holen/erneuern (`{take_over: true}` für Admins), freigeben
-- `GET/POST /api/office/files/:id/comments`, `PATCH/DELETE /api/office/files/:id/comments/:cid` – Kommentare
-  (`{body, version?, parent_id?}`, `{resolved}`), `GET /api/office/people` – Personen für @Erwähnungen
-- `GET /api/office/files/:id/read` – Text/Struktur (`?mode=both|text|structure&version=&range=&sheet=`)
+- `POST /api/office/files/:id/versions/convert` – save in the editor format (`?from=deckcraft`), becomes .pptx
+- `POST /api/office/files/:id/versions/:version/restore` – restore a version (as a new version)
+- `GET/POST/DELETE /api/office/files/:id/lock` – read the lock, take/renew it (`{take_over: true}` for admins), release it
+- `GET/POST /api/office/files/:id/comments`, `PATCH/DELETE /api/office/files/:id/comments/:cid` – comments
+  (`{body, version?, parent_id?}`, `{resolved}`), `GET /api/office/people` – people for @mentions
+- `GET /api/office/files/:id/read` – text/structure (`?mode=both|text|structure&version=&range=&sheet=`)
 - `POST /api/office/files/:id/edit` – `{commands?, writes?, message?, base_version?}`
-- `POST /api/office/files/:id/export-pdf` – `{name?}`, legt ein neues PDF an
+- `POST /api/office/files/:id/export-pdf` – `{name?}`, creates a new PDF
 
-Ohne Sub-Account-Bezug: `/office/app/<art>/` (Editor-Seite), `/office/app/<art>/<datei>` (Build-Dateien),
-`/office/bridge.js`, `/office/blob/<token>/<name>` (signierter PDF-Link).
+Without sub-account binding: `/office/app/<kind>/` (editor page), `/office/app/<kind>/<file>` (build files),
+`/office/bridge.js`, `/office/blob/<token>/<name>` (signed PDF link).
 
-## Herkunft, Lizenzen und Marken
+## Origin, licenses and trademarks
 
-Die Editoren und Engines stammen aus vier Open-Source-Projekten eines Upstream-Teams (je MIT OR Apache-2.0); welche, in
-welcher Version und mit welchem Lizenztext steht in [deploy/office/THIRD-PARTY.md](../deploy/office/THIRD-PARTY.md). Deren
-Namen und Logos sind Marken ihres Teams und nicht von den Lizenzen gedeckt – HyperLevel nennt die Bereiche deshalb neutral
-*Dokumente*, *Tabellen*, *Präsentationen* und *PDF* und verwendet keine Upstream-Logos. Der unveränderte Editor im Rahmen
-kann seinen eigenen Namen zeigen.
+The editors and engines come from four open-source projects of one upstream team (each MIT OR Apache-2.0); which ones, in
+which version and with which license text is in [deploy/office/THIRD-PARTY.md](../deploy/office/THIRD-PARTY.md). Their
+names and logos are trademarks of their team and not covered by the licenses – HyperLevel therefore calls the areas neutrally
+*Documents*, *Spreadsheets*, *Presentations* and *PDF* and uses no upstream logos. The unmodified editor inside the frame
+may show its own name.
 
-## Für Entwickler
+## For developers
 
-`server/modules/office.ts` (Tabellen, Dateien, Versionen, Inhalt, Editor-Routen, `contactFiles`, Push-Art `office`),
-`office-collab.ts` (Sperre, Kommentare, Personen), `office-tools.ts` (Lesen/Bearbeiten/PDF/Umwandeln über die Engine, die
-fünf MCP-Werkzeuge); Logik in `server/services/office-model.ts` (rein: Arten, Namen, Befehlsprüfung, Sperre),
-`office-store.ts` (Bytes auf der Platte unter `<data>/office-files/`, Grenzen, Versionen – ein Trigger verbietet jede
-Änderung an `office_versions`), `office-engine.ts` (Adapter zu den Kommandozeilenprogrammen), `office-blank.ts` (leere
-Dateien, Text ohne Engine), `office-bridge.ts` + `office-bridge-js.ts` (Editor-Seite, CSP, Brücke, signierte Links).
-Oberfläche: `web/src/pages/Office.tsx`, `OfficeFile.tsx`, `OfficeEditor.tsx`, `OfficeParts.tsx` (eigener Chunk,
-i18n-Bereich `office`). Tests: `tests/office.test.ts`, `tests/office-engine.test.ts` mit Engine-Attrappen aus
-`tests/office-fakes.ts` (keine echten Programme in der CI).
+`server/modules/office.ts` (tables, files, versions, content, editor routes, `contactFiles`, push kind `office`),
+`office-collab.ts` (lock, comments, people), `office-tools.ts` (reading/editing/PDF/converting through the engine, the
+five MCP tools); logic in `server/services/office-model.ts` (pure: kinds, names, command check, lock),
+`office-store.ts` (bytes on disk under `<data>/office-files/`, limits, versions – a trigger forbids any
+change to `office_versions`), `office-engine.ts` (adapter to the command-line programs), `office-blank.ts` (empty
+files, text without an engine), `office-bridge.ts` + `office-bridge-js.ts` (editor page, CSP, bridge, signed links).
+Interface: `web/src/pages/Office.tsx`, `OfficeFile.tsx`, `OfficeEditor.tsx`, `OfficeParts.tsx` (own chunk,
+i18n area `office`). Tests: `tests/office.test.ts`, `tests/office-engine.test.ts` with engine mocks from
+`tests/office-fakes.ts` (no real programs in CI).

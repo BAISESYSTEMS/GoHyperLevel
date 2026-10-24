@@ -55,7 +55,9 @@ function Overview({ policy }: { policy: string }) {
 function Basics() {
   const { data, reload } = useLoad(() => api.get('/api/consent/settings'), []);
   const [s, setS] = useState<any>();
-  useEffect(() => data && setS(data.settings), [data]);
+  useEffect(() => {
+    if (data) setS(data.settings);
+  }, [data]);
   const log = useLoad(() => api.get('/api/consent/log?limit=60'), []);
   const texts = useLoad(() => api.get('/api/consent/texts'), []);
   const [action, setAction] = useState('');

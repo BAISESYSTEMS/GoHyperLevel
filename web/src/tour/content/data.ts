@@ -14,7 +14,7 @@ export const DATA_TOURS: Tour[] = [
     practice: true,
     keywords: 'bericht report dashboard auswertung vorlage widget diagramm kennzahl zeitplan e-mail tv modus prognose',
     learned: ['Ein Dashboard mit einem Klick aus einer Vorlage anlegen', 'Zeitraum, Vergleich und Filter setzen', 'Dashboards teilen und per E-Mail verschicken', 'Geplante Berichte verwalten', 'Einen eigenen Bericht bauen und speichern'],
-    docs: { label: 'Berichte & Dashboards', file: 'reports', anchor: 'dashboards' },
+    docs: { label: 'Berichte & Dashboards', file: 'reports.de', anchor: 'dashboards' },
     steps: [
       { title: 'Eigene Auswertungen', route: 'reports', target: 'page-head', text: 'Unter Berichte wertest du alle Bereiche aus – Kontakte, Deals, Umsatz, Termine, Anrufe, Tickets … – als Dashboard, als einzelnen Bericht oder als regelmäßige E-Mail.' },
       { title: 'Die Bereiche', target: 'reports-tabs', text: 'Dashboards, Bericht erstellen, Bibliothek (gespeicherte Berichte), Vorlagen und Zeitpläne.' },
@@ -41,7 +41,7 @@ export const DATA_TOURS: Tour[] = [
     practice: true,
     keywords: 'firma firmen unternehmen company domain zusammenführen dublette verknüpfung primäre firma b2b',
     learned: ['Firmen suchen, filtern und als Ansicht speichern', 'Wie Kontakte automatisch per E-Mail-Domain zur Firma kommen', 'Was die Firmenseite zeigt: Kennzahlen, Eigenschaften, Aktivität, Verknüpfungen', 'Doppelte Firmen zusammenführen'],
-    docs: { label: 'Firmen', file: 'objects', anchor: 'firmen' },
+    docs: { label: 'Firmen', file: 'objects.de', anchor: 'firmen' },
     steps: [
       { title: 'Firmen', route: 'companies', target: 'page-head', text: 'Kontakte gehören zu Firmen – viele zu viele, je Kontakt genau eine **primäre Firma**. Die Firma sammelt Kontakte, Deals, Tickets, Notizen und Aufgaben.' },
       { title: 'Ansichten', target: 'views-bar', text: 'Gespeicherte Ansichten mit Suche, Filtern, Spalten und Sortierung – nur für dich oder fürs Team. „Alle“ zeigt alles.' },
@@ -69,7 +69,7 @@ export const DATA_TOURS: Tour[] = [
     practice: true,
     keywords: 'objekt objekte custom object datensatz verknüpfung label fahrzeug vertrag immobilie projekt builder',
     learned: ['Was eigene Objekte sind und wofür sie taugen', 'Datensätze finden, anlegen und öffnen', 'Datensätze verknüpfen und Labels setzen', 'Ein neues Objekt mit dem Builder anlegen'],
-    docs: { label: 'Eigene Objekte & Verknüpfungen', file: 'objects', anchor: 'eigene-objekte' },
+    docs: { label: 'Eigene Objekte & Verknüpfungen', file: 'objects.de', anchor: 'eigene-objekte' },
     steps: [
       { title: 'Eigene Objekte', route: 'objects', target: 'page-head', text: 'Passt etwas nicht in Kontakte, Firmen oder Deals – z. B. Fahrzeuge, Verträge, Immobilien oder Projekte –, legst du ein eigenes Objekt an: mit Eigenschaften, Datensätzen und Verknüpfungen.' },
       { title: 'Alle Objekte', target: 'obj-cards', text: 'Die Standard-Objekte und deine eigenen. Eigene Objekte stehen zusätzlich direkt in der Seitenleiste unter „Objekte“.' },
@@ -99,7 +99,7 @@ export const DATA_TOURS: Tour[] = [
     practice: true,
     keywords: 'eigenschaft eigenschaften feld eigene felder gruppe property custom field label verknüpfung',
     learned: ['Wo die Felder aller Objekte gepflegt werden', 'Eigenschaften in Gruppen ordnen', 'Eine neue Eigenschaft mit Typ und Gruppe anlegen', 'Labels für Verknüpfungen anlegen'],
-    docs: { label: 'Eigenschaften', file: 'objects', anchor: 'eigenschaften' },
+    docs: { label: 'Eigenschaften', file: 'objects.de', anchor: 'eigenschaften' },
     steps: [
       { title: 'Eigenschaften', route: 'properties', target: 'page-head', text: 'Eine Seite für alle eigenen Felder: Kontakte, Firmen, Deals und jedes eigene Objekt. Die Kontaktfelder sind die bekannten eigenen Felder – jetzt mit Gruppe und Beschreibung.' },
       { title: 'Suchen & anlegen', target: 'props-tools', text: 'Suche nach Bezeichnung oder internem Namen. „+ Gruppe“ legt eine Gruppe an, „+ Eigenschaft“ ein neues Feld.' },
@@ -127,7 +127,7 @@ export const DATA_TOURS: Tour[] = [
     practice: true,
     keywords: 'lead scoring score punkte mql sql schwelle zerfall fit engagement qualifizierung vertrieb',
     learned: ['Regeln für Eigenschaften (Fit) und Aktivität (Engagement) festlegen', 'Schwellen wie MQL und SQL definieren – und Workflows daran hängen', 'Zerfall und Höchstwert einstellen', 'Den Score in der Kontaktliste filtern und am Kontakt nachvollziehen'],
-    docs: { label: 'Lead-Scoring', file: 'objects', anchor: 'lead-scoring' },
+    docs: { label: 'Lead-Scoring', file: 'objects.de', anchor: 'lead-scoring' },
     steps: [
       { title: 'Lead-Scoring', route: 'lead-scoring', target: 'page-head', text: 'Punkte zeigen, welche Kontakte kaufbereit sind: für passende Eigenschaften (Fit) und für Aktivität (Engagement). Schwellen wie MQL und SQL machen daraus klare Stufen.' },
       { title: 'Noch kein Modell?', target: 'ls-empty', optional: true, text: 'Der Knopf legt ein Modell aus einer Vorlage an (Formulare, Klicks, Termine) – danach passt du es an.', missing: 'Es gibt schon ein Modell – weiter geht’s.' },

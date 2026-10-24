@@ -3,7 +3,7 @@
 Requirements: **Node.js 22.13+**, ~300 MB RAM, a reverse proxy for HTTPS.
 
 ```bash
-git clone https://github.com/BAISESYSTEMS/hyperlevel.git /opt/gohigh && cd /opt/gohigh
+git clone https://github.com/BAISESYSTEMS/GoHyperLevel.git /opt/gohigh && cd /opt/gohigh
 npm ci && npm run build && npm prune --omit=dev
 PGHL_BASE_URL=https://crm.example.com PGHL_DATA_DIR=/var/lib/gohigh npm start
 ```
