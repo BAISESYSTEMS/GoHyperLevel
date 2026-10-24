@@ -57,7 +57,9 @@ describe('oss-check rules', () => {
   });
 
   it('the community files go into the public export, the internal launch notes stay out', () => {
-    const files = ['CLA.md', 'CONTRIBUTING.md', 'SECURITY.md', 'docs/partner-program.md', '.github/workflows/cla.yml', '.github/ISSUE_TEMPLATE/bug_report.yml', '.github/ISSUE_TEMPLATE/feature_request.yml', '.github/ISSUE_TEMPLATE/config.yml', 'docs/launch-kit.md'];
+    // The internal notes are missing from the public export (that is the point) – check them only where they exist.
+    const internal = existsSync(join(ROOT, 'docs/launch-kit.md')) ? ['docs/launch-kit.md'] : [];
+    const files = ['CLA.md', 'CONTRIBUTING.md', 'SECURITY.md', 'docs/partner-program.md', '.github/workflows/cla.yml', '.github/ISSUE_TEMPLATE/bug_report.yml', '.github/ISSUE_TEMPLATE/feature_request.yml', '.github/ISSUE_TEMPLATE/config.yml', ...internal];
     const attr = execFileSync('git', ['check-attr', 'export-ignore', '--', ...files], { cwd: ROOT, encoding: 'utf8' });
     for (const f of files) {
       expect(existsSync(join(ROOT, f)), f).toBe(true);
