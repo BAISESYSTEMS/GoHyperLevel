@@ -258,6 +258,9 @@ function Clients() {
   );
 }
 
+/** A snapshot made with "Wissen mitnehmen" (agents, notes, wiki, help centre, learnings – server/modules/knowledge-snapshot.ts). */
+const hasKnowledge = (s: any) => !!(s?.summary?.agents || s?.summary?.memories || s?.summary?.wiki_pages || s?.summary?.kb_articles || s?.summary?.learnings);
+
 function Snapshots() {
   const session = useSession();
   const list = useLoad(() => api.get<any[]>('/api/snapshots'), []);
@@ -266,6 +269,8 @@ function Snapshots() {
   const [apply, setApply] = useState<any>(null);
   const [target, setTarget] = useState('');
   const [activate, setActivate] = useState(false);
+  const [knowledge, setKnowledge] = useState(false);
+  const [lang, setLang] = useState('');
   const importFile = async (file: File) => {
     const text = await file.text();
     let name = file.name.replace(/\.json$/, '');
@@ -281,6 +286,9 @@ function Snapshots() {
     <>
       <SnapshotTemplates />
       <p className="muted">Ein Snapshot ist ein Startpaket: Websites mit Blog-Beiträgen, Funnels, Formulare, Kalender, Workflows, Pipelines, Vorlagen, Produkte, eigene Felder, Kurse (Module & Lektionen) und die Struktur der Community-Gruppen eines Sub-Accounts – ohne Kontakte, Kursteilnehmer oder Community-Beiträge. Damit legst du neue Kunden in Sekunden an.</p>
+      <p className="muted">
+        <b>Wissen mitnehmen</b> packt zusätzlich das Gelernte ein: KI-Agenten mit ihren Anweisungen, ihr Gedächtnis und gemerkte Notizen, das Wiki, die Hilfe-Artikel und eine Learnings-Seite aus deinen Zahlen (beste Betreffzeilen, Lead-Quellen, Kanäle). Ideal für ein neues Land oder eine neue Marke – beim Anwenden lässt sich alles übersetzen. Solche Snapshots enthalten internes Wissen: nicht an Kunden weitergeben.
+      </p>
       <div className="card row" style={{ alignItems: 'flex-end' }} data-tour="snapshots-create">
         <Field label="Aus Sub-Account">
           <Select value={src} onChange={setSrc} options={session.locations.map((l) => [l.id, l.name])} />
@@ -290,9 +298,12 @@ function Snapshots() {
             <Input value={nameV} onChange={setName} placeholder="z. B. Handwerker-Website" />
           </Field>
         </div>
-        <button className="btn" style={{ marginBottom: 12 }} onClick={() => act(() => api.post('/api/snapshots', { location_id: src, name: nameV }), 'Snapshot erstellt').then(() => (setName(''), list.reload()))}>
+        <button className="btn" style={{ marginBottom: 12 }} onClick={() => act(() => api.post('/api/snapshots', { location_id: src, name: nameV, include_knowledge: knowledge }), 'Snapshot erstellt').then(() => (setName(''), list.reload()))}>
           Snapshot erstellen
         </button>
+        <div style={{ marginBottom: 12 }}>
+          <Check checked={knowledge} onChange={setKnowledge} label="Wissen mitnehmen" />
+        </div>
         <label className="btn secondary" style={{ marginBottom: 12 }}>
           JSON importieren
           <input type="file" accept="application/json,.json" hidden onChange={(e) => e.target.files?.[0] && importFile(e.target.files[0])} />
@@ -321,10 +332,15 @@ function Snapshots() {
                     {s.summary.blog_posts ? ` · ${s.summary.blog_posts} Blog-Beiträge` : ''}
                     {s.summary.courses ? ` · ${s.summary.courses} Kurse (${s.summary.lessons} Lektionen)` : ''}
                     {s.summary.community_groups ? ` · ${s.summary.community_groups} Community-Gruppen` : ''}
+                    {hasKnowledge(s) && (
+                      <div className="muted">
+                        Wissen: {s.summary.agents} KI-Agenten · {s.summary.memories} Notizen · {s.summary.wiki_pages} Wiki-Seiten · {s.summary.kb_articles} Hilfe-Artikel{s.summary.learnings ? ' · Learnings-Seite' : ''}
+                      </div>
+                    )}
                   </td>
                   <td className="muted">{dt(s.created_at)}</td>
                   <td className="actions">
-                    <button className="btn small" onClick={() => (setApply(s), setTarget(''))}>
+                    <button className="btn small" onClick={() => (setApply(s), setTarget(''), setLang(''))}>
                       Anwenden
                     </button>
                     <a className="btn small secondary" href={`/api/snapshots/${s.id}/download`}>
@@ -351,9 +367,10 @@ function Snapshots() {
               className="btn"
               disabled={!target}
               onClick={async () => {
-                const r = await act(() => api.post(`/api/snapshots/${apply.id}/apply`, { location_id: target, activate_workflows: activate }));
+                const r = await act(() => api.post(`/api/snapshots/${apply.id}/apply`, { location_id: target, activate_workflows: activate, translate_to: lang }));
                 if (r) {
-                  toast(`Kopiert: ${r.funnels.length} Websites/Funnels, ${r.forms.length} Formulare, ${r.workflows.length} Workflows`);
+                  const k = hasKnowledge(apply) ? `, ${r.knowledge_agents ?? 0} KI-Agenten, ${r.knowledge_wiki ?? 0} Wiki-Seiten${r.translated ? `, ${r.translated} Texte übersetzt` : ''}` : '';
+                  toast(`Kopiert: ${r.funnels.length} Websites/Funnels, ${r.forms.length} Formulare, ${r.workflows.length} Workflows${k}`);
                   setApply(null);
                 }
               }}
@@ -367,6 +384,11 @@ function Snapshots() {
             <Select value={target} onChange={setTarget} placeholder="wählen…" options={session.locations.map((l) => [l.id, l.name])} />
           </Field>
           <Check checked={activate} onChange={setActivate} label="Workflows gleich aktivieren" />
+          {hasKnowledge(apply) && (
+            <Field label="Wissen übersetzen in" hint="Agenten-Anweisungen, Notizen, Wiki, Hilfe-Artikel und Learnings – mit dem KI-Assistenten des Ziel-Sub-Accounts (kostet KI-Guthaben). Leer: unverändert übernehmen.">
+              <Select value={lang} onChange={setLang} options={[['', '– nicht übersetzen –'], ['Englisch', 'Englisch'], ['Französisch', 'Französisch'], ['Spanisch', 'Spanisch'], ['Italienisch', 'Italienisch'], ['Niederländisch', 'Niederländisch'], ['Polnisch', 'Polnisch'], ['Deutsch', 'Deutsch']]} />
+            </Field>
+          )}
         </Modal>
       )}
     </>

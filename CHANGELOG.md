@@ -6,6 +6,14 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.70] – 2026-11-03
+
+### Added
+- **Wissens-Snapshot:** Snapshots können das Gelernte eines Sub-Accounts mitnehmen (*Agentur → Snapshots → Wissen mitnehmen*,
+  `include_knowledge`): KI-Agenten mit Anweisungen und Tools, ihr Gedächtnis und gemerkte Notizen, Wiki, Hilfe-Artikel (als Entwurf)
+  und eine erzeugte *Learnings*-Seite (beste Betreffzeilen, Lead-Quellen, Kanäle). Beim Anwenden übersetzt `translate_to` alles mit
+  dem KI-Assistenten des Ziel-Sub-Accounts in die neue Sprache – für ein neues Land oder eine neue Marke ohne Neustart bei null.
+
 ## [1.0.69] – 2026-11-03
 
 ### Added

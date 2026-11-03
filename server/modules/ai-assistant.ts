@@ -70,6 +70,7 @@ export const PURPOSES: Record<string, string> = {
   mobile_capture: 'App-Diktat',
   canvas: 'Canvas',
   review_reply: 'Bewertungsantwort',
+  snapshot_translate: 'Snapshot-Übersetzung',
 };
 const BOT_SOURCE = 'KI-Assistent';
 const DRAFT_SOURCE = 'KI-Entwurf';

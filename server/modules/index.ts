@@ -91,6 +91,7 @@ import { pipelineBoardModule } from './pipeline-board.js';
 import { dealListModule } from './deal-list.js';
 import { inboxSpamModule } from './inbox-spam.js';
 import { callScriptsModule } from './call-scripts.js';
+import { knowledgeSnapshotModule } from './knowledge-snapshot.js';
 import { notesPlusModule } from './notes-plus.js';
 import { crmGapModules } from './crm-gaps.js';
 import { reputationModule } from './reputation.js';
@@ -786,6 +787,8 @@ export const MODULES: Module[] = [
   inboxSpamModule,
   // Call scripts with placeholders and branches per dialer list or pipeline (shown in the browser phone and the power dialer).
   callScriptsModule,
+  // Wissens-Snapshot: agents, their memory, wiki, help centre and a learnings page travel with a snapshot (opt-in, translatable).
+  knowledgeSnapshotModule,
   // Better notes: title, colour, pinning, Markdown (rendered by the wiki sanitiser), search; extends the add_note step.
   notesPlusModule,
   // HighLevel parity – CRM/inbox/automation gaps: tags in bulk, inbox filters and message search, bulk owner, field clean-up, outbound triggers.

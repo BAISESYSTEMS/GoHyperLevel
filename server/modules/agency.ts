@@ -6,6 +6,7 @@ import { PERMISSIONS, cleanPermissions, requiredPermission, visibleLocations } f
 import { isValidTz } from '../core/time.js';
 import { hashPassword, id, now, slugify } from '../core/util.js';
 import { applySnapshot, exportSnapshot, snapshotSummary, validateSnapshot } from '../services/snapshots.js';
+import { knowledgeSummary, translateKnowledge, withoutKnowledge } from './knowledge-snapshot.js';
 import { createLocation } from './core.js';
 import { sealSettings } from '../core/secrets.js';
 import { locationStats, overviewExtras } from '../services/location-stats.js';
@@ -242,14 +243,15 @@ export const agencyModule: Module = {
     // --- snapshots ---------------------------------------------------------------
     const out = (s: any) => {
       const data = JSON.parse(s.data);
-      return { id: s.id, name: s.name, description: s.description, source_location_id: s.source_location_id, created_at: s.created_at, summary: snapshotSummary(validateSnapshot(data)) };
+      const d = validateSnapshot(data);
+      return { id: s.id, name: s.name, description: s.description, source_location_id: s.source_location_id, created_at: s.created_at, summary: { ...snapshotSummary(d), ...knowledgeSummary(d) } };
     };
     router.get('/api/snapshots', 'admin', () => db.all('SELECT * FROM snapshots ORDER BY created_at DESC').map(out));
     router.post('/api/snapshots', 'admin', (ctx) => {
       const locId = str(ctx.body.location_id, 'Sub-Account', { required: true });
       const loc = app.location(locId);
       if (!loc) throw notFound('Sub-Account nicht gefunden');
-      const row = { id: id(), name: str(ctx.body.name, 'Name') || `${loc.name} (${new Date().toLocaleDateString('de-DE')})`, description: str(ctx.body.description, 'Beschreibung', { max: 2000 }), source_location_id: locId, data: JSON.stringify(exportSnapshot(app, locId)), created_at: now() };
+      const row = { id: id(), name: str(ctx.body.name, 'Name') || `${loc.name} (${new Date().toLocaleDateString('de-DE')})`, description: str(ctx.body.description, 'Beschreibung', { max: 2000 }), source_location_id: locId, data: JSON.stringify(ctx.body.include_knowledge ? exportSnapshot(app, locId) : withoutKnowledge(exportSnapshot(app, locId))), created_at: now() };
       db.insert('snapshots', row);
       return out(row);
     });
@@ -271,12 +273,24 @@ export const agencyModule: Module = {
       r.headers['content-disposition'] = `attachment; filename="snapshot-${slugify(s.name)}.json"`;
       return r;
     });
-    router.post('/api/snapshots/:id/apply', 'admin', (ctx) => {
+    // translate_to: the knowledge (agents, notes, wiki, help centre, learnings) is translated into that language first, with
+    // the target sub-account's AI assistant; nothing is copied when the translation fails.
+    router.post('/api/snapshots/:id/apply', 'admin', async (ctx) => {
       const s = db.get('SELECT * FROM snapshots WHERE id = ?', ctx.params.id);
       if (!s) throw notFound();
       const locId = str(ctx.body.location_id, 'Sub-Account', { required: true });
       if (!app.location(locId)) throw notFound('Sub-Account nicht gefunden');
-      return applySnapshot(app, locId, validateSnapshot(JSON.parse(s.data)), { activateWorkflows: !!ctx.body.activate_workflows });
+      const data = validateSnapshot(JSON.parse(s.data));
+      const language = str(ctx.body.translate_to, 'Sprache', { max: 40 });
+      let translated = 0;
+      if (language) {
+        try {
+          translated = await translateKnowledge(app, data, locId, language, ctx.user?.id ?? null);
+        } catch (e) {
+          throw new HttpError(409, (e as Error).message);
+        }
+      }
+      return { ...applySnapshot(app, locId, data, { activateWorkflows: !!ctx.body.activate_workflows }), translated };
     });
     router.delete('/api/snapshots/:id', 'admin', (ctx) => {
       db.run('DELETE FROM snapshots WHERE id = ?', ctx.params.id);

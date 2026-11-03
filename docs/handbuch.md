@@ -330,7 +330,7 @@ Kanäle, Telefonie, Stripe, Integrations-Katalog, Zapier/Make/n8n, HubSpot-Impor
 15. **SaaS-Modus** *(Agentur → SaaS)* – Verkauft HyperLevel als Abo an Kunden – mit eigenem Agentur-Stripe. Prüfe die laufenden Kunden-Abos.
 16. **White-Label** *(Agentur → White-Label)* – Name, Logo, Farbe, Login-Texte und **Support-E-Mail** – die solltest du bei der Übernahme auf dich ändern.
 17. **Domains** *(Agentur → Domains)* – Alle Domains mit Status. Die Domains selbst liegen beim Domain-Anbieter – Ablaufdaten im Kalender eintragen!
-18. **Snapshots** *(Agentur → Snapshots)* – Startpakete für neue Kunden. Exportiere deine wichtigsten Snapshots einmal als Datei – das ist zugleich eine Sicherung deiner Vorlagen.
+18. **Snapshots** *(Agentur → Snapshots)* – Startpakete für neue Kunden. Exportiere deine wichtigsten Snapshots einmal als Datei – das ist zugleich eine Sicherung deiner Vorlagen. Mit **Wissen mitnehmen** wandert auch das Gelernte mit – KI-Agenten samt Gedächtnis, Wiki, Hilfe-Artikel und eine Learnings-Seite aus deinen Zahlen –, z. B. wenn ein Projekt in ein neues Land geht; beim Anwenden lässt sich alles in die neue Sprache übersetzen. Solche Snapshots enthalten internes Wissen und gehören nicht in die Hände von Kunden.
 
 **Das hast du gelernt:**
 
