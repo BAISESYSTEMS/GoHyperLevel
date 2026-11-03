@@ -57,8 +57,8 @@ export function robotsTxt(extra: string[] = []): string {
   return ['# The app\'s own domain. Websites on their own domain have their own robots.txt.', 'User-agent: *', ...ROBOTS_DISALLOW.map((p) => `Disallow: ${p}`), 'Allow: /', ...extra, ''].join('\n');
 }
 
-/** The icon the build puts next to index.html (web/public); the first one that exists. */
-const ICONS = ['apple-touch-icon.png', 'icon-192.png'];
+/** The icon the build puts next to index.html (web/public); the first one that exists. The round favicon fills the circle search engines draw around it. */
+const ICONS = ['favicon-96.png', 'apple-touch-icon.png', 'icon-192.png'];
 
 export const rootFilesModule: Module = {
   name: 'root-files',

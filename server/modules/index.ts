@@ -259,6 +259,8 @@ import { officeToolsModule } from './office-tools.js';
 import { teamchatModule } from './teamchat.js';
 import { teamchatCommandsModule } from './teamchat-commands.js';
 import { teamchatMcpModule } from './teamchat-mcp.js';
+import { agentEventsModule } from './agent-events.js';
+import { contactFollowupModule } from './contact-followup.js';
 import { collabMobileModule } from './collab-mobile.js';
 import { mailboxModules } from './mailboxes.js';
 import { adsConnectModule } from './ads-connect.js';
@@ -606,6 +608,10 @@ export const MODULES: Module[] = [
   teamchatModule,
   teamchatCommandsModule,
   teamchatMcpModule,
+  // Event feed for AI agents (inbound messages, tasks tagged "agent", chat mentions): after the modules that emit them.
+  agentEventsModule,
+  // "Wiedervorlage am" on contacts (puts a contact aside until a date).
+  contactFollowupModule,
   collabMobileModule,
   // Darstellung: per-user theme/accent/sidebar/icons/hidden menu entries, agency defaults + locks, logo upload.
   appearanceModule,

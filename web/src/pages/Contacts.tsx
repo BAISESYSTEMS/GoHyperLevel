@@ -15,6 +15,7 @@ import { PluginPanels } from '../werkstatt/PluginFrame';
 import { AssociationsPanel, CompanyFilter, companyQs, pickCompany, type CompanyFilterValue } from './ObjectKit';
 import { ContactLeadScore, LeadScoreFilter, ScoreBadge, pickScore, scoreQs, useLeadScores, type ScoreFilterValue } from './LeadScoring';
 import { ContactService, HealthBadge, HealthFilter, useHealthScores } from './HealthScore';
+import { ContactFollowUp, FollowUpFilter, followUpQs, type FollowUpView } from './ContactFollowUp';
 import { useTags } from '../tags';
 import { ContactTagInput, TagChips } from '../tag-chip';
 import { NotesPanel } from './NotesPlus';
@@ -208,6 +209,8 @@ export function Contacts() {
   const [active, setActive] = useState('');
   const [cols, setCols] = useState<string[] | null>(null);
   const [health, setHealth] = useState('');
+  // Contacts put aside until a date ("Wiedervorlage") are out of the list until then.
+  const [followUp, setFollowUp] = useState<FollowUpView>('hide');
   const [page, setPage] = useState(0);
   const [sel, setSel] = useState<string[]>([]);
   const [modal, setModal] = useState<'' | 'new' | 'import'>('');
@@ -218,7 +221,7 @@ export function Contacts() {
     const timer = setTimeout(() => setDebounced(q), 250);
     return () => clearTimeout(timer);
   }, [q]);
-  const qs = `q=${encodeURIComponent(debounced)}${tag ? `&tag=${encodeURIComponent(tag)}` : ''}${attrQs(attr)}${companyQs(company)}${scoreQs(score)}${health ? `&health=${health}` : ''}${sort ? `&sort=${encodeURIComponent(sort)}${dir ? `&dir=${dir}` : ''}` : ''}`;
+  const qs = `q=${encodeURIComponent(debounced)}${tag ? `&tag=${encodeURIComponent(tag)}` : ''}${attrQs(attr)}${companyQs(company)}${scoreQs(score)}${health ? `&health=${health}` : ''}${followUpQs(followUp, !!debounced)}${sort ? `&sort=${encodeURIComponent(sort)}${dir ? `&dir=${dir}` : ''}` : ''}`;
   const { data, loading, reload } = useLoad(() => api.get(`/api/contacts?${qs}&limit=50&offset=${page * 50}`), [qs, page]);
   const all = data?.contacts ?? [];
   const leadScores = useLeadScores(all.map((c: any) => c.id));
@@ -254,7 +257,7 @@ export function Contacts() {
     setPage(0);
   };
   // Filters beyond search and tag: one "Weitere Filter" in Einfach-Modus – open when one is set, its count shown when folded.
-  const extraFilters = [attrQs(attr), companyQs(company), scoreQs(score), health].filter(Boolean).length;
+  const extraFilters = [attrQs(attr), companyQs(company), scoreQs(score), health, followUp === 'hide' ? '' : followUp].filter(Boolean).length;
 
   return (
     <>
@@ -282,6 +285,7 @@ export function Contacts() {
             <AttributionFilter value={attr} onChange={(v) => (setAttr(v), setPage(0))} />
             <CompanyFilter value={company} onChange={(v) => (setCompany(v), setPage(0))} />
             <LeadScoreFilter value={score} onChange={(v) => (setScore(v), setPage(0))} />
+            <FollowUpFilter value={followUp} onChange={(v) => (setFollowUp(v), setPage(0))} />
             <HealthFilter value={health} onChange={(v) => (setHealth(v), setPage(0))} />
           </MoreFields>
         </span>
@@ -747,6 +751,7 @@ export function ContactDetail({ id }: { id: string }) {
               ))}
             </div>
           )}
+          <ContactFollowUp contactId={id} />
           {!simple && <ContactLeadScore contactId={id} />}
           <AssociationsPanel type="contact" id={id} title={t('Firmen & Verknüpfungen')} exclude={['opportunity', 'task']} onChange={reload} />
           {/* Einfach-Modus: lead score, service, courses and origin behind one toggle (Profi: in place, as always) */}

@@ -501,10 +501,25 @@ export function CodeBox({ text }: { text: string }) {
   );
 }
 
-/** A key figure tile. Extra attributes (data-sort-key from a SortableGrid, aria-*) go onto the tile. */
-export function Stat({ label, value, sub, tour, ...rest }: { label: string; value: ReactNode; sub?: ReactNode; tour?: string } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>) {
+/**
+ * Props that make a whole tile or card open a page (`pressable` as a link – a div, since it may hold links of its own): a link
+ * or button inside keeps its own target, Ctrl/⌘ or the middle button opens a new tab. A drag of a sortable tile eats its click
+ * (web/src/sortable/drag.ts), so moving tiles never navigates. Pair with the class `tile-link`.
+ */
+export function tileLink(to: string) {
+  const href = to.startsWith('/') ? to : `${BASE}/${to}`;
+  const open = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>, newTab = false) => {
+    if ((e.target as Element).closest('a, button, input, select, textarea, [role="button"]')) return;
+    if (newTab || e.ctrlKey || e.metaKey) window.open(href, '_blank', 'noopener');
+    else navigate(href);
+  };
+  return { ...pressable((e) => open(e)), role: 'link', 'data-href': href, onAuxClick: (e: React.MouseEvent<HTMLElement>) => void (e.button === 1 && open(e, true)) };
+}
+
+/** A key figure tile. Extra attributes (data-sort-key from a SortableGrid, aria-*) go onto the tile. `to`: the tile opens that page. */
+export function Stat({ label, value, sub, tour, to, ...rest }: { label: string; value: ReactNode; sub?: ReactNode; tour?: string; to?: string } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>) {
   return (
-    <div className="stat card" data-tour={tour} {...rest}>
+    <div className={to ? 'stat card tile-link' : 'stat card'} data-tour={tour} {...(to ? tileLink(to) : {})} {...rest}>
       <div className="muted">{label}</div>
       <div className="stat-value">{value}</div>
       {sub && <div className="muted small">{sub}</div>}

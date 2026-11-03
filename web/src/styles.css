@@ -171,6 +171,11 @@ textarea { min-height: 90px; resize: vertical; }
 .page-head p { margin: 4px 0 0; }
 .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 14px; }
 .stat .stat-value { font-size: 24px; font-weight: 700; margin: 4px 0; }
+/* a tile or card that opens its area (ui.tsx tileLink) */
+.tile-link { cursor: pointer; transition: border-color .15s, box-shadow .15s, transform .15s; }
+.tile-link:hover { border-color: var(--brand); box-shadow: 0 4px 14px rgba(0, 0, 0, .08); transform: translateY(-1px); }
+.tile-link:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .tile-link, .tile-link:hover { transition: none; transform: none; } }
 .empty { text-align: center; padding: 40px 20px; color: var(--muted); }
 .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin-bottom: 16px; overflow-x: auto; }
 .tabs button { background: none; border: 0; padding: 9px 14px; font: inherit; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }

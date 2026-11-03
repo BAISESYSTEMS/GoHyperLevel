@@ -9,3 +9,125 @@
 	--sl-color-accent: #2563eb;
 	--sl-color-accent-high: #0b2a6b;
 }
+
+/* Start page (the only page with a hero): wider column, glow, gradient title, stats, screenshots. The sidebar stays. */
+[data-has-hero] {
+	--sl-content-width: 68rem;
+	--hl-grad: linear-gradient(100deg, #60a5fa 0%, #818cf8 45%, #c084fc 100%);
+}
+:root[data-theme='light'][data-has-hero] {
+	--hl-grad: linear-gradient(100deg, #1d4ed8 0%, #4f46e5 50%, #9333ea 100%);
+}
+[data-has-hero] main {
+	background:
+		radial-gradient(60rem 28rem at 70% -6rem, rgb(37 99 235 / 0.22), transparent 70%),
+		radial-gradient(40rem 22rem at 10% 4rem, rgb(147 51 234 / 0.14), transparent 70%);
+}
+[data-has-hero] .hero {
+	padding-block: 2.5rem 1.5rem;
+	gap: 2.5rem;
+}
+[data-has-hero] .hero h1 {
+	font-size: clamp(2.1rem, 1.2rem + 2.6vw, 3.4rem);
+	line-height: 1.08;
+	letter-spacing: -0.02em;
+}
+.hl-grad {
+	background: var(--hl-grad);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+[data-has-hero] .hero > img,
+[data-has-hero] .hero .hero-html,
+[data-has-hero] .hero picture img {
+	border-radius: 0.9rem;
+	border: 1px solid rgb(255 255 255 / 0.12);
+	box-shadow: 0 30px 80px -20px rgb(37 99 235 / 0.55), 0 0 0 1px rgb(0 0 0 / 0.2);
+	transform: perspective(1400px) rotateY(-7deg) rotateX(2deg);
+	transition: transform 0.4s ease;
+}
+[data-has-hero] .hero > img:hover {
+	transform: perspective(1400px) rotateY(0) rotateX(0);
+}
+@media (min-width: 50rem) {
+	[data-has-hero] .hero {
+		grid-template-columns: 5fr 6fr;
+	}
+}
+
+.hl-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+	gap: 0.75rem;
+	margin: 0.5rem 0 2.5rem;
+}
+.hl-stats > div {
+	padding: 1rem 1.1rem;
+	border-radius: 0.8rem;
+	border: 1px solid var(--sl-color-gray-5);
+	background: color-mix(in srgb, var(--sl-color-accent-low) 45%, transparent);
+}
+.hl-stats b {
+	display: block;
+	font-size: 1.9rem;
+	line-height: 1.1;
+	font-weight: 800;
+	background: var(--hl-grad);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+.hl-stats span {
+	color: var(--sl-color-gray-2);
+	font-size: var(--sl-text-sm);
+}
+
+/* The one-line install command stands out. */
+.hl-install .expressive-code figure {
+	box-shadow: 0 0 0 1px rgb(96 165 250 / 0.45), 0 12px 40px -12px rgb(37 99 235 / 0.6);
+	border-radius: 0.6rem;
+}
+
+[data-has-hero] .card {
+	border-radius: 0.8rem;
+	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+[data-has-hero] .card:hover {
+	transform: translateY(-3px);
+	border-color: var(--sl-color-accent);
+	box-shadow: 0 14px 36px -18px rgb(37 99 235 / 0.7);
+}
+[data-has-hero] .card .icon {
+	background: var(--hl-grad);
+	color: #fff;
+	border-radius: 0.5rem;
+	padding: 0.25rem;
+}
+
+.hl-shots {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	gap: 1rem;
+	margin: 1rem 0 0.5rem;
+}
+.hl-shots figure {
+	margin: 0;
+}
+.hl-shots img {
+	width: 100%;
+	height: auto;
+	border-radius: 0.7rem;
+	border: 1px solid var(--sl-color-gray-5);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hl-shots figure:hover img {
+	transform: scale(1.03);
+	box-shadow: 0 18px 44px -16px rgb(37 99 235 / 0.6);
+}
+.hl-shots figcaption {
+	margin-top: 0.4rem;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-2);
+	text-align: center;
+}

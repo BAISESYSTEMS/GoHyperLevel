@@ -6,6 +6,31 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.69] – 2026-11-03
+
+### Added
+- **Ein Schlüssel je KI-Agent:** API-Schlüssel lassen sich an einen Team-Nutzer binden (`user_id`, Einstellungen → API-Schlüssel
+  „wie …“). Der Agent darf dann nur die Bereiche dieses Nutzers, das Protokoll nennt ihn beim Namen; ohne Nutzer oder Zugriff
+  ist der Schlüssel gesperrt statt unbeschränkt. Ungebundene Schlüssel bleiben wie bisher.
+- **Ereignisse seit letzter Abfrage:** `GET /api/events?since=<cursor>` und MCP-Tool `ghl_events_since` – eingehende
+  Nachrichten, Aufgaben mit Tag `agent`, @Erwähnungen im Team-Chat und fällige Wiedervorlagen in einem Feed mit Cursor
+  (30 Tage, je Aufrufer nach Bereichen gefiltert).
+- **Wiedervorlage am Kontakt:** Kontakt bis zu einem Datum zurückstellen (Kontaktseite, `PUT /api/contacts/:id/follow-up`,
+  `ghl_update_contact` mit `follow_up_at`); die Kontaktliste blendet zurückgestellte aus, am Datum oder bei einer Antwort
+  ist der Kontakt wieder da (Auslöser `contact.follow_up_due`, `ghl_follow_ups`).
+
+### Changed
+- **Dashboard:** Jede Kachel und Karte öffnet ihren Bereich (Kontakte, Pipeline, Termine, Formulare, Nachrichten, Rechnungen,
+  Bewertungen, Aufgaben, Lead-Quellen); Widgets eigener Dashboards öffnen den Bereich ihrer Datenquelle. Strg/⌘ oder die
+  mittlere Maustaste öffnet einen neuen Tab, Ziehen zum Sortieren navigiert nie.
+- **Favicon:** rund und randlos (`favicon.svg`, `favicon-48/96/192.png`) – Suchmaschinen legen jedes Favicon in einen hellen
+  Kreis, die abgerundeten Ecken des App-Icons erschienen darin weiß. `/favicon.ico` liefert das neue Icon.
+- Landingpage: „public since Nov 1, 2026“ neben den GitHub-Sternen (offizieller Release-Tag).
+- Kontaktseite: Service- und Herkunft-Karte auf Englisch.
+- Doku-Website: Startseite mit Kennzahlen, Screenshots und Ein-Befehl-Installation; die Seitenleiste bleibt sichtbar.
+- Roadmap: neue geplante Funktionen (Rebilling mit Faktor, 3D-Workflow-Karte, anpassbare Navigation, Branchenpakete,
+  Meeting-Räume, Postfach-Ansichten, E-Mail-Gesundheitskonsole, Demo-Unterkonto, Social Intelligence).
+
 ## [1.0.68] – 2026-10-24
 
 ### Changed

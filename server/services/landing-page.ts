@@ -847,7 +847,7 @@ function head(x: Ctx, o: { title: string; description: string; path: string; ogT
 <meta property="og:title" content="${h(o.ogTitle ?? o.title)}"><meta property="og:description" content="${h(o.ogDescription ?? o.description)}">
 <meta property="og:url" content="${h(`${d.base}${o.path}`)}"><meta property="og:image" content="${h(og)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${h(heroLabel(c))}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${h(o.ogTitle ?? o.title)}"><meta name="twitter:description" content="${h(o.ogDescription ?? o.description)}"><meta name="twitter:image" content="${h(og)}">
-<link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png"><link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="${FONT_FILE}" as="font" type="font/woff2" crossorigin>
 <style>${CSS}${o.extraCss ?? ''}</style>
 </head>`;

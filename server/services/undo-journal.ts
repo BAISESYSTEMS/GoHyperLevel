@@ -147,7 +147,9 @@ export function createJournal(app: App) {
     const loc = !agency && hash ? db.get<{ id: string; name: string }>('SELECT id, name FROM api_keys WHERE key_hash = ?', hash) : undefined;
     const key = agency ?? loc;
     const kind = via === 'mcp' ? 'mcp' : agency ? 'agency_key' : via === 'api_key' || loc ? 'api_key' : ctx.user ? 'user' : 'system';
-    if (key) return { kind, ref: `${agency ? 'ak' : 'k'}:${key.id}`, userId: null, name: ctx.user?.name?.startsWith('API:') ? ctx.user.name : `API-Schlüssel „${key.name}“` };
+    // A key bound to a team user (an agent's own login) names that user too.
+    const keyName = loc && ctx.user ? `${ctx.user.name} (API-Schlüssel „${key?.name}“)` : `API-Schlüssel „${key?.name}“`;
+    if (key) return { kind, ref: `${agency ? 'ak' : 'k'}:${key.id}`, userId: null, name: ctx.user?.name?.startsWith('API:') ? ctx.user.name : keyName };
     if (ctx.user) return { kind: kind === 'system' ? 'user' : kind, ref: `u:${ctx.user.id}`, userId: ctx.user.id, name: ctx.user.name };
     return { kind: 'system', ref: `x:${via || 'system'}`, userId: null, name: ctx.viaApiKey ? 'API-Schlüssel' : 'System' };
   }

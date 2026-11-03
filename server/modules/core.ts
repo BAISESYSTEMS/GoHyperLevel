@@ -78,6 +78,28 @@ function accountLocked(email: string): boolean {
   return list.length >= 10;
 }
 
+/**
+ * The team user a new API key is bound to (`user_id` in the body; empty = unbound, the whole sub-account).
+ * The user needs access to the sub-account, and nobody hands out more than they have: only agency admins bind
+ * keys to admins, a member only to people whose areas are within their own.
+ */
+export function keyUserFor(app: App, ctx: Ctx, raw: unknown): string | null {
+  const userId = typeof raw === 'string' ? raw.trim() : '';
+  if (!userId) return null;
+  const me = ctx.user;
+  if (!me || ctx.viaApiKey) throw new HttpError(403, 'Schlüssel nur mit Anmeldung an Nutzer binden');
+  const u = app.db.get('SELECT id, role, locations, permissions FROM users WHERE id = ?', userId);
+  if (!u) throw bad('Nutzer nicht gefunden');
+  const locs: string[] = JSON.parse(u.locations || '[]');
+  if (u.role !== 'admin' && !locs.includes(ctx.locationId!)) throw bad('Dieser Nutzer hat keinen Zugriff auf den Sub-Account');
+  if (me.role !== 'admin' && u.id !== me.id) {
+    if (u.role === 'admin') throw new HttpError(403, 'Nur Agentur-Admins binden Schlüssel an Admins');
+    const theirs: string[] | null = u.permissions ? JSON.parse(u.permissions) : null;
+    if (me.permissions && (!theirs || theirs.some((p) => !me.permissions!.includes(p)))) throw new HttpError(403, 'Dieser Nutzer hat Bereiche, die du selbst nicht hast');
+  }
+  return u.id;
+}
+
 export function createLocation(db: any, name: string, timezone = 'Europe/Berlin', extra: Record<string, any> = {}) {
   const loc = {
     id: id(),
@@ -138,6 +160,8 @@ export const coreModule: Module = {
       `,
     ],
     ['002-user-permissions', `ALTER TABLE users ADD COLUMN permissions TEXT;`],
+    // Optional team user behind a key (one per AI agent): the key gets that user's areas instead of the whole sub-account.
+    ['003-api-key-user', `ALTER TABLE api_keys ADD COLUMN user_id TEXT REFERENCES users(id) ON DELETE CASCADE;`],
   ],
   register(app) {
     const { db, router } = app;
@@ -327,14 +351,19 @@ export const coreModule: Module = {
 
     // --- API keys -----------------------------------------------------------
     router.get('/api/api-keys', 'location', (ctx) =>
-      db.all('SELECT id, name, prefix, created_at, last_used_at FROM api_keys WHERE location_id = ? ORDER BY created_at DESC', ctx.locationId),
+      db.all(
+        `SELECT k.id, k.name, k.prefix, k.created_at, k.last_used_at, k.user_id, u.name AS user_name FROM api_keys k LEFT JOIN users u ON u.id = k.user_id
+         WHERE k.location_id = ? ORDER BY k.created_at DESC`,
+        ctx.locationId,
+      ),
     );
     router.post('/api/api-keys', 'location', (ctx) => {
       if (ctx.viaApiKey) throw new HttpError(403, 'API-Schlüssel können keine Schlüssel anlegen');
+      const userId = keyUserFor(app, ctx, ctx.body.user_id);
       const key = `pghl_${token(24)}`;
-      const row = { id: id(), location_id: ctx.locationId, name: str(ctx.body.name, 'Name') || 'API', key_hash: sha256(key), prefix: key.slice(0, 10), created_at: now() };
+      const row = { id: id(), location_id: ctx.locationId, name: str(ctx.body.name, 'Name') || 'API', key_hash: sha256(key), prefix: key.slice(0, 10), user_id: userId, created_at: now() };
       db.insert('api_keys', row);
-      return { id: row.id, name: row.name, key };
+      return { id: row.id, name: row.name, user_id: userId, key };
     });
     router.delete('/api/api-keys/:id', 'location', (ctx) => {
       db.run('DELETE FROM api_keys WHERE id = ? AND location_id = ?', ctx.params.id, ctx.locationId);

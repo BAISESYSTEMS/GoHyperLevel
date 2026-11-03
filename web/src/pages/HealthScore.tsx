@@ -57,6 +57,7 @@ const FACES = ['😞', '🙁', '😐', '🙂', '😄'];
 export function ContactService({ contactId }: { contactId: string }) {
   const { data, error } = useLoad(() => api.get(`/api/contacts/${contactId}/service`), [contactId]);
   const [open, setOpen] = useState(false);
+  const t = useT('contacts');
   if (error || !data) return null;
   const h = data.health;
   return (
@@ -73,7 +74,7 @@ export function ContactService({ contactId }: { contactId: string }) {
             <div className={BAND[h.band]?.[1]} style={{ width: `${h.score}%` }} />
           </div>
           <button className="linkbtn small" onClick={() => setOpen(!open)}>
-            {open ? 'Signale ausblenden' : 'Wie entsteht der Wert?'}
+            {open ? t('Signale ausblenden') : t('Wie entsteht der Wert?')}
           </button>
           {open && (
             <table className="t health-signals">
@@ -82,8 +83,8 @@ export function ContactService({ contactId }: { contactId: string }) {
                   .filter((s: any) => s.weight > 0)
                   .map((s: any) => (
                     <tr key={s.key}>
-                      <td>{s.label}</td>
-                      <td style={{ textAlign: 'right' }}>{s.score === null ? <span className="muted">keine Daten</span> : s.score}</td>
+                      <td>{t(s.label)}</td>
+                      <td style={{ textAlign: 'right' }}>{s.score === null ? <span className="muted">{t('keine Daten')}</span> : s.score}</td>
                       <td className="muted small" style={{ textAlign: 'right' }}>
                         ×{s.weight}
                       </td>
@@ -95,29 +96,30 @@ export function ContactService({ contactId }: { contactId: string }) {
         </>
       )}
       <h3 className="cs-sub">
-        Tickets {data.open ? <span className="muted">({data.open} offen)</span> : null}
+        Tickets {data.open ? <span className="muted">{t('({n} offen)', { n: data.open })}</span> : null}
       </h3>
       {data.tickets.length ? (
-        data.tickets.slice(0, 5).map((t: any) => (
-          <div key={t.id} className="cs-ticket">
-            <Link to={`tickets/${t.id}`}>
-              #{t.number} {t.subject}
+        data.tickets.slice(0, 5).map((tk: any) => (
+          <div key={tk.id} className="cs-ticket">
+            <Link to={`tickets/${tk.id}`}>
+              #{tk.number} {tk.subject}
             </Link>
             <div className="row" style={{ gap: 6, alignItems: 'center' }}>
-              <StatusBadge t={t} /> <PriorityBadge p={t.priority} /> <SlaChip t={t} />
+              <StatusBadge t={tk} /> <PriorityBadge p={tk.priority} /> <SlaChip t={tk} />
             </div>
           </div>
         ))
       ) : (
         <p className="muted" style={{ margin: 0 }}>
-          Keine Tickets.
+          {t('Keine Tickets.')}
         </p>
       )}
       {(data.surveys.csat.length > 0 || data.surveys.nps.length > 0) && (
         <>
-          <h3 className="cs-sub">Umfragen</h3>
+          <h3 className="cs-sub">{t('Umfragen')}</h3>
           {data.surveys.csat.slice(0, 3).map((c: any) => (
             <div key={c.id} className="small">
+              {/* i18n-ignore: CSAT is the same in every language */}
               {FACES[c.csat_score - 1]} CSAT {c.csat_score}/5 · #{c.number} <span className="muted">{d(c.csat_at)}</span>
             </div>
           ))}

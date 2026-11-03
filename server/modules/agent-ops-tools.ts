@@ -129,14 +129,32 @@ export const OPS_TOOLS: Tool[] = [
   {
     name: 'ghl_update_contact',
     title: 'Kontakt ändern',
-    description: 'Ändert Felder eines bestimmten Kontakts (per ID): Name, E-Mail, Telefon, Firma, Adresse, Quelle, zuständige Person (assigned_to), dnd, eigene Felder (custom: {schluessel: wert}). Tags: ghl_tag_contact.',
-    inputSchema: obj({ contact_id: { type: 'string' }, ...CONTACT_PROPS }, ['contact_id']),
+    description:
+      'Ändert Felder eines bestimmten Kontakts (per ID): Name, E-Mail, Telefon, Firma, Adresse, Quelle, zuständige Person (assigned_to), dnd, eigene Felder (custom: {schluessel: wert}). Tags: ghl_tag_contact. ' +
+      'Wiedervorlage: follow_up_at (YYYY-MM-DD oder ISO-Zeitpunkt; null hebt auf) stellt den Kontakt bis dahin zurück, follow_up_note sagt warum; fällige: ghl_follow_ups.',
+    inputSchema: obj(
+      {
+        contact_id: { type: 'string' },
+        ...CONTACT_PROPS,
+        follow_up_at: { type: ['string', 'null'], description: 'Wiedervorlage am (YYYY-MM-DD oder ISO), null = aufheben' },
+        follow_up_note: { type: 'string' },
+      },
+      ['contact_id'],
+    ),
     annotations: { ...W, idempotentHint: true },
-    run: (call, a) => {
+    run: async (call, a) => {
       const body = pick(a, Object.keys(CONTACT_PROPS));
       if ('dnd' in body) body.dnd = body.dnd ? 1 : 0;
-      if (!Object.keys(body).length) throw new HttpError(400, 'Nichts zu ändern');
-      return call.api('PATCH', `/api/contacts/${enc(a.contact_id)}`, { location: a.location_id, body });
+      const followUp = 'follow_up_at' in a;
+      if (!Object.keys(body).length && !followUp) throw new HttpError(400, 'Nichts zu ändern');
+      const path = `/api/contacts/${enc(a.contact_id)}`;
+      const contact = Object.keys(body).length ? await call.api('PATCH', path, { location: a.location_id, body }) : undefined;
+      if (!followUp) return contact;
+      const follow_up =
+        a.follow_up_at === null || a.follow_up_at === ''
+          ? (await call.api('DELETE', `${path}/follow-up`, { location: a.location_id }), null)
+          : await call.api('PUT', `${path}/follow-up`, { location: a.location_id, body: { at: a.follow_up_at, note: a.follow_up_note ?? '' } });
+      return contact ? { ...contact, follow_up } : { contact_id: a.contact_id, follow_up };
     },
   },
   {

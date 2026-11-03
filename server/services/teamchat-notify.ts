@@ -32,6 +32,17 @@ export function notifyMessage(app: App, ctx: Ctx, ch: ChannelRow, row: MessageRo
   const direct = ch.kind === 'dm' || ch.kind === 'group';
   const label = direct ? '' : `#${ch.name}`;
   const text = preview(row, opts.fileCount ?? 0);
+  // Every mention also lands in the agents' event feed (modules/agent-events.ts) – an agent behind a key has no push.
+  for (const uid of mentions) {
+    const u = uid === row.author_id ? undefined : userById(app, uid);
+    if (u && mayChat(u, ch.location_id))
+      app.services.recordAgentEvent?.(ch.location_id, {
+        type: 'chat.mention',
+        area: 'teamchat',
+        userId: uid,
+        data: { user_id: uid, user_name: u.name, channel_id: ch.id, channel: direct ? null : ch.name, message_id: row.id, thread_id: row.thread_id, author: row.author_name, text: markdownToText(row.body).replace(/\s+/g, ' ').trim().slice(0, 500) },
+      });
+  }
   const groups = new Map<string, { title: string; users: string[] }>();
   for (const uid of new Set([...members.map((m) => m.user_id), ...mentions])) {
     if (uid === row.author_id) continue;

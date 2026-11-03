@@ -527,8 +527,10 @@ function Backups() {
 function ApiAndHooks() {
   const t = useT('settings');
   const keys = useLoad(() => api.get<any[]>('/api/api-keys'), []);
+  const people = useLoad(() => api.get<{ id: string; name: string; email: string }[]>('/api/location-users'), []);
   const hooks = useLoad(() => api.get<any[]>('/api/webhooks'), []);
   const [newKey, setNewKey] = useState('');
+  const [keyUser, setKeyUser] = useState('');
   const [url, setUrl] = useState('');
   return (
     <div className="row" style={{ alignItems: 'flex-start' }}>
@@ -538,9 +540,18 @@ function ApiAndHooks() {
           {t('Für Zapier/Make/n8n oder eigene Skripte:')} {/* i18n-ignore (an HTTP header) */}
           <code>Authorization: Bearer pghl_…</code> {t('gegen')} <code>/api/contacts</code>, <code>/api/opportunities</code> {t('usw.')}
         </p>
-        <button className="btn" onClick={async () => { const r = await act(() => api.post('/api/api-keys', { name: prompt(t('Name des Schlüssels'), t('Integration')) ?? 'API' })); if (r) { setNewKey(r.key); keys.reload(); } }}>
-          + {t('Schlüssel')}
-        </button>
+        <p className="muted small">{t('Für KI-Agenten: Schlüssel an einen Team-Nutzer binden – dann darf der Agent nur die Bereiche dieses Nutzers, und das Protokoll zeigt seinen Namen.')}</p>
+        <div className="row">
+          <select value={keyUser} onChange={(e) => setKeyUser(e.target.value)} aria-label={t('Rechte des Schlüssels')}>
+            <option value="">{t('Ganzer Sub-Account')}</option>
+            {(people.data ?? []).map((u) => (
+              <option key={u.id} value={u.id}>{t('wie {name}', { name: u.name })}</option>
+            ))}
+          </select>
+          <button className="btn" onClick={async () => { const r = await act(() => api.post('/api/api-keys', { name: prompt(t('Name des Schlüssels'), t('Integration')) ?? 'API', user_id: keyUser || undefined })); if (r) { setNewKey(r.key); keys.reload(); } }}>
+            + {t('Schlüssel')}
+          </button>
+        </div>
         {newKey && (
           <div style={{ marginTop: 10 }}>
             <p>{t('Nur jetzt sichtbar – kopieren:')}</p>
@@ -551,7 +562,9 @@ function ApiAndHooks() {
           <div key={k.id} className="row" style={{ justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid var(--line)' }}>
             <span>
               {k.name} <span className="mono muted">{k.prefix}…</span>
-              <div className="muted small">{t('zuletzt: {date}', { date: dt(k.last_used_at) })}</div>
+              <div className="muted small">
+                {k.user_name ? t('Rechte wie {name}', { name: k.user_name }) : t('ganzer Sub-Account')} · {t('zuletzt: {date}', { date: dt(k.last_used_at) })}
+              </div>
             </span>
             <button className="btn small ghost" onClick={() => confirmAsk(t('Schlüssel widerrufen?')) && act(() => api.del(`/api/api-keys/${k.id}`)).then(keys.reload)}>
               {t('Widerrufen')}

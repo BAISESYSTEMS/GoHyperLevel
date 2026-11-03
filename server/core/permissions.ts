@@ -120,6 +120,7 @@ const ROUTES: [prefix: string, perm: Permission, readableByAll?: boolean][] = [
   ['/api/contacts', 'contacts'],
   ['/api/notes', 'contacts'],
   ['/api/tasks', 'contacts'],
+  ['/api/follow-ups', 'contacts'],
   // Project planning (tasks, boards, Gantt, time entries); hourly rates and invoices from time belong to payments.
   ['/api/pm/billing', 'payments'],
   ['/api/pm', 'contacts'],

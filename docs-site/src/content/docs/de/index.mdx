@@ -1,0 +1,109 @@
+---
+title: HyperLevel-Dokumentation
+description: HyperLevel betreiben, nutzen und erweitern – das Open-Source-Business-OS, auf dem deine KI-Agenten arbeiten.
+tableOfContents: false
+hero:
+  title: Das Open-Source-Business-OS, <span class="hl-grad">auf dem deine KI-Agenten arbeiten</span>
+  tagline: CRM, Funnels, Postfach, Automationen, Kurse, Helpdesk und Rechnungen in einer App – bedient von dir und deinen KI-Agenten über MCP und die REST-API. Selbst gehostet kostenlos, 0 € pro Platz.
+  image:
+    file: ../../../assets/home/dashboard.png
+    alt: Das HyperLevel-Dashboard mit Kontakten, Deals, Umsatz und Terminen
+  actions:
+    - text: Mit einem Befehl installieren
+      link: '#installieren'
+      icon: right-arrow
+    - text: Live-Demo
+      link: https://demo.gohyperlevel.com/demo
+      icon: external
+      variant: secondary
+    - text: Stern auf GitHub
+      link: https://github.com/BAISESYSTEMS/GoHyperLevel
+      icon: github
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import pipeline from '../../../assets/home/pipeline.png';
+import inbox from '../../../assets/home/inbox-open.png';
+import workflow from '../../../assets/home/workflow-open.png';
+
+<div class="hl-stats not-content">
+	<div><b>340+</b><span>MCP-Tools</span></div>
+	<div><b>250+</b><span>App-Konnektoren</span></div>
+	<div><b>5.800+</b><span>automatische Tests</span></div>
+	<div><b>0 €</b><span>pro Platz · AGPL-3.0</span></div>
+</div>
+
+## Installieren
+
+Auf jedem Linux-Server mit Docker und einer Domain, die auf ihn zeigt – ein Befehl, HTTPS automatisch:
+
+<div class="hl-install">
+
+```bash title="HyperLevel installieren"
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash
+```
+
+</div>
+
+<Tabs>
+	<TabItem label="Docker Compose">
+		```bash
+		git clone https://github.com/BAISESYSTEMS/GoHyperLevel.git hyperlevel && cd hyperlevel
+		cp .env.example .env                    # PGHL_BASE_URL und PGHL_DOMAIN setzen
+		docker compose --profile caddy up -d    # HyperLevel + Caddy (Let's Encrypt)
+		```
+	</TabItem>
+	<TabItem label="Lokale Demo">
+		```bash
+		npm ci && npm run build
+		npm run demo:seed -- --data-dir ./demo-data
+		PGHL_DATA_DIR=./demo-data npm start     # http://localhost:4700 · demo@example.com / demo1234
+		```
+	</TabItem>
+	<TabItem label="Agent verbinden">
+		```bash
+		# Claude Code – alle HyperLevel-Tools im Terminal
+		claude mcp add --transport http hyperlevel https://<deine-domain>/mcp --header "Authorization: Bearer pghl_…"
+		```
+	</TabItem>
+</Tabs>
+
+Weitere Wege – Hostinger, Coolify, Railway, Render, Node.js: [Installationswege](/de/deploy/).
+
+## Warum HyperLevel
+
+<CardGrid>
+	<Card title="Gebaut für KI-Agenten" icon="seti:json">
+		Über 340 MCP-Tools und eine vollständige REST-API. Claude, ChatGPT, Cursor oder dein eigener Agent arbeiten mit denselben Rechten, demselben Protokoll und demselben Rückgängig wie dein Team.
+	</Card>
+	<Card title="Alles in einer App" icon="puzzle">
+		CRM und Pipelines, gemeinsames Postfach, Funnels und Websites, Workflows, Kurse und Community, Helpdesk, Rechnungen und mehr.
+	</Card>
+	<Card title="In Minuten selbst hosten" icon="rocket">
+		Docker Compose, Hostinger, Coolify, Railway oder Node.js – kostenlos unter AGPL, unbegrenzt viele Nutzer, 0 € pro Platz.
+	</Card>
+	<Card title="Zum Anpassen gebaut" icon="pencil">
+		Jedes Modul ist offen. Forken, erweitern, Pull Request schicken – Beiträge sind sehr willkommen.
+	</Card>
+</CardGrid>
+
+## Ein Blick hinein
+
+<div class="hl-shots not-content">
+	<figure><Image src={pipeline} alt="Deal-Pipeline mit Phasen und Werten" widths={[480, 960]} sizes="(min-width: 72rem) 22rem, 100vw" /><figcaption>Pipelines</figcaption></figure>
+	<figure><Image src={inbox} alt="Gemeinsames Postfach mit offener Unterhaltung" widths={[480, 960]} sizes="(min-width: 72rem) 22rem, 100vw" /><figcaption>Gemeinsames Postfach</figcaption></figure>
+	<figure><Image src={workflow} alt="Workflow-Editor mit Auslöser und Schritten" widths={[480, 960]} sizes="(min-width: 72rem) 22rem, 100vw" /><figcaption>Automationen</figcaption></figure>
+</div>
+
+## Wo anfangen
+
+<CardGrid>
+	<LinkCard title="Installationswege" href="/de/deploy/" description="Docker Compose, Hostinger, Coolify, Railway/Render, Node.js" />
+	<LinkCard title="KI-Agenten verbinden" href="/de/ai-tools/" description="Claude Code, Codex, Cursor und ChatGPT über MCP" />
+	<LinkCard title="REST-API & MCP" href="/de/api/" description="Endpunkte, Anmeldung, OpenAPI unter /api/openapi.json" />
+	<LinkCard title="Self-Hosting-Referenz" href="/de/self-hosting/" description="Umgebungsvariablen, Backups, Updates" />
+	<LinkCard title="Sicherheit" href="/de/security/" description="Wie HyperLevel deine Daten schützt" />
+	<LinkCard title="Mitmachen" href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" description="Good first issues, Übersetzungen, neue Module" />
+</CardGrid>

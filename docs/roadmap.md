@@ -30,6 +30,29 @@ What we plan next – roughly in this order. Priorities move with feedback: 👍
   forking.
 - **iOS:** native wrapper with widgets (the PWA with push already works on iOS 16.4+).
 
+### New update features (planned November 2026)
+
+- **Rebilling with a markup factor.** Today usage above a plan's limits is billed at unit cost plus a markup
+  ([cloud.md](cloud.md)). Next: rebill every metered cost (e-mail, SMS, calls, AI) from the first unit, with a
+  factor per metric and plan (1.0–10×) and a live preview of the agency's margin; an AI package for client
+  accounts (flat monthly price, usage window that refills after a few hours).
+- **3D workflow map.** One navigable map (3D and 2D) of a sub-account: workflows, tags, forms, pipelines,
+  calendars and campaigns as nodes, arrows for what triggers or changes what, filters (published, draft, has
+  problems) and a "needs attention" list. Click a node to open it; also as an MCP tool so agents can explain
+  a setup before changing it.
+- **Customizable navigation.** Pinning exists; next: rename, reorder and hide menu items, and an agency-defined
+  menu per SaaS plan or sub-account that clients cannot change.
+- **Industry modes.** Ready-made packages per industry (pipelines, workflows, forms, website, custom fields,
+  dashboard) – restaurants and field/home services first, then the most common German industries.
+- **Meeting rooms.** Booking already adds a video link; next: persistent branded rooms per user and team,
+  recording, transcript and AI notes straight onto the contact and deal.
+- **Inbox customization and an e-mail health console.** Own views and columns in the team inbox; one page
+  with domain checks, bounce and complaint rates and blocklist status per sending domain.
+- **Demo sub-account for sales.** A ready demo account per agency that shows prospects everything without
+  creating a real account (builds on [demo-mode.md](demo-mode.md)).
+- **Social intelligence.** Mentions of the brand and competitors across social networks, with replies from
+  the inbox.
+
 ## Later
 
 - Optional Postgres backend for very large installs (SQLite stays the default).

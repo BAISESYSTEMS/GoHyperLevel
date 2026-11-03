@@ -48,7 +48,7 @@ export const NAMESPACES = {
   contacts: {
     complete: true,
     // the list's filters and badges that live in their areas' files
-    files: ['pages/Contacts.tsx', 'pages/ObjectKit.tsx#CompanyFilter', 'pages/LeadScoring.tsx#LeadScoreFilter', 'pages/HealthScore.tsx#HealthBadge,HealthFilter', 'pages/Attribution.tsx#AttributionFilter'],
+    files: ['pages/Contacts.tsx', 'pages/ObjectKit.tsx#CompanyFilter', 'pages/LeadScoring.tsx#LeadScoreFilter', 'pages/HealthScore.tsx#HealthBadge,HealthFilter,ContactService', 'pages/Attribution.tsx#AttributionFilter,ContactAttribution', 'pages/ContactFollowUp.tsx'],
   },
   deals: { complete: true, files: ['pages/Opportunities.tsx', 'pages/DealBoard.tsx', 'pages/deal-kit.ts', 'pages/DealList.tsx'] },
   inbox: { complete: true, files: ['pages/Conversations.tsx', 'pages/MsgDrafts.tsx', 'pages/TeamInboxKit.tsx', 'pages/MetaInbox.tsx#ChannelFilter', 'pages/Tickets.tsx#TicketFromConversation'] },

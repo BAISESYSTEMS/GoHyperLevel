@@ -1,6 +1,7 @@
 import type { App, Module } from '../core/app.js';
 import { HttpError, notFound, str, type Ctx } from '../core/http.js';
 import { id, now, sha256, token } from '../core/util.js';
+import { keyUserFor } from './core.js';
 
 /**
  * "KI-Werkzeuge verbinden": one click creates a scoped key for Codex, Claude Code, Cursor & Co. – a
@@ -118,7 +119,8 @@ export const aiToolsModule: Module = {
       oauth: !!app.services.mcpOAuth,
       tools: AI_TOOLS,
       keys: db.all(
-        `SELECT k.id, k.name, k.prefix, k.created_at, k.last_used_at, m.tool FROM api_keys k LEFT JOIN ai_tool_keys m ON m.key_id = k.id
+        `SELECT k.id, k.name, k.prefix, k.created_at, k.last_used_at, k.user_id, u.name AS user_name, m.tool FROM api_keys k
+         LEFT JOIN ai_tool_keys m ON m.key_id = k.id LEFT JOIN users u ON u.id = k.user_id
          WHERE k.location_id = ? ORDER BY k.created_at DESC`,
         ctx.locationId,
       ),
@@ -128,12 +130,13 @@ export const aiToolsModule: Module = {
     router.post('/api/ai-tools/keys', 'location', (ctx) => {
       const u = person(ctx);
       const tool = toolOf(ctx.body?.tool);
+      const userId = keyUserFor(app, ctx, ctx.body?.user_id);
       const key = `pghl_${token(24)}`;
-      const row = { id: id(), location_id: ctx.locationId, name: nameOf(tool, ctx.body?.label), key_hash: sha256(key), prefix: key.slice(0, 10), created_at: now() };
+      const row = { id: id(), location_id: ctx.locationId, name: nameOf(tool, ctx.body?.label), key_hash: sha256(key), prefix: key.slice(0, 10), user_id: userId, created_at: now() };
       db.insert('api_keys', row);
       db.insert('ai_tool_keys', { key_id: row.id, kind: 'location', tool, created_by: u.id, created_at: row.created_at });
       audit({ ctx, action: 'ai_tools.key.create', summary: row.name, entityId: row.id });
-      return { id: row.id, name: row.name, prefix: row.prefix, tool, key, scope: 'location', mcp_url: mcpUrl() };
+      return { id: row.id, name: row.name, prefix: row.prefix, tool, key, scope: 'location', user_id: userId, mcp_url: mcpUrl() };
     });
     router.delete('/api/ai-tools/keys/:id', 'location', (ctx) => {
       person(ctx);

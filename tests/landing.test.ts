@@ -420,7 +420,8 @@ describe('landing page (PGHL_LANDING=1)', () => {
     // the brand mark wherever the brand shows: header, footer, app downloads, favicon
     expect(home).toContain('<img class="mk" src="/icon.svg"');
     expect(home).toContain('<span class="fbrand"><img src="/icon.svg"');
-    expect(home).toContain('<link rel="icon" href="/icon.svg" type="image/svg+xml">');
+    // the favicon is round and fills its box: search results draw a light circle around every favicon
+    expect(home).toContain('<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">');
     expect(home).toContain('<a class="dl" href="/app"><img class="appic" src="/icon.svg"');
     expect(home).toContain('<meta name="twitter:card" content="summary_large_image">');
     expect(home).toMatch(/<meta property="og:image" content="http:\/\/localhost\/landing\/og-en\.png">/);
@@ -487,7 +488,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
     expect(body).not.toMatch(/stars<\/span>/);
     t.app.services.landingFetch = async () => new Response(JSON.stringify({ stargazers_count: 1234 }), { headers: { 'content-type': 'application/json' } });
     await t.app.services.landing.refreshStars(true);
-    expect(await (await get('/')).text()).toContain('1,234 stars');
+    expect(await (await get('/')).text()).toContain('1,234 stars · public since Nov 1, 2026');
     t.app.services.landingFetch = async () => new Response('rate limited', { status: 403 });
     await t.app.services.landing.refreshStars(true);
     expect(await (await get('/')).text()).toContain('1,234 stars');

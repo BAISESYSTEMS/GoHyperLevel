@@ -203,13 +203,14 @@ function TrackingSettings() {
 /** Card on the contact page: first/last touch and the visit history. */
 export function ContactAttribution({ contactId }: { contactId: string }) {
   const { data } = useLoad(() => api.get(`/api/contacts/${contactId}/attribution`).catch(() => null), [contactId]);
+  const t = useT('contacts');
   if (!data) return null;
   const s = data.summary;
   const touch = (p: 'first' | 'last') => (
     <div style={{ marginBottom: 10 }}>
-      <div className="muted small">{p === 'first' ? 'Erster Kontakt' : 'Letzter Kontakt'}</div>
+      <div className="muted small">{p === 'first' ? t('Erster Kontakt') : t('Letzter Kontakt')}</div>
       <div>
-        <strong>{srcLabel(s[`${p}_source`])}</strong> / {srcLabel(s[`${p}_medium`])} {s[`${p}_campaign`] ? <Badge tone="blue">{s[`${p}_campaign`]}</Badge> : null}
+        <strong>{t(srcLabel(s[`${p}_source`]))}</strong> / {t(srcLabel(s[`${p}_medium`]))} {s[`${p}_campaign`] ? <Badge tone="blue">{s[`${p}_campaign`]}</Badge> : null}
       </div>
       <div className="muted small">
         {dt(s[`${p}_at`])}
@@ -219,24 +220,24 @@ export function ContactAttribution({ contactId }: { contactId: string }) {
   );
   return (
     <div className="card">
-      <h2>Herkunft</h2>
+      <h2>{t('Herkunft')}</h2>
       {s ? (
         <>
           {touch('first')}
           {s.last_touch_id !== s.first_touch_id && touch('last')}
           <details className="attr-history">
-            <summary>Verlauf ({data.touches.length})</summary>
+            <summary>{t('Verlauf ({n})', { n: data.touches.length })}</summary>
             <ul className="timeline">
-              {data.touches.map((t: any) => (
-                <li key={t.id}>
+              {data.touches.map((x: any) => (
+                <li key={x.id}>
                   <span className="muted small" style={{ minWidth: 92 }}>
-                    {dt(t.created_at)}
+                    {dt(x.created_at)}
                   </span>
                   <span>
-                    <Badge>{KIND[t.kind] ?? t.kind}</Badge> {srcLabel(t.source)} / {srcLabel(t.medium)}
-                    {t.campaign ? ` · ${t.campaign}` : ''}
-                    {t.ref ? ` · Affiliate ${t.ref}` : ''}
-                    <div className="muted small attr-url">{[t.landing_page, t.referrer && `von ${t.referrer}`, t.gclid && 'gclid', t.fbclid && 'fbclid'].filter(Boolean).join(' · ')}</div>
+                    <Badge>{KIND[x.kind] ? t(KIND[x.kind]) : x.kind}</Badge> {t(srcLabel(x.source))} / {t(srcLabel(x.medium))}
+                    {x.campaign ? ` · ${x.campaign}` : ''}
+                    {x.ref ? ` · ${t('Affiliate {ref}', { ref: x.ref })}` : ''}
+                    <div className="muted small attr-url">{[x.landing_page, x.referrer && t('von {referrer}', { referrer: x.referrer }), x.gclid && 'gclid', x.fbclid && 'fbclid'].filter(Boolean).join(' · ')}</div>
                   </span>
                 </li>
               ))}
@@ -244,7 +245,7 @@ export function ContactAttribution({ contactId }: { contactId: string }) {
           </details>
         </>
       ) : (
-        <p className="muted">Keine Angaben – z. B. importiert, manuell angelegt oder ohne Einwilligung.</p>
+        <p className="muted">{t('Keine Angaben – z. B. importiert, manuell angelegt oder ohne Einwilligung.')}</p>
       )}
     </div>
   );

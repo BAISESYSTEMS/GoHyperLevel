@@ -553,10 +553,20 @@ function authenticate(app: App, ctx: Ctx, auth: string) {
     if (auth !== 'location') throw new HttpError(403, 'API-Schlüssel gelten nur für Sub-Account-Endpunkte');
     const key = app.db.get('SELECT * FROM api_keys WHERE key_hash = ?', sha256(bearer));
     if (!key) throw new HttpError(401, 'Ungültiger API-Schlüssel');
+    // A key bound to a team user (one per agent) acts with that user's sub-accounts and areas; a deleted user or
+    // one without access to the sub-account any more makes the key unusable, never unrestricted.
+    let keyUser: User | undefined;
+    if (key.user_id) {
+      const u = app.db.get('SELECT * FROM users WHERE id = ?', key.user_id);
+      if (!u) throw new HttpError(401, 'Der Nutzer dieses API-Schlüssels existiert nicht mehr');
+      keyUser = { id: u.id, email: u.email, name: u.name, role: u.role, locations: JSON.parse(u.locations || '[]'), permissions: u.permissions ? JSON.parse(u.permissions) : null };
+      if (keyUser.role !== 'admin' && !keyUser.locations.includes(key.location_id)) throw new HttpError(403, 'Der Nutzer dieses API-Schlüssels hat keinen Zugriff mehr auf den Sub-Account');
+    }
     app.db.run('UPDATE api_keys SET last_used_at = ? WHERE id = ?', new Date().toISOString(), key.id);
     ctx.locationId = key.location_id;
     ctx.viaApiKey = true;
     ctx.via = isRelay(ctx) ? 'mcp' : 'api_key';
+    if (keyUser) ctx.user = keyUser;
     return;
   }
 

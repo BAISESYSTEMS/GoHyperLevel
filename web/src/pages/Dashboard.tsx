@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api, dt, euro, moneyList, name } from '../api';
-import { Link, PageHead, Select, Spinner, Stat, useLoad } from '../ui';
+import { Link, PageHead, Select, Spinner, Stat, tileLink, useLoad } from '../ui';
 import { PluginWidgets } from '../werkstatt/PluginFrame';
 import { useModules } from '../theme/store';
 import { fmtDate, useT } from '../i18n';
@@ -57,52 +57,53 @@ export function Dashboard() {
   const stat = (k: DashStat) => {
     switch (k) {
       case 'contacts':
-        return <Stat key={k} label={t('Neue Kontakte')} value={data.contacts.new} sub={t('{n} gesamt', { n: data.contacts.total })} />;
+        return <Stat key={k} to="contacts" label={t('Neue Kontakte')} value={data.contacts.new} sub={t('{n} gesamt', { n: data.contacts.total })} />;
       case 'pipeline':
-        return <Stat key={k} label={t('Offene Pipeline')} value={euro(data.opportunities.openValue)} sub={t('{n} Opportunities', { n: data.opportunities.open })} />;
+        return <Stat key={k} to="opportunities" label={t('Offene Pipeline')} value={euro(data.opportunities.openValue)} sub={t('{n} Opportunities', { n: data.opportunities.open })} />;
       case 'won':
-        return <Stat key={k} label={t('Gewonnen')} value={euro(data.opportunities.wonValue)} sub={t('{won} gewonnen · {lost} verloren', { won: data.opportunities.won, lost: data.opportunities.lost })} />;
+        return <Stat key={k} to="opportunities?view=list" label={t('Gewonnen')} value={euro(data.opportunities.wonValue)} sub={t('{won} gewonnen · {lost} verloren', { won: data.opportunities.won, lost: data.opportunities.lost })} />;
       case 'booked':
-        return <Stat key={k} label={t('Termine gebucht')} value={data.appointments.booked} sub={`${t('{n} anstehend', { n: data.appointments.upcoming })}${conv !== null ? ` · ${t('{n}% Show-Rate', { n: conv })}` : ''}`} />;
+        return <Stat key={k} to="calendars" label={t('Termine gebucht')} value={data.appointments.booked} sub={`${t('{n} anstehend', { n: data.appointments.upcoming })}${conv !== null ? ` · ${t('{n}% Show-Rate', { n: conv })}` : ''}`} />;
       case 'forms':
-        return <Stat key={k} label={t('Formular-Einsendungen')} value={data.forms.submissions} />;
+        return <Stat key={k} to="forms" label={t('Formular-Einsendungen')} value={data.forms.submissions} />;
       case 'messages':
-        return <Stat key={k} label={t('Nachrichten')} value={data.messages.sent} sub={t('{received} empfangen · {unread} ungelesen', { received: data.messages.received, unread: data.messages.unread })} />;
+        return <Stat key={k} to="conversations" label={t('Nachrichten')} value={data.messages.sent} sub={t('{received} empfangen · {unread} ungelesen', { received: data.messages.received, unread: data.messages.unread })} />;
       case 'revenue': {
         // per currency, never added up (100 € + 100 $ is not 200 €)
         const rows: { currency: string; paid: number; outstanding: number }[] = data.revenue.by_currency ?? [{ currency: data.revenue.currency ?? 'EUR', paid: data.revenue.paid, outstanding: data.revenue.outstanding }];
         const list = (key: 'paid' | 'outstanding') => moneyList(rows.filter((r) => r[key]).map((r) => [r.currency, r[key]]), data.revenue.currency);
-        return <Stat key={k} label={t('Umsatz bezahlt')} value={list('paid')} sub={t('{amount} offen', { amount: list('outstanding') })} />;
+        return <Stat key={k} to="invoices" label={t('Umsatz bezahlt')} value={list('paid')} sub={t('{amount} offen', { amount: list('outstanding') })} />;
       }
       case 'reviews':
-        return <Stat key={k} label={t('Bewertungen')} value={data.reviews.average?.a ? `${data.reviews.average.a} ★` : '–'} sub={t.plural(data.reviews.average?.n ?? 0, { one: '{n} Bewertung', other: '{n} Bewertungen' })} />;
+        return <Stat key={k} to="reviews" label={t('Bewertungen')} value={data.reviews.average?.a ? `${data.reviews.average.a} ★` : '–'} sub={t.plural(data.reviews.average?.n ?? 0, { one: '{n} Bewertung', other: '{n} Bewertungen' })} />;
       case 'tasks':
         return (
           <Stat
             key={k}
+            to="tasks"
             label={t('Offene Aufgaben')}
             value={data.tasks.open}
             sub={<Link to="tasks" className={data.tasks.overdue ? 'dash-late' : undefined}>{data.tasks.overdue ? t('{n} überfällig', { n: data.tasks.overdue }) : t('Zu den Aufgaben')}</Link>}
           />
         );
       case 'unread':
-        return <Stat key={k} label={t('Ungelesene Nachrichten')} value={data.messages.unread} sub={<Link to="conversations">{t('Zum Posteingang')}</Link>} />;
+        return <Stat key={k} to="conversations" label={t('Ungelesene Nachrichten')} value={data.messages.unread} sub={<Link to="conversations">{t('Zum Posteingang')}</Link>} />;
       case 'upcoming':
-        return <Stat key={k} label={t('Anstehende Termine')} value={data.appointments.upcoming} sub={<Link to="calendars">{t('Zum Kalender')}</Link>} />;
+        return <Stat key={k} to="calendars" label={t('Anstehende Termine')} value={data.appointments.upcoming} sub={<Link to="calendars">{t('Zum Kalender')}</Link>} />;
     }
   };
   const card = (k: DashCard) => {
     switch (k) {
       case 'leads':
         return (
-          <div className="card" key={k} data-tour="dashboard-leads">
+          <div className="card tile-link" key={k} data-tour="dashboard-leads" {...tileLink('contacts')}>
             <h2>{t('Neue Kontakte pro Tag')}</h2>
             <LeadsChart data={data.leadsPerDay} days={Number(days) > 90 ? 90 : Number(days)} today={data.today} />
           </div>
         );
       case 'next':
         return (
-          <div className="card" key={k} data-tour="dashboard-next">
+          <div className="card tile-link" key={k} data-tour="dashboard-next" {...tileLink('calendars')}>
             <h2>{t('Nächste Termine')}</h2>
             {visible('calendars') &&
               (data.appointments.next.length ? (
@@ -133,7 +134,7 @@ export function Dashboard() {
         return data.pipelines.map((p: any) => {
           const max = Math.max(1, ...p.stages.map((s: any) => s.count));
           return (
-            <div className="card" key={p.id} data-tour="dashboard-pipeline">
+            <div className="card tile-link" key={p.id} data-tour="dashboard-pipeline" {...tileLink(`/app/opportunities?pipeline=${p.id}`)}>
               <h2>
                 {t('Pipeline:')} <Link to={`/app/opportunities?pipeline=${p.id}`}>{p.name}</Link>
               </h2>
@@ -155,7 +156,7 @@ export function Dashboard() {
         });
       case 'sources':
         return (
-          <div className="card" key={k} data-tour="dashboard-sources">
+          <div className="card tile-link" key={k} data-tour="dashboard-sources" {...tileLink(visible('attribution') ? 'attribution' : 'contacts')}>
             <h2>{t('Lead-Quellen')}</h2>
             {data.sources.length ? (
               <table className="t">

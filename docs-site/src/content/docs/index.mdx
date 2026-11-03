@@ -1,39 +1,101 @@
 ---
 title: HyperLevel documentation
 description: Run, use and extend HyperLevel – the open-source business OS your AI agents run on.
-template: splash
+tableOfContents: false
 hero:
-  tagline: CRM, funnels, inbox, automations, courses, helpdesk and invoices in one open-source app – run by you and your AI agents over MCP and the REST API.
+  title: The open-source business OS <span class="hl-grad">your AI agents run on</span>
+  tagline: CRM, funnels, inbox, automations, courses, helpdesk and invoices in one app – run by you and your AI agents over MCP and the REST API. Self-host free, 0 € per seat.
+  image:
+    file: ../../assets/home/dashboard.png
+    alt: The HyperLevel dashboard with contacts, deals, revenue and appointments
   actions:
-    - text: Quick start
-      link: https://github.com/BAISESYSTEMS/GoHyperLevel#quick-start
+    - text: Install in one command
+      link: '#install'
       icon: right-arrow
     - text: Live demo
       link: https://demo.gohyperlevel.com/demo
       icon: external
-      variant: minimal
-    - text: GitHub
+      variant: secondary
+    - text: Star on GitHub
       link: https://github.com/BAISESYSTEMS/GoHyperLevel
       icon: github
       variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import pipeline from '../../assets/home/pipeline.png';
+import inbox from '../../assets/home/inbox-open.png';
+import workflow from '../../assets/home/workflow-open.png';
+
+<div class="hl-stats not-content">
+	<div><b>340+</b><span>MCP tools</span></div>
+	<div><b>250+</b><span>app connectors</span></div>
+	<div><b>5,800+</b><span>automated tests</span></div>
+	<div><b>0 €</b><span>per seat · AGPL-3.0</span></div>
+</div>
+
+## Install
+
+On any Linux server with Docker and a domain pointing at it – one command, automatic HTTPS:
+
+<div class="hl-install">
+
+```bash title="Install HyperLevel"
+curl -fsSL https://raw.githubusercontent.com/BAISESYSTEMS/GoHyperLevel/main/scripts/install.sh | bash
+```
+
+</div>
+
+<Tabs>
+	<TabItem label="Docker Compose">
+		```bash
+		git clone https://github.com/BAISESYSTEMS/GoHyperLevel.git hyperlevel && cd hyperlevel
+		cp .env.example .env                    # set PGHL_BASE_URL and PGHL_DOMAIN
+		docker compose --profile caddy up -d    # HyperLevel + Caddy (Let's Encrypt)
+		```
+	</TabItem>
+	<TabItem label="Local demo">
+		```bash
+		npm ci && npm run build
+		npm run demo:seed -- --data-dir ./demo-data
+		PGHL_DATA_DIR=./demo-data npm start     # http://localhost:4700 · demo@example.com / demo1234
+		```
+	</TabItem>
+	<TabItem label="Connect your agent">
+		```bash
+		# Claude Code – every HyperLevel tool in your terminal
+		claude mcp add --transport http hyperlevel https://<your-domain>/mcp --header "Authorization: Bearer pghl_…"
+		```
+	</TabItem>
+</Tabs>
+
+More ways – Hostinger, Coolify, Railway, Render, plain Node.js: [Deploy options](/deploy/).
+
+## Why HyperLevel
 
 <CardGrid>
-	<Card title="Self-host in minutes" icon="rocket">
-		Docker Compose, Hostinger, Coolify, Railway or plain Node.js – free under AGPL, unlimited users, 0 € per seat.
-	</Card>
 	<Card title="Built for AI agents" icon="seti:json">
 		340+ MCP tools and a full REST API. Claude, ChatGPT, Cursor or your own agent work with the same permissions, audit log and undo as your team.
 	</Card>
 	<Card title="Everything in one app" icon="puzzle">
 		CRM and pipelines, unified inbox, funnels and websites, workflows, courses and community, helpdesk, invoices and more.
 	</Card>
+	<Card title="Self-host in minutes" icon="rocket">
+		Docker Compose, Hostinger, Coolify, Railway or plain Node.js – free under AGPL, unlimited users, 0 € per seat.
+	</Card>
 	<Card title="Built to be modified" icon="pencil">
 		Every module is open. Fork it, extend it, send a pull request – contributions are very welcome.
 	</Card>
 </CardGrid>
+
+## A look inside
+
+<div class="hl-shots not-content">
+	<figure><Image src={pipeline} alt="Deal pipeline with stages and values" widths={[480, 960]} sizes="(min-width: 72rem) 22rem, 100vw" /><figcaption>Pipelines</figcaption></figure>
+	<figure><Image src={inbox} alt="Unified inbox with an open conversation" widths={[480, 960]} sizes="(min-width: 72rem) 22rem, 100vw" /><figcaption>Unified inbox</figcaption></figure>
+	<figure><Image src={workflow} alt="Workflow builder with trigger and steps" widths={[480, 960]} sizes="(min-width: 72rem) 22rem, 100vw" /><figcaption>Automations</figcaption></figure>
+</div>
 
 ## Where to start
 
@@ -41,5 +103,7 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Deploy options" href="/deploy/" description="Docker Compose, Hostinger, Coolify, Railway/Render, Node.js" />
 	<LinkCard title="Connect your AI agent" href="/ai-tools/" description="Claude Code, Codex, Cursor and ChatGPT via MCP" />
 	<LinkCard title="REST API & MCP" href="/api/" description="Endpoints, authentication, OpenAPI at /api/openapi.json" />
+	<LinkCard title="Self-hosting reference" href="/self-hosting/" description="Environment variables, backups, updates" />
 	<LinkCard title="Security" href="/security/" description="How HyperLevel protects your data" />
+	<LinkCard title="Contribute" href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" description="Good first issues, translations, new modules" />
 </CardGrid>

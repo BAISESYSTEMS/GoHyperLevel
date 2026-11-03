@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { api } from '../api';
-import { Check, Field, Input, Modal, Select, Spinner, act, confirmAsk, navigate, toast, useLoad } from '../ui';
+import { Check, Field, Input, Modal, Select, Spinner, act, confirmAsk, navigate, tileLink, toast, useLoad } from '../ui';
 import { Icon } from '../icons';
 import { ReportView } from '../charts/ReportView';
 import { useHeight, useWidth, type ReportResult, type Viz } from '../charts/core';
@@ -133,6 +133,13 @@ interface Widget extends Cell {
   report_id?: string;
 }
 
+/** The page a widget's data lives on (report source → app area); a click on the widget outside edit mode opens it. */
+const SOURCE_PAGE: Record<string, string> = {
+  contacts: 'contacts', opportunities: 'opportunities', tasks: 'tasks', appointments: 'calendars', messages: 'conversations', conversations: 'conversations',
+  calls: 'calls', invoices: 'invoices', invoice_items: 'invoices', campaigns: 'campaigns', form_submissions: 'forms', attribution: 'attribution',
+  affiliate_commissions: 'affiliates', course_enrollments: 'courses', subscriptions: 'invoices', tickets: 'tickets',
+};
+
 function WidgetCard({ w, data, handle, height, edit, onRemove, onRename, dashId, loading }: { w: Widget; data?: { result?: ReportResult; error?: string; viz?: Viz }; handle: ReactNode; height: number; edit: boolean; onRemove: () => void; onRename: (title: string) => void; dashId: string; loading: boolean }) {
   const t = useT('reports');
   const [table, setTable] = useState(false);
@@ -140,8 +147,9 @@ function WidgetCard({ w, data, handle, height, edit, onRemove, onRename, dashId,
   const result = useMemo(() => (data?.result ? localResult(data.result) : undefined), [data?.result, t]);
   const [bodyRef, measured] = useHeight<HTMLDivElement>();
   const bodyH = measured || Math.max(60, height - 70);
+  const page = !edit && result ? SOURCE_PAGE[result.source.key] : undefined;
   return (
-    <div className={`card rpt-widget${loading ? ' loading' : ''}${viz === 'kpi' ? ' kpi' : ''}`}>
+    <div className={`card rpt-widget${loading ? ' loading' : ''}${viz === 'kpi' ? ' kpi' : ''}${page ? ' tile-link' : ''}`} {...(page ? tileLink(page) : {})}>
       <div className="rpt-widget-head">
         {handle}
         {edit ? <input className="rpt-widget-title-input" value={w.title} onChange={(e) => onRename(e.target.value)} aria-label={t('Titel')} /> : <h3 title={t(w.title)}>{t(w.title)}</h3>}

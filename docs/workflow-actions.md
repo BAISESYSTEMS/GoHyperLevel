@@ -736,6 +736,7 @@ that has no `sample` is run with empty settings, so give it one. What a step act
 | Kontakt verlässt ein Segment | `segment.left` | Segment-ID (leer = jedes beobachtete Segment) |
 | Einwilligung bestätigt | `consent.confirmed` | Kanal, Zweck |
 | Einwilligung widerrufen | `consent.revoked` | Kanal |
+| Wiedervorlage fällig | `contact.follow_up_due` |  |
 
 ### Nachrichten & Anrufe
 

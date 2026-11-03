@@ -103,7 +103,7 @@ const de: Copy = {
     ctaSelf: 'Mit 1 Befehl selbst hosten',
     ctaCloud: 'Cloud starten',
     star: 'auf GitHub',
-    starCount: (n) => `${n} Sterne`,
+    starCount: (n) => `${n} ${n === '1' ? 'Stern' : 'Sterne'} · öffentlich seit 01.11.2026`,
     mockLabel: 'Echte Bildschirme aus der Demo',
   },
   ai: {
@@ -428,7 +428,7 @@ const en: Copy = {
     ctaSelf: 'Self-host in 1 command',
     ctaCloud: 'Start in the cloud',
     star: 'on GitHub',
-    starCount: (n) => `${n} stars`,
+    starCount: (n) => `${n} ${n === '1' ? 'star' : 'stars'} · public since Nov 1, 2026`,
     mockLabel: 'Real screens from the demo',
   },
   ai: {

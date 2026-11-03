@@ -1,6 +1,8 @@
 # Generated from ../docs by scripts/sync-docs.mjs – edit the pages in docs/, not here.
 /src/content/docs/*
 !/src/content/docs/index.mdx
+# de/ itself must not be excluded, or the line below cannot bring its start page back
+!/src/content/docs/de/
 /src/content/docs/de/*
 !/src/content/docs/de/index.mdx
 /src/sidebar.generated.json

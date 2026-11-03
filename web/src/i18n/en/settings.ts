@@ -165,6 +165,12 @@ export default {
   'Nur jetzt sichtbar – kopieren:': 'Visible only now – copy it:',
   'zuletzt: {date}': 'last used: {date}',
   'Schlüssel widerrufen?': 'Revoke this key?',
+  'Für KI-Agenten: Schlüssel an einen Team-Nutzer binden – dann darf der Agent nur die Bereiche dieses Nutzers, und das Protokoll zeigt seinen Namen.': 'For AI agents: bind the key to a team user – the agent then only gets that user’s areas, and the audit log shows its name.',
+  'Rechte des Schlüssels': 'Key permissions',
+  'Ganzer Sub-Account': 'Whole sub-account',
+  'wie {name}': 'as {name}',
+  'Rechte wie {name}': 'permissions of {name}',
+  'ganzer Sub-Account': 'whole sub-account',
   Widerrufen: 'Revoke',
   'Ausgehende Webhooks': 'Outgoing webhooks',
   'Jedes Ereignis (contact.created, form.submitted, appointment.booked …) als JSON-POST an deine Adresse.':
