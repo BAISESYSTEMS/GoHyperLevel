@@ -1,0 +1,699 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Hosted cloud version (PGHL_CLOUD_MODE=1) | HyperLevel Docs</title><link rel="canonical" href="https://docs.gohyperlevel.com/cloud/"/><link rel="alternate" hreflang="en" href="https://docs.gohyperlevel.com/cloud/"/><link rel="alternate" hreflang="de" href="https://docs.gohyperlevel.com/de/cloud/"/><link rel="alternate" hreflang="x-default" href="https://docs.gohyperlevel.com/cloud/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.2"/><meta name="generator" content="Starlight v0.42.7"/><meta property="og:title" content="Hosted cloud version (PGHL_CLOUD_MODE=1)"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.gohyperlevel.com/cloud/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:site_name" content="HyperLevel Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:image" content="https://docs.gohyperlevel.com/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.DdUizGEC.css"><style>@layer starlight.components{svg:where(.astro-hkc32dio){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/" class="site-title sl-flex astro-6rvad3va"><img class="light:sl-hidden print:hidden astro-6rvad3va" alt src="/_astro/logo-dark.DcAxiGJs.svg" width="420" height="96"><img class="dark:sl-hidden print:block astro-6rvad3va" alt src="/_astro/logo.BXUvVMvj.svg" width="420" height="96"><span class="sr-only astro-6rvad3va" translate="no">HyperLevel Docs</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Djc9ZKGJ.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/cloud/" class="astro-2z5xp7gb">English</option><option value="/de/cloud/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="04e4z3h" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Get started</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/README.md#quick-start" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Quick start</span></a></li><li class="astro-rmhv4bp6"><a href="/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deploy options</span></a></li><li class="astro-rmhv4bp6"><a href="/self-hosting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Self-hosting reference</span></a></li><li class="astro-rmhv4bp6"><a href="/demo-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Demo mode</span></a></li><li class="astro-rmhv4bp6"><a href="/cloud/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Hosted cloud</span></a></li><li class="astro-rmhv4bp6"><a href="/landing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Landing page</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">AI &amp; agents</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/agent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">HyperLevel Agent</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI tools: Claude Code, Codex, Cursor, ChatGPT</span></a></li><li class="astro-rmhv4bp6"><a href="/mcp-client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">External MCP servers</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI providers – bring your own key</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI assistant</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI workflow builder</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Studio</span></a></li><li class="astro-rmhv4bp6"><a href="/genmedia/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI media generation</span></a></li><li class="astro-rmhv4bp6"><a href="/site-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Funnel &amp; website AI</span></a></li><li class="astro-rmhv4bp6"><a href="/voice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Voice</span></a></li><li class="astro-rmhv4bp6"><a href="/cognee/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Knowledge memory (Cognee)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">API &amp; integrations</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">REST API &amp; MCP</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-actions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Workflow actions &amp; triggers</span></a></li><li class="astro-rmhv4bp6"><a href="/integrations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Integrations: Zapier, Make, n8n, REST hooks</span></a></li><li class="astro-rmhv4bp6"><a href="/connectors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Connectors &amp; Composio</span></a></li><li class="astro-rmhv4bp6"><a href="/nango/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Nango</span></a></li><li class="astro-rmhv4bp6"><a href="/channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Channels &amp; providers</span></a></li><li class="astro-rmhv4bp6"><a href="/meta-channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">WhatsApp, Messenger &amp; Instagram</span></a></li><li class="astro-rmhv4bp6"><a href="/mailbox-sync/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mailbox sync</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment providers</span></a></li><li class="astro-rmhv4bp6"><a href="/stripe/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stripe</span></a></li><li class="astro-rmhv4bp6"><a href="/todoist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Todoist</span></a></li><li class="astro-rmhv4bp6"><a href="/social-comments/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social comments</span></a></li><li class="astro-rmhv4bp6"><a href="/comment-to-dm/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Comment to DM</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">CRM, sales &amp; teamwork</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/sales/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sales</span></a></li><li class="astro-rmhv4bp6"><a href="/objects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Companies, custom objects &amp; lead scoring</span></a></li><li class="astro-rmhv4bp6"><a href="/custom-values/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Custom values</span></a></li><li class="astro-rmhv4bp6"><a href="/projects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Projects &amp; time tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/team-inbox/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team inbox</span></a></li><li class="astro-rmhv4bp6"><a href="/team-calendars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team calendars</span></a></li><li class="astro-rmhv4bp6"><a href="/booking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Booking rules</span></a></li><li class="astro-rmhv4bp6"><a href="/telephony/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Telephony</span></a></li><li class="astro-rmhv4bp6"><a href="/reputation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reputation</span></a></li><li class="astro-rmhv4bp6"><a href="/team-chat/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team chat</span></a></li><li class="astro-rmhv4bp6"><a href="/collaboration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Live collaboration</span></a></li><li class="astro-rmhv4bp6"><a href="/wiki/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wiki</span></a></li><li class="astro-rmhv4bp6"><a href="/canvas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Canvas</span></a></li><li class="astro-rmhv4bp6"><a href="/living-boards/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Living Boards</span></a></li><li class="astro-rmhv4bp6"><a href="/office/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Office</span></a></li><li class="astro-rmhv4bp6"><a href="/xr/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">XR</span></a></li><li class="astro-rmhv4bp6"><a href="/undo/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Undo, history &amp; trash</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Marketing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/email-marketing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail marketing</span></a></li><li class="astro-rmhv4bp6"><a href="/email-builder/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail designer</span></a></li><li class="astro-rmhv4bp6"><a href="/email-tracking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/deliverability/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deliverability</span></a></li><li class="astro-rmhv4bp6"><a href="/sites/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Website builder</span></a></li><li class="astro-rmhv4bp6"><a href="/forms/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Forms</span></a></li><li class="astro-rmhv4bp6"><a href="/social-planner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social planner</span></a></li><li class="astro-rmhv4bp6"><a href="/ads-manager/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Ads manager</span></a></li><li class="astro-rmhv4bp6"><a href="/growth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Growth: attribution, affiliates &amp; ad reports</span></a></li><li class="astro-rmhv4bp6"><a href="/referrals/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Referrals &amp; partner links</span></a></li><li class="astro-rmhv4bp6"><a href="/webinars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Webinars</span></a></li><li class="astro-rmhv4bp6"><a href="/video-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Video studio</span></a></li><li class="astro-rmhv4bp6"><a href="/consent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Consent &amp; legal</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Selling &amp; billing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/invoicing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Invoicing</span></a></li><li class="astro-rmhv4bp6"><a href="/dunning/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Dunning</span></a></li><li class="astro-rmhv4bp6"><a href="/sepa/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SEPA</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-plans/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment plans</span></a></li><li class="astro-rmhv4bp6"><a href="/store/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Online store &amp; gift cards</span></a></li><li class="astro-rmhv4bp6"><a href="/saas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SaaS mode</span></a></li><li class="astro-rmhv4bp6"><a href="/gewinnrechner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Profit calculator</span></a></li><li class="astro-rmhv4bp6"><a href="/backoffice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Back office</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Courses, community &amp; service</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/courses/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Courses</span></a></li><li class="astro-rmhv4bp6"><a href="/quizzes-certificates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quizzes &amp; certificates</span></a></li><li class="astro-rmhv4bp6"><a href="/community/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Community</span></a></li><li class="astro-rmhv4bp6"><a href="/academy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Academy</span></a></li><li class="astro-rmhv4bp6"><a href="/helpdesk/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Helpdesk: tickets, SLAs, knowledge base</span></a></li><li class="astro-rmhv4bp6"><a href="/bug-reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bug reports &amp; wishes</span></a></li><li class="astro-rmhv4bp6"><a href="/reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reports &amp; dashboards</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Apps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/android-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Android app</span></a></li><li class="astro-rmhv4bp6"><a href="/app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install the app &amp; push</span></a></li><li class="astro-rmhv4bp6"><a href="/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gray-label &amp; own-brand apps</span></a></li><li class="astro-rmhv4bp6"><a href="/ios-web-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">iPhone, iPad &amp; foldables</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Operate &amp; secure</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/backups/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Backups, alerts &amp; status page</span></a></li><li class="astro-rmhv4bp6"><a href="/incident-runbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Incident runbook</span></a></li><li class="astro-rmhv4bp6"><a href="/performance/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Performance &amp; sizing</span></a></li><li class="astro-rmhv4bp6"><a href="/security/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security</span></a></li><li class="astro-rmhv4bp6"><a href="/security-review-2026-10/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security review, October 2026</span></a></li><li class="astro-rmhv4bp6"><a href="/auth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sign-in, SSO &amp; passkeys</span></a></li><li class="astro-rmhv4bp6"><a href="/umzug/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Switch-over importers (Umzug)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Customize &amp; extend</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/theming/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Appearance &amp; themes</span></a></li><li class="astro-rmhv4bp6"><a href="/translating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">UI language &amp; translating</span></a></li><li class="astro-rmhv4bp6"><a href="/werkstatt/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werkstatt, plugins &amp; Marktplatz</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Run your company on HyperLevel</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/company-playbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Company playbook</span></a></li><li class="astro-rmhv4bp6"><a href="/handbuch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handbook (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/kurs-firma-fuehren/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Course: run your company (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/partner-program/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Partner program</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Project</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/roadmap/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Roadmap</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CHANGELOG.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Changelog</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/SECURITY.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Security policy</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/discussions" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">GitHub Discussions</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/cloud/" class="astro-2z5xp7gb">English</option><option value="/de/cloud/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#decision-how-customers-are-separated" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Decision: how customers are separated</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#what-the-customer-gets" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">What the customer gets</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fair-use-transparent-never-a-feature-lock" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fair use (transparent, never a feature lock)</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#operator-setup" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Operator setup</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#1-switch-it-on" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">1. Switch it on</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#2-stripe" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">2. Stripe</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#3-domain-and-tls" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">3. Domain and TLS</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#4-sign-in-with-google-optional" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">4. Sign in with Google (optional)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#5-mail" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">5. Mail</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#6-legal-texts" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">6. Legal texts</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#7-fair-use-dunning-signup-protection" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">7. Fair use, dunning, signup protection</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#billing-lifecycle-and-data-protection" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Billing lifecycle and data protection</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#operator-console-agentur--cloud" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Operator console (Agentur → Cloud)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#isolation-and-support-access" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Isolation and support access</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#abuse-handling" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Abuse handling</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#customer-sites-their-own-origin-and-verified-domains" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Customer sites: their own origin and verified domains</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#b2b-only-signup" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">B2B-only signup</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#agentur-plan-client-accounts-and-white-label" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Agentur plan: client accounts and white-label</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#cloud-or-self-hosted" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Cloud or self-hosted?</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#waitlist-mode" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Waitlist mode</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#cloud--hq-crm-bridge" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Cloud → HQ CRM bridge</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#hooks-for-module-authors" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Hooks for module authors</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#api" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">API</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#operating-it" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Operating it</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#known-limits-and-open-questions" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Known limits and open questions</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#decision-how-customers-are-separated" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Decision: how customers are separated</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#what-the-customer-gets" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">What the customer gets</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fair-use-transparent-never-a-feature-lock" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fair use (transparent, never a feature lock)</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#operator-setup" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Operator setup</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#1-switch-it-on" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">1. Switch it on</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#2-stripe" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">2. Stripe</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#3-domain-and-tls" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">3. Domain and TLS</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#4-sign-in-with-google-optional" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">4. Sign in with Google (optional)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#5-mail" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">5. Mail</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#6-legal-texts" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">6. Legal texts</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#7-fair-use-dunning-signup-protection" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">7. Fair use, dunning, signup protection</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#billing-lifecycle-and-data-protection" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Billing lifecycle and data protection</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#operator-console-agentur--cloud" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Operator console (Agentur → Cloud)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#isolation-and-support-access" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Isolation and support access</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#abuse-handling" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Abuse handling</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#customer-sites-their-own-origin-and-verified-domains" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Customer sites: their own origin and verified domains</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#b2b-only-signup" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">B2B-only signup</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#agentur-plan-client-accounts-and-white-label" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Agentur plan: client accounts and white-label</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#cloud-or-self-hosted" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Cloud or self-hosted?</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#waitlist-mode" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Waitlist mode</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#cloud--hq-crm-bridge" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Cloud → HQ CRM bridge</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#hooks-for-module-authors" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Hooks for module authors</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#api" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">API</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#operating-it" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Operating it</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#known-limits-and-open-questions" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Known limits and open questions</span></a></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Hosted cloud version (PGHL_CLOUD_MODE=1)</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>A solopreneur, a small team or an agency opens the operator’s instance, picks a plan, pays and works
+immediately – no installation, no server. Self-hosting stays free and complete; the cloud mode is for whoever
+wants to <strong>run this software as a service for other people</strong> (the operator can be the project itself, an
+agency or a hosting partner).</p>
+<p>Prices (list prices per month, all configurable by the operator): <strong>Self-hosted 0 €</strong> (AGPL) · <strong>Cloud Solo 49,99 €</strong>
+(1 user, contacts, funnels and workflows unlimited) · <strong>Cloud Team &amp; Company 99,99 €</strong> (unlimited users; plan id
+<code dir="auto">cloud-team</code>) · <strong>Cloud Agentur 199 €</strong> (unlimited users, <strong>white-label</strong>, client sub-accounts, custom domains). Prices
+are <strong>net plus VAT</strong> – Stripe Tax adds the tax at checkout (reverse charge for EU businesses with a VAT ID), and the pricing
+page says so. Yearly: twelve months minus the yearly discount (default 20 %), <strong>rounded down</strong> to whole euros so the
+customer never gets less than the advertised discount – 479 €, 959 € and 1.910 € a year with the defaults. <strong>Every plan
+has every feature – the one exception is white-label and client sub-accounts (with custom domains), which only the
+Agentur plan has. There is no fee per user and no contact tiers.</strong></p>
+<p><strong>Not open yet? Waitlist mode.</strong> Without a Stripe key – or with <code dir="auto">PGHL_CLOUD_WAITLIST=1</code> – the cloud mode runs as a waitlist:
+nobody can sign up, enter payment data or be charged, and <code dir="auto">/cloud</code>, <code dir="auto">/start</code> and the landing page offer self-hosting plus a
+waitlist form instead (<a href="#waitlist-mode">waitlist mode</a>). The project’s own instance, gohyperlevel.com, runs like this until the
+hosted service opens.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="decision-how-customers-are-separated">Decision: how customers are separated</h2><a class="sl-anchor-link" href="#decision-how-customers-are-separated"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Decision: how customers are separated”</span></a></div>
+<p><strong>Every customer (tenant) is a sub-account of the operator’s instance – the isolation that already carries
+agencies and the SaaS mode – plus a thin tenant layer on top. No separate database or process per customer.</strong></p>
+<p>Options considered:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Isolation</th>
+<th>Cost / risk</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One SQLite file + process per customer</td>
+<td>strongest</td>
+<td>each customer needs a process, a port, a backup, a migration run and routing; thousands of customers are not manageable on one box; every feature module would need to be multi-process safe</td>
+<td>rejected: too much new operations surface for a first release</td>
+</tr>
+<tr>
+<td>New <code dir="auto">tenant_id</code> column on every table</td>
+<td>strong if complete</td>
+<td>touches every table, every query, every module – the exact “edit shared files” this project forbids, and one forgotten <code dir="auto">WHERE</code> leaks data</td>
+<td>rejected</td>
+</tr>
+<tr>
+<td><strong>Sub-account per customer (<code dir="auto">location_id</code>), tenant layer on top</strong></td>
+<td>the guarantee that every table, the REST API, MCP, search, webhooks and the audit log already rely on, and which <code dir="auto">tests/tenant-isolation.test.ts</code> and <code dir="auto">tests/security-fixtures.ts</code> attack with every route</td>
+<td>small: new tables only, hooks into existing registries</td>
+<td><strong>chosen</strong></td>
+</tr>
+</tbody>
+</table>
+<p>How it fits together:</p>
+<ul>
+<li>A <strong>tenant</strong> (<code dir="auto">cloud_tenants</code>) is one paying customer. It owns one <strong>primary sub-account</strong>; on the Agentur
+plan it can add <strong>client sub-accounts</strong> (<code dir="auto">cloud_locations</code>) for its own customers.</li>
+<li>People are <code dir="auto">users</code> with rows in <code dir="auto">cloud_members</code> (role <code dir="auto">owner</code> or <code dir="auto">member</code>, optional <code dir="auto">all_locations</code>).
+Customer logins are ordinary non-admin users – they never have the operator’s admin role.</li>
+<li><strong>Billing sits on the primary sub-account’s <code dir="auto">saas_subscriptions</code> row</strong>, so the existing SaaS machinery
+(statuses, usage gate, read-only mode, Stripe webhook, banner, usage metering) is reused unchanged. The three
+cloud plans are synced into <code dir="auto">saas_plans</code> (all areas, limits only for users / e-mails / SMS / AI, never for
+contacts or features). Client sub-accounts get a price-less mirror of the owner’s subscription so a paused
+owner pauses the clients too.</li>
+<li>The operator’s own sub-accounts are not tenants; operator admins are walled off from tenants (see
+<a href="#isolation-and-support-access">Isolation</a>).</li>
+<li>Everything lives in modules of its own (<code dir="auto">server/modules/cloud*.ts</code>, <code dir="auto">server/services/cloud*.ts</code>,
+<code dir="auto">web/src/pages/Cloud*.tsx</code>); shared code only got registry hooks (see <a href="#hooks-for-module-authors">Hooks</a>).</li>
+</ul>
+<p>Consequence to be aware of: all customers share one SQLite file, one process and one instance’s resources.
+That is the same scale statement as the rest of the project (thousands of contacts per sub-account, a few
+hundred to a few thousand tenants on one decent server). Beyond that, run several instances (each with its own
+cloud domain) – nothing in the design prevents it.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-the-customer-gets">What the customer gets</h2><a class="sl-anchor-link" href="#what-the-customer-gets"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What the customer gets”</span></a></div>
+<ol>
+<li><strong><code dir="auto">/cloud</code></strong> – public pricing page (no cookies, no scripts needed): the three plans, monthly/yearly toggle,
+“all features in every plan – white-label and client accounts only in Cloud Agentur”, “no fee per user”, the VAT note
+(“net plus VAT, calculated by Stripe Tax”), a white-label section for the Agentur plan, “Cloud oder selbst hosten?” and
+the link to the self-hosting guide (0 €).</li>
+<li><strong><code dir="auto">/start</code></strong> – signup: company name, e-mail, plan, interval, optional coupon, acceptance of <strong>AGB, AVV and
+Datenschutz</strong> (the accepted version of each is stored with a timestamp), password or <strong>Sign in with Google</strong>. B2B only by
+default: a VAT ID or the confirmation “I order as a business” is required (<a href="#b2b-only-signup">B2B-only signup</a>).
+An e-mail with a confirmation link follows; confirming creates the account (after the trial / checkout).
+<strong>No account and no password before the address is proven</strong> (protection against account pre-hijacking): nothing
+exists until the link is confirmed, and the password from the form only counts when the link is opened in the
+browser that sent the form (a cookie set on submit binds them). Opened anywhere else – another device, or the
+inbox of somebody whose address a stranger typed in – the link asks for the password itself; whatever was typed
+into the form is thrown away. The link is valid for 24 hours and is claimed by the first confirmation: afterwards it
+only goes on in the browser that confirmed (e.g. when the payment page failed), and the confirmation closes every
+other open sign-up for that address (their links, passwords and browser bindings stop working). Sign-ups already at
+Stripe stay; provisioning refuses a second account for the address and cancels that subscription. With Google the
+address counts as proven, and the Google sign-up closes the open e-mail sign-ups for it the same way.</li>
+<li><strong>Checkout</strong> – with a card (default): Stripe Checkout with the trial, automatic tax and tax-ID collection;
+without a card (operator setting): the trial starts at once and the account turns read-only when it ends.</li>
+<li><strong>Provisioning in seconds</strong> – tenant, sub-account, owner login, default pipeline and templates (or the
+operator’s snapshot), welcome e-mail, an onboarding checklist, and – with a cloud domain – <code dir="auto">&lt;name&gt;.&lt;cloud-domain&gt;</code>
+as the login address.</li>
+<li><strong>Settings → Cloud-Konto</strong> – plan and usage, change plan (prorated by Stripe), billing portal, invoices,
+cancel (with an optional reason), team, clients and white-label (Agentur), <strong>data export</strong>, <strong>support access
+consent</strong>, <strong>AVV download</strong>, <strong>delete account</strong>.</li>
+</ol>
+<div class="sl-heading-wrapper level-h3"><h3 id="fair-use-transparent-never-a-feature-lock">Fair use (transparent, never a feature lock)</h3><a class="sl-anchor-link" href="#fair-use-transparent-never-a-feature-lock"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Fair use (transparent, never a feature lock)”</span></a></div>
+<p>Every plan has the same features. To protect the service from abuse there are operator-set limits per
+sub-account, shown to the customer as meters in their account:</p>
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Solo</th>
+<th>Team &amp; Company</th>
+<th>Agentur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users</td>
+<td>1</td>
+<td>unlimited</td>
+<td>unlimited</td>
+</tr>
+<tr>
+<td>E-mails per month</td>
+<td>10,000</td>
+<td>50,000</td>
+<td>50,000</td>
+</tr>
+<tr>
+<td>SMS per month</td>
+<td>pass-through at cost</td>
+<td>pass-through at cost</td>
+<td>pass-through at cost</td>
+</tr>
+<tr>
+<td>AI calls per month (operator’s key)</td>
+<td>300</td>
+<td>2,000</td>
+<td>2,000</td>
+</tr>
+<tr>
+<td>Media storage</td>
+<td>5 GB</td>
+<td>25 GB</td>
+<td>25 GB</td>
+</tr>
+</tbody>
+</table>
+<p>Media storage counts everything a sub-account keeps on disk: media uploads, course and community videos, call audio,
+meeting recordings and the files visitors send through public forms. Form uploads that would pass the plan are refused
+with 413 and the customer is told at 90 % and 100 % (<a href="/forms/#limits-and-settings">forms.md</a>).</p>
+<p>All values are defaults; the operator changes them (empty = unlimited) under <em>Agentur → Cloud → Einstellungen →
+Fair Use</em>, and chooses per metric whether reaching the limit <strong>blocks</strong> (with a notice) or <strong>bills at cost plus
+markup</strong> on the next Stripe invoice. Own provider keys (SMTP, Twilio, “bring your own key” for AI) are not
+counted against the operator. Contacts, funnels, workflows, courses … are never limited. Agentur: client
+accounts are for the agency’s own clients, not for reselling the software (fair use; optionally capped with
+<em>Kunden-Accounts im Tarif Agentur</em>).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="operator-setup">Operator setup</h2><a class="sl-anchor-link" href="#operator-setup"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Operator setup”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="1-switch-it-on">1. Switch it on</h3><a class="sl-anchor-link" href="#1-switch-it-on"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “1. Switch it on”</span></a></div>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.w36nc.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_MODE</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">1</span><span style="--0:#D6DEEB;--1:#403F53">                      </span><span style="--0:#919F9F;--1:#5F636F"># enables the modules, /cloud, /start, the console</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_BASE_URL</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">https://cloud.example.com</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#919F9F;--1:#5F636F"># must be public https – Stripe and the e-mail links use it</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_DOMAIN</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">cloud.example.com</span><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#919F9F;--1:#5F636F"># optional: customers get &lt;name&gt;.cloud.example.com</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_TRIAL_DAYS</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">14</span><span style="--0:#D6DEEB;--1:#403F53">               </span><span style="--0:#919F9F;--1:#5F636F"># default 14 (0 = no trial, max 90); editable in the console</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_CARD_REQUIRED</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">1</span><span style="--0:#D6DEEB;--1:#403F53">             </span><span style="--0:#919F9F;--1:#5F636F"># 0 = trial without payment data</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_STRIPE_SECRET_KEY</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">sk_live_…</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#919F9F;--1:#5F636F"># optional – otherwise enter it in the UI (below)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_STRIPE_WEBHOOK_SECRET</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">whsec_…</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_CLOUD_SITES_DOMAIN</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">example-sites.net</span><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#919F9F;--1:#5F636F"># customers' sites live on &lt;slug&gt;.example-sites.net, never on the login domain</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="PGHL_CLOUD_MODE=1                      # enables the modules, /cloud, /start, the consolePGHL_BASE_URL=https://cloud.example.com # must be public https – Stripe and the e-mail links use itPGHL_CLOUD_DOMAIN=cloud.example.com    # optional: customers get <name>.cloud.example.comPGHL_CLOUD_TRIAL_DAYS=14               # default 14 (0 = no trial, max 90); editable in the consolePGHL_CLOUD_CARD_REQUIRED=1             # 0 = trial without payment dataPGHL_CLOUD_STRIPE_SECRET_KEY=sk_live_… # optional – otherwise enter it in the UI (below)PGHL_CLOUD_STRIPE_WEBHOOK_SECRET=whsec_…PGHL_CLOUD_SITES_DOMAIN=example-sites.net  # customers&#x27; sites live on <slug>.example-sites.net, never on the login domain"><div></div></button></div></figure></div>
+<p>Only <code dir="auto">PGHL_CLOUD_MODE</code> is required. The other values seed the settings once; afterwards the console
+(<em>Agentur → Cloud → Einstellungen</em>) is the source of truth. With the mode off, none of the routes exist and
+<code dir="auto">/cloud</code> and <code dir="auto">/start</code> return 404. Until the Stripe key of step 2 is set, the instance stays in
+<a href="#waitlist-mode">waitlist mode</a> (no signup, no payment); <code dir="auto">PGHL_CLOUD_WAITLIST=1</code> keeps it there after that, <code dir="auto">=0</code> opens it
+without Stripe (trials without a card only).</p>
+<p>In cloud mode <strong>leave the SaaS sign-up page <code dir="auto">/signup</code> off</strong> (<em>Agentur → SaaS → Einstellungen</em>); the console’s
+checklist warns if it is on. Self-serve signups run through <code dir="auto">/start</code>. Either way <code dir="auto">/signup</code> never shows or accepts the cloud
+plans (<code dir="auto">cloud-solo|team|agency</code>, <code dir="auto">cloud-agency-client</code>): a link to one redirects to <code dir="auto">/cloud</code>, a <code dir="auto">POST</code> with one is refused.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="2-stripe">2. Stripe</h3><a class="sl-anchor-link" href="#2-stripe"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “2. Stripe”</span></a></div>
+<p>The cloud mode reuses the SaaS Stripe connection of the instance (the operator’s <strong>own</strong> Stripe account –
+never a customer’s).</p>
+<ol>
+<li>Stripe Dashboard → Developers → API keys: create a <strong>restricted or secret key</strong> and enter it under
+<em>Agentur → SaaS → Einstellungen</em> (stored sealed, never shown again) – or set
+<code dir="auto">PGHL_CLOUD_STRIPE_SECRET_KEY</code>.</li>
+<li>Developers → Webhooks → add endpoint <code dir="auto">https://&lt;your host&gt;/hooks/stripe-agency</code> with the events
+<code dir="auto">checkout.session.completed</code>, <code dir="auto">customer.subscription.created</code>, <code dir="auto">customer.subscription.updated</code>,
+<code dir="auto">customer.subscription.deleted</code>, <code dir="auto">customer.subscription.trial_will_end</code>, <code dir="auto">invoice.finalized</code>,
+<code dir="auto">invoice.paid</code>, <code dir="auto">invoice.payment_failed</code>. Copy the signing secret into the same settings page (or
+<code dir="auto">PGHL_CLOUD_STRIPE_WEBHOOK_SECRET</code>). The console shows the exact URL and event list.</li>
+<li><strong>Products and prices are created for you.</strong> When the key is set, the three plans (monthly and yearly) are
+created in Stripe and kept in sync when you change a price. Changing a price only affects new subscriptions;
+running ones keep their price until the customer changes plan.</li>
+<li>Optional: <em>Settings → Tax</em> in Stripe to switch on <strong>Stripe Tax</strong> (VAT, reverse charge for EU companies with a
+VAT ID). In the console, “Stripe Tax” and “USt-IdNr. abfragen” decide whether Checkout uses them.</li>
+<li>Optional: create <strong>promotion codes</strong> in Stripe; customers enter them at signup or in Checkout.</li>
+<li>Customers manage cards and see invoices in the <strong>Stripe customer portal</strong> (button in their account); the
+invoices are also listed in the app.</li>
+</ol>
+<p>Test mode: use a <code dir="auto">sk_test_…</code> key and a test webhook secret; nothing else changes. The automated tests never
+call Stripe (all HTTP is mocked).</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="3-domain-and-tls">3. Domain and TLS</h3><a class="sl-anchor-link" href="#3-domain-and-tls"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “3. Domain and TLS”</span></a></div>
+<p>Without a cloud domain all customers use the instance’s own address. With <code dir="auto">PGHL_CLOUD_DOMAIN=cloud.example.com</code>
+every new account gets <code dir="auto">&lt;name&gt;.cloud.example.com</code> as its login domain (stored as the sub-account’s white-label
+app domain, so the existing domain handling applies):</p>
+<ul>
+<li>DNS: <code dir="auto">*.cloud.example.com  A  &lt;server IP&gt;</code> (one wildcard record).</li>
+<li>TLS: the Caddy profile (<code dir="auto">docker compose --profile caddy</code>) fetches each certificate on the first visit and asks
+<code dir="auto">GET /api/tls/ask?domain=…</code> first – known sub-domains are answered with 200. No wildcard certificate needed.</li>
+<li>Agentur customers can add their own domain per sub-account (<em>Kunden &amp; White-Label → Domain</em>): <code dir="auto">A</code> record to the
+server, certificate follows by itself.</li>
+<li>Customer <strong>sites</strong> get an origin of their own: <code dir="auto">PGHL_CLOUD_SITES_DOMAIN=example-sites.net</code> with
+<code dir="auto">*.example-sites.net  A  &lt;server IP&gt;</code>; a site’s custom domain starts after a TXT record proves it
+(<a href="#customer-sites-their-own-origin-and-verified-domains">Customer sites</a>).</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="4-sign-in-with-google-optional">4. Sign in with Google (optional)</h3><a class="sl-anchor-link" href="#4-sign-in-with-google-optional"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “4. Sign in with Google (optional)”</span></a></div>
+<p>Set up Google sign-in as for the rest of the instance (<em>Einstellungen → Anmeldung (SSO)</em>). Add this
+<strong>authorized redirect URI</strong> in the Google console: <code dir="auto">https://&lt;your host&gt;/start/google/callback</code>. The console
+shows the URI and whether Google is ready. Without it the signup page simply offers the password form.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="5-mail">5. Mail</h3><a class="sl-anchor-link" href="#5-mail"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “5. Mail”</span></a></div>
+<p>Confirmation, welcome, invitation, trial and payment mails are sent from one sub-account of the operator’s
+(<em>Einstellungen → Absender der System-Mails</em>; default: the SaaS mail sender, else the oldest operator sub-account). Set
+up e-mail sending there (SMTP/API, SPF/DKIM – see <a href="/deliverability/">deliverability.md</a>). The overview
+checklist tells you when no sender exists. Mail texts are German and live in <code dir="auto">server/services/cloud-mail.ts</code>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="6-legal-texts">6. Legal texts</h3><a class="sl-anchor-link" href="#6-legal-texts"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “6. Legal texts”</span></a></div>
+<p><em>Agentur → Cloud → Rechtliches</em> holds <strong>AGB, AVV (Auftragsverarbeitungsvertrag), Datenschutzerklärung and
+Impressum</strong> as editable texts with placeholders (<code dir="auto">{{operator.name}}</code>, <code dir="auto">{{operator.address}}</code>, <code dir="auto">{{operator.hosting}}</code>,
+<code dir="auto">{{customer.company}}</code>, <code dir="auto">{{service}}</code>, <code dir="auto">{{date}}</code>, <code dir="auto">{{trial_days}}</code> …) filled from <em>Einstellungen → Anbieter</em>.
+<code dir="auto">{{operator.hosting}}</code> is the field <em>Hosting-Anbieter und Serverstandort</em>; the AVV (§ 7, Anlage 2) and the privacy policy
+name it. For gohyperlevel.com that is the Hostinger VPS in <strong>Frankfurt am Main, Germany</strong> – enter the provider’s legal name
+from the hosting contract (an IP lookup is no proof of location). Texts saved before keep their version; add the line
+there by hand.</p>
+<blockquote>
+<p><strong>The shipped texts are templates, not legal advice.</strong> They are a starting point so you can see the
+structure; have a lawyer review and complete them before you accept real customers. The overview checklist
+stays red until no placeholder is open.</p>
+</blockquote>
+<p>Every save creates a <strong>new version</strong>. New customers accept the current version at signup (stored with
+version, time and tenant); existing customers get a banner to confirm after a change. The AVV is available to the
+customer as a PDF with their company name filled in. The public pages are <code dir="auto">/cloud/legal/agb|avv|datenschutz|impressum</code>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="7-fair-use-dunning-signup-protection">7. Fair use, dunning, signup protection</h3><a class="sl-anchor-link" href="#7-fair-use-dunning-signup-protection"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “7. Fair use, dunning, signup protection”</span></a></div>
+<p>All in <em>Agentur → Cloud → Einstellungen</em>: prices, yearly discount, trial days, card at start or not, limits and
+overage behaviour, the times below, signup rate limit, disposable-address blocking and extra blocked domains,
+status page, support e-mail, snapshot for new accounts.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="billing-lifecycle-and-data-protection">Billing lifecycle and data protection</h2><a class="sl-anchor-link" href="#billing-lifecycle-and-data-protection"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Billing lifecycle and data protection”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">trial ──► active ──► payment failed ──► (grace) ──► read-only ──► export offered +    ──► deleted</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53"> </span></span><span style="--0:#d6deeb;--1:#403f53">│                    banner + mails     7 days      30 days       deletion scheduled     14 days later</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53"> </span></span><span style="--0:#d6deeb;--1:#403f53">└─ no card: trial ends ──► read-only ─────────────────────────────┘ (same timeline)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="trial ──► active ──► payment failed ──► (grace) ──► read-only ──► export offered +    ──► deleted │                    banner + mails     7 days      30 days       deletion scheduled     14 days later └─ no card: trial ends ──► read-only ─────────────────────────────┘ (same timeline)"><div></div></button></div></figure></div>
+<p>Defaults, all configurable: grace <strong>7 days</strong> after the first failed payment, <strong>30 days</strong> read-only, then a mail
+“export your data – deletion scheduled” and the hard delete <strong>14 days</strong> later. A customer who pays at any point
+before the delete is back to normal at once. In read-only mode reads, the <strong>export</strong>, the billing page and
+paying always work; writes get a clear message. A customer who <strong>deletes their account</strong> themselves gets a
+confirmation mail and a <strong>7-day</strong> window to undo it (also configurable); the subscription ends immediately.</p>
+<p>Mails: verification, welcome, invitation, trial ending (3 days before), trial ended, payment failed, payment
+reminder (from day 3), read-only, deletion scheduled, self-delete, deleted, subscribed, cancellation, plan change.
+Each is sent once (deduplicated) and listed in the tenant’s event history.</p>
+<p><strong>Deletion removes everything</strong>: the tenant’s sub-accounts and all rows that belong to them (including
+messages, files in the upload folders, search indexes and domains), the customers’ users and their personal
+rows, and the Stripe subscription. What stays is a tombstone row without personal data (id, plan, dates) for the
+operator’s own books, and the audit entries of the operator’s actions (written without names).</p>
+<p><strong>Export</strong> (<code dir="auto">GET /api/cloud/export</code>, owner only, any time even when read-only) is a ZIP: one JSON and one CSV per
+table (contacts, tasks, messages, invoices …), <code dir="auto">team.json</code>, the uploaded files, a manifest and a short README
+(<code dir="auto">LIESMICH.txt</code>). Passwords, API keys, tokens and other secrets are never included.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="operator-console-agentur--cloud">Operator console (<em>Agentur → Cloud</em>)</h2><a class="sl-anchor-link" href="#operator-console-agentur--cloud"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Operator console (Agentur → Cloud)”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Übersicht</td>
+<td>MRR and ARR, paying customers, trials running, <strong>trial → subscription conversion</strong> (90 days), <strong>churn</strong> (30 days), customers per plan, recent events, and the setup checklist (Stripe, webhook, signup open, mail sender, legal texts, cloud domain)</td>
+</tr>
+<tr>
+<td>Kunden</td>
+<td>list with search and filters (status, plan), CSV export; per customer: history, <strong>extend trial</strong>, <strong>comp a plan</strong> (free, optionally for N months), <strong>change plan</strong>, note, <strong>open account</strong> (only with the customer’s consent), <strong>delete</strong> (typed confirmation)</td>
+</tr>
+<tr>
+<td>Einstellungen</td>
+<td>prices, yearly discount, trial, card, fair use, overage, dunning times, Stripe URL/events, signup protection, cloud domain, mail sender, snapshot, provider details</td>
+</tr>
+<tr>
+<td>Rechtliches</td>
+<td>the four legal texts with versions, open placeholders and how many customers accepted the current version</td>
+</tr>
+<tr>
+<td>Anmeldungen</td>
+<td>signups that paid but could not be provisioned (retry); open signups are deleted after 7 days, failed ones after 30</td>
+</tr>
+<tr>
+<td>Missbrauch</td>
+<td>notices from <code dir="auto">/abuse</code> with the decision back to the reporter, accounts with a measure in place, the measures (pause sending, sites offline, suspend), the abuse address and the automatic pause (<a href="#abuse-handling">Abuse handling</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>Access control: every <code dir="auto">/api/cloud/console/*</code> route is admin-only (customers get 403 from the router itself).
+Statuses: <strong>Testphase</strong>, <strong>Aktiv</strong>, <strong>Geschenkt</strong>, <strong>Zahlung offen</strong>, <strong>Schreibgeschützt</strong>, <strong>Gekündigt</strong>,
+<strong>Löschung geplant</strong>. MRR counts paying, non-comped subscriptions, yearly plans as a twelfth.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="isolation-and-support-access">Isolation and support access</h2><a class="sl-anchor-link" href="#isolation-and-support-access"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Isolation and support access”</span></a></div>
+<ul>
+<li>Customers never see other customers or the operator’s data – the sub-account boundary plus a team/people list
+that hides the operator’s admins from tenants (<code dir="auto">hideUser</code>). The attack harness in
+<code dir="auto">tests/security-fixtures.ts</code> (<code dir="auto">crossTenantAttack</code>) and <code dir="auto">tests/cloud-isolation.test.ts</code> fire every route of the
+app from a tenant login at a second tenant and the operator.</li>
+<li><strong>Operator access is opt-in by the customer.</strong> Under <em>Daten &amp; Konto → Support-Zugriff</em> the owner allows access
+for 1 hour, 24 hours, 7 or 30 days, or revokes it. Without it, operator admins get 403 on that tenant’s
+sub-accounts and the agency-wide content lists (contacts, deals, tasks, documents, invoices, privacy) skip it.
+Every opening is written to the <strong>customer’s own audit log</strong> (“Support hat das Konto geöffnet”) and to the
+tenant’s history. The same consent guards the other doors: <strong>reports across all sub-accounts</strong> and the
+operator’s <strong>audit log</strong> skip customers who have not opened their account, and the operator’s <strong>user
+management</strong> cannot set a password, reset 2FA, sign out or delete a customer’s login – or add a login to a
+customer’s sub-account – without it (the people list leaves the customers out).</li>
+<li><strong>Hosts are the operator’s:</strong> the cloud domain and every sub-domain of it, the login domains of all accounts, the
+app’s own address and every connected domain can be claimed by one site or help center only – a customer cannot
+point a site at somebody else’s login address (<code dir="auto">app.services.domainTaken</code>, answered with “Diese Domain ist schon
+vergeben”).</li>
+<li><strong>Fair use covers storage of all kinds:</strong> the <em>Medien-Speicher</em> meter adds up media uploads, course videos,
+community videos, call audio and meeting recordings; an upload that would pass the plan is refused when it starts
+(course and community videos) or arrives (audio). Community members can start about three videos’ worth of
+uploads per day.</li>
+<li>Honest limit: the operator runs the server and the database file. The consent toggle protects the product
+surface (UI, API, MCP); it is not end-to-end encryption. Say so in your AVV and your technical measures.</li>
+<li>Customers cannot reach agency routes (all <code dir="auto">admin</code>-only) or other sub-accounts; client logins created by an
+Agentur customer get 403 on the cloud account routes.</li>
+<li>Signup protection without a captcha: hidden honeypot field, a minimum fill time (signed form token),
+per-address and per-e-mail rate limits, optional disposable-domain blocking, verification by e-mail with a
+confirm click (a link scanner opening the mail does not create anything), and <strong>no account enumeration</strong>
+(an existing address gets a “you already have an account” mail and the same screen). The pricing and signup
+pages set <strong>no cookies</strong>; a technical cookie (<code dir="auto">pghl_cloud</code>) binds the browser to the signup only after the
+e-mail link was confirmed.</li>
+<li>Changes are audit-logged: plan changes, settings, legal versions, comp, trial extension, deletion, support access.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="abuse-handling">Abuse handling</h2><a class="sl-anchor-link" href="#abuse-handling"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Abuse handling”</span></a></div>
+<p>The Digital Services Act applies to small hosting services too: a point of contact, a notice mechanism, reasons for every
+restriction. <code dir="auto">modules/cloud-abuse.ts</code> provides the parts:</p>
+<ul>
+<li><strong><code dir="auto">/abuse</code></strong> – a public, cookie-free notice form (linked in the footer of the pricing, signup and legal pages and on the status
+page) with the fields of Art. 16 DSA: kind of violation, the exact URL(s), a substantiated explanation, name and e-mail (optional
+for child sexual abuse material) and the good-faith statement. The reporter gets a receipt with a reference number, the operator
+an alert (e-mail, push, webhook – <a href="/backups/#alerts">backups.md</a>), and the notice is matched to the customer by its URL (site path,
+sites domain, custom domain, form, login domain). An abuse e-mail address for the form is set under <em>Missbrauch</em>.</li>
+<li><strong>Decisions</strong> – under <em>Agentur → Cloud → Missbrauch</em> each notice gets a status (new, in review, actioned, rejected); closing it needs a
+reason, which goes to the reporter by e-mail (Art. 16(5)). Closed notices are deleted a year after the decision.</li>
+<li><strong>Measures per customer</strong> – <em>pause sending</em> (e-mail and SMS fail with the reason, everything else works), <em>sites offline</em> (the
+customer’s sites, blogs, help centers and forms answer 410), <em>suspend</em> (no customer route but the profile, the cloud account
+summary and the data export; sites and sending stop too). Each one needs a reason that goes to the owner as a statement of
+reasons (Art. 17), is logged in the customer’s history and the operator’s audit log, and is undone with one click.</li>
+<li><strong>Automatic pause</strong> – every 10 minutes the last 500 sent e-mails of each customer are checked (from 100 on): more than <strong>0.1 %</strong>
+reported as spam or more than <strong>5 %</strong> bounced pauses the customer’s sending, with the rate as the reason, a mail to the owner and an
+alert to the operator. After the operator resumes it only mails sent afterwards count. Off with the switch under <em>Missbrauch</em>.</li>
+<li>The AGB template names these measures and the notice form (§ 7).</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="customer-sites-their-own-origin-and-verified-domains">Customer sites: their own origin and verified domains</h2><a class="sl-anchor-link" href="#customer-sites-their-own-origin-and-verified-domains"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Customer sites: their own origin and verified domains”</span></a></div>
+<p>Phishing pages on website builders are common, and a Safe Browsing entry for the login domain would hit every customer. Two rules
+(<code dir="auto">modules/cloud-sites.ts</code>):</p>
+<ol>
+<li><strong>Never on the login origin.</strong> A customer’s site is not served on the app’s address, the cloud domain or a login domain. With
+<code dir="auto">PGHL_CLOUD_SITES_DOMAIN=example-sites.net</code> (a registrable domain of its own – not a sub-domain of the login domain; ideally on the
+Public Suffix List) a request for <code dir="auto">/p/&lt;slug&gt;</code> there is redirected to <code dir="auto">https://&lt;slug&gt;.example-sites.net/…</code>, which serves the site
+(DNS: <code dir="auto">*.example-sites.net</code> to the server; Caddy fetches the certificates through <code dir="auto">/api/tls/ask</code>). Without a sites domain such a
+request is redirected to the site’s verified custom domain or refused – set the sites domain before customers publish (the
+overview checklist asks for it). The operator’s own sites are unaffected.</li>
+<li><strong>Custom domains only after verification.</strong> A custom domain of a customer’s site starts once the TXT record
+<code dir="auto">_pghl-verify.&lt;domain&gt;</code> holds the value shown in the site settings (<code dir="auto">pghl-verify=…</code>, derived from the instance secret). The app
+checks waiting domains every 10 minutes and on <em>aktualisieren</em> (<code dir="auto">POST /api/site-domain-check</code>); until then the domain shows a
+“being verified” page and gets no certificate. This stops a customer from taking over a domain whose DNS still points at the
+server. Domains connected before this rule existed count as verified.</li>
+</ol>
+<div class="sl-heading-wrapper level-h2"><h2 id="b2b-only-signup">B2B-only signup</h2><a class="sl-anchor-link" href="#b2b-only-signup"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “B2B-only signup”</span></a></div>
+<p><em>Agentur → Cloud → Einstellungen → Stripe → Nur Unternehmen (B2B)</em>, <strong>on by default</strong>: the signup form asks for the company name (always
+required) and a VAT ID or the confirmation “Ich bestelle als Unternehmen (§ 14 BGB)”; a consumer cannot finish the signup. The VAT ID
+is checked for its format (Stripe Tax validates it at checkout when <em>USt-IdNr. abfragen</em> is on); the confirmation and the VAT ID are
+stored in the customer’s history (<em>Unternehmer bestätigt</em>). The AGB template states that the service is for businesses only and
+that a contract with a consumer may be terminated – which spares you the consumer rules (withdrawal right, cancellation button,
+OSS for EU consumers). Switching it off removes the questions; then those consumer rules apply to you.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="agentur-plan-client-accounts-and-white-label">Agentur plan: client accounts and white-label</h2><a class="sl-anchor-link" href="#agentur-plan-client-accounts-and-white-label"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Agentur plan: client accounts and white-label”</span></a></div>
+<p>White-label is the Agentur plan’s headline, and only this plan has it: <code dir="auto">entitlements()</code> in <code dir="auto">server/services/cloud.ts</code>
+gives <code dir="auto">white_label</code>, <code dir="auto">client_accounts</code> and <code dir="auto">custom_domain</code> to <code dir="auto">agency</code> alone, and every white-label route checks its own
+entitlement (<code dir="auto">/api/cloud/branding</code> → white-label, <code dir="auto">/api/cloud/domain</code> → custom domain, <code dir="auto">/api/cloud/clients</code> → client
+accounts) – Solo and Team &amp; Company customers get 403 (<code dir="auto">tests/cloud.test.ts</code>). It includes:</p>
+<ul>
+<li>the agency’s own <strong>name, logos (light/dark, mark, favicon) and colours</strong>, login title and text – for the agency and for
+each client account;</li>
+<li>its own <strong>login domain</strong> and <strong>custom domains for clients</strong> (certificate on the first visit);</li>
+<li>the <strong>installable app (PWA)</strong> with the brand’s name and icon – the manifest and the iPhone/iPad icons follow the login
+domain; a branded <strong>Android APK</strong> has to be built by the agency itself (<code dir="auto">android/README.md</code>), it is not in any store;</li>
+<li>the brand instead of the operator’s in the login, the app shell and the browser tab (a few built-in texts still name
+the product, e.g. the built-in agent’s default name – the rename branch makes those follow the brand);</li>
+<li><strong>client sub-accounts</strong> for the agency’s own customers, and logins restricted to one client with
+the usual client areas. All client accounts are covered by the owner’s subscription and share its status
+(paused owner → clients read-only). Deleting a client account erases its data like a tenant deletion.</li>
+</ul>
+<p>Not covered yet: running the <em>SaaS mode for the agency’s own customers</em> (selling their own plans through their
+own Stripe) – that stays an operator feature of a self-hosted instance. See <a href="/saas/">saas.md</a>. Pages and posts must
+therefore not say “SaaS mode from 199 €”: it is “white-label from 199 € in the cloud, SaaS mode self-hosted from 0 €”.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="cloud-or-self-hosted">Cloud or self-hosted?</h2><a class="sl-anchor-link" href="#cloud-or-self-hosted"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Cloud or self-hosted?”</span></a></div>
+<p>The short version of the comparison on <code dir="auto">/cloud</code> and the landing page (<a href="/landing/">landing.md</a>) – same software, every
+feature; the difference is who runs the server:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Cloud (Solo 49,99 € · Team &amp; Company 99,99 € · Agentur 199 €)</th>
+<th>Self-hosted (0 €, AGPL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>an account in minutes, no server, Docker or Linux</td>
+<td>one command on your server (<a href="/deploy/">deploy</a>)</td>
+</tr>
+<tr>
+<td>Updates, security patches</td>
+<td>the operator installs them</td>
+<td>yours (<a href="/self-hosting/#updates">self-hosting.md → Updates</a>)</td>
+</tr>
+<tr>
+<td>Backups</td>
+<td>the operator’s hourly encrypted off-site backups with a monthly restore test (<a href="/backups/">backups.md</a>); your own ZIP export any time</td>
+<td>yours (<a href="/self-hosting/#operations-backup-and-performance">self-hosting.md → Backup</a>, <a href="/backups/">backups.md</a>)</td>
+</tr>
+<tr>
+<td>TLS, domains, mail deliverability</td>
+<td>handled; custom domains on the Agentur plan</td>
+<td>yours (<a href="/deliverability/">deliverability.md</a>)</td>
+</tr>
+<tr>
+<td>Where the data is</td>
+<td>the operator’s server – gohyperlevel.com: planned in Frankfurt am Main, Germany (not open yet, <a href="#waitlist-mode">waitlist</a>); AVV at signup</td>
+<td>your server</td>
+</tr>
+<tr>
+<td>White-label, SaaS mode</td>
+<td>white-label on the Agentur plan; no SaaS mode</td>
+<td>both included</td>
+</tr>
+<tr>
+<td>Help</td>
+<td>the operator’s support address (<em>Agentur → Cloud → Einstellungen → Support-E-Mail</em>)</td>
+<td>the community (GitHub Issues/Discussions)</td>
+</tr>
+</tbody>
+</table>
+<p>Switching: the cloud export (ZIP with JSON/CSV per table and the files) can be read back in part – contacts through the
+CSV import; a one-click move between the cloud and a self-hosted instance (either way) does not exist yet.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="waitlist-mode">Waitlist mode</h2><a class="sl-anchor-link" href="#waitlist-mode"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Waitlist mode”</span></a></div>
+<p>While the service is not open – no Stripe key yet, or on purpose – the cloud mode runs as a <strong>waitlist</strong>: nobody can sign
+up, enter payment data or be charged, and the public pages lead with self-hosting and collect interest instead.</p>
+<table>
+<thead>
+<tr>
+<th><code dir="auto">PGHL_CLOUD_WAITLIST</code></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unset (default)</td>
+<td>on while the cloud mode has no Stripe key (<em>Agentur → SaaS → Einstellungen</em> or <code dir="auto">PGHL_CLOUD_STRIPE_SECRET_KEY</code>); entering the key opens the signup at once, without a restart</td>
+</tr>
+<tr>
+<td><code dir="auto">1</code></td>
+<td>on, even with Stripe – and on the <a href="/landing/#cloud-waitlist-mode">landing page</a> of an instance without cloud mode</td>
+</tr>
+<tr>
+<td><code dir="auto">0</code></td>
+<td>off, even without Stripe (a test instance whose trials need no card; card-required signups still stop at “Bezahlung nicht möglich”)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What is refused.</strong> A router wrapper (<code dir="auto">server/modules/cloud-waitlist.ts</code>) answers <code dir="auto">POST /start</code>, <code dir="auto">GET|POST /start/verify/:token</code>, <code dir="auto">GET /start/google/callback</code> and – in cloud mode – the SaaS self-signup <code dir="auto">GET|POST /signup</code> with
+<strong>403</strong> (the waitlist page, or JSON <code dir="auto">{error, waitlist: true, waitlist_url}</code> for JSON callers; <code dir="auto">GET /signup</code> redirects to <code dir="auto">/start</code>). No
+signup row, no account or sub-account, no verification mail, no Stripe Checkout – even for direct calls. Existing customers
+are not touched: login, account, billing portal, plan changes and client accounts keep working, and a Checkout that was paid
+before the switch still completes (webhook or <code dir="auto">/start/done</code>). The agency’s SaaS tools (<code dir="auto">PUT /api/saas/locations/:id</code>,
+<code dir="auto">POST /api/saas/locations/:id/checkout</code>, the MCP tool on top) answer <strong>409</strong> when they would put a cloud plan on a sub-account
+that is not already a cloud customer.</p>
+<p><strong>What the pages show.</strong> <code dir="auto">/start</code> is the waitlist page (German; English with <code dir="auto">?lang=en</code> or an English browser). <code dir="auto">/cloud</code>
+keeps the plans and prices but marks them <em>Bald verfügbar</em> and <em>voraussichtlich</em>, every button reads <em>Auf die Warteliste</em>
+(with the plan preselected), and trial, card and payment wording, the “Beliebt” tag and the payment FAQ are gone. The landing
+page leads with <em>Kostenlos selbst hosten</em> (<a href="/landing/#cloud-waitlist-mode">landing.md</a>). <code dir="auto">GET /api/version</code> says
+<code dir="auto">cloud.waitlist: true</code>, <code dir="auto">GET /api/public/cloud/pricing</code> says <code dir="auto">waitlist: true</code>.</p>
+<p><strong>Where the sign-ups go.</strong> With <code dir="auto">PGHL_LANDING_LOCATION</code> into that sub-account’s waitlist form through the
+<a href="/company-playbook/#landing-page-waitlist-dogfooding">landing waitlist hook</a>: source „Cloud-Warteliste“, the plan in
+<code dir="auto">custom.plan</code>, the form’s Double-Opt-in and consent proof – the page then shows the form’s own consent text and asks for the
+first name it requires. Without it into the <strong>built-in list</strong>: e-mail, optional name, plan, language, the consent text as
+shown (with the privacy link) and its time, the IP only as a keyed hash; one row per address (a second sign-up updates plan
+and language). Both ways: a honeypot, a signed time token (at least 2 seconds), 6 posts per IP and 3 per address an hour. The
+built-in list <strong>never sends mail</strong>; a new entry reaches the admins as a push notification without the address. The consent
+links <code dir="auto">PGHL_LANDING_PRIVACY_URL</code>, else <code dir="auto">/cloud/legal/datenschutz</code> – mention the waitlist (purpose, consent, deletion) in that
+privacy policy.</p>
+<p><strong>The list.</strong> <em>Agentur → Cloud → Warteliste</em>: whether the mode is on and why, where entries go, the list with search, CSV
+export and delete (access and erasure under the GDPR; export and delete land in the audit log). On a landing-page instance
+without cloud mode there is no console tab – use the admin routes below (e.g. the CSV export). When the cloud opens, send
+the launch notice yourself, once – the entries were collected without Double-Opt-in.</p>
+<p>API: <code dir="auto">GET /api/public/cloud-waitlist[?lang=en]</code> → <code dir="auto">{enabled, via: forms|builtin, token, plans, consent, privacy_url, need_name, doi}</code>;
+<code dir="auto">POST /api/public/cloud-waitlist</code> with JSON <code dir="auto">{email, name?, plan?: solo|team|agency, consent: true, lang?: de|en, wt}</code> (<code dir="auto">wt</code> = the
+token) → <code dir="auto">{ok, state: ok|doi, message}</code>, or <code dir="auto">{error, state}</code> with 400 (<code dir="auto">email</code>, <code dir="auto">consent</code>, <code dir="auto">name</code>, <code dir="auto">stale</code>), 429 (<code dir="auto">rate</code>) or 404
+(<code dir="auto">closed</code>, mode off). A plain form post (the same fields plus <code dir="auto">back</code>: <code dir="auto">/</code>, <code dir="auto">/de</code>, <code dir="auto">/cloud</code> or <code dir="auto">/start</code>) gets a 303 back to that
+page with <code dir="auto">?wl=&lt;state&gt;#warteliste</code>. Operator (admin): <code dir="auto">GET /api/cloud/waitlist[?q=]</code>, <code dir="auto">GET /api/cloud/waitlist.csv</code>,
+<code dir="auto">DELETE /api/cloud/waitlist/:id</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="cloud--hq-crm-bridge">Cloud → HQ CRM bridge</h2><a class="sl-anchor-link" href="#cloud--hq-crm-bridge"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Cloud → HQ CRM bridge”</span></a></div>
+<p>Dogfooding: the operator runs the cloud business in its own sub-account, set up with the template <em>Software- &amp; SaaS-Firma
+(HQ)</em> (<a href="/company-playbook/#the-hq-template">company playbook</a>). Set <code dir="auto">PGHL_HQ_LOCATION</code> to that sub-account’s id and every
+tenant shows up there (<code dir="auto">server/modules/cloud-hq-bridge.ts</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Cloud event</th>
+<th>In the HQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>signup / trial started (<code dir="auto">provisioned</code>, <code dir="auto">trial_started</code>)</td>
+<td>contact (e-mail, company, the owner’s name) + deal in <strong>Kunden (Cloud)</strong> → <em>Testphase</em>, tag <code dir="auto">status:testphase</code>, field <em>Testphase endet am</em></td>
+</tr>
+<tr>
+<td>trial ending (the 3-day reminder), trial extended</td>
+<td>tag <code dir="auto">testphase:endet-bald</code> (removed again on extension or subscription)</td>
+</tr>
+<tr>
+<td>subscribed, trial converted, reactivated</td>
+<td><em>Kunde</em>, tag <code dir="auto">status:kunde</code>, MRR on the contact and as the deal value</td>
+</tr>
+<tr>
+<td>plan changed</td>
+<td>plan, interval, MRR and the deal name updated</td>
+</tr>
+<tr>
+<td>payment failed, read-only / payment recovered</td>
+<td>tag <code dir="auto">zahlung:offen</code> set / removed (dunning)</td>
+</tr>
+<tr>
+<td>cancellation scheduled / undone, cancelled</td>
+<td>tag <code dir="auto">kuendigung:vorgemerkt</code>; on the end <em>Gekündigt / Rückgewinnung</em>, tag <code dir="auto">status:gekuendigt</code>, the cancel reason in <em>Kündigungsgrund</em></td>
+</tr>
+<tr>
+<td>deletion scheduled / undone</td>
+<td>tag <code dir="auto">loeschung:geplant</code></td>
+</tr>
+<tr>
+<td>account erased (<code dir="auto">deleted</code>)</td>
+<td>the contact is <strong>anonymised</strong>: name, e-mail, company and the other personal fields are cleared, its notes, tasks, messages, conversations, form submissions and timeline deleted; plan, MRR, interval, source, dates and the pseudonymous account id stay (like the tenant’s own tombstone)</td>
+</tr>
+</tbody>
+</table>
+<p>The stage always follows the subscription status (trialing → <em>Testphase</em>, active or past due → <em>Kunde</em>, cancelled or a
+trial that ran out unpaid → <em>Gekündigt / Rückgewinnung</em>), so a missed event heals with the next one. Fields: <em>Tarif</em>,
+<em>MRR</em>, <em>Abrechnung</em> (interval), <em>Quelle</em> (<code dir="auto">Cloud-Anmeldung</code>, or <code dir="auto">Landingpage</code> when the person came through the waitlist
+first – matched by e-mail) and <em>Cloud-Konto (ID)</em>; nothing else of the customer’s data is copied. Every event adds one
+line to the contact’s timeline. One contact and one deal per tenant (<code dir="auto">cloud_hq_links</code>); the HQ’s own workflows react to
+the status tags once you activate them. A customer’s sub-account is refused as HQ, and without <code dir="auto">PGHL_CLOUD_MODE=1</code> the
+bridge is off. It hangs on <code dir="auto">app.services.cloudEventTaps</code> (below).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="hooks-for-module-authors">Hooks for module authors</h2><a class="sl-anchor-link" href="#hooks-for-module-authors"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Hooks for module authors”</span></a></div>
+<p>Cloud code is split into modules registered in <code dir="auto">server/modules/index.ts</code> (<code dir="auto">cloud</code>, <code dir="auto">cloud-pages</code>,
+<code dir="auto">cloud-signup</code>, <code dir="auto">cloud-billing</code>, <code dir="auto">cloud-account</code>, <code dir="auto">cloud-console</code>, and <code dir="auto">cloud-waitlist</code>, which also runs for the landing page
+without cloud mode). Shared files only got these small seams
+(also listed in <a href="/architecture/">architecture.md</a>):</p>
+<ul>
+<li><code dir="auto">app.services.saasEventTaps</code> – functions called after every handled Stripe event (the cloud billing module
+logs history and sends mails from here).</li>
+<li><code dir="auto">app.services.cloudEventTaps</code> – functions <code dir="auto">(app, tenantId, type, detail)</code> called after every tenant event written by
+<code dir="auto">logCloudEvent</code> and for the trial-ending reminder (<code dir="auto">trial_ending</code>); synchronous, may run inside the hard delete’s
+transaction, a failing tap is logged and never breaks billing (used by the <a href="#cloud--hq-crm-bridge">HQ bridge</a>).</li>
+<li><code dir="auto">app.services.cloudCompleteSignup</code> – the SaaS webhook hands checkout sessions with <code dir="auto">cloud_signup_id</code> to cloud.</li>
+<li><code dir="auto">app.services.hideUser(user, locationId)</code> and <code dir="auto">hiddenUser()</code> in <code dir="auto">server/core/permissions.ts</code> – people lists of a
+sub-account skip users that must not appear there (operator admins in tenants); <code dir="auto">app.services.hiddenLocations(user)</code>
+and <code dir="auto">visibleLocations()</code> – the operator’s sub-account lists skip customers not open for support.</li>
+<li><code dir="auto">app.services.storageGate(locationId, bytes)</code> – refuses an upload that would pass the plan’s media storage (403 for the
+team’s own uploads); <code dir="auto">app.services.storageMeter(locationId)</code> – <code dir="auto">{ used, limit }</code> in bytes for gates that answer in their own
+words (public form uploads, <code dir="auto">modules/public-upload-quota.ts</code>).</li>
+<li><code dir="auto">app.services.cloudMailer</code> – replace the mail transport (tests use it), <code dir="auto">app.services.cloudFormMinMs</code> – the
+minimum fill time of the signup form (tests set it to 0), <code dir="auto">app.services.cloud</code> – <code dir="auto">info()</code>, <code dir="auto">reconcile()</code>,
+<code dir="auto">tenantOfLocation()</code>, <code dir="auto">tenantOfUser()</code>, <code dir="auto">resetLimits()</code>.</li>
+<li><code dir="auto">app.services.cloudWaitlist</code> – <code dir="auto">enabled()</code>, <code dir="auto">reason()</code>, <code dir="auto">view({lang, back, plan?, state?})</code> (what a page needs to render the form),
+<code dir="auto">via()</code>, <code dir="auto">resetLimits()</code>; <code dir="auto">app.services.cloudWaitlistMinMs</code> – the waitlist form’s minimum fill time (tests set it to 0).
+<code dir="auto">cloudWaitlist(app)</code> / <code dir="auto">cloudWaitlistReason(app)</code> in <code dir="auto">modules/cloud.ts</code> decide the mode; texts and the form’s HTML are pure in
+<code dir="auto">services/cloud-waitlist.ts</code>, the landing page’s replacements in <code dir="auto">services/landing-waitlist-copy.ts</code>.</li>
+<li><code dir="auto">GET /api/version</code> carries <code dir="auto">cloud: { enabled, waitlist, signup_url, pricing_url }</code> so the web app shows the cloud pages.</li>
+<li><code dir="auto">app.services.cloudAbuse</code> (<code dir="auto">flags</code>, <code dir="auto">sendingBlocked</code>, <code dir="auto">sitesBlocked</code>, <code dir="auto">act</code>, <code dir="auto">autoPause</code>) from <code dir="auto">modules/cloud-abuse.ts</code>, which wraps
+<code dir="auto">app.services.usageGate</code>, adds one guard and a router wrapper on the public <code dir="auto">/p/:funnel…</code> and <code dir="auto">/f/:id…</code> routes;
+<code dir="auto">modules/cloud-sites.ts</code> adds a rewrite in front of the funnels’ one, a router wrapper on <code dir="auto">/p/:funnel…</code> and wraps
+<code dir="auto">app.services.wantedDomains</code> and <code dir="auto">app.services.domainStatus</code> (test hook <code dir="auto">siteDomainTxt</code>). The <code dir="auto">notice</code> kind of <code dir="auto">cloud-mail.ts</code>
+carries free-form notices (statements of reasons, receipts).</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="api">API</h2><a class="sl-anchor-link" href="#api"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “API”</span></a></div>
+<p>Customer (<code dir="auto">user</code> routes): <code dir="auto">GET /api/cloud/me|plans|team|clients|invoices|branding|legal|onboarding|avv|export</code>,
+<code dir="auto">POST /api/cloud/plan|subscribe|subscribe/confirm|portal|cancel|delete|delete/undo|legal/accept|team|clients</code>,
+<code dir="auto">PUT /api/cloud/branding|domain|support</code>, <code dir="auto">PATCH|DELETE /api/cloud/team/:id</code>, <code dir="auto">PATCH|DELETE /api/cloud/clients/:id</code>,
+<code dir="auto">GET|POST /api/site-domain-check</code> (verification of a site’s custom domain).
+Public: <code dir="auto">GET /cloud</code>, <code dir="auto">GET|POST /start</code>, <code dir="auto">/start/verify/:token</code>, <code dir="auto">/start/done</code>, <code dir="auto">/start/google/callback</code>,
+<code dir="auto">/cloud/legal/:doc</code>, <code dir="auto">GET /api/public/cloud/pricing</code>, <code dir="auto">GET|POST /api/public/cloud-waitlist</code> (<a href="#waitlist-mode">waitlist mode</a>). Operator (<code dir="auto">admin</code>): <code dir="auto">/api/cloud/console/overview|tenants| tenants.csv|settings|legal|signups|reconcile|abuse</code>, <code dir="auto">tenants/:id[/extend-trial|comp|plan|open|delete|abuse]</code>, <code dir="auto">abuse/:id</code> and
+<code dir="auto">abuse/settings</code>; the waitlist <code dir="auto">GET /api/cloud/waitlist[.csv]</code>, <code dir="auto">DELETE /api/cloud/waitlist/:id</code>; public <code dir="auto">GET|POST /abuse</code>. Details in
+<a href="/api/#cloud-mode">api.md</a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="operating-it">Operating it</h2><a class="sl-anchor-link" href="#operating-it"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Operating it”</span></a></div>
+<ul>
+<li>A background tick (<code dir="auto">reconcile</code>, about once a minute) handles trial expiry and reminders, comped plans running
+out, payment reminders, read-only, the deletion schedule, self-deleted accounts and housekeeping. <em>Agentur →
+Cloud</em> has no button you must press; <code dir="auto">POST /api/cloud/console/reconcile</code> runs it on demand.</li>
+<li><strong>Backups</strong>: the SQLite file and the upload folders hold all customers together. Set up the <strong>off-site encrypted
+backups</strong> before the first paying customer – hourly to S3-compatible storage at another provider, retention 48 hourly /
+14 daily / 6 monthly, a monthly restore test, <code dir="auto">npm run backup:restore</code> (<a href="/backups/">backups.md</a>). The overview checklist
+stays red until they are configured. A restore brings back deleted customers; keep that in mind for the deletion promise in
+your AVV (deleted customers can remain in backups for up to six months with the default retention).</li>
+<li><strong>Uptime and alerts</strong>: point an external monitor at <code dir="auto">/healthz?strict=1</code>; alerts for disk, backup age, a stalled scheduler and
+error spikes go by e-mail, push and webhook (<a href="/backups/#uptime-and-alerts">backups.md → Uptime and alerts</a>).</li>
+<li><strong>Status page</strong>: <code dir="auto">/status</code> is on in cloud mode – components, 90 days of uptime from the instance’s own health samples and the
+incidents you write under <em>Agentur → System</em> (<a href="/backups/#status-page">backups.md → Status page</a>). Enter its address (or an
+external status page) as <em>Status-Seite</em> in the settings; it is linked from the pricing page and the account.</li>
+<li><strong>Incidents</strong>: the <a href="/incident-runbook/">incident runbook</a> – contacts, the GDPR 72-hour steps with templates, restore, key rotation.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="known-limits-and-open-questions">Known limits and open questions</h2><a class="sl-anchor-link" href="#known-limits-and-open-questions"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Known limits and open questions”</span></a></div>
+<ul>
+<li>One SQLite instance serves all customers (see above); scale out by running instances.</li>
+<li>The auto-pause looks at the last 500 sent mails: there one complaint is already 0.2 %, above the 0.1 % limit – a single spam
+report pauses the customer’s sending until you resume it. That is deliberately strict for a new service; switch the automatic
+pause off under <em>Missbrauch</em> if it bites honest senders.</li>
+<li>Taken offline are sites, their blog and help center (<code dir="auto">/p/…</code>) and forms (<code dir="auto">/f/…</code>); booking pages, webinars and the members’ area of
+a blocked customer stay up – suspend the account to stop its logins and sending as well.</li>
+<li>The operator has database-level access; consent covers the product surface only.</li>
+<li>The operator’s sub-account lists (<code dir="auto">/api/me</code> switcher, <em>Agentur → Projekte</em>, the agency overview and <code dir="auto">/api/locations</code>)
+leave out customers that have not opened their account for support, so the operator lands in an own account and
+the console is the customer list. Other agency-wide views that aggregate across all accounts (reports, SaaS
+dashboard) can still count tenants; the SaaS dashboard also overcounts comped tenants’ MRR – the cloud console’s
+MRR is the one to read.</li>
+<li>Storage fair use counts the media uploads of a sub-account (the <code dir="auto">uploads</code> table) and is enforced for uploads
+through <code dir="auto">/api/uploads</code>; files other modules store (form files, generated media, …) are not counted.</li>
+<li>Deleted files are found by the ids in the names of files in the known data folders (<code dir="auto">uploads</code>, <code dir="auto">form-files</code>,
+<code dir="auto">community</code>, <code dir="auto">acc-docs</code>, <code dir="auto">hr-docs</code>, <code dir="auto">pm-files</code>, <code dir="auto">teamchat-files</code>, <code dir="auto">genmedia</code>, <code dir="auto">call-intel</code>, <code dir="auto">call-audio</code>,
+<code dir="auto">office-files</code>, … – the list <code dir="auto">FILE_DIRS</code> in <code dir="auto">server/services/cloud-export.ts</code>, plus the scaled picture copies in
+<code dir="auto">uploads-opt</code>); a module that stores files elsewhere has to be added to that list. Queued deletions for the knowledge memory (<code dir="auto">cognee_deletions</code>, with the
+sub-account’s own Cognee login) outlive the customer until Cognee has deleted its datasets.</li>
+<li>The Agentur plan does not yet include “SaaS mode for the agency’s own customers”.</li>
+<li>The legal templates need a lawyer; the product name in the shipped texts comes from the agency branding.</li>
+<li>Invoices for the subscription come from Stripe (Billing invoices with Stripe Tax); they are listed in the app but
+not turned into German GoBD invoices of the operator’s bookkeeping.</li>
+</ul>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/edit/main/docs/cloud.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/demo-mode/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Previous<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Demo mode</span></span></a><a href="/landing/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Next<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Landing page</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

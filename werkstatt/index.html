@@ -1,0 +1,1137 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Werkstatt, plugins and Marktplatz | HyperLevel Docs</title><link rel="canonical" href="https://docs.gohyperlevel.com/werkstatt/"/><link rel="alternate" hreflang="en" href="https://docs.gohyperlevel.com/werkstatt/"/><link rel="alternate" hreflang="de" href="https://docs.gohyperlevel.com/de/werkstatt/"/><link rel="alternate" hreflang="x-default" href="https://docs.gohyperlevel.com/werkstatt/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.2"/><meta name="generator" content="Starlight v0.42.7"/><meta property="og:title" content="Werkstatt, plugins and Marktplatz"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.gohyperlevel.com/werkstatt/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:site_name" content="HyperLevel Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:image" content="https://docs.gohyperlevel.com/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.DdUizGEC.css"><style>@layer starlight.components{svg:where(.astro-hkc32dio){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/" class="site-title sl-flex astro-6rvad3va"><img class="light:sl-hidden print:hidden astro-6rvad3va" alt src="/_astro/logo-dark.DcAxiGJs.svg" width="420" height="96"><img class="dark:sl-hidden print:block astro-6rvad3va" alt src="/_astro/logo.BXUvVMvj.svg" width="420" height="96"><span class="sr-only astro-6rvad3va" translate="no">HyperLevel Docs</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Djc9ZKGJ.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/werkstatt/" class="astro-2z5xp7gb">English</option><option value="/de/werkstatt/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="04e4z3h" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Get started</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/README.md#quick-start" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Quick start</span></a></li><li class="astro-rmhv4bp6"><a href="/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deploy options</span></a></li><li class="astro-rmhv4bp6"><a href="/self-hosting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Self-hosting reference</span></a></li><li class="astro-rmhv4bp6"><a href="/demo-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Demo mode</span></a></li><li class="astro-rmhv4bp6"><a href="/cloud/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Hosted cloud</span></a></li><li class="astro-rmhv4bp6"><a href="/landing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Landing page</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">AI &amp; agents</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/agent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">HyperLevel Agent</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI tools: Claude Code, Codex, Cursor, ChatGPT</span></a></li><li class="astro-rmhv4bp6"><a href="/mcp-client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">External MCP servers</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI providers – bring your own key</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI assistant</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI workflow builder</span></a></li><li class="astro-rmhv4bp6"><a href="/ai-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Studio</span></a></li><li class="astro-rmhv4bp6"><a href="/genmedia/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI media generation</span></a></li><li class="astro-rmhv4bp6"><a href="/site-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Funnel &amp; website AI</span></a></li><li class="astro-rmhv4bp6"><a href="/voice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Voice</span></a></li><li class="astro-rmhv4bp6"><a href="/cognee/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Knowledge memory (Cognee)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">API &amp; integrations</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">REST API &amp; MCP</span></a></li><li class="astro-rmhv4bp6"><a href="/workflow-actions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Workflow actions &amp; triggers</span></a></li><li class="astro-rmhv4bp6"><a href="/integrations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Integrations: Zapier, Make, n8n, REST hooks</span></a></li><li class="astro-rmhv4bp6"><a href="/connectors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Connectors &amp; Composio</span></a></li><li class="astro-rmhv4bp6"><a href="/nango/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Nango</span></a></li><li class="astro-rmhv4bp6"><a href="/channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Channels &amp; providers</span></a></li><li class="astro-rmhv4bp6"><a href="/meta-channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">WhatsApp, Messenger &amp; Instagram</span></a></li><li class="astro-rmhv4bp6"><a href="/mailbox-sync/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mailbox sync</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment providers</span></a></li><li class="astro-rmhv4bp6"><a href="/stripe/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stripe</span></a></li><li class="astro-rmhv4bp6"><a href="/todoist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Todoist</span></a></li><li class="astro-rmhv4bp6"><a href="/social-comments/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social comments</span></a></li><li class="astro-rmhv4bp6"><a href="/comment-to-dm/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Comment to DM</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">CRM, sales &amp; teamwork</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/sales/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sales</span></a></li><li class="astro-rmhv4bp6"><a href="/objects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Companies, custom objects &amp; lead scoring</span></a></li><li class="astro-rmhv4bp6"><a href="/custom-values/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Custom values</span></a></li><li class="astro-rmhv4bp6"><a href="/projects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Projects &amp; time tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/team-inbox/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team inbox</span></a></li><li class="astro-rmhv4bp6"><a href="/team-calendars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team calendars</span></a></li><li class="astro-rmhv4bp6"><a href="/booking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Booking rules</span></a></li><li class="astro-rmhv4bp6"><a href="/telephony/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Telephony</span></a></li><li class="astro-rmhv4bp6"><a href="/reputation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reputation</span></a></li><li class="astro-rmhv4bp6"><a href="/team-chat/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team chat</span></a></li><li class="astro-rmhv4bp6"><a href="/collaboration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Live collaboration</span></a></li><li class="astro-rmhv4bp6"><a href="/wiki/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wiki</span></a></li><li class="astro-rmhv4bp6"><a href="/canvas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Canvas</span></a></li><li class="astro-rmhv4bp6"><a href="/living-boards/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Living Boards</span></a></li><li class="astro-rmhv4bp6"><a href="/office/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Office</span></a></li><li class="astro-rmhv4bp6"><a href="/xr/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">XR</span></a></li><li class="astro-rmhv4bp6"><a href="/undo/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Undo, history &amp; trash</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Marketing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/email-marketing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail marketing</span></a></li><li class="astro-rmhv4bp6"><a href="/email-builder/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail designer</span></a></li><li class="astro-rmhv4bp6"><a href="/email-tracking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/deliverability/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Deliverability</span></a></li><li class="astro-rmhv4bp6"><a href="/sites/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Website builder</span></a></li><li class="astro-rmhv4bp6"><a href="/forms/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Forms</span></a></li><li class="astro-rmhv4bp6"><a href="/social-planner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social planner</span></a></li><li class="astro-rmhv4bp6"><a href="/ads-manager/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Ads manager</span></a></li><li class="astro-rmhv4bp6"><a href="/growth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Growth: attribution, affiliates &amp; ad reports</span></a></li><li class="astro-rmhv4bp6"><a href="/referrals/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Referrals &amp; partner links</span></a></li><li class="astro-rmhv4bp6"><a href="/webinars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Webinars</span></a></li><li class="astro-rmhv4bp6"><a href="/video-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Video studio</span></a></li><li class="astro-rmhv4bp6"><a href="/consent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Consent &amp; legal</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Selling &amp; billing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/invoicing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Invoicing</span></a></li><li class="astro-rmhv4bp6"><a href="/dunning/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Dunning</span></a></li><li class="astro-rmhv4bp6"><a href="/sepa/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SEPA</span></a></li><li class="astro-rmhv4bp6"><a href="/payment-plans/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Payment plans</span></a></li><li class="astro-rmhv4bp6"><a href="/store/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Online store &amp; gift cards</span></a></li><li class="astro-rmhv4bp6"><a href="/saas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SaaS mode</span></a></li><li class="astro-rmhv4bp6"><a href="/gewinnrechner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Profit calculator</span></a></li><li class="astro-rmhv4bp6"><a href="/backoffice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Back office</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Courses, community &amp; service</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/courses/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Courses</span></a></li><li class="astro-rmhv4bp6"><a href="/quizzes-certificates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quizzes &amp; certificates</span></a></li><li class="astro-rmhv4bp6"><a href="/community/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Community</span></a></li><li class="astro-rmhv4bp6"><a href="/academy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Academy</span></a></li><li class="astro-rmhv4bp6"><a href="/helpdesk/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Helpdesk: tickets, SLAs, knowledge base</span></a></li><li class="astro-rmhv4bp6"><a href="/bug-reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bug reports &amp; wishes</span></a></li><li class="astro-rmhv4bp6"><a href="/reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reports &amp; dashboards</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Apps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/android-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Android app</span></a></li><li class="astro-rmhv4bp6"><a href="/app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install the app &amp; push</span></a></li><li class="astro-rmhv4bp6"><a href="/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gray-label &amp; own-brand apps</span></a></li><li class="astro-rmhv4bp6"><a href="/ios-web-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">iPhone, iPad &amp; foldables</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Operate &amp; secure</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/backups/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Backups, alerts &amp; status page</span></a></li><li class="astro-rmhv4bp6"><a href="/incident-runbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Incident runbook</span></a></li><li class="astro-rmhv4bp6"><a href="/performance/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Performance &amp; sizing</span></a></li><li class="astro-rmhv4bp6"><a href="/security/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security</span></a></li><li class="astro-rmhv4bp6"><a href="/security-review-2026-10/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Security review, October 2026</span></a></li><li class="astro-rmhv4bp6"><a href="/auth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sign-in, SSO &amp; passkeys</span></a></li><li class="astro-rmhv4bp6"><a href="/umzug/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Switch-over importers (Umzug)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Customize &amp; extend</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/theming/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Appearance &amp; themes</span></a></li><li class="astro-rmhv4bp6"><a href="/translating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">UI language &amp; translating</span></a></li><li class="astro-rmhv4bp6"><a href="/werkstatt/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werkstatt, plugins &amp; Marktplatz</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Run your company on HyperLevel</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/company-playbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Company playbook</span></a></li><li class="astro-rmhv4bp6"><a href="/handbuch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handbook (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/kurs-firma-fuehren/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Course: run your company (DE)</span></a></li><li class="astro-rmhv4bp6"><a href="/partner-program/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Partner program</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Project</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/roadmap/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Roadmap</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CHANGELOG.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Changelog</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/SECURITY.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Security policy</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/discussions" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">GitHub Discussions</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dark</option><option value="light" class="astro-2z5xp7gb">Light</option><option value="auto" selected class="astro-2z5xp7gb">Auto</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Select language</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/werkstatt/" class="astro-2z5xp7gb">English</option><option value="/de/werkstatt/" class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#screenshots" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Screenshots</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#architecture" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Architecture</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#policy-approval-and-budget" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Policy, approval and budget</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#model-gate-and-denkstufe" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Model gate and Denkstufe</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#model-gate-mindest-modell" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Model gate (Mindest-Modell)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#denkstufe-reasoning-effort" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Denkstufe (reasoning effort)</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#sicherheitsnetz" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Sicherheitsnetz</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#in-the-agent-chat" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">In the agent chat</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#license-agpl-core-and-pro" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">License: AGPL core and Pro</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#security-model" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Security model</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#why-two-kinds-of-server-logic" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Why two kinds of server logic</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#kill-switch" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Kill switch</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#writing-a-plugin-by-hand" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Writing a plugin by hand</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#manifest-reference" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Manifest reference</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#marktplatz" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Marktplatz</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#stage-3-core-features-and-feature-flags" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Stage 3: core features and feature flags</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mcp-tools-and-the-agent" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MCP tools and the agent</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#configuration" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Configuration</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#live-smoke-test" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Live smoke test</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#so-testest-du-die-werkstatt" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">So testest du die Werkstatt</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#vorbereitung-admin-einmalig-ca-5-minuten" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Vorbereitung (Admin, einmalig, ca. 5 Minuten)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#der-ablauf-schritt-für-schritt-als-mitglied" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Der Ablauf, Schritt für Schritt (als Mitglied)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#im-agent-chat-testen" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Im Agent-Chat testen</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#wenn-etwas-nicht-klappt" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Wenn etwas nicht klappt</span></a></li></ul></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#screenshots" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Screenshots</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#architecture" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Architecture</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#policy-approval-and-budget" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Policy, approval and budget</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#model-gate-and-denkstufe" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Model gate and Denkstufe</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#model-gate-mindest-modell" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Model gate (Mindest-Modell)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#denkstufe-reasoning-effort" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Denkstufe (reasoning effort)</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#sicherheitsnetz" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Sicherheitsnetz</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#in-the-agent-chat" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">In the agent chat</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#license-agpl-core-and-pro" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">License: AGPL core and Pro</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#security-model" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Security model</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#why-two-kinds-of-server-logic" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Why two kinds of server logic</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#kill-switch" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Kill switch</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#writing-a-plugin-by-hand" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Writing a plugin by hand</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#manifest-reference" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Manifest reference</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#marktplatz" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Marktplatz</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#stage-3-core-features-and-feature-flags" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Stage 3: core features and feature flags</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mcp-tools-and-the-agent" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MCP tools and the agent</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#configuration" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Configuration</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#live-smoke-test" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Live smoke test</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#so-testest-du-die-werkstatt" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">So testest du die Werkstatt</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#vorbereitung-admin-einmalig-ca-5-minuten" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Vorbereitung (Admin, einmalig, ca. 5 Minuten)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#der-ablauf-schritt-für-schritt-als-mitglied" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Der Ablauf, Schritt für Schritt (als Mitglied)</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#im-agent-chat-testen" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Im Agent-Chat testen</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#wenn-etwas-nicht-klappt" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Wenn etwas nicht klappt</span></a></li></ul></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Werkstatt, plugins and Marktplatz</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>Wishes that people submit are built by AI agents – first only for the person (or sub-account) who wished for them,
+then, if they prove good, for everyone.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.w36nc.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">Wunsch ──► Werkstatt ──► private plugin ──► Sub-Account ──► Agentur-weit ──► Marktplatz ──► core feature</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53"> </span></span><span style="--0:#d6deeb;--1:#403f53">(wish)    plan, consent,   only the author   one sub-account   all sub-accounts  install per      "im Kern</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">           </span></span><span style="--0:#d6deeb;--1:#403f53">approval, build  sees it           (team)            (admin)           sub-account     enthalten"</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="Wunsch ──► Werkstatt ──► private plugin ──► Sub-Account ──► Agentur-weit ──► Marktplatz ──► core feature (wish)    plan, consent,   only the author   one sub-account   all sub-accounts  install per      &quot;im Kern           approval, build  sees it           (team)            (admin)           sub-account     enthalten&quot;"><div></div></button></div></figure></div>
+<ul>
+<li><strong>Werkstatt</strong> (<code dir="auto">/app/werkstatt</code>) is where a wish is built: <em>Bauen lassen</em> on a wish (or in the done screen of
+“Neuer Wunsch”) makes the AI propose a plan, the requester confirms it, the build runs with a log, cost tracking and
+a monthly budget per sub-account.</li>
+<li><strong>Marktplatz</strong> (<code dir="auto">/app/marktplatz</code>) is where plugins are discovered and installed – with categories, search,
+screenshots, ratings, install counts, consent screens, updates and uninstall.</li>
+<li><strong>Plugins</strong> are small apps that run in a sandbox: a menu page, a panel on the contact/deal page, a dashboard widget,
+a workflow action or a scheduled job.</li>
+</ul>
+<p>Both names live in one constant, <a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/server/services/werkstatt/names.ts"><code dir="auto">server/services/werkstatt/names.ts</code></a>; rename
+them there and the server messages and the web app follow. The UI is German; this page is English.</p>
+<ul>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#policy-approval-and-budget">Policy, approval and budget</a></li>
+<li><a href="#model-gate-and-denkstufe">Model gate and Denkstufe</a></li>
+<li><a href="#sicherheitsnetz">Sicherheitsnetz</a></li>
+<li><a href="#in-the-agent-chat">In the agent chat</a></li>
+<li><a href="#license-agpl-core-and-pro">License: AGPL core and Pro</a></li>
+<li><a href="#security-model">Security model</a></li>
+<li><a href="#writing-a-plugin-by-hand">Writing a plugin by hand</a></li>
+<li><a href="#marktplatz">Marktplatz</a></li>
+<li><a href="#stage-3-core-features-and-feature-flags">Stage 3: core features and feature flags</a></li>
+<li><a href="#mcp-tools-and-the-agent">MCP tools and the agent</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#live-smoke-test">Live smoke test</a></li>
+<li><a href="#so-testest-du-die-werkstatt">So testest du die Werkstatt</a> (German tester guide)</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="screenshots">Screenshots</h2><a class="sl-anchor-link" href="#screenshots"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Screenshots”</span></a></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Light</th>
+<th>Dark</th>
+<th>Phone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The build plan (what gets created, permissions, cost)</td>
+<td><a href="/assets/werkstatt-plan.png"><img src="/assets/werkstatt-plan.png" alt="Plan"></a></td>
+<td><a href="/assets/werkstatt-plan-dark.png"><img src="/assets/werkstatt-plan-dark.png" alt="Plan, dark"></a></td>
+<td><a href="/assets/werkstatt-plan-phone.png"><img src="/assets/werkstatt-plan-phone.png" alt="Plan, phone"></a></td>
+</tr>
+<tr>
+<td>A running plugin (Deal-Ampel, sandboxed iframe)</td>
+<td><a href="/assets/werkstatt-plugin.png"><img src="/assets/werkstatt-plugin.png" alt="Plugin"></a></td>
+<td><a href="/assets/werkstatt-plugin-dark.png"><img src="/assets/werkstatt-plugin-dark.png" alt="Plugin, dark"></a></td>
+<td><a href="/assets/werkstatt-plugin-phone.png"><img src="/assets/werkstatt-plugin-phone.png" alt="Plugin, phone"></a></td>
+</tr>
+<tr>
+<td>The Marktplatz</td>
+<td><a href="/assets/marktplatz.png"><img src="/assets/marktplatz.png" alt="Marktplatz"></a></td>
+<td><a href="/assets/marktplatz-dark.png"><img src="/assets/marktplatz-dark.png" alt="Marktplatz, dark"></a></td>
+<td><a href="/assets/marktplatz-phone.png"><img src="/assets/marktplatz-phone.png" alt="Marktplatz, phone"></a></td>
+</tr>
+</tbody>
+</table>
+<p>The Sicherheitsnetz and the agent chat (made by <code dir="auto">scripts/werkstatt-safety-screenshots.ts</code>, scripted AI, fictional demo data):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Light</th>
+<th>Dark</th>
+<th>Phone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent chat: the plan as a card, confirmed with the person’s own button</td>
+<td><a href="/assets/werkstatt-chat-plan.png"><img src="/assets/werkstatt-chat-plan.png" alt="Chat plan"></a></td>
+<td><a href="/assets/werkstatt-chat-plan-dark.png"><img src="/assets/werkstatt-chat-plan-dark.png" alt="Chat plan, dark"></a></td>
+<td><a href="/assets/werkstatt-chat-plan-phone.png"><img src="/assets/werkstatt-chat-plan-phone.png" alt="Chat plan, phone"></a></td>
+</tr>
+<tr>
+<td>Agent chat: finished, with the sandboxed preview, Öffnen / Ändern lassen / Verwerfen</td>
+<td><a href="/assets/werkstatt-chat-done.png"><img src="/assets/werkstatt-chat-done.png" alt="Chat done"></a></td>
+<td><a href="/assets/werkstatt-chat-done-dark.png"><img src="/assets/werkstatt-chat-done-dark.png" alt="Chat done, dark"></a></td>
+<td><a href="/assets/werkstatt-chat-done-phone.png"><img src="/assets/werkstatt-chat-done-phone.png" alt="Chat done, phone"></a></td>
+</tr>
+<tr>
+<td>Agent chat: “mach die Karten kräftiger” → version 2 with the diff summary</td>
+<td><a href="/assets/werkstatt-chat-change.png"><img src="/assets/werkstatt-chat-change.png" alt="Chat change"></a></td>
+<td><a href="/assets/werkstatt-chat-change-dark.png"><img src="/assets/werkstatt-chat-change-dark.png" alt="Chat change, dark"></a></td>
+<td><a href="/assets/werkstatt-chat-change-phone.png"><img src="/assets/werkstatt-chat-change-phone.png" alt="Chat change, phone"></a></td>
+</tr>
+<tr>
+<td>Publish dialog: review and second opinion side by side</td>
+<td><a href="/assets/werkstatt-publish.png"><img src="/assets/werkstatt-publish.png" alt="Publish"></a></td>
+<td><a href="/assets/werkstatt-publish-dark.png"><img src="/assets/werkstatt-publish-dark.png" alt="Publish, dark"></a></td>
+<td><a href="/assets/werkstatt-publish-phone.png"><img src="/assets/werkstatt-publish-phone.png" alt="Publish, phone"></a></td>
+</tr>
+<tr>
+<td>Versions with their seals and the diff</td>
+<td><a href="/assets/werkstatt-versions.png"><img src="/assets/werkstatt-versions.png" alt="Versions"></a></td>
+<td><a href="/assets/werkstatt-versions-dark.png"><img src="/assets/werkstatt-versions-dark.png" alt="Versions, dark"></a></td>
+<td><a href="/assets/werkstatt-versions-phone.png"><img src="/assets/werkstatt-versions-phone.png" alt="Versions, phone"></a></td>
+</tr>
+<tr>
+<td>The model gate says no (an everyday model is connected)</td>
+<td><a href="/assets/werkstatt-model-gate.png"><img src="/assets/werkstatt-model-gate.png" alt="Model gate"></a></td>
+<td><a href="/assets/werkstatt-model-gate-dark.png"><img src="/assets/werkstatt-model-gate-dark.png" alt="Model gate, dark"></a></td>
+<td><a href="/assets/werkstatt-model-gate-phone.png"><img src="/assets/werkstatt-model-gate-phone.png" alt="Model gate, phone"></a></td>
+</tr>
+<tr>
+<td>Policy: Mindest-Modell</td>
+<td><a href="/assets/werkstatt-model-policy.png"><img src="/assets/werkstatt-model-policy.png" alt="Model policy"></a></td>
+<td><a href="/assets/werkstatt-model-policy-dark.png"><img src="/assets/werkstatt-model-policy-dark.png" alt="Model policy, dark"></a></td>
+<td><a href="/assets/werkstatt-model-policy-phone.png"><img src="/assets/werkstatt-model-policy-phone.png" alt="Model policy, phone"></a></td>
+</tr>
+<tr>
+<td>KI-Anbieter → Denkstufe</td>
+<td><a href="/assets/ai-effort.png"><img src="/assets/ai-effort.png" alt="Denkstufe"></a></td>
+<td><a href="/assets/ai-effort-dark.png"><img src="/assets/ai-effort-dark.png" alt="Denkstufe, dark"></a></td>
+<td><a href="/assets/ai-effort-phone.png"><img src="/assets/ai-effort-phone.png" alt="Denkstufe, phone"></a></td>
+</tr>
+</tbody>
+</table>
+<p>A plugin’s detail page with the live preview (<a href="/assets/marktplatz-detail.png">image</a>), a finished order with its log
+(<a href="/assets/werkstatt-build-done.png">image</a>) and the policy screen (<a href="/assets/werkstatt-policy.png">image</a>). They are made
+from a fictional demo instance by <code dir="auto">scripts/werkstatt-screenshots.ts</code> (scripted AI, no keys; see
+<a href="#configuration">Configuration</a>).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="architecture">Architecture</h2><a class="sl-anchor-link" href="#architecture"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Architecture”</span></a></div>
+<p>Everything is its own set of modules; nothing was added to the existing feature modules except small hooks
+(<code dir="auto">app.services</code>, a guard list, the workflow action registry).</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">modules/werkstatt.ts</code></td>
+<td>Builds: analyse → plan → consent → (approval) → build, log, progress, cost, notes in the app, policy, dry run</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/plugins.ts</code></td>
+<td>Plugin store (versions, installs, rollout scopes), the bridge route, the isolated UI routes, workflow action <code dir="auto">plugin_action</code>, the job scheduler, export/import</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/marktplatz.ts</code></td>
+<td>Catalogue, install with consent, updates, reviews, screenshots, AI security review and publishing</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/werkstatt-core.ts</code></td>
+<td>Stage 3: spec + GitHub issue for a coding agent, status tracking, “im Kern enthalten”</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/werkstatt-tools.ts</code></td>
+<td>MCP tools and the agent hint</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/flags.ts</code></td>
+<td><code dir="auto">app.services.flags.enabled(name, { locationId, userId })</code> and the admin screen</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/ai-effort.ts</code></td>
+<td>Denkstufe settings (agency default, per capability, per sub-account) for <code dir="auto">aiRun</code> and the agent chat</td>
+</tr>
+<tr>
+<td><code dir="auto">modules/license.ts</code></td>
+<td><code dir="auto">app.services.license.has('pro')</code> – a stub that says yes until a license system exists</td>
+</tr>
+<tr>
+<td><code dir="auto">services/werkstatt/*</code></td>
+<td>Pure logic: manifest, static checks, bridge, sandbox runner, declarative steps, generation prompts, policy, health, model gate (<code dir="auto">modelgate.ts</code>, <code dir="auto">models.ts</code>), signing (<code dir="auto">signing.ts</code>, <code dir="auto">trust.ts</code>), second opinion, version diff and badges</td>
+</tr>
+<tr>
+<td><code dir="auto">services/ai-effort.ts</code></td>
+<td>Which Denkstufe a model takes and what each provider receives</td>
+</tr>
+<tr>
+<td><code dir="auto">web/src/werkstatt/ChatCards.tsx</code></td>
+<td>The cards of the agent chat (plan, live progress, preview, diff) – a lazy chunk</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two stages of building.</strong> The AI (through <code dir="auto">app.services.aiRun</code>, so it works with Anthropic, OpenAI and any
+OpenAI-compatible connection such as OpenRouter; structured output) decides per wish:</p>
+<ol>
+<li><strong>Stufe 1 “Einrichtung”</strong> – no code. A plan of existing building blocks, created through the normal API as the
+requesting user, only in their sub-account: workflows (as drafts), custom fields, custom objects, properties,
+reports, dashboards, custom AI agents (private), templates, forms, pipelines, tags. Everything can be undone.</li>
+<li><strong>Stufe 2 “Mini-App”</strong> – a plugin: manifest + UI + optional server logic. The AI is treated as an untrusted author:
+its output is parsed, validated, statically checked and self-tested in the sandbox; problems go back to the model
+(up to the policy’s <em>Korrekturrunden</em>, default 2) before the build gives up with a readable message. The log stays.</li>
+</ol>
+<p><strong>The order’s life:</strong> <code dir="auto">planning</code> → <code dir="auto">planned</code> (the plan: what is created, permissions, estimated cost) →
+<code dir="auto">awaiting_approval</code> (only if the policy asks) → <code dir="auto">building</code> → <code dir="auto">done</code> | <code dir="auto">failed</code>; <code dir="auto">cancelled</code>, <code dir="auto">rejected</code> and <code dir="auto">undone</code>
+are the other ends. While it works the build shows a progress line with step names (“Schritt 2 von 3: …”,
+“Plugin wird überarbeitet (Versuch 2 von 3)”) – the page polls every 1.5 s.</p>
+<p><strong>Notifications.</strong> Plan ready, approval needed, approved/declined, finished/failed: an entry in the app (strip on the
+Werkstatt page, badge under the menu item), a push notification and – for decisions somebody waits for – an email.
+The approval request goes to all admins with two push buttons <em>Freigeben</em> / <em>Ablehnen</em> and two links in the email
+(<code dir="auto">/app/werkstatt/&lt;id&gt;?loc=&lt;sub-account&gt;&amp;action=approve|reject</code>). The links only <strong>open</strong> the order with its plan and
+a confirmation dialog – nothing is ever decided by a link or a button press on the notification itself.
+Push kind <code dir="auto">werkstatt</code> can be switched off per user like the other kinds; emails respect the “E-Mail bei Antworten”
+switch of <em>Fehler &amp; Wünsche</em>. Orders and alarms that belong to a sub-account also land in the phone app’s notification
+feed (<code dir="auto">/api/mobile/feed</code>, event type <code dir="auto">werkstatt</code>); app versions that do not know the type skip it.</p>
+<p><strong>Plugin lifecycle.</strong> A plugin has versions (<code dir="auto">1.0.0</code>, <code dir="auto">1.0.1</code>, …) with a changelog; the first one starts <strong>private</strong>
+(only its author). <em>Ändern lassen</em> writes a new version from chat feedback (estimate shown first); the old versions stay
+and can be restored. A version that asks for more permissions than the active one needs a new consent before it
+becomes active. Rollout scopes: <code dir="auto">private</code> → <code dir="auto">location</code> (the sub-account) → <code dir="auto">agency</code> (all sub-accounts, admins only) →
+<code dir="auto">marketplace</code> (admins only, after the security review).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="policy-approval-and-budget">Policy, approval and budget</h2><a class="sl-anchor-link" href="#policy-approval-and-budget"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Policy, approval and budget”</span></a></div>
+<p><em>Werkstatt → Richtlinien</em> (admins; agency-wide, stored in <code dir="auto">agency_settings</code>). The defaults are safe:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wer darf bauen (<code dir="auto">who</code>)</td>
+<td><code dir="auto">admins</code></td>
+<td><code dir="auto">admins</code>, <code dir="auto">team</code> (people with the right “Einstellungen”) or <code dir="auto">everyone</code> of a sub-account</td>
+</tr>
+<tr>
+<td>Zusätzlich erlaubte Personen / Sub-Accounts (<code dir="auto">allow_users</code>, <code dir="auto">allow_locations</code>)</td>
+<td>empty</td>
+<td>Grants only: these people (or everyone in these sub-accounts) may build even when <code dir="auto">who</code> is <code dir="auto">admins</code>. Never restricts a wider <code dir="auto">who</code>.</td>
+</tr>
+<tr>
+<td>Freigabe (<code dir="auto">approval</code>)</td>
+<td>on</td>
+<td>Builds by non-admins wait for an admin’s approval</td>
+</tr>
+<tr>
+<td>Budget (<code dir="auto">budget_usd</code>, <code dir="auto">budgets</code>)</td>
+<td>5 $ per sub-account and month</td>
+<td>All AI cost of the Werkstatt (plans, builds, changes, reviews, specs) counts; when it is used up nothing new starts. Own amount per sub-account possible.</td>
+</tr>
+<tr>
+<td>Korrekturrunden (<code dir="auto">repair_rounds</code>)</td>
+<td>2</td>
+<td>How often the model may repair an unusable answer or a failed check (0–4)</td>
+</tr>
+<tr>
+<td>Server-Logik (<code dir="auto">server_logic</code>)</td>
+<td><code dir="auto">script</code></td>
+<td><code dir="auto">script</code> (sandbox), <code dir="auto">declarative</code> (steps only) or <code dir="auto">off</code></td>
+</tr>
+<tr>
+<td>Externe Hosts (<code dir="auto">allowed_hosts</code>)</td>
+<td>none</td>
+<td>Hosts a plugin may declare for images/fonts/scripts/connections</td>
+</tr>
+<tr>
+<td>Notausschalter (<code dir="auto">kill</code>)</td>
+<td>10 errors in 10 min and ≥ 50 %, or an average of 8000 ms over ≥ 10 calls</td>
+<td>See <a href="#kill-switch">Kill switch</a></td>
+</tr>
+<tr>
+<td>Mindest-Modell (<code dir="auto">model_gate</code>)</td>
+<td>on, all four families, newer versions, Stufe 1 with the normal model</td>
+<td>See <a href="#model-gate-mindest-modell">Model gate</a></td>
+</tr>
+<tr>
+<td>Zweitmeinung (<code dir="auto">second_opinion</code>)</td>
+<td>on</td>
+<td>Pro; publishing waits for a second opinion when a second model is connected</td>
+</tr>
+<tr>
+<td>Signierte Plugins (<code dir="auto">trusted_keys</code>)</td>
+<td>none</td>
+<td>Public Ed25519 keys whose signed bundles count as „signiert“ (the HyperLevel keys are built in)</td>
+</tr>
+<tr>
+<td>Kernfeatures (<code dir="auto">core</code>)</td>
+<td>–</td>
+<td>GitHub repository, agent (<code dir="auto">@codex</code> / <code dir="auto">@claude</code>), sub-account holding the GitHub token</td>
+</tr>
+</tbody>
+</table>
+<p>Costs: the plan shows the model and an estimate (typical and worst case with repair rounds) before the requester
+confirms; the build’s real cost (from the provider’s usage) is added to the order and to the month’s total. The AI
+connection used is whatever <code dir="auto">aiRun</code> resolves for the sub-account: the BYOK routing for “Text” (a sub-account’s own or the
+agency’s), otherwise the assistant’s own Anthropic/OpenAI key. <strong>The KI-Assistent must be switched on in the
+sub-account</strong> (Einstellungen → KI-Assistent) – the Werkstatt shows exactly that as a hint when it is not.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="model-gate-and-denkstufe">Model gate and Denkstufe</h2><a class="sl-anchor-link" href="#model-gate-and-denkstufe"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Model gate and Denkstufe”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="model-gate-mindest-modell">Model gate (Mindest-Modell)</h3><a class="sl-anchor-link" href="#model-gate-mindest-modell"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Model gate (Mindest-Modell)”</span></a></div>
+<p>Writing code and judging it is only as good as the model behind it. The Werkstatt therefore works with a <strong>top model</strong>
+only: <em>Werkstatt → Richtlinien → Mindest-Modell</em>. Four families are built in, matched case-insensitively and also behind
+an OpenRouter vendor prefix (<code dir="auto">anthropic/claude-opus-5.5</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Patterns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-6 Sol</td>
+<td><code dir="auto">gpt-6*sol*</code></td>
+</tr>
+<tr>
+<td>Astra</td>
+<td><code dir="auto">*astra*</code></td>
+</tr>
+<tr>
+<td>Claude Opus 5.5</td>
+<td><code dir="auto">*opus-5-5*</code>, <code dir="auto">*opus-5.5*</code></td>
+</tr>
+<tr>
+<td>Claude Fable 5.5</td>
+<td><code dir="auto">*fable-5-5*</code>, <code dir="auto">*fable-5.5*</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Newer versions of these families</strong> (GPT-7 Sol, Claude Opus 5.6, Fable 6 …) count too (switch, default on). Versions
+are compared, not guessed: <code dir="auto">claude-opus-4-20250514</code> is not newer.</li>
+<li>Admins can switch families off one by one and add <strong>own patterns</strong> (<code dir="auto">*my-model*</code>; globs with at least three fixed
+characters, so no blanket <code dir="auto">*</code>).</li>
+<li><strong>Stufe 1 may use the normal model</strong> (switch, default on): planning and building a configuration from existing blocks
+(no code) works with whatever is connected. A Mini-App plan made with a weaker model is shown with the refusal, <em>Plan
+neu erstellen</em> plans it again once a top model is connected.</li>
+<li>What is gated: writing plugins (<code dir="auto">werkstatt_build</code>, also “Ändern lassen”), the security review and the second opinion,
+core specifications – and, with Stufe 1 switched off, the plan as well. The check happens before a single token is
+spent, and again when the build starts.</li>
+<li>The refusal is plain German with a link: „Für die Werkstatt brauchst du ein Spitzenmodell (z. B. GPT-6 Sol, Astra,
+Claude Opus 5.5 oder Fable 5.5) – aktuell ist „…“ eingestellt. Wähle unter Einstellungen → KI-Anbieter bei „Werkstatt“
+ein passendes Modell (<code dir="auto">/app/settings/ai-providers</code>).“ (members are told to ask an admin).</li>
+</ul>
+<p><strong>Which model serves the Werkstatt</strong> is its own routing capability in <em>Einstellungen → KI-Anbieter → Wofür welches
+Modell?</em>: <strong>Werkstatt</strong> (builds, changes, plans, specs; falls back to <strong>Text</strong>), and <strong>Werkstatt: Zweitmeinung</strong> (the
+second reviewer, see <a href="#sicherheitsnetz">Sicherheitsnetz</a>). A model id can be typed for either.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="denkstufe-reasoning-effort">Denkstufe (reasoning effort)</h3><a class="sl-anchor-link" href="#denkstufe-reasoning-effort"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Denkstufe (reasoning effort)”</span></a></div>
+<p><em>Einstellungen → KI-Anbieter → Denkstufe</em>: how hard the models think. One <strong>Denkstufe (Standard)</strong> – built in:
+<strong>maximal (<code dir="auto">xhigh</code>)</strong> – and an optional level per capability: KI-Agent, Werkstatt (build, change, specs), Werkstatt
+(review, second opinion), quick AI texts, summaries, phone agent. It can be set for the whole agency and, optionally,
+per sub-account (the sub-account’s own value wins). A higher level costs more tokens and takes longer; phone agent and
+quick texts are usually fine with a lower one. <strong>The Werkstatt never goes below „hoch“</strong> – a lower setting is raised.</p>
+<p>What a provider receives:</p>
+<table>
+<thead>
+<tr>
+<th>Wire</th>
+<th>Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anthropic Messages</td>
+<td><code dir="auto">output_config.effort</code> (Claude 5 family; Haiku has none)</td>
+</tr>
+<tr>
+<td>OpenAI Responses</td>
+<td><code dir="auto">reasoning.effort</code> (gpt-5, o-series, gpt-6)</td>
+</tr>
+<tr>
+<td>OpenAI-compatible Chat Completions (OpenAI, Azure, Gemini’s layer, Groq …)</td>
+<td><code dir="auto">reasoning_effort</code></td>
+</tr>
+<tr>
+<td>OpenRouter</td>
+<td><code dir="auto">reasoning: { effort }</code></td>
+</tr>
+</tbody>
+</table>
+<p>A model that cannot take the level gets the <strong>highest it supports</strong> and says so in the build log: <em>„KI: claude-sonnet-5-5
+· Denkstufe hoch (xhigh → high, vom Modell nicht unterstützt)“</em>. A model without any reasoning control gets nothing sent
+in everyday calls. If a provider refuses the level, an everyday call is repeated once without it; the Werkstatt (which
+must not think less quietly) fails with a clear message instead. Model and Denkstufe are shown on every build, on every
+plugin version (badge row) and in the dry run. See <code dir="auto">services/ai-effort.ts</code> for the model table.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="sicherheitsnetz">Sicherheitsnetz</h2><a class="sl-anchor-link" href="#sicherheitsnetz"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Sicherheitsnetz”</span></a></div>
+<p>The safety net around what AI agents build, from the first line to the Marktplatz:</p>
+<ul>
+<li><strong>Before it runs:</strong> static checks, the sandbox self-test with <strong>one smoke run per entry point</strong> (page, every panel with
+the context of its contact or deal, every widget, every action and job) – a panel that crashes fails the version even if
+the page works.</li>
+<li><strong>Badge row on every version</strong> (plugin page → <em>Versionen</em>): static ✓ · tests ✓ (with „3/3 Einstiegspunkte“) ·
+Sicherheitsprüfung bestanden · Zweitmeinung · signiert / „ungeprüft“ · model and Denkstufe. Under the changelog a
+diff summary says what changed (new permissions, entry points, lines of UI and server code).</li>
+<li><strong>Before the Marktplatz:</strong> the AI security review (checklist, only with a top model), then – <strong>Pro</strong> – a <strong>second opinion</strong>
+by a <em>different</em> allowed top model. It must differ from the model that wrote the version and from the one that did the
+first review; it answers the same checklist independently, and the publish dialog shows both verdicts side by side
+with what differs. A failed second opinion blocks publishing; hints need the same explicit „gelesen“. When a second
+model is connected (routing <em>Werkstatt: Zweitmeinung</em>) and the policy asks for it (default), publishing waits for it.</li>
+<li><strong>While it runs:</strong> health per plugin (errors, <strong>average response time</strong>, usage), the <a href="#kill-switch">kill switch</a> with
+notification, and one-click rollback.</li>
+<li><strong>Core proposals never auto-deploy.</strong> <em>Als Kernfeature vorschlagen</em> only writes a spec and opens an issue; the pull
+request needs green CI (typecheck, tests, build) and a human review, and the feature starts behind a feature flag
+(<code dir="auto">core.&lt;slug&gt;</code>, off). The issue says so.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="in-the-agent-chat">In the agent chat</h2><a class="sl-anchor-link" href="#in-the-agent-chat"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “In the agent chat”</span></a></div>
+<p>The HyperLevel Agent runs the whole lifecycle in the conversation (<em>Realtime Feature Lifecycle</em>):</p>
+<ol>
+<li><strong>A wish</strong> („Ich hätte gern eine Ampel, die zeigt, welche Deals lange liegen“) – the agent checks the Marktplatz first
+(<code dir="auto">ghl_list_plugins</code>), then calls <code dir="auto">ghl_build_from_wish</code> (planning only: a few cents, builds nothing).</li>
+<li><strong>The plan as a card</strong> in the chat: what is built, permissions with risk, estimated cost, model and Denkstufe – and the
+model gate’s message if the connected model is too weak. The person confirms with the <strong>card’s own button</strong> (same
+route as in the Werkstatt, same consent: the confirm must list exactly the plan’s permissions). The agent itself never
+confirms a plan unless the person says „ja, bauen“ in the chat – and then the agent’s confirm still asks first (class
+<em>sensitive</em>, also in „Autonom“).</li>
+<li><strong>Live progress:</strong> the same card shows the step names while the build runs (polling), „Wartet auf Freigabe“ when the
+policy asks for an admin’s approval.</li>
+<li><strong>A preview card:</strong> the finished plugin appears inline in a sandboxed frame (<code dir="auto">sandbox="allow-scripts"</code>, no
+<code dir="auto">allow-same-origin</code>; panels in sample-data mode) with its seals and the buttons <strong>Öffnen</strong>, <strong>Ändern lassen</strong> (a text
+field with the cost estimate), <strong>Version zurück</strong> and <strong>Verwerfen</strong>.</li>
+<li><strong>Conversational changes:</strong> „Mach die Karten dunkler“ → <code dir="auto">ghl_change_plugin</code> → version 2 with the diff summary in the
+card and in the agent’s answer; the old version stays, rollback is one click.</li>
+<li><strong>Admins</strong> manage the lifecycle from the chat: <code dir="auto">ghl_plugin_overview</code> (waiting approvals, plugins with health, review and
+Marktplatz state) and <code dir="auto">ghl_plugin_admin</code> (approve or reject an order, review, second opinion, publish, unpublish,
+rollback, disable, enable, rollout scope, core proposal). Each asks for confirmation; publishing needs the review id
+and the admin’s explicit approval, exactly like the dialog.</li>
+</ol>
+<p>Only the newest card of an order is interactive; older ones shrink to one line. The cards are one lazy chunk that loads
+when a result of these tools is on screen.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="license-agpl-core-and-pro">License: AGPL core and Pro</h2><a class="sl-anchor-link" href="#license-agpl-core-and-pro"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “License: AGPL core and Pro”</span></a></div>
+<p>The plugin runtime and <strong>local builds with your own AI key</strong> stay in the AGPL core and never ask for a license: building,
+the sandbox, private/sub-account/agency-wide rollout, export/import of unsigned bundles, the single AI security review,
+the kill switch, rollback and the agent chat. A few things around them are <strong>Pro</strong> and sit behind a license check
+(<code dir="auto">app.services.license.has('pro')</code>, <code dir="auto">services/werkstatt/license.ts</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Pro feature</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publishing to and installing from the <strong>Marktplatz</strong> (per sub-account, with consent screens)</td>
+<td>publish, install, update routes</td>
+</tr>
+<tr>
+<td>Installing <strong>HyperLevel-signed plugins</strong> (Ed25519)</td>
+<td>import of a bundle whose signature is valid for a trusted key</td>
+</tr>
+<tr>
+<td>The <strong>second opinion</strong> by another top model</td>
+<td>publish dialog</td>
+</tr>
+<tr>
+<td>The <strong>advanced rollout</strong>: a percentage of the sub-accounts</td>
+<td>feature flag stage „Prozent“</td>
+</tr>
+</tbody>
+</table>
+<p>Browsing the Marktplatz, running installed plugins and everything above stays available without a license; a missing
+license is a plain German message („… ist eine Pro-Funktion – dafür ist eine HyperLevel-Pro-Lizenz nötig. Plugins bauen und
+nutzen funktioniert weiterhin ohne Lizenz.“), and the screens mark these places with a small <strong>Pro</strong>.</p>
+<p><strong>There is no license system yet.</strong> <code dir="auto">modules/license.ts</code> registers a stub whose <code dir="auto">has()</code> is always <code dir="auto">true</code>, so nothing is
+locked today and self-hosters change nothing. A future license module only has to assign its own
+<code dir="auto">app.services.license = { has(feature) }</code>; <code dir="auto">hasPro()</code> treats a missing service as licensed.</p>
+<p><strong>Signed plugins.</strong> A bundle (<code dir="auto">*.gohigh-plugin.json</code>) can carry an Ed25519 signature over its content (canonical JSON of
+<code dir="auto">format, bundle_version, plugin, version, integrity</code>). On import the app checks it against the keys it trusts:</p>
+<table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Meaning</th>
+<th>Install</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>signiert</strong></td>
+<td>valid signature of a trusted key („von HyperLevel signiert“ for the built-in keys)</td>
+<td>Pro</td>
+</tr>
+<tr>
+<td><strong>ungeprüft</strong> (no signature, or a key this installation does not know)</td>
+<td>warning with the reason</td>
+<td>only after the importer ticks „ich weiß, dass das Paket ungeprüft ist“ (<code dir="auto">accept_unverified</code>)</td>
+</tr>
+<tr>
+<td><strong>ungültig</strong></td>
+<td>signature does not match the content – edited after signing or forged</td>
+<td>refused, no way around it</td>
+</tr>
+</tbody>
+</table>
+<p>Trusted keys: the built-in HyperLevel keys (<code dir="auto">services/werkstatt/trusted-keys.ts</code>, public keys only; the built-in id always
+wins, nobody can claim it through the settings), <code dir="auto">PGHL_PLUGIN_TRUSTED_KEYS</code> (JSON), and <em>Werkstatt → Richtlinien →
+Signierte Plugins</em>. An installation that sets <code dir="auto">PGHL_PLUGIN_SIGNING_KEY</code> signs its own exports. <code dir="auto">scripts/werkstatt-sign.mjs</code>
+makes keys and signs/verifies bundles for publishers:</p>
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">node</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">scripts/werkstatt-sign.mjs</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">keygen</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--id</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">gohigh-2026</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--out</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">./keys</span><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#919F9F;--1:#5F636F"># private key stays with the publisher</span></div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">node</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">scripts/werkstatt-sign.mjs</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">sign</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">my-plugin.json</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--key</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">./keys/gohigh-2026.private.pem</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--id</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">gohigh-2026</span></div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">node</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">scripts/werkstatt-sign.mjs</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">verify</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">my-plugin.signed.json</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--public</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">$(</span><span style="--0:#82AAFF;--1:#3B61B0">cat</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#ECC48D;--1:#3B61B0">./keys/gohigh-2026.public.txt</span><span style="--0:#ECC48D;--1:#984E4D">)</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="node scripts/werkstatt-sign.mjs keygen --id gohigh-2026 --out ./keys      # private key stays with the publishernode scripts/werkstatt-sign.mjs sign my-plugin.json --key ./keys/gohigh-2026.private.pem --id gohigh-2026node scripts/werkstatt-sign.mjs verify my-plugin.signed.json --public &quot;$(cat ./keys/gohigh-2026.public.txt)&quot;"><div></div></button></div></figure></div>
+<blockquote>
+<p><strong>Maintainers:</strong> the HyperLevel publisher key pair has to be generated by HyperLevel (never commit the private half); its public
+half goes into <code dir="auto">GOHIGH_PUBLIC_KEYS</code>. Until a key is listed there, no bundle counts as HyperLevel-signed.</p>
+</blockquote>
+<div class="sl-heading-wrapper level-h2"><h2 id="security-model">Security model</h2><a class="sl-anchor-link" href="#security-model"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Security model”</span></a></div>
+<p>A plugin is code written by an AI (or a stranger, if imported). The design assumes it is hostile and layers the
+defences; none of them relies on the plugin behaving.</p>
+<p><strong>UI isolation (browser).</strong> The plugin UI is a document served from a dedicated route (<code dir="auto">/plugin-frame/&lt;version&gt;</code>) and
+embedded as <code dir="auto">&lt;iframe sandbox="allow-scripts"&gt;</code> – <strong>without</strong> <code dir="auto">allow-same-origin</code>, so it has an opaque origin: no
+cookies, no localStorage, no access to the app. Its CSP (response header <em>and</em> the iframe <code dir="auto">sandbox</code> directive):
+<code dir="auto">default-src 'none'</code>; scripts/styles only inline (plus declared and admin-allowed hosts); <code dir="auto">connect-src 'none'</code>;
+no frames, workers, objects. It talks to the app only through <code dir="auto">postMessage</code> with a <strong>host page</strong>
+(<code dir="auto">/plugin-host/&lt;id&gt;</code>, nonce CSP, <code dir="auto">frame-ancestors 'self'</code>). The host page checks every request against a fixed
+catalogue of operations and the manifest, and relays it to <code dir="auto">POST /api/plugins/&lt;id&gt;/call</code>. The session cookie and
+CSRF header belong to the app’s frame, never to the plugin. Navigation of the frame is detected and the plugin is
+stopped.</p>
+<p><strong>The bridge</strong> (<code dir="auto">services/werkstatt/bridge.ts</code>) is the one place where plugin requests become API calls. For each
+call it checks: (1) the operation is in the catalogue; (2) the plugin’s <strong>manifest scope</strong> allows it (an undeclared
+scope is denied and counted as an event); (3) the <strong>user’s own permission area</strong> (<code dir="auto">contacts</code>, <code dir="auto">conversations</code>, …) – a
+member without access to conversations cannot read them through a plugin; (4) the call is made <strong>as that user,
+pinned to the current sub-account</strong> through the internal route caller (never a location from the request body);
+guards refuse everything outside an allow-list of routes for <code dir="auto">via=plugin</code>; (5) limits: 600 calls per minute per
+plugin and user, AI 30 calls per hour per plugin and sub-account, storage 100 keys / 64 KB per value / 512 KB per
+plugin and sub-account. Records a plugin creates are tracked so <em>Deinstallieren → aufräumen</em> can remove them. There
+is deliberately <strong>no scope for sending messages, deleting records or payments</strong>.</p>
+<p><strong>Server logic in a child process</strong> (jobs, workflow actions in <code dir="auto">server_mode: "script"</code>): Node 22’s permission
+model (<code dir="auto">node --permission</code> with no <code dir="auto">--allow-*</code>: no file system, no child processes, no workers, no addons, no WASI),
+<code dir="auto">--max-old-space-size=96</code>, <code dir="auto">--disallow-code-generation-from-strings</code>, a hard timeout with <code dir="auto">SIGKILL</code>, a call limit
+(200 per run) and IPC to the bridge as the only way out. Inside the child the code runs in a <code dir="auto">vm</code> context with no
+ambient authority (no <code dir="auto">process</code>, <code dir="auto">require</code>, timers, typed arrays; strings code generation off) and only JSON strings
+cross the boundary – never host objects.</p>
+<p><strong>Static checks before a version may be active</strong> (<code dir="auto">services/werkstatt/checks.ts</code>): size limits (UI 200 KB, server
+100 KB, steps 40 KB, total 320 KB), forbidden APIs (network, storage, eval/Function, <code dir="auto">window.open</code>, navigation,
+workers, dynamic import, obfuscation hints …), forbidden tags/attributes (<code dir="auto">iframe</code>, <code dir="auto">object</code>, <code dir="auto">embed</code>, <code dir="auto">base</code>, <code dir="auto">meta</code>,
+<code dir="auto">link</code>, inline event handlers with URLs, <code dir="auto">javascript:</code>), external URLs and hosts only when declared in the manifest
+<strong>and</strong> on the admin’s allow-list, operations used vs. scopes declared, entry points vs. code. Then the <strong>self-test</strong>
+runs every handler and the UI scripts in the sandbox with sample data (nothing real is read or written).</p>
+<p><strong>Honest limits.</strong></p>
+<ul>
+<li>Node’s permission model does <strong>not</strong> restrict the network. The runner patches every function that opens a
+connection (net/tls/http/https/http2/dgram/dns) and the sandbox probe verifies it, but the strongest guarantee is
+an own network namespace: where <code dir="auto">unshare -rn</code> works (Linux with user namespaces) the child runs inside one and has
+no network device at all. The status screen (<em>Richtlinien → Sandbox</em>) shows which of the two protects this server.
+Set <code dir="auto">PGHL_PLUGIN_NETNS=off</code> to disable the namespace.</li>
+<li><code dir="auto">vm</code> is not a security boundary on its own; it is one layer under the permission model, the memory cap, the
+timeout and the namespace.</li>
+<li>Static checks are regex-level; obfuscated code can slip past them. The runtime isolation is the real protection –
+that is why both are there and why a published plugin also gets an AI review.</li>
+<li>A browser engine bug could break out of an iframe sandbox; keep the browser updated. WebRTC is neutralised in the
+frame bootstrap and statically forbidden; DNS prefetch is switched off by header.</li>
+<li>The AI that writes a plugin can be prompt-injected through the wish text. The wish is treated as data, the output is
+parsed strictly, and nothing the model says is executed before the checks, the self-test and – for sharing – the
+review and an admin.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="why-two-kinds-of-server-logic">Why two kinds of server logic</h3><a class="sl-anchor-link" href="#why-two-kinds-of-server-logic"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Why two kinds of server logic”</span></a></div>
+<p>Some servers cannot run the permission-restricted child process (an old Node, a sandbox that forbids it, a container
+without <code dir="auto">unshare</code>). The Werkstatt therefore knows <strong>declarative steps</strong> – a list of calls to the same operations with
+<code dir="auto">{{templates}}</code>, <code dir="auto">foreach</code> and <code dir="auto">if</code>, interpreted by the server itself. No code runs, so there is nothing to escape
+from. The policy can force it (<code dir="auto">server_logic: declarative</code>), and the Werkstatt falls back to it automatically when the
+sandbox probe fails, telling the user in the plan. Script plugins are the flexible option; declarative plugins are the
+one you can always trust to run anywhere.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="kill-switch">Kill switch</h3><a class="sl-anchor-link" href="#kill-switch"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Kill switch”</span></a></div>
+<p>Every error of a plugin (UI error reports, failed runs, denied calls) is an event. When a plugin has <code dir="auto">errors</code> events in
+<code dir="auto">window_min</code> minutes and they make up at least <code dir="auto">ratio</code> of its events, it is switched off in all sub-accounts, admins are
+notified and an automatic error is filed in <em>Fehler &amp; Wünsche</em> (the existing error capture). An admin can switch it
+on again (<em>Plugin → Wieder einschalten</em>) or kill it by hand.</p>
+<p><strong>Slowness counts too.</strong> When the average response time of a plugin’s calls, jobs and actions over the window reaches
+<code dir="auto">latency_ms</code> (default 8000 ms, 0 = off) and there were at least <code dir="auto">min_calls</code> of them, the plugin is switched off the
+same way (“Zu langsam: im Schnitt 900 ms in 10 Minuten …”). The Werkstatt page and the plugin’s health card show the
+average of the last 24 hours and the error rate.</p>
+<p><strong>Who hears about it.</strong> Admins and the plugin’s author get a note in the app (kind <code dir="auto">alarm</code>), a push notification with the
+button <em>Zurückrollen</em> and an email with the same link. The link (<code dir="auto">/app/werkstatt/plugins/&lt;id&gt;?action=rollback</code>) only
+<strong>opens</strong> the rollback confirmation – nothing is rolled back by a link or a button on the notification itself.</p>
+<p><strong>One-click rollback</strong> (<code dir="auto">POST /api/plugins/:id/rollback {version_id?}</code>): the version before the active one (or the one
+named) runs again – for the author, for every install that was pinned to the bad version and, if the Marktplatz offered
+it, for the listing (when the older version was never reviewed, the listing is taken down instead). A killed plugin is
+switched on again with a clean slate; the bad version stays in the list. A rollback never asks for new permissions: the
+older version ran before, so what it needs was accepted.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="writing-a-plugin-by-hand">Writing a plugin by hand</h2><a class="sl-anchor-link" href="#writing-a-plugin-by-hand"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Writing a plugin by hand”</span></a></div>
+<p>You do not need the AI. A plugin is one JSON bundle (<code dir="auto">*.gohigh-plugin.json</code>); <em>Werkstatt → Meine Plugins → Plugin
+importieren</em> takes it, shows the consent list and runs the same checks and self-test as for an AI-written one. <em>Exportieren</em>
+makes one from any plugin you can see – that is also how self-hosters share plugins.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">"format"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">gohigh-plugin</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">"bundle_version"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">"exported_at"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">2026-01-01T00:00:00.000Z</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">"plugin"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"name"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Hallo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"slug"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">hallo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"description"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Zeigt eine Begrüßung.</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"category"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">sonstiges</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"icon"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">sparkles</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> },</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">"version"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#096E72">"version"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">1.0.0</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#096E72">"manifest"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#096E72">"name"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Hallo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"slug"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">hallo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"icon"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">sparkles</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"version"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">1.0.0</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#096E72">"description"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Zeigt eine Begrüßung.</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"category"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">sonstiges</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#096E72">"scopes"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">contacts:read</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">],</span></div></div><div class="ec-line"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#096E72">"entries"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"page"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"title"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Hallo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> } }</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">},</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#096E72">"ui_html"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">&lt;div id=</span><span style="--0:#F78C6C;--1:#AA0982">\"</span><span style="--0:#C789D6;--1:#7C5686">out</span><span style="--0:#F78C6C;--1:#AA0982">\"</span><span style="--0:#C789D6;--1:#7C5686">&gt;&lt;/div&gt;&lt;script&gt;gohigh.ready(async function (ctx) { var r = await gohigh.contacts.list({ limit: 1 }); document.getElementById('out').textContent = 'Kontakte: ' + r.total; });&lt;/script&gt;</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#096E72">"server_js"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">""</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#096E72">"steps"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#FF6A83;--1:#A24848">null</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#096E72">"changelog"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Erste Version</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">},</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">"integrity"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">&lt;sha256 over manifest, ui_html, server_js, steps – a hand-written bundle may leave it wrong; the importer is told&gt;</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{  &quot;format&quot;: &quot;gohigh-plugin&quot;,  &quot;bundle_version&quot;: 1,  &quot;exported_at&quot;: &quot;2026-01-01T00:00:00.000Z&quot;,  &quot;plugin&quot;: { &quot;name&quot;: &quot;Hallo&quot;, &quot;slug&quot;: &quot;hallo&quot;, &quot;description&quot;: &quot;Zeigt eine Begrüßung.&quot;, &quot;category&quot;: &quot;sonstiges&quot;, &quot;icon&quot;: &quot;sparkles&quot; },  &quot;version&quot;: {    &quot;version&quot;: &quot;1.0.0&quot;,    &quot;manifest&quot;: {      &quot;name&quot;: &quot;Hallo&quot;, &quot;slug&quot;: &quot;hallo&quot;, &quot;icon&quot;: &quot;sparkles&quot;, &quot;version&quot;: &quot;1.0.0&quot;,      &quot;description&quot;: &quot;Zeigt eine Begrüßung.&quot;, &quot;category&quot;: &quot;sonstiges&quot;,      &quot;scopes&quot;: [&quot;contacts:read&quot;],      &quot;entries&quot;: { &quot;page&quot;: { &quot;title&quot;: &quot;Hallo&quot; } }    },    &quot;ui_html&quot;: &quot;<div id=\&quot;out\&quot;></div><script>gohigh.ready(async function (ctx) { var r = await gohigh.contacts.list({ limit: 1 }); document.getElementById(&#x27;out&#x27;).textContent = &#x27;Kontakte: &#x27; + r.total; });</script>&quot;,    &quot;server_js&quot;: &quot;&quot;,    &quot;steps&quot;: null,    &quot;changelog&quot;: &quot;Erste Version&quot;  },  &quot;integrity&quot;: &quot;<sha256 over manifest, ui_html, server_js, steps – a hand-written bundle may leave it wrong; the importer is told>&quot;}"><div></div></button></div></figure></div>
+<p>The importer validates everything again, never trusts ids or flags, and starts the plugin <strong>private and unreviewed</strong>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="manifest-reference">Manifest reference</h3><a class="sl-anchor-link" href="#manifest-reference"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Manifest reference”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">name</code></td>
+<td>string, 2–60</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">slug</code></td>
+<td><code dir="auto">a-z0-9-</code>, 2–40</td>
+<td>Made unique per installation (suffix)</td>
+</tr>
+<tr>
+<td><code dir="auto">icon</code></td>
+<td>Lucide-style name, e.g. <code dir="auto">gift</code>, <code dir="auto">sparkles</code>, <code dir="auto">traffic-cone</code>, <code dir="auto">star</code></td>
+<td>Unknown names show a puzzle piece</td>
+</tr>
+<tr>
+<td><code dir="auto">version</code></td>
+<td><code dir="auto">x.y.z</code></td>
+<td>The server sets it for new versions</td>
+</tr>
+<tr>
+<td><code dir="auto">description</code></td>
+<td>string, 5–400</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">category</code></td>
+<td><code dir="auto">vertrieb</code>, <code dir="auto">kontakte</code>, <code dir="auto">kommunikation</code>, <code dir="auto">berichte</code>, <code dir="auto">ki</code>, <code dir="auto">service</code>, <code dir="auto">marketing</code>, <code dir="auto">sonstiges</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">scopes</code></td>
+<td>list of scope keys (max 20)</td>
+<td>Only what the code uses – the review flags unused ones</td>
+</tr>
+<tr>
+<td><code dir="auto">entries.page</code></td>
+<td><code dir="auto">{ title, icon? }</code></td>
+<td>A page in the menu below <em>Marktplatz</em></td>
+</tr>
+<tr>
+<td><code dir="auto">entries.panels</code></td>
+<td><code dir="auto">[{ id, on: "contact"|"deal", title, height? }]</code> (max 3)</td>
+<td><code dir="auto">height</code> 80–600 px</td>
+</tr>
+<tr>
+<td><code dir="auto">entries.widgets</code></td>
+<td><code dir="auto">[{ id, title, size?: "s"|"m"|"l" }]</code> (max 3)</td>
+<td>Dashboard</td>
+</tr>
+<tr>
+<td><code dir="auto">entries.actions</code></td>
+<td><code dir="auto">[{ id, label, fields?: [{ key, label, type?: "text"|"textarea"|"number" }] }]</code> (max 5)</td>
+<td>Workflow step <em>Plugin-Aktion</em>; fields are merge-field templates</td>
+</tr>
+<tr>
+<td><code dir="auto">entries.jobs</code></td>
+<td><code dir="auto">[{ id, label, every: "hourly"|"daily"|"weekly", at?: "HH:MM", weekday?: 0-6 }]</code> (max 3)</td>
+<td><code dir="auto">at</code> is local time of the sub-account</td>
+</tr>
+<tr>
+<td><code dir="auto">server</code></td>
+<td><code dir="auto">{ mode: "script"|"declarative" }</code></td>
+<td>Required for actions and jobs</td>
+</tr>
+<tr>
+<td><code dir="auto">externalHosts</code></td>
+<td>list of host names (max 5)</td>
+<td>Only effective when an admin allowed them; default: none</td>
+</tr>
+<tr>
+<td><code dir="auto">author</code></td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<p>At least one entry point is required. Unknown keys are rejected. <code dir="auto">id</code>s are <code dir="auto">a-z0-9_</code>, starting with a letter.</p>
+<p><strong>Scopes</strong> (<code dir="auto">services/werkstatt/manifest.ts</code>; the consent screen shows label, hint and risk):</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Allows</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">contacts:read</code> / <code dir="auto">contacts:write</code></td>
+<td>read contacts, notes, tasks / create, update, tag</td>
+<td>medium / high</td>
+</tr>
+<tr>
+<td><code dir="auto">notes:write</code></td>
+<td>add notes to contacts</td>
+<td>medium</td>
+</tr>
+<tr>
+<td><code dir="auto">tasks:read</code> / <code dir="auto">tasks:write</code></td>
+<td>your tasks / create, update, complete</td>
+<td>low / medium</td>
+</tr>
+<tr>
+<td><code dir="auto">conversations:read</code></td>
+<td>messages with contacts</td>
+<td>high</td>
+</tr>
+<tr>
+<td><code dir="auto">opportunities:read</code> / <code dir="auto">opportunities:write</code></td>
+<td>deals and pipelines / move, change status and value</td>
+<td>low / high</td>
+</tr>
+<tr>
+<td><code dir="auto">calendars:read</code></td>
+<td>appointments</td>
+<td>low</td>
+</tr>
+<tr>
+<td><code dir="auto">companies:read</code> / <code dir="auto">companies:write</code></td>
+<td>companies</td>
+<td>low / medium</td>
+</tr>
+<tr>
+<td><code dir="auto">tickets:read</code>, <code dir="auto">invoices:read</code></td>
+<td>tickets, invoices and estimates</td>
+<td>medium</td>
+</tr>
+<tr>
+<td><code dir="auto">objects:read</code> / <code dir="auto">objects:write</code></td>
+<td>records of custom objects</td>
+<td>low / medium</td>
+</tr>
+<tr>
+<td><code dir="auto">reports:read</code></td>
+<td>run report queries</td>
+<td>medium</td>
+</tr>
+<tr>
+<td><code dir="auto">ai:run</code></td>
+<td>text with the sub-account’s AI provider (costs tokens, 30 per hour)</td>
+<td>medium</td>
+</tr>
+</tbody>
+</table>
+<p>Every operation also needs the user’s own permission area. <code dir="auto">storage.*</code> (plugin storage) is always allowed.</p>
+<p><strong>UI API</strong> (inside <code dir="auto">ui_html</code>, a body fragment with inline <code dir="auto">&lt;style&gt;</code>/<code dir="auto">&lt;script&gt;</code>; no <code dir="auto">&lt;html&gt;</code>, <code dir="auto">&lt;head&gt;</code>, <code dir="auto">&lt;iframe&gt;</code> …):</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="js"><code><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">ready</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">async</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">function</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#D7DBE0;--1:#403F53">ctx</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> {          </span><span style="--0:#919F9F;--1:#5D6376">// ctx: { entry, entity, today, location, plugin, demo }</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#C792EA;--1:#8844AE">const { </span><span style="--0:#82AAFF;--1:#3B61B0">contacts</span><span style="--0:#C792EA;--1:#8844AE"> } = await </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">contacts</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">list</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">{ limit: </span><span style="--0:#F78C6C;--1:#AA0982">20</span><span style="--0:#C792EA;--1:#8844AE"> }</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">toast</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">Fertig</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">);                     </span><span style="--0:#919F9F;--1:#5D6376">// gohigh.toast(text, 'error')</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">navigate</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">contacts/</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">contacts</span><span style="--0:#D6DEEB">[</span></span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">]</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#7FDBCA;--1:#096E72">id</span><span style="--0:#D6DEEB;--1:#403F53">);   </span><span style="--0:#919F9F;--1:#5D6376">// internal pages only (also &lt;a href="contacts/&lt;id&gt;"&gt;)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">resize</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">240</span><span style="--0:#D6DEEB;--1:#403F53">);                         </span><span style="--0:#919F9F;--1:#5D6376">// pages/widgets can ask for a height</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">});</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="gohigh.ready(async function (ctx) {          // ctx: { entry, entity, today, location, plugin, demo }  const { contacts } = await gohigh.contacts.list({ limit: 20 });  gohigh.toast(&#x27;Fertig&#x27;);                     // gohigh.toast(text, &#x27;error&#x27;)  gohigh.navigate(&#x27;contacts/&#x27; + contacts[0].id);   // internal pages only (also <a href=&quot;contacts/<id>&quot;>)  gohigh.resize(240);                         // pages/widgets can ask for a height});"><div></div></button></div></figure></div>
+<p>Operations are <code dir="auto">gohigh.&lt;area&gt;.&lt;name&gt;(args)</code> and return promises: <code dir="auto">contacts.list/get/create/update/tag</code>, <code dir="auto">notes.add</code>,
+<code dir="auto">tasks.list/create/update</code>, <code dir="auto">conversations.list/messages</code>, <code dir="auto">opportunities.list/update</code>, <code dir="auto">pipelines.list</code>,
+<code dir="auto">appointments.list</code>, <code dir="auto">companies.list/create</code>, <code dir="auto">tickets.list</code>, <code dir="auto">invoices.list</code>, <code dir="auto">objects.types/list/create</code>,
+<code dir="auto">reports.run</code>, <code dir="auto">ai.complete</code>, <code dir="auto">storage.get/set/remove/list</code>. Exact arguments and results: the <em>Funktionen</em> block of the
+authoring guide in <a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/server/services/werkstatt/generate.ts"><code dir="auto">generate.ts</code></a> (<code dir="auto">AUTHORING_GUIDE</code>) and
+<a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/server/services/werkstatt/ops.ts"><code dir="auto">ops.ts</code></a>. Ready-made CSS variables (<code dir="auto">--bg --panel --text --muted --line --brand …</code>,
+light/dark) and classes (<code dir="auto">gh-card</code>, <code dir="auto">gh-row</code>, <code dir="auto">gh-btn</code>, <code dir="auto">gh-table</code>, <code dir="auto">gh-badge</code> …) come with the frame. Not available:
+<code dir="auto">fetch</code>, <code dir="auto">XMLHttpRequest</code>, storage, cookies, <code dir="auto">eval</code>, <code dir="auto">window.open</code>, <code dir="auto">parent</code>, <code dir="auto">postMessage</code>.</p>
+<p><strong>Server script</strong> (<code dir="auto">server_js</code>, <code dir="auto">server.mode: "script"</code>): plain JavaScript, no <code dir="auto">import</code>/<code dir="auto">require</code>/<code dir="auto">process</code>/timers.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="js"><code><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">action</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">notify_owner</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">async</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">function</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#D7DBE0;--1:#403F53">input</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> {   </span><span style="--0:#919F9F;--1:#5D6376">// input: the manifest fields + contact { id, name, email }</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#C792EA;--1:#8844AE">await</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">notes</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">add</span><span style="--0:#D6DEEB;--1:#403F53">({ contact_id: </span><span style="--0:#7FDBCA;--1:#096E72">input</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">contact</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#7FDBCA;--1:#096E72">id</span><span style="--0:#889FB2;--1:#4D667B">,</span><span style="--0:#D6DEEB;--1:#403F53"> body: </span><span style="--0:#7FDBCA;--1:#096E72">input</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#7FDBCA;--1:#096E72">text</span><span style="--0:#D6DEEB;--1:#403F53"> });</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> { ok: </span><span style="--0:#FF6A83;--1:#A24848">true</span><span style="--0:#D6DEEB;--1:#403F53"> };</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">});</span></div></div><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">job</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">daily_check</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">async</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">function</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">()</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#C792EA;--1:#8844AE">const </span><span style="--0:#82AAFF;--1:#3B61B0">today</span><span style="--0:#C792EA;--1:#8844AE"> = </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">context</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#7FDBCA;--1:#096E72">today</span><span style="--0:#D6DEEB;--1:#403F53">;                      </span><span style="--0:#919F9F;--1:#5D6376">// { today, today_md, now, location, input }</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#096E72">gohigh</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">log</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">Heute ist </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">today</span><span style="--0:#D6DEEB">);</span></span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">});</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="gohigh.action(&#x27;notify_owner&#x27;, async function (input) {   // input: the manifest fields + contact { id, name, email }  await gohigh.notes.add({ contact_id: input.contact.id, body: input.text });  return { ok: true };});gohigh.job(&#x27;daily_check&#x27;, async function () {  const today = gohigh.context.today;                      // { today, today_md, now, location, input }  gohigh.log(&#x27;Heute ist &#x27; + today);});"><div></div></button></div></figure></div>
+<p>Jobs and actions run as the user who installed the plugin (private install: that person; sub-account or agency-wide:
+the admin who released it), at most 200 calls and 10 seconds per run.</p>
+<p><strong>Declarative steps</strong> (<code dir="auto">steps</code>, <code dir="auto">server.mode: "declarative"</code>):</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{ </span><span style="--0:#7FDBCA;--1:#096E72">"actions"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"followup"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">{ </span><span style="--0:#7FDBCA;--1:#096E72">"op"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">tasks.create</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"args"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"title"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">{{input.text}} – {{contact.name}}</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"contact_id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">{{contact.id}}</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> } }</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">] }, </span><span style="--0:#7FDBCA;--1:#096E72">"jobs"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"daily"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">{ </span><span style="--0:#7FDBCA;--1:#096E72">"op"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">contacts.list</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"args"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"limit"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">100</span><span style="--0:#D6DEEB;--1:#403F53"> }, </span><span style="--0:#7FDBCA;--1:#096E72">"as"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">res</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> },</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">{ </span><span style="--0:#7FDBCA;--1:#096E72">"foreach"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">res.contacts</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"as"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"do"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">{ </span><span style="--0:#7FDBCA;--1:#096E72">"if"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"path"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">c.date_of_birth</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"op"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">endswith</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"value"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">{{today_md}}</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> }, </span><span style="--0:#7FDBCA;--1:#096E72">"then"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">      </span></span><span style="--0:#D6DEEB;--1:#403F53">{ </span><span style="--0:#7FDBCA;--1:#096E72">"op"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">tasks.create</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"args"</span><span style="--0:#D6DEEB;--1:#403F53">: { </span><span style="--0:#7FDBCA;--1:#096E72">"title"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">Gratulieren: {{c.first_name}}</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">"contact_id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7C5686">{{c.id}}</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> } } ] } ] }</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">] } }</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{ &quot;actions&quot;: { &quot;followup&quot;: [  { &quot;op&quot;: &quot;tasks.create&quot;, &quot;args&quot;: { &quot;title&quot;: &quot;{{input.text}} – {{contact.name}}&quot;, &quot;contact_id&quot;: &quot;{{contact.id}}&quot; } }] }, &quot;jobs&quot;: { &quot;daily&quot;: [  { &quot;op&quot;: &quot;contacts.list&quot;, &quot;args&quot;: { &quot;limit&quot;: 100 }, &quot;as&quot;: &quot;res&quot; },  { &quot;foreach&quot;: &quot;res.contacts&quot;, &quot;as&quot;: &quot;c&quot;, &quot;do&quot;: [    { &quot;if&quot;: { &quot;path&quot;: &quot;c.date_of_birth&quot;, &quot;op&quot;: &quot;endswith&quot;, &quot;value&quot;: &quot;{{today_md}}&quot; }, &quot;then&quot;: [      { &quot;op&quot;: &quot;tasks.create&quot;, &quot;args&quot;: { &quot;title&quot;: &quot;Gratulieren: {{c.first_name}}&quot;, &quot;contact_id&quot;: &quot;{{c.id}}&quot; } } ] } ] }] } }"><div></div></button></div></figure></div>
+<p>Steps: <code dir="auto">{op, args?, as?}</code>, <code dir="auto">{foreach, as, do, limit?}</code>, <code dir="auto">{if:{path, op: eq|ne|gt|lt|contains|endswith|empty|notempty, value?}, then, else?}</code>,
+<code dir="auto">{set, value}</code>, <code dir="auto">{result}</code>. At most 50 steps, 3 levels, 200 iterations. Templates: <code dir="auto">{{input.field}}</code>, <code dir="auto">{{contact.id}}</code>,
+<code dir="auto">{{today}}</code>, <code dir="auto">{{today_md}}</code>, <code dir="auto">{{name.path|fallback}}</code>.</p>
+<p><strong>Examples</strong> to start from (and to install from <em>Werkstatt → Meine Plugins → Beispiele</em>): <code dir="auto">geburtstags-erinnerungen</code>
+(daily job creating tasks, plus a page), <code dir="auto">deal-ampel</code> (dashboard widget and page showing deals as traffic lights),
+<code dir="auto">notizen-zusammenfassung</code> (contact panel, AI summary), <code dir="auto">followup-aufgabe</code> (declarative workflow action). Source:
+<a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/server/services/werkstatt/examples.ts"><code dir="auto">examples.ts</code></a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="marktplatz">Marktplatz</h2><a class="sl-anchor-link" href="#marktplatz"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Marktplatz”</span></a></div>
+<ul>
+<li><strong>Installing.</strong> Per sub-account (team right “Einstellungen”) or just for yourself. The consent screen lists exactly
+the manifest’s permissions with their risk; the server only accepts the install when the consent equals that list.
+Plugins whose server logic or external hosts the policy does not allow cannot be installed.</li>
+<li><strong>Updates</strong> show the changelog since the installed version; new permissions need a new consent, unchanged ones
+update without asking.</li>
+<li><strong>Uninstalling</strong> removes the plugin from the sub-account; optionally also the data it stored and the records it
+created there.</li>
+<li><strong>Ratings and reviews.</strong> Anyone who has the plugin (also while it is still private – the rating helps the admin
+decide) can rate 1–5 and write a note; the Marktplatz shows average, count and installs.</li>
+<li><strong>Screenshots</strong>: authors/admins upload up to four; admins can capture one automatically (opt-in, see
+<a href="#configuration">Configuration</a>). The detail page also has a <strong>live preview with sample data</strong> running in the same
+sandbox – no real data involved.</li>
+<li><strong>Curation.</strong> Only admins publish, in two steps: an <strong>AI security review</strong> (a checklist: scopes minimal, no
+exfiltration, no external resources, no dangerous APIs, data handling, writes justified, AI injection, matches
+description, robustness) merged with the program’s own findings (which can only make the verdict worse), then the
+admin’s own approval. <code dir="auto">fail</code> blocks, <code dir="auto">warn</code> needs an explicit “ich habe die Hinweise gelesen”. A review belongs to
+the exact version. Only a top model reviews (<a href="#model-gate-mindest-modell">Model gate</a>); with <strong>Pro</strong> a <strong>second opinion</strong>
+by a different top model comes in between (<a href="#sicherheitsnetz">Sicherheitsnetz</a>). Publishing, installing and updating
+through the Marktplatz are Pro features (<a href="#license-agpl-core-and-pro">License</a>); browsing is free.</li>
+<li><strong>Health</strong> per plugin: installs, usage, errors (24 h / 7 d), votes of the wish, rating – and the kill switch.</li>
+<li><strong>Export / import</strong> as JSON bundle (see above).</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="stage-3-core-features-and-feature-flags">Stage 3: core features and feature flags</h2><a class="sl-anchor-link" href="#stage-3-core-features-and-feature-flags"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Stage 3: core features and feature flags”</span></a></div>
+<p>For a popular plugin, admins choose <em>Als Kernfeature vorschlagen</em>: the AI writes a spec from the wish, the plugin’s
+code and its usage data; the <strong>github-codex</strong> module opens an issue in the configured repository with an
+<code dir="auto">@codex</code> or <code dir="auto">@claude</code> instruction (the GitHub token is the sealed one of <em>Einstellungen → KI-Werkzeuge → GitHub für
+Codex</em>; repository and agent are in the policy or typed in the dialog). Without token or repository the dialog says
+so and the spec is kept – the issue can be opened later under <em>Werkstatt → Kernfeatures</em>. The proposal is tracked:
+issue → pull request → merged. When the core version ships (entered by hand, or automatically when the app reaches the
+target version of a merged proposal) the plugin is marked <strong>“im Kern enthalten”</strong> and its installs <strong>migrate</strong>
+(switched off, data kept) or <strong>retire</strong> (removed); everyone who had it is notified.</p>
+<p><strong>Feature flags</strong> let core features roll out in stages: <code dir="auto">Aus → Privat (chosen users) → Sub-Accounts (chosen) → Prozent (a stable share of sub-accounts) → Alle</code>, each stage including the ones before. The percentage stage is the advanced
+rollout and a <strong>Pro</strong> feature (the other stages are free).</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="ts"><code><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5D6376">// in a module of its own</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">app</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">services</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">flags</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">define</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">core.deal-ampel</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">, { description: </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">Deal-Ampel im Dashboard</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> });   </span><span style="--0:#919F9F;--1:#5D6376">// once; starts switched off</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (app</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">services</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#FAF39F;--1:#111111">flags</span><span style="--0:#C792EA;--1:#8844AE">.</span><span style="--0:#82AAFF;--1:#3B61B0">enabled</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">core.deal-ampel</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">, { locationId, userId })) { … }</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="// in a module of its ownapp.services.flags.define(&#x27;core.deal-ampel&#x27;, { description: &#x27;Deal-Ampel im Dashboard&#x27; });   // once; starts switched offif (app.services.flags.enabled(&#x27;core.deal-ampel&#x27;, { locationId, userId })) { … }"><div></div></button></div></figure></div>
+<p>The web app can ask <code dir="auto">GET /api/flags/me</code> for the flags that are on for the signed-in user. Admin screen:
+<em>Werkstatt → Funktionen</em>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="mcp-tools-and-the-agent">MCP tools and the agent</h2><a class="sl-anchor-link" href="#mcp-tools-and-the-agent"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “MCP tools and the agent”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ghl_list_plugins</code></td>
+<td>Plugins visible in the sub-account (and the Marktplatz), with status and health</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_install_plugin</code></td>
+<td>Install a Marktplatz plugin. The first call only shows the permissions; with <code dir="auto">accept_permissions: true</code> (after the user saw them) it installs (Pro)</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_build_from_wish</code></td>
+<td>Start a build from a wish or a text – same policy, model gate, approval and budget as in the app; <strong>plans only</strong> (the chat shows the plan as a card); with <code dir="auto">build_id</code>, <code dir="auto">confirm</code> and <code dir="auto">accept_permissions</code> it confirms the plan. <code dir="auto">wait: false</code> answers at once</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_plugin_status</code></td>
+<td>Version, status, health, seals per version, builds of a plugin; the live state and the diff of a build</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_change_plugin</code></td>
+<td>„Ändern lassen“: a new version from a conversation, returns the diff summary</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_discard_plugin</code></td>
+<td>Delete a plugin of the user (destructive: always asks)</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_plugin_overview</code></td>
+<td>Admins: orders waiting for approval, plugins with health, review and Marktplatz state</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_plugin_admin</code></td>
+<td>Admins: <code dir="auto">approve_build</code>, <code dir="auto">reject_build</code>, <code dir="auto">review</code>, <code dir="auto">second_opinion</code>, <code dir="auto">publish</code>, <code dir="auto">unpublish</code>, <code dir="auto">rollback</code>, <code dir="auto">disable</code>, <code dir="auto">enable</code>, <code dir="auto">scope</code>, <code dir="auto">core_proposal</code></td>
+</tr>
+</tbody>
+</table>
+<p>They need a user identity (an agency key or a session) because installing and building are always <em>as somebody</em>. The agent
+class of a call follows the risk: planning is an ordinary write (a few cents), confirming a build, changing, discarding and
+the admin tool are <em>sensitive</em> (a confirmation card even in „Autonom“). The HyperLevel Agent is told this in its prompt
+(<code dir="auto">app.services.agentPromptExtras</code>), see <a href="#in-the-agent-chat">In the agent chat</a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="configuration">Configuration</h2><a class="sl-anchor-link" href="#configuration"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Configuration”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Where</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy</td>
+<td>Werkstatt → Richtlinien</td>
+<td>see above</td>
+</tr>
+<tr>
+<td>AI connection</td>
+<td>Einstellungen → KI-Anbieter / Agentur → KI-Werkzeuge</td>
+<td>Anthropic, OpenAI or any OpenAI-compatible preset; routing “Text” decides who serves <code dir="auto">aiRun</code></td>
+</tr>
+<tr>
+<td>KI-Assistent on</td>
+<td>Einstellungen → KI-Assistent</td>
+<td>per sub-account</td>
+</tr>
+<tr>
+<td>Denkstufe</td>
+<td>Einstellungen → KI-Anbieter → Denkstufe</td>
+<td>default <code dir="auto">xhigh</code>; per capability; the Werkstatt never below <code dir="auto">high</code></td>
+</tr>
+<tr>
+<td>Routing „Werkstatt“, „Werkstatt: Zweitmeinung“</td>
+<td>Einstellungen → KI-Anbieter → Wofür welches Modell?</td>
+<td>which model builds / gives the second opinion</td>
+</tr>
+<tr>
+<td>Mindest-Modell, signierte Plugins, Zweitmeinung</td>
+<td>Werkstatt → Richtlinien</td>
+<td>see <a href="#model-gate-mindest-modell">Model gate</a></td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_PLUGIN_TRUSTED_KEYS</code></td>
+<td>environment</td>
+<td>JSON <code dir="auto">[{"id","label","public_key"}]</code>: more publishers whose signed bundles count as „signiert“</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_PLUGIN_SIGNING_KEY</code>, <code dir="auto">PGHL_PLUGIN_SIGNING_KEY_ID</code></td>
+<td>environment</td>
+<td>PKCS#8 PEM (<code dir="auto">\n</code> allowed) + id: this installation signs its exports with it and trusts it</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_PLUGIN_NETNS=off</code></td>
+<td>environment</td>
+<td>Do not use <code dir="auto">unshare -rn</code> for the child process</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_PLUGIN_SCREENSHOTS=1</code>, <code dir="auto">PGHL_CHROMIUM=/path/to/chromium</code></td>
+<td>environment</td>
+<td>Capture Marktplatz screenshots automatically with a headless Chromium on the server (off by default: it runs a browser on plugin code)</td>
+</tr>
+<tr>
+<td><code dir="auto">PGHL_CHROMIUM_NO_SANDBOX=1</code></td>
+<td>environment</td>
+<td>Needed in containers without user namespaces; removes Chromium’s own sandbox – only in a disposable container</td>
+</tr>
+</tbody>
+</table>
+<p>Screenshots of the docs and README are made with <code dir="auto">npm run build &amp;&amp; node --import tsx scripts/werkstatt-screenshots.ts</code>
+(a scripted AI, no keys).</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="live-smoke-test">Live smoke test</h2><a class="sl-anchor-link" href="#live-smoke-test"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Live smoke test”</span></a></div>
+<p><code dir="auto">scripts/werkstatt-smoke.mjs</code> checks a running instance <strong>without building or spending anything</strong>: it lists the policy
+(who may build, approval, budget), the AI connections and routing, does a <em>dry run</em> for a sample wish (policy, AI
+readiness, budget, cost estimate, prompt size – no model call, nothing stored) and checks the GitHub setup for core
+proposals.</p>
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">PGHL_BASE_URL</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">https://crm.example.com</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">PGHL_AGENCY_KEY</span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#ECC48D;--1:#3B61B0">pghla_…</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">\</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#ECC48D;--1:#3B61B0">node</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">scripts/werkstatt-smoke.mjs</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--location</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Praxis Sonnenweg</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--user</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">mia@example.com</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="PGHL_BASE_URL=https://crm.example.com PGHL_AGENCY_KEY=pghla_… \  node scripts/werkstatt-smoke.mjs --location &quot;Praxis Sonnenweg&quot; --user mia@example.com"><div></div></button></div></figure></div>
+<p>A read-only agency key is enough. Exit code 0 means everything needed is in place, 1 means something blocks building
+(the lines marked <code dir="auto">FAIL</code>). <code dir="auto">--live-plan</code> (opt-in, spends a few cents) really asks the AI for a plan and cancels the
+order afterwards; <code dir="auto">--json</code> prints the result machine-readable.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="so-testest-du-die-werkstatt">So testest du die Werkstatt</h2><a class="sl-anchor-link" href="#so-testest-du-die-werkstatt"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “So testest du die Werkstatt”</span></a></div>
+<p>Für alle, die die Werkstatt zum ersten Mal ausprobieren – als Mitglied eines eigenen Sub-Accounts (z. B. Mia) und
+als Admin der Agentur.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="vorbereitung-admin-einmalig-ca-5-minuten">Vorbereitung (Admin, einmalig, ca. 5 Minuten)</h3><a class="sl-anchor-link" href="#vorbereitung-admin-einmalig-ca-5-minuten"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Vorbereitung (Admin, einmalig, ca. 5 Minuten)”</span></a></div>
+<ol>
+<li><strong>KI anschließen.</strong> <em>Agentur → KI-Werkzeuge</em> (oder <em>Einstellungen → KI-Anbieter</em>): eine Verbindung anlegen –
+Anthropic, OpenAI oder ein OpenAI-kompatibler Dienst wie <strong>OpenRouter</strong> (Schlüssel eintragen, Modell wählen) – und
+unter <em>Routing</em> für <strong>Text</strong> auswählen. Tipp: ein starkes Modell nehmen; Mini-Apps sind lange JSON-Antworten.
+<strong>Wichtig:</strong> Mini-Apps schreibt und prüft nur ein <strong>Spitzenmodell</strong> (GPT-6 Sol, Astra, Claude Opus 5.5 oder
+Fable 5.5; über OpenRouter z. B. <code dir="auto">anthropic/claude-opus-5.5</code>). Wähle dieses Modell im selben Routing bei
+<strong>Werkstatt</strong> – sonst plant die Werkstatt zwar Einrichtungen, verweigert aber Mini-Apps mit einer klaren Meldung und
+einem Link hierher. <em>Werkstatt → Richtlinien → Mindest-Modell</em> zeigt und ändert die Regel.
+<em>Optional:</em> bei <strong>Werkstatt: Zweitmeinung</strong> ein <strong>anderes</strong> Spitzenmodell wählen (Pro) – dann prüft vor dem
+Veröffentlichen ein zweites Modell unabhängig vom ersten.</li>
+<li><strong>KI-Assistent einschalten</strong> in jedem Sub-Account, in dem gebaut wird (<em>Einstellungen → KI-Assistent</em>, Schalter an).
+Auch im Sub-Account, in dem du als Admin die Sicherheitsprüfung machst.</li>
+<li><strong>Werkstatt freischalten.</strong> <em>Werkstatt → Richtlinien</em>: „Wer darf bauen“ bleibt auf <em>Nur Admins</em>; unter <strong>Zusätzlich
+erlaubte Personen</strong> den Tester (z. B. Mia) oder seinen Sub-Account ankreuzen. <strong>Freigabe durch Admin</strong> angeschaltet
+lassen, <strong>Budget</strong> prüfen (Standard 5 $ pro Sub-Account und Monat). Speichern.</li>
+<li><em>Optional für Schritt 9:</em> unter <em>Einstellungen → KI-Werkzeuge → GitHub für Codex</em> ein GitHub-Token eintragen und in
+den Richtlinien bei <em>Kernfeatures</em> das Repository (<code dir="auto">besitzer/name</code>) festlegen.</li>
+<li><strong>Denkstufe ansehen:</strong> <em>Einstellungen → KI-Anbieter → Denkstufe</em>. Standard ist „maximal (xhigh)“; die Werkstatt fragt nie
+unter „hoch“ an. Für Telefonagent und schnelle Texte darfst du niedriger einstellen (spart Kosten und Zeit).</li>
+<li><strong>Prüfen:</strong> <code dir="auto">node scripts/werkstatt-smoke.mjs</code> (siehe <a href="#live-smoke-test">Live smoke test</a>) meldet, ob alles bereit
+ist – ohne Kosten – und zeigt Modell, Denkstufe, Mindest-Modell und Pro-Stand.</li>
+</ol>
+<div class="sl-heading-wrapper level-h3"><h3 id="der-ablauf-schritt-für-schritt-als-mitglied">Der Ablauf, Schritt für Schritt (als Mitglied)</h3><a class="sl-anchor-link" href="#der-ablauf-schritt-für-schritt-als-mitglied"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Der Ablauf, Schritt für Schritt (als Mitglied)”</span></a></div>
+<ol>
+<li><strong>Wunsch einreichen.</strong> Oben rechts <em>Feedback → Wunsch einreichen</em>, z. B. „Ich möchte auf einen Blick sehen, welche
+Deals länger nicht angefasst wurden – grün, gelb, rot.“</li>
+<li><strong>Bauen lassen.</strong> Im Fenster „Danke!“ (oder später auf der Wunschseite) auf <strong>Bauen lassen</strong> klicken, dann <em>Plan
+erstellen</em>. Du siehst live, was die KI gerade tut („Die KI analysiert den Wunsch …“). Es dauert meist eine halbe
+Minute; du kannst das Fenster schließen – der Auftrag steht danach unter <em>Werkstatt → Aufträge</em>.</li>
+<li><strong>Plan prüfen.</strong> Der Plan zeigt die Stufe (<em>Einrichtung</em> oder <em>Mini-App</em>), <strong>was gebaut wird</strong>, <strong>welche
+Berechtigungen</strong> nötig sind (Lesen/Ändern, Risiko) und die <strong>geschätzten KI-Kosten</strong>. Haken setzen, <em>Zur Freigabe
+senden</em> (oder <em>Jetzt bauen</em>, wenn keine Freigabe nötig ist). Darunter steht, <strong>mit welchem Modell und welcher
+Denkstufe</strong> gebaut wird. Ist das Modell zu schwach, steht dort die Meldung „Für die Werkstatt brauchst du ein
+Spitzenmodell …“ mit dem Knopf <em>Zu den KI-Anbietern</em> – nach der Korrektur erstellt <em>Plan neu erstellen</em> den Plan
+noch einmal.</li>
+<li><strong>Freigabe (Admin).</strong> Der Admin bekommt einen Hinweis in der App (Menü <em>Werkstatt</em>, Streifen „Neu für dich“), eine
+Push-Nachricht mit <strong>Freigeben / Ablehnen</strong> und eine E-Mail mit denselben Links. Die Links öffnen den Auftrag mit
+Plan und Kosten; erst im Dialog wird entschieden. Das Mitglied sieht bis dahin <strong>„Wartet auf Freigabe“</strong> und wird
+über die Entscheidung benachrichtigt.</li>
+<li><strong>Bau.</strong> Nach der Freigabe läuft der Bau; der Fortschritt steht live im Protokoll („Die KI schreibt das Plugin“,
+„Sicherheitsprüfung und Selbsttest laufen“, bei Einrichtungen „Schritt 2 von 3 …“). Fällt die Antwort der KI
+unbrauchbar aus, bekommt sie bis zu <em>Korrekturrunden</em> weitere Versuche – danach steht eine lesbare Fehlermeldung
+im Auftrag und das Protokoll bleibt erhalten.</li>
+<li><strong>Das private Plugin.</strong> Das fertige Plugin ist <strong>nur für das Mitglied</strong> aktiv (erscheint unter dem Menüpunkt
+<em>Marktplatz</em> bzw. als Panel/Widget). Andere – auch im selben Sub-Account – sehen es nicht. Unter <em>Werkstatt → Meine
+Plugins</em> sieht man Berechtigungen, Gesundheit, Versionen.</li>
+<li><strong>Testen und bewerten.</strong> Plugin ausprobieren, auf der Plugin-Seite <em>Testen und bewerten</em> (1–5 Sterne + Notiz).
+Gefällt etwas nicht: <strong>Ändern lassen</strong> (zeigt die geschätzten Kosten) → neue Version nach (ggf.) Freigabe; die
+alte bleibt und lässt sich unter <em>Versionen</em> wieder aktivieren. Jede Version trägt <strong>Siegel</strong> (statisch ✓, Tests ✓,
+Prüfung, Zweitmeinung, Signatur, Modell · Denkstufe) und eine Zusammenfassung, was sich geändert hat. <strong>Zurückrollen</strong>
+(bei <em>Gesundheit</em>) macht mit einem Klick die Vorversion wieder zur aktuellen.</li>
+<li><strong>Veröffentlichen (Admin).</strong> Am Plugin <em>Im Marktplatz veröffentlichen</em>: erst die <strong>KI-Sicherheitsprüfung</strong> (Checkliste
+mit Ergebnis), mit Pro und einem zweiten Modell dann die <strong>Zweitmeinung</strong> – beide Urteile stehen nebeneinander, bei
+Abweichungen mit dem Punkt, in dem sie sich unterscheiden –, dann die eigene Bestätigung. Danach erscheint es im
+<em>Marktplatz</em> für alle Sub-Accounts.</li>
+<li><strong>Installieren in einem anderen Sub-Account.</strong> Ein Team-Mitglied eines anderen Sub-Accounts öffnet den
+<em>Marktplatz</em>, schaut sich die <strong>Live-Vorschau mit Beispieldaten</strong> an, liest die Berechtigungen und installiert.</li>
+<li><strong>Kernfeature (Admin).</strong> Am Plugin <em>Als Kernfeature vorschlagen</em>: Die KI schreibt eine Spezifikation und legt ein
+GitHub-Issue an (<code dir="auto">@codex</code> oder <code dir="auto">@claude</code>). Fehlt der GitHub-Token, steht im Dialog genau, was zu tun ist – die
+Spezifikation bleibt gespeichert. Der Stand (Issue → PR → gemerged) steht unter <em>Werkstatt → Kernfeatures</em>. Nichts
+davon wird automatisch ausgeliefert: CI, Review durch einen Menschen und ein Feature-Flag stehen davor.</li>
+<li><strong>Notausschalter und Zurückrollen (Admin, optional).</strong> Unter <em>Richtlinien → Notausschalter</em> kannst du eine niedrige
+Schwelle einstellen (z. B. Antwortzeit 300 ms) und das Plugin mehrfach aufrufen: Es schaltet sich ab, Admins und
+Autor bekommen Hinweis, Push und E-Mail mit <strong>Zurückrollen</strong> – ein Klick, und die Vorversion läuft wieder.</li>
+</ol>
+<div class="sl-heading-wrapper level-h3"><h3 id="im-agent-chat-testen">Im Agent-Chat testen</h3><a class="sl-anchor-link" href="#im-agent-chat-testen"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Im Agent-Chat testen”</span></a></div>
+<ol>
+<li><em>Einstellungen → KI-Anbieter</em>: eine Verbindung für den Agenten (Routing <strong>KI-Agent</strong>). Der Agent braucht ein Modell mit
+Werkzeug-Unterstützung; die Werkstatt selbst nutzt das Routing „Werkstatt“.</li>
+<li>Im Chat (Strg/⌘ + J) einen Wunsch äußern: „Ich hätte gern eine Ampel, die zeigt, welche Deals lange liegen.“ Der Agent
+plant und zeigt den <strong>Plan als Karte</strong>. <em>Du</em> klickst <em>Jetzt bauen</em> – der Agent bestätigt nie von selbst.</li>
+<li>Die Karte zeigt <strong>live</strong> die Schritte und danach eine <strong>Vorschau</strong> in der Sandbox mit <em>Öffnen</em>, <em>Ändern lassen</em>,
+<em>Version zurück</em> und <em>Verwerfen</em>.</li>
+<li>„Mach die Karten kräftiger umrandet“: Der Agent fragt kurz nach, baut <strong>Version 2</strong> und fasst die Änderung zusammen; die
+Karte zeigt die Unterschiede.</li>
+<li>Als Admin: „Gibt es Freigaben?“ – der Agent zeigt wartende Aufträge; „Gib den Auftrag frei“, „Prüfe das Plugin“,
+„Veröffentliche es“, „Rolle es zurück“ – jede Aktion fragt vorher nach.</li>
+</ol>
+<div class="sl-heading-wrapper level-h3"><h3 id="wenn-etwas-nicht-klappt">Wenn etwas nicht klappt</h3><a class="sl-anchor-link" href="#wenn-etwas-nicht-klappt"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Wenn etwas nicht klappt”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Meldung</th>
+<th>Bedeutung / Lösung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>„In der Werkstatt bauen nur Admins …“</td>
+<td>Der Tester ist nicht freigeschaltet: Richtlinien → <em>Zusätzlich erlaubte Personen</em></td>
+</tr>
+<tr>
+<td>„Der KI-Assistent ist aus.“</td>
+<td>Einstellungen → KI-Assistent einschalten (im Sub-Account des Testers)</td>
+</tr>
+<tr>
+<td>„Kein … API-Schlüssel hinterlegt“</td>
+<td>Verbindung fehlt oder ist aus: KI-Anbieter prüfen, Routing für <em>Text</em> setzen</td>
+</tr>
+<tr>
+<td>„Das Monatsbudget der Werkstatt ist aufgebraucht“</td>
+<td>Richtlinien → Budget erhöhen (je Sub-Account möglich)</td>
+</tr>
+<tr>
+<td>„Die KI hat auch nach … Versuchen keinen brauchbaren Plan/Plugin geliefert“</td>
+<td>Das Modell kann keine strukturierten (JSON-)Antworten – ein stärkeres Modell wählen, den Wunsch genauer beschreiben oder die Korrekturrunden erhöhen</td>
+</tr>
+<tr>
+<td>„Das Plugin hat die automatische Prüfung nicht bestanden“</td>
+<td>Die Prüfungen (verbotene Zugriffe, Selbsttest) sind im Protokoll aufgelistet; ein erneuter Versuch oder <em>Ändern lassen</em> hilft meist</td>
+</tr>
+<tr>
+<td>„Die Skript-Sandbox ist auf diesem Server nicht verfügbar“</td>
+<td>Nur deklarative Plugins laufen (siehe <a href="#why-two-kinds-of-server-logic">Why two kinds of server logic</a>)</td>
+</tr>
+<tr>
+<td>„Es ist noch kein GitHub-Token hinterlegt“</td>
+<td>Einstellungen → KI-Werkzeuge → GitHub für Codex; Repository in den Richtlinien</td>
+</tr>
+<tr>
+<td>„Für die Werkstatt brauchst du ein Spitzenmodell (z. B. GPT-6 Sol, Astra, Claude Opus 5.5 oder Fable 5.5) …“</td>
+<td>Einstellungen → KI-Anbieter → bei <strong>Werkstatt</strong> ein Spitzenmodell wählen; oder unter <em>Richtlinien → Mindest-Modell</em> eigene Muster hinzufügen. Einrichtungen (Stufe 1) gehen auch ohne</td>
+</tr>
+<tr>
+<td>„… nimmt die Denkstufe „xhigh“ nicht an“</td>
+<td>Das Anbieter-Modell lehnt den Parameter ab: anderes Modell wählen oder – nur für alltägliche Aufrufe – die Denkstufe senken (die Werkstatt geht nie unter „hoch“)</td>
+</tr>
+<tr>
+<td>„… ist eine Pro-Funktion“</td>
+<td>Marktplatz-Veröffentlichung, signierte Plugins, Zweitmeinung und Prozent-Rollout brauchen die Pro-Lizenz; Bauen und Nutzen nicht</td>
+</tr>
+<tr>
+<td>„Ungeprüft: Dieses Paket ist nicht signiert …“</td>
+<td>Ein Paket ohne gültige Signatur: nur nach ausdrücklichem Haken installieren, Herkunft prüfen</td>
+</tr>
+<tr>
+<td>„Die Zweitmeinung muss ein anderes Modell sein …“</td>
+<td>Bei <em>Werkstatt: Zweitmeinung</em> ein anderes Spitzenmodell wählen als das, das gebaut und zuerst geprüft hat</td>
+</tr>
+</tbody>
+</table>
+<p>Alles, was beim Testen entsteht, ist rückgängig zu machen: Einrichtungen per <em>Alles rückgängig machen</em> im Auftrag,
+Plugins per <em>Deinstallieren</em> (optional mit Aufräumen) oder <em>Löschen</em>.</p>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/edit/main/docs/werkstatt.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/translating/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Previous<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">UI language &amp; translating</span></span></a><a href="/company-playbook/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Next<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Company playbook</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

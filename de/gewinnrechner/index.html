@@ -1,0 +1,1118 @@
+<!DOCTYPE html><html lang="de" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Gewinnrechner (profit calculator) | HyperLevel Docs</title><link rel="canonical" href="https://docs.gohyperlevel.com/de/gewinnrechner/"/><link rel="alternate" hreflang="en" href="https://docs.gohyperlevel.com/gewinnrechner/"/><link rel="alternate" hreflang="de" href="https://docs.gohyperlevel.com/de/gewinnrechner/"/><link rel="alternate" hreflang="x-default" href="https://docs.gohyperlevel.com/gewinnrechner/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.2"/><meta name="generator" content="Starlight v0.42.7"/><meta property="og:title" content="Gewinnrechner (profit calculator)"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.gohyperlevel.com/de/gewinnrechner/"/><meta property="og:locale" content="de"/><meta property="og:description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:site_name" content="HyperLevel Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Documentation for HyperLevel – the open-source business OS your AI agents run on."/><meta property="og:image" content="https://docs.gohyperlevel.com/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/_astro/common.DdUizGEC.css"><style>@layer starlight.components{svg:where(.astro-hkc32dio){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Zum Inhalt springen</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/de" class="site-title sl-flex astro-6rvad3va"><img class="light:sl-hidden print:hidden astro-6rvad3va" alt src="/_astro/logo-dark.DcAxiGJs.svg" width="420" height="96"><img class="dark:sl-hidden print:block astro-6rvad3va" alt src="/_astro/logo.BXUvVMvj.svg" width="420" height="96"><span class="sr-only astro-6rvad3va" translate="no">HyperLevel Docs</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Suchen&quot;}"><button data-open-modal disabled aria-label="Suchen" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Suchen</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Strg</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Suchen" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Abbrechen</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Djc9ZKGJ.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Farbschema wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dunkel</option><option value="light" class="astro-2z5xp7gb">Hell</option><option value="auto" selected class="astro-2z5xp7gb">System</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Sprache wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/gewinnrechner/" class="astro-2z5xp7gb">English</option><option value="/de/gewinnrechner/" selected class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Hauptnavigation"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menü</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="19r8xt0" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Loslegen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/README.md#quick-start" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Quick start</span></a></li><li class="astro-rmhv4bp6"><a href="/de/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Installationswege</span></a></li><li class="astro-rmhv4bp6"><a href="/de/self-hosting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Self-hosting reference</span></a></li><li class="astro-rmhv4bp6"><a href="/de/demo-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Demo-Modus</span></a></li><li class="astro-rmhv4bp6"><a href="/de/cloud/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gehostete Cloud</span></a></li><li class="astro-rmhv4bp6"><a href="/de/landing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Landingpage</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">KI &amp; Agenten</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/agent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">HyperLevel Agent</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-tools/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Werkzeuge: Claude Code, Codex, Cursor, ChatGPT</span></a></li><li class="astro-rmhv4bp6"><a href="/de/mcp-client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Externe MCP-Server</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Anbieter mit eigenem Schlüssel</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-assistant/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI assistant</span></a></li><li class="astro-rmhv4bp6"><a href="/de/workflow-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Workflow-Builder</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ai-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">AI Studio</span></a></li><li class="astro-rmhv4bp6"><a href="/de/genmedia/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">KI-Medien</span></a></li><li class="astro-rmhv4bp6"><a href="/de/site-ai/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Funnel- &amp; Website-KI</span></a></li><li class="astro-rmhv4bp6"><a href="/de/voice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stimme</span></a></li><li class="astro-rmhv4bp6"><a href="/de/cognee/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wissensgedächtnis (Cognee)</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">API &amp; Integrationen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">REST-API &amp; MCP</span></a></li><li class="astro-rmhv4bp6"><a href="/de/workflow-actions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Workflow-Aktionen &amp; Auslöser</span></a></li><li class="astro-rmhv4bp6"><a href="/de/integrations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Integrations: Zapier, Make, n8n, REST hooks</span></a></li><li class="astro-rmhv4bp6"><a href="/de/connectors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Konnektoren &amp; Composio</span></a></li><li class="astro-rmhv4bp6"><a href="/de/nango/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Nango</span></a></li><li class="astro-rmhv4bp6"><a href="/de/channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kanäle &amp; Anbieter</span></a></li><li class="astro-rmhv4bp6"><a href="/de/meta-channels/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">WhatsApp, Messenger &amp; Instagram</span></a></li><li class="astro-rmhv4bp6"><a href="/de/mailbox-sync/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Postfach-Abgleich</span></a></li><li class="astro-rmhv4bp6"><a href="/de/payment-providers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Zahlungsanbieter</span></a></li><li class="astro-rmhv4bp6"><a href="/de/stripe/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Stripe</span></a></li><li class="astro-rmhv4bp6"><a href="/de/todoist/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Todoist</span></a></li><li class="astro-rmhv4bp6"><a href="/de/social-comments/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social-Kommentare</span></a></li><li class="astro-rmhv4bp6"><a href="/de/comment-to-dm/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kommentar-zu-DM</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">CRM, Vertrieb &amp; Zusammenarbeit</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/sales/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Vertrieb</span></a></li><li class="astro-rmhv4bp6"><a href="/de/objects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Companies, custom objects &amp; lead scoring</span></a></li><li class="astro-rmhv4bp6"><a href="/de/custom-values/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Custom Values</span></a></li><li class="astro-rmhv4bp6"><a href="/de/projects/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Projekte &amp; Zeiterfassung</span></a></li><li class="astro-rmhv4bp6"><a href="/de/team-inbox/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team-Postfach</span></a></li><li class="astro-rmhv4bp6"><a href="/de/team-calendars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team-Kalender</span></a></li><li class="astro-rmhv4bp6"><a href="/de/booking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Buchungsregeln</span></a></li><li class="astro-rmhv4bp6"><a href="/de/telephony/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Telefonie</span></a></li><li class="astro-rmhv4bp6"><a href="/de/reputation/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bewertungen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/team-chat/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Team-Chat</span></a></li><li class="astro-rmhv4bp6"><a href="/de/collaboration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Live collaboration</span></a></li><li class="astro-rmhv4bp6"><a href="/de/wiki/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Wiki</span></a></li><li class="astro-rmhv4bp6"><a href="/de/canvas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Canvas</span></a></li><li class="astro-rmhv4bp6"><a href="/de/living-boards/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Living Boards</span></a></li><li class="astro-rmhv4bp6"><a href="/de/office/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Office</span></a></li><li class="astro-rmhv4bp6"><a href="/de/xr/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">XR</span></a></li><li class="astro-rmhv4bp6"><a href="/de/undo/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Rückgängig, Verlauf &amp; Papierkorb</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Marketing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/email-marketing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail marketing</span></a></li><li class="astro-rmhv4bp6"><a href="/de/email-builder/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-mail designer</span></a></li><li class="astro-rmhv4bp6"><a href="/de/email-tracking/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">E-Mail-Tracking</span></a></li><li class="astro-rmhv4bp6"><a href="/de/deliverability/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Zustellbarkeit</span></a></li><li class="astro-rmhv4bp6"><a href="/de/sites/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Website builder</span></a></li><li class="astro-rmhv4bp6"><a href="/de/forms/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Formulare</span></a></li><li class="astro-rmhv4bp6"><a href="/de/social-planner/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Social planner</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ads-manager/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werbeanzeigen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/growth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Growth: attribution, affiliates &amp; ad reports</span></a></li><li class="astro-rmhv4bp6"><a href="/de/referrals/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Empfehlungs- &amp; Partnerlinks</span></a></li><li class="astro-rmhv4bp6"><a href="/de/webinars/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Webinare</span></a></li><li class="astro-rmhv4bp6"><a href="/de/video-studio/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Video studio</span></a></li><li class="astro-rmhv4bp6"><a href="/de/consent/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Einwilligungen &amp; Recht</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Verkaufen &amp; Abrechnen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/invoicing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Rechnungen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/dunning/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Mahnwesen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/sepa/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SEPA</span></a></li><li class="astro-rmhv4bp6"><a href="/de/payment-plans/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Ratenzahlung</span></a></li><li class="astro-rmhv4bp6"><a href="/de/store/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Onlineshop &amp; Gutscheine</span></a></li><li class="astro-rmhv4bp6"><a href="/de/saas/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">SaaS mode</span></a></li><li class="astro-rmhv4bp6"><a href="/de/gewinnrechner/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gewinnrechner</span></a></li><li class="astro-rmhv4bp6"><a href="/de/backoffice/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Back-Office</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Kurse, Community &amp; Service</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/courses/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kurse</span></a></li><li class="astro-rmhv4bp6"><a href="/de/quizzes-certificates/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Quizze &amp; Zertifikate</span></a></li><li class="astro-rmhv4bp6"><a href="/de/community/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Community</span></a></li><li class="astro-rmhv4bp6"><a href="/de/academy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Academy</span></a></li><li class="astro-rmhv4bp6"><a href="/de/helpdesk/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Helpdesk: tickets, SLAs, knowledge base</span></a></li><li class="astro-rmhv4bp6"><a href="/de/bug-reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Bug reports &amp; wishes</span></a></li><li class="astro-rmhv4bp6"><a href="/de/reports/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Reports &amp; dashboards</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Apps</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="7"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/android-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Android app</span></a></li><li class="astro-rmhv4bp6"><a href="/de/app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install the app &amp; push</span></a></li><li class="astro-rmhv4bp6"><a href="/de/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Gray-Label- &amp; eigene Apps</span></a></li><li class="astro-rmhv4bp6"><a href="/de/ios-web-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">iPhone, iPad &amp; Foldables</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Betrieb &amp; Sicherheit</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="8"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/backups/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Backups, Alarme &amp; Statusseite</span></a></li><li class="astro-rmhv4bp6"><a href="/de/incident-runbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Notfall-Runbook</span></a></li><li class="astro-rmhv4bp6"><a href="/de/performance/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Performance &amp; Dimensionierung</span></a></li><li class="astro-rmhv4bp6"><a href="/de/security/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sicherheit</span></a></li><li class="astro-rmhv4bp6"><a href="/de/security-review-2026-10/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sicherheitsprüfung Oktober 2026</span></a></li><li class="astro-rmhv4bp6"><a href="/de/auth/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Anmeldung, SSO &amp; Passkeys</span></a></li><li class="astro-rmhv4bp6"><a href="/de/umzug/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Umzug: Importe aus anderen Systemen</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Anpassen &amp; Erweitern</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="9"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/theming/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Aussehen &amp; Themes</span></a></li><li class="astro-rmhv4bp6"><a href="/de/translating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sprache der Oberfläche &amp; Übersetzen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/werkstatt/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Werkstatt, Plugins &amp; Marktplatz</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Die eigene Firma mit HyperLevel führen</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="10"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/company-playbook/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Company Playbook</span></a></li><li class="astro-rmhv4bp6"><a href="/de/handbuch/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handbuch</span></a></li><li class="astro-rmhv4bp6"><a href="/de/kurs-firma-fuehren/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kurs: Deine Firma führen</span></a></li><li class="astro-rmhv4bp6"><a href="/de/partner-program/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Partner program</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Projekt</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="11"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/de/roadmap/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Roadmap</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CHANGELOG.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Changelog</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Mitmachen</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/SECURITY.md" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">Sicherheitsrichtlinie</span></a></li><li class="astro-rmhv4bp6"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/discussions" class="astro-rmhv4bp6" target="_blank"><span class="astro-rmhv4bp6">GitHub Discussions</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Farbschema wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="dark" class="astro-2z5xp7gb">Dunkel</option><option value="light" class="astro-2z5xp7gb">Hell</option><option value="auto" selected class="astro-2z5xp7gb">System</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><starlight-lang-select><label style="--sl-select-width: 7em" class="astro-2z5xp7gb"><span class="sr-only astro-2z5xp7gb">Sprache wählen</span><svg aria-hidden="true" class="icon label-icon astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg><select autocomplete="off" class="astro-2z5xp7gb"><option value="/gewinnrechner/" class="astro-2z5xp7gb">English</option><option value="/de/gewinnrechner/" selected class="astro-2z5xp7gb">Deutsch</option></select><svg aria-hidden="true" class="icon caret astro-2z5xp7gb astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-lang-select></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">Auf dieser Seite<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Überblick</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#how-a-number-is-calculated" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">How a number is calculated</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#key-figures" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Key figures</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#projection" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Projection</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#tornado" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Tornado</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#taxes-estimate" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Taxes (estimate)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#inputs" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Inputs</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#presets" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Presets</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#scenarios-comparison-export" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Scenarios, comparison, export</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#api" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">API</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mcp-tools-and-the-hyperlevel-agent" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MCP tools and the HyperLevel Agent</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#for-self-hosters" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">For self-hosters</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#for-developers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">For developers</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">Auf dieser Seite</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Überblick</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#how-a-number-is-calculated" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">How a number is calculated</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#key-figures" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Key figures</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#projection" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Projection</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#tornado" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Tornado</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#taxes-estimate" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Taxes (estimate)</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#inputs" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Inputs</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#presets" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Presets</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#scenarios-comparison-export" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Scenarios, comparison, export</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#api" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">API</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mcp-tools-and-the-hyperlevel-agent" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MCP tools and the HyperLevel Agent</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#for-self-hosters" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">For self-hosters</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#for-developers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">For developers</span></a></li></ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Gewinnrechner (profit calculator)</h1><p class="sl-flex astro-gsljcgkv"><svg aria-hidden="true" class="astro-gsljcgkv astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-color: var(--sl-color-orange-high);--sl-icon-size: 1.5em;"><path d="M12 16a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm10.67 1.47-8.05-14a3 3 0 0 0-5.24 0l-8 14A3 3 0 0 0 3.94 22h16.12a3 3 0 0 0 2.61-4.53Zm-1.73 2a1 1 0 0 1-.88.51H3.94a1 1 0 0 1-.88-.51 1 1 0 0 1 0-1l8-14a1 1 0 0 1 1.78 0l8.05 14a1 1 0 0 1 .05 1.02v-.02ZM12 8a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1Z"/></svg><span class="astro-gsljcgkv">Dieser Inhalt ist noch nicht in deiner Sprache verfügbar.</span></p></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>“What do I earn at which price and how many customers – after VAT, payment fees, running costs, acquisition costs and taxes?” The Gewinnrechner answers that for any pricing model: a flat price per company, per seat, per location with included units, a step price and a cap, size bands by team size (Solo / Team / Firma), agency tiers by client accounts, or a mix of all of them. It was built to price HyperLevel Cloud itself, and works just as well for an agency retainer, a course membership or a craftsman’s job.</p>
+<p>Where: <strong>Umsatz → Gewinnrechner</strong> (route <code dir="auto">/app/calc</code>). Training for the team: <strong>Akademie → Gewinnrechner: Was bleibt übrig?</strong>.</p>
+<blockquote>
+<p><strong>Schätzung, keine Steuerberatung.</strong> The numbers are a planning aid with simplified assumptions. The tax part is an estimate, not tax advice; the notice is shown on the page, in every API answer and in the CSV export. Have the result checked by your Steuerberater before you rely on it.</p>
+</blockquote>
+<p>What you get:</p>
+<ul>
+<li><strong>Input panel + six presets</strong> (HyperLevel Staffel, HyperLevel Standort-Modell, SaaS pro Nutzer, Agentur-Retainer, Kurs/Community, Handwerk).</li>
+<li><strong>One-sentence answer</strong> and the key figures: revenue, after variable costs, EBIT, net profit, break-even, MRR/ARR, customer value (LTV), LTV/CAC, payback.</li>
+<li><strong>Heatmap matrix</strong> customers × price points with a metric selector (revenue gross/net, after variable costs, EBIT, net profit after taxes, margin), per month or per year. A click on a cell shows its calculation.</li>
+<li><strong>Waterfall</strong> (payments → VAT → fees → variable → fixed → acquisition → taxes → net profit), <strong>tornado</strong> (which input moves the net profit most) and a <strong>12/24/36-month projection</strong> with customer growth and churn – all hand-made SVG, no chart library.</li>
+<li><strong>Scenarios</strong> per sub-account: save, reopen, compare up to six side by side, CSV export (German spreadsheet format).</li>
+<li><strong>API, MCP tools and the HyperLevel Agent</strong> use exactly the same engine, so “what does 300 customers on the Standort-Modell leave me?” gets the same answer in the browser, from a script and from Claude.</li>
+</ul>
+<p>Nothing to set up: no credentials, no environment variables, no outgoing requests. The calculation runs in the browser; only saving a scenario talks to the server.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="how-a-number-is-calculated">How a number is calculated</h2><a class="sl-anchor-link" href="#how-a-number-is-calculated"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “How a number is calculated”</span></a></div>
+<p>A <strong>cell</strong> is one steady-state month with <em>N</em> active customers at one set of prices. Everything is computed per customer and multiplied by <em>N</em>, so the matrix, the break-even and the projection all agree.</p>
+<ol>
+<li><strong>Customers per plan.</strong> The plans’ <code dir="auto">mix</code> values are scaled to 100 %. Within a plan, customers are spread over a <strong>distribution of units</strong> (<code dir="auto">customers.unit_mix</code>, e.g. 35 % with 1 location, 3 % with 30), or the plan’s <code dir="auto">avg_units</code>, or <code dir="auto">customers.avg_units</code>. A distribution is more exact than an average because caps and included units do not act linearly.</li>
+<li><strong>Price per customer:</strong> <code dir="auto">base_price + max(0, units − included_units) × unit_price</code>, limited by <code dir="auto">cap</code> (0 = no cap). The cap acts <strong>per customer</strong>, not on the average. <em>Examples:</em> flat per company = base price only; per seat = base price 0 and a unit price; HyperLevel Standort-Modell = 49 € incl. 3 locations, +10 € each, cap 499 €.</li>
+<li><strong>Add-ons</strong> add <code dir="auto">price × take_rate</code> (× units for per-unit add-ons). <strong>Prices are net or gross</strong> (<code dir="auto">pricing.price_basis</code>): a gross price of 119 € is 100 € net at 19 % VAT.</li>
+<li><strong>Annual payers:</strong> the share that pays yearly gets <code dir="auto">discount</code> percent off (16.7 % = two months free), so the average revenue drops by <code dir="auto">share × discount</code>. The payment fee is then charged once a year, not twelve times.</li>
+<li><strong>Umsatzsteuer.</strong> Domestic customers carry the VAT rate (19 / 7 / 0 %). EU business customers pay <strong>no</strong> German VAT (reverse charge), EU consumers the VAT of their country (one-stop shop, default 21 %). <strong>Kleinunternehmer</strong> (§ 19 UStG) charge no VAT, but cannot deduct input VAT, so purchases cost gross. The VAT is not revenue – the waterfall shows it as the first step.</li>
+<li><strong>Payment fees</strong> fall on the <strong>gross</strong> charge: per method <code dir="auto">pct × gross + fixed</code>, limited by <code dir="auto">cap</code>, blended by share (default: Stripe EU cards 1.5 % + 0.25 €). The setup fee is its own charge. Customers who pay through an app store pay no payment fee but the store fee.</li>
+<li><strong>Variable costs per month:</strong> hosting, AI tokens and e-mail/SMS (each per customer, per user and per unit), support (minutes × hourly rate), other, partner commission (percent of the net revenue of the referred share) and app-store fees.</li>
+<li><strong>Fixed costs</strong> per month, and <strong>CAC</strong> for every new customer. In a steady-state month the new customers are the ones replacing the churn (<code dir="auto">N × churn</code>), so no churn means no acquisition cost – and the <strong>setup fees</strong> come in with the same customers.</li>
+<li><strong>EBIT</strong> = net revenue − variable costs − fixed costs − acquisition costs.</li>
+<li><strong>Taxes</strong> are computed on the yearly profit (12 × the month) by legal form (below). <strong>Net profit</strong> = EBIT − taxes − Vorsorge (health and pension insurance of a sole proprietor, entered as a monthly amount).</li>
+</ol>
+<div class="sl-heading-wrapper level-h3"><h3 id="key-figures">Key figures</h3><a class="sl-anchor-link" href="#key-figures"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Key figures”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Figure</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ARPU</td>
+<td>recurring net revenue per customer and month (all plans, units, VAT segments)</td>
+</tr>
+<tr>
+<td>Contribution per customer</td>
+<td>ARPU minus payment fees and variable costs</td>
+</tr>
+<tr>
+<td>Lifetime</td>
+<td><code dir="auto">1 / churn</code>, at most <code dir="auto">max_lifetime_months</code></td>
+</tr>
+<tr>
+<td>LTV</td>
+<td>contribution × lifetime + setup fee (net of its fee)</td>
+</tr>
+<tr>
+<td>LTV / CAC</td>
+<td>LTV divided by the cost per new customer (3× or more is the usual rule of thumb)</td>
+</tr>
+<tr>
+<td>Payback</td>
+<td><code dir="auto">(CAC − setup fee) / contribution</code> months until a new customer has paid for his acquisition</td>
+</tr>
+<tr>
+<td>Break-even</td>
+<td>smallest number of customers with EBIT ≥ 0 – and, separately, with net profit ≥ 0 after taxes and Vorsorge</td>
+</tr>
+<tr>
+<td>Minimum price</td>
+<td>lowest base price of the reference plan at which the chosen customer count reaches EBIT 0</td>
+</tr>
+<tr>
+<td>MRR / ARR</td>
+<td>recurring net revenue per month / times twelve</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="projection">Projection</h3><a class="sl-anchor-link" href="#projection"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Projection”</span></a></div>
+<p><code dir="auto">customers(t) = customers(t−1) × (1 − churn) + new(t)</code>, billed on the customers at the end of the month; <code dir="auto">new(t)</code> starts at <code dir="auto">growth.monthly_new</code> and grows by <code dir="auto">growth.monthly_new_growth</code> percent a month. Taxes are computed per fiscal year of twelve months and spread evenly; the one-time investment (<code dir="auto">costs.fixed.one_time</code>) is deducted in month 1. The <strong>break-even month</strong> is the first month after which the cumulative profit stays at or above zero.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="tornado">Tornado</h3><a class="sl-anchor-link" href="#tornado"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Tornado”</span></a></div>
+<p>Every lever is moved by ± <code dir="auto">matrix.sensitivity_pct</code> (default 20 %) with everything else fixed, and the yearly net profit is recalculated: customers, prices, churn, units per customer, add-on bookings, payment fees, hosting, AI, e-mail/SMS, support, partner commission, CAC and fixed costs. Bars are sorted by their swing.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="taxes-estimate">Taxes (estimate)</h2><a class="sl-anchor-link" href="#taxes-estimate"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Taxes (estimate)”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Legal form</th>
+<th>What is calculated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Einzelunternehmen / Freiberufler</em></td>
+<td>Einkommensteuer by the <strong>§ 32a EStG</strong> Grundtarif (or Splittingtarif for joint assessment) on profit + other income − Vorsorge − deductions, income rounded down to full euros; <strong>Solidaritätszuschlag</strong> with Freigrenze and Milderungszone; optional Kirchensteuer (8 / 9 %); <strong>Gewerbesteuer</strong> with Hebesatz, Freibetrag 24,500 € and the credit against the income tax under <strong>§ 35 EStG</strong> (4.0 × the Messbetrag, at most the Gewerbesteuer and at most the share of the income tax that falls on the business income). Freiberufler pay no Gewerbesteuer: switch it off. With <em>other income</em> only the extra tax caused by the profit counts.</td>
+</tr>
+<tr>
+<td><em>GmbH / UG</em></td>
+<td>Körperschaftsteuer 15 % + Soli 5.5 % on it, Gewerbesteuer without a Freibetrag (and without § 35); optionally the Abgeltungsteuer (25 % + Soli) on the share of the profit that is paid out. A managing director’s salary belongs in the fixed costs (<em>Gehälter</em>) – the calculator warns when it is 0.</td>
+</tr>
+<tr>
+<td><em>Keine</em></td>
+<td>no taxes: net profit is the result before taxes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sources and parameters.</strong> The tariff coefficients are plain input fields (<em>Steuern → Tarifwerte bearbeiten</em>, <code dir="auto">tax.est.*</code>), so a new year is a data change, not a code change. Built in and labelled by year:</p>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Grundfreibetrag</th>
+<th>Zone 2 ends</th>
+<th>Zone 3 ends</th>
+<th>Soli-Freigrenze (single)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td>11,604 €</td>
+<td>17,005 €</td>
+<td>66,760 €</td>
+<td>18,130 €</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>12,096 €</td>
+<td>17,443 €</td>
+<td>68,480 €</td>
+<td>19,950 €</td>
+</tr>
+<tr>
+<td><strong>2026</strong> (default)</td>
+<td>12,348 €</td>
+<td>17,799 €</td>
+<td>69,878 €</td>
+<td>20,350 €</td>
+</tr>
+</tbody>
+</table>
+<p>2025 and 2026 follow the <strong>Steuerfortentwicklungsgesetz</strong> (higher Grundfreibetrag and shifted zone borders; 42 % from the end of zone 3 up to 277,825 €, 45 % above). 2026 is the newest enacted tariff at the time of writing – pick the year in the tax box, or set <code dir="auto">tax.est: { year: 2025 }</code> in the API to load another one. <strong>Check the values against the current BMF notice (Programmablaufplan / Lohnsteuer-Tabellen) before relying on them.</strong></p>
+<p>Reference values the tests assert against an independent implementation of the formula (Grundtarif 2026, zu versteuerndes Einkommen → Einkommensteuer, rounded down to full euros): 15,000 € → 435 €, 30,000 € → 4,217 €, 60,000 € → 14,233 €, 100,000 € → 30,864 €, 300,000 € → 115,529 €.</p>
+<p><strong>What is deliberately not modelled</strong> (all of these change the real bill): Verlustvortrag, Kinderfreibeträge and other allowances (use <em>Weitere Abzüge</em>), Hinzurechnungen and Kürzungen beyond a flat amount, Investitionsabzugsbetrag and depreciation, income tax on a managing director’s salary, Kirchensteuer on dividends, the Vorauszahlungs schedule, and anything about timing within the year.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="inputs">Inputs</h2><a class="sl-anchor-link" href="#inputs"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Inputs”</span></a></div>
+<p>The whole input is one JSON object. Everything is optional: missing fields take the defaults below, unknown fields are an <strong>error</strong> (an agent typing <code dir="auto">custmers</code> must not get a silently wrong answer), lists are replaced as a whole, objects merge field by field. <code dir="auto">GET /api/calc/schema</code> returns the same as a JSON Schema (draft 2020-12) with a <code dir="auto">description</code> and <code dir="auto">default</code> on every field. Amounts are euros, “pro Monat” unless noted, percentages are 0–100.</p>
+<p>The <em>Meaning</em> column is the German text the page shows as a tooltip on each field.</p>
+<!-- defaults:start -->
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">pricing.price_basis</code></td>
+<td>net | gross</td>
+<td></td>
+<td><code dir="auto">net</code></td>
+<td>Preise sind Netto (ohne USt) oder Brutto (inkl. deutscher USt, wie sie Endkunden sehen)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[]</code></td>
+<td>Liste</td>
+<td></td>
+<td><code dir="auto">[Standard]</code></td>
+<td>Tarife mit Kunden-Mix (Staffeln nach Teamgröße, Agentur-Stufen, Standort-Modell …)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].name</code></td>
+<td>Text</td>
+<td></td>
+<td><code dir="auto">Standard</code></td>
+<td>Name des Tarifs (z. B. Solo, Team, Agentur Pro)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].mix</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">100</code></td>
+<td>Anteil der Kunden in diesem Tarif; die Anteile aller Tarife werden auf 100 % hochgerechnet</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].base_price</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">49</code></td>
+<td>Pauschalpreis pro Kunde und Monat (Staffelpreis, nicht pro Nutzer)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].included_units</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">0</code></td>
+<td>Im Grundpreis enthaltene Einheiten (Standorte, Nutzer oder Kunden-Accounts)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].unit_price</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Preis je weiterer Einheit über den enthaltenen hinaus (Stufenpreis)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].cap</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Deckel: höchster Monatspreis (0 = kein Deckel)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].setup_fee</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">0</code></td>
+<td>Einmalige Einrichtungsgebühr pro Neukunde</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].users</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">1</code></td>
+<td>Durchschnittliche Nutzer pro Kunde in diesem Tarif (für Kosten pro Nutzer)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].avg_units</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">0</code></td>
+<td>Durchschnittliche Einheiten pro Kunde in diesem Tarif; 0 = Kundeneinstellungen (Verteilung oder Durchschnitt) gelten</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].extra_cost</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Zusätzliche variable Kosten pro Kunde dieses Tarifs (z. B. White-Label-App)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.plans[].note</code></td>
+<td>Text</td>
+<td></td>
+<td>–</td>
+<td>Hinweis zum Tarif (z. B. „2–99 Nutzer“, „bis 5 Clients“)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.annual.share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil der Kunden, die jährlich im Voraus zahlen</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.annual.discount</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">16.7</code></td>
+<td>Rabatt bei Jahreszahlung (16,7 % = zwei Monate gratis)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.addons[]</code></td>
+<td>Liste</td>
+<td></td>
+<td><code dir="auto">[]</code></td>
+<td>Add-ons (zubuchbar)</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.addons[].name</code></td>
+<td>Text</td>
+<td></td>
+<td><code dir="auto">Add-on</code></td>
+<td>Name</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.addons[].price</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Preis pro Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.addons[].take_rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil der Kunden, die es buchen</td>
+</tr>
+<tr>
+<td><code dir="auto">pricing.addons[].per_unit</code></td>
+<td>ja/nein</td>
+<td></td>
+<td><code dir="auto">false</code></td>
+<td>Preis gilt je Einheit (Standort/Nutzer) statt je Kunde</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.count</code></td>
+<td>Zahl (ganz)</td>
+<td></td>
+<td><code dir="auto">100</code></td>
+<td>Anzahl zahlender Kunden für die Einzelrechnung („Was verdiene ich bei … Kunden?“)</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.avg_units</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">1</code></td>
+<td>Durchschnittliche Einheiten (Standorte/Nutzer/Accounts) je Kunde, wenn keine Verteilung angegeben ist</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.unit_mix[]</code></td>
+<td>Liste</td>
+<td></td>
+<td><code dir="auto">[]</code></td>
+<td>Verteilung der Einheiten je Kunde, z. B. 40 % mit 1 Standort, 10 % mit 30 (genauer als ein Durchschnitt, weil Deckel und Inklusiv-Einheiten nicht linear wirken)</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.unit_mix[].units</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">1</code></td>
+<td>Einheiten</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.unit_mix[].share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil der Kunden</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.b2b_share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">80</code></td>
+<td>Anteil Geschäftskunden (B2B); wichtig für die Umsatzsteuer bei Kunden im EU-Ausland</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.eu_share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil der Kunden in anderen EU-Ländern (B2B: Reverse Charge ohne USt, B2C: USt des Landes)</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.churn</code></td>
+<td>Zahl</td>
+<td>% pro Monat</td>
+<td><code dir="auto">3</code></td>
+<td>Kündigungsquote pro Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.max_lifetime_months</code></td>
+<td>Zahl</td>
+<td>Monate</td>
+<td><code dir="auto">60</code></td>
+<td>Obergrenze der Kundenlebensdauer für den Kundenwert (LTV), z. B. wenn die Kündigungsquote 0 ist</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.growth.start</code></td>
+<td>Zahl (ganz)</td>
+<td></td>
+<td><code dir="auto">0</code></td>
+<td>Kunden zu Beginn</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.growth.monthly_new</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">10</code></td>
+<td>Neukunden pro Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.growth.monthly_new_growth</code></td>
+<td>Zahl</td>
+<td>% pro Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Wachstum der Neukunden pro Monat (z. B. 2 = jeden Monat 2 % mehr Neukunden)</td>
+</tr>
+<tr>
+<td><code dir="auto">customers.growth.months</code></td>
+<td>Zahl (ganz)</td>
+<td>Monate</td>
+<td><code dir="auto">36</code></td>
+<td>Länge der Prognose</td>
+</tr>
+<tr>
+<td><code dir="auto">vat.rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">19</code></td>
+<td>Umsatzsteuersatz im Inland (19, 7 oder 0)</td>
+</tr>
+<tr>
+<td><code dir="auto">vat.kleinunternehmer</code></td>
+<td>ja/nein</td>
+<td></td>
+<td><code dir="auto">false</code></td>
+<td>Kleinunternehmer (§ 19 UStG): keine USt auf Umsätze, aber auch keine Vorsteuer – Einkäufe kosten brutto</td>
+</tr>
+<tr>
+<td><code dir="auto">vat.eu_b2c_rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">21</code></td>
+<td>USt-Satz für Privatkunden im EU-Ausland (One-Stop-Shop, Durchschnitt)</td>
+</tr>
+<tr>
+<td><code dir="auto">vat.input_rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">19</code></td>
+<td>Vorsteuersatz der Einkäufe (nur für Kleinunternehmer relevant)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.payment.methods[]</code></td>
+<td>Liste</td>
+<td></td>
+<td><code dir="auto">[Karte (EU)]</code></td>
+<td>Zahlungsarten mit Anteil und Gebühr (Richtwerte, beim Anbieter prüfen); die Gebühr fällt auf den Bruttobetrag je Abbuchung an</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.payment.methods[].label</code></td>
+<td>Text</td>
+<td></td>
+<td><code dir="auto">Karte (EU)</code></td>
+<td>Name</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.payment.methods[].share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">100</code></td>
+<td>Anteil der Zahlungen</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.payment.methods[].pct</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">1.5</code></td>
+<td>Prozent vom Bruttobetrag (Stripe, EU-Karten: 1,5 %)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.payment.methods[].fixed</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">0.25</code></td>
+<td>Fester Betrag je Abbuchung (Stripe: 0,25 €)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.payment.methods[].cap</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">0</code></td>
+<td>Höchstgebühr je Abbuchung (0 = keine)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.hosting.per_customer</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">1</code></td>
+<td>Hosting: pro Kunde und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.hosting.per_user</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Hosting: pro Nutzer und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.hosting.per_unit</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Hosting: pro Einheit (Standort/Account) und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.ai.per_customer</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">1.5</code></td>
+<td>KI-Token: pro Kunde und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.ai.per_user</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>KI-Token: pro Nutzer und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.ai.per_unit</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>KI-Token: pro Einheit (Standort/Account) und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.messaging.per_customer</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0.5</code></td>
+<td>E-Mail/SMS: pro Kunde und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.messaging.per_user</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>E-Mail/SMS: pro Nutzer und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.messaging.per_unit</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>E-Mail/SMS: pro Einheit (Standort/Account) und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.support.minutes_per_customer</code></td>
+<td>Zahl</td>
+<td>Min.</td>
+<td><code dir="auto">5</code></td>
+<td>Support-Minuten pro Kunde und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.support.hourly_rate</code></td>
+<td>Zahl</td>
+<td>€/Std.</td>
+<td><code dir="auto">45</code></td>
+<td>Stundensatz für Support (Vollkosten)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.other.per_customer</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Sonstige variable Kosten pro Kunde und Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.other.pct_of_revenue</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Sonstige variable Kosten in Prozent vom Netto-Umsatz</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.referral.commission_pct</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">20</code></td>
+<td>Provision in Prozent vom Netto-Umsatz der vermittelten Kunden (dauerhaft)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.referral.share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil der Kunden, die über Partner kommen</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.app_store.fee_pct</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">15</code></td>
+<td>Store-Gebühr in Prozent vom Netto-Umsatz (Apple/Google: 15–30 %)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.variable.app_store.share</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil der Kunden, die über einen App-Store zahlen (dann fallen keine Zahlungsgebühren an)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.fixed.servers_tools</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">150</code></td>
+<td>Server und Software-Werkzeuge</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.fixed.salaries</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Gehälter inkl. Nebenkosten (ohne Unternehmerlohn)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.fixed.insurance</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">50</code></td>
+<td>Versicherungen</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.fixed.marketing</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">500</code></td>
+<td>Marketing (laufend)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.fixed.other</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">100</code></td>
+<td>Sonstige Fixkosten (Buchhaltung, Büro …)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.fixed.one_time</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">0</code></td>
+<td>Einmalige Anfangsinvestition (nur Prognose; wird im ersten Monat abgezogen)</td>
+</tr>
+<tr>
+<td><code dir="auto">costs.cac</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">150</code></td>
+<td>Kosten je Neukunde (CAC: Werbung, Vertrieb, Onboarding)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.legal_form</code></td>
+<td>einzelunternehmen | kapitalgesellschaft | keine</td>
+<td></td>
+<td><code dir="auto">einzelunternehmen</code></td>
+<td>Rechtsform: Einzelunternehmen (ESt), GmbH/UG (KSt) oder keine Steuern (Ergebnis vor Steuern)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.year</code></td>
+<td>Zahl (ganz)</td>
+<td></td>
+<td><code dir="auto">2026</code></td>
+<td>Veranlagungsjahr der Tarifwerte (nur Beschriftung; 2024–2026 sind eingebaut, „year“ allein lädt die Werte)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.grundfreibetrag</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">12348</code></td>
+<td>Grundfreibetrag: bis hierhin keine Steuer</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.zone2_end</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">17799</code></td>
+<td>Ende der ersten Progressionszone</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.zone3_end</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">69878</code></td>
+<td>Ende der zweiten Progressionszone (danach Spitzensteuersatz)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.zone4_end</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">277825</code></td>
+<td>Ab hier gilt der Reichensteuersatz</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.y_a</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">914.51</code></td>
+<td>Zone 2: Koeffizient von y² ((a·y + b)·y)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.y_b</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">1400</code></td>
+<td>Zone 2: Koeffizient von y</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.z_a</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">173.1</code></td>
+<td>Zone 3: Koeffizient von z² ((a·z + b)·z + c)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.z_b</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">2397</code></td>
+<td>Zone 3: Koeffizient von z</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.z_c</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">1034.87</code></td>
+<td>Zone 3: konstanter Betrag</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.rate4</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">0.42</code></td>
+<td>Spitzensteuersatz als Faktor (0,42)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.sub4</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">11135.63</code></td>
+<td>Spitzensteuersatz: abzuziehender Betrag</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.rate5</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">0.45</code></td>
+<td>Reichensteuersatz als Faktor (0,45)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.est.sub5</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">19470.38</code></td>
+<td>Reichensteuersatz: abzuziehender Betrag</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.soli.rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">5.5</code></td>
+<td>Prozent der Einkommensteuer</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.soli.freigrenze</code></td>
+<td>Zahl</td>
+<td>€</td>
+<td><code dir="auto">20350</code></td>
+<td>Freigrenze der Einkommensteuer (Einzelveranlagung; bei Zusammenveranlagung doppelt)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.soli.milderung</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">11.9</code></td>
+<td>Milderungszone: höchstens dieser Prozentsatz des Betrags über der Freigrenze</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.church.enabled</code></td>
+<td>ja/nein</td>
+<td></td>
+<td><code dir="auto">false</code></td>
+<td>Kirchensteuer berechnen</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.church.rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">9</code></td>
+<td>Prozent der Einkommensteuer (8 in Bayern und Baden-Württemberg, sonst 9)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.joint</code></td>
+<td>ja/nein</td>
+<td></td>
+<td><code dir="auto">false</code></td>
+<td>Zusammenveranlagung (Splittingtarif) statt Einzelveranlagung</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.other_income</code></td>
+<td>Zahl</td>
+<td>€/Jahr</td>
+<td><code dir="auto">0</code></td>
+<td>Weitere zu versteuernde Einkünfte pro Jahr (z. B. Gehalt, Partner); der Gewinn kommt obendrauf</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.deductions</code></td>
+<td>Zahl</td>
+<td>€/Jahr</td>
+<td><code dir="auto">0</code></td>
+<td>Weitere Abzüge pro Jahr (Sonderausgaben, Freibeträge) neben der Vorsorge</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.vorsorge_monat</code></td>
+<td>Zahl</td>
+<td>€/Monat</td>
+<td><code dir="auto">0</code></td>
+<td>Kranken-, Pflege- und Rentenversicherung als fester Monatsbetrag (nur Einzelunternehmen; mindert Steuer und Gewinn)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.gewerbesteuer.enabled</code></td>
+<td>ja/nein</td>
+<td></td>
+<td><code dir="auto">true</code></td>
+<td>Gewerbesteuer berechnen (Freiberufler zahlen keine: ausschalten)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.gewerbesteuer.hebesatz</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">400</code></td>
+<td>Hebesatz der Gemeinde</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.gewerbesteuer.messzahl</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">3.5</code></td>
+<td>Steuermesszahl</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.gewerbesteuer.freibetrag</code></td>
+<td>Zahl</td>
+<td>€/Jahr</td>
+<td><code dir="auto">24500</code></td>
+<td>Freibetrag bei Einzelunternehmen (Kapitalgesellschaften haben keinen)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.gewerbesteuer.hinzurechnung</code></td>
+<td>Zahl</td>
+<td>€/Jahr</td>
+<td><code dir="auto">0</code></td>
+<td>Hinzurechnungen zum Gewerbeertrag pro Jahr</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.gewerbesteuer.s35_factor</code></td>
+<td>Zahl</td>
+<td></td>
+<td><code dir="auto">4</code></td>
+<td>Anrechnung auf die Einkommensteuer nach § 35 EStG: Vielfaches des Messbetrags (Einzelunternehmen)</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.kst.rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">15</code></td>
+<td>Körperschaftsteuer</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.kst.soli_rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">5.5</code></td>
+<td>Solidaritätszuschlag auf die Körperschaftsteuer</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.kst.distribution_pct</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">0</code></td>
+<td>Anteil des Gewinns nach Steuern, der an den Inhaber ausgeschüttet wird</td>
+</tr>
+<tr>
+<td><code dir="auto">tax.kst.dividend_rate</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">25</code></td>
+<td>Abgeltungsteuer auf Ausschüttungen (zuzüglich Soli darauf)</td>
+</tr>
+<tr>
+<td><code dir="auto">matrix.customers</code></td>
+<td>Liste</td>
+<td></td>
+<td><code dir="auto">[10,25,50,100,250,500,1000,5000]</code></td>
+<td>Zeilen: Kundenzahlen</td>
+</tr>
+<tr>
+<td><code dir="auto">matrix.columns</code></td>
+<td>price | factor | plan</td>
+<td></td>
+<td><code dir="auto">price</code></td>
+<td>Spalten: price = Grundpreis des Tarifs „plan_index“, factor = alle Preise mit einem Faktor, plan = ein Tarif pro Spalte</td>
+</tr>
+<tr>
+<td><code dir="auto">matrix.prices</code></td>
+<td>Liste</td>
+<td>€/Monat</td>
+<td><code dir="auto">[29,49,79,99,149]</code></td>
+<td>Spalten bei columns=price: Grundpreise pro Monat</td>
+</tr>
+<tr>
+<td><code dir="auto">matrix.factors</code></td>
+<td>Liste</td>
+<td></td>
+<td><code dir="auto">[0.6,0.8,1,1.25,1.5]</code></td>
+<td>Spalten bei columns=factor: Preisfaktoren (1 = aktuelle Preise)</td>
+</tr>
+<tr>
+<td><code dir="auto">matrix.plan_index</code></td>
+<td>Zahl (ganz)</td>
+<td></td>
+<td><code dir="auto">0</code></td>
+<td>Tarif (0 = erster), dessen Grundpreis bei columns=price ersetzt wird</td>
+</tr>
+<tr>
+<td><code dir="auto">matrix.sensitivity_pct</code></td>
+<td>Zahl</td>
+<td>%</td>
+<td><code dir="auto">20</code></td>
+<td>Schwankung für die Sensitivitätsanalyse (Tornado)</td>
+</tr>
+</tbody>
+</table>
+<!-- defaults:end -->
+<div class="sl-heading-wrapper level-h2"><h2 id="presets">Presets</h2><a class="sl-anchor-link" href="#presets"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Presets”</span></a></div>
+<p>All numbers are examples; replace them with your own.</p>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HyperLevel Staffel (Vorschlag)</strong></td>
+<td>Solo 49 € (1 user), Team 99 € (2–99 users), Firma 199 € (100+), each with included locations, a step price per extra location and a cap; agency tiers Start 99 € (up to 5 client accounts), Pro 249 € (unlimited, white-label) and SaaS 449 € (resell + own app); customer mix 50 / 35 / 10 / 3 / 1.5 / 0.5 %</td>
+</tr>
+<tr>
+<td><strong>HyperLevel Standort-Modell</strong></td>
+<td>49 € per company incl. 3 locations, +10 € per extra location, cap 499 €; a distribution of locations per customer shows how the cap works</td>
+</tr>
+<tr>
+<td><strong>SaaS pro Nutzer</strong></td>
+<td>classic per-seat subscription: 12 € per user and month, 8 users on average, GmbH</td>
+</tr>
+<tr>
+<td><strong>Agentur-Retainer</strong></td>
+<td>packages 1,500 / 2,500 / 4,500 € plus a setup fee; the work is support minutes × hourly rate; columns are the packages</td>
+</tr>
+<tr>
+<td><strong>Kurs/Community</strong></td>
+<td>membership at 29 € gross for consumers, annual discount, EU customers, card / PayPal / direct debit, a coaching add-on</td>
+</tr>
+<tr>
+<td><strong>Handwerk</strong></td>
+<td>jobs per month as “customers” (churn 100 % = every job is new), the job value as the setup fee, labour and material as costs</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="scenarios-comparison-export">Scenarios, comparison, export</h2><a class="sl-anchor-link" href="#scenarios-comparison-export"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Scenarios, comparison, export”</span></a></div>
+<p><strong>Als Szenario speichern</strong> stores the complete input (with a name and a note) for the sub-account – up to 200. <strong>Szenarien</strong> lists them with their key figures, reopens one (<code dir="auto">/app/calc/&lt;id&gt;</code>) and compares up to six side by side: every key figure per scenario, the difference to the first one and the best value per row. The comparison is recalculated with the current engine. <strong>CSV</strong> exports the matrix (one row per customers × price, per month and per year, <code dir="auto">;</code> separated, decimal comma, UTF-8 with BOM for German Excel). <strong>JSON</strong> copies the input for the API or the agent.</p>
+<p>Unsaved work is kept in your browser (per sub-account, never sent anywhere), so a reload does not lose it.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="api">API</h2><a class="sl-anchor-link" href="#api"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “API”</span></a></div>
+<p>Sub-account routes: login with <code dir="auto">x-location-id</code>, a sub-account API key, or an agency key with <code dir="auto">x-location-id</code>. <strong>Rights:</strong> the area <em>Rechnungen &amp; Produkte</em> (<code dir="auto">payments</code>) for every route; a client login without it gets <code dir="auto">403</code>. Scenarios belong to one sub-account – another account’s id is <code dir="auto">404</code>. Calculations (<code dir="auto">run</code>, <code dir="auto">breakeven</code>, <code dir="auto">compare</code>) change nothing and leave no audit entry; saving, changing and deleting a scenario do. Read-only agency keys cannot call the POST routes (the same limit as every other computed endpoint).</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">GET /api/calc/schema</code></td>
+<td>JSON Schema of the input with descriptions and defaults</td>
+</tr>
+<tr>
+<td><code dir="auto">GET /api/calc/presets</code>, <code dir="auto">GET /api/calc/presets/:key</code></td>
+<td>the six presets; with <code dir="auto">:key</code> the complete input</td>
+</tr>
+<tr>
+<td><code dir="auto">POST /api/calc/run</code></td>
+<td><code dir="auto">{preset?, scenario_id?, input?, customers?, column?, sensitivity?, compact?, metric?, period?}</code> → headline, warnings, the matrix (rows × columns), unit economics and break-even per column and the <strong>focus</strong> (<code dir="auto">customers</code> at the configured prices, or at the matrix column <code dir="auto">column</code>: cell with month and year lines, taxes, waterfall, projection, optional tornado). <code dir="auto">compact: true</code> returns one matrix metric (<code dir="auto">metric</code>: <code dir="auto">revenue_gross</code>, <code dir="auto">revenue_net</code>, <code dir="auto">contribution</code>, <code dir="auto">ebit</code>, <code dir="auto">net_profit</code>, <code dir="auto">margin</code>; <code dir="auto">period</code>: <code dir="auto">month</code> | <code dir="auto">year</code>) plus the assumptions – what agents get</td>
+</tr>
+<tr>
+<td><code dir="auto">POST /api/calc/breakeven</code></td>
+<td>same inputs, plus <code dir="auto">target_net_profit_month</code> → break-even customers per price column (before and after taxes), minimum price for <code dir="auto">customers</code>, and with a target the customers or the price needed</td>
+</tr>
+<tr>
+<td><code dir="auto">GET/POST /api/calc/scenarios</code></td>
+<td>list with key figures / save <code dir="auto">{name, note?, preset?, input?}</code></td>
+</tr>
+<tr>
+<td><code dir="auto">GET/PATCH/DELETE /api/calc/scenarios/:id</code></td>
+<td>open / change <code dir="auto">{name?, note?, input?}</code> (input is a partial over the stored one) / delete</td>
+</tr>
+<tr>
+<td><code dir="auto">POST /api/calc/scenarios/:id/run</code></td>
+<td>run with temporary changes: <code dir="auto">{input?, customers?, column?, sensitivity?, compact?}</code></td>
+</tr>
+<tr>
+<td><code dir="auto">POST /api/calc/compare</code></td>
+<td><code dir="auto">{ids: [2–6 scenario ids]}</code> → key figures side by side</td>
+</tr>
+<tr>
+<td><code dir="auto">GET /api/calc/scenarios/:id/export.csv</code></td>
+<td>the matrix as CSV (recorded as an export in the audit log)</td>
+</tr>
+</tbody>
+</table>
+<p>Errors are German and specific: <code dir="auto">Ungültige Eingabe: customers.churn: muss zwischen 0 und 100 liegen</code>.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.w36nc.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">curl</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">-s</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">https://office.example.com/api/calc/run</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">\</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#82AAFF;--1:#3B61B0">-H</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">authorization: Bearer </span><span style="--0:#C5E478;--1:#3B61B0">$KEY</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">-H</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">x-location-id: </span><span style="--0:#C5E478;--1:#3B61B0">$LOCATION</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">-H</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">content-type: application/json</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">\</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#82AAFF;--1:#3B61B0">-d</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">{"preset":"gohigh-standort","customers":500,"compact":true}</span><span style="--0:#D9F5DD;--1:#111111">'</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="curl -s https://office.example.com/api/calc/run \  -H &quot;authorization: Bearer $KEY&quot; -H &quot;x-location-id: $LOCATION&quot; -H &#x27;content-type: application/json&#x27; \  -d &#x27;{&quot;preset&quot;:&quot;gohigh-standort&quot;,&quot;customers&quot;:500,&quot;compact&quot;:true}&#x27;"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h2"><h2 id="mcp-tools-and-the-hyperlevel-agent">MCP tools and the HyperLevel Agent</h2><a class="sl-anchor-link" href="#mcp-tools-and-the-hyperlevel-agent"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “MCP tools and the HyperLevel Agent”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ghl_calc_run</code></td>
+<td>calculate (preset, saved scenario or own input): headline, key figures, one matrix metric, top levers, assumptions. Read-only; <code dir="auto">location_id</code> is optional for agency keys</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_calc_breakeven</code></td>
+<td>break-even per price, minimum price, and customers / price for a target net profit per month</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_calc_scenarios_list</code></td>
+<td>saved scenarios with key figures, and the presets</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_calc_scenario_run</code></td>
+<td>recalculate a scenario with changes, or compare it with others (<code dir="auto">compare_with</code>)</td>
+</tr>
+<tr>
+<td><code dir="auto">ghl_calc_scenario_save</code></td>
+<td>save a new scenario or change one (a write: the HyperLevel Agent asks for confirmation as usual)</td>
+</tr>
+</tbody>
+</table>
+<p>The tool descriptions double as the <strong>agent hint</strong>: they say when to use the calculator (price, profit, margin, break-even, customer value, “what is left?”), list the input fields, and tell the agent to quote the key figures <strong>and the assumptions</strong>, to ask when price or customer count is missing instead of guessing, and to add <em>Schätzung, keine Steuerberatung</em>. Results carry a <code dir="auto">link</code> (<code dir="auto">/app/calc/&lt;id&gt;</code>), which the in-app agent shows as an “Öffnen” button. Examples to ask:</p>
+<ul>
+<li>“Was bleibt bei 300 Kunden im HyperLevel Standort-Modell nach allen Kosten und Steuern übrig?”</li>
+<li>“Ab wie vielen Kunden bin ich mit der HyperLevel Staffel im Plus?”</li>
+<li>“Welcher Grundpreis bringt bei 200 Kunden 5.000 € Nettogewinn im Monat?”</li>
+<li>“Vergleiche meine gespeicherten Szenarien.”</li>
+</ul>
+<p>The page has buttons that put these questions into the agent. Mobile API (native app, read-only): <code dir="auto">GET /api/mobile/calc/scenarios?location=</code> and <code dir="auto">POST /api/mobile/calc/scenarios/:id/run</code> <code dir="auto">{location_id, customers?, input?}</code> – see <a href="/api/">docs/api.md</a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="for-self-hosters">For self-hosters</h2><a class="sl-anchor-link" href="#for-self-hosters"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “For self-hosters”</span></a></div>
+<ul>
+<li>Nothing to configure and no credentials: the module ships with HyperLevel, creates its table (<code dir="auto">calc_scenarios</code>) on start and uses no outside service. The HyperLevel Agent needs an AI connection like for everything else (<a href="/agent/">docs/agent.md</a>); the calculator itself does not.</li>
+<li>Access follows the member areas: give a client login the area <em>Rechnungen &amp; Produkte</em> to let it use the calculator. With SaaS plans the area is the one the plan gates.</li>
+<li>Scenarios contain no personal data (only your own prices and costs); they are deleted with the sub-account. They are not part of the GDPR contact export.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="for-developers">For developers</h2><a class="sl-anchor-link" href="#for-developers"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “For developers”</span></a></div>
+<p>The engine is pure TypeScript without imports from the app: <code dir="auto">server/services/calc-engine.ts</code> (cells, break-even, projection, waterfall, tornado, CSV), <code dir="auto">calc-spec.ts</code> (the declarative input: defaults, JSON Schema, validation and the table below), <code dir="auto">calc-tax.ts</code> (the tax functions), <code dir="auto">calc-presets.ts</code>, <code dir="auto">calc-summary.ts</code> (key figures, comparison, compact answers, targets). The browser imports the same files, which keeps page, API and tools identical, and makes the engine packageable as a plugin later. <code dir="auto">tests/calc-engine.test.ts</code> covers the maths (price models, VAT, fees, taxes with reference values, break-even, projection, matrix), <code dir="auto">tests/calc-api.test.ts</code> the API, rights, isolation, MCP tools and app endpoints. This page’s defaults table is generated: change a default in <code dir="auto">calc-spec.ts</code> and the test tells you to refresh it.</p>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/BAISESYSTEMS/GoHyperLevel/edit/main/docs/gewinnrechner.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Seite bearbeiten</a></div><div class="pagination-links print:hidden astro-b5raizh3" dir="ltr"><a href="/de/saas/" rel="prev" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-b5raizh3">Vorherige Seite<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">SaaS mode</span></span></a><a href="/de/backoffice/" rel="next" class="astro-b5raizh3"><svg aria-hidden="true" class="astro-b5raizh3 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-b5raizh3">Nächste Seite<br class="astro-b5raizh3"><span class="link-title astro-b5raizh3">Back-Office</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>
