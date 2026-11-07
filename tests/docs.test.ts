@@ -243,6 +243,7 @@ const GERMAN_PAGES = [
   'docs/handbuch.md',
   'docs/helpdesk.de.md',
   'docs/integrations.de.md',
+  'docs/kurs-firma-fuehren.de.md',
   'docs/meta-channels.de.md',
   'docs/objects.de.md',
   'docs/office.de.md',

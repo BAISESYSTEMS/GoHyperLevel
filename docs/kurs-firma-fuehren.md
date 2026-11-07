@@ -1,233 +1,255 @@
-# Kurs: Deine Firma mit HyperLevel führen
+**English** · [Deutsch](kurs-firma-fuehren.de.md)
 
-10 Lektionen für Gründerinnen und Gründer, die ihre eigene Firma mit HyperLevel führen – zusammen etwa 3 Stunden. Jede Lektion endet mit einer **10-Minuten-Aufgabe** in der echten App. In HyperLevel findest du den Kurs unter *Akademie → Kurs: Deine Firma führen*; dort markiert die Tour jede Stelle und wartet, bis du sie ausprobiert hast.
+# Course: Run your company with HyperLevel
 
-> Am besten arbeitest du in deinem eigenen HQ-Sub-Account mit der Vorlage **„Software- & SaaS-Firma (HQ)“** (*Agentur → Snapshots → Vorlagen*). Das Betriebs-Handbuch für die Zeit danach – Routinen, Kennzahlen, wann einstellen, wann automatisieren – ist das [Company-Playbook](company-playbook.md).
+10 lessons for founders who run their own company with HyperLevel – about 3 hours in total. Every lesson ends with a **10-minute task** in the real app. In HyperLevel you will find the course under *Academy → Course: Run your company*; there the tour highlights every spot and waits until you have tried it out.
 
-> **Hinweis:** Dieser Kurs ersetzt keine Beratung. Steuerfragen gehören zur Steuerberaterin oder zum Steuerberater, Rechtsfragen zur Anwältin oder zum Anwalt.
+> It is best to work in your own HQ sub-account using the template **“Software- & SaaS-Firma (HQ)”** (*Agency → Snapshots → Templates*). The operating manual for afterwards – routines, metrics, when to hire, when to automate – is the [Company playbook](company-playbook.md).
 
-**Inhalt**
+> **Note:** This course does not replace professional advice. Tax questions belong with a tax advisor, legal questions with a lawyer.
 
-1. [Firmen-Setup: Branding, Team, Rechte, Steuerdaten](#lektion-1-firmen-setup-branding-team-rechte-steuerdaten) – Firmendaten, Logo und Farben, Steuer- und Rechnungsdaten, das Team mit den richtigen Rechten – das Fundament für alles Weitere.
-2. [Vertrieb: Pipeline, Lead-Scoring, Sequenzen, Angebote](#lektion-2-vertrieb-pipeline-lead-scoring-sequenzen-angebote) – Vom Interessenten zum Kunden: eine Pipeline, die zu deinem Verkaufsprozess passt, Lead-Scoring, persönliche Sequenzen und Angebote mit Unterschrift.
-3. [Marketing: Funnels, Formulare, E-Mail, Social, Attribution](#lektion-3-marketing-funnels-formulare-e-mail-social-attribution) – Landingpage und Warteliste, Formulare mit Double-Opt-in, Newsletter, Social Planner und die Frage, welcher Kanal wirklich Kunden bringt.
-4. [Kundenservice: Posteingang, Helpdesk, SLAs, Wissensdatenbank](#lektion-4-kundenservice-posteingang-helpdesk-slas-wissensdatenbank) – Alle Kanäle in einem Posteingang, Tickets mit SLA, eine Wissensdatenbank, die Fragen beantwortet, bevor sie gestellt werden.
-5. [Finanzen: Rechnungen, SEPA, Mahnwesen, DATEV, Gewinnrechner](#lektion-5-finanzen-rechnungen-sepa-mahnwesen-datev-gewinnrechner) – Rechnungen mit XRechnung/ZUGFeRD, Lastschrift per SEPA, automatisches Mahnwesen, DATEV-Export, Buchhaltung light und der Gewinnrechner für deine Preise.
-6. [Projekte & Zeit](#lektion-6-projekte--zeit) – Aufgaben, Projekte, wiederkehrende Routinen und Zeiterfassung – damit die Roadmap und deine Woche nicht im Kopf leben.
-7. [KI-Mitarbeiter & Automatisierung](#lektion-7-ki-mitarbeiter--automatisierung) – Workflows, die dir Routine abnehmen, und KI-Agenten mit klaren Grenzen: Entwürfe, Freigaben, Protokoll – nichts geht ungeprüft an Kunden.
-8. [Kennzahlen & Wochen-Routine](#lektion-8-kennzahlen--wochen-routine) – Das CEO-Cockpit mit MRR, ARR, Testphasen, Conversion, Kündigungen, Quellen und SLA – und ein Wochen-Review in 30 Minuten.
-9. [Datenschutz & Compliance: DSGVO, AVV, Aufbewahrung, GoBD](#lektion-9-datenschutz--compliance-dsgvo-avv-aufbewahrung-gobd) – Einwilligungen mit Nachweis, Auftragsverarbeitung, Löschfristen und unveränderbare Belege – was die App übernimmt und was du selbst regeln musst.
-10. [Skalieren: Team, Rollen, Snapshots, Agentur-Modus](#lektion-10-skalieren-team-rollen-snapshots-agentur-modus) – Wenn es mehr wird: Rollen statt Einzelrechte, Vorlagen statt Handarbeit, Agentur-Modus für Partner – und wann du einstellst statt automatisierst.
+**Contents**
 
----
-
-## Lektion 1: Firmen-Setup: Branding, Team, Rechte, Steuerdaten
-
-Firmendaten, Logo und Farben, Steuer- und Rechnungsdaten, das Team mit den richtigen Rechten – das Fundament für alles Weitere. *(ca. 15 Minuten)*
-
-1. **Warum zuerst das Setup?** – Alles, was HyperLevel verschickt – Rechnungen, E-Mails, Angebote, das Hilfe-Center – nimmt Name, Adresse, Logo und Steuerdaten von hier. Zehn Minuten jetzt sparen dir später jede Korrektur.
-2. **Firmendaten** *(Einstellungen → Firma)* – Name, Adresse, Zeitzone, Website und Logo. Bei einer GmbH gehört der vollständige Firmenname mit Rechtsform hinein, bei Einzelunternehmen dein Name.
-3. **Rechnungs- und Steuerdaten** *(Einstellungen → Rechnungen)* – Steuernummer oder USt-IdNr., Bankverbindung, Kleinunternehmer-Regel ja/nein, Zahlungsziel und Nummernkreis. Was hier steht, steht auf jeder Rechnung – im Zweifel mit der Steuerberatung abstimmen.
-4. **Das Team** *(Einstellungen → Team)* – Jede Person bekommt einen eigenen Login – nie geteilte Passwörter. Admins sehen alles; Mitglieder nur die Bereiche, die du anhakst (z. B. nur Service oder nur Vertrieb).
-5. **Zwei-Faktor-Login** *(Einstellungen → Mein Konto)* – Für dich als Gründerin oder Gründer Pflicht: 2FA einschalten und die Backup-Codes in den Passwort-Manager legen.
-6. **Deine 10-Minuten-Aufgabe** *(Einstellungen → Firma)* – Trag Firmendaten, Logo und Steuerdaten ein, lade eine Person mit eingeschränkten Rechten ein (z. B. nur Service) und schalte 2FA ein. – *So geht's:* Arbeite die drei Reiter **Firma**, **Rechnungen** und **Team** einmal von oben nach unten durch.
-
-**Das hast du gelernt:**
-
-- Firmendaten und Branding pflegen
-- Steuer- und Rechnungsdaten für korrekte Rechnungen hinterlegen
-- Kolleginnen mit genau den Bereichen einladen, die sie brauchen
-
-Mehr dazu: [Company-Playbook](company-playbook.md#1-company-setup)
+1. [Company setup: branding, team, permissions, tax details](#lesson-1-company-setup-branding-team-permissions-tax-details) – Company details, logo and colors, tax and invoice details, your team with the right permissions – the foundation for everything else.
+2. [Sales: pipeline, lead scoring, sequences, quotes](#lesson-2-sales-pipeline-lead-scoring-sequences-quotes) – From prospect to customer: a pipeline that fits your sales process, lead scoring, personal sequences and quotes with signature.
+3. [Marketing: funnels, forms, e-mail, social, attribution](#lesson-3-marketing-funnels-forms-e-mail-social-attribution) – Landing page and waitlist, forms with double opt-in, newsletter, social planner and the question of which channel really brings customers.
+4. [Customer service: inbox, helpdesk, SLAs, knowledge base](#lesson-4-customer-service-inbox-helpdesk-slas-knowledge-base) – All channels in one inbox, tickets with SLAs, a knowledge base that answers questions before they are asked.
+5. [Finance: invoices, SEPA, dunning, DATEV, profit calculator](#lesson-5-finance-invoices-sepa-dunning-datev-profit-calculator) – Invoices with XRechnung/ZUGFeRD, SEPA direct debit, automatic dunning, DATEV export, light bookkeeping and the profit calculator for your pricing.
+6. [Projects & time](#lesson-6-projects--time) – Tasks, projects, recurring routines and time tracking – so your roadmap and your week do not live in your head.
+7. [AI employees & automation](#lesson-7-ai-employees--automation) – Workflows that take routine work off your plate, and AI agents with clear boundaries: drafts, approvals, audit log – nothing goes to customers unchecked.
+8. [Metrics & weekly routine](#lesson-8-metrics--weekly-routine) – The CEO cockpit with MRR, ARR, trials, conversion, churn, sources and SLAs – and a weekly review in 30 minutes.
+9. [Privacy & compliance: GDPR, DPA, retention, GoBD](#lesson-9-privacy--compliance-gdpr-dpa-retention-gobd) – Consents with proof, data processing agreements, retention periods and immutable records – what the app handles and what you must arrange yourself.
+10. [Scaling: team, roles, snapshots, agency mode](#lesson-10-scaling-team-roles-snapshots-agency-mode) – When things grow: roles instead of individual permissions, templates instead of manual work, agency mode for partners – and when to hire instead of automate.
 
 ---
 
-## Lektion 2: Vertrieb: Pipeline, Lead-Scoring, Sequenzen, Angebote
+<a id="lektion-1-firmen-setup-branding-team-rechte-steuerdaten"></a>
 
-Vom Interessenten zum Kunden: eine Pipeline, die zu deinem Verkaufsprozess passt, Lead-Scoring, persönliche Sequenzen und Angebote mit Unterschrift. *(ca. 15 Minuten)*
+## Lesson 1: Company setup: branding, team, permissions, tax details
 
-1. **Deine Kunden-Pipeline** *(Opportunities)* – Mit der HQ-Vorlage gibt es **Kunden (Cloud)**: Warteliste → Testphase → Kunde → Gekündigt / Rückgewinnung. Dazu **Agentur-Partner** und **Presse & Influencer**.
-2. **Eine Pipeline ist eine Prognose** – Jede Karte ist ein Deal mit Wert. Wer die Pipeline täglich pflegt, sieht im Dashboard, was nächsten Monat reinkommt – wer nicht, rät.
-3. **Lead-Scoring** *(Lead-Scoring)* – Punkte für Verhalten (Formular, Klick, Termin) und Merkmale (Teamgröße, Tarif). Sortiere deine Kontakte nach Score und ruf die heißesten zuerst an.
-4. **Sequenzen und Angebote** *(sales)* – Sequenzen sind persönliche Mail-Folgen, die stoppen, sobald jemand antwortet. Angebote verschickst du mit Positionen, Online-Unterschrift und optionaler Anzahlung.
-5. **Ehrlich verkaufen** – Keine künstliche Knappheit, keine erfundenen Rabatte. In einer kleinen Firma ist dein Ruf das wichtigste Vertriebswerkzeug – die Vorlagen-Mails sind deshalb bewusst schlicht.
-6. **Deine 10-Minuten-Aufgabe** *(Opportunities)* – Leg drei echte Kontakte als Deals in **Kunden (Cloud)** an, verschiebe einen in **Testphase** und schreibe ein Angebot für den Tarif Team & Company. – *So geht's:* Öffne **Opportunities** und lege den ersten Deal an.
+Company details, logo and colors, tax and invoice details, your team with the right permissions – the foundation for everything else. *(approx. 15 minutes)*
 
-**Das hast du gelernt:**
+1. **Why start with setup?** – Everything HyperLevel sends out – invoices, e-mails, quotes, the help center – pulls the name, address, logo and tax details from here. Ten minutes now saves you every correction later.
+2. **Company details** *(Settings → Company)* – Name, address, time zone, website and logo. For a limited company (such as a GmbH), enter the full legal company name; for a sole proprietorship, your own name.
+3. **Invoice and tax details** *(Settings → Billing)* – Tax number or VAT ID, bank account details, small-business VAT exemption yes/no, payment terms and invoice number sequence. Whatever is entered here appears on every invoice – check with your tax advisor when in doubt.
+4. **The team** *(Settings → Team)* – Every person gets their own login – never share passwords. Admins see everything; members only see the areas you check (e.g. service only or sales only).
+5. **Two-factor sign-in** *(Settings → My Account)* – Mandatory for you as a founder: turn on 2FA and store the backup codes in your password manager.
+6. **Your 10-minute task** *(Settings → Company)* – Enter your company details, logo and tax details, invite one person with restricted permissions (e.g. service only) and turn on 2FA. – *How to do it:* Work through the three tabs **Company**, **Billing** and **Team** once from top to bottom.
 
-- Die Kunden-Pipeline lesen und pflegen
-- Mit Lead-Scoring die heißesten Kontakte zuerst anrufen
-- Sequenzen und Angebote für den persönlichen Verkauf nutzen
+**What you have learned:**
 
-Mehr dazu: [Company-Playbook](company-playbook.md#2-sales)
+- Maintain company details and branding
+- Store tax and billing details for compliant invoices
+- Invite colleagues with only the areas they need
 
----
-
-## Lektion 3: Marketing: Funnels, Formulare, E-Mail, Social, Attribution
-
-Landingpage und Warteliste, Formulare mit Double-Opt-in, Newsletter, Social Planner und die Frage, welcher Kanal wirklich Kunden bringt. *(ca. 15 Minuten)*
-
-1. **Formulare zuerst** *(Formulare & Umfragen)* – Die HQ-Vorlage bringt **Warteliste & Newsletter** (Double-Opt-in), **Demo-Anfrage**, **Support** und **Feature-Wunsch** mit. Jedes Formular hat einen Link und einen Einbett-Code.
-2. **Funnels und Website** *(Funnels & Websites)* – Eine Landingpage mit einem klaren Versprechen und einem Formular reicht für den Anfang. A/B-Tests lohnen sich erst ab einigen hundert Besuchen pro Woche.
-3. **E-Mail-Kampagnen** *(Kampagnen)* – Newsletter nur an Kontakte mit bestätigter Einwilligung. Lieber einmal pro Woche etwas Nützliches als täglich Werbung.
-4. **Social Planner** *(Social Planner)* – Plane Beiträge eine Woche im Voraus – am besten als Entwurf, den du am Montag freigibst.
-5. **Attribution** *(Attribution)* – Welche Quelle bringt Leads, welche bringt Kunden? Erst damit weißt du, wo dein Marketing-Budget hingehört.
-6. **Deine 10-Minuten-Aufgabe** *(Formulare & Umfragen)* – Bette das Formular **Warteliste & Newsletter** auf deiner Website ein, melde dich selbst an und bestätige die Double-Opt-in-Mail. – *So geht's:* Öffne **Formulare**, kopiere den Einbett-Code und teste die Anmeldung.
-
-**Das hast du gelernt:**
-
-- Ein Formular mit Double-Opt-in auf die Website bringen
-- Newsletter und Social-Posts planen
-- Mit Attribution sehen, welche Quelle Kunden bringt
-
-Mehr dazu: [Company-Playbook](company-playbook.md#3-marketing)
+More on this: [Company playbook](company-playbook.md#1-company-setup)
 
 ---
 
-## Lektion 4: Kundenservice: Posteingang, Helpdesk, SLAs, Wissensdatenbank
+<a id="lektion-2-vertrieb-pipeline-lead-scoring-sequenzen-angebote"></a>
 
-Alle Kanäle in einem Posteingang, Tickets mit SLA, eine Wissensdatenbank, die Fragen beantwortet, bevor sie gestellt werden. *(ca. 15 Minuten)*
+## Lesson 2: Sales: pipeline, lead scoring, sequences, quotes
 
-1. **Ein Posteingang für alles** *(Konversationen)* – E-Mail, Chat, WhatsApp, SMS und Anrufe landen hier. Gespräche sind für schnelle Antworten, Tickets für Anliegen mit Frist.
-2. **Tickets mit SLA** *(Tickets)* – Das Formular **Support** legt Tickets an. Zwei HQ-Workflows melden, wenn eine Frist in Gefahr ist oder verletzt wurde.
-3. **Realistische Fristen** *(Einstellungen → Service)* – Versprich nur, was du halten kannst. Allein gegründet? Dann lieber „erste Antwort innerhalb eines Werktags“ als eine Stunde, die du nicht schaffst.
-4. **Wissensdatenbank** *(Wissensdatenbank)* – Die Vorlage legt vier Entwürfe an: Cloud vs. Self-Hosting, Preise, Umzug von HighLevel, DSGVO/AVV. Lies sie, passe sie an und veröffentliche sie.
-5. **Die goldene Regel** – Jede Frage, die zweimal kommt, wird ein Hilfe-Artikel. So beantwortet die Wissensdatenbank mit der Zeit die Hälfte der Tickets für dich.
-6. **Deine 10-Minuten-Aufgabe** – Passe die Fristen an, veröffentliche zwei der vier Hilfe-Artikel und schicke dir selbst ein Ticket über das Formular **Support**. – *So geht's:* Öffne **Wissensdatenbank** und veröffentliche den Artikel „Was kostet HyperLevel?“.
+From prospect to customer: a pipeline that fits your sales process, lead scoring, personal sequences and quotes with signature. *(approx. 15 minutes)*
 
-**Das hast du gelernt:**
+1. **Your customer pipeline** *(Opportunities)* – The HQ template includes **Customers (Cloud)**: Waitlist → Trial → Customer → Churned / Winback. Plus **Agency Partners** and **Press & Influencers**.
+2. **A pipeline is a forecast** – Every card is a deal with a value. If you maintain the pipeline daily, the dashboard shows what will come in next month – if you don't, you are guessing.
+3. **Lead scoring** *(Lead Scoring)* – Points for behavior (form submission, click, appointment) and attributes (team size, plan). Sort your contacts by score and call the hottest leads first.
+4. **Sequences and quotes** *(sales)* – Sequences are personal e-mail follow-ups that stop as soon as someone replies. You send quotes with line items, online signature and optional deposit.
+5. **Sell honestly** – No artificial scarcity, no made-up discounts. In a small company your reputation is your most important sales tool – the template e-mails are therefore kept deliberately plain.
+6. **Your 10-minute task** *(Opportunities)* – Create three real contacts as deals in **Customers (Cloud)**, move one to **Trial** and write a quote for the Team & Company plan. – *How to do it:* Open **Opportunities** and create your first deal.
 
-- Posteingang und Tickets auseinanderhalten
-- SLAs so einstellen, dass sie realistisch sind
-- Die Wissensdatenbank mit den häufigsten Fragen füllen
+**What you have learned:**
 
-Mehr dazu: [Company-Playbook](company-playbook.md#4-customer-service)
+- Read and maintain the customer pipeline
+- Call the hottest contacts first using lead scoring
+- Use sequences and quotes for personal sales
 
----
-
-## Lektion 5: Finanzen: Rechnungen, SEPA, Mahnwesen, DATEV, Gewinnrechner
-
-Rechnungen mit XRechnung/ZUGFeRD, Lastschrift per SEPA, automatisches Mahnwesen, DATEV-Export, Buchhaltung light und der Gewinnrechner für deine Preise. *(ca. 20 Minuten)*
-
-1. **Rechnungen** *(Rechnungen & Angebote)* – Rechnungen gehen als PDF mit eingebetteter E-Rechnung (ZUGFeRD) oder als XRechnung raus. Festgeschriebene Rechnungen sind unveränderbar – korrigiert wird per Gutschrift.
-2. **SEPA-Lastschrift** *(sepa)* – Für Kunden ohne Karte: Mandat online einholen, Lastschrift-Datei erzeugen, im Online-Banking hochladen. Ohne Zahlungsanbieter.
-3. **Mahnwesen** *(dunning)* – Freundliche Erinnerung, dann Mahnstufen – automatisch, aber mit deiner Freigabe für die letzte Stufe.
-4. **Buchhaltung light und DATEV** *(Buchhaltung)* – Belege hochladen, Bankumsätze zuordnen, monatlich den DATEV-Export an die Steuerberatung. Die Buchhaltung bereitet vor – die Steuerberatung entscheidet.
-5. **Gewinnrechner** *(Gewinnrechner)* – Was bleibt bei 49,99 €, 99,99 € und 199 € nach USt, Gebühren, Kosten und Steuern? Lege ein Szenario mit deinen echten Zahlen an – eine Schätzung, keine Steuerberatung.
-6. **Deine 10-Minuten-Aufgabe** – Schreib eine Test-Rechnung an dich selbst, aktiviere eine Mahnstufe und lege im Gewinnrechner ein Szenario mit deinen drei Tarifen an. – *So geht's:* Öffne den **Gewinnrechner** und nimm die Vorlage „HyperLevel Staffel“ als Start.
-
-**Das hast du gelernt:**
-
-- E-Rechnungen schreiben, die der Pflicht entsprechen
-- SEPA-Lastschrift und Mahnwesen einrichten
-- Den DATEV-Export für die Steuerberatung erzeugen
-- Preise mit dem Gewinnrechner prüfen
-
-Mehr dazu: [Company-Playbook](company-playbook.md#5-finance)
+More on this: [Company playbook](company-playbook.md#2-sales)
 
 ---
 
-## Lektion 6: Projekte & Zeit
+<a id="lektion-3-marketing-funnels-formulare-e-mail-social-attribution"></a>
 
-Aufgaben, Projekte, wiederkehrende Routinen und Zeiterfassung – damit die Roadmap und deine Woche nicht im Kopf leben. *(ca. 10 Minuten)*
+## Lesson 3: Marketing: funnels, forms, e-mail, social, attribution
 
-1. **Aufgaben** *(Aufgaben)* – Alles mit Datum ist eine Aufgabe – auch das, was Workflows anlegen (Check-in-Anruf in der Testphase, SLA in Gefahr).
-2. **Projekte** *(pm)* – Die HQ-Vorlage legt das Projekt **CEO-Routinen** an: Morgenrunde, Wochen-Review, Roadmap-Runde, Monatsabschluss, Quartals- und Jahres-Check – alle wiederkehrend.
-3. **Roadmap als Projekt** – Leg ein zweites Projekt „Roadmap“ an: Spalten Ideen → Geplant → In Arbeit → Fertig. Feature-Wünsche mit dem Tag roadmap:wunsch landen dort als Aufgaben.
-4. **Zeiterfassung** *(time)* – Auch als Gründerin lohnt es sich, eine Woche lang alles zu erfassen: Wie viel Zeit geht in Support, Vertrieb, Entwicklung? Das zeigt, was du zuerst abgeben oder automatisieren solltest.
-5. **Weniger ist mehr** – Drei Prioritäten pro Woche reichen. Alles andere ist ein Backlog, kein Versprechen.
-6. **Deine 10-Minuten-Aufgabe** *(pm)* – Öffne **CEO-Routinen**, passe die Wochentage an deinen Kalender an und leg das Projekt „Roadmap“ mit vier Spalten an. – *So geht's:* Öffne **Projekte** und wähle **CEO-Routinen**.
+Landing page and waitlist, forms with double opt-in, newsletter, social planner and the question of which channel really brings customers. *(approx. 15 minutes)*
 
-**Das hast du gelernt:**
+1. **Forms first** *(Forms & Surveys)* – The HQ template comes with **Waitlist & Newsletter** (double opt-in), **Demo Request**, **Support** and **Feature Wish**. Every form has a direct link and an embed code.
+2. **Funnels and website** *(Funnels & Websites)* – A landing page with a clear promise and a form is enough to start. A/B tests are only worth it once you have a few hundred visits per week.
+3. **E-mail campaigns** *(Campaigns)* – Send newsletters only to contacts with confirmed consent. Better something useful once a week than daily promotion.
+4. **Social planner** *(Social Planner)* – Schedule posts one week ahead – ideally as drafts that you approve on Monday.
+5. **Attribution** *(Attribution)* – Which source brings leads, and which brings paying customers? Only then do you know where your marketing budget belongs.
+6. **Your 10-minute task** *(Forms & Surveys)* – Embed the **Waitlist & Newsletter** form on your website, sign up yourself and confirm the double opt-in e-mail. – *How to do it:* Open **Forms**, copy the embed code and test the sign-up.
 
-- Projekte mit Board, Liste und Kalender führen
-- Wiederkehrende Routinen als Aufgaben anlegen
-- Zeit erfassen und auswerten
+**What you have learned:**
 
-Mehr dazu: [Company-Playbook](company-playbook.md#6-projects--time)
+- Put a double opt-in form on your website
+- Schedule newsletters and social posts
+- Use attribution to see which source brings customers
 
----
-
-## Lektion 7: KI-Mitarbeiter & Automatisierung
-
-Workflows, die dir Routine abnehmen, und KI-Agenten mit klaren Grenzen: Entwürfe, Freigaben, Protokoll – nichts geht ungeprüft an Kunden. *(ca. 15 Minuten)*
-
-1. **Die HQ-Workflows** *(Automationen)* – Neun Workflows kommen als **Entwurf**: Warteliste, Testphase-Onboarding (Tag 0/1/3/7/12), Testphase endet, Kunde geworden, Kündigung & Rückgewinnung, zwei SLA-Workflows, Feature-Wunsch, Demo-Anfrage.
-2. **Erst testen, dann aktivieren** – Jeder Workflow hat einen **Trockenlauf**: Er zeigt Schritt für Schritt, was passieren würde – ohne eine Mail zu senden. Aktiviere erst, wenn E-Mail-Versand und Texte stimmen.
-3. **KI-Agenten** *(agents)* – Ein Agent bekommt nur die Werkzeuge, die er braucht, z. B. „Tickets lesen, Antwort-Entwurf schreiben“. Senden, löschen oder bezahlen bleibt bei dir.
-4. **Freigaben und Grenzen** – Regel für den Anfang: KI schreibt Entwürfe, Menschen schicken ab. Kosten-Limit setzen, Protokoll wöchentlich ansehen, Kundendaten nur an Anbieter mit AVV.
-5. **Was automatisieren?** – Automatisiere, was du dreimal gleich gemacht hast und was bei einem Fehler niemandem schadet. Persönliche Gespräche – Kündigungen, Beschwerden – bleiben persönlich.
-6. **Deine 10-Minuten-Aufgabe** *(Automationen)* – Öffne den Workflow **Testphase: Onboarding**, mach einen Trockenlauf mit dir selbst als Kontakt und aktiviere ihn erst danach. – *So geht's:* Öffne **Automationen** und wähle den Onboarding-Workflow.
-
-**Das hast du gelernt:**
-
-- Workflows erst im Trockenlauf testen, dann aktivieren
-- KI-Agenten mit eingeschränkten Werkzeugen und Freigaben einsetzen
-- Im Protokoll nachsehen, was automatisch passiert ist
-
-Mehr dazu: [Company-Playbook](company-playbook.md#7-ai-employees--automation)
+More on this: [Company playbook](company-playbook.md#3-marketing)
 
 ---
 
-## Lektion 8: Kennzahlen & Wochen-Routine
+<a id="lektion-4-kundenservice-posteingang-helpdesk-slas-wissensdatenbank"></a>
 
-Das CEO-Cockpit mit MRR, ARR, Testphasen, Conversion, Kündigungen, Quellen und SLA – und ein Wochen-Review in 30 Minuten. *(ca. 15 Minuten)*
+## Lesson 4: Customer service: inbox, helpdesk, SLAs, knowledge base
 
-1. **Das CEO-Cockpit** *(Berichte)* – Die HQ-Vorlage legt das Dashboard **CEO-Cockpit (SaaS)** an: MRR, ARR, aktive Abos, laufende Testphasen, Lead → Kunde, Kündigungen, SLA-Quote, Leads je Quelle.
-2. **MRR zuerst** – Monatlich wiederkehrender Umsatz ist die eine Zahl, die zählt. Ein gesundes frühes SaaS wächst 10–20 % im Monat; wichtiger als das Tempo ist, dass die Kurve nicht wieder fällt.
-3. **Trichter und Kündigungen** – Testphase → Kunde sollte bei 15–25 % (ohne Karte) bzw. 40–60 % (mit Karte) liegen. Kündigungen unter 3 % pro Monat. Jede Kündigung hat einen Grund – er steht im Feld „Kündigungsgrund“.
-4. **Das Wochen-Review (30 Min.)** – Montag, immer gleich: 1. Zahlen ansehen (10 Min.), 2. drei Auffälligkeiten notieren, 3. Tickets mit SLA-Verletzung besprechen, 4. drei Entscheidungen für die Woche festlegen.
-5. **Automatisch per E-Mail** – Unter Berichte → Zeitpläne lässt du dir das Cockpit jeden Montag um 8 Uhr schicken. Dann beginnt das Review, bevor du die App öffnest.
-6. **Deine 10-Minuten-Aufgabe** – Öffne das **CEO-Cockpit**, plane den Versand für Montag 8 Uhr und notiere deine drei Zahlen der Woche in der Aufgabe „Wochen-Review“. – *So geht's:* Öffne **Berichte** und wähle **CEO-Cockpit (SaaS)**.
+All channels in one inbox, tickets with SLAs, a knowledge base that answers questions before they are asked. *(approx. 15 minutes)*
 
-**Das hast du gelernt:**
+1. **One inbox for everything** *(Conversations)* – E-mail, chat, WhatsApp, SMS and calls land here. Conversations are for quick replies, tickets are for issues with a deadline.
+2. **Tickets with SLAs** *(Tickets)* – The **Support** form creates tickets. Two HQ workflows notify you when a deadline is at risk or has been breached.
+3. **Realistic deadlines** *(Settings → Service)* – Only promise what you can keep. Solo founder? Then “first reply within one business day” is better than a one-hour target you cannot meet.
+4. **Knowledge base** *(Knowledge Base)* – The template creates four drafts: Cloud vs. Self-Hosting, Pricing, Switching from HighLevel, GDPR/DPA. Read them, adapt them and publish them.
+5. **The golden rule** – Every question that comes up twice becomes a help article. Over time, the knowledge base answers half of your tickets for you.
+6. **Your 10-minute task** – Adjust your SLA deadlines, publish two of the four help articles and send yourself a ticket via the **Support** form. – *How to do it:* Open **Knowledge Base** and publish the article “How much does HyperLevel cost?”.
 
-- Die wichtigsten SaaS-Kennzahlen lesen
-- Ein 30-Minuten-Wochen-Review mit festen Fragen machen
-- Den Bericht automatisch per E-Mail bekommen
+**What you have learned:**
 
-Mehr dazu: [Company-Playbook](company-playbook.md#8-kpis--weekly-routine)
+- Tell conversations and tickets apart
+- Set realistic SLAs
+- Populate the knowledge base with the most frequent questions
 
----
-
-## Lektion 9: Datenschutz & Compliance: DSGVO, AVV, Aufbewahrung, GoBD
-
-Einwilligungen mit Nachweis, Auftragsverarbeitung, Löschfristen und unveränderbare Belege – was die App übernimmt und was du selbst regeln musst. *(ca. 15 Minuten)*
-
-1. **Einwilligung & Recht** *(Einstellungen → Einwilligung & Recht)* – Double-Opt-in, Texte der Einwilligung mit Versionen, Cookie-Banner, Impressum und Datenschutzerklärung. Jede Einwilligung wird mit Zeitpunkt und Text nachweisbar gespeichert.
-2. **Auftragsverarbeitung (AVV)** – Jeder Dienst, der Kundendaten für dich verarbeitet (Hosting, E-Mail-Versand, KI-Anbieter), braucht einen AVV. Leg dir eine Liste an – im Wiki oder als Hilfe-Artikel.
-3. **Aufbewahrung** – Rechnungen und Buchungsbelege: in der Regel 8 bzw. 10 Jahre, Geschäftsbriefe 6 Jahre. Werbe-Kontakte ohne Einwilligung: löschen. Die genauen Fristen klärt deine Steuerberatung.
-4. **GoBD** – Festgeschriebene Rechnungen und Buchungen sind unveränderbar, Änderungen laufen über Storno und Gutschrift, jede Änderung steht im Protokoll. Eine Verfahrensdokumentation schreibst du trotzdem selbst.
-5. **Grenzen dieses Kurses** – Dieser Kurs ersetzt keine Beratung. Steuerfragen gehören zur Steuerberaterin oder zum Steuerberater, Rechtsfragen zur Anwältin oder zum Anwalt.
-6. **Deine 10-Minuten-Aufgabe** – Prüfe den Double-Opt-in-Text, trage Impressum und Datenschutz ein und schreib deine AVV-Liste (Hosting, Mail, KI, Zahlung) ins Wiki. – *So geht's:* Öffne **Einstellungen → Einwilligung & Recht**.
-
-**Das hast du gelernt:**
-
-- Einwilligungen und Double-Opt-in nachweisbar machen
-- Wissen, wann ein AVV nötig ist
-- Aufbewahrungsfristen und GoBD-Grundsätze kennen
-- Wann die Steuerberatung oder ein Anwalt gefragt ist
-
-Mehr dazu: [Company-Playbook](company-playbook.md#9-privacy--compliance)
+More on this: [Company playbook](company-playbook.md#4-customer-service)
 
 ---
 
-## Lektion 10: Skalieren: Team, Rollen, Snapshots, Agentur-Modus
+<a id="lektion-5-finanzen-rechnungen-sepa-mahnwesen-datev-gewinnrechner"></a>
 
-Wenn es mehr wird: Rollen statt Einzelrechte, Vorlagen statt Handarbeit, Agentur-Modus für Partner – und wann du einstellst statt automatisierst. *(ca. 15 Minuten, nur für die Agentur)*
+## Lesson 5: Finance: invoices, SEPA, dunning, DATEV, profit calculator
 
-1. **Rollen statt Einzelrechte** *(Einstellungen → Team)* – Denk in Rollen: Support (Posteingang, Tickets, Wissensdatenbank), Vertrieb (Kontakte, Opportunities), Buchhaltung (Rechnungen, Buchhaltung). Jede neue Person bekommt eine Rolle, keine Sonder-Rechte.
-2. **Vorlagen von HyperLevel** *(Agentur → Snapshots)* – Hier liegt **Software- & SaaS-Firma (HQ)** – mit einem Klick in einen Sub-Account geladen. Deinen eigenen, verbesserten Stand speicherst du darunter als Snapshot.
-3. **Agentur-Modus** *(Agentur → Kunden)* – Agentur-Partner bekommen eigene Sub-Accounts – aus einem Snapshot, mit eigenem Login und auf Wunsch unter ihrer Marke.
-4. **Einstellen oder automatisieren?** – Faustregel: Kostet dich eine Aufgabe mehr als 10 Stunden pro Woche und ist sie nicht automatisierbar, ist es Zeit für eine Person. Zuerst meistens Support, dann Vertrieb.
-5. **Dokumentiere, was funktioniert** – Jede Routine, die gut läuft, gehört ins Wiki – dann kann sie jemand anderes übernehmen. Das Company-Playbook ist dafür der Startpunkt.
-6. **Deine 10-Minuten-Aufgabe** *(Agentur → Snapshots)* – Speichere deinen HQ-Sub-Account als Snapshot „HQ – Stand heute“ und schreib im Wiki auf, welche Rolle du als Erstes besetzen würdest. – *So geht's:* Öffne **Agentur → Snapshots** und klicke auf **Snapshot erstellen**.
+Invoices with XRechnung/ZUGFeRD, SEPA direct debit, automatic dunning, DATEV export, light bookkeeping and the profit calculator for your pricing. *(approx. 20 minutes)*
 
-**Das hast du gelernt:**
+1. **Invoices** *(Invoices & Quotes)* – Invoices go out as PDFs with embedded e-invoice data (ZUGFeRD) or as XRechnung. Finalized invoices are immutable – corrections are made via credit notes.
+2. **SEPA direct debit** *(sepa)* – For customers without a card: collect the mandate online, generate the direct debit XML file, upload it to online banking. No payment processor required.
+3. **Dunning** *(dunning)* – Friendly reminder first, then dunning levels – automated, but with your manual approval for the final stage.
+4. **Light bookkeeping and DATEV** *(Accounting)* – Upload receipts, match bank transactions, send the monthly DATEV export to your tax advisor. Bookkeeping prepares the records – your tax advisor decides.
+5. **Profit calculator** *(Profit Calculator)* – What is left at €49.99, €99.99 and €199 after VAT, payment fees, costs and taxes? Create a scenario with your real numbers – an estimate, not tax advice.
+6. **Your 10-minute task** – Write a test invoice to yourself, enable a dunning level and create a scenario in the profit calculator with your three plans. – *How to do it:* Open the **Profit Calculator** and start from the “HyperLevel Tiers” preset.
 
-- Rechte nach Rollen vergeben
-- Mit Snapshots und Vorlagen wiederholbar arbeiten
-- Agentur-Partner mit eigenen Sub-Accounts betreuen
-- Entscheiden, ob du einstellst oder automatisierst
+**What you have learned:**
 
-Mehr dazu: [Company-Playbook](company-playbook.md#10-scaling)
+- Issue compliant e-invoices
+- Set up SEPA direct debit and dunning
+- Generate the DATEV export for your tax advisor
+- Check your pricing with the profit calculator
+
+More on this: [Company playbook](company-playbook.md#5-finance)
+
+---
+
+<a id="lektion-6-projekte--zeit"></a>
+
+## Lesson 6: Projects & time
+
+Tasks, projects, recurring routines and time tracking – so your roadmap and your week do not live in your head. *(approx. 10 minutes)*
+
+1. **Tasks** *(Tasks)* – Everything with a due date is a task – including items created by workflows (trial check-in call, SLA at risk).
+2. **Projects** *(pm)* – The HQ template sets up the **CEO Routines** project: morning check, weekly review, roadmap session, monthly close, quarterly and annual check – all recurring.
+3. **Roadmap as a project** – Create a second project called “Roadmap” with four columns: Ideas → Planned → In Progress → Done. Feature wishes tagged `roadmap:wunsch` land there as tasks.
+4. **Time tracking** *(time)* – Even as a founder, it pays to log everything for one week: how much time goes into support, sales, development? That shows what you should delegate or automate first.
+5. **Less is more** – Three priorities per week are enough. Everything else is a backlog, not a promise.
+6. **Your 10-minute task** *(pm)* – Open **CEO Routines**, align the weekdays with your calendar and create the “Roadmap” project with four columns. – *How to do it:* Open **Projects** and select **CEO Routines**.
+
+**What you have learned:**
+
+- Run projects with board, list and calendar views
+- Set up recurring routines as tasks
+- Track and evaluate your time
+
+More on this: [Company playbook](company-playbook.md#6-projects--time)
+
+---
+
+<a id="lektion-7-ki-mitarbeiter--automatisierung"></a>
+
+## Lesson 7: AI employees & automation
+
+Workflows that take routine work off your plate, and AI agents with clear boundaries: drafts, approvals, audit log – nothing goes to customers unchecked. *(approx. 15 minutes)*
+
+1. **The HQ workflows** *(Workflows)* – Nine workflows come as **drafts**: waitlist, trial onboarding (day 0/1/3/7/12), trial ending, became a customer, churn & winback, two SLA workflows, feature wish, demo request.
+2. **Test first, activate second** – Every workflow has a **dry run**: it shows step by step what would happen – without sending a single e-mail. Only activate once mail delivery and copy are right.
+3. **AI agents** *(agents)* – An agent only gets the tools it needs, e.g. “read tickets, draft reply”. Sending, deleting or paying stays with you.
+4. **Approvals and limits** – Rule for the beginning: AI writes drafts, humans hit send. Set a cost cap, check the audit log weekly, and send customer data only to providers with a signed DPA.
+5. **What to automate?** – Automate what you have done the same way three times and where a mistake harms no one. Personal conversations – cancellations, complaints – stay personal.
+6. **Your 10-minute task** *(Workflows)* – Open the **Trial: Onboarding** workflow, run a dry run with yourself as the contact and only activate it afterwards. – *How to do it:* Open **Workflows** and select the onboarding workflow.
+
+**What you have learned:**
+
+- Test workflows in dry-run mode before activating them
+- Use AI agents with restricted tools and human approval
+- Check the audit log to see what ran automatically
+
+More on this: [Company playbook](company-playbook.md#7-ai-employees--automation)
+
+---
+
+<a id="lektion-8-kennzahlen--wochen-routine"></a>
+
+## Lesson 8: Metrics & weekly routine
+
+The CEO cockpit with MRR, ARR, trials, conversion, churn, sources and SLAs – and a weekly review in 30 minutes. *(approx. 15 minutes)*
+
+1. **The CEO cockpit** *(Reports)* – The HQ template creates the **CEO Cockpit (SaaS)** dashboard: MRR, ARR, active subscriptions, active trials, lead → customer conversion, churn, SLA compliance rate, leads by source.
+2. **MRR first** – Monthly recurring revenue is the one number that matters. A healthy early-stage SaaS grows 10–20% per month; more important than speed is that the curve does not drop back down.
+3. **Funnel and churn** – Trial → customer should sit around 15–25% (no card required) or 40–60% (with card). Monthly churn below 3%. Every cancellation has a reason – recorded in the “Cancellation reason” field.
+4. **The weekly review (30 min)** – Monday, always the same: 1. check the numbers (10 min), 2. note three anomalies, 3. review tickets with SLA breaches, 4. set three decisions for the week.
+5. **Automated by e-mail** – Under Reports → Schedules, have the cockpit e-mailed to you every Monday at 8 a.m. That way the review starts before you even open the app.
+6. **Your 10-minute task** – Open the **CEO Cockpit**, schedule delivery for Monday at 8 a.m. and write down your three numbers of the week in the “Weekly Review” task. – *How to do it:* Open **Reports** and select **CEO Cockpit (SaaS)**.
+
+**What you have learned:**
+
+- Read the key SaaS metrics
+- Run a 30-minute weekly review with fixed questions
+- Receive the report automatically by e-mail
+
+More on this: [Company playbook](company-playbook.md#8-kpis--weekly-routine)
+
+---
+
+<a id="lektion-9-datenschutz--compliance-dsgvo-avv-aufbewahrung-gobd"></a>
+
+## Lesson 9: Privacy & compliance: GDPR, DPA, retention, GoBD
+
+Consents with proof, data processing agreements, retention periods and immutable records – what the app handles and what you must arrange yourself. *(approx. 15 minutes)*
+
+1. **Consent & legal** *(Settings → Consent & Legal)* – Double opt-in, consent texts with versioning, cookie banner, legal notice (Impressum) and privacy policy. Every consent is stored with timestamp and wording as verifiable proof.
+2. **Data processing agreements (DPA / AVV)** – Every service that processes customer data on your behalf (hosting, e-mail delivery, AI provider) requires a DPA. Keep a list – in the wiki or as a help article.
+3. **Retention periods** – Invoices and accounting records: typically 8 or 10 years; business correspondence: 6 years. Marketing contacts without consent: delete. Your tax advisor can confirm the exact statutory periods.
+4. **GoBD (immutable accounting records)** – Finalized invoices and accounting entries are immutable; changes run through reversals and credit notes, and every change is logged in the audit trail. You still write your own procedural documentation (*Verfahrensdokumentation*).
+5. **Limits of this course** – This course does not replace professional advice. Tax questions belong with a tax advisor, legal questions with a lawyer.
+6. **Your 10-minute task** – Review the double opt-in wording, enter your legal notice and privacy policy, and write your DPA list (hosting, e-mail, AI, payments) in the wiki. – *How to do it:* Open **Settings → Consent & Legal**.
+
+**What you have learned:**
+
+- Make consents and double opt-in verifiable
+- Know when a data processing agreement (DPA) is required
+- Understand retention periods and GoBD principles
+- Know when to consult a tax advisor or lawyer
+
+More on this: [Company playbook](company-playbook.md#9-privacy--compliance)
+
+---
+
+<a id="lektion-10-skalieren-team-rollen-snapshots-agentur-modus"></a>
+
+## Lesson 10: Scaling: team, roles, snapshots, agency mode
+
+When things grow: roles instead of individual permissions, templates instead of manual work, agency mode for partners – and when to hire instead of automate. *(approx. 15 minutes, agency only)*
+
+1. **Roles instead of individual permissions** *(Settings → Team)* – Think in roles: Support (inbox, tickets, knowledge base), Sales (contacts, opportunities), Accounting (invoices, bookkeeping). Every new person gets a role, not custom one-off permissions.
+2. **HyperLevel templates** *(Agency → Snapshots)* – This is where **Software- & SaaS-Firma (HQ)** lives – loaded into a sub-account in one click. You save your own improved setup underneath as a snapshot.
+3. **Agency mode** *(Agency → Clients)* – Agency partners get their own sub-accounts – created from a snapshot, with their own login and optionally under their own brand.
+4. **Hire or automate?** – Rule of thumb: if a task costs you more than 10 hours a week and cannot be automated, it is time for a person. Usually support first, then sales.
+5. **Document what works** – Every routine that runs well belongs in the wiki – so someone else can take it over. The Company playbook is the starting point.
+6. **Your 10-minute task** *(Agency → Snapshots)* – Save your HQ sub-account as a snapshot “HQ – current state” and write down in the wiki which role you would fill first. – *How to do it:* Open **Agency → Snapshots** and click **Create snapshot**.
+
+**What you have learned:**
+
+- Assign permissions by role
+- Work repeatably with snapshots and templates
+- Serve agency partners with their own sub-accounts
+- Decide when to hire and when to automate
+
+More on this: [Company playbook](company-playbook.md#10-scaling)
