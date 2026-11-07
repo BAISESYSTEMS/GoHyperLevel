@@ -28,8 +28,8 @@ describe('course „Deine Firma führen“', () => {
     expect(tourById('firma-9-compliance')!.steps.some((s) => /Steuerberat/.test(s.text) && /Anwalt|Anwältin/.test(s.text))).toBe(true);
   });
 
-  it('docs/kurs-firma-fuehren.md is the generated course (run the generator after changing a lesson)', () => {
-    const md = readFileSync(join(ROOT, 'docs/kurs-firma-fuehren.md'), 'utf8');
+  it('docs/kurs-firma-fuehren.de.md is the generated course (run the generator after changing a lesson)', () => {
+    const md = readFileSync(join(ROOT, 'docs/kurs-firma-fuehren.de.md'), 'utf8');
     expect(md).toBe(companyCourseMarkdown('HyperLevel'));
     for (const t of COMPANY_TOURS) expect(md).toContain(`## ${lessonHeading(t.chapter!, t.title)}`);
   });
