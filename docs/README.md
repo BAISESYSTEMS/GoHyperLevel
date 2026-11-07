@@ -67,7 +67,7 @@ Pages marked **(DE)** are only available in German for now – translations are 
 
 ## Run your company on HyperLevel
 
-- [Company playbook](company-playbook.md) · [Handbook (DE)](handbuch.md) · [Course: run your company (DE)](kurs-firma-fuehren.md) · [Partner program](partner-program.md)
+- [Company playbook](company-playbook.md) · [Handbook (DE)](handbuch.md) · [Course: run your company](kurs-firma-fuehren.md) · [Partner program](partner-program.md)
 
 ## Project
 
