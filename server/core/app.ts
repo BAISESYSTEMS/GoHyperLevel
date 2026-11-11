@@ -23,6 +23,7 @@ import { PerfMonitor } from './perf.js';
 import { openSettings, sealSettings } from './secrets.js';
 import { serveStatic } from './static.js';
 import { sha256 } from './util.js';
+import { errorText } from '../i18n/errors-en.js';
 
 export interface Config {
   port: number;
@@ -262,6 +263,10 @@ export function createApp(config: Config, modules: Module[]) {
 const bodylessMethod = (m: string) => m === 'GET' || m === 'HEAD' || m === 'OPTIONS';
 
 function send(res: ServerResponse, status: number, body: unknown, headers: Record<string, string> = {}) {
+  // Error texts in English when the web app is in English (header x-pghl-lang, server/i18n/errors-en.ts). Other clients keep German.
+  if (body && typeof body === 'object' && typeof (body as { error?: unknown }).error === 'string' && String((res.req as IncomingMessage | undefined)?.headers['x-pghl-lang'] ?? '') === 'en') {
+    body = { ...(body as object), error: errorText((body as { error: string }).error) };
+  }
   const json = JSON.stringify(body ?? null);
   void sendBody(res, status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...headers }, json);
 }

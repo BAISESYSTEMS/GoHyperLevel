@@ -1,5 +1,5 @@
 /** Fetch wrapper: JSON in/out, CSRF header, current sub-account header, readable errors. */
-import { fmtDate, fmtDateTime, fmtMoney, tr } from './i18n';
+import { fmtDate, fmtDateTime, fmtMoney, getLocale, tr } from './i18n';
 
 const t = tr('core');
 let locationId = localStorage.getItem('pghl.location') ?? '';
@@ -35,6 +35,8 @@ async function call<T = any>(method: string, path: string, body?: unknown): Prom
       method,
       headers: {
         'x-pghl': '1',
+        // the UI language, so the server can answer with English error messages (server/i18n/errors-en.ts)
+        'x-pghl-lang': getLocale(),
         ...(body !== undefined ? { 'content-type': 'application/json' } : {}),
         ...(locationId ? { 'x-location-id': locationId } : {}),
       },

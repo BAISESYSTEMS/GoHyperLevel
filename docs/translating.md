@@ -118,8 +118,12 @@ export default {
   runtime adds about 1.5 KB gzip to the first download; all English catalogs together are about 24 KB gzip, split by
   area. A language switch loads every namespace on screen first and then re-renders everything at once.
 - `<html lang>` follows the language.
-- The server keeps answering in German. Where the app shows a server message (toasts, page errors, the login card),
-  `serverText()` replaces the common generic ones with the `errors` catalog.
+- The web app sends its language with every request (header `x-pghl-lang`). For `en`, the server translates the text of
+  every error answer (`{ error: … }`) with `server/i18n/errors-en.ts` before sending it; other clients (API keys, MCP,
+  scripts) keep the German text. Keys are the German messages; `{v0}`, `{v1}` … stand for the values of a template
+  literal and are translated too when they are known texts such as field names. A message whose values stay German
+  is left entirely German rather than mixed. `serverText()` still maps the common generic ones with the `errors`
+  catalog, so nothing changes for messages the dictionary does not know.
 
 Labels kept in constants (menu entries in `main.tsx`, status maps, tab lists) stay German in the code and are
 translated where they are shown, e.g. `t(STATUS_LABEL[s])`. Their German text must then be in the catalog – the
