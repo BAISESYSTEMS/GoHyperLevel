@@ -66,7 +66,7 @@ fixed instant.
 Documentation is checked like code (`tests/docs.test.ts`, the same rules as `npm run docs:check`): every relative link and
 `#anchor` must resolve, every `docs/*.md` page must be linked from the README, every `PGHL_*` variable the server reads
 goes into `.env.example` **and** `docs/self-hosting.md`, every workflow action/trigger type into the lists at the end of
-`docs/workflow-actions.md` (`npm run docs:gen` adds the missing rows and regenerates `docs/handbuch.md`), every route family
+`docs/workflow-actions.md` (`npm run docs:gen` adds the missing rows and regenerates `docs/handbook.md` and `docs/handbook.de.md`), every route family
 under `/api/` is named in some page, README numbers (MCP tools, triggers, actions, tours) must not promise more than
 exists, and `CHANGELOG.md` has one `### Added` / `### Changed` / `### Fixed` heading per version. The other direction is
 `tests/api-contract.test.ts`: every `METHOD /api/…` a page names, every `api.get/post/…('/api/…')` of the web app and every

@@ -8,7 +8,7 @@ import { indexPage, type PageRow } from '../services/wiki-store.js';
 
 /**
  * Wissens-Snapshot: what a sub-account has learned travels with its snapshot, so a new market or brand (e.g. a shop
- * going international under another domain) starts with the know-how instead of from zero (docs/api.md, Snapshots; docs/handbuch.md, Kapitel 12).
+ * going international under another domain) starts with the know-how instead of from zero (docs/api.md, Snapshots; docs/handbook.md, chapter 12).
  *
  *   knowledge_agents     – the sub-account's AI agents: instructions, tools, knowledge text, starter prompts. What
  *                          belongs to one installation stays behind: AI connection, schedules, channel replies.

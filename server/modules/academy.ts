@@ -45,7 +45,7 @@ export function sandboxOf(app: App): { id: string; name: string } | null {
 }
 
 /** Docs a member (client login) may read; the agency reads all of docs/ (they include server details). */
-const MEMBER_DOCS = ['academy', 'handbuch', 'app', 'ios-web-app', 'email-builder', 'email-marketing', 'growth', 'ai-assistant', 'meta-channels', 'stripe', 'helpdesk', 'reports', 'objects', 'integrations', 'genmedia', 'canvas', 'backoffice', 'mailbox-sync', 'wiki', 'team-chat', 'werkstatt', 'README'];
+const MEMBER_DOCS = ['academy', 'handbook', 'handbook.de', 'app', 'ios-web-app', 'email-builder', 'email-marketing', 'growth', 'ai-assistant', 'meta-channels', 'stripe', 'helpdesk', 'reports', 'objects', 'integrations', 'genmedia', 'canvas', 'backoffice', 'mailbox-sync', 'wiki', 'team-chat', 'werkstatt', 'README'];
 
 /** The repository's docs folder: next to the working directory (Docker, Hostinger) or the source. */
 function docsDir(): string | undefined {
@@ -56,7 +56,8 @@ function docsDir(): string | undefined {
 
 function docFile(name: string): string | undefined {
   const dir = docsDir();
-  if (!dir || !/^[A-Za-z0-9-]{1,60}$/.test(name)) return undefined;
+  // `<page>.de` is the German version next to the English page (docs/self-hosting.de.md)
+  if (!dir || !/^[A-Za-z0-9-]{1,60}(\.de)?$/.test(name)) return undefined;
   // The UI is German: prefer the German README (README.de.md) next to the English one.
   const readme = [resolve(dir, '..', 'README.de.md'), resolve(dir, '..', 'README.md')].find((f) => existsSync(f)) ?? resolve(dir, '..', 'README.md');
   const file = name === 'README' ? readme : join(dir, `${name}.md`);

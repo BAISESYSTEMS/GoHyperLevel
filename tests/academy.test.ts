@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { startTestApp } from './helpers';
 import { GROUPS, JOURNEY, MODULE_TOURS, TOURS, badges, composeSteps, journeyStatus, resumeIndex, searchTours, stepVisible, tourById, toursForPath, tourTargets, visibleTours, type Access } from '../web/src/tour/catalog';
-import { handbookMarkdown } from '../web/src/tour/handbook';
+import { HANDBOOK_FILES, handbookDoc, missingTranslations, unusedTranslations } from '../web/src/tour/handbook';
 import { slug } from '../web/src/tour/slug';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -122,10 +122,21 @@ describe('tour definitions', () => {
     }
   });
 
-  it('docs/handbuch.md is the generated handbook (run the generator after changing the journey)', () => {
-    const md = readFileSync(join(ROOT, 'docs/handbuch.md'), 'utf8');
-    expect(md).toBe(handbookMarkdown('HyperLevel'));
-    for (const c of JOURNEY) expect(md).toContain(`## Kapitel ${c.chapter}: ${c.title}`);
+  it('docs/handbook.de.md and docs/handbook.md are the generated handbook (run npm run docs:gen after changing the journey)', () => {
+    const de = readFileSync(join(ROOT, HANDBOOK_FILES.de), 'utf8');
+    const en = readFileSync(join(ROOT, HANDBOOK_FILES.en), 'utf8');
+    expect(de).toBe(handbookDoc('de'));
+    expect(en).toBe(handbookDoc('en'));
+    for (const c of JOURNEY) expect(de).toContain(`## Kapitel ${c.chapter}: ${c.title}`);
+    // the same chapters in both languages
+    const chapters = (md: string) => [...md.matchAll(/^## (?:Kapitel|Chapter) (\d+):/gm)].map((m) => Number(m[1]));
+    expect(chapters(en)).toEqual(chapters(de));
+    expect(chapters(en)).toEqual(JOURNEY.map((c) => c.chapter));
+  });
+
+  it('every text of the handbook has its English line in web/src/tour/handbook.en.ts', () => {
+    expect(missingTranslations(), 'add these to web/src/tour/handbook.en.ts').toEqual([]);
+    expect(unusedTranslations(), 'remove these from web/src/tour/handbook.en.ts').toEqual([]);
   });
 });
 
@@ -242,7 +253,7 @@ describe('academy API', () => {
     expect(mine.data).toMatchObject({ tours: {}, active: null, can_sandbox: false });
     expect((await t.api.post('/api/academy/sandbox', {})).status).toBe(403);
     expect((await t.api.get('/api/academy/docs/self-hosting')).status).toBe(403);
-    const hb = await t.api.get('/api/academy/docs/handbuch');
+    const hb = await t.api.get('/api/academy/docs/handbook.de');
     expect(hb.status).toBe(200);
     expect(hb.data.markdown).toContain('Kapitel 1');
     expect((await t.api.get('/api/academy/docs')).data).not.toContain('self-hosting');

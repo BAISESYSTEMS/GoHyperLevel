@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { api } from '../api';
+import { useLocale } from '../i18n';
 import { Icon } from '../icons';
 import { useSession } from '../session';
 import { Empty, Link, PageHead, Spinner, useLoad } from '../ui';
@@ -33,9 +34,10 @@ export function DocViewer({ name }: { name: string }) {
   );
 }
 
-/** The whole journey as a printable handbook (Drucken → „Als PDF speichern“). */
+/** The whole journey as a printable handbook (Drucken → „Als PDF speichern“) – in English when the app is in English. */
 export function Handbook() {
   const session = useSession();
+  const locale = useLocale();
   useAnchor(true);
   return (
     <div className="doc-view handbook" data-tour="handbook">
@@ -44,9 +46,9 @@ export function Handbook() {
           <Icon name="printer" size={15} /> Drucken / als PDF speichern
         </button>
       </PageHead>
-      <p className="muted no-print">Tipp: Im Druckdialog „Als PDF speichern“ wählen – dann hast du das Handbuch als Datei. Die Markdown-Fassung liegt im Code unter docs/handbuch.md.</p>
+      <p className="muted no-print">Tipp: Im Druckdialog „Als PDF speichern“ wählen – dann hast du das Handbuch als Datei. Die Markdown-Fassung liegt im Code unter docs/handbook.de.md (Englisch: docs/handbook.md).</p>
       <div className="card doc-card">
-        <Markdown text={handbookMarkdown(session.branding.name || 'HyperLevel')} />
+        <Markdown text={handbookMarkdown(session.branding.name || 'HyperLevel', locale)} />
       </div>
     </div>
   );
