@@ -67,7 +67,7 @@ Seiten mit deutscher Fassung öffnen hier auf Deutsch, die übrigen auf Englisch
 
 ## Die eigene Firma mit HyperLevel führen
 
-- [Company Playbook](company-playbook.md) · [Handbuch (DE)](handbuch.md) · [Kurs: Deine Firma führen](kurs-firma-fuehren.de.md) · [Partnerprogramm](partner-program.de.md)
+- [Company Playbook](company-playbook.md) · [Handbuch](handbook.de.md) · [Kurs: Deine Firma führen](kurs-firma-fuehren.de.md) · [Partnerprogramm](partner-program.de.md)
 
 ## Projekt
 

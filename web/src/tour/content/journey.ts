@@ -2,7 +2,7 @@ import type { Tour } from '../types';
 
 /**
  * Gesamt-Guide „Firma übernehmen“: everything a successor needs to run the company, in 14 chapters.
- * Each chapter is its own tour (resumable); `next` chains them. docs/handbuch.md is generated from this.
+ * Each chapter is its own tour (resumable); `next` chains them. docs/handbook.md and docs/handbook.de.md are generated from this.
  */
 export const JOURNEY: Tour[] = [
   {
@@ -352,7 +352,7 @@ export const JOURNEY: Tour[] = [
     minutes: 15,
     keywords: 'checkliste übergabe abschluss fertig',
     learned: ['Alle Zugänge gehören dir und sind gesichert', 'Versand, Zahlungen und Backups funktionieren', 'Du weißt, was automatisch passiert und wo du nachsiehst', 'Das Handbuch liegt ausgedruckt bereit'],
-    docs: { label: 'Handbuch', file: 'handbuch' },
+    docs: { label: 'Handbuch', file: 'handbook.de' },
     steps: [
       { title: 'Der Übergabe-Status', route: 'academy', target: 'academy-handover', text: 'Geh die offenen Punkte von oben nach unten durch. Jeder Punkt hat einen Link dorthin, wo er erledigt wird.' },
       { title: '☐ Zugänge', text: 'Alle Passwörter im Passwort-Manager, 2FA bei allen Admins, alte Zugänge, Schlüssel und fremde Handys (Geräte der App) entfernt, Konten bei Domain-, Server-, Zahlungs- und KI-Anbietern auf dich umgestellt.' },
