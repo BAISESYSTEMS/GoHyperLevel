@@ -183,7 +183,12 @@ export function createApp(config: Config, modules: Module[]) {
     },
   };
 
-  for (const m of modules) m.beforeMigrations?.(db);
+  try {
+    db.tx(() => { for (const m of modules) m.beforeMigrations?.(db); });
+  } catch (error) {
+    db.close();
+    throw error;
+  }
   for (const m of modules) for (const [name, sql] of m.migrations ?? []) db.migrate(`${m.name}:${name}`, sql);
   // Planner statistics for tables and indexes that have none yet (new indexes from the migrations above).
   db.optimize(true);
