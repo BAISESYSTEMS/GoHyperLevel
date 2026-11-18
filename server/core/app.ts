@@ -91,6 +91,8 @@ export interface LocationRow {
 
 export interface Module {
   name: string;
+  /** Idempotent schema repair, run on every startup before any module’s SQL migrations. */
+  beforeMigrations?(db: Db): void;
   /** Ordered, named SQL migrations. Names must never change once shipped. */
   migrations?: [name: string, sql: string][];
   register(app: App): void;
@@ -181,6 +183,12 @@ export function createApp(config: Config, modules: Module[]) {
     },
   };
 
+  try {
+    db.tx(() => { for (const m of modules) m.beforeMigrations?.(db); });
+  } catch (error) {
+    db.close();
+    throw error;
+  }
   for (const m of modules) for (const [name, sql] of m.migrations ?? []) db.migrate(`${m.name}:${name}`, sql);
   // Planner statistics for tables and indexes that have none yet (new indexes from the migrations above).
   db.optimize(true);

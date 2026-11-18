@@ -32,6 +32,24 @@ export const membershipsModule: Module = {
 
 …and register it in `server/modules/index.ts`. Never change migration names, only append new ones.
 
+### Repairing module schema before migrations
+
+A module may implement the optional synchronous `beforeMigrations(db: Db): void` hook to repair its own existing schema objects, such as stale triggers that would otherwise prevent a SQL migration from running.
+
+At startup, `createApp` calls all hooks in module registry order, before **any** module's SQL migrations and before `register(app)`. All hooks share one database transaction. If a hook throws, changes from all hooks are rolled back, the database connection is closed, and startup fails with the original error; no migrations or module registration run.
+
+Hooks run on every startup, including when no migrations are pending. Keep them idempotent and safe on a fresh database where the module's tables do not exist yet. They receive only the database, so they must not depend on registered services, routes, or asynchronous work. Use named SQL migrations for normal schema evolution; reserve this hook for repairs that must happen before those migrations.
+
+For example, a module can remove an obsolete trigger before migrations replace it:
+
+```ts
+beforeMigrations(db) {
+  db.raw.exec('DROP TRIGGER IF EXISTS example_legacy_trigger');
+},
+```
+
+Modules without this hook need no changes; their migrations and registration retain their existing order. Regression coverage: `tests/pre-migrations.test.ts`.
+
 ## Rules
 
 - **Auth per route:** `public`, `user` (signed in), `admin`, `location` (signed in *or* API key + sub-account). Everything with `location` filters on `ctx.locationId`.

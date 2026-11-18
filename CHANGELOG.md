@@ -6,6 +6,10 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+### Added
+- **Module schema repair:** optional synchronous `beforeMigrations(db)` hooks run on every startup before any module's SQL
+  migrations. All hooks share a transaction; a failure rolls back their changes, closes the database, and aborts startup.
+
 ## [1.0.70] – 2026-11-03
 
 ### Added
