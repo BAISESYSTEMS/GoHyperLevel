@@ -389,7 +389,7 @@ export function checkBudget(app: App, loc: string, projectId: string): { kind: '
     const what = kind === 'hours' ? `${fmtHours(top.used)} von ${fmtHours(top.budget)}` : `${fmtEur(top.used)} von ${fmtEur(top.budget)}`;
     const title = `Budget „${project.name}“: ${String(round1(top.percent)).replace('.', ',')} % ${kind === 'hours' ? 'der Stunden' : 'des Budgets'} verbraucht`;
     const stamp = now().slice(0, 16);
-    for (const u of people) notifyMember(app, { locationId: loc, userId: u, kind: 'budget', title, body: `${what} (Schwelle ${top.threshold} %)`, link: `/app/pm/${project.id}`, projectId: project.id, ref: `budget:${project.id}:${kind}:${top.threshold}:${stamp}`, area: kind === 'amount' ? 'payments' : 'contacts', push: 'payments' });
+    for (const u of people) notifyMember(app, { locationId: loc, userId: u, kind: 'budget', title, body: `${what} (Schwelle ${top.threshold} %)`, link: `/app/pm/${project.id}`, projectId: project.id, ref: `budget:${project.id}:${kind}:${top.threshold}:${stamp}`, area: kind === 'amount' ? 'payments' : 'tasks', push: 'payments' });
     app.services.audit?.({ action: 'pm.budget.threshold', actor: 'System', locationId: loc, entityId: project.id, summary: `${title} – ${what}` });
   }
   for (const h of hits) {

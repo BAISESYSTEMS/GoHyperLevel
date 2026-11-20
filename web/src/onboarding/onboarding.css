@@ -1,0 +1,35 @@
+/* Ersteinstieg: the welcome wizard (FirstRun.tsx – its choice cards reuse .gs-goal from areas/simple.css) and the
+   "Erste Schritte" card on the dashboard (FirstSteps.tsx). Only theme tokens, no own colours. */
+
+/* --- wizard ------------------------------------------------------------------------------------------------------- */
+.fr-progress { display: flex; align-items: center; gap: 10px; margin: -4px 0 10px; }
+.fr-dots { display: inline-flex; gap: 6px; }
+.fr-dots span { width: 28px; height: 6px; border-radius: 99px; background: var(--line); }
+.fr-dots span.done, .fr-dots span.on { background: var(--brand); }
+.fr-dots span.on { opacity: .55; }
+.fr-lead { margin: 0 0 4px; }
+.fr-choices .gs-goal b { gap: 8px; }
+.fr-choices .gs-goal b svg { flex: none; color: var(--brand-text, var(--brand)); }
+.fr-after { margin: 0; }
+.fr-modal .fr-skip { margin-right: auto; }
+
+/* --- "Erste Schritte" card ------------------------------------------------------------------------------------------ */
+.fr-card { margin-bottom: 14px; border-left: 4px solid var(--brand); }
+.fr-card-head { display: flex; align-items: center; gap: 10px; }
+.fr-card-head h2 { margin: 0; flex: 1; }
+.fr-bar { height: 6px; border-radius: 99px; background: var(--line); overflow: hidden; margin: 10px 0 6px; }
+.fr-bar span { display: block; height: 100%; background: var(--brand); border-radius: 99px; transition: width .3s ease; }
+.fr-steps { list-style: none; margin: 0; padding: 0; }
+.fr-steps li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.fr-steps li:first-child { border-top: 0; }
+.fr-steps li.done b { color: var(--muted); text-decoration: line-through; font-weight: 500; }
+.fr-steps li a { color: inherit; text-decoration: none; }
+.fr-steps li a:hover b { text-decoration: underline; }
+.fr-mark { flex: none; width: 22px; height: 22px; border-radius: 99px; border: 2px solid var(--line); display: grid; place-items: center; }
+.fr-steps li.done .fr-mark { background: var(--brand); border-color: var(--brand); color: var(--on-brand, #fff); }
+.fr-steps li.next .fr-mark { border-color: var(--brand); }
+@media (prefers-reduced-motion: reduce) { .fr-bar span { transition: none; } }
+@media (max-width: 599.98px) {
+  .fr-steps li { flex-wrap: wrap; }
+  .fr-steps li .btn { margin-left: 34px; }
+}

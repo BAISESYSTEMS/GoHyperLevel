@@ -622,7 +622,7 @@ export function FocusPage() {
   const noteText = answer?.source === 'ai' ? t('Von der KI zusammengestellt') : answer?.note === 'limit' ? t('KI-Limit für diese Stunde erreicht – nach festen Regeln zusammengestellt') : t('Nach festen Regeln zusammengestellt');
   const shown = mode !== 'idle' || busy || !!error;
   const wakeListening = b.wake === 'on' || b.wake === 'starting';
-  const emoji = c.agent.id ? c.agent.emoji : '✨';
+  const emoji = c.avatar || '✨';
   const canSpeak = canReadAloud(voice.tts || !!speechPlan(c.prefs, voice).tts);
   const chipState = b.activity === 'hearing' ? t('hört zu …') : b.activity === 'thinking' ? t('denkt nach …') : b.activity === 'speaking' ? t('spricht …') : wakeListening ? t('wartet auf „{phrase}“', { phrase: c.wake_phrase }) : t('bereit');
 

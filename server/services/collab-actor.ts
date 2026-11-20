@@ -1,7 +1,7 @@
 import type { App } from '../core/app.js';
 import type { Ctx, User } from '../core/http.js';
 import { sha256 } from '../core/util.js';
-import { hiddenUser } from '../core/permissions.js';
+import { grants, hiddenUser } from '../core/permissions.js';
 
 /**
  * Who is acting, for Wiki and Team-Chat: a person, the HyperLevel Agent on behalf of a person, an AI app
@@ -44,7 +44,7 @@ export function teamUsers(app: App, locationId: string | null, area: string): Te
     .map(userFromRow)
     .filter((u) => u.role === 'admin' || (locationId !== null && u.locations.includes(locationId)))
     .filter((u) => locationId === null || !hiddenUser(app, u, locationId))
-    .filter((u) => u.role === 'admin' || !u.permissions || u.permissions.includes(area));
+    .filter((u) => u.role === 'admin' || !u.permissions || grants(u.permissions, area));
 }
 
 /** A copy of the request as another user (to ask "may this person see it?"). */

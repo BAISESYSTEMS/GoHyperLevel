@@ -6,7 +6,7 @@ import { Check, Spinner, useLoad } from '../ui';
  * Einstellungen does not pull the whole Agentur page into its chunk.
  */
 
-export const DEFAULT_CLIENT_PERMS = ['dashboard', 'conversations', 'calendars', 'contacts', 'funnels', 'forms'];
+export const DEFAULT_CLIENT_PERMS = ['dashboard', 'conversations', 'calendars', 'contacts', 'tasks', 'funnels', 'forms'];
 
 export function PermissionPicker({ value, onChange }: { value: string[] | null; onChange: (v: string[] | null) => void }) {
   const perms = useLoad(() => api.get<Record<string, string>>('/api/permissions'), []);

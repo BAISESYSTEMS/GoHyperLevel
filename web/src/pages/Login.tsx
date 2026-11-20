@@ -4,13 +4,19 @@ import { ShieldCheck } from 'lucide-react';
 import { api } from '../api';
 import type { Branding } from '../session';
 import { Field, Input } from '../ui';
-import { getPasskey, passkeyError, passkeysSupported } from '../webauthn';
 import { Later, lazyPages } from '../lazy';
 import { ProviderIcon } from '../provider-icon';
 import { resolveDark, usePrefs } from '../theme/store';
 import { PRODUCT_ICON } from '../theme/brand-icon';
 import { serverText, useT } from '../i18n';
 import { LanguageLinks } from '../i18n/LanguageMenu';
+
+// Passkeys: the WebAuthn helpers (../webauthn) are a chunk of their own – fetched when a passkey is on offer, used on the click.
+// (The support check is the one of webauthn.ts, repeated here so the login page needs no download for it.)
+const passkeysSupported = () => typeof window !== 'undefined' && !!window.PublicKeyCredential && !!navigator.credentials;
+const webauthn = () => import('../webauthn');
+const getPasskey = async (options: unknown) => (await webauthn()).getPasskey(options);
+const passkeyError = async (e: unknown) => (await webauthn()).passkeyError(e);
 
 // Only the 2FA gate needs these – the settings page they live on is a big chunk of its own.
 const { TwoFactor } = lazyPages(() => import('./Settings'), 'TwoFactor');
@@ -211,7 +217,7 @@ export function LoginPage({ needsSetup, onDone, branding, hint }: { needsSetup: 
       try {
         credential = await getPasskey(o.options);
       } catch (e) {
-        throw new Error(passkeyError(e));
+        throw new Error(await passkeyError(e));
       }
       return api.post('/api/auth/passkey/login', { challenge_id: o.challenge_id, credential, next: here() });
     });
@@ -238,6 +244,8 @@ export function LoginPage({ needsSetup, onDone, branding, hint }: { needsSetup: 
   // --- steps ------------------------------------------------------------------------------
   if (step.kind === 'second') {
     const viaTicket = !!step.token;
+    // a passkey is on offer: fetch its helpers now, so the click finds them (the browser wants the call close to the click)
+    if (step.passkey && passkeysSupported()) void webauthn().catch(() => undefined);
     const send = (extra: Record<string, unknown>) => (viaTicket ? api.post('/api/auth/second-factor', { token: step.token, ...extra }) : api.post('/api/auth/login', { email: f.email, password: f.password, ...extra }));
     const usePasskey = () =>
       run('passkey', async () => {
@@ -245,7 +253,7 @@ export function LoginPage({ needsSetup, onDone, branding, hint }: { needsSetup: 
         try {
           credential = await getPasskey(step.passkey!.options);
         } catch (e) {
-          throw new Error(passkeyError(e));
+          throw new Error(await passkeyError(e));
         }
         return send({ passkey: { challenge_id: step.passkey!.challenge_id, credential } });
       });
@@ -351,6 +359,7 @@ export function LoginPage({ needsSetup, onDone, branding, hint }: { needsSetup: 
   // --- start --------------------------------------------------------------------------------
   const m = methods;
   const passkeyOk = !!m?.passkey && passkeysSupported() && !needsSetup;
+  if (passkeyOk) void webauthn().catch(() => undefined);
   const emailWay = !!m && (needsSetup || m.password || m.magic_link);
   const top = !!m && (m.providers.length > 0 || passkeyOk);
   const magicOnly = !!m && !m.password && m.magic_link;

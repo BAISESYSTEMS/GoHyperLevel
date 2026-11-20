@@ -1,6 +1,6 @@
 import type { App } from '../core/app.js';
 import { csvSafe } from '../core/csv.js';
-import { hiddenUser } from '../core/permissions.js';
+import { grants, hiddenUser } from '../core/permissions.js';
 import { todayYmd } from './acc-ledger.js';
 
 /** Small helpers shared by the Back-Office modules (accounting, inventory, HR). */
@@ -32,7 +32,7 @@ export function usersWithArea(app: App, locationId: string, area: string, opts: 
     .filter((u) => {
       if (u.role === 'admin') return true;
       if (!u.permissions) return !opts.explicit;
-      return (JSON.parse(u.permissions) as string[]).includes(area);
+      return grants(JSON.parse(u.permissions) as string[], area);
     })
     .map((u) => u.id);
 }

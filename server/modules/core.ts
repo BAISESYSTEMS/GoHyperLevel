@@ -162,6 +162,16 @@ export const coreModule: Module = {
     ['002-user-permissions', `ALTER TABLE users ADD COLUMN permissions TEXT;`],
     // Optional team user behind a key (one per AI agent): the key gets that user's areas instead of the whole sub-account.
     ['003-api-key-user', `ALTER TABLE api_keys ADD COLUMN user_id TEXT REFERENCES users(id) ON DELETE CASCADE;`],
+    // Tasks & projects became their own area: whoever had contacts keeps them.
+    [
+      '004-tasks-area',
+      `UPDATE users SET permissions = json_insert(permissions, '$[#]', 'tasks')
+       WHERE permissions IS NOT NULL AND json_valid(permissions)
+         AND EXISTS (SELECT 1 FROM json_each(users.permissions) WHERE value = 'contacts')
+         AND NOT EXISTS (SELECT 1 FROM json_each(users.permissions) WHERE value = 'tasks');`,
+    ],
+    // Read-only keys (scope "read"): only GET and read-only MCP tools, e.g. an agent that may look into a mailbox but never send.
+    ['005-api-key-scope', `ALTER TABLE api_keys ADD COLUMN scope TEXT NOT NULL DEFAULT 'write';`],
   ],
   register(app) {
     const { db, router } = app;
@@ -352,7 +362,7 @@ export const coreModule: Module = {
     // --- API keys -----------------------------------------------------------
     router.get('/api/api-keys', 'location', (ctx) =>
       db.all(
-        `SELECT k.id, k.name, k.prefix, k.created_at, k.last_used_at, k.user_id, u.name AS user_name FROM api_keys k LEFT JOIN users u ON u.id = k.user_id
+        `SELECT k.id, k.name, k.prefix, k.scope, k.created_at, k.last_used_at, k.user_id, u.name AS user_name FROM api_keys k LEFT JOIN users u ON u.id = k.user_id
          WHERE k.location_id = ? ORDER BY k.created_at DESC`,
         ctx.locationId,
       ),
@@ -361,9 +371,9 @@ export const coreModule: Module = {
       if (ctx.viaApiKey) throw new HttpError(403, 'API-Schlüssel können keine Schlüssel anlegen');
       const userId = keyUserFor(app, ctx, ctx.body.user_id);
       const key = `pghl_${token(24)}`;
-      const row = { id: id(), location_id: ctx.locationId, name: str(ctx.body.name, 'Name') || 'API', key_hash: sha256(key), prefix: key.slice(0, 10), user_id: userId, created_at: now() };
+      const row = { id: id(), location_id: ctx.locationId, name: str(ctx.body.name, 'Name') || 'API', key_hash: sha256(key), prefix: key.slice(0, 10), user_id: userId, scope: ctx.body.scope === 'read' ? 'read' : 'write', created_at: now() };
       db.insert('api_keys', row);
-      return { id: row.id, name: row.name, user_id: userId, key };
+      return { id: row.id, name: row.name, user_id: userId, scope: row.scope, key };
     });
     router.delete('/api/api-keys/:id', 'location', (ctx) => {
       db.run('DELETE FROM api_keys WHERE id = ? AND location_id = ?', ctx.params.id, ctx.locationId);

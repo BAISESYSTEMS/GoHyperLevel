@@ -15,6 +15,13 @@ export type WlPlan = PlanKey;
 export const WL_PLANS: WlPlan[] = ['solo', 'team', 'agency'];
 /** The source the forms path passes on (`source` field of the HQ form) and the built-in list stores. */
 export const WAITLIST_SOURCE = 'Cloud-Warteliste';
+/**
+ * Where a signup came from (issue #22): the page's `utm_source`, kept short and plain (lower case, letters, digits, `.`, `_`, `-`),
+ * so the operator list shows "producthunt" or "reddit" instead of the fixed source. Empty when the page had none.
+ */
+export function utmSource(v: unknown): string {
+  return String(v ?? '').toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+}
 /** The section id every waitlist link scrolls to. */
 export const WAITLIST_ANCHOR = 'warteliste';
 /** The public endpoint the form posts to. */
@@ -177,6 +184,8 @@ export interface WaitlistEntry {
   name: string;
   plan: WlPlan | '';
   lang: WlLang;
+  /** utm_source of the page the form sat on ('' = none). */
+  utm: string;
 }
 
 /** A submission (JSON or form fields) → the entry, or what is wrong with it. `needName`: the receiving form wants a first name. */
@@ -186,7 +195,7 @@ export function parseWaitlist(body: Record<string, unknown>, o: { needName?: boo
   const name = clean(body.name ?? body.first_name, 120);
   if (o.needName && !name) return { ok: false, error: 'name' };
   if (!yes(body.consent)) return { ok: false, error: 'consent' };
-  return { ok: true, entry: { email, name, plan: wlPlan(body.plan), lang: wlLang(body.lang) } };
+  return { ok: true, entry: { email, name, plan: wlPlan(body.plan), lang: wlLang(body.lang), utm: utmSource(body.utm_source ?? body._utm_source) } };
 }
 
 /** A honeypot field was filled (bots): answer like a success, store nothing. */
@@ -228,6 +237,8 @@ export interface WaitlistView {
   doi: boolean;
   /** Result of the last post (?wl=…), shown above or instead of the form. */
   state?: WlState;
+  /** utm_source of the page, sent along with the form (see utmSource). */
+  utm?: string;
 }
 
 /** Class names of the page the form sits on (the landing page and the cloud pages have their own styles). */
@@ -252,7 +263,7 @@ export function waitlistFormHtml(v: WaitlistView, c: WlClasses, idp = 'wl'): str
   const privacy = v.privacyUrl ? ` ${h(t.privacyPrefix)} <a href="${h(v.privacyUrl)}" target="_blank" rel="noopener">${h(t.privacy)}</a>.` : '';
   const plans = [`<option value="">${h(t.planAny)}</option>`, ...WL_PLANS.map((p) => `<option value="${p}"${v.plan === p ? ' selected' : ''}>${h(t.plans[p])}</option>`)].join('');
   return `<form class="${c.form}" method="post" action="${WAITLIST_ACTION}" autocomplete="on">${err}
-<input type="hidden" name="lang" value="${v.lang}"><input type="hidden" name="back" value="${h(safeBack(v.back))}"><input type="hidden" name="wt" value="${h(v.token)}">
+<input type="hidden" name="lang" value="${v.lang}"><input type="hidden" name="back" value="${h(safeBack(v.back))}"><input type="hidden" name="wt" value="${h(v.token)}">${v.utm ? `<input type="hidden" name="utm_source" value="${h(v.utm)}">` : ''}
 <div class="${c.row}"><div><label class="${c.label}" for="${idp}-name">${h(v.needName ? t.firstName : t.name)}</label><input class="${c.input}" id="${idp}-name" name="name" type="text" maxlength="120" autocomplete="${v.needName ? 'given-name' : 'name'}"${v.needName ? ' required' : ''}></div>
 <div><label class="${c.label}" for="${idp}-email">${h(t.email)}</label><input class="${c.input}" id="${idp}-email" name="email" type="email" maxlength="200" autocomplete="email" required></div></div>
 <label class="${c.label}" for="${idp}-plan">${h(t.plan)}</label><select class="${c.input}" id="${idp}-plan" name="plan">${plans}</select>

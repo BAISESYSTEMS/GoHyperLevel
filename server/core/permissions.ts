@@ -3,7 +3,9 @@ export const PERMISSIONS = {
   dashboard: 'Dashboard',
   conversations: 'Konversationen',
   calendars: 'Kalender',
-  contacts: 'Kontakte & Aufgaben',
+  contacts: 'Kontakte',
+  // Own area since 1.0.72 so an agent can plan with the team without seeing customers (users with contacts got it added).
+  tasks: 'Aufgaben & Projekte',
   opportunities: 'Opportunities',
   campaigns: 'Kampagnen & Vorlagen',
   workflows: 'Automationen',
@@ -44,8 +46,14 @@ export const visibleLocations = <T>(app: { services: Record<string, any> }, u: {
 export function cleanPermissions(v: unknown): Permission[] | null {
   if (v === null || v === undefined) return null;
   if (!Array.isArray(v)) return null;
-  return v.map(String).filter((p): p is Permission => p in PERMISSIONS);
+  const out = [...new Set(v.map(String).filter((p): p is Permission => p in PERMISSIONS))];
+  // Contacts include tasks & projects (as before 1.0.72); tasks alone are the new, narrower grant.
+  if (out.includes('contacts') && !out.includes('tasks')) out.push('tasks');
+  return out;
 }
+
+/** Whether a list of areas grants `area` – also for lists stored before tasks became their own area. */
+export const grants = (perms: readonly string[], area: string) => perms.includes(area) || (area === 'tasks' && perms.includes('contacts'));
 
 /**
  * Which area an API route belongs to. Lookups that other screens need (tag, field, pipeline,
@@ -119,11 +127,11 @@ const ROUTES: [prefix: string, perm: Permission, readableByAll?: boolean][] = [
   ['/api/ticket-events', 'calendars'],
   ['/api/contacts', 'contacts'],
   ['/api/notes', 'contacts'],
-  ['/api/tasks', 'contacts'],
+  ['/api/tasks', 'tasks'],
   ['/api/follow-ups', 'contacts'],
   // Project planning (tasks, boards, Gantt, time entries); hourly rates and invoices from time belong to payments.
   ['/api/pm/billing', 'payments'],
-  ['/api/pm', 'contacts'],
+  ['/api/pm', 'tasks'],
   ['/api/smart-lists', 'contacts', true],
   ['/api/activities', 'contacts'],
   ['/api/deal-smart-tags', 'opportunities', true],

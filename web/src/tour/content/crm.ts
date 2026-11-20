@@ -35,7 +35,7 @@ export const CRM_TOURS: Tour[] = [
     routes: ['project'],
     keywords: 'steckbrief uptime website down überwachung claude sitzung repository server dokumente artefakte',
     learned: ['Was im Steckbrief eines Projekts steht', 'Wie die Website-Überwachung funktioniert', 'Wo Dokumente, Claude-Artefakte und Claude-Sitzungen hängen', 'Dass Zugangsdaten nie in den Steckbrief gehören – nur der Hinweis, wo sie liegen'],
-    docs: { label: 'Handbuch: Kunden & Projekte', file: 'handbuch', anchor: 'kapitel-4-kunden--projekte' },
+    docs: { label: 'Handbuch: Kunden & Projekte', file: 'handbook.de', anchor: 'kapitel-4-kunden--projekte' },
     steps: [
       { title: 'Der Steckbrief', route: 'project', target: 'page-head', text: 'Jeder Sub-Account kann ein Projekt sein. Hier steht alles, was man darüber wissen muss – besonders wichtig für eine Übergabe.' },
       { title: 'Kennzahlen des Projekts', target: 'project-stats', text: 'Kontakte, offene Deals, offene und überfällige Aufgaben, Ungelesenes und Entwürfe.' },

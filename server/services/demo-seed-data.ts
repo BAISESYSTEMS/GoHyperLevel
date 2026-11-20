@@ -43,7 +43,8 @@ export interface LocPlan {
   tickets: number;
   script?: string;
   pm?: { name: string; template?: string; tasks?: [title: string, startDay: number, days: number, milestone?: boolean][] };
-  office?: [kind: 'docx' | 'xlsx', name: string][];
+  /** Office documents: a text (docx, paragraphs split by blank lines) or table rows (xlsx); without content a short placeholder. */
+  office?: [kind: 'docx' | 'xlsx', name: string, content?: string | (string | number)[][]][];
   webinar?: string;
   reports: string[];
   /** Load the built-in template „Software- & SaaS-Firma (HQ)“ first (services/hq-template.ts). */
@@ -120,7 +121,11 @@ export const PLANS: LocPlan[] = [
     script: 'Erstgespräch Website',
     webinar: 'Mehr Anfragen über Google',
     pm: { name: 'Relaunch Bäckerei Morgenrot', template: 'website-projekt' },
-    office: [['docx', 'Angebot Relaunch Bäckerei Morgenrot'], ['xlsx', 'Kampagnenbudget Q4']],
+    office: [
+      ['docx', 'Angebot Relaunch Bäckerei Morgenrot', 'Angebot Website-Relaunch\n\nBäckerei Morgenrot, Berlin\n\nAusgangslage: Die bestehende Website ist nicht für Smartphones optimiert, lädt langsam und bietet keine Online-Vorbestellung.\n\nLeistungen: Konzept und Sitemap, Design (Startseite und sechs Unterseiten), Umsetzung im Baukasten, Vorbestellung für Torten, Texte-Check und SEO-Grundeinrichtung, Schulung (1 Stunde).\n\nZeitplan: Kick-off in KW 46, Entwurf nach zwei Wochen, Go-live nach sechs Wochen.\n\nInvestition: 6.800 € netto, zahlbar 50 % bei Auftrag und 50 % bei Go-live. Optional Wartung für 89 € im Monat.'],
+      ['xlsx', 'Kampagnenbudget Q4', [['Kunde', 'Kanal', 'Oktober (€)', 'November (€)', 'Dezember (€)', 'Summe (€)'], ['Bäckerei Morgenrot', 'Google Ads', 450, 520, 680, 1650], ['Holzwerk Brandt', 'Google Ads', 900, 900, 600, 2400], ['Hotel Am Kanal', 'Meta Ads', 600, 750, 1100, 2450], ['Café Sonnendeck', 'Instagram', 250, 250, 400, 900], ['Gesamt', '', 2200, 2420, 2780, 7400]]],
+      ['docx', 'Protokoll Jour fixe Hotel Am Kanal', 'Protokoll Jour fixe\n\nTeilnehmende: Hotel Am Kanal (Direktion, Marketing), Nordlicht Digital\n\n1. Buchungsstrecke: Die Absprungrate im zweiten Schritt ist von 48 % auf 31 % gesunken.\n\n2. Weihnachtsangebot: Landingpage bis Freitag, Kampagnenstart am Montag.\n\n3. Nächster Termin: Montag, 9:30 Uhr.\n\nAufgaben: Texte Weihnachtsangebot (Hotel), Bilder freigeben (Hotel), Landingpage bauen (Nordlicht).'],
+    ],
     reports: ['sales', 'marketing', 'revenue'],
   },
   {
@@ -171,6 +176,22 @@ export const PLANS: LocPlan[] = [
     platforms: ['Google', 'Arztportal', 'Facebook'],
     tickets: 3,
     webinar: 'Rückenschmerzen im Büro – was wirklich hilft',
+    pm: {
+      name: 'Eröffnung Präventionsraum',
+      tasks: [
+        ['Angebote für Geräte einholen', -30, 5],
+        ['Kassen-Zertifizierung Rückenkurs beantragen', -24, 10],
+        ['Raum streichen und Boden verlegen', -12, 6],
+        ['Geräte geliefert', -3, 1, true],
+        ['Kursplan und Preise festlegen', 1, 4],
+        ['Website und Newsletter ankündigen', 4, 5],
+        ['Tag der offenen Tür', 12, 1, true],
+      ],
+    },
+    office: [
+      ['docx', 'Hygieneplan Praxis', 'Hygieneplan Praxis Sonnenweg\n\nBehandlungsliegen: nach jeder Behandlung Auflage wechseln, Liege täglich wischdesinfizieren.\n\nHände: vor und nach jedem Patientenkontakt desinfizieren.\n\nGeräte und Kleingeräte: nach Nutzung reinigen, wöchentlich desinfizieren (Liste am Empfang).\n\nWäsche: Handtücher bei 60 °C waschen.\n\nVerantwortlich: Praxisleitung, Prüfung jeden Freitag.'],
+      ['xlsx', 'Auslastung Therapeuten November', [['Therapeut', 'Termine', 'Ausfälle', 'Auslastung (%)'], ['Lena Maurer', 132, 6, 91], ['Daniel Huber', 118, 9, 84], ['Jonas Weiß (Massage)', 54, 2, 78], ['Gesamt', 304, 17, 86]]],
+    ],
     reports: ['revenue'],
   },
   {
@@ -238,7 +259,10 @@ export const PLANS: LocPlan[] = [
         ['Übergabe an Bauherrn', 17, 1, true],
       ],
     },
-    office: [['docx', 'Prüfprotokoll Vorlage'], ['xlsx', 'Materialliste Neubau Lindenstraße']],
+    office: [
+      ['docx', 'Prüfprotokoll Vorlage', 'Prüfprotokoll nach DIN VDE 0100-600\n\nAnlage: ____________________   Auftraggeber: ____________________\n\nBesichtigen: Auswahl der Betriebsmittel, Schutz gegen direktes Berühren, Kennzeichnung der Stromkreise.\n\nErproben: Funktion der Fehlerstrom-Schutzeinrichtungen, Schalter und Taster.\n\nMessen: Schleifenimpedanz, Isolationswiderstand, Auslösestrom und Auslösezeit der RCD.\n\nErgebnis: mängelfrei / Mängel laut Anlage\n\nPrüfer: ____________________   Datum: ____________'],
+      ['xlsx', 'Materialliste Neubau Lindenstraße', [['Position', 'Menge', 'Einheit', 'Einzelpreis (€)', 'Summe (€)'], ['NYM-J 3×1,5 mm²', 6, 'Ring', 69, 414], ['NYM-J 5×2,5 mm²', 2, 'Ring', 98, 196], ['Schalterdosen UP', 140, 'Stk', 0.25, 35], ['Zählerschrank 4-feldrig', 1, 'Stk', 890, 890], ['FI/LS-Kombination', 12, 'Stk', 48, 576], ['Steckdosen reinweiß', 64, 'Stk', 3.9, 249.6]]],
+    ],
     reports: ['sales', 'revenue'],
   },
   {
@@ -278,6 +302,22 @@ export const PLANS: LocPlan[] = [
     platforms: ['Google', 'Facebook'],
     tickets: 2,
     webinar: 'Masterclass: Fit trotz Bürojob',
+    pm: {
+      name: 'Launch Neujahrs-Challenge',
+      tasks: [
+        ['Konzept und Ablauf der 30 Tage', -21, 4],
+        ['Videos drehen (12 Workouts)', -14, 6],
+        ['Landingpage und Checkout', -6, 4],
+        ['Videos geschnitten', -1, 1, true],
+        ['E-Mail-Serie schreiben', 1, 5],
+        ['Instagram-Kampagne starten', 8, 10],
+        ['Start der Challenge', 18, 1, true],
+      ],
+    },
+    office: [
+      ['docx', 'Content-Plan Januar', 'Content-Plan Januar\n\nWoche 1: Start der Neujahrs-Challenge – Reels mit dem Workout von Tag 1, Live am Sonntag.\n\nWoche 2: Ernährung – drei schnelle Frühstücksideen, Kundenstimme Sophie.\n\nWoche 3: Motivation – „Warum Konstanz schlägt Intensität“, Q&A live.\n\nWoche 4: Ergebnisse – Vorher/Nachher (mit Einverständnis), Angebot 1:1-Coaching.'],
+      ['xlsx', 'Umsatzplanung Challenge', [['Kanal', 'Besucher', 'Anmeldungen', 'Käufe', 'Umsatz (€)'], ['Instagram', 4200, 610, 96, 14304], ['Newsletter', 1800, 420, 88, 13112], ['Partner', 950, 140, 31, 4619], ['Gesamt', 6950, 1170, 215, 32035]]],
+    ],
     reports: ['marketing'],
   },
   {
@@ -332,6 +372,10 @@ export const PLANS: LocPlan[] = [
     script: 'Demo-Call Qualifizierung',
     pm: { name: 'Onboarding Pflegedienst Lichtblick', template: 'kunden-onboarding' },
     webinar: 'Live-Demo: Schichtplanung ohne Excel',
+    office: [
+      ['docx', 'Release Notes 1.8', 'Taktwerk 1.8 – Release Notes\n\nNeu: Schichtgruppen (Küche, Service, Lager) mit eigenen Farben und Vorlagen.\n\nNeu: Warnung bei weniger als 11 Stunden Ruhezeit direkt im Plan.\n\nVerbessert: Der CSV-Import erkennt Umlaute und Trennzeichen automatisch.\n\nBehoben: Das Kalender-Abo zeigt geänderte Schichten jetzt innerhalb von 15 Minuten.'],
+      ['xlsx', 'Investoren-Update KPIs', [['Monat', 'MRR (€)', 'Kunden', 'Testphasen', 'Churn (%)'], ['Juli', 2380, 24, 6, 2.1], ['August', 2790, 28, 7, 0], ['September', 3150, 32, 9, 3.1], ['Oktober', 3520, 35, 8, 0], ['November', 3890, 37, 8, 2.7]]],
+    ],
     reports: ['sales'],
     hq: true,
   },
@@ -375,6 +419,22 @@ export const PLANS: LocPlan[] = [
     platforms: ['Google', 'Facebook'],
     tickets: 2,
     webinar: 'Online-Verkostung: Drei Röstungen im Vergleich',
+    pm: {
+      name: 'Weihnachtsgeschäft',
+      tasks: [
+        ['Sorten für den Adventskalender festlegen', -28, 3],
+        ['Verpackung und Etiketten bestellen', -24, 4],
+        ['Fotos für den Shop', -14, 2],
+        ['Adventskalender im Shop live', -8, 1, true],
+        ['Firmengeschenke abfüllen', 2, 8],
+        ['Versand-Spitze vorbereiten (Aushilfe)', 6, 10],
+        ['Letzter Versandtag', 31, 1, true],
+      ],
+    },
+    office: [
+      ['xlsx', 'Röstplan Dezember', [['Röstung', 'Herkunft', 'Menge (kg)', 'Rösttag'], ['Hafenbohne Espresso', 'Brasilien', 120, 'Donnerstag'], ['Fördeblick Filter', 'Äthiopien', 60, 'Donnerstag'], ['Nachtwache entkoffeiniert', 'Kolumbien', 20, 'jeden zweiten Donnerstag'], ['Adventskalender-Mischung', 'verschiedene', 35, 'einmalig']]],
+      ['docx', 'Rezeptkarte Filterkaffee', 'Filterkaffee wie im Café\n\n1. 15 g Kaffee mittelfein mahlen.\n\n2. Filterpapier ausspülen, Kanne vorwärmen.\n\n3. 30 g Wasser (94 °C) aufgießen, 30 Sekunden quellen lassen.\n\n4. In Kreisen auf 250 g auffüllen, Gesamtzeit etwa drei Minuten.'],
+    ],
     reports: ['revenue'],
     store: true,
   },

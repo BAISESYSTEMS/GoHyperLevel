@@ -24,6 +24,11 @@
     r.setAttribute('data-density', o.spatial ? 'comfortable' : p.density);
     r.setAttribute('data-font', p.font);
     r.setAttribute('data-icons', p.icons);
+    // Stil & Fenster (web/src/theme/look.ts): an older cache has none of these – the standard look.
+    r.setAttribute('data-surface', p.surface || 'standard');
+    r.setAttribute('data-side-style', p.side_style || 'solid');
+    r.setAttribute('data-header', p.header || 'solid');
+    r.setAttribute('data-backdrop', p.backdrop || 'plain');
     var css = o.css && (dark ? o.css.dark : o.css.light);
     if (css) {
       var s = document.createElement('style');

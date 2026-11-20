@@ -133,7 +133,7 @@ export const agentEventsModule: Module = {
         const comment = (e.data.comment ?? {}) as Record<string, any>;
         recordAgentEvent(app, e.locationId, {
           type: 'task.agent',
-          area: 'contacts',
+          area: 'tasks',
           data: {
             change: kind.slice(5),
             task_id: t.id,

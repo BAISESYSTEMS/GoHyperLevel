@@ -84,7 +84,7 @@ export const resetWhiteLabel = (app: App, t: Tenant) => applyBranding(app, t, {}
 
 const INVITE_DAYS = 7;
 /** What a login for one client account of an Agentur gets by default (the owner can widen it). */
-const CLIENT_AREAS = ['dashboard', 'conversations', 'calendars', 'contacts', 'funnels', 'forms'] as const;
+const CLIENT_AREAS = ['dashboard', 'conversations', 'calendars', 'contacts', 'tasks', 'funnels', 'forms'] as const;
 
 export function createInvite(app: App, userId: string, locationId: string): string {
   const t = token(32);

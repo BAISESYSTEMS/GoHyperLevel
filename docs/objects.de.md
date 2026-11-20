@@ -75,7 +75,7 @@ Menü **Lead-Scoring** (Marketing). Ein oder mehrere **Modelle** je Sub-Account;
 
 ## Rechte
 
-Firmen, Datensätze, Verknüpfungen, Ansichten und Scores gehören zum Bereich **Kontakte & Aufgaben**; Objekte, Eigenschaften, Labels und Scoring-Modelle anlegen/ändern braucht **Einstellungen des Sub-Accounts** (die Listen sind für alle lesbar). „Nur lesen“-Agenturschlüssel können nichts ändern.
+Firmen, Datensätze, Verknüpfungen, Ansichten und Scores gehören zum Bereich **Kontakte**; Objekte, Eigenschaften, Labels und Scoring-Modelle anlegen/ändern braucht **Einstellungen des Sub-Accounts** (die Listen sind für alle lesbar). „Nur lesen“-Agenturschlüssel können nichts ändern.
 
 ## API & MCP
 

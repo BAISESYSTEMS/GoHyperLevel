@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { api } from '../api';
+import { useLocale, useT } from '../i18n';
 import { Icon } from '../icons';
 import { useSession } from '../session';
 import { Empty, Link, PageHead, Spinner, useLoad } from '../ui';
@@ -17,15 +18,18 @@ function useAnchor(ready: boolean) {
   }, [ready]);
 }
 
-/** A page from docs/ (or the README), read inside the app. */
+/** A page from docs/ (or the README), read inside the app – in English the English twin of a German page (`growth.de` → `growth`). */
 export function DocViewer({ name }: { name: string }) {
-  const doc = useLoad(() => api.get<{ name: string; title: string; markdown: string }>(`/api/academy/docs/${encodeURIComponent(name)}`), [name]);
+  const t = useT('academy');
+  const locale = useLocale();
+  const page = locale === 'en' ? name.replace(/\.de$/, '') : name;
+  const doc = useLoad(() => api.get<{ name: string; title: string; markdown: string }>(`/api/academy/docs/${encodeURIComponent(page)}`), [page]);
   useAnchor(!!doc.data);
   return (
     <div className="doc-view">
-      <PageHead title={doc.data?.title ?? 'Anleitung'} sub={<Link to="academy">← Akademie</Link>}>
+      <PageHead title={doc.data?.title ?? t('Anleitung')} sub={<Link to="academy">{t('← Akademie')}</Link>}>
         <button className="btn secondary" onClick={() => window.print()}>
-          <Icon name="printer" size={15} /> Drucken / PDF
+          <Icon name="printer" size={15} /> {t('Drucken / PDF')}
         </button>
       </PageHead>
       {doc.error ? <Empty>{doc.error}</Empty> : !doc.data ? <Spinner /> : <div className="card doc-card"><Markdown text={doc.data.markdown} /></div>}
@@ -33,20 +37,22 @@ export function DocViewer({ name }: { name: string }) {
   );
 }
 
-/** The whole journey as a printable handbook (Drucken → „Als PDF speichern“). */
+/** The whole journey as a printable handbook (Drucken → „Als PDF speichern“) – in English when the app is in English. */
 export function Handbook() {
+  const t = useT('academy');
   const session = useSession();
+  const locale = useLocale();
   useAnchor(true);
   return (
     <div className="doc-view handbook" data-tour="handbook">
-      <PageHead title="Handbuch" sub={<Link to="academy">← Akademie</Link>}>
+      <PageHead title={t('Handbuch')} sub={<Link to="academy">{t('← Akademie')}</Link>}>
         <button className="btn" data-tour="handbook-print" onClick={() => window.print()}>
-          <Icon name="printer" size={15} /> Drucken / als PDF speichern
+          <Icon name="printer" size={15} /> {t('Drucken / als PDF speichern')}
         </button>
       </PageHead>
-      <p className="muted no-print">Tipp: Im Druckdialog „Als PDF speichern“ wählen – dann hast du das Handbuch als Datei. Die Markdown-Fassung liegt im Code unter docs/handbuch.md.</p>
+      <p className="muted no-print">{t('Tipp: Im Druckdialog „Als PDF speichern“ wählen – dann hast du das Handbuch als Datei. Die Markdown-Fassung liegt im Code unter docs/handbook.de.md (Englisch: docs/handbook.md).')}</p>
       <div className="card doc-card">
-        <Markdown text={handbookMarkdown(session.branding.name || 'HyperLevel')} />
+        <Markdown text={handbookMarkdown(session.branding.name || 'HyperLevel', locale)} />
       </div>
     </div>
   );

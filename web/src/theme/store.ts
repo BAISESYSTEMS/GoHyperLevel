@@ -4,7 +4,8 @@ import { api } from '../api';
 import { registerIconPack, setIconPack } from '../icons';
 import { toastError } from '../ui';
 import { currentXr, spatialActive } from '../xr/detect';
-import { buildBoth, modeTokens, type LookInput } from './css';
+import { buildBoth, sideTokens, type LookInput } from './css';
+import { styleAttrs, styleOf } from './look';
 
 /**
  * The look of this browser: the effective preferences (from the server, cached in localStorage so that
@@ -13,6 +14,7 @@ import { buildBoth, modeTokens, type LookInput } from './css';
  *
  *   html[data-theme="light|dark"]   resolved mode (also what styles.css' dark rules key on)
  *   html[data-theme-id], data-dept-mode, data-dept-tint, data-sidebar, data-density, data-font, data-icons
+ *   html[data-surface], data-side-style, data-header, data-backdrop   Stil & Fenster (look.ts, look.css)
  *   html[data-spatial="1"]          Raum-Modus (headsets, glasses: docs/xr.md) – data-density is "comfortable" while it is on
  *   <style id="pghl-theme">         the theme's CSS variables (css.ts)
  */
@@ -92,7 +94,7 @@ export const resolveDark = (mode: Prefs['mode']) => (mode === 'dark' ? true : mo
 /** Is the Raum-Modus on? "auto" follows the device (visionOS, Quest, Android XR …), "on" and "off" are the person's word. */
 export const spatialOf = (p: Prefs) => spatialActive(p.spatial, currentXr());
 
-const lookOf = (p: Prefs, brandColor: string): LookInput => ({ theme: p.theme, accent: p.accent, palette: p.dept_palette, brandColor, spatial: spatialOf(p) });
+const lookOf = (p: Prefs, brandColor: string): LookInput => ({ theme: p.theme, accent: p.accent, palette: p.dept_palette, brandColor, spatial: spatialOf(p), style: styleOf(p) });
 
 function styleEl(): HTMLStyleElement | null {
   if (typeof document === 'undefined') return null;
@@ -111,7 +113,8 @@ export function applyLook(p: Prefs, brandColor = state.brandColor, remember = tr
   const root = document.documentElement;
   const isDark = resolveDark(p.mode);
   const spatial = spatialOf(p);
-  const css = buildBoth(lookOf(p, brandColor));
+  const look = lookOf(p, brandColor);
+  const css = buildBoth(look);
   root.dataset.theme = isDark ? 'dark' : 'light';
   root.dataset.themeId = p.theme;
   root.dataset.deptMode = p.dept;
@@ -122,13 +125,14 @@ export function applyLook(p: Prefs, brandColor = state.brandColor, remember = tr
   root.dataset.density = spatial ? 'comfortable' : p.density;
   root.dataset.font = p.font;
   root.dataset.icons = p.icons;
+  Object.assign(root.dataset, styleAttrs(look.style!));
   const el = styleEl();
   if (el) el.textContent = isDark ? css.dark : css.light;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', modeTokens(p.theme, isDark).side);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', sideTokens(look, isDark).side);
   // Without the tile order: this cache is shared by everyone on the browser and outlives a logout; web/src/sortable/store.ts
   // keeps the order per login.
   const { tile_order: _order, ...cached } = p;
-  if (remember) writeLocal(LOOK_KEY, JSON.stringify({ v: 1, p: cached, css, spatial, side: { light: modeTokens(p.theme, false).side, dark: modeTokens(p.theme, true).side } }));
+  if (remember) writeLocal(LOOK_KEY, JSON.stringify({ v: 1, p: cached, css, spatial, side: { light: sideTokens(look, false).side, dark: sideTokens(look, true).side } }));
   // The styles of the mode are a chunk of their own: nobody who does not wear a headset downloads them.
   if (spatial) void import('../xr/spatial');
   setIconPack(p.icons);

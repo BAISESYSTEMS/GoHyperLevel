@@ -1,0 +1,11 @@
+/* The quick menu behind the logo (QuickMenuPanel.tsx) – loaded with it; the button is in shell.css. */
+.qm-pop{position:fixed;z-index:1000;width:280px;max-width:calc(100vw - 16px);background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.28);padding:12px;display:grid;gap:12px}
+.qm-head{display:flex;align-items:center;justify-content:space-between}
+.qm-row{display:grid;gap:6px}
+.qm-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.qm-segs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:3px}
+.qm-seg{flex:1;border:0;background:none;border-radius:7px;padding:6px 8px;font:inherit;font-size:13px;color:inherit;cursor:pointer}
+.qm-seg.on{background:var(--panel);box-shadow:0 1px 3px rgba(0,0,0,.2);font-weight:600}
+.qm-seg:disabled{opacity:.5;cursor:not-allowed}
+.qm-links{display:flex;gap:6px;flex-wrap:wrap}
+.qm-links .btn{flex:1;font-size:13px}

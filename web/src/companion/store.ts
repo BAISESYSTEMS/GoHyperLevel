@@ -24,6 +24,10 @@ export interface CheckinPrefs {
 export interface CompanionPrefs {
   agent_id: string | null;
   name: string;
+  /** one emoji ('' = the default: the sub-account's, the agency's or the agent's own) */
+  avatar: string;
+  /** how the assistant talks: neutral, casual ("du") or formal ("Sie") */
+  tone: 'neutral' | 'casual' | 'formal';
   wake_phrase: string;
   shortcut: boolean;
   read_aloud: boolean | null;
@@ -33,7 +37,7 @@ export interface CompanionPrefs {
   tts_provider: string;
   /** '' = the provider's first connection */
   tts_connection_id: string;
-  /** default "auto" = the native Jarvis voice of the app language (de-DE-/en-US-Chirp3-HD-Iapetus) */
+  /** default "auto" = the native default voice of the app language (de-DE-/en-US-Chirp3-HD-Iapetus) */
   tts_voice: string;
   tz: string;
   checkin: CheckinPrefs;
@@ -51,8 +55,12 @@ export interface CompanionPrefs {
 }
 export interface CompanionState {
   prefs: CompanionPrefs;
-  /** the effective name ("Jarvis" unless chosen otherwise or a custom agent answers) */
+  /** the effective name: the person's choice → a custom agent's name → the sub-account's / agency's default → "Assistent" */
   name: string;
+  /** what an empty name means for this person (the placeholder of the name field) */
+  default_name: string;
+  /** the effective avatar (an emoji) */
+  avatar: string;
   wake_phrase: string;
   agent: { id: string | null; name: string; emoji: string };
   agent_missing: boolean;
@@ -65,9 +73,11 @@ export interface CompanionState {
 }
 
 const DEFAULTS: CompanionState = {
-  prefs: { agent_id: null, name: '', wake_phrase: '', shortcut: true, read_aloud: null, voice_reply: true, browser_voice: '', tts_provider: 'google_speech', tts_connection_id: '', tts_voice: 'auto', tz: '', checkin: { mode: 'off', minutes: 60, times: ['08:30'], quiet_from: '20:00', quiet_to: '08:00', weekdays_only: false, only_changed: true, speak: false }, conversation_window: 8, barge_in: true, voice_engine: 'classic', live_connection_id: '', initiative: 'balanced', events: { on: true, unanswered_minutes: 30, triggers: {} }, role: 'business_developer', growth: { daily: false, time: '08:00', weekly: true } },
-  name: 'Jarvis',
-  wake_phrase: 'Hey Jarvis',
+  prefs: { agent_id: null, name: '', avatar: '', tone: 'neutral', wake_phrase: '', shortcut: true, read_aloud: null, voice_reply: true, browser_voice: '', tts_provider: 'google_speech', tts_connection_id: '', tts_voice: 'auto', tz: '', checkin: { mode: 'off', minutes: 60, times: ['08:30'], quiet_from: '20:00', quiet_to: '08:00', weekdays_only: false, only_changed: true, speak: false }, conversation_window: 8, barge_in: true, voice_engine: 'classic', live_connection_id: '', initiative: 'balanced', events: { on: true, unanswered_minutes: 30, triggers: {} }, role: 'business_developer', growth: { daily: false, time: '08:00', weekly: true } },
+  name: 'Assistent',
+  default_name: 'Assistent',
+  avatar: '✨',
+  wake_phrase: 'Hey Assistent',
   agent: { id: null, name: 'HyperLevel Agent', emoji: '✨' },
   agent_missing: false,
   tz: '',

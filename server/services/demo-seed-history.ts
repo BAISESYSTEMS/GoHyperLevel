@@ -35,6 +35,16 @@ const plusDays = (iso: string, d: number) => new Date(Date.parse(iso) + d * DAY)
 /** Today at 9 o'clock – or now, when that is earlier (the nightly reset runs at 3): nothing the history creates lies in the future. */
 const todayAt = (k: Kit) => Math.min(Date.parse(k.inDays(0, 9)), k.nowMs - 60_000);
 
+/**
+ * Pays an invoice on a day after it was issued (a few days to two weeks later, never after today). The payment carries that date –
+ * payments cannot be changed afterwards, and the bookkeeping (cash basis, EÜR) books the money on the day it came in.
+ */
+export async function payInvoice(k: Kit, invoiceId: string, issued: string, days: [number, number] = [2, 12]) {
+  const r = (a: number, b: number) => a + Math.floor(k.aux() * (b - a + 1));
+  const paidAt = new Date(Math.min(Date.parse(issued) + r(days[0], days[1]) * DAY + r(0, 360) * 60e3, todayAt(k))).toISOString();
+  return k.call('POST', `/api/invoices/${invoiceId}/payments`, { paid_at: paidAt, method: ['Überweisung', 'Überweisung', 'Überweisung', 'Lastschrift', 'Karte'][r(0, 4)] });
+}
+
 /** Paid invoices over the last twelve months, a few more every month (the dashboard's revenue and the revenue reports). */
 export function seedRevenueHistory(k: Kit, products: any[], jobs: Job[]) {
   const spec = REVENUE[k.plan.key];
@@ -62,7 +72,7 @@ export function seedRevenueHistory(k: Kit, products: any[], jobs: Job[]) {
         at: issued,
         run: async () => {
           const inv = await k.call('POST', '/api/invoices', { contact_id: c.id, title: items[0].name, items, issued_at: issued, due_at: k.inDays(-back + 14, 12) });
-          if (inv?.id) await k.call('PATCH', `/api/invoices/${inv.id}`, { status: 'paid' });
+          if (inv?.id) await payInvoice(k, inv.id, issued);
         },
       });
     }
@@ -101,7 +111,7 @@ export function subscription(k: Kit, jobs: Job[], product: { name: string; price
       });
       if (!parent?.id) return;
       parentId = parent.id;
-      await k.call('PATCH', `/api/invoices/${parent.id}`, { status: 'paid' });
+      await payInvoice(k, parent.id, startIso, [1, 4]);
     },
   });
   if (o.children === false) return;
@@ -111,7 +121,7 @@ export function subscription(k: Kit, jobs: Job[], product: { name: string; price
       run: async () => {
         if (!parentId) return;
         const child = await k.call('POST', '/api/invoices', { contact_id: contact.id, title: product.name, items, issued_at: at, due_at: plusDays(at, 14), parent_id: parentId });
-        if (child?.id) await k.call('PATCH', `/api/invoices/${child.id}`, { status: 'paid' });
+        if (child?.id) await payInvoice(k, child.id, at, [1, 4]);
       },
     });
   }

@@ -6,7 +6,7 @@ import { HttpError, bad, notFound, str, type Ctx } from '../core/http.js';
 import { hmInTz, ymdInTz, zonedToUtc } from '../core/time.js';
 import { id as newId, now } from '../core/util.js';
 import { addDays, isYmd } from './pm-schedule.js';
-import { hiddenUser } from '../core/permissions.js';
+import { grants, hiddenUser } from '../core/permissions.js';
 
 /**
  * Project planning, shared pieces: projects/statuses/sections/custom fields, the people who can be assigned,
@@ -122,7 +122,7 @@ export function team(app: App, locationId: string): Person[] {
     .all<{ id: string; name: string; email: string; role: string; locations: string; permissions: string | null }>('SELECT id, name, email, role, locations, permissions FROM users ORDER BY name')
     .filter((u) => u.role === 'admin' || json<string[]>(u.locations, []).includes(locationId))
     .filter((u) => !hiddenUser(app, u, locationId))
-    .filter((u) => u.role === 'admin' || !u.permissions || json<string[]>(u.permissions, []).includes('contacts'))
+    .filter((u) => u.role === 'admin' || !u.permissions || grants(json<string[]>(u.permissions, []), 'tasks'))
     .map((u) => ({ id: u.id, name: u.name || u.email, email: u.email }));
 }
 export const isTeamMember = (app: App, locationId: string, userId: string) => team(app, locationId).some((p) => p.id === userId);

@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import type { App, Module } from '../core/app.js';
 import { domainAlias, normalizeDomain } from '../core/domains.js';
 import { HttpError, bad, notFound, str, text } from '../core/http.js';
-import { PERMISSIONS, cleanPermissions, requiredPermission, visibleLocations } from '../core/permissions.js';
+import { PERMISSIONS, cleanPermissions, grants, requiredPermission, visibleLocations } from '../core/permissions.js';
 import { isValidTz } from '../core/time.js';
 import { hashPassword, id, now, slugify } from '../core/util.js';
 import { applySnapshot, exportSnapshot, snapshotSummary, validateSnapshot } from '../services/snapshots.js';
@@ -103,7 +103,24 @@ export const agencyModule: Module = {
       const u = ctx.user;
       if (!u || u.role === 'admin' || !u.permissions) return;
       const need = requiredPermission(ctx.method, ctx.path);
-      if (need && !u.permissions.includes(need)) throw new HttpError(403, `Kein Zugriff auf „${PERMISSIONS[need]}“`);
+      if (need && !grants(u.permissions, need)) throw new HttpError(403, `Kein Zugriff auf „${PERMISSIONS[need]}“`);
+    });
+    // Tasks & projects without the contacts area (e.g. an AI agent without a data processing agreement): the task stays,
+    // the customer behind it does not – contact names and the contact columns of /api/tasks are blanked.
+    app.resultFilters.push((ctx, _route, result) => {
+      const u = ctx.user;
+      if (!u || u.role === 'admin' || !u.permissions || u.permissions.includes('contacts') || requiredPermission(ctx.method, ctx.path) !== 'tasks') return result;
+      if (!result || typeof result !== 'object' || (result as { __raw?: boolean }).__raw) return result;
+      const strip = (v: unknown, depth: number): unknown => {
+        if (depth > 6 || !v || typeof v !== 'object') return v;
+        if (Array.isArray(v)) return v.map((x) => strip(x, depth + 1));
+        const o: Record<string, unknown> = {};
+        for (const [k, x] of Object.entries(v)) o[k] = k === 'contact_name' ? '' : strip(x, depth + 1);
+        // Rows of GET /api/tasks carry the contact's columns next to the task.
+        if ('contact_id' in o && 'first_name' in o) (o.first_name = ''), (o.last_name = ''), (o.email = '');
+        return o;
+      };
+      return strip(result, 0);
     });
     router.get('/api/permissions', 'user', () => PERMISSIONS);
 

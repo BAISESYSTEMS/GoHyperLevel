@@ -14,6 +14,7 @@ import {
   isWlState,
   parseWaitlist,
   safeBack,
+  utmSource,
   wlLang,
   wlPlan,
   wlText,
@@ -141,7 +142,7 @@ export const cloudWaitlistModule: Module = {
       return cloudEnabled(app) ? '/cloud/legal/datenschutz' : '';
     };
 
-    const view = (o: { lang?: WlLang; back: string; plan?: unknown; state?: unknown }): WaitlistView => {
+    const view = (o: { lang?: WlLang; back: string; plan?: unknown; state?: unknown; utm?: unknown }): WaitlistView => {
       const f = formsTarget(app);
       return {
         lang: o.lang ?? 'de',
@@ -154,6 +155,7 @@ export const cloudWaitlistModule: Module = {
         needName: !!f?.needName,
         doi: !!f?.doi,
         state: isWlState(o.state) ? o.state : undefined,
+        utm: utmSource(o.utm),
       };
     };
 
@@ -181,7 +183,7 @@ export const cloudWaitlistModule: Module = {
     function store(entry: WaitlistEntry, ctx: Ctx) {
       const t = wlText(entry.lang, brand());
       const at = now();
-      const row = { email: entry.email, name: entry.name, plan: entry.plan, lang: entry.lang, source: WAITLIST_SOURCE, consent_text: consentText(t, privacyUrl()), consent_at: at, ip_hash: ipHash(ctx.ip), updated_at: at };
+      const row = { email: entry.email, name: entry.name, plan: entry.plan, lang: entry.lang, source: entry.utm || WAITLIST_SOURCE, consent_text: consentText(t, privacyUrl()), consent_at: at, ip_hash: ipHash(ctx.ip), updated_at: at };
       const fresh = db.run(
         `INSERT INTO cloud_waitlist (id, email, name, plan, lang, source, consent_text, consent_at, ip_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT(email) DO NOTHING`,
@@ -222,6 +224,7 @@ export const cloudWaitlistModule: Module = {
         [f.consentField]: true,
         ...(plan ? { plan } : {}),
         source: WAITLIST_SOURCE,
+        ...(entry.utm ? { _utm_source: entry.utm } : {}),
         _page: page,
       });
     }

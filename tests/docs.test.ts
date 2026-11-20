@@ -148,7 +148,7 @@ describe('the repository documentation', () => {
 
   it('the numbers about the Akademie are real (chapters exactly, tours never more than exist)', () => {
     const claims = (file: string, re: RegExp) => [...read(file).matchAll(re)].map((m) => Number(m[1]));
-    for (const file of ['README.de.md', 'docs/academy.de.md', 'docs/handbuch.md']) for (const n of claims(file, /\b(\d+) Kapitel\b/g)) expect(n, `${file}: Kapitel`).toBe(JOURNEY.length);
+    for (const file of ['README.de.md', 'docs/academy.de.md', 'docs/handbook.de.md']) for (const n of claims(file, /\b(\d+) Kapitel\b/g)) expect(n, `${file}: Kapitel`).toBe(JOURNEY.length);
     for (const file of ['README.de.md', 'docs/academy.de.md']) for (const n of claims(file, /\b(\d+)\+? Modul-Touren\b/g)) expect(n, `${file}: Modul-Touren`).toBeLessThanOrEqual(MODULE_TOURS.length);
   });
 
@@ -240,7 +240,7 @@ const GERMAN_PAGES = [
   'docs/email-builder.de.md',
   'docs/email-marketing.de.md',
   'docs/growth.de.md',
-  'docs/handbuch.md',
+  'docs/handbook.de.md',
   'docs/helpdesk.de.md',
   'docs/integrations.de.md',
   'docs/kurs-firma-fuehren.de.md',

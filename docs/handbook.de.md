@@ -1,3 +1,5 @@
+[English](handbook.md) · **Deutsch**
+
 # Handbuch: Die Firma mit HyperLevel übernehmen
 
 Dieses Handbuch ist die gedruckte Fassung des Gesamt-Guides **„Firma übernehmen“** aus der **Akademie** (Menüpunkt *Akademie* in HyperLevel). Es führt eine Nachfolgerin oder einen Nachfolger in 14 Kapiteln durch alles, was man braucht, um die Firma zu führen – vom sicheren Zugang über die Tagesroutine bis zum Betrieb des Servers. Zusammen dauert das etwa 5 Stunden; jedes Kapitel lässt sich einzeln machen und später fortsetzen.
@@ -330,7 +332,7 @@ Kanäle, Telefonie, Stripe, Integrations-Katalog, Zapier/Make/n8n, HubSpot-Impor
 15. **SaaS-Modus** *(Agentur → SaaS)* – Verkauft HyperLevel als Abo an Kunden – mit eigenem Agentur-Stripe. Prüfe die laufenden Kunden-Abos.
 16. **White-Label** *(Agentur → White-Label)* – Name, Logo, Farbe, Login-Texte und **Support-E-Mail** – die solltest du bei der Übernahme auf dich ändern.
 17. **Domains** *(Agentur → Domains)* – Alle Domains mit Status. Die Domains selbst liegen beim Domain-Anbieter – Ablaufdaten im Kalender eintragen!
-18. **Snapshots** *(Agentur → Snapshots)* – Startpakete für neue Kunden. Exportiere deine wichtigsten Snapshots einmal als Datei – das ist zugleich eine Sicherung deiner Vorlagen. Mit **Wissen mitnehmen** wandert auch das Gelernte mit – KI-Agenten samt Gedächtnis, Wiki, Hilfe-Artikel und eine Learnings-Seite aus deinen Zahlen –, z. B. wenn ein Projekt in ein neues Land geht; beim Anwenden lässt sich alles in die neue Sprache übersetzen. Solche Snapshots enthalten internes Wissen und gehören nicht in die Hände von Kunden.
+18. **Snapshots** *(Agentur → Snapshots)* – Startpakete für neue Kunden. Exportiere deine wichtigsten Snapshots einmal als Datei – das ist zugleich eine Sicherung deiner Vorlagen.
 
 **Das hast du gelernt:**
 
@@ -390,7 +392,7 @@ Alles abhaken: Zugänge, Versand, Zahlungen, Backups, Websites, Automationen –
 - Du weißt, was automatisch passiert und wo du nachsiehst
 - Das Handbuch liegt ausgedruckt bereit
 
-Mehr dazu: [Handbuch](handbuch.md)
+Mehr dazu: [Handbuch](handbook.de.md)
 
 ---
 

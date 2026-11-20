@@ -4,7 +4,7 @@ import { api } from '../api';
 import { useLocale, useT } from '../i18n';
 import { Check, Field, Modal, Select, Tabs, act, navigate } from '../ui';
 import { browserVoices, readAloud, stopReading } from '../focus/speech';
-import { canWake, openCheckin, saveCompanion, setWake, useBus, useCompanion, wakeOn, type CheckinPrefs } from './store';
+import { canWake, loadCompanion, openCheckin, saveCompanion, setWake, useBus, useCompanion, wakeOn, type CheckinPrefs } from './store';
 import { GrowthBriefingFields, RoleField } from './Growth';
 import { ACCOUNT_TTS, BROWSER_TTS, DEFAULT_TTS_PROVIDER, DEFAULT_TTS_VOICE, JARVIS_PROVIDER_VOICES, JARVIS_VOICE_LABELS, companionConnection, loadVoiceInfo, speechPlan, type VoiceInfo } from './voice';
 
@@ -23,6 +23,66 @@ interface Proactive {
   live: { available: boolean; connections: { id: string; label: string }[] };
 }
 const WINDOWS = [0, 5, 8, 15];
+/** Avatars to pick with one click ('' = the default: the sub-account's, the agency's or the agent's own). */
+const AVATARS = ['', '✨', '🤖', '🦉', '🦊', '🐝', '🧭', '💡', '🎩', '🌱'];
+
+interface Defaults {
+  name: string;
+  avatar: string;
+  agency: { name: string; avatar: string };
+  builtin: { de: string; en: string };
+  may_edit: boolean;
+  may_edit_agency: boolean;
+}
+
+/**
+ * The defaults for everyone who has not chosen a name or avatar: the sub-account's (admins and people with the settings area) and the
+ * agency's (admins). Order: own choice → sub-account → agency → "Assistent"/"Assistant".
+ */
+function AccountDefaults() {
+  const t = useT('companion');
+  const locale = useLocale();
+  const [d, setD] = useState<Defaults | null>(null);
+  const [locName, setLocName] = useState('');
+  const [agName, setAgName] = useState('');
+  useEffect(() => {
+    api
+      .get<Defaults>('/api/companion/defaults')
+      .then((r) => (setD(r), setLocName(r.name), setAgName(r.agency.name)))
+      .catch(() => setD(null));
+  }, []);
+  if (!d || (!d.may_edit && !d.may_edit_agency)) return null;
+  const builtin = locale === 'en' ? d.builtin.en : d.builtin.de;
+  const saveLoc = async (patch: { name?: string; avatar?: string }) => {
+    const r = await act(() => api.put<Defaults>('/api/companion/defaults', patch));
+    if (r) (setD(r), void loadCompanion(true));
+  };
+  const saveAgency = async (patch: { name?: string; avatar?: string }) => {
+    const r = await act(() => api.put<{ name: string; avatar: string }>('/api/companion/agency-defaults', patch));
+    if (r) (setD({ ...d, agency: r }), void loadCompanion(true));
+  };
+  return (
+    <>
+      <h3 className="cmp-set-h">{t('Standard für alle')}</h3>
+      <p className="cmp-note">{t('Gilt für alle, die selbst keinen Namen gewählt haben. Wer einen eigenen Namen einträgt, behält ihn.')}</p>
+      {d.may_edit && (
+        <Field label={t('Name in diesem Sub-Account')} hint={t('Leer = Standard der Agentur, sonst {name}.', { name: d.agency.name || builtin })}>
+          <input value={locName} maxLength={40} placeholder={d.agency.name || builtin} onChange={(e) => setLocName(e.target.value)} onBlur={() => locName !== d.name && void saveLoc({ name: locName })} />
+        </Field>
+      )}
+      {d.may_edit && (
+        <Field label={t('Avatar in diesem Sub-Account')}>
+          <Select value={d.avatar} onChange={(v) => void saveLoc({ avatar: v })} options={AVATARS.map((a): [string, string] => [a, a || t('Standard')])} />
+        </Field>
+      )}
+      {d.may_edit_agency && (
+        <Field label={t('Name für alle Sub-Accounts (Agentur)')} hint={t('Leer = {name}.', { name: builtin })}>
+          <input value={agName} maxLength={40} placeholder={builtin} onChange={(e) => setAgName(e.target.value)} onBlur={() => agName !== d.agency.name && void saveAgency({ name: agName })} />
+        </Field>
+      )}
+    </>
+  );
+}
 
 const browserTz = () => {
   try {
@@ -126,7 +186,7 @@ export function CompanionSettings({ onClose, initialTab = 'companion' }: { onClo
 
   const conns = (info?.connections ?? []).filter((x) => x.usable !== false);
   const hasGoogle = conns.some((x) => x.provider === DEFAULT_TTS_PROVIDER);
-  // a provider with its own Jarvis voice (Google, kie.ai) is connected – then the "add Google" hint is noise
+  // a provider with its own default voice (Google, kie.ai) is connected – then the "add Google" hint is noise
   const hasJarvisVoice = conns.some((x) => !!JARVIS_PROVIDER_VOICES[x.provider]);
   const jarvisLabel = JARVIS_VOICE_LABELS[p.tts_provider]?.[lang === 'en' ? 'en' : 'de'] ?? '';
   const who = p.tts_provider === BROWSER_TTS || p.tts_provider === ACCOUNT_TTS ? p.tts_provider : conn ? `c:${conn.id}` : `p:${p.tts_provider}`;
@@ -142,7 +202,7 @@ export function CompanionSettings({ onClose, initialTab = 'companion' }: { onClo
     if (v.startsWith('p:')) return void save({ tts_provider: v.slice(2), tts_connection_id: '', ...(JARVIS_PROVIDER_VOICES[v.slice(2)] ? { tts_voice: DEFAULT_TTS_VOICE } : {}) });
     const x = conns.find((k) => `c:${k.id}` === v);
     if (!x) return;
-    // a voice belongs to its provider: another provider starts with its own default (Jarvis's voice for Google and kie.ai)
+    // a voice belongs to its provider: another provider starts with its own default (the default voice for Google and kie.ai)
     const voice = x.provider === p.tts_provider ? p.tts_voice : JARVIS_PROVIDER_VOICES[x.provider] ? DEFAULT_TTS_VOICE : '';
     void save({ tts_provider: x.provider, tts_connection_id: x.id, tts_voice: voice });
   };
@@ -180,15 +240,35 @@ export function CompanionSettings({ onClose, initialTab = 'companion' }: { onClo
             <Select
               value={p.agent_id ?? ''}
               onChange={(v) => void save({ agent_id: v || null })}
-              options={[['', t('Jarvis – HyperLevel Agent (Standard)')], ...agents.map((a): [string, string] => [a.id, `${a.emoji} ${a.name}`])]}
+              options={[['', t('Eingebauter Assistent – HyperLevel Agent (Standard)')], ...agents.map((a): [string, string] => [a.id, `${a.emoji} ${a.name}`])]}
             />
           </Field>
           {c.agent_missing && <p className="cmp-warn">{t('Der gewählte Agent ist nicht mehr verfügbar – bis du einen anderen wählst, antwortet der HyperLevel Agent.')}</p>}
-          <Field label={t('Name')} hint={t('So heißt dein Companion – und so weckst du ihn.')}>
-            {/* i18n-ignore-next-line */}
-            <input value={name} maxLength={40} placeholder={c.agent.id ? c.agent.name : 'Jarvis'} onChange={(e) => setName(e.target.value)} onBlur={() => name !== p.name && void save({ name })} />
+          <Field label={t('Name')} hint={t('So heißt dein Assistent – überall in der App, im Agent-Panel und beim Weckwort. Leer = {name}.', { name: c.default_name })}>
+            <input value={name} maxLength={40} placeholder={c.default_name} onChange={(e) => setName(e.target.value)} onBlur={() => name !== p.name && void save({ name })} />
+          </Field>
+          <Field label={t('Avatar')} hint={t('Ein Emoji für deinen Assistenten. Leer = Standard.')}>
+            <div className="cmp-avatars" role="radiogroup" aria-label={t('Avatar')}>
+              {AVATARS.map((a) => (
+                <button key={a || 'default'} type="button" role="radio" aria-checked={p.avatar === a} className={`cmp-avatar${p.avatar === a ? ' on' : ''}`} onClick={() => void save({ avatar: a })} title={a || t('Standard')}>
+                  {a || t('Standard')}
+                </button>
+              ))}
+            </div>
+          </Field>
+          <Field label={t('Ton')} hint={t('Wie {name} mit dir spricht – im Chat und im Fokus-Modus.', { name: c.name })}>
+            <Select
+              value={p.tone}
+              onChange={(v) => void save({ tone: v as typeof p.tone })}
+              options={[
+                ['neutral', t('Neutral')],
+                ['casual', t('Locker (du)')],
+                ['formal', t('Förmlich (Sie)')],
+              ]}
+            />
           </Field>
           <RoleField p={p} save={save} />
+          <AccountDefaults />
         </div>
       )}
       {tab === 'voice' && (
@@ -288,7 +368,7 @@ export function CompanionSettings({ onClose, initialTab = 'companion' }: { onClo
           )}
           {info && !hasJarvisVoice && (
             <p className="cmp-warn" data-tour="companion-google-hint">
-              {t('Für die Jarvis-Stimme unter KI-Anbieter eine Verbindung „Google Cloud Speech“ mit API-Schlüssel anlegen (Text-to-Speech-API im Google-Projekt aktivieren)')}{' – '}
+              {t('Für die Standardstimme unter KI-Anbieter eine Verbindung „Google Cloud Speech“ mit API-Schlüssel anlegen (Text-to-Speech-API im Google-Projekt aktivieren)')}{' – '}
               <a
                 href="/app/settings/ai-providers"
                 onClick={(e) => {
@@ -303,7 +383,7 @@ export function CompanionSettings({ onClose, initialTab = 'companion' }: { onClo
             </p>
           )}
           {serverChosen && /^en-/i.test(p.tts_voice) && lang === 'de' && <p className="cmp-note">{t('Eine englische Stimme liest deutsche Antworten mit englischem Akzent.')}</p>}
-          <Field label={t('Browserstimme')} hint={t('Spricht, wenn keine Stimme des Servers da ist. Automatisch = für Jarvis eine britische Männerstimme (z. B. „Google UK English Male“), sonst eine in deiner Sprache.')}>
+          <Field label={t('Browserstimme')} hint={t('Spricht, wenn keine Stimme des Servers da ist. Automatisch = eine natürliche Stimme in deiner Sprache.')}>
             <Select value={p.browser_voice} onChange={(v) => void save({ browser_voice: v })} options={[['', t('Automatisch')], ...voices.map((v): [string, string] => [v.name, `${v.name} (${v.lang})`])]} />
           </Field>
           <div className="cmp-actions">

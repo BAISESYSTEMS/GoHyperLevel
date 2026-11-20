@@ -6,7 +6,7 @@ import { callRoute } from './mobile.js';
 import { safeFetch } from './net.js';
 import { classify, routeProblem, type Allow, type Klass } from './agent-safety.js';
 import { collectAgentTools } from './agent-tool-sources.js';
-import { requiredPermission } from '../core/permissions.js';
+import { grants, requiredPermission } from '../core/permissions.js';
 import { RECORD_KINDS } from './agent-context.js';
 
 /**
@@ -142,7 +142,7 @@ export function makeCaller(app: App, ctx: Ctx, user: User, locationId: string, a
     // a member's areas, so catalogues (ghl_api_routes) only offer what this person may use
     can: (method, path) => {
       const area = requiredPermission(method, path);
-      return agency || !user.permissions || !area || user.permissions.includes(area);
+      return agency || !user.permissions || !area || grants(user.permissions, area);
     },
     api: async (method, path, opts = {}) => {
       if (!agency && opts.location && opts.location !== locationId) throw new HttpError(403, 'Der Agent arbeitet nur im aktuellen Sub-Account.');
@@ -519,7 +519,7 @@ export function toolCatalog(app: App, user: User, opts: { webFetch: boolean }): 
  */
 export async function externalTools(app: App, user: User, locationId: string): Promise<AgentTool[]> {
   const area = requiredPermission('POST', '/api/mcp-servers/call');
-  if (user.role !== 'admin' && user.permissions && area && !user.permissions.includes(area)) return [];
+  if (user.role !== 'admin' && user.permissions && area && !grants(user.permissions, area)) return [];
   const list = await collectAgentTools(app, { locationId, userId: user.id });
   return list.map((t) => {
     const a = t.annotations ?? {};

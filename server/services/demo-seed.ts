@@ -5,7 +5,7 @@ import { createLocation } from '../modules/core.js';
 import { submitForm } from '../modules/forms.js';
 import { FIRST, LAST, PLANS, demoPhone } from './demo-seed-data.js';
 import { seedCampaigns, seedCommunity, seedCourses, seedKnowledge, seedSites, seedSupportHistory, seedWorkflowRuns } from './demo-seed-depth.js';
-import { runJobs, seedDealHistory, seedRevenueHistory, seedSaasBook, seedSubscriptions, type DealRef, type Job } from './demo-seed-history.js';
+import { payInvoice, runJobs, seedDealHistory, seedRevenueHistory, seedSaasBook, seedSubscriptions, type DealRef, type Job } from './demo-seed-history.js';
 import {
   seedAgencyObjects,
   seedCallScript,
@@ -23,6 +23,7 @@ import {
   seedXRechnung,
   type Kit,
 } from './demo-seed-extras.js';
+import { seedAffiliateDepth, seedBookkeeping, seedCanvas, seedCreditNotes, seedGoogleReviews, seedInventory, seedLoyalty, seedNps, seedSequence, seedSocial, seedTeam, seedThreads } from './demo-seed-more.js';
 import { receiveMessage, sendToContact } from './messaging.js';
 import { DEFAULT_LOST_REASONS as LOST_REASONS } from './opportunities.js';
 import { callRoute } from './route-call.js';
@@ -171,7 +172,7 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     const dated = new Set<string>();
     const call = <T = any>(method: string, path: string, body?: Record<string, any>) => run<T>(L, method, path, body);
     const contacts: any[] = [];
-    const k: Kit = { app, me, L, plan, contacts, contact: (i) => contacts[i % Math.max(contacts.length, 1)], call, step, inDays, ymd, rand, nowMs: base.getTime(), dated };
+    const k: Kit = { app, me, L, plan, contacts, contact: (i) => contacts[i % Math.max(contacts.length, 1)], call, step, inDays, ymd, rand, aux: rng(20261112 + pi), nowMs: base.getTime(), dated };
     const contact = k.contact;
 
     // The demo websites are fictional (.example) – no uptime checks against them.
@@ -341,7 +342,7 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
         const due = i < 7 ? -75 + i * 11 : i < 9 ? -6 - i : 14;
         const inv = await call('POST', '/api/invoices', { contact_id: contact(i + 3).id, title: p.name, items: [{ name: p.name, qty, price_cents: p.price_cents, tax_rate: 19 }], issued_at: inDays(due - 14, 9), due_at: inDays(due, 12) });
         if (!inv?.id) continue;
-        if (i < 7) await call('PATCH', `/api/invoices/${inv.id}`, { status: 'paid' });
+        if (i < 7) await payInvoice(k, inv.id, inDays(due - 14, 9), [3, 14]);
         else if (i < 11) await call('PATCH', `/api/invoices/${inv.id}`, { status: 'sent' });
       }
       await call('POST', '/api/invoices', { kind: 'estimate', contact_id: contact(1).id, title: `Angebot: ${products[0].name}`, items: [{ name: products[0].name, qty: 1, price_cents: products[0].price_cents, tax_rate: 19 }] });
@@ -401,6 +402,7 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
       }
     }
     await seedReviewPlatforms(k);
+    await seedGoogleReviews(k);
 
     // --- service: tickets & help center -------------------------------------------------------------
     const ticketSpecs: [string, string, string][] = [
@@ -435,10 +437,22 @@ export async function seedDemo(app: App, opts: DemoSeedOptions = {}): Promise<De
     await seedStore(k, products);
     if (plan.key === 'coach') await seedCreator(k);
     if (plan.key === 'agency') await seedAgencyObjects(k);
+    await seedAffiliateDepth(k);
+    await seedSocial(k);
+    await seedTeam(k);
+    await seedNps(k);
+    await seedSequence(k);
+    await seedLoyalty(k);
+    await seedInventory(k, products);
+    await seedCanvas(k);
     for (const key of plan.reports) await call('POST', `/api/reports/templates/${key}`, {});
 
     // --- spread the history over the last twelve months -------------------------------------------
     await step('backdate', () => backdate(app, L, base, rand, dated));
+    // conversations of the last days (dated by themselves), then the bookkeeping books the invoices with their final dates
+    await seedThreads(k);
+    await seedCreditNotes(k);
+    await seedBookkeeping(k);
   }
 
   await app.events.flush();
@@ -486,7 +500,11 @@ function backdate(app: App, locationId: string, base: Date, rand: () => number, 
       const frozen = !!inv.finalised_at;
       const issued = frozen ? inv.issued_at : iso(5 + Math.floor(rand() * 55));
       db.run(`UPDATE invoices SET created_at = ?${hasColumn('invoices', 'issued_at') && !frozen ? ', issued_at = ?' : ''} WHERE id = ?`, ...(hasColumn('invoices', 'issued_at') && !frozen ? [issued, issued] : [issued]), inv.id);
-      if (inv.status === 'paid') db.run('UPDATE invoices SET paid_at = ? WHERE id = ?', new Date(Math.min(Date.parse(issued) + (2 + Math.floor(rand() * 10)) * 864e5, base.getTime())).toISOString(), inv.id);
+      if (inv.status === 'paid') {
+        // an invoice paid through a payment keeps that payment's date (payments cannot be moved); the draw happens either way, so the rest of the demo stays the same
+        const paidAt = new Date(Math.min(Date.parse(issued) + (2 + Math.floor(rand() * 10)) * 864e5, base.getTime())).toISOString();
+        if (!db.get(`SELECT 1 FROM invoice_payments WHERE invoice_id = ? AND kind = 'payment'`, inv.id)) db.run('UPDATE invoices SET paid_at = ? WHERE id = ?', paidAt, inv.id);
+      }
     }
     // Appointments were booked a few days before they take place (the dashboard counts what was booked recently).
     for (const a of db.all('SELECT id, start_at FROM appointments WHERE location_id = ?', locationId)) {

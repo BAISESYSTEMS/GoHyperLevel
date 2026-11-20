@@ -6,6 +6,7 @@ import { HttpError, bad, notFound, str, type Ctx } from '../core/http.js';
 import { id, now } from '../core/util.js';
 import { LOCK_LABELS, LOCK_OF, cleanLocks, cleanPrefs, effectivePrefs, type Locks, type Prefs } from '../services/appearance-model.js';
 import { checkLogoDataUrl } from '../services/svg-safe.js';
+import { contentMatches } from '../core/files.js';
 import { cleanTileOrder, mergeTileOrder, trimTileOrder, type TileOrderPatch } from '../services/tile-order.js';
 
 /**
@@ -17,6 +18,7 @@ import { cleanTileOrder, mergeTileOrder, trimTileOrder, type TileOrderPatch } fr
  *   GET/PATCH /api/agency/branding/look                agency defaults and locks (admin)
  *   GET/PATCH /api/agency/locations/:id/branding/look  per-client overrides (admin)
  *   POST      /api/agency/branding/logo                logo / mark / favicon upload: PNG, JPEG, WebP, SVG (admin)
+ *   POST      /api/appearance/backdrop                 own background picture (Stil & Fenster): JPEG, PNG, WebP ≤ 4 MB (user)
  *
  * Hidden menu entries are a view preference, not a permission: the page stays reachable by its address and
  * the permission areas (modules/permissions) are untouched.
@@ -38,6 +40,22 @@ const clientKey = (locationId: string) => `appearance:loc:${locationId}`;
 const OFFER_DAYS = 14;
 /** Per-person answers and choices that an agency default never carries. */
 const PERSONAL = ['asked', 'goal_asked', 'pinned', 'unpinned', 'tile_order'];
+/** Background pictures: the browser re-encodes them (JPEG, ≤ 2400 px) before the upload, so this limit is rarely reached. */
+export const BACKDROP_MAX = 4 * 1024 * 1024;
+const BACKDROP_TYPES: Record<string, string> = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
+
+/** Checks an uploaded background picture (a data: URL): raster only – no SVG, nothing that could carry a script. */
+export function checkBackdropDataUrl(dataUrl: unknown): { ok: true; mime: string; ext: string; buf: Buffer } | { ok: false; error: string } {
+  const m = String(dataUrl ?? '').match(/^data:([\w/+.-]+);base64,([A-Za-z0-9+/=\s]+)$/);
+  if (!m) return { ok: false, error: 'Erwarte eine data:-URL' };
+  const mime = m[1].toLowerCase();
+  if (!BACKDROP_TYPES[mime]) return { ok: false, error: 'Nur JPG, PNG oder WebP' };
+  const buf = Buffer.from(m[2], 'base64');
+  if (!buf.length) return { ok: false, error: 'Die Datei ist leer' };
+  if (buf.length > BACKDROP_MAX) return { ok: false, error: 'Bild größer als 4 MB' };
+  if (!contentMatches(mime, buf)) return { ok: false, error: 'Dateiinhalt passt nicht zum Dateityp' };
+  return { ok: true, mime, ext: BACKDROP_TYPES[mime], buf };
+}
 
 /**
  * Checks a body or stored set: cleanPrefs, plus the grids and keys of `tile_order` (cleanTileOrder – kept out of the shared model
@@ -253,6 +271,21 @@ export const appearanceModule: Module = {
       const row = { id: id(), location_id: String(ctx.req.headers['x-location-id'] ?? '') || 'agency', name, file, mime: check.mime, size: check.buf.length, created_at: now() };
       db.insert('uploads', row);
       return { ...row, url: `${app.baseUrl()}/uploads/${file}` };
+    });
+
+    // --- own background picture (Stil & Fenster → Hintergrund → Bild) ----------------------------------------
+    // Any login may upload one for itself (agency admins also for their defaults). The answer is the path the
+    // preference `backdrop_image` takes – relative, so it works on every domain of the instance.
+    router.post('/api/appearance/backdrop', 'user', (ctx) => {
+      const name = str(ctx.body?.name ?? 'hintergrund.jpg', 'Dateiname', { max: 200 }) || 'hintergrund.jpg';
+      const check = checkBackdropDataUrl(ctx.body?.data);
+      if (!check.ok) throw bad(check.error);
+      mkdirSync(uploadDir, { recursive: true });
+      const file = `${id(20)}${check.ext}`;
+      writeFileSync(join(uploadDir, file), check.buf);
+      // location 'look': not one of a sub-account's files (it never shows in its media list)
+      db.insert('uploads', { id: id(), location_id: 'look', name, file, mime: check.mime, size: check.buf.length, created_at: now() });
+      return { url: `/uploads/${file}` };
     });
   },
 };

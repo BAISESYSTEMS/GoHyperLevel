@@ -6,6 +6,67 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.74] – 2026-11-15
+
+### Added
+- **Bankkonto verbinden (Bank-Sync):** Buchhaltung → Bank verbindet Geschäftskonten per PSD2 über Enable Banking
+  (nur lesen, bis 180 Tage Freigabe). Umsätze und Kontostand kommen alle 8 Stunden von selbst, „Jetzt abrufen“ jederzeit;
+  Rechnungen werden wie beim Datei-Import zugeordnet. Die Agentur hinterlegt App-ID und privaten Schlüssel einmal.
+
+### Changed
+- Erster Download wieder unter dem Budget: Strg+K-Palette, Schnellmenü, Plugin-Rahmen, Passkeys und Editor-Stile laden erst bei Bedarf.
+
+## [1.0.73] – 2026-11-12
+
+### Added
+- **Willkommens-Assistent:** drei Schritte beim ersten Start (Ziel → Daten holen → erster Erfolg), jederzeit überspringbar,
+  mit Fortschritt; dazu eine Karte „Erste Schritte“ im Dashboard.
+- **Darstellung → Stil & Fenster:** sieben Voreinstellungen plus Feineinstellung für Fensterstil, Ecken, Schatten, Rahmen,
+  Schrift, Seitenleiste, Kopfzeile und Hintergrund, je Nutzer gespeichert; die Agentur kann einen Stil vorgeben und sperren.
+- **Assistent mit eigenem Namen:** Name, Avatar und Ton wählt jede Person selbst (Standard „Assistent“, Vorgabe je
+  Sub-Account und Agentur möglich); ein selbst gesetztes „Jarvis“ bleibt. Strg+K findet Seiten, Einstellungen, Kontakte und
+  Deals und merkt sich Favoriten; das Menü sortiert sich nicht mehr von selbst um.
+- **Demo-Daten in jeder Rubrik:** echte Gesprächsverläufe, Google-Bewertungen mit Antworten, Formulare mit Einsendungen,
+  Buchhaltung, Lager, Team und mehr.
+- **Handbuch auf Englisch** (#30, von alikazmidev): *Akademie → Handbuch* folgt der Sprache der Oberfläche; die englischen
+  Texte stehen in `web/src/tour/handbook.en.ts` (ein Test meldet jede fehlende Zeile). `npm run docs:gen` schreibt
+  `docs/handbook.md` (Englisch) und `docs/handbook.de.md` (Deutsch, vorher `docs/handbuch.md`).
+- **Server-Fehlermeldungen auf Englisch** (#29, von alikazmidev), wenn die App auf Englisch steht: die Web-App schickt ihre
+  Sprache mit (`x-pghl-lang`), der Server übersetzt jede Fehlerantwort mit `server/i18n/errors-en.ts` (rund 4.700 Meldungen,
+  Werte wie Feld- und Bereichsnamen werden mitübersetzt, halb deutsche Sätze gibt es nicht). API-Schlüssel, MCP und Skripte
+  bekommen weiter Deutsch.
+- **Akademie auf Englisch:** Akademie-Seite (Tour-Karten, Gesamt-Guide, Abzeichen, Übungs-Firma), Handbuch- und
+  Anleitungsseiten folgen der Sprache der Oberfläche; Tour-Titel, Zusammenfassungen und Kapitel kommen aus den Zeilen des
+  Handbuchs, die Suche findet auch englische Titel, und eine deutsche Anleitung öffnet in Englisch ihre englische Fassung.
+  Die Tour-Blase und die Schritte der Modul-Touren sind noch deutsch.
+
+### Fixed
+- Die „Mehr dazu“-Links der Touren auf deutsche Anleitungen (`helpdesk.de`, `self-hosting.de` …) öffnen wieder in der App
+  statt mit „nicht gefunden“; Kunden-Logins lesen ihre Anleitungen auch auf Deutsch, Server-Details bleiben der Agentur.
+- CLA-Prüfung auf GitHub: der Workflow legt den Branch `cla-signatures` beim ersten Lauf selbst an (vorher scheiterte jede
+  Prüfung daran) und verlinkt die CLA des eigenen Repos statt der alten Adresse `BAISESYSTEMS/hyperlevel`.
+
+## [1.0.72] – 2026-11-04
+
+### Added
+- **Eigener Bereich „Aufgaben & Projekte“** (`tasks`), getrennt von „Kontakte“: Aufgaben, Projektplanung und Zeiterfassung.
+  „Kontakte“ schließt Aufgaben weiter ein (gespeicherte Rechte, Rollen, Einladungen und SaaS-Pläne bekommen `tasks` dazu);
+  `tasks` allein ist die neue, engere Freigabe: Kontaktnamen an Aufgaben sind dann ausgeblendet – ein KI-Agent plant mit,
+  ohne Kunden zu sehen.
+- **Nur-Lesen-Schlüssel für Sub-Accounts** (`scope: "read"`, Einstellungen → API-Schlüssel „nur lesen“): nur GET und
+  lesende MCP-Tools, jedes Schreiben 403.
+
+## [1.0.71] – 2026-11-03
+
+### Added
+- **Herkunft auf der Cloud-Warteliste:** Landingpage und `/cloud` geben `utm_source` der Seite ins Wartelisten-Formular; die
+  Liste (*Agentur → Cloud → Warteliste*, CSV) zeigt dann z. B. `producthunt` oder `reddit` statt „Cloud-Warteliste“ (#22).
+
+### Changed
+- Der Hero der Landingpage spricht von „deinen KI-Agenten“ statt von Jarvis.
+- Die HighLevel-Vergleichsseite heißt jetzt „Die Open-Source-Alternative zu GoHighLevel“ / „The open-source GoHighLevel
+  alternative“ (Titel, Überschrift, Beschreibung).
+
 ## [1.0.70] – 2026-11-03
 
 ### Added

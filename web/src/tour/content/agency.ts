@@ -206,7 +206,7 @@ export const AGENCY_TOURS: Tour[] = [
     routes: ['agency/audit', 'settings/locations'],
     keywords: 'betrieb backup protokoll audit server ressourcen down ausfall störung',
     learned: ['Backups herunterladen und wo sie liegen', 'Im Protokoll nachsehen, wer was geändert hat', 'Die wöchentliche Server-Routine', 'Was tun, wenn eine Website nicht erreichbar ist'],
-    docs: { label: 'Handbuch: Betrieb', file: 'handbuch', anchor: 'kapitel-13-betrieb' },
+    docs: { label: 'Handbuch: Betrieb', file: 'handbook.de', anchor: 'kapitel-13-betrieb' },
     steps: [
       { title: 'Backups', route: 'settings/locations', target: 'backups', text: 'Jeden Tag sichert der Server die Datenbank automatisch, die letzten 14 bleiben. Hier lädst du eins herunter oder legst sofort eins an – z. B. vor großen Änderungen.' },
       { title: 'Backups außer Haus', target: 'backups', text: 'Lade regelmäßig (z. B. monatlich) ein Backup herunter und leg es an einen zweiten Ort (Cloud-Speicher). Uploads wie Bilder liegen zusätzlich im Datenordner des Servers.' },

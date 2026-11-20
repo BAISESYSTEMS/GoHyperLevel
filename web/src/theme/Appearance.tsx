@@ -10,9 +10,11 @@ import { resolveDark, setShowAll, update, useLook } from './store';
 import { THEME_LIST, type ModeTokens } from './themes';
 import { SpatialCard } from '../xr/SpatialCard';
 import { GoalCard } from '../areas/GoalSetup';
+import { LookStyle } from './LookStyle';
 
 /**
  * Einstellungen → Darstellung: theme gallery with live mini previews, hell/dunkel/system, accent colour,
+ * Stil & Fenster (presets, window style, corners, shadows, typeface, sidebar/top bar style, background – LookStyle.tsx),
  * department colours, sidebar, icon pack, density, font size and which menu areas stay visible.
  * Everything applies at once (store.update); groups the agency locked are shown but disabled.
  */
@@ -294,6 +296,10 @@ export function Appearance() {
         <Themes p={p} lock={!!L.theme} />
       </Section>
 
+      <Section title="Stil & Fenster" tour="appearance-style" lock={L.style} hint="Wie Fenster, Karten, Leisten und Hintergrund aussehen – unabhängig von den Farben. Ein Klick auf eine Voreinstellung, darunter fein abstimmen.">
+        <LookStyle p={p} lock={!!L.style} />
+      </Section>
+
       <Section title="Akzentfarbe" tour="appearance-accent" lock={L.accent} hint="Für Buttons, Links, Auswahl und Fokus. Hover-Farbe und lesbare Schrift (schwarz oder weiß) werden automatisch abgeleitet.">
         <AccentPicker p={p} lock={!!L.accent} />
       </Section>
@@ -354,6 +360,7 @@ export function Appearance() {
                 ['small', 'Klein'],
                 ['normal', 'Normal'],
                 ['large', 'Groß'],
+                ['xlarge', 'Sehr groß'],
               ]}
               onChange={(v) => void update({ font: v })}
               disabled={L.density}

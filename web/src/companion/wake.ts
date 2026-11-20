@@ -1,5 +1,5 @@
 /**
- * The wake word of the companion ("Hey Jarvis") with the browser's own speech recognition – there is no keyword engine of our own.
+ * The wake word of the companion ("Hey <Name>", e.g. "Hey Max") with the browser's own speech recognition – there is no keyword engine of our own.
  * It only runs while the person switched it on for this device and the tab is visible (CompanionLayer pauses it otherwise), and
  * the audio goes nowhere but to the browser's recognizer: in Chrome and Edge that recognizer is an online service of the browser's
  * maker (Google, Microsoft), in Safari Apple's. HyperLevel only gets text, and only what follows the wake phrase becomes a question.

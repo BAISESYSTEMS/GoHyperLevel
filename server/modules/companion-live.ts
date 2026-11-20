@@ -576,7 +576,7 @@ export const companionLiveModule: Module = {
         description: 'Gibt eine Bitte der Person an den HyperLevel Agenten weiter (Daten nachschlagen, Entwürfe, Aufgaben, Nachrichten, Termine …). Er nutzt die Werkzeuge und Rechte der Person. Alles Schreibende bestätigt die Person per Klick auf dem Bildschirm – nie per Stimme.',
         parameters: { type: 'object', properties: { request: { type: 'string', description: 'Die Bitte in einem Satz, in der Sprache der Person' } }, required: ['request'] },
       },
-      { name: 'end_conversation', description: 'Beendet das Gespräch, wenn die Person sich verabschiedet („danke Jarvis“, „das war’s“).', parameters: { type: 'object', properties: {} } },
+      { name: 'end_conversation', description: 'Beendet das Gespräch, wenn die Person sich verabschiedet („danke“, „das war’s“, „tschüss“).', parameters: { type: 'object', properties: {} } },
     ];
 
     const upgrade = (req: IncomingMessage, socket: Duplex, head: Buffer): boolean => {

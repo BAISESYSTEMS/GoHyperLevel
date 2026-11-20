@@ -1,5 +1,5 @@
 import type { App } from '../core/app.js';
-import { hiddenUser } from '../core/permissions.js';
+import { grants, hiddenUser } from '../core/permissions.js';
 import { id, now } from '../core/util.js';
 
 /**
@@ -30,7 +30,7 @@ export function mayUseArea(u: { role: string; locations?: string | string[]; per
   if (!locs.includes(locationId)) return false;
   if (!area) return true;
   const perms = Array.isArray(u.permissions) ? u.permissions : u.permissions ? JSON.parse(u.permissions) : null;
-  return !perms || perms.includes(area);
+  return !perms || grants(perms, area);
 }
 
 export function notifyMember(app: App, n: MemberNotice): boolean {

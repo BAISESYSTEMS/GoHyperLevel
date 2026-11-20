@@ -24,6 +24,8 @@ export interface Kit {
   inDays: (d: number, hour: number, minute?: number) => string;
   ymd: (d: number) => string;
   rand: () => number;
+  /** A second random stream for the later additions (demo-seed-more.ts, payments): they leave `rand` – and with it the rest of the demo – as it was. */
+  aux: () => number;
   /** The moment the seed counts from (its `now` option): nothing is dated after it. */
   nowMs: number;
   /** Ids of rows whose dates the history already set (demo-seed-history.ts) – the final backdating leaves them alone. */
@@ -148,13 +150,13 @@ export async function seedProject(k: Kit) {
 
 /** Office documents (generated locally – no document engine needed for the list). */
 export async function seedOffice(k: Kit) {
-  for (const [kind, name] of k.plan.office ?? []) {
-    if (kind === 'docx') await k.call('POST', '/api/office/files', { kind, name, text: `${name}\n\n${k.plan.name}\n\nDieses Dokument ist erfunden und gehört zur Demo. Es darf frei bearbeitet werden.` });
+  for (const [kind, name, content] of k.plan.office ?? []) {
+    if (kind === 'docx') await k.call('POST', '/api/office/files', { kind, name, text: typeof content === 'string' ? `${content}\n\n${k.plan.name} – erfundenes Demo-Dokument, frei bearbeitbar.` : `${name}\n\n${k.plan.name}\n\nDieses Dokument ist erfunden und gehört zur Demo. Es darf frei bearbeitet werden.` });
     else
       await k.call('POST', '/api/office/files', {
         kind,
         name,
-        rows: [
+        rows: Array.isArray(content) ? content : [
           ['Position', 'Menge', 'Einzelpreis (€)', 'Summe (€)'],
           ['Material', 12, 18.5, 222],
           ['Arbeitszeit (Std.)', 16, 78, 1248],
@@ -176,7 +178,28 @@ export async function seedWebinar(k: Kit) {
     schedule: { ondemand: { enabled: true } },
   });
   if (w?.id) await k.call('PATCH', `/api/webinars/${w.id}`, { status: 'published' });
-  if (w?.id) for (let i = 0; i < 16; i++) await k.call('POST', `/api/webinars/${w.id}/registrations`, { contact_id: k.contact(i + 7).id });
+  if (!w?.id) return;
+  for (let i = 0; i < 16; i++) await k.call('POST', `/api/webinars/${w.id}/registrations`, { contact_id: k.contact(i + 7).id });
+  // The sessions lie in the past weeks, most people watched (part of) it – and no "starts now" reminders go out after each reset.
+  await k.step('webinar sessions', () => {
+    const db = k.app.db;
+    const today = Math.min(Date.parse(k.inDays(0, 9)), k.nowMs - 60_000);
+    db.tx(() => {
+      for (const [i, r] of db.all<{ id: string }>('SELECT id FROM webinar_registrations WHERE webinar_id = ? ORDER BY rowid', w.id).entries()) {
+        const session = today - (3 + ((i * 7) % 52)) * 864e5 + 10 * 3600e3;
+        const watched = i % 5 === 1 || i % 7 === 3 ? 0 : 0.35 + k.aux() * 0.65;
+        db.run(
+          'UPDATE webinar_registrations SET session_start = ?, created_at = ?, attended_at = ?, watched_s = ?, watch_pct = ? WHERE id = ?',
+          new Date(session).toISOString(),
+          new Date(session - (1 + (i % 6)) * 864e5).toISOString(),
+          watched ? new Date(session + 120e3).toISOString() : null,
+          Math.round(2700 * watched),
+          Math.round(100 * watched),
+          r.id,
+        );
+      }
+    });
+  });
 }
 
 /** The online store: open, products published, orders in every state and a gift card. */

@@ -107,6 +107,29 @@ const words = (s: string) =>
     .filter((w) => w.length >= 2);
 
 /**
+ * Words people (and models) use for a feature whose routes say something else: an order bump lives under buy-offers, the
+ * Meta pixel in the ads settings, a Zoom link on the calendar. Without these a search for "bump" finds nothing and a model
+ * wrongly reports the feature as missing.
+ */
+const ROUTE_SYNONYMS: Record<string, string[]> = {
+  bump: ['buy', 'offers', 'upsell'],
+  orderbump: ['buy', 'offers', 'upsell'],
+  upsell: ['buy', 'offers'],
+  checkout: ['buy', 'store'],
+  pixel: ['ads'],
+  capi: ['ads'],
+  zoom: ['calendars', 'appointments', 'connector'],
+  meet: ['calendars', 'appointments'],
+  teams: ['calendars', 'appointments'],
+  calendly: ['calendars', 'appointments'],
+  manychat: ['ig', 'comments'],
+  autodm: ['ig', 'comments'],
+  mailchimp: ['campaigns', 'sequences'],
+  skool: ['community'],
+  linkinbio: ['site', 'templates'],
+};
+
+/**
  * ghl_api_routes: which routes ghl_api can call – live from the router (every module, also future ones), with the short
  * description of the API reference where there is one and the area a login needs. Lets a model find "the route for X" instead
  * of guessing; the call itself still runs with the caller's rights.
@@ -146,7 +169,8 @@ export function apiRoutesTool(app: App): Tool {
         .map((r) => {
           const summary = summaryOf(r.method, r.pattern);
           const hay = words(`${r.pattern} ${r.module} ${summary}`);
-          const score = q.reduce((n, w) => n + (hay.some((h) => h.startsWith(w) || (w.length > 4 && h.startsWith(w.slice(0, -1)))) ? 1 : 0), 0);
+          const hit = (w: string) => hay.some((h) => h.startsWith(w) || (w.length > 4 && h.startsWith(w.slice(0, -1))));
+          const score = q.reduce((n, w) => n + (hit(w) || (ROUTE_SYNONYMS[w] ?? []).some(hit) ? 1 : 0), 0);
           return { r, summary, score };
         })
         .filter((x) => !q.length || x.score > 0)

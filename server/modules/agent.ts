@@ -367,7 +367,9 @@ export const agentModule: Module = {
         return custom;
       }
       const s = locSettings(locId);
-      return { cfg: { ...DEFAULT_AGENT, mode: s.default_mode, webFetch: s.web_fetch && agencySettings().web_fetch_allowed }, connectionId: null, model: '', ownerId: null };
+      // the built-in agent goes by the assistant's name the person (or the sub-account, the agency) chose – modules/companion.ts
+      const name = (app.services.assistantName?.(user, locId) as string | undefined) || DEFAULT_AGENT.name;
+      return { cfg: { ...DEFAULT_AGENT, name, mode: s.default_mode, webFetch: s.web_fetch && agencySettings().web_fetch_allowed }, connectionId: null, model: '', ownerId: null };
     };
 
     // --- conversations ------------------------------------------------------------------------------------
@@ -867,7 +869,7 @@ export const agentModule: Module = {
       const s = locSettings(ctx.locationId);
       return {
         enabled: s.enabled,
-        default_agent: { id: null, name: DEFAULT_AGENT.name, emoji: DEFAULT_AGENT.emoji, description: DEFAULT_AGENT.description, mode: s.default_mode, starters: DEFAULT_STARTERS },
+        default_agent: { id: null, name: (app.services.assistantName?.(u, ctx.locationId) as string | undefined) || DEFAULT_AGENT.name, emoji: (app.services.assistantAvatar?.(u, ctx.locationId) as string | undefined) || DEFAULT_AGENT.emoji, description: DEFAULT_AGENT.description, mode: s.default_mode, starters: DEFAULT_STARTERS },
         agents: app.services.agentDefs?.listFor(u, ctx.locationId) ?? [],
         connection: resolved ? { id: resolved.connectionId, provider: resolved.provider, label: resolved.label, model: resolved.model, vision: resolved.capabilities.includes('vision') } : null,
         // Models the chat can switch to: every text connection plus the user's own bridge (if paired).

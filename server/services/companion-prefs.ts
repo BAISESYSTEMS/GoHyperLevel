@@ -4,14 +4,41 @@ import { TRIGGER_IDS, type TriggerPriority } from './companion-triggers.js';
 import { VOICE_RE } from './voice-settings.js';
 
 /**
- * Fokus-Modus mit Companion: one person's choices per sub-account – which agent answers (the built-in HyperLevel Agent as
- * "Jarvis" or one of their custom agents), its name and wake phrase, the shortcut, reading answers aloud, and the proactive
- * check-ins (interval or fixed times, quiet hours, weekdays only, only when something changed). Pure: validation, defaults and
- * the "is a check-in due now?" rule the scheduler in modules/companion.ts asks every minute. The wake word itself is switched on
- * per device in the browser (microphone permission is per device) and never stored here.
+ * Fokus-Modus mit Companion: one person's choices per sub-account – which agent answers (the built-in HyperLevel Agent under the
+ * assistant's name or one of their custom agents), its name, avatar, tone and wake phrase, the shortcut, reading answers aloud, and
+ * the proactive check-ins (interval or fixed times, quiet hours, weekdays only, only when something changed). Pure: validation,
+ * defaults and the "is a check-in due now?" rule the scheduler in modules/companion.ts asks every minute. The wake word itself is
+ * switched on per device in the browser (microphone permission is per device) and never stored here.
  */
 
-export const DEFAULT_NAME = 'Jarvis';
+/**
+ * The assistant's name when nobody chose one: neutral, by language. "Jarvis" was the fixed persona until 1.0.72 – whoever typed a
+ * name in keeps it, an empty name follows the defaults. Order: the person's name → a custom agent's name → the sub-account's
+ * default → the agency's default → this.
+ */
+export const DEFAULT_NAMES = { de: 'Assistent', en: 'Assistant' } as const;
+export const DEFAULT_NAME: string = DEFAULT_NAMES.de;
+export const defaultName = (lang?: string | null): string => (lang === 'en' ? DEFAULT_NAMES.en : DEFAULT_NAMES.de);
+/** How the assistant talks: neutral (default), casual ("du", relaxed) or formal ("Sie"). */
+export const TONES = ['neutral', 'casual', 'formal'] as const;
+export type Tone = (typeof TONES)[number];
+/** One emoji as the assistant's avatar – '' = the default (the sub-account's, the agency's, else the agent's own emoji). */
+export function cleanAvatar(v: unknown): string {
+  const s = String(v ?? '')
+    .replace(/[\s<>{}[\]`"'&\\]/g, '')
+    .slice(0, 16);
+  if (!s || /[\p{L}\p{N}\p{Cc}]/u.test(s.replace(/\p{Regional_Indicator}/gu, ''))) return '';
+  return /\p{Extended_Pictographic}|\p{Regional_Indicator}/u.test(s) ? s : '';
+}
+/** What a sub-account or the agency sets for everyone who has not chosen for themselves. */
+export interface AssistantDefaults {
+  name: string;
+  avatar: string;
+}
+export function cleanDefaults(v: unknown, cur: AssistantDefaults = { name: '', avatar: '' }): AssistantDefaults {
+  const b = v && typeof v === 'object' && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+  return { name: b.name !== undefined ? cleanName(b.name, 40) : cur.name, avatar: b.avatar !== undefined ? cleanAvatar(b.avatar) : cur.avatar };
+}
 /** Interval presets of the settings (minutes); any other number from 5 to 1440 is a custom interval. */
 export const CHECKIN_INTERVALS = [5, 10, 15, 20, 30, 45, 60, 120, 180, 240] as const;
 export const CHECKIN_MODES = ['off', 'interval', 'daily'] as const;
@@ -93,10 +120,13 @@ export interface CheckinPrefs {
 }
 
 export interface CompanionPrefs {
-  /** null = the built-in HyperLevel Agent (shown as the persona "Jarvis"), else a custom agent's id */
+  /** null = the built-in HyperLevel Agent (under the assistant's name), else a custom agent's id */
   agent_id: string | null;
-  /** '' = the default: "Jarvis" for the built-in agent, the custom agent's own name otherwise */
+  /** '' = the default: the custom agent's own name, else the sub-account's or agency's default, else "Assistent"/"Assistant" */
   name: string;
+  /** '' = the default avatar (the sub-account's, the agency's, else the agent's emoji) */
+  avatar: string;
+  tone: Tone;
   /** '' = "Hey <name>" */
   wake_phrase: string;
   shortcut: boolean;
@@ -113,7 +143,7 @@ export interface CompanionPrefs {
   tts_provider: string;
   /** '' = the provider's first connection of this sub-account */
   tts_connection_id: string;
-  /** the provider's voice id (default "auto" = the native Jarvis voice of the language; '' = the provider's default) */
+  /** the provider's voice id (default "auto" = the native default voice of the language; '' = the provider's default) */
   tts_voice: string;
   /** the person's time zone for daily check-ins and quiet hours ('' = the sub-account's) */
   tz: string;
@@ -146,7 +176,7 @@ export interface EventPrefs {
 export const defaultEvents = (): EventPrefs => ({ on: true, unanswered_minutes: DEFAULT_UNANSWERED_MINUTES, triggers: {} });
 
 export const defaultCheckin = (): CheckinPrefs => ({ mode: 'off', minutes: 60, times: ['08:30'], quiet_from: '20:00', quiet_to: '08:00', weekdays_only: false, only_changed: true, speak: false });
-export const defaultPrefs = (): CompanionPrefs => ({ agent_id: null, name: '', wake_phrase: '', shortcut: true, read_aloud: null, voice_reply: true, browser_voice: '', tts_provider: DEFAULT_TTS_PROVIDER, tts_connection_id: '', tts_voice: DEFAULT_TTS_VOICE, tz: '', checkin: defaultCheckin(), conversation_window: DEFAULT_CONVERSATION_WINDOW, barge_in: true, voice_engine: 'classic', live_connection_id: '', initiative: 'balanced', events: defaultEvents(), role: DEFAULT_ROLE, growth: defaultGrowth() });
+export const defaultPrefs = (): CompanionPrefs => ({ agent_id: null, name: '', avatar: '', tone: 'neutral', wake_phrase: '', shortcut: true, read_aloud: null, voice_reply: true, browser_voice: '', tts_provider: DEFAULT_TTS_PROVIDER, tts_connection_id: '', tts_voice: DEFAULT_TTS_VOICE, tz: '', checkin: defaultCheckin(), conversation_window: DEFAULT_CONVERSATION_WINDOW, barge_in: true, voice_engine: 'classic', live_connection_id: '', initiative: 'balanced', events: defaultEvents(), role: DEFAULT_ROLE, growth: defaultGrowth() });
 
 function cleanTriggerMap(v: unknown): EventPrefs['triggers'] {
   const out: EventPrefs['triggers'] = {};
@@ -173,7 +203,7 @@ export const cleanName = (v: unknown, max: number) =>
     .trim()
     .slice(0, max);
 
-/** "Hey Jarvis" for "Jarvis" – the wake phrase that follows the companion's name. */
+/** "Hey Max" for "Max" – the wake phrase that follows the companion's name. */
 export const wakePhraseFor = (name: string) => `Hey ${cleanName(name, 40) || DEFAULT_NAME}`;
 
 function cleanTimes(v: unknown): string[] {
@@ -192,6 +222,8 @@ export function withPrefDefaults(stored: unknown): CompanionPrefs {
   return {
     agent_id: typeof s.agent_id === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(s.agent_id) ? s.agent_id : null,
     name: cleanName(s.name, 40),
+    avatar: cleanAvatar(s.avatar),
+    tone: TONES.includes(s.tone) ? s.tone : d.tone,
     wake_phrase: cleanName(s.wake_phrase, 60),
     shortcut: bool(s.shortcut, d.shortcut),
     read_aloud: typeof s.read_aloud === 'boolean' ? s.read_aloud : null,
@@ -240,9 +272,14 @@ export function cleanPrefs(body: unknown, cur: CompanionPrefs): CompanionPrefs {
     else throw new Error('Unbekannter Agent');
   }
   if (b.name !== undefined) out.name = cleanName(b.name, 40);
+  if (b.avatar !== undefined) out.avatar = cleanAvatar(b.avatar);
+  if (b.tone !== undefined) {
+    if (!TONES.includes(b.tone)) throw new Error('Ton: neutral, locker oder förmlich');
+    out.tone = b.tone;
+  }
   if (b.wake_phrase !== undefined) {
     const p = cleanName(b.wake_phrase, 60);
-    if (p && p.replace(/[^\p{L}]/gu, '').length < 4) throw new Error('Das Weckwort ist zu kurz – mindestens vier Buchstaben, z. B. „Hey Jarvis“.');
+    if (p && p.replace(/[^\p{L}]/gu, '').length < 4) throw new Error('Das Weckwort ist zu kurz – mindestens vier Buchstaben, z. B. „Hey Max“.');
     out.wake_phrase = p;
   }
   for (const k of ['shortcut', 'voice_reply'] as const) if (b[k] !== undefined) out[k] = b[k] === true;

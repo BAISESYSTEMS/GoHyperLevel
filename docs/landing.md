@@ -37,7 +37,7 @@ The home page leads with the agentic side, in this order:
    `prefers-reduced-motion`; every language needs the same number of words), who it is for as a smaller line below
    ("for agentic solopreneurs, agencies, small businesses & startups" / "für agentische Solopreneure, Agenturen, kleine Unternehmen und
    Startups"; screen readers get the whole sentence from the heading's label), a sub
-   line on Jarvis and "one single source of truth", the three calls to action (live demo, self-host in one command,
+   line on the AI assistant and "one single source of truth", the three calls to action (live demo, self-host in one command,
    cloud), the GitHub link with the star count, a badge row (MCP, your own Claude/ChatGPT plan for your own chats …) and a
    crossfade of up to four real screens – `shot-jarvis.webp` first when it exists, then pipeline, inbox, workflow editor,
    website builder (still with `prefers-reduced-motion`).
@@ -53,15 +53,15 @@ The home page leads with the agentic side, in this order:
 3. **Counted, not claimed** – MCP tools, workflow triggers, workflow actions and integrations counted from the running
    code (the triggers and actions the way the workflow catalogue counts them), automated tests counted from the repository
    at build time.
-4. **One single source of truth** (`#agentisch`) – agents fill the CRM: Claude, ChatGPT, Codex, Hermes, Cursor, Jarvis,
+4. **One single source of truth** (`#agentisch`) – agents fill the CRM: Claude, ChatGPT, Codex, Hermes, Cursor, your AI assistant,
    your own agents and your team read and write the same database over MCP and the REST API, with the same permissions,
    audit log and undo; read-only keys; inside the app the agent asks before anything is sent, deleted or paid, and every MCP
    tool tells external clients whether it reads, writes or sends (so the client can ask). A small HTML diagram, no picture.
-5. **Jarvis** (`#jarvis`) – the voice companion and business developer of focus mode ([living-boards.md](living-boards.md#fokus-modus-mit-companion)):
+5. **The AI assistant** (`#jarvis` – the id stays for old links; the page no longer names a fixed persona since 1.0.73, people name the assistant themselves, the example chat calls it "Max") – the voice companion and business developer of focus mode ([living-boards.md](living-boards.md#fokus-modus-mit-companion)):
    growth briefing with top‑3 opportunities and risks in € (opt-in), weekly review, check-ins and event alerts, drafts that
    wait for a click (voice never confirms), conversation mode, the fallback chain. An example conversation drawn in HTML
    (no numbers, labelled as an example).
-6. **What makes it different** (`#warum`) – nine cards: €0 per seat, one source of truth, Jarvis, your own Claude or ChatGPT
+6. **What makes it different** (`#warum`) – nine cards: €0 per seat, one source of truth, an agentic assistant with your name, your own Claude or ChatGPT
    plan (personal chats only – Claude through Claude Code on your computer via the bridge, ChatGPT with "Sign in with
    ChatGPT" on self-hosted installs; automations use API keys), XR, designs (live counts of themes and icon packs), the
    Academy, open & customizable, German & English/GDPR/e-invoices. Each title links to its section or docs page.
@@ -87,7 +87,7 @@ The home page leads with the agentic side, in this order:
    (GDPR, GoBD-minded invoicing, XRechnung/ZUGFeRD, SEPA, DATEV, hosting in Frankfurt, German & English), the HighLevel
    importer in three steps, HighLevel side by side, the comparison matrix, **Cloud or self-hosted?**, pricing,
    **white-label on the Agency plan**, apps, **Open source – and open for contributions** (links to CONTRIBUTING.md, the
-   good first issues and the repository, the CLA note), the one-command install with a copy button, FAQ (with Jarvis, who
+   good first issues and the repository, the CLA note), the one-command install with a copy button, FAQ (with the AI assistant, who
    maintains the data, AI optional, own subscription).
 12. **Apps** – the Android APK from this server (`/downloads/hyperlevel.apk`, version, size and SHA-256 from the latest upload,
    QR code to `/android`, how to allow unknown sources), the iPhone/iPad web app (add to home screen, what works) and XR
@@ -145,7 +145,7 @@ open-source project and is not affiliated with HighLevel Inc. or the other vendo
 mode is part of self-hosting, not of the cloud; our branded app is an installable web app plus a self-built Android APK,
 not a store app; the HighLevel importer moves contacts, custom fields, tags, pipelines, deals, calendars and appointments,
 not funnels or workflows. Testimonials are left out until real quotes exist. Your own ChatGPT or Claude subscription is
-always "for your own chats" (automations use API keys), XR always "beta", Jarvis's growth briefing always "you switch it
+always "for your own chats" (automations use API keys), XR always "beta", the assistant's growth briefing always "you switch it
 on". "Built with Claude" appears as plain words in the footer, never as a logo.
 
 ## The comparison research
@@ -192,7 +192,7 @@ MCP row says that other vendors have MCP servers too.
 
 `npm run landing:assets` (after `npm run build`) seeds a fictional demo, sets the product name to HyperLevel, takes
 the four hero screens at 1440×900 (`shot-workflow|inbox|funnel|pipeline.webp`) plus `shot-jarvis.webp` (focus mode with
-Jarvis' briefing, first in the hero), `shot-academy.webp` (the Academy with a running tour – in German, like its tours),
+the assistant's briefing, first in the hero), `shot-academy.webp` (the Academy with a running tour – in German, like its tours),
 `shot-themes.webp` (four looks side by side: standard, dark with duotone icons, area colours, a white-label logo) and
 `shot-xr.webp` (a board in the 3D preview), converts them to WebP in Chromium (each well under 250 KB), renders the social
 cards `og-en.png` and `og-de.png` (1200×630, the page's own font, the HyperLevel mark and the tagline) plus
@@ -219,7 +219,7 @@ copies to `dist-web/landing/`. The font is Inter Tight as a variable font (SIL O
 
 `server/modules/landing.ts` (routes, data, cache, screenshot sizes) with the pure parts in `server/services/landing-calc.ts`,
 `landing-compare.ts`, `landing-copy.ts`, `landing-waitlist-copy.ts` (waitlist mode), `landing-page.ts`, `landing-agentic.ts`
-with `landing-agentic-copy.ts` (one source of truth, Jarvis, the reasons, Academy, designs, XR, open source) and
+with `landing-agentic-copy.ts` (one source of truth, the AI assistant, the reasons, Academy, designs, XR, open source) and
 `landing-logos.ts` (the integrations row). The waitlist form comes
 from `app.services.cloudWaitlist.view()` (`server/modules/cloud-waitlist.ts`). Hooks: `app.services.robotsExtra` (lines for
 `/robots.txt`, used for the `Sitemap:` line), `app.services.landingFetch` (test hook for the GitHub call),

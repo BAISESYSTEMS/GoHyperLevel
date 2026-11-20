@@ -62,7 +62,7 @@ describe('web bundle', () => {
 
   it('loads no page, editor, tour or phone code up front', () => {
     const files = firstDownload().map((c) => c.file);
-    for (const heavy of [/email-builder/, /twilio/, /engine/, /charts/, /Contacts/, /Settings/, /Workflows/, /Funnels/, /Reports/, /VideoStudio/, /Academy/, /Panel/, /Canvas/, /Workspace/, /XrViewer/, /XrButton/, /spatial/]) {
+    for (const heavy of [/email-builder/, /twilio/, /engine/, /charts/, /Contacts/, /Settings/, /Workflows/, /Funnels/, /Reports/, /VideoStudio/, /Academy/, /Panel/, /Canvas/, /Workspace/, /XrViewer/, /XrButton/, /spatial/, /nav-palette/]) {
       expect(files.filter((f) => heavy.test(f)), String(heavy)).toEqual([]);
     }
   });

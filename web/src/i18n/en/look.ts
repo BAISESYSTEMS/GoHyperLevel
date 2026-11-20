@@ -1,0 +1,97 @@
+import type { Catalog } from '../registry';
+
+/** English – Settings → Appearance → Style & windows (theme/LookStyle.tsx, the labels and presets of theme/look.ts). */
+export default {
+  // the section
+  Voreinstellungen: 'Presets',
+  'Eigene Mischung – wähle oben eine Voreinstellung oder stimme unten fein ab.': 'Your own mix – pick a preset above or fine-tune below.',
+  Feineinstellung: 'Fine-tuning',
+  Fensterstil: 'Window style',
+  Ecken: 'Corners',
+  Schatten: 'Shadow',
+  Rahmen: 'Border',
+  Schriftart: 'Typeface',
+  'Schriften, die dein Gerät schon hat – nichts wird nachgeladen. Fehlt eine, springt die nächste ähnliche ein.': 'Fonts your device already has – nothing is downloaded. If one is missing, the closest similar one steps in.',
+  Seitenleiste: 'Sidebar',
+  'Stil der Seitenleiste': 'Sidebar style',
+  Kopfzeile: 'Top bar',
+  Hintergrund: 'Background',
+  'Hinter den Seiten – am schönsten mit „Glas“ oder einer schwebenden Seitenleiste.': 'Behind the pages – looks best with “Glass” or a floating sidebar.',
+  'Stil zurücksetzen': 'Reset style',
+  'Farben, Dichte und Schriftgröße bleiben, wie sie sind.': 'Colours, density and font size stay as they are.',
+
+  // window styles
+  Standard: 'Standard',
+  'Feiner Rahmen, klare Flächen – so kennst du HyperLevel.': 'Fine border, clear surfaces – HyperLevel as you know it.',
+  Flach: 'Flat',
+  'Ohne Rahmen und Schatten, nur ruhige Flächen.': 'No borders or shadows, just calm surfaces.',
+  Klassisch: 'Classic',
+  'Rahmen mit leichtem Schatten, wie ein Desktop-Programm.': 'Borders with a light shadow, like a desktop program.',
+  Weich: 'Soft',
+  'Große Rundungen und weiche, schwebende Schatten.': 'Generous rounding and soft, floating shadows.',
+  Glas: 'Glass',
+  'Halbtransparente Karten, die den Hintergrund durchscheinen lassen.': 'Translucent cards that let the background shine through.',
+  Kantig: 'Bold edges',
+  'Eckig, kräftige Rahmen und harte Schatten.': 'Square, strong borders and hard shadows.',
+
+  // corners, shadow, border
+  'Wie der Stil': 'Like the style',
+  Eckig: 'Square',
+  Leicht: 'Slight',
+  Mittel: 'Medium',
+  Rund: 'Round',
+  'Sehr rund': 'Very round',
+  Keine: 'None',
+  Zart: 'Faint',
+  Kräftig: 'Strong',
+  'Mit Rahmen': 'With border',
+  'Ohne Rahmen': 'No border',
+
+  // typefaces
+  System: 'System',
+  Modern: 'Modern',
+  Humanistisch: 'Humanist',
+  Geometrisch: 'Geometric',
+  'Rund & freundlich': 'Rounded & friendly',
+  Serif: 'Serif',
+  Monospace: 'Monospace',
+
+  // sidebar and top bar
+  Fest: 'Solid',
+  'Durchgehende Leiste in der Farbe des Themes.': 'A continuous bar in the theme’s colour.',
+  Schwebend: 'Floating',
+  'Abgesetzt mit Rundung und Schatten.': 'Set apart with rounded corners and a shadow.',
+  Nahtlos: 'Seamless',
+  'In der Farbe der Seite, nur durch eine Linie getrennt.': 'In the page colour, separated only by a line.',
+  'Kopfzeile als eigene Fläche mit Linie.': 'The top bar as its own surface with a line.',
+  Offen: 'Open',
+  'In der Farbe der Seite, ohne Linie.': 'In the page colour, without a line.',
+  Milchglas: 'Frosted glass',
+  'Halbtransparent – der Inhalt scheint beim Scrollen durch.': 'Translucent – the content shows through as you scroll.',
+  'Als abgerundete Leiste über der Seite.': 'A rounded bar floating above the page.',
+
+  // backgrounds
+  Einfarbig: 'Plain',
+  Verlauf: 'Gradient',
+  Polarlicht: 'Aurora',
+  Punkte: 'Dots',
+  Raster: 'Grid',
+  'Eigenes Bild': 'Own picture',
+  'Eigenes Bild hochladen': 'Upload your own picture',
+  'Anderes Bild hochladen': 'Upload another picture',
+  'Wird hochgeladen …': 'Uploading …',
+  'Bild entfernen': 'Remove picture',
+  'Das Foto wird so abgeschwächt, dass Schrift darauf immer lesbar bleibt.': 'The photo is toned down so that text on it always stays readable.',
+  'Dieses Bild kann der Browser nicht lesen – bitte JPG, PNG oder WebP.': 'Your browser cannot read this picture – please use JPG, PNG or WebP.',
+
+  // presets
+  'Das gewohnte HyperLevel: Rahmen, klare Flächen, Systemschrift.': 'The familiar HyperLevel: borders, clear surfaces, system font.',
+  Minimal: 'Minimal',
+  'Flach und nahtlos – nichts lenkt vom Inhalt ab.': 'Flat and seamless – nothing distracts from the content.',
+  'Rahmen und zarte Schatten wie ein Desktop-Programm.': 'Borders and faint shadows like a desktop program.',
+  'Große Rundungen, schwebende Leisten, sanfter Verlauf.': 'Generous rounding, floating bars, a gentle gradient.',
+  'Halbtransparente Fenster über Polarlicht, Kopfzeile aus Milchglas.': 'Translucent windows over aurora light, a frosted-glass top bar.',
+  Redaktion: 'Editorial',
+  'Serifenschrift auf Punkteraster – ruhig wie ein Magazin.': 'A serif typeface on a dot grid – calm like a magazine.',
+  'Eckige Fenster, kräftige Rahmen, harte Schatten auf Raster.': 'Square windows, strong borders, hard shadows on a grid.',
+} satisfies Catalog;

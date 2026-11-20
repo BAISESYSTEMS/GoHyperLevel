@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { api } from '../api';
 import { ICONS, Icon, type IconName } from '../icons';
-import { Badge } from '../ui';
+import { Badge, Link } from '../ui';
+import { Later, lazyPages } from '../lazy';
 import { CARD_TOOLS, NAMES, ROUTES, SCOPE_LABELS, type PluginScope } from '../../../server/services/werkstatt/names';
 
 /** Shared bits of the Werkstatt and Marktplatz screens (names live in server/services/werkstatt/names.ts). */
@@ -66,3 +67,31 @@ export const openBuild = (o: BuildRequest = {}) => {
   pendingBuild.v = o;
   window.dispatchEvent(new CustomEvent('pghl:build', { detail: o }));
 };
+
+/** Menu entries below „Marktplatz“: the pages of the plugins that are on here. */
+export function PluginNav({ cur }: { cur: string[] }) {
+  const plugins = useActivePlugins().filter((p) => p.page);
+  if (!plugins.length) return null;
+  return (
+    <div className="nav-sub" data-tour="plugin-nav">
+      {plugins.map((p) => (
+        <Link key={p.id} to={`plugin/${p.id}`} className={cur[0] === 'plugin' && cur[1] === p.id ? 'on' : ''}>
+          <PluginIcon name={p.page?.icon ?? p.icon} size={15} /> {p.page?.title ?? p.name}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+// The plugin frames (PluginFrame.tsx: iframe bridge, widget grid) are a chunk of their own – the dashboard loads it only when a
+// plugin that is on here brings a widget.
+const frames = lazyPages(() => import('./PluginFrame'), 'PluginWidgets');
+/** Dashboard widgets of plugins (nothing, and no download, without any). */
+export function PluginWidgets() {
+  const has = useActivePlugins().some((p) => p.widgets.length > 0);
+  return has ? (
+    <Later>
+      <frames.PluginWidgets />
+    </Later>
+  ) : null;
+}

@@ -1,7 +1,7 @@
-import type { Module } from '../core/app.js';
+import type { App, Module } from '../core/app.js';
 import { bad, clampLimit, notFound, str } from '../core/http.js';
 import { id, now } from '../core/util.js';
-import { dedupeKey, matchTxn, parseBankFile, type Candidate, type Match } from '../services/acc-bank.js';
+import { dedupeKey, matchTxn, parseBankFile, type BankTxn, type Candidate, type Match } from '../services/acc-bank.js';
 import { decodeCp1252 } from '../services/acc-datev.js';
 import { ensureIssued, invoiceBalance, postInvoicePayment } from '../services/acc-autopost.js';
 import { bookingDate, chartMap, entryBySourceKey, postEntry, requireEnabled, trail } from '../services/acc-ledger.js';
@@ -57,51 +57,70 @@ const txnOut = (r: TxnRow) => {
   return { ...rest, match };
 };
 
+/** Open invoices and open booked receipts a bank line could pay. */
+export function bankCandidates(app: App, loc: string): Candidate[] {
+  const { db } = app;
+  // the open amount: what is left after partial payments, credit notes and deducted partial invoices
+  const invoices = db.all<{ id: string; number: string; total_cents: number; company: string | null; first_name: string | null; last_name: string | null }>(
+    `SELECT i.id, i.number, i.total_cents - i.paid_cents - i.credited_cents - i.deducted_cents AS total_cents, c.company, c.first_name, c.last_name FROM invoices i LEFT JOIN contacts c ON c.id = i.contact_id
+     WHERE i.location_id = ? AND i.kind = 'invoice' AND i.status = 'sent' AND i.total_cents - i.paid_cents - i.credited_cents - i.deducted_cents > 0 LIMIT 2000`,
+    loc,
+  );
+  const receipts = db.all<{ id: string; invoice_no: string; supplier: string; gross_cents: number | null; net_cents: number | null; reverse_charge: number }>(
+    `SELECT id, invoice_no, supplier, gross_cents, net_cents, reverse_charge FROM acc_receipts WHERE location_id = ? AND status = 'booked' AND payment = 'open' AND payment_entry_id IS NULL LIMIT 2000`,
+    loc,
+  );
+  return [
+    ...invoices.map<Candidate>((i) => ({ kind: 'invoice', id: i.id, ref: i.number, party: i.company || [i.first_name, i.last_name].filter(Boolean).join(' '), amount_cents: i.total_cents })),
+    ...receipts.filter((r) => r.invoice_no).map<Candidate>((r) => ({ kind: 'receipt', id: r.id, ref: r.invoice_no, party: r.supplier, amount_cents: (r.reverse_charge ? r.net_cents : r.gross_cents) ?? 0 })),
+  ];
+}
+
+/** Matches the open bank lines of a sub-account with its open invoices and receipts again; returns how many got a proposal. */
+export function rematchBank(app: App, loc: string, ids?: string[]): number {
+  const { db } = app;
+  const setMatch = (txnId: string, m: Match | null) => db.run(`UPDATE acc_bank_txns SET status = ?, match = ? WHERE id = ? AND status IN ('open', 'matched')`, m ? 'matched' : 'open', JSON.stringify(m ?? {}), txnId);
+  const cands = bankCandidates(app, loc);
+  const rows = db.all<TxnRow>(`SELECT * FROM acc_bank_txns WHERE location_id = ? AND status IN ('open', 'matched') ${ids?.length ? `AND id IN (${ids.map(() => '?').join(',')})` : ''}`, loc, ...(ids ?? []));
+  // One document is proposed for one line only: the best score keeps it.
+  const taken = new Map<string, { txn: string; score: number }>();
+  const results = rows.map((r) => ({ r, m: matchTxn(r, cands) }));
+  for (const { r, m } of results.sort((a, b) => (b.m?.score ?? 0) - (a.m?.score ?? 0))) {
+    if (!m) continue;
+    const k = `${m.kind}:${m.id}`;
+    if (taken.has(k)) (m.score = 0);
+    else taken.set(k, { txn: r.id, score: m.score });
+  }
+  let matched = 0;
+  for (const { r, m } of results) {
+    const ok = m && m.score >= 50 ? m : null;
+    setMatch(r.id, ok);
+    if (ok) matched++;
+  }
+  return matched;
+}
+
+/** Stores bank lines (a known dedupe key adds nothing) and returns the ids of the new ones. */
+export function insertBankTxns(app: App, loc: string, importId: string | null, rows: { txn: BankTxn; key: string }[]): string[] {
+  const added: string[] = [];
+  for (const { txn: t, key } of rows) {
+    const rowId = id();
+    const r = app.db.run(
+      `INSERT OR IGNORE INTO acc_bank_txns (id, location_id, import_id, booking_date, value_date, amount_cents, currency, counterparty, counterparty_iban, purpose, end_to_end_id, bank_ref, account_iban, dedupe_key, status, match, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open', '{}', ?)`,
+      rowId, loc, importId, t.booking_date, t.value_date, t.amount_cents, t.currency, t.counterparty, t.counterparty_iban, t.purpose, t.end_to_end_id, t.bank_ref, t.account_iban, key, now(),
+    );
+    if (r.changes) added.push(rowId);
+  }
+  return added;
+}
+
 export const bankModule: Module = {
   name: 'accounting-bank',
   register(app) {
     const { db, router } = app;
-
-    /** Open invoices and open booked receipts a bank line could pay. */
-    const candidates = (loc: string): Candidate[] => {
-      // the open amount: what is left after partial payments, credit notes and deducted partial invoices
-      const invoices = db.all<{ id: string; number: string; total_cents: number; company: string | null; first_name: string | null; last_name: string | null }>(
-        `SELECT i.id, i.number, i.total_cents - i.paid_cents - i.credited_cents - i.deducted_cents AS total_cents, c.company, c.first_name, c.last_name FROM invoices i LEFT JOIN contacts c ON c.id = i.contact_id
-         WHERE i.location_id = ? AND i.kind = 'invoice' AND i.status = 'sent' AND i.total_cents - i.paid_cents - i.credited_cents - i.deducted_cents > 0 LIMIT 2000`,
-        loc,
-      );
-      const receipts = db.all<{ id: string; invoice_no: string; supplier: string; gross_cents: number | null; net_cents: number | null; reverse_charge: number }>(
-        `SELECT id, invoice_no, supplier, gross_cents, net_cents, reverse_charge FROM acc_receipts WHERE location_id = ? AND status = 'booked' AND payment = 'open' AND payment_entry_id IS NULL LIMIT 2000`,
-        loc,
-      );
-      return [
-        ...invoices.map<Candidate>((i) => ({ kind: 'invoice', id: i.id, ref: i.number, party: i.company || [i.first_name, i.last_name].filter(Boolean).join(' '), amount_cents: i.total_cents })),
-        ...receipts.filter((r) => r.invoice_no).map<Candidate>((r) => ({ kind: 'receipt', id: r.id, ref: r.invoice_no, party: r.supplier, amount_cents: (r.reverse_charge ? r.net_cents : r.gross_cents) ?? 0 })),
-      ];
-    };
-
-    const setMatch = (txnId: string, m: Match | null) => db.run(`UPDATE acc_bank_txns SET status = ?, match = ? WHERE id = ? AND status IN ('open', 'matched')`, m ? 'matched' : 'open', JSON.stringify(m ?? {}), txnId);
-
-    function rematch(loc: string, ids?: string[]) {
-      const cands = candidates(loc);
-      const rows = db.all<TxnRow>(`SELECT * FROM acc_bank_txns WHERE location_id = ? AND status IN ('open', 'matched') ${ids?.length ? `AND id IN (${ids.map(() => '?').join(',')})` : ''}`, loc, ...(ids ?? []));
-      // One document is proposed for one line only: the best score keeps it.
-      const taken = new Map<string, { txn: string; score: number }>();
-      const results = rows.map((r) => ({ r, m: matchTxn(r, cands) }));
-      for (const { r, m } of results.sort((a, b) => (b.m?.score ?? 0) - (a.m?.score ?? 0))) {
-        if (!m) continue;
-        const k = `${m.kind}:${m.id}`;
-        if (taken.has(k)) (m.score = 0);
-        else taken.set(k, { txn: r.id, score: m.score });
-      }
-      let matched = 0;
-      for (const { r, m } of results) {
-        const ok = m && m.score >= 50 ? m : null;
-        setMatch(r.id, ok);
-        if (ok) matched++;
-      }
-      return matched;
-    }
+    const candidates = (loc: string) => bankCandidates(app, loc);
+    const rematch = (loc: string, ids?: string[]) => rematchBank(app, loc, ids);
 
     // --- import -----------------------------------------------------------------------------------------------------
     router.post('/api/accounting/bank/import', 'location', (ctx) => {

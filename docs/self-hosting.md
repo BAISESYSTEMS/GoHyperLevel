@@ -119,6 +119,7 @@ All variables are optional except `PGHL_BASE_URL`; much of it can also be set in
 | Variable | Meaning |
 | --- | --- |
 | `PGHL_ANDROID_CERT_SHA256`, `PGHL_ANDROID_PACKAGE` | Optional: SHA-256 fingerprint(s) of your Android app's signing certificate (comma-separated) and its package id (default `org.gohigh.android`) for `/.well-known/assetlinks.json` – without a fingerprint App Links are off; the agency setting wins – see [Android app](app.md#android-app) |
+| `PGHL_ENABLEBANKING_APP_ID`, `PGHL_ENABLEBANKING_PRIVATE_KEY` | Optional: Enable Banking application ID and RSA private key (PEM) for the read-only bank sync in Accounting → Bank; the key the agency stores in the app wins – see [back office](backoffice.md) |
 | `PGHL_AGENT_TOKEN`, `PGHL_SERVER_IP` | Domain agent for customers' own domains: shared secret between app and agent, public IP(s) of the server ([Domain agent](#domain-agent)) |
 | `PGHL_REFERRALS_DISABLED=1` | Only the providers' plain sign-up links: turns off every partner link behind “Create account”, whatever is set under *Agency → Partner links* ([Partner links](#partner-links)) |
 | `PGHL_REFERRALS` | Optional: your own partner links as JSON, e.g. `{"kie":"https://kie.ai/?ref=me","stripe":""}` (`""` = plain sign-up page); the agency's settings win ([docs/referrals.md](referrals.md)) |

@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { api, dt, euro, moneyList, name } from '../api';
 import { Link, PageHead, Select, Spinner, Stat, tileLink, useLoad } from '../ui';
-import { PluginWidgets } from '../werkstatt/PluginFrame';
+import { PluginWidgets } from '../werkstatt/shared';
 import { useModules } from '../theme/store';
 import { fmtDate, useT } from '../i18n';
 import { LearnLink } from '../tour/learn';
-import { AcademyWelcome } from '../tour/welcome';
+import { lazyPages } from '../lazy';
 import { MoreFields, useSimple } from '../areas/fields';
 import { dashboardLayout, type DashCard, type DashStat } from '../areas/easy-core';
 import { SortableGrid } from '../sortable/lazy';
 import '../areas/easy-core.css';
+
+// Ersteinstieg: the "Erste Schritte" card after the welcome wizard (or the academy hint) – a chunk of its own, the first download stays small.
+const { FirstSteps } = lazyPages(() => import('../onboarding/FirstSteps'), 'FirstSteps');
 
 /** The calendar day (YYYY-MM-DD) n days from `ymd`. Its own two lines: importing the planner's date helpers (pm-format.ts) put all of
  *  them into the first download (tests/bundle-budget.test.ts). */
@@ -189,7 +192,9 @@ export function Dashboard() {
         {!simple && range}
         <LearnLink label="learn" />
       </PageHead>
-      <AcademyWelcome />
+      <Suspense fallback={null}>
+        <FirstSteps contacts={data.contacts.total} />
+      </Suspense>
       {/* Every tile and card can be dragged into your own order (web/src/sortable). The essential row of Einfach-Modus and the
           one behind "Mehr anzeigen" share one saved order with the full row, so switching modes keeps it. */}
       {layout.stats.length > 0 && (

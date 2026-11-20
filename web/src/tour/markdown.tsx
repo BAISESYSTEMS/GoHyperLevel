@@ -8,11 +8,12 @@ import { slug } from './slug';
  * can run in the app. Links to other `.md` files open inside the academy.
  */
 
-/** `docs/x.md#y`, `x.md`, `../README.md` → in-app route; everything else unchanged. */
+/** `docs/x.md#y`, `x.de.md`, `../README.md` → in-app route; everything else unchanged. */
 export function docHref(href: string): { internal: string } | { external: string } | { anchor: string } {
   if (href.startsWith('#')) return { anchor: href.slice(1) };
-  const m = href.match(/^(?:\.{1,2}\/)*(?:docs\/)?([A-Za-z0-9-]+)\.md(#.*)?$/);
-  if (m) return { internal: `academy/docs/${m[1]}${m[2] ?? ''}` };
+  // `<page>.de.md` is the German version next to the English page (server/modules/academy.ts serves both)
+  const m = href.match(/^(?:\.{1,2}\/)*(?:docs\/)?([A-Za-z0-9-]+(?:\.de)?)\.md(#.*)?$/);
+  if (m) return { internal: `academy/docs/${m[1] === 'README.de' ? 'README' : m[1]}${m[2] ?? ''}` };
   return { external: href };
 }
 

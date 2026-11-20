@@ -10,6 +10,7 @@ import { AttributionFilter, ContactAttribution, attrQs, pickAttr, type AttrFilte
 import { CanvasPin } from '../canvas/pin';
 import { act, Badge, Check, confirmAsk, Empty, Field, Input, Link, Modal, navigate, PageHead, pressable, Select, Spinner, Tabs, Textarea, toast, useLoad, useRoute } from '../ui';
 import { messageText } from './EmailBuilder';
+import { useIntent } from '../onboarding/plan';
 import { MailEngagement } from './MailEngagement';
 import { PluginPanels } from '../werkstatt/PluginFrame';
 import { AssociationsPanel, CompanyFilter, companyQs, pickCompany, type CompanyFilterValue } from './ObjectKit';
@@ -213,7 +214,9 @@ export function Contacts() {
   const [followUp, setFollowUp] = useState<FollowUpView>('hide');
   const [page, setPage] = useState(0);
   const [sel, setSel] = useState<string[]>([]);
-  const [modal, setModal] = useState<'' | 'new' | 'import'>('');
+  // `?import=1` (welcome wizard, "Erste Schritte"): the CSV import opens right away
+  const importNow = useIntent('import');
+  const [modal, setModal] = useState<'' | 'new' | 'import'>(importNow ? 'import' : '');
   const tags = useTags();
   const workflows = useLoad(() => api.get<any[]>('/api/workflows'), []);
   const [debounced, setDebounced] = useState('');

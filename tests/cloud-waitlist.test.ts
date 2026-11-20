@@ -27,7 +27,7 @@ describe('waitlist mode: when it is on', () => {
   });
 
   it('checks a submission: address, consent, optional name and plan', () => {
-    expect(parseWaitlist({ email: ' Mia@Example.COM ', consent: '1', plan: 'team', lang: 'en', name: 'Mia <b>' })).toEqual({ ok: true, entry: { email: 'mia@example.com', name: 'Mia b', plan: 'team', lang: 'en' } });
+    expect(parseWaitlist({ email: ' Mia@Example.COM ', consent: '1', plan: 'team', lang: 'en', name: 'Mia <b>' })).toEqual({ ok: true, entry: { email: 'mia@example.com', name: 'Mia b', plan: 'team', lang: 'en', utm: '' } });
     expect(parseWaitlist({ email: 'kein-mail', consent: '1' })).toEqual({ ok: false, error: 'email' });
     expect(parseWaitlist({ email: 'a@b.de' })).toEqual({ ok: false, error: 'consent' });
     expect(parseWaitlist({ email: 'a@b.de', consent: 'on', plan: 'gold' })).toMatchObject({ ok: true, entry: { plan: '', lang: 'de' } });
@@ -120,7 +120,7 @@ describe('cloud mode without Stripe (waitlist on by itself)', () => {
     const de = (await page('/de')).body;
     expect(de).not.toContain('Danke! Wir melden uns');
     expect(de).toContain('Kann ich die Cloud schon nutzen?');
-    expect(de).toContain('<meta name="description" content="Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups: CRM, Postfach, Funnels, Automationen und Jarvis als KI-Business-Developer – kostenlos selbst gehostet');
+    expect(de).toContain('<meta name="description" content="Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups: CRM, Postfach, Funnels, Automationen und ein KI-Business-Developer – kostenlos selbst gehostet');
     expect(de).toContain('0 € · Cloud geplant');
     expect(de).toContain('<meta property="og:image" content="http://localhost/landing/og-waitlist-de.png">');
     // a plan button preselects the plan
@@ -216,6 +216,21 @@ describe('cloud mode without Stripe (waitlist on by itself)', () => {
     expect(count(`SELECT COUNT(*) AS n FROM cloud_waitlist WHERE email = 'lea@example.com'`)).toBe(1);
     expect(t.app.db.get<any>(`SELECT plan, name, lang FROM cloud_waitlist WHERE email = 'lea@example.com'`)).toEqual({ plan: 'agency', name: 'Lea Licht', lang: 'en' });
     expect(count(`SELECT COUNT(*) AS n FROM push_log WHERE kind = 'cloud_waitlist'`)).toBe(1);
+  });
+
+  it('remembers where a sign-up came from: utm_source of the page (issue #22)', async () => {
+    const landing = await page('/?utm_source=ProductHunt');
+    expect(landing.body).toContain('<input type="hidden" name="utm_source" value="producthunt">');
+    expect((await page('/')).body).not.toContain('name="utm_source"');
+    expect((await page('/cloud?utm_source=x.com')).body).toContain('name="utm_source" value="x.com"');
+    const b = browser(t.base);
+    await b.form('/api/public/cloud-waitlist', { email: 'ph@example.com', consent: '1', lang: 'en', back: '/', wt: token(landing.body), utm_source: 'producthunt' });
+    expect(t.app.db.get<any>(`SELECT source FROM cloud_waitlist WHERE email = 'ph@example.com'`)!.source).toBe('producthunt');
+    // odd values are cut down to something plain; without one the fixed source stays
+    await t.api.raw('/api/public/cloud-waitlist', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: 'odd@example.com', consent: true, wt: token(landing.body), utm_source: '<script>Reddit r/selfhosted' }) });
+    expect(t.app.db.get<any>(`SELECT source FROM cloud_waitlist WHERE email = 'odd@example.com'`)!.source).toBe('script-reddit-r-selfhosted');
+    expect((await t.api.get('/api/cloud/waitlist')).data.items.find((e: any) => e.email === 'ph@example.com').source).toBe('producthunt');
+    t.app.services.cloudWaitlist.resetLimits();
   });
 
   it('needs the consent, a valid address and a fresh form; ignores bots; limits the rate', async () => {

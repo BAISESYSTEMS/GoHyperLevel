@@ -89,8 +89,8 @@ export const windowExpired = (openedAt: number, t: number, windowMs: number, hea
 /** A turn that goes on and on is cut here (then sent like any other). */
 export const MAX_TURN_MS = 30_000;
 
-/** "Danke Jarvis", "stopp", "das war's", "thanks, that's all" … – the person ends the conversation. Pure. */
-export function isEndPhrase(text: string, name = 'Jarvis'): boolean {
+/** "Danke Max", "stopp", "das war's", "thanks, that's all" … – the person ends the conversation (`name` = the assistant's). Pure. */
+export function isEndPhrase(text: string, name = 'Assistent'): boolean {
   const n = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const t = text
     .trim()

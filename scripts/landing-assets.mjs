@@ -4,7 +4,7 @@
  *
  *  - shot-workflow|inbox|funnel|pipeline.webp – real screens of a freshly seeded, fictional demo instance (headless Chromium,
  *    1440×900, the product name set to HyperLevel in the agency branding), converted to WebP in the browser;
- *  - shot-jarvis|academy|themes|xr.webp – focus mode with Jarvis' briefing, the Academy with a running tour (German, like its
+ *  - shot-jarvis|academy|themes|xr.webp – focus mode with the assistant's briefing, the Academy with a running tour (German, like its
  *    tours), four looks side by side and the 3D preview of a board (the steps live in scripts/shots-kit.mjs);
  *  - og-en.png, og-de.png – the social cards (1200×630) with the hero line, set in the page's own font;
  *  - og-waitlist-en.png, og-waitlist-de.png – the same cards for the cloud waitlist mode (cloud "coming soon", no price as on offer);
@@ -143,8 +143,8 @@ if (!args.includes('--no-shots')) {
 // --- social cards ----------------------------------------------------------------------------------------------------------
 const font = readFileSync(join(out, 'inter-tight-latin-wght-normal.woff2')).toString('base64');
 const CARDS = {
-  en: { eyebrow: 'Open source · Self-host free · Cloud from €49.99', h1: 'The free, open-source growth OS for agentic solopreneurs, agencies, small businesses & startups', sub: 'CRM, funnels, automations and Jarvis, your AI business developer.', badges: ['Self-host: $0', 'Cloud from €49.99', 'MCP: Claude, ChatGPT, Codex, Cursor'] },
-  de: { eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €', h1: 'Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups', sub: 'CRM, Funnels, Automationen und Jarvis, dein KI-Business-Developer.', badges: ['Selbst gehostet: 0 €', 'Cloud ab 49,99 €', 'Gehostet in Frankfurt'] },
+  en: { eyebrow: 'Open source · Self-host free · Cloud from €49.99', h1: 'The free, open-source growth OS for agentic solopreneurs, agencies, small businesses & startups', sub: 'CRM, funnels, automations and your AI assistant as business developer.', badges: ['Self-host: $0', 'Cloud from €49.99', 'MCP: Claude, ChatGPT, Codex, Cursor'] },
+  de: { eyebrow: 'Open Source · Selbst gehostet kostenlos · Cloud ab 49,99 €', h1: 'Das freie Open-Source-Wachstums-Betriebssystem für agentische Solopreneure, Agenturen, kleine Unternehmen und Startups', sub: 'CRM, Funnels, Automationen und dein KI-Assistent als Business-Developer.', badges: ['Selbst gehostet: 0 €', 'Cloud ab 49,99 €', 'Gehostet in Frankfurt'] },
 };
 // Cloud waitlist mode (docs/landing.md#cloud-waitlist-mode): the cloud is not on offer yet, so no cloud price and no "hosted in".
 const CARDS_WAITLIST = {

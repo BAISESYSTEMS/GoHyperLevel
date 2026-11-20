@@ -25,6 +25,7 @@ import {
 import { retainerFacts } from '../services/pm-retainers.js';
 import { viewerOf } from '../services/pm-time.js';
 import { registerTriggers } from '../services/wfx-kit.js';
+import { grants } from '../core/permissions.js';
 
 /**
  * Job costing (docs/projects.md#job-costing-and-retainers): project budgets with alert thresholds (notification, audit line and the
@@ -62,7 +63,7 @@ CREATE INDEX pm_budgets_loc ON pm_budgets(location_id);
 `;
 
 /** Agency admins, keys and people without restrictions have every area; a member needs it listed. */
-const hasArea = (ctx: Ctx, area: string) => !ctx.user || ctx.user.role === 'admin' || !ctx.user.permissions || ctx.user.permissions.includes(area as never);
+const hasArea = (ctx: Ctx, area: string) => !ctx.user || ctx.user.role === 'admin' || !ctx.user.permissions || grants(ctx.user.permissions, area);
 
 export const pmCostingModule: Module = {
   name: 'pm-costing',

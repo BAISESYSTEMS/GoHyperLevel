@@ -12,6 +12,15 @@ import {
   PREF_KEYS,
   PROFILES,
   SIDEBAR_MODES,
+  BACKDROPS,
+  BORDERS,
+  HEADER_STYLES,
+  RADII,
+  SHADOWS,
+  SIDE_STYLES,
+  STYLE_KEYS,
+  SURFACES,
+  TYPEFACES,
   hiddenForProfile,
   type LockKey,
   type Locks,
@@ -23,6 +32,9 @@ import { Check, Field, Input, Select, Spinner, act, useLoad } from '../ui';
 import { THEME_LIST, themeById } from './themes';
 import { isHex } from './color';
 import { PRODUCT_ICON } from './brand-icon';
+import { BACKDROP_LABEL, BORDER_LABEL, HEADER_LABEL, LOOK_PRESETS, RADIUS_LABEL, SHADOW_LABEL, SIDE_STYLE_LABEL, SURFACE_LABEL, TYPEFACE_LABEL } from './look-presets';
+import { uploadBackdrop } from './LookStyle';
+import { tr } from '../i18n';
 
 /**
  * Agentur → White-Label, the look part: logos (light/dark), the square mark for the narrow sidebar, favicon,
@@ -146,7 +158,7 @@ export function BrandingLook({ locationId }: { locationId?: string }) {
   const inherited = look.data.agency?.defaults ?? {};
   const setD = <K extends keyof Prefs>(k: K, v: Prefs[K] | undefined) => setDraft((d) => (d ? { ...d, defaults: { ...d.defaults, [k]: v } } : d));
   const unset = client ? 'wie Agentur' : 'nicht vorgegeben';
-  const sel = <K extends 'theme' | 'mode' | 'dept' | 'dept_palette' | 'sidebar' | 'icons' | 'density' | 'font'>(k: K, options: [string, string][]) => (
+  const sel = <K extends 'theme' | 'mode' | 'dept' | 'dept_palette' | 'sidebar' | 'icons' | 'density' | 'font' | (typeof STYLE_KEYS)[number]>(k: K, options: [string, string][]) => (
     <Select value={(draft.defaults[k] as string) ?? ''} onChange={(x) => setD(k, (x || undefined) as Prefs[K] | undefined)} options={[['', `– ${unset}${client && inherited[k] ? `: ${options.find((o) => o[0] === inherited[k])?.[1] ?? ''}` : ''} –`], ...options]} />
   );
   const lockState = (k: LockKey): string => (draft.locks[k] === undefined ? '' : draft.locks[k] ? 'lock' : 'free');
@@ -215,8 +227,55 @@ export function BrandingLook({ locationId }: { locationId?: string }) {
         'density',
         <div className="grid2">
           <Field label="Dichte">{sel('density', DENSITIES.map((d) => [d, { compact: 'Kompakt', normal: 'Normal', comfortable: 'Komfortabel' }[d]!]))}</Field>
-          <Field label="Schriftgröße">{sel('font', FONT_SIZES.map((f) => [f, { small: 'Klein', normal: 'Normal', large: 'Groß' }[f]!]))}</Field>
+          <Field label="Schriftgröße">{sel('font', FONT_SIZES.map((f) => [f, { small: 'Klein', normal: 'Normal', large: 'Groß', xlarge: 'Sehr groß' }[f]!]))}</Field>
         </div>,
+      )}
+      {row(
+        'style',
+        <>
+          <Field label="Voreinstellung" hint="Füllt alle Felder darunter; danach einzeln anpassen.">
+            <Select
+              value={LOOK_PRESETS.find((pr) => STYLE_KEYS.every((k) => draft.defaults[k] === pr.style[k]))?.id ?? ''}
+              onChange={(x) => {
+                const pr = LOOK_PRESETS.find((y) => y.id === x);
+                setDraft((d) => d && { ...d, defaults: { ...d.defaults, ...Object.fromEntries(STYLE_KEYS.map((k) => [k, pr ? pr.style[k] : undefined])) } });
+              }}
+              options={[['', `– ${unset} / eigene Mischung –`], ...LOOK_PRESETS.map((pr) => [pr.id, pr.name] as [string, string])]}
+            />
+          </Field>
+          <div className="grid3">
+            <Field label="Fensterstil">{sel('surface', SURFACES.map((v) => [v, SURFACE_LABEL[v][0]]))}</Field>
+            <Field label="Ecken">{sel('radius', RADII.map((v) => [v, RADIUS_LABEL[v]]))}</Field>
+            <Field label="Schatten">{sel('shadow', SHADOWS.map((v) => [v, SHADOW_LABEL[v]]))}</Field>
+            <Field label="Rahmen">{sel('border', BORDERS.map((v) => [v, BORDER_LABEL[v]]))}</Field>
+            <Field label="Schriftart">{sel('typeface', TYPEFACES.map((v) => [v, TYPEFACE_LABEL[v]]))}</Field>
+            <Field label="Seitenleiste">{sel('side_style', SIDE_STYLES.map((v) => [v, SIDE_STYLE_LABEL[v][0]]))}</Field>
+            <Field label="Kopfzeile">{sel('header', HEADER_STYLES.map((v) => [v, HEADER_LABEL[v][0]]))}</Field>
+            <Field label="Hintergrund">{sel('backdrop', BACKDROPS.map((v) => [v, BACKDROP_LABEL[v]]))}</Field>
+          </div>
+          <Field label="Eigenes Hintergrundbild" hint="Gilt, wenn als Hintergrund „Eigenes Bild“ gewählt ist. Es wird so abgeschwächt, dass Schrift lesbar bleibt.">
+            <div className="actions">
+              {draft.defaults.backdrop_image && <span className="lk-thumb" style={{ backgroundImage: `url("${draft.defaults.backdrop_image}")` }} aria-hidden="true" />}
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                aria-label="Hintergrundbild hochladen"
+                style={{ width: 'auto' }}
+                onChange={async (e) => {
+                  const f = e.target.files?.[0];
+                  e.target.value = '';
+                  const url = f && (await uploadBackdrop(f, tr('look')));
+                  if (url) setDraft((d) => d && { ...d, defaults: { ...d.defaults, backdrop_image: url, backdrop: 'image' } });
+                }}
+              />
+              {draft.defaults.backdrop_image && (
+                <button className="btn small secondary" onClick={() => setD('backdrop_image', undefined)}>
+                  Bild entfernen
+                </button>
+              )}
+            </div>
+          </Field>
+        </>,
       )}
       {row(
         'modules',

@@ -100,6 +100,11 @@ export const loginPolicyModule: Module = {
       );
       `,
     ],
+    // Tasks & projects became their own area (core 004): open invites keep what they promised.
+    ['002-tasks-area', `UPDATE login_invites SET permissions = json_insert(permissions, '$[#]', 'tasks')
+       WHERE permissions IS NOT NULL AND json_valid(permissions)
+         AND EXISTS (SELECT 1 FROM json_each(login_invites.permissions) WHERE value = 'contacts')
+         AND NOT EXISTS (SELECT 1 FROM json_each(login_invites.permissions) WHERE value = 'tasks');`],
   ],
   register(app) {
     const { db, router } = app;

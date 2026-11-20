@@ -23,6 +23,7 @@ import { PerfMonitor } from './perf.js';
 import { openSettings, sealSettings } from './secrets.js';
 import { serveStatic } from './static.js';
 import { sha256 } from './util.js';
+import { errorText } from '../i18n/errors-en.js';
 
 export interface Config {
   port: number;
@@ -75,6 +76,8 @@ export interface App {
   afterWrite: ((ctx: Ctx, route: Route, result: unknown) => void)[];
   /** Called after every successful authenticated read (the audit log records exports and downloads). */
   afterRead: ((ctx: Ctx, route: Route) => void)[];
+  /** Rewrite what an authenticated route answers for this caller (e.g. hide contact names from logins without the contacts area). */
+  resultFilters: ((ctx: Ctx, route: Route, result: unknown) => unknown)[];
   /** The app's own address for in-process calls (MCP relays REST), set once listening. */
   selfUrl: string;
 }
@@ -165,6 +168,7 @@ export function createApp(config: Config, modules: Module[]) {
     bearerAuth: [],
     afterWrite: [],
     afterRead: [],
+    resultFilters: [],
     selfUrl: '',
     location(id) {
       const row = db.get('SELECT * FROM locations WHERE id = ?', id);
@@ -262,6 +266,10 @@ export function createApp(config: Config, modules: Module[]) {
 const bodylessMethod = (m: string) => m === 'GET' || m === 'HEAD' || m === 'OPTIONS';
 
 function send(res: ServerResponse, status: number, body: unknown, headers: Record<string, string> = {}) {
+  // Error texts in English when the web app is in English (header x-pghl-lang, server/i18n/errors-en.ts). Other clients keep German.
+  if (body && typeof body === 'object' && typeof (body as { error?: unknown }).error === 'string' && String((res.req as IncomingMessage | undefined)?.headers['x-pghl-lang'] ?? '') === 'en') {
+    body = { ...(body as object), error: errorText((body as { error: string }).error) };
+  }
   const json = JSON.stringify(body ?? null);
   void sendBody(res, status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...headers }, json);
 }
@@ -463,7 +471,8 @@ async function handleRequest(app: App, req: IncomingMessage, res: ServerResponse
   try {
     ctx.body = parseBody(ctx.rawBody, req.headers['content-type']);
     if (found.route.auth !== 'public') for (const g of app.guards) g(ctx, found.route.auth);
-    const result = await found.route.handler(ctx);
+    let result = await found.route.handler(ctx);
+    if (found.route.auth !== 'public') for (const f of app.resultFilters) result = f(ctx, found.route, result);
     // Public pages as they leave the server: modules may rewrite the HTML for this visitor or answer in its place (the cookie
     // banner blocks third-party code until consent). app.services.htmlTransforms = [(ctx, result) => void]; they only see
     // GET pages with a 200 and a string body, and may set cookies and replace the result.
@@ -567,6 +576,8 @@ function authenticate(app: App, ctx: Ctx, auth: string) {
     ctx.viaApiKey = true;
     ctx.via = isRelay(ctx) ? 'mcp' : 'api_key';
     if (keyUser) ctx.user = keyUser;
+    // Read-only keys: the write check is a guard of modules/mcp.ts (it knows the read-only tool relays).
+    if (key.scope === 'read') ctx.scope = 'read';
     return;
   }
 

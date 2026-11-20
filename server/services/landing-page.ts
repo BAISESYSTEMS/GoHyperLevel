@@ -20,7 +20,7 @@ import { LOGOS_CSS, logosHtml } from './landing-logos.js';
  * carries the result). Pure: the module passes everything in.
  * Cloud waitlist mode (`LandingData.waitlist`): self-hosting is the main call to action, the cloud plans are marked as planned, every
  * cloud button scrolls to the waitlist form (#warteliste) and the texts come from landing-waitlist-copy.ts.
- * The home page leads with the agentic side: the integrations row (landing-logos.ts) under the hero, then one source of truth, Jarvis,
+ * The home page leads with the agentic side: the integrations row (landing-logos.ts) under the hero, then one source of truth, the AI assistant,
  * what makes the product different, the agents, the Academy, designs and XR (landing-agentic.ts, texts in landing-agentic-copy.ts).
  */
 
@@ -473,7 +473,7 @@ interface Ctx {
   mix: MixTool[];
 }
 
-/** The hero's crossfade, in this order: Jarvis first when its screenshot exists, then the classic screens (four at most). */
+/** The hero's crossfade, in this order: the assistant (focus mode) first when its screenshot exists, then the classic screens (four at most). */
 const HERO_SHOTS: ShotKey[] = ['jarvis', 'pipeline', 'inbox', 'workflow', 'funnel'];
 
 function header(x: Ctx): string {

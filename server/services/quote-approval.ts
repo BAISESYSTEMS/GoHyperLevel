@@ -6,6 +6,7 @@ import { membersWhere, notifyMember } from './member-notify.js';
 import { getQuote, type QuoteRow } from './quote-engine.js';
 import type { QuoteDoc } from './quote-model.js';
 import { lineAmounts, salesTotals } from './sales-lines.js';
+import { grants } from '../core/permissions.js';
 
 /**
  * Internal approval of quotes (docs/sales.md#internal-approval): an optional rule per sub-account – quotes above a net amount or with
@@ -132,7 +133,7 @@ interface Person {
   permissions: string[] | null;
 }
 
-const hasArea = (u: Person, area: string) => u.role === 'admin' || !u.permissions || u.permissions.includes(area);
+const hasArea = (u: Person, area: string) => u.role === 'admin' || !u.permissions || grants(u.permissions, area);
 
 /** Does this person hold the approving role (and may work on quotes at all)? */
 export function holdsRole(app: App, loc: string, rule: ApprovalRule, u: Person): boolean {

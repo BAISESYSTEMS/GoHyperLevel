@@ -184,7 +184,7 @@ export function maySeePage(u: { role: string; permissions: string[] | null }, pa
   if (u.role === 'admin') return true;
   if (area === 'admin') return false;
   if (area === '*') return true;
-  return !u.permissions || u.permissions.includes(area);
+  return !u.permissions || u.permissions.includes(area) || (area === 'tasks' && u.permissions.includes('contacts'));
 }
 
 /** Cursor x: share of the surface's width (0…1). */

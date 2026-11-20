@@ -63,7 +63,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: Object.fromEntries(
-      ['/api', '/book', '/f', '/p', '/i', '/r', '/hooks', '/assets-public'].map((p) => [p, 'http://localhost:4700']),
+      // /uploads: pictures the app stores (own background pictures are relative paths, logos absolute ones)
+      ['/api', '/book', '/f', '/p', '/i', '/r', '/hooks', '/assets-public', '/uploads'].map((p) => [p, 'http://localhost:4700']),
     ),
   },
 });

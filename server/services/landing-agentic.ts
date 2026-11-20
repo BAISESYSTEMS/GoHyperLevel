@@ -3,7 +3,7 @@ import type { AgenticCopy, Nums, ShotKey, UspIcon } from './landing-agentic-copy
 
 /**
  * Launch landing page: the agentic sections, server-rendered like the rest of landing-page.ts – one source of truth (agents fill the
- * CRM), Jarvis, what makes the product different, the Academy, designs, XR, open source. Pure: the page passes the copy (product name
+ * CRM), the AI assistant, what makes the product different, the Academy, designs, XR, open source. Pure: the page passes the copy (product name
  * already filled in), the screenshots that exist and the numbers. A screenshot that is missing on disk is simply not rendered; one
  * that fails to load anyway is hidden by the page's script (`data-hide`), and the text then takes the full width.
  */
@@ -54,14 +54,14 @@ export function ssotSection(x: AgenticCtx): string {
 </div></div></section>`;
 }
 
-/** Jarvis: what the companion does, with a small example conversation (no numbers, no data – an illustration). */
+/** The AI assistant (id and keys stay "jarvis" for old links): what it does, with a small example conversation (no numbers, no data – an illustration). */
 export function jarvisSection(x: AgenticCtx): string {
   const j = x.a.jarvis;
   const d = j.demo;
   return `<section id="jarvis" class="alt" aria-labelledby="jv-h"><div class="wrap"><div class="jv">
 <div class="jv-t"><h2 id="jv-h">${h(j.h2)}</h2><p class="lead">${h(j.lead)}</p>
 <ul class="jv-items">${j.items.map(([t, p]) => `<li><h3>${h(t)}</h3><p>${h(p)}</p></li>`).join('')}</ul></div>
-<figure class="chat"><p class="chat-l">${h(d.label)}</p><p class="bub you">${h(d.you)}</p><p class="bub jv-b"><b>Jarvis</b>${h(d.jarvis)}</p>
+<figure class="chat"><p class="chat-l">${h(d.label)}</p><p class="bub you">${h(d.you)}</p><p class="bub jv-b"><b>${h(d.who)}</b>${h(d.jarvis)}</p>
 <div class="ccard"><p>${h(d.card)}</p><p class="ccard-b"><span class="fb run">${h(d.run)}</span><span class="fb">${h(d.reject)}</span></p></div><figcaption>${h(d.note)}</figcaption></figure>
 </div><p class="fine">${h(j.fine)}</p>${docLink(x, 'docs/living-boards.md#fokus-modus-mit-companion', j.docs)}</div></section>`;
 }

@@ -39,7 +39,9 @@ export const shortcutRows = (mod: string): { group: string; rows: ShortcutRow[] 
   {
     group: 'Überall',
     rows: [
-      { keys: `${mod} K`, text: 'Springen: Projekt, Seite, Claude-Sitzung' },
+      { keys: `${mod} K`, text: 'Springen und suchen: Seite, Einstellung, Kontakt, Deal, Projekt – ☆ heftet Favoriten an' },
+      { keys: `${mod} J`, text: 'Assistent (Chat) öffnen – noch einmal drücken springt ins Eingabefeld' },
+      { keys: 'Alt J', text: 'Fokus-Modus: mit dem Assistenten sprechen (halten oder kurz drücken)' },
       { keys: `${mod} N`, text: 'Neu anlegen (die Hauptaktion der Seite)' },
       { keys: `${mod} B`, text: 'Seitenleiste ein- oder ausklappen' },
       { keys: `${mod} Z`, text: 'Rückgängig' },

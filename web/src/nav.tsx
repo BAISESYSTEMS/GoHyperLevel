@@ -1,15 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { ChevronsUpDown, ExternalLink, Search as SearchIcon } from 'lucide-react';
 import { api } from './api';
 import { Icon, type IconName } from './icons';
-import { can, useSession, type Session } from './session';
+import { useSession, type Session } from './session';
 import { useT } from './i18n';
-import { navigate, useFocusLayer, useRoute } from './ui';
+import { navigate, useRoute } from './ui';
+import { Later, lazyPages, whenIdle } from './lazy';
 
 /**
- * Getting around between projects: a searchable project switcher in the sidebar, a Ctrl+K
- * palette (projects, pages, Claude sessions, Codex tasks) and one-click buttons into a project's
- * Claude session or Codex task.
+ * Getting around: a searchable project switcher in the sidebar, the Ctrl+K palette (favourites, recent pages, pages, settings,
+ * contacts and deals, projects, documents, Claude sessions, Codex tasks – ranked by match, the assistant for everything else),
+ * favourites (☆, shown at the top of the menu) and one-click buttons into a project's Claude session or Codex task.
  */
 
 export interface ProjectInfo {
@@ -80,7 +81,7 @@ export function useOpenProject() {
   };
 }
 
-function sortProjects(list: ProjectInfo[]) {
+export function sortProjects(list: ProjectInfo[]) {
   const rec = recents();
   return [...list].sort((a, b) => {
     const ra = rec.indexOf(a.id), rb = rec.indexOf(b.id);
@@ -147,7 +148,7 @@ function SessionButton({ kind, sessions, compact }: { kind: keyof typeof SESSION
   );
 }
 
-function useListKeys(count: number, onPick: (i: number) => void, onEsc: () => void) {
+export function useListKeys(count: number, onPick: (i: number) => void, onEsc: () => void) {
   const [sel, setSel] = useState(0);
   useEffect(() => setSel(0), [count]);
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -257,101 +258,96 @@ export function ProjectSwitcher() {
   );
 }
 
-interface Cmd {
-  key: string;
+// --- favourites and recent pages --------------------------------------------------------------------------------------------
+
+/** A page the person pinned as a favourite: shown at the top of the menu and of Ctrl+K (kept in this browser, per login). */
+export interface Fav {
+  path: string;
   label: string;
-  hint?: string;
-  icon: IconName | 'status';
-  status?: string;
-  run: () => void;
+  icon: IconName;
+}
+const FAV_MAX = 12;
+const favKey = (uid: string) => `pghl.nav.favs.${uid}`;
+let favCache: { uid: string; list: Fav[] } | null = null;
+const favSubs = new Set<() => void>();
+function readFavs(uid: string): Fav[] {
+  if (favCache?.uid === uid) return favCache.list;
+  let list: Fav[] = [];
+  try {
+    const raw: unknown = JSON.parse(localStorage.getItem(favKey(uid)) ?? '[]');
+    if (Array.isArray(raw)) list = raw.filter((f) => f && typeof f.path === 'string' && typeof f.label === 'string' && typeof f.icon === 'string').slice(0, FAV_MAX);
+  } catch {
+    /* storage blocked (private mode): no favourites */
+  }
+  favCache = { uid, list };
+  return list;
+}
+const subscribeFavs = (f: () => void) => (favSubs.add(f), () => void favSubs.delete(f));
+/** The person's favourites, kept fresh across the tab. */
+export function useFavs(): Fav[] {
+  const uid = useSession().user.id;
+  return useSyncExternalStore(subscribeFavs, () => readFavs(uid));
+}
+export const isFav = (uid: string, path: string) => readFavs(uid).some((f) => f.path === path);
+/** Pin a page as a favourite, or remove it. */
+export function toggleFav(uid: string, fav: Fav) {
+  const list = readFavs(uid);
+  const next = list.some((f) => f.path === fav.path) ? list.filter((f) => f.path !== fav.path) : [...list, fav].slice(-FAV_MAX);
+  favCache = { uid, list: next };
+  try {
+    localStorage.setItem(favKey(uid), JSON.stringify(next));
+  } catch {
+    /* storage blocked: only for this tab */
+  }
+  favSubs.forEach((f) => f());
 }
 
-/** Ctrl+K: jump to a project, a page, a Claude session or a Codex task. */
+const RECENT_PAGES = 'pghl.nav.recent';
+export function recentPages(): string[] {
+  try {
+    const r: unknown = JSON.parse(localStorage.getItem(RECENT_PAGES) ?? '[]');
+    return Array.isArray(r) ? r.filter((x): x is string => typeof x === 'string').slice(0, 6) : [];
+  } catch {
+    return [];
+  }
+}
+function rememberPage(route: string) {
+  if (!route) return;
+  try {
+    localStorage.setItem(RECENT_PAGES, JSON.stringify([route, ...recentPages().filter((x) => x !== route)].slice(0, 6)));
+  } catch {
+    /* storage blocked */
+  }
+}
+
+// The dialog itself is a chunk of its own (nav-palette.tsx): fetched when the browser is idle, or on the first Ctrl+K.
+const { PaletteDialog } = lazyPages(() => import('./nav-palette'), 'PaletteDialog');
+
+/**
+ * Ctrl/⌘+K – one place to get anywhere (favourites, recent pages, pages, settings, contacts and deals, projects, documents,
+ * sessions, the assistant for everything else; see nav-palette.tsx). This part only catches the shortcut – on every page, also
+ * in text fields – and the "Springen" button (`pghl:palette`), and remembers the pages someone opens for "Zuletzt".
+ */
 export function CommandPalette({ nav }: { nav: [string, IconName, string, string][] }) {
-  const t = useT('shell');
-  const session = useSession();
-  const projects = useProjects();
-  const open = useOpenProject();
+  const route = useRoute();
   const [show, setShow] = useState(false);
-  const [q, setQ] = useState('');
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') (e.preventDefault(), setShow((s) => !s));
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'k') (e.preventDefault(), setShow((s) => !s));
     };
     const onOpen = () => setShow(true);
     window.addEventListener('keydown', onKey);
     window.addEventListener('pghl:palette', onOpen);
     return () => (window.removeEventListener('keydown', onKey), window.removeEventListener('pghl:palette', onOpen));
   }, []);
-  const [docs, setDocs] = useState<any[]>([]);
-  useEffect(() => {
-    if (!show) return;
-    (session.user.role === 'admin' ? api.get<any[]>('/api/agency/docs') : api.get<any[]>('/api/docs')).then(setDocs).catch(() => {});
-  }, [show, session.locationId]);
-  const cmds = useMemo<Cmd[]>(() => {
-    const out: Cmd[] = [];
-    for (const p of sortProjects(projects).filter((p) => p.status !== 'archiviert')) {
-      out.push({ key: `p${p.id}`, label: p.name, hint: p.tagline || t('Projekt öffnen'), icon: 'status', status: p.status, run: () => open(p.id, 'project') });
-      for (const s of p.claude_sessions) out.push({ key: `c${p.id}${s.url}`, label: `Claude: ${p.name}`, hint: s.label, icon: 'claude', run: () => window.open(s.url, '_blank', 'noopener') });
-      for (const s of p.codex_sessions ?? []) out.push({ key: `x${p.id}${s.url}`, label: `Codex: ${p.name}`, hint: s.label, icon: 'codex', run: () => window.open(s.url, '_blank', 'noopener') });
-    }
-    for (const d of docs) out.push({ key: `d${d.id}`, label: d.title, hint: d.project ?? t('Eingang'), icon: d.source === 'Codex' ? 'codex' : d.kind === 'artifact' ? 'artifact' : 'doc', run: () => window.open(d.url, '_blank', 'noopener') });
-    for (const [route, icon, label, perm] of nav) if (can(session, perm)) out.push({ key: `n${route}`, label, hint: t('Seite im aktuellen Projekt'), icon, run: () => navigate(route) });
-    // Rückgängig: my history of changes and the trash (undo/Undo.tsx, pages/Trash.tsx).
-    out.push({ key: 'verlauf', label: t('Verlauf – meine letzten Änderungen'), hint: t('Rückgängig machen'), icon: 'history', run: () => window.dispatchEvent(new Event('pghl:verlauf')) });
-    out.push({ key: 'papierkorb', label: t('Papierkorb'), hint: t('Gelöschtes wiederherstellen'), icon: 'trash', run: () => navigate('trash') });
-    if (session.user.role === 'admin')
-      for (const [page, label, icon] of [
-        ['projects', 'Alle Projekte', 'project'],
-        ['contacts', 'Alle Kontakte', 'contacts'],
-        ['deals', 'Alle Deals', 'opportunities'],
-        ['tasks', 'Alle Aufgaben', 'tasks'],
-        ['docs', 'Alle Dokumente & Artefakte', 'doc'],
-      ] as [string, string, IconName][])
-        out.push({ key: `a${page}`, label: t(label), hint: t('Agentur'), icon, run: () => navigate(`agency/${page}`) });
-    return out;
-  }, [projects, nav, session, docs, t]);
-  const list = cmds.filter((c) => matches(q, c.label, c.hint ?? '')).slice(0, 40);
-  const close = () => (setShow(false), setQ(''));
-  const pick = (i: number) => list[i] && (close(), list[i].run());
-  const keys = useListKeys(list.length, pick, close);
-  // Tab stays in the palette, Esc closes it, and the focus goes back to where it was (the Springen button, the page).
-  const box = useRef<HTMLDivElement>(null);
-  useFocusLayer(box, close, { active: show });
+  // the pages someone opens, for "Zuletzt" (only areas of the menu, not every record)
+  useEffect(() => void (route[0] && nav.some((n) => n[0] === route[0]) && rememberPage(route[0])), [route[0]]); // eslint-disable-line react-hooks/exhaustive-deps
+  // fetched once the page is up and the browser is idle, so the first Ctrl+K opens without waiting
+  useEffect(() => whenIdle(() => PaletteDialog.preload(), { delay: 8000 }), []);
   if (!show) return null;
   return (
-    <div className="modal-bg palette-bg" onMouseDown={(e) => e.target === e.currentTarget && close()}>
-      <div ref={box} className="modal palette" role="dialog" aria-modal="true" aria-label={t('Springen zu')} data-tour="palette">
-        <div className="palette-head">
-          <SearchIcon size={17} className="ico" />
-          <input
-            autoFocus
-            placeholder={t('Projekt, Seite, Dokument, Claude-Sitzung oder Codex-Aufgabe…')}
-            aria-label={t('Springen zu')}
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            onKeyDown={keys.onKeyDown}
-            role="combobox"
-            aria-expanded="true"
-            aria-controls="palette-list"
-            aria-activedescendant={list[keys.sel] ? `palette-opt-${keys.sel}` : undefined}
-          />
-          <button className="icon-btn" onClick={close} aria-label={t('Schließen')}>
-            ✕
-          </button>
-        </div>
-        <div className="palette-list" id="palette-list" role="listbox" aria-label={t('Springen zu')}>
-          {list.map((c, i) => (
-            <div key={c.key} id={`palette-opt-${i}`} role="option" aria-selected={i === keys.sel} className={`palette-row${i === keys.sel ? ' sel' : ''}`} onMouseEnter={() => keys.setSel(i)} onClick={() => pick(i)}>
-              {c.icon === 'status' ? <StatusDot status={c.status!} /> : <Icon name={c.icon} />}
-              <span className="grow">{c.label}</span>
-              <span className="muted small">{c.hint}</span>
-            </div>
-          ))}
-          {!list.length && <div className="muted small" style={{ padding: 14 }}>{t('Nichts gefunden.')}</div>}
-        </div>
-        <div className="palette-foot muted small">{t('↑↓ auswählen · Enter öffnen · Esc schließen')}</div>
-      </div>
-    </div>
+    <Later>
+      <PaletteDialog nav={nav} close={() => setShow(false)} />
+    </Later>
   );
 }

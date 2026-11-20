@@ -47,8 +47,39 @@ export type IconPackId = (typeof ICON_PACKS)[number];
 
 export const DENSITIES = ['compact', 'normal', 'comfortable'] as const;
 export type Density = (typeof DENSITIES)[number];
-export const FONT_SIZES = ['small', 'normal', 'large'] as const;
+export const FONT_SIZES = ['small', 'normal', 'large', 'xlarge'] as const;
 export type FontSize = (typeof FONT_SIZES)[number];
+
+/**
+ * Stil & Fenster (web/src/theme/look.ts turns these into CSS variables and <html> attributes, so every page follows
+ * without knowing about them). `surface` is the character of cards and windows; `radius`, `shadow` and `border`
+ * fine-tune it – 'auto' takes the value the surface style suggests. The defaults are the classic HyperLevel look.
+ */
+export const SURFACES = ['standard', 'flat', 'classic', 'soft', 'glass', 'brutal'] as const;
+export type Surface = (typeof SURFACES)[number];
+export const RADII = ['auto', 'square', 'small', 'medium', 'large', 'round'] as const;
+export type Radius = (typeof RADII)[number];
+export const SHADOWS = ['auto', 'none', 'subtle', 'medium', 'strong'] as const;
+export type Shadow = (typeof SHADOWS)[number];
+export const BORDERS = ['auto', 'on', 'off'] as const;
+export type Border = (typeof BORDERS)[number];
+/** Typefaces of the app: font stacks of fonts the systems already have – nothing is downloaded (the app's CSP allows no font hosts). */
+export const TYPEFACES = ['system', 'modern', 'humanist', 'geometric', 'rounded', 'serif', 'mono'] as const;
+export type Typeface = (typeof TYPEFACES)[number];
+/** Sidebar look (its width is `sidebar`): solid colour, floating panel with rounded corners, or blended into the page. */
+export const SIDE_STYLES = ['solid', 'floating', 'blend'] as const;
+export type SideStyle = (typeof SIDE_STYLES)[number];
+/** Top bar: solid panel, clear (page colour, no line), frosted glass, or a floating rounded bar. */
+export const HEADER_STYLES = ['solid', 'clear', 'glass', 'floating'] as const;
+export type HeaderStyle = (typeof HEADER_STYLES)[number];
+/** App background behind the pages: the theme's plain colour, a soft gradient, aurora light, dots, a grid or an own picture (`backdrop_image`). */
+export const BACKDROPS = ['plain', 'gradient', 'aurora', 'dots', 'grid', 'image'] as const;
+export type Backdrop = (typeof BACKDROPS)[number];
+/** An own background picture: only files uploaded through POST /api/appearance/backdrop (served by this server, re-encoded as JPEG). */
+export const BACKDROP_IMAGE_RE = /^\/uploads\/[A-Za-z0-9]{20}\.(?:jpg|png|webp)$/;
+/** The preference keys of "Stil & Fenster" (one lock group: `style`). */
+export const STYLE_KEYS = ['surface', 'radius', 'shadow', 'border', 'typeface', 'side_style', 'header', 'backdrop'] as const;
+export type StyleKey = (typeof STYLE_KEYS)[number];
 
 /** Raum-Modus (spatial UI for headsets and glasses, docs/xr.md): automatic on XR devices, always on, or off. */
 export const SPATIAL_MODES = ['auto', 'on', 'off'] as const;
@@ -234,6 +265,17 @@ export interface Prefs {
   icons: IconPackId;
   density: Density;
   font: FontSize;
+  /** Stil & Fenster (see SURFACES above). */
+  surface: Surface;
+  radius: Radius;
+  shadow: Shadow;
+  border: Border;
+  typeface: Typeface;
+  side_style: SideStyle;
+  header: HeaderStyle;
+  backdrop: Backdrop;
+  /** The own background picture ('' = none), a path matching BACKDROP_IMAGE_RE. Kept when another background is picked. */
+  backdrop_image: string;
   /** Raum-Modus: 'auto' = on when an XR device is detected (visionOS, Quest, Android XR), 'on' / 'off' = the person's choice. */
   spatial: SpatialMode;
   /** Hidden menu entries (route ids from MODULE_IDS). A view preference, not a permission. */
@@ -266,6 +308,15 @@ export const PREF_DEFAULTS: Prefs = {
   icons: 'line',
   density: 'normal',
   font: 'normal',
+  surface: 'standard',
+  radius: 'auto',
+  shadow: 'auto',
+  border: 'auto',
+  typeface: 'system',
+  side_style: 'solid',
+  header: 'solid',
+  backdrop: 'plain',
+  backdrop_image: '',
   spatial: 'auto',
   hidden: [],
   profile: '',
@@ -280,7 +331,7 @@ export const PREF_DEFAULTS: Prefs = {
 export const PREF_KEYS = Object.keys(PREF_DEFAULTS) as (keyof Prefs)[];
 
 /** What an agency can fix for its clients' logins (admins are never locked). */
-export const LOCK_KEYS = ['theme', 'accent', 'dept', 'sidebar', 'icons', 'density', 'modules'] as const;
+export const LOCK_KEYS = ['theme', 'accent', 'dept', 'sidebar', 'icons', 'density', 'style', 'modules'] as const;
 export type LockKey = (typeof LOCK_KEYS)[number];
 export type Locks = Partial<Record<LockKey, boolean>>;
 export const LOCK_LABELS: Record<LockKey, string> = {
@@ -290,6 +341,7 @@ export const LOCK_LABELS: Record<LockKey, string> = {
   sidebar: 'Seitenleiste (voll/schmal)',
   icons: 'Icon-Pack',
   density: 'Dichte und Schriftgröße',
+  style: 'Stil & Fenster (Formen, Schrift, Hintergrund)',
   modules: 'Sichtbare Bereiche',
 };
 export const LOCK_OF: Record<keyof Prefs, LockKey | null> = {
@@ -303,6 +355,15 @@ export const LOCK_OF: Record<keyof Prefs, LockKey | null> = {
   icons: 'icons',
   density: 'density',
   font: 'density',
+  surface: 'style',
+  radius: 'style',
+  shadow: 'style',
+  border: 'style',
+  typeface: 'style',
+  side_style: 'style',
+  header: 'style',
+  backdrop: 'style',
+  backdrop_image: 'style',
   // A property of the device a person wears, not of the agency's brand: never locked.
   spatial: null,
   hidden: 'modules',
@@ -373,6 +434,34 @@ export function cleanPrefs(input: unknown): Partial<{ [K in keyof Prefs]: Prefs[
         break;
       case 'spatial':
         out.spatial = oneOf(SPATIAL_MODES, v, 'Raum-Modus');
+        break;
+      case 'surface':
+        out.surface = oneOf(SURFACES, v, 'Fensterstil');
+        break;
+      case 'radius':
+        out.radius = oneOf(RADII, v, 'Ecken');
+        break;
+      case 'shadow':
+        out.shadow = oneOf(SHADOWS, v, 'Schatten');
+        break;
+      case 'border':
+        out.border = oneOf(BORDERS, v, 'Rahmen');
+        break;
+      case 'typeface':
+        out.typeface = oneOf(TYPEFACES, v, 'Schriftart');
+        break;
+      case 'side_style':
+        out.side_style = oneOf(SIDE_STYLES, v, 'Stil der Seitenleiste');
+        break;
+      case 'header':
+        out.header = oneOf(HEADER_STYLES, v, 'Kopfzeile');
+        break;
+      case 'backdrop':
+        out.backdrop = oneOf(BACKDROPS, v, 'Hintergrund');
+        break;
+      case 'backdrop_image':
+        if (v !== '' && !(typeof v === 'string' && BACKDROP_IMAGE_RE.test(v))) throw new Error('Hintergrundbild: bitte über „Bild hochladen“ wählen');
+        out.backdrop_image = v;
         break;
       case 'dept_tint':
       case 'asked':

@@ -2,7 +2,7 @@ import type { Lang } from './landing-copy.js';
 import type { LogosText } from './landing-logos.js';
 
 /**
- * Launch landing page: the texts of the agentic sections (landing-agentic.ts) – one source of truth, Jarvis, the reasons that make
+ * Launch landing page: the texts of the agentic sections (landing-agentic.ts) – one source of truth, the AI assistant, the reasons that make
  * {b} different, the Academy, designs, XR and open source – plus the screenshots' alt texts and the integrations row, in German and
  * English. Same rules as landing-copy.ts: one interface for both languages, `{b}` is the product name, every claim backed by the code
  * or the docs. Live numbers (themes, icon packs, MCP tools) come from the running code; the Academy's numbers are written here and
@@ -25,7 +25,7 @@ export type UspIcon = 'seat' | 'db' | 'jarvis' | 'key' | 'xr' | 'palette' | 'cap
 export interface AgenticCopy {
   logos: LogosText;
   ssot: { kicker: string; h2: string; lead: string; flowLabel: string; agentsLabel: string; agents: string[]; hub: string; hubSub: string; dataLabel: string; data: string[]; guards: string[]; fine: string; docs: string };
-  jarvis: { h2: string; lead: string; items: [string, string][]; demo: { label: string; you: string; jarvis: string; card: string; run: string; reject: string; note: string }; fine: string; docs: string };
+  jarvis: { h2: string; lead: string; items: [string, string][]; demo: { label: string; you: string; who: string; jarvis: string; card: string; run: string; reject: string; note: string }; fine: string; docs: string };
   usp: { h2: string; lead: string; items: (n: Nums) => [UspIcon, string, string][] };
   academy: { h2: string; lead: string; stats: [string, string][]; items: string[]; docs: string };
   designs: { h2: string; lead: string; items: (n: Nums) => string[]; docs: string };
@@ -50,7 +50,7 @@ const de: AgenticCopy = {
     lead: 'Du hast schon einen Agenten oder ein AIOS? Behalte es – {b} ist der Universaladapter darunter. Claude, ChatGPT, Codex, Cursor, Hermes, dein eigener Agent-Harness oder jedes System, das MCP oder REST spricht, stöpselt sich in Minuten an. Dann legt es Kontakte, Deals, Notizen, Aufgaben, Rechnungen und Projekte an und hält sie aktuell – du tippst nichts mehr selbst ins CRM. Jeder Agent und jeder Mensch liest und schreibt dieselbe Datenbank: mit denselben Rechten, demselben Protokoll und demselben Rückgängig.',
     flowLabel: 'So arbeiten Agenten und Menschen auf denselben Daten',
     agentsLabel: 'Wer daran arbeitet',
-    agents: ['Claude', 'ChatGPT', 'Codex', 'Hermes', 'Cursor', 'Jarvis', 'Deine eigenen Agenten', 'Dein Team'],
+    agents: ['Claude', 'ChatGPT', 'Codex', 'Hermes', 'Cursor', 'Dein KI-Assistent', 'Deine eigenen Agenten', 'Dein Team'],
     hub: 'Eine Datenbank',
     hubSub: 'dieselben Daten für alle',
     dataLabel: 'Was sie aktuell halten',
@@ -60,27 +60,28 @@ const de: AgenticCopy = {
     docs: 'Anleitung für alle KI-Werkzeuge',
   },
   jarvis: {
-    h2: 'Jarvis: dein Sprach-Begleiter und KI-Business-Developer',
-    lead: 'Tipp auf Fokus, sag „Hey Jarvis“ oder halte Alt+J: Die Menüs treten zur Seite, und ein einziges Eingabefeld antwortet mit Live-Zahlen aus deinen Daten. Als Business Developer denkt Jarvis ans ganze Geschäft – Umsatz, Pipeline, Lead-Fluss, Kundenbindung –, ordnet nach €-Wirkung und endet mit ein bis drei Schritten, die er für dich vorbereitet.',
+    h2: 'Dein KI-Assistent: Sprach-Begleiter und Business-Developer',
+    lead: 'Gib ihm einen Namen, ein Gesicht und einen Ton. Dann tipp auf Fokus, sag „Hey Max“ (oder wie er bei dir heißt) oder halte Alt+J: Die Menüs treten zur Seite, und ein einziges Eingabefeld antwortet mit Live-Zahlen aus deinen Daten. Als Business Developer denkt dein Assistent ans ganze Geschäft – Umsatz, Pipeline, Lead-Fluss, Kundenbindung –, ordnet nach €-Wirkung und endet mit ein bis drei Schritten, die er für dich vorbereitet.',
     items: [
       ['Wachstums-Briefing am Morgen', 'Die Top-3-Chancen und -Risiken mit €-Betrag und eine Wachstumsidee mit fertigem Entwurf – nur, wenn es Neues gibt. Du schaltest es ein.'],
       ['Wochenbilanz am Montag', 'Umsatz, neue Leads, gewonnene Deals, Abschlussquote und Pipeline gegenüber der Vorwoche.'],
       ['Check-ins und Meldungen', 'Zu deinen Uhrzeiten, mit Ruhezeit – und sofort, wenn ein Lead kommt, eine Nachricht zu lange wartet, eine Bewertung schlecht ist oder eine Zahlung fehlschlägt.'],
       ['Bereitet vor, entscheidet nicht', 'Antworten, E-Mails, Aufgaben und Social-Posts als Entwurf. Was rausgeht, wartet auf deinen Klick – die Stimme bestätigt nie.'],
       ['Spricht wie ein Kollege', 'Gesprächsmodus mit Unterbrechen, Antworten werden gesprochen, während sie entstehen, Aufgaben laufen im Hintergrund weiter.'],
-      ['Hilft, auch wenn Modelle ausfallen', 'Fällt ein Modell aus, antwortet das nächste der Ersatzkette; antwortet keines, antwortet Jarvis aus deinen Zahlen.'],
+      ['Hilft, auch wenn Modelle ausfallen', 'Fällt ein Modell aus, antwortet das nächste der Ersatzkette; antwortet keines, antwortet dein Assistent aus deinen Zahlen.'],
     ],
     demo: {
       label: 'Beispiel',
-      you: '„Hey Jarvis, was brennt?“',
+      you: '„Hey Max, was brennt?“',
+      who: 'Max',
       jarvis: 'Eine Rechnung ist überfällig, und ein neuer Lead wartet noch auf eine Antwort. Soll ich Anna an ihre Rechnung erinnern?',
       card: 'E-Mail an Anna senden: Zahlungserinnerung',
       run: 'Ausführen',
       reject: 'Ablehnen',
       note: 'Nichts geht raus, bevor du klickst.',
     },
-    fine: 'Jarvis spricht mit deinem eigenen Sprachanbieter (Google, kie.ai mit ElevenLabs-Stimmen, OpenAI und andere) oder mit der Browserstimme. Das Weckwort ist pro Gerät freiwillig und nutzt die Spracherkennung des Browsers (Chrome, Edge, Safari).',
-    docs: 'So funktionieren Fokus-Modus und Jarvis',
+    fine: 'Der Name ist frei wählbar – pro Person, mit Vorgabe für das Team oder die ganze Agentur. Dein Assistent spricht mit deinem eigenen Sprachanbieter (Google, kie.ai mit ElevenLabs-Stimmen, OpenAI und andere) oder mit der Browserstimme. Das Weckwort ist pro Gerät freiwillig und nutzt die Spracherkennung des Browsers (Chrome, Edge, Safari).',
+    docs: 'So funktionieren Fokus-Modus und KI-Assistent',
   },
   usp: {
     h2: 'Was {b} anders macht',
@@ -88,7 +89,7 @@ const de: AgenticCopy = {
     items: (n) => [
       ['seat', '0 € pro Nutzer, auf deinem Server', 'Selbst gehostet ist das ganze Produkt: alle Funktionen, unbegrenzt Nutzer, Kontakte und Sub-Accounts. Du zahlst einen kleinen Server, nicht pro Person.'],
       ['db', 'Eine Quelle der Wahrheit für Menschen und Agenten', 'Agenten füllen und pflegen das CRM über MCP und die REST-API; alle arbeiten auf denselben Daten – mit denselben Rechten, Protokoll und Rückgängig.'],
-      ['jarvis', 'Jarvis, dein agentischer Butler', 'Brieft dich am Morgen, meldet sich, wenn etwas passiert, und bereitet den nächsten Schritt vor – du bestätigst mit einem Klick.'],
+      ['jarvis', 'Ein agentischer Assistent mit deinem Namen', 'Brieft dich am Morgen, meldet sich, wenn etwas passiert, und bereitet den nächsten Schritt vor – du bestätigst mit einem Klick.'],
       ['key', 'Dein eigenes Claude- oder ChatGPT-Abo', 'Für deine persönlichen Chats: Claude über die offizielle Claude-Code-CLI auf deinem eigenen Rechner (die Bridge), ChatGPT mit „Mit ChatGPT anmelden“ bei selbst gehosteten Installationen. Automationen, Teams und Kunden nutzen API-Schlüssel – so wollen es die Regeln der Anbieter.'],
       ['xr', 'Gemacht für XR- und Datenbrillen', 'Ein Raum-Modus mit 60-px-Zielen für Blick und Pinch, 2–4 Seiten nebeneinander für riesige virtuelle Bildschirme, Boards und Canvas als schwebende Panels in WebXR. Beta.'],
       ['palette', 'Dein Design, bis zu den Icons', `${n.themes} Themes, jedes hell und dunkel, jede Akzentfarbe, ${n.iconPacks} Icon-Pakete, deine Logos und deine Login-Domain – volles White-Label für Agenturen.`],
@@ -149,7 +150,7 @@ const de: AgenticCopy = {
     fine: 'Pull Requests brauchen einmalig eine Unterschrift unter die CLA – der CLA Assistant fragt beim ersten. Sicherheitslücken bitte vertraulich melden (SECURITY.md).',
   },
   shots: {
-    jarvis: 'Fokus-Modus mit dem Begleiter Jarvis',
+    jarvis: 'Fokus-Modus mit dem KI-Assistenten',
     pipeline: 'Pipeline mit Deals in jeder Phase',
     inbox: 'Gemeinsames Postfach mit einer E-Mail-Unterhaltung',
     workflow: 'Workflow-Editor mit Auslöser und Schritten',
@@ -174,7 +175,7 @@ const en: AgenticCopy = {
     lead: "Already run an agent or an AI OS? Keep it – {b} is the universal adapter underneath. Claude, ChatGPT, Codex, Cursor, Hermes, your own agent harness or anything that speaks MCP or REST plugs in within minutes. Then it creates and maintains contacts, deals, notes, tasks, invoices and projects for you – you stop typing data into your CRM. Every agent and every person reads and writes the same database – with the same permissions, the same audit log and the same undo.",
     flowLabel: 'How agents and people work on the same data',
     agentsLabel: 'Who works on it',
-    agents: ['Claude', 'ChatGPT', 'Codex', 'Hermes', 'Cursor', 'Jarvis', 'Your own agents', 'Your team'],
+    agents: ['Claude', 'ChatGPT', 'Codex', 'Hermes', 'Cursor', 'Your AI assistant', 'Your own agents', 'Your team'],
     hub: 'One database',
     hubSub: 'the same data for everyone',
     dataLabel: 'What they keep up to date',
@@ -184,27 +185,28 @@ const en: AgenticCopy = {
     docs: 'Guide for every AI tool',
   },
   jarvis: {
-    h2: 'Jarvis: your voice companion and AI business developer',
-    lead: 'Tap Fokus, say “Hey Jarvis” or hold Alt+J: the menus step aside and one prompt answers with live numbers from your data. As business developer, Jarvis looks at the whole business – revenue, pipeline, lead flow, retention – ranks what matters by its impact in euros and ends with one to three steps it prepares for you.',
+    h2: 'Your AI assistant: voice companion and business developer',
+    lead: 'Give it a name, a face and a tone. Then tap Fokus, say “Hey Max” (or whatever you call it) or hold Alt+J: the menus step aside and one prompt answers with live numbers from your data. As business developer, your assistant looks at the whole business – revenue, pipeline, lead flow, retention – ranks what matters by its impact in euros and ends with one to three steps it prepares for you.',
     items: [
       ['Growth briefing in the morning', 'The top three opportunities and risks with their € amount, and one growth idea with a ready draft – only when there is something new. You switch it on.'],
       ['Weekly review on Mondays', 'Revenue, new leads, won deals, win rate and pipeline against the week before.'],
       ['Check-ins and alerts', 'At the times you choose, with quiet hours – and right away when a lead comes in, a message waits too long, a review is bad or a payment fails.'],
       ['Prepares, never presumes', 'Replies, e-mails, tasks and social posts as drafts. Anything that goes out waits for your click – voice never confirms.'],
       ['Talks like a colleague', 'Conversation mode with barge-in, answers spoken while they are written, tasks that keep running in the background.'],
-      ["Helps when models don't", 'If a model fails, the next one in the fallback chain answers; if none does, Jarvis answers from your numbers.'],
+      ["Helps when models don't", 'If a model fails, the next one in the fallback chain answers; if none does, your assistant answers from your numbers.'],
     ],
     demo: {
       label: 'Example',
-      you: '“Hey Jarvis, what needs me today?”',
+      you: '“Hey Max, what needs me today?”',
+      who: 'Max',
       jarvis: 'An invoice is overdue and a new lead is still waiting for an answer. Shall I send Anna a reminder about her invoice?',
       card: 'Send e-mail to Anna: payment reminder',
       run: 'Run',
       reject: 'Decline',
       note: 'Nothing is sent until you click.',
     },
-    fine: "Jarvis speaks with your own voice provider (Google, kie.ai with ElevenLabs voices, OpenAI and others) or with the browser's voice. The wake word is opt-in per device and uses the browser's own speech recognition (Chrome, Edge, Safari).",
-    docs: 'How focus mode and Jarvis work',
+    fine: "The name is yours to choose – per person, with a default for the team or the whole agency. Your assistant speaks with your own voice provider (Google, kie.ai with ElevenLabs voices, OpenAI and others) or with the browser's voice. The wake word is opt-in per device and uses the browser's own speech recognition (Chrome, Edge, Safari).",
+    docs: 'How focus mode and the AI assistant work',
   },
   usp: {
     h2: 'What makes {b} different',
@@ -212,7 +214,7 @@ const en: AgenticCopy = {
     items: (n) => [
       ['seat', '€0 per seat, on your server', 'Self-hosted is the full product: every feature, unlimited users, contacts and sub-accounts. You pay for a small server, not per person.'],
       ['db', 'One source of truth for people and agents', 'Agents fill and maintain the CRM over MCP and the REST API; everyone works on the same data – with the same permissions, audit log and undo.'],
-      ['jarvis', 'Jarvis, your agentic butler', 'Briefs you in the morning, speaks up when something happens and prepares the next step – you confirm with one click.'],
+      ['jarvis', 'An agentic assistant with your name', 'Briefs you in the morning, speaks up when something happens and prepares the next step – you confirm with one click.'],
       ['key', 'Your own Claude or ChatGPT plan', "For your personal chats: Claude through the official Claude Code CLI on your own computer (the bridge), ChatGPT with “Sign in with ChatGPT” on self-hosted installs. Automations, teams and clients use API keys – that is what the providers' rules ask for."],
       ['xr', 'Made for XR headsets and display glasses', 'A spatial mode with 60 px targets for eyes and pinch, 2–4 pages side by side for giant virtual screens, boards and canvases as floating panels in WebXR. Beta.'],
       ['palette', 'Your design, down to the icons', `${n.themes} themes, each light and dark, any accent colour, ${n.iconPacks} icon packs, your logos and your login domain – full white-label for agencies.`],
@@ -273,7 +275,7 @@ const en: AgenticCopy = {
     fine: 'Pull requests need a one-time signature of the CLA – the CLA Assistant asks on your first one. Please report vulnerabilities privately (SECURITY.md).',
   },
   shots: {
-    jarvis: 'Focus mode with the Jarvis companion',
+    jarvis: 'Focus mode with the AI assistant',
     pipeline: 'Pipeline with deals in every stage',
     inbox: 'Shared inbox with an e-mail conversation',
     workflow: 'Workflow editor with a trigger and steps',

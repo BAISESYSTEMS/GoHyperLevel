@@ -13,6 +13,7 @@ import { callRoute } from '../services/route-call.js';
 import { cancelAppointment, rescheduleAppointment } from '../services/teamcal-book.js';
 import { moveVideo } from '../services/teamcal-video.js';
 import { peopleOf } from '../services/team-people.js';
+import { grants } from '../core/permissions.js';
 
 /**
  * Calendar view (docs/booking.md#calendar-view): the data behind the day, week, month, team and agenda grids of the Kalender page,
@@ -33,7 +34,7 @@ const ISSUE_TEXT: Record<Issue['kind'], string> = {
 export const issueMessage = (issues: Issue[]) => `Die Zeit ${[...new Set(issues.map((i) => ISSUE_TEXT[i.kind]))].join(', ')}`;
 
 /** May this request see another area's data (invoices, tasks)? Admins, unrestricted members and API keys may. */
-const mayArea = (ctx: Ctx, area: string) => (ctx.user ? ctx.user.role === 'admin' || ctx.user.permissions === null || ctx.user.permissions.includes(area) : !!ctx.viaApiKey);
+const mayArea = (ctx: Ctx, area: string) => (ctx.user ? ctx.user.role === 'admin' || ctx.user.permissions === null || grants(ctx.user.permissions, area) : !!ctx.viaApiKey);
 
 const isoOf = (v: unknown, what: string): Date => {
   const d = new Date(String(v ?? ''));

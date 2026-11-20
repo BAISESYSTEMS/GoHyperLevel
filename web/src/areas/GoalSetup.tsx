@@ -4,15 +4,14 @@ import { useT } from '../i18n';
 import { Icon } from '../icons';
 import { Modal } from '../ui';
 import { update } from '../theme/store';
-import { AcademyWelcome } from '../tour/welcome';
 import { areaOf, allAreas } from './registry';
 import './simple.css';
 
 /**
  * "Was willst du tun?" – the goal-based first-run setup of the Einfach-Modus. The chosen goals decide which areas stay in
- * the menu (server/services/areas-model.ts); everything else is one click away under "Mehr". New logins get it as a
- * dialog (skipping applies "Leads & Vertrieb"), existing ones once as a banner. Changeable any time under
- * Einstellungen → Darstellung.
+ * the menu (server/services/areas-model.ts); everything else is one click away under "Mehr". New logins pick them in
+ * the first step of the welcome wizard (web/src/onboarding/FirstRun.tsx – skipping it keeps the whole menu), existing
+ * ones get the offer once as a banner. Changeable any time under Einstellungen → Darstellung.
  */
 
 export function GoalPicker({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
@@ -54,42 +53,6 @@ export function GoalPicker({ value, onChange }: { value: string[]; onChange: (v:
         </div>
       )}
     </>
-  );
-}
-
-/** The first-run dialog. ✕ / Esc / "Später" apply the default goal – the menu is simple from the start, changeable later. */
-export function GoalSetup() {
-  const t = useT('simple');
-  const [open, setOpen] = useState(true);
-  const [goals, setGoals] = useState<string[]>([DEFAULT_GOAL]);
-  if (!open) return null;
-  const apply = (g: string[]) => {
-    setOpen(false);
-    void update({ goals: g.length ? g : [DEFAULT_GOAL], goal_asked: true, asked: true });
-  };
-  return (
-    <Modal
-      title={t('Was willst du tun?')}
-      wide
-      onClose={() => apply([DEFAULT_GOAL])}
-      footer={
-        <>
-          <button className="btn secondary" onClick={() => apply([DEFAULT_GOAL])}>
-            {t('Später')}
-          </button>
-          <button className="btn" onClick={() => apply(goals)} data-tour="goal-apply">
-            {t('Übernehmen')}
-          </button>
-        </>
-      }
-    >
-      {/* The academy first: „Academy starten“ keeps the chosen goals and opens the first tour. */}
-      <AcademyWelcome compact onStart={() => apply(goals)} />
-      <p className="muted" style={{ marginTop: 0 }}>
-        {t('Wähle, wofür du die App nutzt – wir zeigen dir nur die Bereiche, die du dafür brauchst. Nichts wird gelöscht oder gesperrt, alles andere liegt unter „Mehr“.')}
-      </p>
-      <GoalPicker value={goals} onChange={setGoals} />
-    </Modal>
   );
 }
 

@@ -13,11 +13,11 @@ import type { Tool } from './mcp.js';
  */
 
 export const ROLE_PRESETS: { key: string; name: string; description: string; permissions: Permission[]; readonly: Permission[] }[] = [
-  { key: 'sales', name: 'Vertrieb', description: 'Kontakte, Deals, Kalender und Gespräche – ohne Einstellungen.', permissions: ['dashboard', 'contacts', 'opportunities', 'calendars', 'conversations', 'payments'], readonly: ['payments'] },
+  { key: 'sales', name: 'Vertrieb', description: 'Kontakte, Deals, Kalender und Gespräche – ohne Einstellungen.', permissions: ['dashboard', 'contacts', 'tasks', 'opportunities', 'calendars', 'conversations', 'payments'], readonly: ['payments'] },
   { key: 'marketing', name: 'Marketing', description: 'Kampagnen, Websites, Formulare, Social Media, Bewertungen.', permissions: ['dashboard', 'campaigns', 'funnels', 'forms', 'social', 'reviews', 'contacts'], readonly: ['contacts'] },
-  { key: 'support', name: 'Kundenservice', description: 'Posteingang, Tickets und Kontakte.', permissions: ['dashboard', 'conversations', 'helpdesk', 'contacts', 'calendars'], readonly: [] },
+  { key: 'support', name: 'Kundenservice', description: 'Posteingang, Tickets und Kontakte.', permissions: ['dashboard', 'conversations', 'helpdesk', 'contacts', 'tasks', 'calendars'], readonly: [] },
   { key: 'accounting', name: 'Buchhaltung', description: 'Rechnungen und Buchhaltung, Kontakte nur lesen.', permissions: ['dashboard', 'payments', 'accounting', 'contacts'], readonly: ['contacts'] },
-  { key: 'assistant', name: 'Assistenz (nur lesen)', description: 'Sieht Kontakte, Kalender und Deals, ändert nichts.', permissions: ['dashboard', 'contacts', 'calendars', 'opportunities'], readonly: ['contacts', 'calendars', 'opportunities'] },
+  { key: 'assistant', name: 'Assistenz (nur lesen)', description: 'Sieht Kontakte, Kalender und Deals, ändert nichts.', permissions: ['dashboard', 'contacts', 'tasks', 'calendars', 'opportunities'], readonly: ['contacts', 'tasks', 'calendars', 'opportunities'] },
 ];
 
 const sameSet = (a: unknown[], b: unknown[]) => a.length === b.length && a.every((x) => b.includes(x));
@@ -37,6 +37,14 @@ export const roleTemplatesModule: Module = {
       );
       CREATE INDEX user_role_templates_tpl ON user_role_templates(template_id);`,
     ],
+    // Tasks & projects became their own area (core 004): a role with contacts keeps them, read-only where contacts were.
+    ['002-tasks-area', `UPDATE role_templates SET permissions = json_insert(permissions, '$[#]', 'tasks')
+       WHERE permissions IS NOT NULL AND json_valid(permissions)
+         AND EXISTS (SELECT 1 FROM json_each(role_templates.permissions) WHERE value = 'contacts')
+         AND NOT EXISTS (SELECT 1 FROM json_each(role_templates.permissions) WHERE value = 'tasks');
+      UPDATE role_templates SET readonly = json_insert(readonly, '$[#]', 'tasks')
+       WHERE json_valid(readonly) AND EXISTS (SELECT 1 FROM json_each(role_templates.readonly) WHERE value = 'contacts')
+         AND NOT EXISTS (SELECT 1 FROM json_each(role_templates.readonly) WHERE value = 'tasks');`],
   ],
   register(app: App) {
     const { db, router } = app;

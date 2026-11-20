@@ -6,7 +6,7 @@ module, Todoist sync, mobile app, MCP) instead of living next to them: **every e
 and a task written by anything else (plain task list, workflows, Todoist, the Android app) shows up in the
 planner without any change.
 
-Menu: **Projektplanung** (`/app/pm`) and **Zeiterfassung** (`/app/time`), area "Kontakte & Aufgaben" (`contacts`).
+Menu: **Projektplanung** (`/app/pm`) and **Zeiterfassung** (`/app/time`), area "Aufgaben & Projekte" (`tasks`; `contacts` includes it, `tasks` alone – e.g. for an AI agent – shows tasks without the customer names on them).
 Billing endpoints need the area "Rechnungen & Produkte" (`payments`) as well. No settings or environment
 variables to set up; it uses the sub-account's invoice settings and member area.
 

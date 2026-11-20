@@ -3,6 +3,7 @@ import { api, currentLocation } from '../api';
 import { Badge, Check, Empty, Modal, Spinner, act, confirmAsk, navigate, useLoad } from '../ui';
 import { de, useDebounced } from './MarketingKit';
 import { useT } from '../i18n';
+import './email-builder.css';
 
 /**
  * Template gallery: finished German e-mail designs by occasion, searchable, with a preview. A template is copied as the

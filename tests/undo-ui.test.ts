@@ -42,7 +42,7 @@ describe('undo UI', () => {
     expect(main).toContain("['trash', 'trash', 'Papierkorb', '*']");
     expect(main).toMatch(/<HistoryButton \/>/);
     expect(main).toMatch(/<UndoLayer /);
-    expect(readFileSync(join(root, 'nav.tsx'), 'utf8')).toContain("'pghl:verlauf'");
+    expect(readFileSync(join(root, 'nav-palette.tsx'), 'utf8')).toContain("'pghl:verlauf'");
     expect(readFileSync(join(root, 'pages', 'Tasks.tsx'), 'utf8')).toContain("'Erledigt heute'");
     // every write the app makes is announced to the toast (api.ts reads the journal headers)
     expect(readFileSync(join(root, 'api.ts'), 'utf8')).toContain('x-undo-id');

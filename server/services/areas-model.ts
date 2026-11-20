@@ -52,7 +52,7 @@ export const GOALS: Goal[] = [
   { id: 'all', label: 'Alles', text: 'Alle Bereiche im Menü wie bisher – nichts kommt unter „Mehr“.', areas: [] },
 ];
 
-/** The goal the first-run setup applies when someone skips it. */
+/** The goal preselected in the first step of the welcome wizard (skipping it keeps the whole menu – web/src/onboarding/first-run-model.ts). */
 export const DEFAULT_GOAL: GoalId = 'leads';
 
 /** Simple mode is on once goals are chosen and "Alles" is not one of them. No goals = the classic full menu. */

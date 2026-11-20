@@ -94,6 +94,7 @@
 
 .agent-status { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 .agent-error { font-size: 13px; color: var(--red); background: rgba(220, 38, 38, .08); border-radius: 8px; padding: 8px 10px; }
+.agent-error .agent-retry { margin-left: 8px; vertical-align: middle; }
 .agent-typing { display: flex; gap: 4px; padding: 6px 2px; }
 .agent-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: agent-dot 1s infinite ease-in-out; }
 .agent-typing span:nth-child(2) { animation-delay: .15s; }

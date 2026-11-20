@@ -4,6 +4,7 @@ import { Icon } from '../icons';
 import { act, Badge, Check, CodeBox, confirmAsk, Empty, Field, Input, Modal, pressable, Select, Spinner, Tabs, Textarea, toast, useLoad } from '../ui';
 import { FileButton, dlHref, germanDate, signedMoney, ymdLocal } from './boCommon';
 import { SortableGrid } from '../sortable/Sortable';
+import { BankSyncPanel } from './AccountingBankSync';
 
 /** Buchhaltung, second half: bank, reports, export & period lock, chart of accounts, settings. */
 
@@ -24,6 +25,7 @@ export function BankTab({ accounts, onChange }: { accounts: any[]; onChange: () 
   const run = async (fn: () => Promise<unknown>, ok?: string) => (await act(fn, ok)) !== undefined && refresh();
   return (
     <>
+      <BankSyncPanel onSynced={refresh} />
       <div className="row" style={{ alignItems: 'center', marginBottom: 10 }}>
         <FileButton
           label="Kontoauszug importieren"
@@ -51,7 +53,7 @@ export function BankTab({ accounts, onChange }: { accounts: any[]; onChange: () 
         </div>
       </div>
       <p className="muted small">
-        CSV-Export der Bank oder CAMT.053 (XML). Es gibt keine Bankanbindung (FinTS) – die Dateien lädst du selbst hoch; dieselbe Datei zweimal importieren erzeugt keine Dubletten. Vorschläge werden erst nach deinem Klick gebucht, auf das <strong>Bankdatum</strong>.
+        Umsätze kommen über die verbundene Bank von selbst – oder als CSV-Export der Bank bzw. CAMT.053 (XML), den du hier hochlädst; dieselbe Datei zweimal importieren erzeugt keine Dubletten. Vorschläge werden erst nach deinem Klick gebucht, auf das <strong>Bankdatum</strong>.
       </p>
       {list.loading && !list.data ? (
         <Spinner />

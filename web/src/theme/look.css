@@ -1,0 +1,72 @@
+/* ==========================================================================================================
+   Stil & Fenster – cards and windows, corners, shadows, borders, typeface, sidebar, top bar, app background.
+   The values are CSS variables from the generated <style id="pghl-theme"> (theme/look.ts via css.ts); this file only
+   uses them, so every page follows without knowing about it. It is imported at the top of theme.css, i.e. after
+   styles.css: equal selectors here win over styles.css, more specific component rules still win over these.
+   Switches on <html>: data-surface · data-side-style · data-header · data-backdrop.
+   No backdrop-filter on cards: dialogs render inside cards (position: fixed), and a filter would trap them.
+   ========================================================================================================== */
+
+/* Fallbacks = the standard look (first visit, print). */
+:root {
+  --r-card: 12px; --r-ctl: 8px; --r-btn: 8px; --r-pop: 14px;
+  --sh-card: none; --sh-pop: 0 20px 60px rgba(0, 0, 0, .3); --sh-side: 0 10px 30px -12px rgba(15, 23, 42, .2);
+  --bd-w: 1px; --bd-c: var(--line); --surface: var(--panel);
+  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --backdrop: none; --backdrop-size: auto; --backdrop-blend: normal; --tint-a: 8%; --img-veil: var(--bg); --img-blend: normal;
+}
+
+/* ---- typeface ---- */
+body { font-family: var(--font-ui); }
+
+/* ---- cards and windows ---- */
+.card, .table-wrap, .kcol, .inbox {
+  background: var(--surface);
+  border-width: var(--bd-w);
+  border-color: var(--bd-c);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+.modal { border-radius: var(--r-pop); box-shadow: var(--sh-pop); }
+.kcard, .wf-step, .blocklist .blk { border-radius: var(--r-ctl); }
+
+/* ---- controls ---- */
+input:where(:not([type='checkbox'], [type='radio'], [type='range'], [type='color'])), select, textarea, .tag-input, .codebox { border-radius: var(--r-ctl); }
+.btn, button.btn { border-radius: var(--r-btn); }
+.side nav a { border-radius: min(var(--r-btn), 12px); }
+
+/* ---- brutal: hard edges for buttons, fields and dialogs too ---- */
+:root[data-surface='brutal'] :is(.btn, button.btn):not(.ghost) { border: 2px solid var(--text); box-shadow: 2px 2px 0 var(--text); }
+:root[data-surface='brutal'] :is(.btn, button.btn):not(.ghost):active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--text); }
+:root[data-surface='brutal'] :is(input:where(:not([type='checkbox'], [type='radio'], [type='range'], [type='color'])), select, textarea, .tag-input) { border-color: var(--text); }
+:root[data-surface='brutal'] .modal { border: 2px solid var(--text); }
+:root[data-surface='brutal'] .modal-head, :root[data-surface='brutal'] .modal-foot { border-color: var(--text); }
+@media (prefers-reduced-motion: reduce) { :root[data-surface='brutal'] :is(.btn, button.btn):active { transform: none; } }
+
+/* ---- app background (behind pages and a floating or seamless sidebar) ---- */
+@media screen {
+  body { background-image: var(--backdrop); background-size: var(--backdrop-size); background-blend-mode: var(--backdrop-blend); background-position: center; background-attachment: fixed; }
+}
+
+/* ---- sidebar: floating panel / seamless (its colours come from css.ts) ---- */
+@media screen and (min-width: 600px) {
+  :root[data-side-style='floating'] .shell { grid-template-columns: 246px 1fr; }
+  :root[data-side-style='floating']:is([data-sidebar='rail'], [data-size='medium']) .shell { grid-template-columns: 80px 1fr; }
+  :root[data-side-style='floating'] .side { margin: 10px 0 10px 10px; border-radius: calc(var(--r-card) + 4px); box-shadow: var(--sh-side); }
+  :root[data-side-style='blend'] .side { background: transparent; border-right: 1px solid var(--line); }
+}
+
+/* ---- top bar ---- */
+@media screen {
+  :root[data-header='clear'] .topbar { background: color-mix(in srgb, var(--bg) 90%, transparent); border-bottom-color: transparent; }
+}
+/* below 600 px the bar is not sticky (ios/ios.css): glass and floating fall back to the solid bar there */
+@media screen and (min-width: 600px) {
+  :root[data-header='glass'] .topbar { background: transparent; border-bottom-color: color-mix(in srgb, var(--line) 70%, transparent); }
+  /* the blur sits on a pseudo element: a filter on the bar itself would trap the dialogs its buttons open */
+  :root[data-header='glass'] .topbar::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: color-mix(in srgb, var(--panel) 70%, transparent); -webkit-backdrop-filter: blur(16px) saturate(1.6); backdrop-filter: blur(16px) saturate(1.6); }
+  :root[data-header='floating'] .topbar { margin: 10px 16px 0; top: 10px; background: var(--panel); border: var(--bd-w) solid var(--bd-c); border-radius: var(--r-card); box-shadow: var(--sh-side); }
+}
+
+/* The editor's own styles (Darstellung → Stil & Fenster: presets, mini windows, fine-tuning) are in look-editor.css,
+   loaded with the settings page – not part of the first download. */

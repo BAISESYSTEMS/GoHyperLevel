@@ -6,6 +6,9 @@
    data-sidebar (full|rail) · data-density · data-font · data-icons
    ========================================================================================================== */
 
+/* Stil & Fenster (cards, corners, shadows, typeface, sidebar and top bar style, background): its own file, before the rules below. */
+@import './look.css';
+
 /* Fallbacks until the theme CSS is there (first visit): the standard theme. */
 :root {
   --on-brand: #fff;
@@ -39,6 +42,7 @@ input:focus, select:focus, textarea:focus { outline-color: var(--brand-ring); }
 /* ---- font size ---- */
 :root[data-font='small'] { --fs: 13px; --fs-small: 11px; }
 :root[data-font='large'] { --fs: 16px; --fs-small: 13.5px; }
+:root[data-font='xlarge'] { --fs: 17.5px; --fs-small: 15px; }
 body { font-size: var(--fs); }
 .small { font-size: var(--fs-small); }
 h1 { font-size: calc(var(--fs) * 1.57); }

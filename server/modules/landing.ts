@@ -196,7 +196,7 @@ export const landingModule: Module = {
       const apk = app.services.mobileAppInfo?.() as { version_name: string; size: number; sha256: string } | null | undefined;
       const p = prices();
       const home = pagePath('home', lang);
-      const waitlist = app.services.cloudWaitlist?.enabled() ? app.services.cloudWaitlist.view({ lang, back: home, plan: q.get('plan'), state: q.get('wl') }) : undefined;
+      const waitlist = app.services.cloudWaitlist?.enabled() ? app.services.cloudWaitlist.view({ lang, back: home, plan: q.get('plan'), state: q.get('wl'), utm: q.get('utm_source') }) : undefined;
       const d: LandingData = {
         kind,
         lang,

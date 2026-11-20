@@ -4,7 +4,7 @@ import { VersionTag, leftDemo } from '../demo';
 import { Icon, type IconName } from '../icons';
 import { Later, lazyPages } from '../lazy';
 import { ChatBadge } from '../pages/collab-badge';
-import { ProjectSwitcher } from '../nav';
+import { ProjectSwitcher, toggleFav, useFavs } from '../nav';
 import { useT } from '../i18n';
 import { LanguageMenu } from '../i18n/LanguageMenu';
 import { peersByRoute, usePresence } from '../presence/store';
@@ -16,7 +16,7 @@ import { modeTokens } from './css';
 import { PRODUCT_ICON } from './brand-icon';
 import { DEPT_OF_ROUTE } from './depts';
 import { resolveDark, setShowAll, toggleSidebar, useLook } from './store';
-import { useNavSplit } from '../areas/adaptive';
+import { setPinned, useNavSplit } from '../areas/adaptive';
 import { AREA_BADGE } from '../areas/info';
 import { QuickMenuButton } from '../areas/QuickMenu';
 import { FocusEnter } from '../focus/FocusEnter';
@@ -140,11 +140,20 @@ export function Sidebar({ session, cur, route, open, entries, childrenOf, preloa
   // Menu: entries the person may use, minus the hidden ones (unless "show all"), headings only above a visible entry.
   const hidden = look.prefs.hidden;
   const isShown = (r: string) => look.showAll || !hidden.includes(r) || r === cur;
-  // Einfach-Modus (goals chosen): only the core entries, pinned and promoted ones in the list – the rest under "Mehr",
-  // Einstellungen pinned at the bottom (web/src/areas/adaptive.ts).
+  // Einfach-Modus (goals chosen): only the core and pinned entries in the list – the rest under "Mehr", Einstellungen pinned at
+  // the bottom (web/src/areas/adaptive.ts). The list only changes when the person pins or unpins; an open page from "Mehr" shows
+  // in a fixed slot above the "Mehr" button (`here`) with a pin, so nothing in the list jumps.
   const split = useNavSplit(entries.filter((n) => n[0] !== 'group' && isShown(n[0])).map((n) => n[0]), cur);
   const [more, setMore] = useState(false);
   useEffect(() => setMore(false), [cur]);
+  const hereItem = split.here ? (entries.find((n) => n[0] === split.here) as NavItem | undefined) : undefined;
+  // Favoriten (☆ in Ctrl+K): pages the person pinned, at the top – only those they may still open
+  const rootOf = (path: string) => path.split(/[/?]/)[0];
+  const here = route.join('/');
+  const favs = useFavs().filter((f) => {
+    const r = rootOf(f.path);
+    return r === 'agency' ? session.user.role === 'admin' : entries.some((n) => n[0] === r);
+  });
   const inMenu = (r: string) => !split.simple || (split.core.includes(r) && r !== 'settings');
   const shown = entries.filter((n) => (n[0] === 'group' ? !split.simple : isShown(n[0]) && inMenu(n[0])));
   const items = shown.filter((n, i) => n[0] !== 'group' || (shown[i + 1] && shown[i + 1][0] !== 'group'));
@@ -202,6 +211,24 @@ export function Sidebar({ session, cur, route, open, entries, childrenOf, preloa
       </Later>
       <ProjectSwitcher />
       <nav>
+        {favs.length > 0 && (
+          <div className="nav-favs" data-tour="nav-favs">
+            <div className="group">{t('Favoriten')}</div>
+            {favs.map((f) => (
+              <span key={`fav-${f.path}`} className="nav-item nav-fav">
+                <NavLink to={f.path} className={here === f.path ? 'on' : ''} dept={DEPT_OF_ROUTE[rootOf(f.path)]} label={rail ? f.label : undefined} {...tipFor(f.label)}>
+                  <Icon name={f.icon} size={18} />
+                  <span className="nav-label">{f.label}</span>
+                </NavLink>
+                {!rail && (
+                  <button type="button" className="side-iconbtn nav-fav-x" onClick={() => toggleFav(session.user.id, f)} aria-label={t('{name} aus den Favoriten nehmen', { name: f.label })} title={t('Aus den Favoriten nehmen')}>
+                    ×
+                  </button>
+                )}
+              </span>
+            ))}
+          </div>
+        )}
         {session.user.role === 'admin' && (
           <>
             <span className="nav-item">
@@ -259,7 +286,20 @@ export function Sidebar({ session, cur, route, open, entries, childrenOf, preloa
       </nav>
       {split.simple && (
         <div className="side-more side-simple" data-tour="nav-more-box">
-          <button className={`side-showall side-morebtn${more ? ' on' : ''}`} onClick={() => setMore(!more)} aria-expanded={more} aria-haspopup="dialog" data-tour="nav-more" aria-label={t('Mehr: alle Bereiche ({n})', { n: moreCount })} {...tipFor(t('Mehr: alle Bereiche ({n})', { n: moreCount }))}>
+          {hereItem && (
+            <span className="nav-item side-here">
+              <NavLink to={hereItem[0]} className="side-showall on" dept={DEPT_OF_ROUTE[hereItem[0]]} label={rail ? hereItem[2] : undefined} {...tipFor(hereItem[2])}>
+                <Icon name={hereItem[1]} size={16} />
+                {!rail && <span className="nav-label">{hereItem[2]}</span>}
+              </NavLink>
+              {!rail && (
+                <button type="button" className="side-iconbtn side-herepin" onClick={() => void setPinned(hereItem[0], true, look.prefs)} aria-label={t('{name} ins Menü heften', { name: hereItem[2] })} title={t('Ins Menü heften')}>
+                  <Icon name="pin" size={15} />
+                </button>
+              )}
+            </span>
+          )}
+          <button className={`side-showall side-morebtn${more || hereItem ? ' on' : ''}`} onClick={() => setMore(!more)} aria-expanded={more} aria-haspopup="dialog" data-tour="nav-more" aria-label={t('Mehr: alle Bereiche ({n})', { n: moreCount })} {...tipFor(t('Mehr: alle Bereiche ({n})', { n: moreCount }))}>
             <Icon name="grid" size={16} />
             {!rail && (
               <span>

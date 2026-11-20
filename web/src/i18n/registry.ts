@@ -41,7 +41,7 @@ export const NAMESPACES = {
   shell: {
     complete: true,
     // `file#A,B` = only those components of a file (the top-bar buttons of areas that are not translated yet)
-    files: ['main.tsx', 'nav.tsx', 'theme/Sidebar.tsx', 'ios/TabBar.tsx', 'ios/tabs.ts', 'ios/MasterDetail.tsx', 'pages/PmGlobal.tsx', 'demo.tsx', 'undo/Undo.tsx#ToastView,HistoryButton', 'agent/Panel.tsx#AgentButton', 'pages/Feedback.tsx#FeedbackButton'],
+    files: ['main.tsx', 'nav.tsx', 'nav-palette.tsx', 'theme/Sidebar.tsx', 'ios/TabBar.tsx', 'ios/tabs.ts', 'ios/MasterDetail.tsx', 'pages/PmGlobal.tsx', 'demo.tsx', 'undo/Undo.tsx#ToastView,HistoryButton', 'agent/Panel.tsx#AgentButton', 'pages/Feedback.tsx#FeedbackButton'],
   },
   login: { complete: true, files: ['pages/Login.tsx', 'webauthn.ts'] },
   dashboard: { complete: true, files: ['pages/Dashboard.tsx'] },
@@ -143,7 +143,7 @@ export const NAMESPACES = {
   // the project's stored files on the Projekt-Steckbrief (slot "project.files")
   projectfiles: { complete: true, files: ['pages/ProjectFiles.tsx'] },
   // Einfach-Modus: goal setup and banner, the "Mehr" panel of the adaptive sidebar, area descriptions and quick actions
-  simple: { complete: true, files: ['areas/GoalSetup.tsx', 'areas/MorePanel.tsx', 'areas/info.ts', 'areas/QuickMenu.tsx', 'areas/fields.tsx', 'areas/SettingsTabs.tsx', 'areas/SetupChecklist.tsx'] },
+  simple: { complete: true, files: ['areas/GoalSetup.tsx', 'areas/MorePanel.tsx', 'areas/info.ts', 'areas/QuickMenu.tsx', 'areas/QuickMenuPanel.tsx', 'areas/fields.tsx', 'areas/SettingsTabs.tsx', 'areas/SetupChecklist.tsx'] },
   // operations under Agentur → System (health, alerts, off-site backup, status page incidents) and abuse handling under Agentur → Cloud
   ops: { complete: true, files: ['pages/OpsPanel.tsx', 'pages/CloudAbuse.tsx'] },
   // online store (orders, products, collections, shipping), gift cards and the PayPal/Mollie settings (docs/store.md, docs/payment-providers.md)
@@ -167,6 +167,14 @@ export const NAMESPACES = {
   // files in the customer portal: the share toggle on a contact's documents and the upload rules (docs/sales.md)
   portalfiles: { complete: true, files: ['pages/PortalFiles.tsx'] },
   gaps: { complete: true, files: ['pages/SiteSeo.tsx', 'pages/SocialExtras.tsx', 'pages/AgencyBanners.tsx', 'pages/RoleTemplates.tsx', 'pages/VideoTestimonials.tsx', 'pages/PromptLab.tsx', 'pages/GoogleLeads.tsx', 'pages/SystemMails.tsx', 'pages/WordPressPlugin.tsx', 'pages/ReviewBulk.tsx', 'pages/CourseAi.tsx'] },
+  // Einstellungen → Darstellung → Stil & Fenster: presets, window style, corners, typeface, sidebar/top bar, background
+  look: { complete: true, files: ['theme/LookStyle.tsx', 'theme/look.ts', 'theme/look-presets.ts'] },
+  // Ersteinstieg: the welcome wizard (goals → data → first success), the "Erste Schritte" card on the dashboard, the academy hint and the practice-company banner
+  onboarding: { complete: true, files: ['onboarding/FirstRun.tsx', 'onboarding/FirstSteps.tsx', 'onboarding/first-run-model.ts', 'tour/welcome.tsx', 'tour/help.tsx#SandboxBanner'] },
+  // the Akademie page with its badges, the handbook and the guides from docs/ (tour titles and summaries: tour/handbook.en.ts)
+  academy: { complete: true, files: ['pages/Academy.tsx', 'tour/docs.tsx', 'tour/catalog.ts#badges'] },
+  // the assistant's panel (Strg/⌘+J): chat, history, tool cards, confirmations, voice (its top-bar button is in `shell`)
+  agent: { complete: true, files: ['agent/Panel.tsx#MODE_LABEL,StatusIcon,SOURCE_LABEL,STATUS_TEXT,ToolCardView,ARG_LABELS,argValue,friendlyError,ConfirmCard,AgentPanel,TypingDots'] },
 } as const satisfies Record<string, { complete: boolean; server?: boolean; files: readonly string[] }>;
 export type Namespace = keyof typeof NAMESPACES;
 
@@ -229,5 +237,9 @@ export const CATALOGS: { [L in Exclude<Locale, typeof SOURCE_LOCALE>]: Partial<R
     rentals: () => import('./en/rentals'),
     gaps: () => import('./en/gaps'),
     portalfiles: () => import('./en/portalfiles'),
+    look: () => import('./en/look'),
+    onboarding: () => import('./en/onboarding'),
+    academy: () => import('./en/academy'),
+    agent: () => import('./en/agent'),
   },
 };

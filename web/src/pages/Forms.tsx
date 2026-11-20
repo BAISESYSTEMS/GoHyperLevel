@@ -9,6 +9,7 @@ import { Later, PageSuspense, lazyPages } from '../lazy';
 import { useT } from '../i18n';
 import { MoreFields } from '../areas/fields';
 import { WordPressPluginCard } from './WordPressPlugin';
+import { useIntent } from '../onboarding/plan';
 
 // Typeform depth (field options, jumps, templates, design, scoring, analytics) loads when the editor needs it.
 const { FieldOptions, JumpsEditor, TemplateGallery } = lazyPages(() => import('./FormFields'), 'FieldOptions', 'JumpsEditor', 'TemplateGallery');
@@ -119,7 +120,9 @@ export function Forms() {
   const t = useT('forms');
   const forms = useLoad(() => api.get<any[]>('/api/forms'), []);
   const [modal, setModal] = useState(false);
-  const [gallery, setGallery] = useState(false);
+  // `?gallery=1` (welcome wizard, "Erste Schritte"): start from a template
+  const galleryNow = useIntent('gallery');
+  const [gallery, setGallery] = useState(galleryNow);
   const [n, setN] = useState('');
   const [kind, setKind] = useState('form');
   return (

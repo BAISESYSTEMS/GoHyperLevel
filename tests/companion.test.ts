@@ -6,7 +6,7 @@ import { retry } from '../server/services/agent-llm.js';
 import { COMPANION_TOOLS } from '../server/modules/companion.js';
 import { classify, routeProblem } from '../server/services/agent-safety.js';
 import { briefingSig, nextSteps, rankHotspots, rulesSay, type Hotspot } from '../server/services/briefing.js';
-import { checkinDue, cleanPrefs, defaultCheckin, defaultPrefs, inQuiet, nextCheckin, wakePhraseFor, withPrefDefaults, type CheckinPrefs } from '../server/services/companion-prefs.js';
+import { checkinDue, cleanAvatar, cleanDefaults, cleanPrefs, defaultCheckin, defaultName, defaultPrefs, inQuiet, nextCheckin, wakePhraseFor, withPrefDefaults, type CheckinPrefs } from '../server/services/companion-prefs.js';
 import { findWake } from '../web/src/companion/wake.js';
 
 /**
@@ -82,6 +82,24 @@ describe('settings (pure)', () => {
     expect(cleanPrefs({ name: '  <b>Max</b>\n ', read_aloud: true }, cur)).toMatchObject({ name: 'b Max /b', read_aloud: true });
     expect(withPrefDefaults({ checkin: { mode: 'hourly', minutes: 99999, quiet_from: 'x' }, shortcut: 'yes', tz: 'Nope/Nope' })).toMatchObject({ shortcut: true, tz: '', checkin: { mode: 'off', minutes: 60, quiet_from: '20:00' } });
     expect(wakePhraseFor('Jarvis')).toBe('Hey Jarvis');
+    expect(wakePhraseFor('')).toBe('Hey Assistent');
+  });
+
+  it('names the assistant neutrally by language and keeps avatar and tone clean', () => {
+    expect(defaultName('de')).toBe('Assistent');
+    expect(defaultName('en')).toBe('Assistant');
+    expect(defaultName(null)).toBe('Assistent');
+    for (const ok of ['🦊', '✨', '🤖', '🇩🇪']) expect(cleanAvatar(ok), ok).toBe(ok);
+    for (const bad of ['abc', '<b>', '🦊x', '1', '', '"🦊"']) expect(cleanAvatar(bad), bad).toBe(bad === '"🦊"' ? '🦊' : '');
+    const cur = defaultPrefs();
+    expect(cur).toMatchObject({ name: '', avatar: '', tone: 'neutral' });
+    expect(cleanPrefs({ tone: 'formal', avatar: '🦉' }, cur)).toMatchObject({ tone: 'formal', avatar: '🦉' });
+    expect(() => cleanPrefs({ tone: 'laut' }, cur)).toThrow(/Ton/);
+    // stored settings from before 1.0.73: an empty name follows the defaults, a typed "Jarvis" stays
+    expect(withPrefDefaults({ name: '' })).toMatchObject({ name: '', avatar: '', tone: 'neutral' });
+    expect(withPrefDefaults({ name: 'Jarvis', tone: 'shout' })).toMatchObject({ name: 'Jarvis', tone: 'neutral' });
+    expect(cleanDefaults({ name: ' <i>Max</i> ', avatar: 'x' })).toEqual({ name: 'i Max /i', avatar: '' });
+    expect(cleanDefaults({ avatar: '🐝' }, { name: 'Max', avatar: '' })).toEqual({ name: 'Max', avatar: '🐝' });
   });
 });
 
@@ -178,10 +196,10 @@ beforeEach(() => {
 });
 
 describe('settings per person and sub-account', () => {
-  it('starts as Jarvis with the HyperLevel Agent, saves choices and refuses foreign agents', async () => {
+  it('starts as the neutral "Assistent" with the HyperLevel Agent, saves choices and refuses foreign agents', async () => {
     const r = await t.api.get('/api/companion/prefs');
     expect(r.status).toBe(200);
-    expect(r.data).toMatchObject({ name: 'Jarvis', wake_phrase: 'Hey Jarvis', agent: { id: null, name: 'HyperLevel Agent' }, prefs: { checkin: { mode: 'off', quiet_from: '20:00', quiet_to: '08:00', only_changed: true } } });
+    expect(r.data).toMatchObject({ name: 'Assistent', default_name: 'Assistent', avatar: '✨', wake_phrase: 'Hey Assistent', agent: { id: null, name: 'HyperLevel Agent' }, prefs: { checkin: { mode: 'off', quiet_from: '20:00', quiet_to: '08:00', only_changed: true } } });
     expect((await t.api.put('/api/companion/prefs', { name: 'Friday', wake_phrase: '' })).data).toMatchObject({ name: 'Friday', wake_phrase: 'Hey Friday' });
     expect((await t.api.put('/api/companion/prefs', { checkin: { minutes: 1 } })).status).toBe(400);
     expect((await t.api.put('/api/companion/prefs', { agent_id: 'gibt-es-nicht' })).status).toBe(404);
@@ -193,7 +211,7 @@ describe('settings per person and sub-account', () => {
     const set = await t.api.put('/api/companion/prefs', { agent_id: mine.id, name: '' });
     expect(set.data).toMatchObject({ name: 'Vertriebs-Ass', agent: { id: mine.id, emoji: '🦊' }, wake_phrase: 'Hey Vertriebs-Ass' });
     // settings are per sub-account
-    expect((await t.api.get('/api/companion/prefs', { 'x-location-id': B })).data.name).toBe('Jarvis');
+    expect((await t.api.get('/api/companion/prefs', { 'x-location-id': B })).data.name).toBe('Assistent');
     await t.api.put('/api/companion/prefs', { agent_id: null, name: '' });
     // a sub-account API key has no person
     const key = (await t.api.post('/api/api-keys', { name: 'K' })).data.key;
@@ -201,10 +219,37 @@ describe('settings per person and sub-account', () => {
     expect(viaKey.status).toBe(403);
   });
 
+  it('follows the sub-account’s and the agency’s default name, keeps an own name, and carries avatar and tone', async () => {
+    expect((await t.api.put('/api/companion/agency-defaults', { name: 'Friday' })).data).toMatchObject({ name: 'Friday' });
+    expect((await t.api.get('/api/companion/prefs')).data).toMatchObject({ name: 'Friday', wake_phrase: 'Hey Friday' });
+    const d = (await t.api.put('/api/companion/defaults', { name: 'Max', avatar: '🦉' })).data;
+    expect(d).toMatchObject({ name: 'Max', avatar: '🦉', agency: { name: 'Friday' }, builtin: { de: 'Assistent', en: 'Assistant' }, may_edit: true, may_edit_agency: true });
+    expect((await t.api.get('/api/companion/prefs')).data).toMatchObject({ name: 'Max', default_name: 'Max', avatar: '🦉' });
+    // the other sub-account only has the agency's default
+    expect((await t.api.get('/api/companion/prefs', { 'x-location-id': B })).data.name).toBe('Friday');
+    // the default is set by people with the settings area – not by someone without it, and the agency's only by admins
+    expect((await noMoney('PUT', '/api/companion/defaults', { name: 'Otto' }, { 'x-location-id': A })).status).toBe(403);
+    expect((await member('PUT', '/api/companion/agency-defaults', { name: 'Mia' }, { 'x-location-id': A })).status).toBe(403);
+    // an own name (e.g. the old "Jarvis") wins over every default; avatar and tone are per person
+    expect((await t.api.put('/api/companion/prefs', { name: 'Jarvis', avatar: '🤖', tone: 'formal' })).data).toMatchObject({ name: 'Jarvis', avatar: '🤖', wake_phrase: 'Hey Jarvis', prefs: { tone: 'formal' } });
+    expect((await t.api.put('/api/companion/prefs', { tone: 'laut' })).status).toBe(400);
+    // the agent panel's built-in agent goes by the same name and avatar
+    expect((await t.api.get('/api/agent/bootstrap')).data.default_agent).toMatchObject({ name: 'Jarvis', emoji: '🤖' });
+    // the tone reaches the agent's prompt in the chat as well, the focus role only in focus mode
+    const extras = (source: string) => (t.app.services.agentPromptExtras as ((i: any) => string)[]).map((f) => f({ user: { id: me, name: 'Chef', role: 'admin', locations: [] }, locationId: A, automatic: false, source })).join('\n');
+    expect(extras('chat')).toContain('siezt');
+    expect(extras('chat')).not.toContain('Fokus-Modus mit Companion');
+    expect(extras('focus')).toContain('„Jarvis“');
+    await t.api.put('/api/companion/prefs', { name: '', avatar: '', tone: 'neutral' });
+    await t.api.put('/api/companion/defaults', { name: '', avatar: '' });
+    await t.api.put('/api/companion/agency-defaults', { name: '' });
+    expect((await t.api.get('/api/companion/prefs')).data.name).toBe('Assistent');
+  });
+
   it('teaches the agent its companion role only in focus-mode runs', () => {
     const extras = (t.app.services.agentPromptExtras as ((i: any) => string)[]).map((f) => f({ user: { id: me, name: 'Chef', role: 'admin', locations: [] }, locationId: A, automatic: false, source: 'focus' })).join('\n');
     expect(extras).toContain('Fokus-Modus mit Companion');
-    expect(extras).toContain('„Jarvis“');
+    expect(extras).toContain('„Assistent“');
     expect(extras).toContain('keine Bestätigung');
     const chat = (t.app.services.agentPromptExtras as ((i: any) => string)[]).map((f) => f({ user: { id: me, name: 'Chef', role: 'admin', locations: [] }, locationId: A, automatic: false, source: 'chat' })).join('\n');
     expect(chat).not.toContain('Fokus-Modus mit Companion');
@@ -289,7 +334,7 @@ describe('proactive check-ins', () => {
     expect(pushes).toHaveLength(1);
     expect(pushes[0]).toMatchObject({ kind: 'checkin', userIds: [me], locationId: A });
     expect(pushes[0].url).toMatch(/^\/app\/focus\?checkin=/);
-    expect(pushes[0].title).toMatch(/^Jarvis: \d Sachen brauchen dich$/);
+    expect(pushes[0].title).toMatch(/^Assistent: \d Sachen brauchen dich$/);
     // 20 minutes later: not yet
     expect(await runDue('2026-07-14T08:20:00Z')).toBe(0);
     // an hour later, nothing changed: no check-in (and no push)

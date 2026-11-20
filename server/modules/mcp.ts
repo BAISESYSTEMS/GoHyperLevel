@@ -536,6 +536,10 @@ export const mcpModule: Module = {
     app.guards.push((ctx) => {
       if ((ctx.via === 'agency_key' || ctx.via === 'mcp') && KEY_BLOCKED.test(ctx.path)) throw new HttpError(403, 'Mit einem Agentur-Schlüssel nicht erlaubt');
     });
+    // Read-only sub-account keys (api_keys.scope = 'read'): reading only – read-only MCP tools may still ask with a POST.
+    app.guards.push((ctx) => {
+      if (ctx.scope === 'read' && ctx.viaApiKey && !['GET', 'HEAD'].includes(ctx.method) && !isReadOnlyToolRelay(ctx)) throw new HttpError(403, 'Dieser Schlüssel darf nur lesen');
+    });
 
     router.get('/api/agency/api-keys', 'admin', () => db.all('SELECT id, name, prefix, scope, created_at, last_used_at FROM agency_api_keys ORDER BY created_at DESC'));
     router.post('/api/agency/api-keys', 'admin', (ctx) => {

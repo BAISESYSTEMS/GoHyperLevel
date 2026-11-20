@@ -5,11 +5,12 @@
  *   npm run docs:gen -- --check  # exit 1 when a file is out of date (what tests/docs.test.ts asserts)
  *
  *  - docs/workflow-actions.md   "All actions" and "All triggers": adds the types of GET /api/workflow-catalog that are missing, drops vanished ones
- *  - docs/handbuch.md           the printed Akademie guide (web/src/tour/handbook.ts)
+ *  - docs/handbook.md           the printed Academy guide in English (web/src/tour/handbook.ts, texts in handbook.en.ts)
+ *  - docs/handbook.de.md        the same guide in German
  *
  * Hand-written text and hand-edited cells are never touched.
  */
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -106,23 +107,28 @@ export async function loadCatalog(): Promise<Catalog> {
   }
 }
 
-async function handbook(): Promise<string> {
+type HandbookLang = 'de' | 'en';
+
+/** The handbook files in both languages: [path, text]. */
+async function handbooks(): Promise<[string, string][]> {
   // web code is not part of the server type-check: load it dynamically (tsx compiles it)
-  const mod = (await import(pathToFileURL(join(root, 'web/src/tour/handbook.ts')).href)) as { handbookMarkdown: (brand?: string) => string };
-  return mod.handbookMarkdown('HyperLevel');
+  const mod = (await import(pathToFileURL(join(root, 'web/src/tour/handbook.ts')).href)) as {
+    HANDBOOK_FILES: Record<HandbookLang, string>;
+    handbookDoc: (lang: HandbookLang, brand?: string) => string;
+  };
+  return (['en', 'de'] as const).map((lang) => [join(root, mod.HANDBOOK_FILES[lang]), mod.handbookDoc(lang, 'HyperLevel')]);
 }
 
 async function main() {
   const check = process.argv.includes('--check');
   const page = join(root, 'docs/workflow-actions.md');
-  const hb = join(root, 'docs/handbuch.md');
   const wanted: [string, string][] = [
     [page, syncWorkflowLists(readFileSync(page, 'utf8'), await loadCatalog())],
-    [hb, await handbook()],
+    ...(await handbooks()),
   ];
   let stale = 0;
   for (const [file, text] of wanted) {
-    const current = readFileSync(file, 'utf8');
+    const current = existsSync(file) ? readFileSync(file, 'utf8') : null;
     if (current === text) continue;
     stale++;
     if (check) console.error(`${file.replace(`${root}/`, '')} is out of date – run: npm run docs:gen`);

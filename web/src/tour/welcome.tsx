@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAppInfo } from '../demo';
+import { useT } from '../i18n';
 import { Icon } from '../icons';
 import { navigate } from '../ui';
 import { FIRST_TOUR, learn } from './learn';
@@ -21,6 +22,7 @@ const dismissed = () => {
 };
 
 export function AcademyWelcome({ compact, onStart }: { compact?: boolean; onStart?: () => void }) {
+  const t = useT('onboarding');
   const academy = useAcademy();
   const demo = !!useAppInfo()?.demo?.enabled;
   const [hidden, setHidden] = useState(dismissed);
@@ -33,15 +35,15 @@ export function AcademyWelcome({ compact, onStart }: { compact?: boolean; onStar
     <div className={`academy-welcome${compact ? ' compact' : ''}`} role="region" aria-label="Academy" data-tour="academy-welcome">
       <Icon name="academy" size={compact ? 20 : 26} />
       <div className="grow">
-        <strong>In 10 Minuten startklar – Academy starten</strong>
-        <p>Die geführte Tour zeigt dir Menü, Suche, Hilfe und die wichtigsten Bereiche – direkt in der echten Oberfläche, Schritt für Schritt. Danach findest du für jeden Bereich eine eigene Tour.</p>
+        <strong>{t('In 10 Minuten startklar – Academy starten')}</strong>
+        <p>{t('Die geführte Tour zeigt dir Menü, Suche, Hilfe und die wichtigsten Bereiche – direkt in der echten Oberfläche, Schritt für Schritt. Danach findest du für jeden Bereich eine eigene Tour.')}</p>
         <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
           <button type="button" className="btn" onClick={start} data-tour="academy-welcome-start">
-            Academy starten
+            {t('Academy starten')}
           </button>
           {!compact && (
             <button type="button" className="btn secondary" onClick={() => navigate('academy')}>
-              Alle Touren ansehen
+              {t('Alle Touren ansehen')}
             </button>
           )}
         </div>
@@ -50,7 +52,7 @@ export function AcademyWelcome({ compact, onStart }: { compact?: boolean; onStar
         <button
           type="button"
           className="icon-btn"
-          aria-label="Schließen"
+          aria-label={t('Schließen')}
           onClick={() => {
             setHidden(true);
             try {

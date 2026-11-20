@@ -39,7 +39,7 @@ export function can(s: Pick<Session, 'user'> & { saas?: Session['saas']; hr?: Se
   // 'hr' = the Personal page: HR staff, and everybody who is an employee or manager (own record only). HR needs the area explicitly.
   if (perm === 'hr') return !s.saas?.blocked?.includes('personal') && !!(s.hr && (s.hr.is_hr || s.hr.employee || s.hr.is_manager));
   if (s.saas?.blocked?.includes(perm)) return false;
-  return s.user.role === 'admin' || !s.user.permissions || s.user.permissions.includes(perm);
+  return s.user.role === 'admin' || !s.user.permissions || s.user.permissions.includes(perm) || (perm === 'tasks' && s.user.permissions.includes('contacts'));
 }
 
 export const DEFAULT_BRANDING: Branding = { name: 'HyperLevel', logo_url: '', logo_dark_url: '', mark_url: '', mark_dark_url: '', show_name: '', favicon_url: '', color: '#2563eb', login_title: '', login_text: '', support_email: '' };

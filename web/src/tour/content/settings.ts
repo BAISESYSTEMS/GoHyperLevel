@@ -12,7 +12,7 @@ export const SETTINGS_TOURS: Tour[] = [
     routes: ['settings/account'],
     keywords: '2fa zwei faktor sicherheit passwort passkey google microsoft github apple sso verknüpfen geräte abmelden authenticator backup codes dunkelmodus',
     learned: ['Das Passwort ändern', 'Zwei-Faktor-Login mit einer Authenticator-App einschalten und Backup-Codes sichern', 'Fremde oder alte Geräte abmelden', 'Zur Darstellung (Theme, hell/dunkel) abbiegen'],
-    docs: { label: 'Handbuch: Zugang & Sicherheit', file: 'handbuch', anchor: 'kapitel-1-zugang--sicherheit' },
+    docs: { label: 'Handbuch: Zugang & Sicherheit', file: 'handbook.de', anchor: 'kapitel-1-zugang--sicherheit' },
     steps: [
       { title: 'Mein Konto', route: 'settings/account', target: 'account-password', text: 'Hier verwaltest du deinen eigenen Zugang. Ein gutes Passwort ist lang und kommt nur hier vor – am besten aus dem Passwort-Manager.' },
       { title: 'Zwei-Faktor-Login', target: 'account-2fa', placement: 'right', text: 'Mit 2FA reicht ein gestohlenes Passwort nicht: Beim Anmelden fragt {brand} zusätzlich einen Code aus einer App (Google Authenticator, Authy, 1Password).' },

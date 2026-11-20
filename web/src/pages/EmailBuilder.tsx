@@ -37,6 +37,7 @@ import { changedAgainst } from '../areas/marketing-fields';
 import { GenImageButton } from './GenMediaKit';
 import { tr, useT } from '../i18n';
 import { lazyPages } from '../lazy';
+import './email-builder.css';
 
 // The AI writer of the Funnel & Website AI for text blocks (docs/site-ai.md#ai-writer).
 const { AiWriteButton } = lazyPages(() => import('./site/AiWriter'), 'AiWriteButton');

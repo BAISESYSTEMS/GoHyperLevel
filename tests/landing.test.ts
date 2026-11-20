@@ -217,7 +217,9 @@ describe('landing: copy', () => {
       // one keyframe set for every language: the same number of rotating words, AI agents first
       expect(c.hero.rotate.length, c.lang).toBe(COPY.de.hero.rotate.length);
       expect(c.hero.rotate[0], c.lang).toMatch(/KI-Agenten|AI agents/);
-      expect(c.hero.sub, c.lang).toContain('Jarvis');
+      // the hero speaks of agents, not of the companion's name (Paul, 3 Nov 2026: "Jarvis" in the header sounds childish)
+      expect(c.hero.sub, c.lang).toMatch(/KI-Agenten|AI agents/);
+      expect(c.hero.sub, c.lang).not.toContain('Jarvis');
       expect(c.features.items({ triggers: '1', actions: '2' }).length, c.lang).toBe(COPY.de.features.items({ triggers: '1', actions: '2' }).length);
     }
   });
@@ -495,7 +497,7 @@ describe('landing page (PGHL_LANDING=1)', () => {
     expect(await (await get('/')).text()).toContain('APK · coming soon');
   });
 
-  it('leads with the agentic side: integrations under the hero, one source of truth, Jarvis, reasons, agents, Academy, designs, XR', async () => {
+  it('leads with the agentic side: integrations under the hero, one source of truth, the AI assistant, reasons, agents, Academy, designs, XR', async () => {
     for (const [p, lang] of [['/', 'en'], ['/de', 'de']] as const) {
       const body = await (await get(p)).text();
       const a = AGENTIC[lang];
@@ -510,6 +512,9 @@ describe('landing page (PGHL_LANDING=1)', () => {
       expect(body).toContain(a.logos.h2);
       expect(body).toContain(h(a.ssot.h2));
       expect(body).toContain(h(a.jarvis.h2));
+      // the assistant has no fixed persona name any more (Paul, 12 Nov 2026) – people name it themselves
+      expect(body, p).not.toMatch(/Jarvis/);
+      expect(body).toContain(`<b>${h(a.jarvis.demo.who)}</b>`);
       expect(body.match(/<li class="card"><span class="usp-i">/g)).toHaveLength(9);
       expect(body).toContain(`<b>${ACADEMY.chapters}</b>`);
       expect(body).toContain('https://github.com/BAISESYSTEMS/GoHyperLevel/blob/main/CONTRIBUTING.md');
@@ -539,8 +544,8 @@ describe('landing page (PGHL_LANDING=1)', () => {
     writeFileSync(join(dir, 'shot-jarvis.webp'), webp(1440, 900));
     writeFileSync(join(dir, 'shot-xr.webp'), webp(1600, 1000));
     const body = await (await get('/')).text();
-    // Jarvis leads the hero's crossfade
-    expect(body).toMatch(/<div class="stage"><img src="\/landing\/shot-jarvis\.webp" width="1440" height="900" alt="Focus mode with the Jarvis companion" fetchpriority="high"/);
+    // the assistant (focus mode) leads the hero's crossfade
+    expect(body).toMatch(/<div class="stage"><img src="\/landing\/shot-jarvis\.webp" width="1440" height="900" alt="Focus mode with the AI assistant" fetchpriority="high"/);
     expect(body).toContain('<img src="/landing/shot-xr.webp" width="1600" height="1000" alt="HyperLevel in the spatial mode for XR headsets" loading="lazy" decoding="async" data-hide>');
     expect(body).toContain('id="xr" aria-labelledby="xr-h"><div class="wrap"><div class="spot">');
   });

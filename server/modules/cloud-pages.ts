@@ -85,7 +85,7 @@ export const cloudPagesModule: Module = {
     const { router } = app;
     /** The waitlist form for a page, when the waitlist mode is on. */
     const waitlist = (ctx: Ctx, back: string, lang: WlLang = 'de'): WaitlistView | undefined =>
-      app.services.cloudWaitlist?.enabled() ? app.services.cloudWaitlist.view({ lang, back, plan: ctx.query.get('plan'), state: ctx.query.get('wl') }) : undefined;
+      app.services.cloudWaitlist?.enabled() ? app.services.cloudWaitlist.view({ lang, back, plan: ctx.query.get('plan'), state: ctx.query.get('wl'), utm: ctx.query.get('utm_source') }) : undefined;
 
     router.get('/cloud', 'public', (ctx) => servePage(pricingPage(pageCtx(app), { ...pricingData(app), waitlist: waitlist(ctx, '/cloud') })));
 

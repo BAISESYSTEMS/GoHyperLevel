@@ -531,6 +531,7 @@ function ApiAndHooks() {
   const hooks = useLoad(() => api.get<any[]>('/api/webhooks'), []);
   const [newKey, setNewKey] = useState('');
   const [keyUser, setKeyUser] = useState('');
+  const [keyRead, setKeyRead] = useState(false);
   const [url, setUrl] = useState('');
   return (
     <div className="row" style={{ alignItems: 'flex-start' }}>
@@ -548,7 +549,8 @@ function ApiAndHooks() {
               <option key={u.id} value={u.id}>{t('wie {name}', { name: u.name })}</option>
             ))}
           </select>
-          <button className="btn" onClick={async () => { const r = await act(() => api.post('/api/api-keys', { name: prompt(t('Name des Schlüssels'), t('Integration')) ?? 'API', user_id: keyUser || undefined })); if (r) { setNewKey(r.key); keys.reload(); } }}>
+          <Check checked={keyRead} onChange={setKeyRead} label={t('nur lesen')} />
+          <button className="btn" onClick={async () => { const r = await act(() => api.post('/api/api-keys', { name: prompt(t('Name des Schlüssels'), t('Integration')) ?? 'API', user_id: keyUser || undefined, scope: keyRead ? 'read' : 'write' })); if (r) { setNewKey(r.key); keys.reload(); } }}>
             + {t('Schlüssel')}
           </button>
         </div>
@@ -563,7 +565,7 @@ function ApiAndHooks() {
             <span>
               {k.name} <span className="mono muted">{k.prefix}…</span>
               <div className="muted small">
-                {k.user_name ? t('Rechte wie {name}', { name: k.user_name }) : t('ganzer Sub-Account')} · {t('zuletzt: {date}', { date: dt(k.last_used_at) })}
+                {k.user_name ? t('Rechte wie {name}', { name: k.user_name }) : t('ganzer Sub-Account')}{k.scope === 'read' ? ` · ${t('nur lesen')}` : ''} · {t('zuletzt: {date}', { date: dt(k.last_used_at) })}
               </div>
             </span>
             <button className="btn small ghost" onClick={() => confirmAsk(t('Schlüssel widerrufen?')) && act(() => api.del(`/api/api-keys/${k.id}`)).then(keys.reload)}>

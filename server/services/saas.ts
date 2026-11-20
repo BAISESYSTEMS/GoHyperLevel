@@ -1,4 +1,4 @@
-import { PERMISSIONS, type Permission } from '../core/permissions.js';
+import { grants, type Permission, PERMISSIONS } from '../core/permissions.js';
 
 /**
  * SaaS mode (agency resells sub-accounts): plan shape, limits, usage months, the billing
@@ -202,7 +202,7 @@ export const isReadOnly = (s: SubStatus | undefined) => s === 'paused' || s === 
 /** Areas the plan switches off (never the always-on ones). */
 export function disabledAreas(plan: Pick<Plan, 'features'> | undefined): Permission[] {
   if (!plan) return [];
-  return (Object.keys(PERMISSIONS) as Permission[]).filter((p) => !ALWAYS_ON.includes(p) && !plan.features.includes(p));
+  return (Object.keys(PERMISSIONS) as Permission[]).filter((p) => !ALWAYS_ON.includes(p) && !grants(plan.features, p));
 }
 
 // --- lifecycle -----------------------------------------------------------------------

@@ -251,7 +251,7 @@ export function CompanionLayer() {
         <div className={`cmp-edge s-${state}${c.unseen ? ' has-news' : ''}`} data-tour="companion-edge">
           <button type="button" className="cmp-edge-btn" onClick={() => (state === 'speaking' ? interruptSpeaking() : summon('tap'))} aria-label={label} title={label}>
             <span className="cmp-edge-face" aria-hidden="true">
-              {c.agent.id ? c.agent.emoji : <AudioLines size={20} />}
+              {c.avatar && c.avatar !== '✨' ? c.avatar : <AudioLines size={20} />}
             </span>
             {listening && <span className="cmp-edge-ear" aria-hidden="true" />}
             {b.conv && (

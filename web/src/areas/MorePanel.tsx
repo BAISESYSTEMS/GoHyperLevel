@@ -34,7 +34,9 @@ export function MorePanel({ entries, core, more, promoted, hiddenCount, onClose 
   }, [entries]);
   const needle = q.trim().toLowerCase();
   const match = (r: (typeof rows)[number]) => !needle || `${r.label} ${t(AREA_DESC[r.route] ?? '')} ${AREA_KEYWORDS[r.route] ?? ''} ${r.route}`.toLowerCase().includes(needle);
-  const others = rows.filter((r) => more.includes(r.route) && r.route !== 'settings' && match(r));
+  // used often but not in the menu: a suggestion to pin – the menu itself never changes by itself (areas/adaptive.ts)
+  const suggested = rows.filter((r) => promoted.includes(r.route) && more.includes(r.route) && r.route !== 'settings' && match(r));
+  const others = rows.filter((r) => more.includes(r.route) && !promoted.includes(r.route) && r.route !== 'settings' && match(r));
   const mine = rows.filter((r) => core.includes(r.route) && r.route !== 'settings' && match(r));
   const sections = [...new Set(others.map((r) => r.section))];
   const go = (route: string) => (onClose(), navigate(route));
@@ -74,20 +76,26 @@ export function MorePanel({ entries, core, more, promoted, hiddenCount, onClose 
         </div>
         <input className="mp-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('Bereich suchen…')} aria-label={t('Bereich suchen…')} />
         <div className="mp-body">
+          {suggested.length > 0 && (
+            <section className="mp-suggest">
+              <h3>{t('Oft genutzt – anheften?')}</h3>
+              <ul>{suggested.map((r) => item(r, false))}</ul>
+            </section>
+          )}
           {sections.map((s) => (
             <section key={s || 'top'}>
               <h3>{s || t('Allgemein')}</h3>
               <ul>{others.filter((r) => r.section === s).map((r) => item(r, false))}</ul>
             </section>
           ))}
-          {!others.length && !needle && <p className="muted small">{t('Alle Bereiche sind schon in deinem Menü.')}</p>}
+          {!others.length && !suggested.length && !needle && <p className="muted small">{t('Alle Bereiche sind schon in deinem Menü.')}</p>}
           {mine.length > 0 && (
             <section>
               <h3>{t('In deinem Menü')}</h3>
               <ul>{mine.map((r) => item(r, true))}</ul>
             </section>
           )}
-          {!others.length && !mine.length && needle && <p className="muted small">{t('Kein Bereich gefunden.')}</p>}
+          {!others.length && !suggested.length && !mine.length && needle && <p className="muted small">{t('Kein Bereich gefunden.')}</p>}
         </div>
         <div className="mp-foot muted small">
           <a href="#" onClick={(e) => (e.preventDefault(), go('settings/appearance'))}>

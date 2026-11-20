@@ -238,6 +238,7 @@ import { wfxTriggersModule } from './wfx-triggers.js';
 import { accountingModule } from './accounting.js';
 import { receiptsModule } from './accounting-receipts.js';
 import { bankModule } from './accounting-bank.js';
+import { bankSyncModule } from './accounting-bank-sync.js';
 import { reportsModule as accountingReportsModule } from './accounting-reports.js';
 import { accountingAutopostModule } from './accounting-autopost.js';
 import { inventoryModule } from './inventory.js';
@@ -579,6 +580,7 @@ export const MODULES: Module[] = [
   accountingModule,
   receiptsModule,
   bankModule,
+  bankSyncModule,
   accountingReportsModule,
   accountingAutopostModule,
   inventoryModule,

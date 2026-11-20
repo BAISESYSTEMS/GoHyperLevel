@@ -105,6 +105,9 @@ describe('(a) coverage: every area is reachable', () => {
     const caller = { agency: false, locationId: locA, api: async () => ({}) };
     const r: any = await routes.run(caller, { query: 'formular einsendungen' });
     expect(r.routes.some((x: string) => x.startsWith('GET /api/forms/:id/submissions'))).toBe(true);
+    // features named the way people say them, not the way the routes are called
+    for (const [query, route] of [['order bump', /\/api\/buy-offers/], ['pixel', /\/api\/ads\//], ['zoom', /\/api\/(calendars|appointments)/], ['manychat', /\/api\/ig-comments/]] as const)
+      expect(((await routes.run(caller, { query, limit: 100 })) as any).routes.some((x: string) => route.test(x)), query).toBe(true);
     const wf: any = await routes.run(caller, { module: 'workflows', method: 'POST' });
     expect(wf.routes).toEqual(expect.arrayContaining([expect.stringMatching(/^POST \/api\/workflows\/:id\/enroll/)]));
     const keys: any = await routes.run(caller, { query: 'api-keys passwort 2fa users', limit: 100 });

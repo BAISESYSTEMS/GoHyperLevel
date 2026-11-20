@@ -171,6 +171,7 @@ export default {
   'wie {name}': 'as {name}',
   'Rechte wie {name}': 'permissions of {name}',
   'ganzer Sub-Account': 'whole sub-account',
+  'nur lesen': 'read only',
   Widerrufen: 'Revoke',
   'Ausgehende Webhooks': 'Outgoing webhooks',
   'Jedes Ereignis (contact.created, form.submitted, appointment.booked …) als JSON-POST an deine Adresse.':

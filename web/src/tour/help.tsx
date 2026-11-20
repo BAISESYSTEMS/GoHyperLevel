@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useT } from '../i18n';
 import { Icon } from '../icons';
 import { useSession } from '../session';
 import { navigate, useRoute } from '../ui';
@@ -122,6 +123,7 @@ export function HelpButton() {
 
 /** A clear hint while you are in the practice sub-account. */
 export function SandboxBanner() {
+  const t = useT('onboarding');
   const session = useSession();
   const academy = useAcademy();
   if (!academy?.sandbox || academy.sandbox.id !== session.locationId) return null;
@@ -129,7 +131,7 @@ export function SandboxBanner() {
     <div className="sandbox-banner" data-tour="sandbox-banner">
       <Icon name="academy" size={16} />
       <span className="grow">
-        <strong>Übungs-Firma:</strong> Hier ist alles erfunden – probier ruhig alles aus.<span className="sb-more"> E-Mails und SMS werden nur gespeichert, nie verschickt.</span>
+        <strong>{t('Übungs-Firma:')}</strong> {t('Hier ist alles erfunden – probier ruhig alles aus.')}<span className="sb-more"> {t('E-Mails und SMS werden nur gespeichert, nie verschickt.')}</span>
       </span>
       <a
         href="/app/academy"
@@ -138,7 +140,7 @@ export function SandboxBanner() {
           navigate('academy');
         }}
       >
-        Zur Akademie
+        {t('Zur Akademie')}
       </a>
     </div>
   );

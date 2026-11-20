@@ -88,11 +88,14 @@ import { TabBar } from './ios/TabBar';
 import { initViewport } from './ios/viewport';
 const { IosLayer } = lazyPages(() => import('./ios/IosLayer'), 'IosLayer');
 import { MountFlag, RootBoundary, StartSpinner } from './boot';
+import { adminHome } from './onboarding/home';
 import { Sidebar } from './theme/Sidebar';
 import { DEPT_OF_ROUTE } from './theme/depts';
 import { loadAppearance, loadPublicAppearance, useLook, useModules } from './theme/store';
-// Einfach-Modus: goal setup for new logins, a banner once for existing ones; the area registry and menu use (web/src/areas).
-const { GoalSetup, GoalBanner } = lazyPages(() => import('./areas/GoalSetup'), 'GoalSetup', 'GoalBanner');
+// Einfach-Modus: the welcome wizard for new logins (goals → data → first success, web/src/onboarding), a banner once for
+// existing ones; the area registry and menu use (web/src/areas).
+const { GoalBanner } = lazyPages(() => import('./areas/GoalSetup'), 'GoalBanner');
+const { FirstRun } = lazyPages(() => import('./onboarding/FirstRun'), 'FirstRun');
 import { registerNav } from './areas/registry';
 import { startNavSession, trackVisit } from './areas/adaptive';
 const { BrowserPhone } = lazyPages(() => import('./pages/Phone'), 'BrowserPhone');
@@ -121,7 +124,8 @@ import { Slot } from './slots';
 import { WerkstattNav } from './werkstatt/Nav';
 import { BoardsNav } from './boards/Nav';
 import { goHome } from './boards/home';
-import { PluginNav, PluginPage } from './werkstatt/PluginFrame';
+import { PluginNav } from './werkstatt/shared';
+const { PluginPage } = lazyPages(() => import('./werkstatt/PluginFrame'), 'PluginPage');
 const { BuildLayer } = lazyPages(() => import('./werkstatt/Build'), 'BuildLayer');
 const { MarktplatzPage } = lazyPages(() => import('./werkstatt/Marktplatz'), 'MarktplatzPage');
 const { WerkstattPage } = lazyPages(() => import('./werkstatt/Werkstatt'), 'WerkstattPage');
@@ -145,9 +149,9 @@ const NAV: (['group', string] | NavItem)[] = [
   ['objects', 'objects', 'Objekte', 'contacts'],
   ['opportunities', 'opportunities', 'Opportunities', 'opportunities'],
   ['sales', 'trophy', 'Vertrieb', 'opportunities'],
-  ['tasks', 'tasks', 'Aufgaben', 'contacts'],
-  ['pm', 'gantt', 'Projektplanung', 'contacts'],
-  ['time', 'schedule', 'Zeiterfassung', 'contacts'],
+  ['tasks', 'tasks', 'Aufgaben', 'tasks'],
+  ['pm', 'gantt', 'Projektplanung', 'tasks'],
+  ['time', 'schedule', 'Zeiterfassung', 'tasks'],
   ['canvas', 'canvas', 'Canvas', 'canvas'],
   ['wiki', 'wiki', 'Wiki', 'wiki'],
   ['office', 'office', 'Office', 'office'],
@@ -276,8 +280,8 @@ function Page({ route, session }: { route: string[]; session: Session }) {
   const t = useT('shell');
   const [p, id] = route;
   const visible = navFor(session).filter((n) => n[0] !== 'group');
-  // The agency lands on the overview of all projects; everyone else in their project.
-  const page = p ?? (session.user.role === 'admin' ? 'agency' : can(session, 'dashboard') ? 'dashboard' : visible[0]?.[0] ?? 'settings');
+  // The agency lands on the overview of all projects (an admin with one company of their own on its dashboard); everyone else in their project.
+  const page = p ?? (session.user.role === 'admin' ? adminHome(session.locations) : can(session, 'dashboard') ? 'dashboard' : visible[0]?.[0] ?? 'settings');
   const entry = NAV.find((n) => n[0] === page && n[0] !== 'group');
   if (entry && !can(session, entry[3]!)) return session.saas?.blocked?.includes(entry[3]!) ? <PlanLocked /> : <p>{t('Kein Zugriff auf diesen Bereich.')}</p>;
   switch (page) {
@@ -451,7 +455,7 @@ function Shell({ session, children }: { session: Session; children: ReactNode })
   const focus = useFocusMode(route);
   // A board that was made the start page opens right after signing in (only on the bare landing page).
   useEffect(() => void goHome(session, route), []); // eslint-disable-line react-hooks/exhaustive-deps
-  const cur = route[0] ?? (session.user.role === 'admin' ? 'agency' : navFor(session).find((n) => n[0] !== 'group')?.[0] ?? 'dashboard');
+  const cur = route[0] ?? (session.user.role === 'admin' ? adminHome(session.locations) : navFor(session).find((n) => n[0] !== 'group')?.[0] ?? 'dashboard');
   // Once the page is up and the browser is idle: the most used pages, so the first click needs no download.
   useEffect(() => whenIdle(() => ['dashboard', 'contacts', 'conversations', 'opportunities', 'calendars', 'tasks'].filter((r) => r !== cur && navFor(session).some((n) => n[0] === r)).forEach(preloadRoute), { delay: 6000 }), []);
   const nav = translateNav(t, navFor(session));
@@ -505,7 +509,7 @@ function Shell({ session, children }: { session: Session; children: ReactNode })
           <UndoLayer key={`undo-${session.locationId}`} />
         </Later>
         <CommandPalette nav={translateNav(t, NAV_ITEMS.filter((n) => modules.visible(n[0]) || n[0] === cur))} />
-        {look.offerProfiles && <GoalSetup />}
+        {look.offerProfiles && <FirstRun />}
         <Deferred>
           <TourLayer />
           <IosLayer userId={session.user.id} />
@@ -542,7 +546,7 @@ function App() {
       void loadBranding(true);
       void loadAppearance();
       // Signed in: fetch the landing page's chunk while the next requests run.
-      preloadRoute(location.pathname.replace(/^\/app\/?/, '').split('/')[0] || (me.user.role === 'admin' ? 'agency' : 'dashboard'));
+      preloadRoute(location.pathname.replace(/^\/app\/?/, '').split('/')[0] || (me.user.role === 'admin' ? adminHome(me.locations) : 'dashboard'));
       // Login policy: admins must set up a second factor before anything else (login-policy module).
       // The person's language (user.lang, else the browser's) – its shell texts load alongside.
       const [gate, saas, hr] = await Promise.all([api.get('/api/auth/gate').catch(() => null), loc ? loadSaasAccount() : null, loc ? loadHrAccess() : null, startSignedIn(me.user, ['shell', 'dashboard'])]);

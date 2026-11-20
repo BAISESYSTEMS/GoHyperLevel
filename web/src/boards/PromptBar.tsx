@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { api } from '../api';
+import { api, ApiError } from '../api';
 import { canRecord, micError, startRecording, transcribe, type RecordingHandle } from '../agent/voice';
 import { Icon } from '../icons';
 import { Link, toastError } from '../ui';
@@ -86,7 +86,8 @@ export function PromptBar({ board, catalogue, call, onUndo, canEdit, wish }: { b
       setCard(null);
     } catch (e) {
       toastError(e);
-      if (/nicht mehr aktuell|abgelaufen|geändert/.test((e as Error).message)) setCard(null);
+      // stale, expired or already applied: the server answers 409 (its text follows the UI language, so not matched)
+      if (e instanceof ApiError && e.status === 409) setCard(null);
     } finally {
       setBusy(false);
     }

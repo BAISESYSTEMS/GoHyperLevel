@@ -123,8 +123,9 @@ describe('accessibility in the code', () => {
     expect(ui).toMatch(/role=\{t\.kind === 'err' \? 'alert' : undefined\}/);
     // the Modal, the command palette and the phone menu share one focus layer: in, Tab trapped, Esc, focus back
     expect(ui).toMatch(/useFocusLayer\(box, onClose\)/);
-    expect(read('web/src/nav.tsx')).toMatch(/useFocusLayer\(box, close, \{ active: show \}\)/);
-    expect(read('web/src/nav.tsx')).toMatch(/role="combobox"[\s\S]*aria-activedescendant/);
+    // (the palette dialog is a lazy chunk of its own – nav-palette.tsx, mounted only while open)
+    expect(read('web/src/nav-palette.tsx')).toMatch(/useFocusLayer\(box, close\)/);
+    expect(read('web/src/nav-palette.tsx')).toMatch(/role="combobox"[\s\S]*aria-activedescendant/);
     expect(read('web/src/main.tsx')).toMatch(/useFocusLayer\(side, \(\) => setOpen\(false\), \{ active: open, first: true \}\)/);
     expect(read('web/src/main.tsx')).toMatch(/aria-expanded=\{open\} aria-controls="side-nav"/);
     // rows opened with Enter show a ring

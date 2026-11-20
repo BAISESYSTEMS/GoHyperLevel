@@ -111,18 +111,3 @@ export function PluginWidgets() {
     </SortableGrid>
   );
 }
-
-/** Menu entries below „Marktplatz“: the pages of the plugins that are on here. */
-export function PluginNav({ cur }: { cur: string[] }) {
-  const plugins = useActivePlugins().filter((p) => p.page);
-  if (!plugins.length) return null;
-  return (
-    <div className="nav-sub" data-tour="plugin-nav">
-      {plugins.map((p) => (
-        <Link key={p.id} to={`plugin/${p.id}`} className={cur[0] === 'plugin' && cur[1] === p.id ? 'on' : ''}>
-          <PluginIcon name={p.page?.icon ?? p.icon} size={15} /> {p.page?.title ?? p.name}
-        </Link>
-      ))}
-    </div>
-  );
-}

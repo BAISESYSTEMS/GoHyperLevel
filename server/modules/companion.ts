@@ -6,7 +6,7 @@ import { boardData } from '../services/boards-data.js';
 import type { BoardSpec } from '../services/boards-model.js';
 import { boardWidgets, type View } from '../services/boards-widgets.js';
 import { briefingSig, collectBriefing, greetingName, type BriefingCore, type Hotspot, type Lang, type NextStep } from '../services/briefing.js';
-import { CHECKIN_INTERVALS, DEFAULT_NAME, checkinDue, cleanName, cleanPrefs, nextCheckin, wakePhraseFor, withPrefDefaults, type CompanionPrefs } from '../services/companion-prefs.js';
+import { CHECKIN_INTERVALS, DEFAULT_NAMES, checkinDue, cleanDefaults, cleanName, cleanPrefs, defaultName, nextCheckin, wakePhraseFor, withPrefDefaults, type AssistantDefaults, type CompanionPrefs } from '../services/companion-prefs.js';
 import { noInventedNumbers, sourceOf, validateTiles } from '../services/focus-compose.js';
 import { callRoute } from '../services/route-call.js';
 import { backgroundCtx, userFromRow } from './agent.js';
@@ -17,9 +17,12 @@ import { PUSH_KINDS } from './push.js';
 
 /**
  * Fokus-Modus mit Companion (docs/living-boards.md#fokus-modus-mit-companion): the person's companion – the built-in HyperLevel
- * Agent as "Jarvis" or one of their custom agents – and its proactive check-ins.
+ * Agent under the assistant's name (own choice → sub-account default → agency default → "Assistent"/"Assistant") or one of their
+ * custom agents – and its proactive check-ins.
  *
- *   GET/PUT /api/companion/prefs          own choices per sub-account (agent, name, wake phrase, shortcut, voice, check-ins)
+ *   GET/PUT /api/companion/prefs          own choices per sub-account (agent, name, avatar, tone, wake phrase, shortcut, voice, check-ins)
+ *   GET/PUT /api/companion/defaults       the sub-account's default name and avatar (PUT: admins and people with the settings area)
+ *   GET/PUT /api/companion/agency-defaults the agency's default name and avatar (admins)
  *   GET     /api/companion/briefing       "Was brennt?": Brennpunkte, next steps and their tiles, read with the caller's rights
  *   GET     /api/companion/checkins       own check-ins (newest first, ?unseen=1 = only unseen), kept 30 days
  *   GET     /api/companion/checkins/:id   one check-in with its tiles read again (live numbers, current rights)
@@ -109,6 +112,15 @@ export const companionModule: Module = {
       CREATE INDEX companion_checkins_user ON companion_checkins(user_id, location_id, created_at);
       `,
     ],
+    [
+      '002-defaults',
+      `
+      CREATE TABLE companion_defaults (
+        location_id TEXT PRIMARY KEY REFERENCES locations(id) ON DELETE CASCADE,
+        data TEXT NOT NULL DEFAULT '{}', updated_at TEXT NOT NULL
+      );
+      `,
+    ],
   ],
   register(app) {
     const { db, router } = app;
@@ -144,16 +156,44 @@ export const companionModule: Module = {
         return null;
       }
     };
-    const nameOf = (p: CompanionPrefs, u: User, loc: string) => p.name || agentOf(p, u, loc)?.name || DEFAULT_NAME;
+    // --- defaults: the sub-account's and the agency's name and avatar for everyone who has not chosen ------------------------
+    const AGENCY_KEY = 'companion_defaults';
+    const json = (raw: string | undefined): unknown => {
+      try {
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    };
+    const agencyDefaults = (): AssistantDefaults => cleanDefaults(json(db.get<{ value: string }>('SELECT value FROM agency_settings WHERE key = ?', AGENCY_KEY)?.value));
+    const locDefaults = (loc: string): AssistantDefaults => cleanDefaults(json(db.get<{ data: string }>('SELECT data FROM companion_defaults WHERE location_id = ?', loc)?.data));
+    /** The name and avatar of the built-in agent for someone who chose nothing: sub-account → agency → neutral by language. */
+    const baseOf = (u: User | null, loc: string): AssistantDefaults => {
+      const l = locDefaults(loc);
+      const a = agencyDefaults();
+      return { name: l.name || a.name || defaultName(u ? langOf(u) : 'de'), avatar: l.avatar || a.avatar };
+    };
+    const mayDefault = (u: User) => u.role === 'admin' || !u.permissions || u.permissions.includes('settings');
+    const nameOf = (p: CompanionPrefs, u: User, loc: string) => p.name || agentOf(p, u, loc)?.name || baseOf(u, loc).name;
+    /** The built-in agent's name for this person (the agent panel, its system prompt) – a custom companion agent does not rename it. */
+    app.services.assistantName = (u: User | null | undefined, loc: string): string => {
+      if (!u) return baseOf(null, loc).name;
+      return prefsOf(u.id, loc).name || baseOf(u, loc).name;
+    };
+    app.services.assistantAvatar = (u: User | null | undefined, loc: string): string => (u ? prefsOf(u.id, loc).avatar : '') || baseOf(u ?? null, loc).avatar;
     const prefsOut = (u: User, loc: string) => {
       const p = prefsOf(u.id, loc);
       const agent = agentOf(p, u, loc);
       const name = nameOf(p, u, loc);
+      const base = baseOf(u, loc);
       const row = rowOf(u.id, loc);
       const next = nextCheckin(p.checkin, { now: new Date(), tz: tzOf(loc, p), lastAt: row?.last_eval_at ?? null });
       return {
         prefs: p,
         name,
+        /** what an empty name means for this person right now (the settings' placeholder) */
+        default_name: agent?.name || base.name,
+        avatar: p.avatar || (agent ? agent.emoji : base.avatar || '✨'),
         wake_phrase: p.wake_phrase || wakePhraseFor(name),
         agent: agent ?? { id: null, name: 'HyperLevel Agent', emoji: '✨' },
         agent_missing: !!p.agent_id && !agent,
@@ -192,16 +232,42 @@ export const companionModule: Module = {
       return prefsOut(u, ctx.locationId);
     });
 
-    // The HyperLevel Agent knows when it speaks as the companion in focus mode (short, spoken answers; confirmations stay on screen).
+    // The defaults of the sub-account (people with the settings area) and of the agency (admins): name and avatar.
+    const defaultsOut = (u: User, loc: string) => ({ ...locDefaults(loc), agency: agencyDefaults(), builtin: DEFAULT_NAMES, may_edit: mayDefault(u), may_edit_agency: u.role === 'admin' });
+    router.get('/api/companion/defaults', 'location', (ctx) => defaultsOut(person(ctx), ctx.locationId));
+    router.put('/api/companion/defaults', 'location', (ctx) => {
+      const u = person(ctx);
+      if (!mayDefault(u)) throw new HttpError(403, 'Den Standard für alle legen Admins und Personen mit Zugriff auf die Einstellungen fest.');
+      const next = cleanDefaults(ctx.body ?? {}, locDefaults(ctx.locationId));
+      db.run('INSERT INTO companion_defaults (location_id, data, updated_at) VALUES (?, ?, ?) ON CONFLICT(location_id) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at', ctx.locationId, JSON.stringify(next), now());
+      return defaultsOut(u, ctx.locationId);
+    });
+    router.get('/api/companion/agency-defaults', 'admin', () => agencyDefaults());
+    router.put('/api/companion/agency-defaults', 'admin', (ctx) => {
+      const next = cleanDefaults(ctx.body ?? {}, agencyDefaults());
+      db.run('INSERT INTO agency_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value', AGENCY_KEY, JSON.stringify(next));
+      return next;
+    });
+
+    // The HyperLevel Agent knows the name the person gives it and the tone they want (chat and focus); in focus mode it speaks as the
+    // companion (short, spoken answers; confirmations stay on screen).
+    const TONE_LINE: Record<string, string> = {
+      casual: 'Ton: locker und persönlich – du duzt die Person, kurze Sätze, gern mit einem freundlichen Wort.',
+      formal: 'Ton: förmlich und sachlich – du siezt die Person, keine Umgangssprache.',
+    };
     app.services.agentPromptExtras = [
       ...(app.services.agentPromptExtras ?? []),
       (i: { user: User; locationId: string; automatic: boolean; source?: string }) => {
-        if (i.automatic || i.source !== 'focus') return '';
-        const name = cleanName(nameOf(prefsOf(i.user.id, i.locationId), i.user, i.locationId), 40);
+        if (i.automatic || !i.user?.id) return '';
+        const p = prefsOf(i.user.id, i.locationId);
+        const name = cleanName(nameOf(p, i.user, i.locationId), 40);
+        const tone = TONE_LINE[p.tone] ?? '';
+        if (i.source !== 'focus') return tone ? ['# Ton', tone].join('\n') : '';
         return [
           '# Fokus-Modus mit Companion',
           `Die Person spricht mit dir im Fokus-Modus – oft per Sprache – und hört deine Antwort vorgelesen. Sie nennt dich „${name}“. Antworte kurz und gesprochen: ein bis drei Sätze, ohne Tabellen und lange Aufzählungen, außer sie bittet um Details.`,
           'Änderungen, Versand, Löschen und Zahlungen laufen weiter über die Bestätigungskarte auf dem Bildschirm: sag in einem Satz, was du vorbereitest, und behaupte nie, etwas sei erledigt, bevor das Werkzeug es gemeldet hat. Eine gesprochene Zustimmung ist keine Bestätigung.',
+          ...(tone ? [tone] : []),
         ].join('\n');
       },
     ];
@@ -269,7 +335,7 @@ export const companionModule: Module = {
       // an agency key's stand-in user is no person: no name, no personal companion settings
       const u = ctx.viaApiKey ? undefined : ctx.user;
       const core = await collectBriefing(app, ctx, { lang: o.lang, now: o.now, name: firstName(u, ctx.viaApiKey) });
-      const name = u ? nameOf(prefsOf(u.id, ctx.locationId), u, ctx.locationId) : DEFAULT_NAME;
+      const name = u ? nameOf(prefsOf(u.id, ctx.locationId), u, ctx.locationId) : baseOf(null, ctx.locationId).name;
       const ai = o.ai && u ? await phrase(ctx, core, { lang: o.lang, name, first: firstName(u) }) : null;
       return { ...core, say: ai?.say || core.say, tip: ai?.tip ?? '', source: ai ? 'ai' : 'rules', tiles: o.tiles === false ? [] : await tilesFor(ctx, core.hotspots, o.lang), at: now() };
     };

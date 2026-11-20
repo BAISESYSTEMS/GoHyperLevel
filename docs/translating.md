@@ -38,6 +38,7 @@ language. The [roadmap](roadmap.md) lists what comes next.
 | Social planner: calendar, list, composer, statistics, connecting channels | `pages/Social.tsx` | `social` |
 | Wiki and team chat, with their emoji menu, embeds and record picker | `pages/Wiki*.tsx`, `pages/TeamChat.tsx`, `pages/Chat*.tsx`, `pages/CollabKit.tsx` | `collab` |
 | Courses: course editor, students, discussion, reviews, cohorts, analytics, video library, learning paths, member-area settings, the course workflow step, a contact's courses | `pages/Courses.tsx`, `pages/CourseTabs.tsx`, `pages/CourseVideo.tsx`, `pages/CoursePaths.tsx` | `courses` |
+| The *Akademie* page (tour cards, complete guide, badges, practice company), the handbook in the UI language and the guides from `docs/` (a German page opens its English twin); tour titles, summaries, groups and the complete guide come from the handbook's lines in `tour/handbook.en.ts` | `pages/Academy.tsx`, `tour/docs.tsx`, `tour/catalog.ts#badges` | `academy` |
 
 `core` also gained what several areas share: the charts (`charts/*`), the QR code dialog, the *Aufs Canvas* button
 of record pages, the opened/clicked note of e-mails, the *Konto anlegen ↗* links next to provider key fields, and the
@@ -46,9 +47,9 @@ uploads browser, image picker and Markdown editor of the blog and course editors
 **Still German** (they fall back cleanly – a missing translation shows the German text, never a raw key): every other
 page – among them the community, calls and the phone system, accounting, inventory, HR, the AI and video studios,
 SaaS/agency and the integrations pages –, the panels other areas render inside the translated pages (e.g. mailbox
-and channel settings, the legal panels of an invoice), the guided tours and the *Akademie*, the handbook,
+and channel settings, the legal panels of an invoice), the guided tours themselves (the tour bubble, the *?* help menu, the handover status and the steps of the module tours),
 server-rendered public pages (booking pages, forms, funnels, invoice, portal and course member pages), e-mails the
-server sends, and the server's own messages apart from the generic ones above. Texts that come from the server as
+server sends, and the server's messages to other clients (API keys, MCP, scripts). Texts that come from the server as
 data stay German as well: the line "Anna hat zugewiesen …" in the inbox timeline, the undo journal's labels, the
 names and descriptions in the workflow trigger/action catalogue, the starter templates of the email, form and site
 galleries, and default names and starter content the server stores with new records (a new course's first module
@@ -118,8 +119,12 @@ export default {
   runtime adds about 1.5 KB gzip to the first download; all English catalogs together are about 24 KB gzip, split by
   area. A language switch loads every namespace on screen first and then re-renders everything at once.
 - `<html lang>` follows the language.
-- The server keeps answering in German. Where the app shows a server message (toasts, page errors, the login card),
-  `serverText()` replaces the common generic ones with the `errors` catalog.
+- The web app sends its language with every request (header `x-pghl-lang`). For `en`, the server translates the text of
+  every error answer (`{ error: … }`) with `server/i18n/errors-en.ts` before sending it; other clients (API keys, MCP,
+  scripts) keep the German text. Keys are the German messages; `{v0}`, `{v1}` … stand for the values of a template
+  literal and are translated too when they are known texts such as field names. A message whose values stay German
+  is left entirely German rather than mixed. `serverText()` still maps the common generic ones with the `errors`
+  catalog, so nothing changes for messages the dictionary does not know.
 
 Labels kept in constants (menu entries in `main.tsx`, status maps, tab lists) stay German in the code and are
 translated where they are shown, e.g. `t(STATUS_LABEL[s])`. Their German text must then be in the catalog – the

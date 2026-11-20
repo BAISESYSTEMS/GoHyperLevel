@@ -1,4 +1,4 @@
-# Appearance: themes, accent, department colours, sidebar, icons, logos
+# Appearance: themes, accent, department colours, window style, sidebar, icons, logos
 
 HyperLevel's look is data. A person picks it under **Einstellungen → Darstellung**, the agency sets defaults (and
 locks) under **Agentur → White-Label**, and nothing in a page component knows about any of it: everything
@@ -14,12 +14,13 @@ goes through CSS custom properties and a handful of attributes on `<html>`.
 | CSS variable generation | `web/src/theme/css.ts` |
 | Store, cache, apply | `web/src/theme/store.ts`, `web/public/theme-boot.js` |
 | All styling that uses the variables | `web/src/theme/theme.css` |
+| Stil & Fenster (presets, cards and windows, typeface, sidebar/top bar style, background) | `web/src/theme/look.ts`, `look.css`, `LookStyle.tsx` – [Stil & Fenster](#stil--fenster) |
 | Sidebar (logo, rail, flyouts, hidden entries) | `web/src/theme/Sidebar.tsx` |
 | Pages | `web/src/theme/Appearance.tsx`, `Profiles.tsx`, `BrandingLook.tsx` |
 | Hand-made icon pack | `web/src/theme/packs/solid.ts` |
 | Raum-Modus (tokens, stylesheet, detection) | `web/src/xr/*`, [xr.md](xr.md) |
 | Own order of tiles and cards (rules, drag & drop, store) | `server/services/tile-order.ts`, `web/src/sortable/*` – [Kacheln sortieren](#kacheln-sortieren) |
-| Tests | `tests/theme.test.ts`, `tests/appearance.test.ts`, `tests/xr-spatial.test.ts`, `tests/tile-order.test.ts` |
+| Tests | `tests/theme.test.ts`, `tests/appearance.test.ts`, `tests/look.test.ts`, `tests/xr-spatial.test.ts`, `tests/tile-order.test.ts` |
 
 ## What people can choose
 
@@ -36,7 +37,9 @@ paint fast):
   tabs on a department's pages.
 - **Sidebar**: full or icons only (Ctrl/⌘+B). On phones the drawer stays.
 - **Icon pack**: Linien, Fein, Kräftig, Eckig, Duotone, Gefüllt.
-- **Density** (kompakt / normal / komfortabel) and **font size** (klein / normal / groß).
+- **Stil & Fenster**: one-click presets and fine-tuning of cards and windows, corners, shadows, borders, typeface,
+  sidebar and top bar style and the app background (also an own picture) – see [Stil & Fenster](#stil--fenster).
+- **Density** (kompakt / normal / komfortabel) and **font size** (klein / normal / groß / sehr groß).
 - **Raum-Modus** (Automatisch / An / Aus): the spatial UI for headsets and display glasses – large targets, glass surfaces, a type scale for
   eyes + pinch. Its colours are theme tokens (`--sp-*`, `web/src/xr/tokens.ts`, checked for contrast in every theme) and its stylesheet loads only
   while `data-spatial="1"` is on the root; the store then also sets `data-density="comfortable"`. Never locked by an agency. See [xr.md](xr.md).
@@ -60,8 +63,9 @@ not answer yet), and it is available in the Akademie and on the Darstellung page
 Simple by default, powerful on demand. The rules are pure data in `server/services/areas-model.ts`, shared by the server
 and the web app; the web side lives in `web/src/areas/`.
 
-- **Goal setup "Was willst du tun?"** – a new login picks one or more goals: *Leads & Vertrieb*, *Kurse & Community*,
-  *Agentur*, *Rechnungen & Büro* or *Alles*. Skipping (✕, Esc, "Später") applies *Leads & Vertrieb*. Existing logins see a
+- **Goal setup "Was willst du tun?"** – the first step of the welcome wizard (`web/src/onboarding/FirstRun.tsx`): a new
+  login picks one or more goals: *Leads & Vertrieb* (preselected), *Kurse & Community*, *Agentur*, *Rechnungen & Büro* or
+  *Alles*. Skipping that step ("Überspringen", ✕, Esc) keeps the whole menu (*Alles*). Existing logins see a
   dismissible banner once ("Neu: Einfach-Modus") with "Ziele wählen" and "Alles behalten". The goals can be changed at any
   time in the first card of Einstellungen → Darstellung. An agency that sets `goals` in its defaults
   (`PATCH /api/agency/branding/look`) decides for its clients, who then skip the setup; the lock *Sichtbare Bereiche* covers
@@ -70,9 +74,14 @@ and the web app; the web side lives in `web/src/areas/`.
   Kalender, Aufgaben, Akademie (so new logins always find the guided tours) plus the areas of the goals. Everything else is under **Mehr**, a searchable panel with a one-line
   description per area, where areas can be pinned into the menu or moved under "Mehr". Einstellungen stays pinned at the
   bottom. *Alles* (or no goals) keeps the classic full menu. Hidden areas and permissions still apply on top.
-- **Promotion by use** – each visit of an area is counted per person (not per sub-account). An area under "Mehr" opened at
-  least three times in 14 days moves into the menu at the **next session start**, never while someone works; the counts are
-  read once per browser session. Areas the person moved under "Mehr" themselves are never promoted.
+- **Predictable menu (since 1.0.73)** – the menu only changes when the person pins or unpins an area. Each visit of an area is
+  counted per person (not per sub-account); an area under "Mehr" opened at least three times in 14 days is only **suggested**
+  at the top of the "Mehr" panel (*Oft genutzt – anheften?*), it never moves into the menu by itself (until 1.0.72 it did, at the
+  next session start). Areas the person moved under "Mehr" themselves are never suggested. A page opened from "Mehr" shows in
+  one fixed place above the "Mehr" button with a pin – the list itself does not shift any more.
+- **Favoriten** – ☆ next to any page or settings section in Strg/⌘+K (or *Diese Seite als Favorit anheften* there for the open
+  page, deep links included) pins it at the top of the sidebar, in every menu mode; × next to a favourite removes it. Kept in
+  this browser per login (`localStorage`).
 - **Profi-Funktionen** – `PRO_FEATURES` names expert fields (invoice details, website pro tools, team inbox views, contact
   pro tools) that are hidden in Einfach-Modus until switched on; the preference is `pro`. Outside Einfach-Modus nothing is
   hidden.
@@ -220,11 +229,48 @@ loading with the app, and the tiles show in their natural order until it is ther
 then, so no iframe is mounted twice). Tables, kanban boards, Living Boards
 and custom report dashboards keep their own arranging.
 
+## Stil & Fenster
+
+How windows, cards, bars and the background look – independent of the colours (the theme). **Seven presets** set every
+style key at once (*Standard, Minimal, Klassisch, Weich, Glas, Redaktion, Kantig*); colours, density and font size stay.
+Below them the fine-tuning:
+
+| Key | Values | |
+| --- | --- | --- |
+| `surface` | `standard` · `flat` · `classic` · `soft` · `glass` · `brutal` | the character of cards and windows; `standard` is the look before this feature |
+| `radius` · `shadow` · `border` | `auto` + fixed steps | `auto` takes what the surface suggests (`SURFACE_DEFAULTS`) |
+| `typeface` | `system` · `modern` · `humanist` · `geometric` · `rounded` · `serif` · `mono` | font stacks of fonts the systems bring – nothing is downloaded (the CSP allows no font hosts) |
+| `side_style` | `solid` · `floating` · `blend` | floating: a rounded panel with a shadow (from 600 px); blend: the page colours, only a line apart |
+| `header` | `solid` · `clear` · `glass` · `floating` | glass and floating from 600 px (below, the bar is not sticky) |
+| `backdrop` | `plain` · `gradient` · `aurora` · `dots` · `grid` · `image` | behind the pages and a floating or seamless sidebar |
+| `backdrop_image` | `''` or `/uploads/<20 chars>.jpg\|png\|webp` | the own picture; kept when another background is picked, presets leave it alone |
+
+Everything is CSS variables in the generated theme sheet (`styleVars` in `look.ts`, added by `css.ts`): `--r-card --r-ctl
+--r-btn --r-pop` (radii), `--sh-card --sh-pop --sh-side` (shadows), `--bd-w --bd-c` (card border), `--surface` (card
+background, translucent for glass), `--font-ui`, `--backdrop --backdrop-size --backdrop-blend`. The structural parts key on
+`html[data-surface|data-side-style|data-header|data-backdrop]` in `look.css` (imported at the top of `theme.css`, so it
+overrides `styles.css` but loses to component rules). A component that draws its own card gets every style for free by
+using these variables. The boot script sets the attributes too, so the first paint has the right shapes.
+
+Rules that keep it safe:
+
+- **Readable on every background.** The gradients mix the accent into the page at `--tint-a`: the largest share up to
+  12 % that keeps text and muted text ≥ 4.5:1 on the strongest spot (`backdropTint`). Glass cards are 76 % panel; the
+  contrast on them is checked for every theme, mode and a set of accents (`tests/look.test.ts`).
+- **An own picture** is re-encoded in the browser (JPEG, ≤ 2400 px, photo metadata gone) and uploaded with
+  `POST /api/appearance/backdrop` (JPEG/PNG/WebP ≤ 4 MB, content checked, no SVG, stored under `/uploads`, not in a
+  sub-account's media). It is drawn under a *blended* veil instead of plain transparency: on a light page with `screen`
+  (the picture can only get lighter than the veil), on a dark page with `multiply` (only darker). The veil is the page
+  colour moved as far towards black/white as text and muted text allow (`imageVeil`), so any photo stays readable.
+- **No `backdrop-filter` on cards or bars.** Dialogs render inside cards (`position: fixed`, no portal) and a filter on
+  an ancestor would trap them; the frosted top bar blurs through a `::before` behind its content.
+- Agencies set all of it as a default per client and lock it as one group (*Stil & Fenster*).
+
 ## Agency defaults, locks and per-client overrides
 
 *Agentur → White-Label* has the logos (see below) and **Standard-Darstellung der Logins**: a default for every
 setting above and a lock per group (*Theme und Hell/Dunkel, Akzentfarbe, Bereichsfarben, Seitenleiste,
-Icon-Pack, Dichte und Schrift, Sichtbare Bereiche*). A locked group cannot be changed by client logins; the
+Icon-Pack, Dichte und Schrift, Stil & Fenster, Sichtbare Bereiche*). A locked group cannot be changed by client logins; the
 server answers 403 (`Von deiner Agentur festgelegt: …`). **Agency admins are never locked.** Under
 *Agentur → Kunden → Branding* each client can override the defaults and open or close locks (`Wie Agentur`
 inherits).
@@ -244,6 +290,7 @@ theme *HyperLevel Standard*; other themes keep their own accent unless a default
 | `GET/PATCH /api/agency/branding/look` | admin | agency defaults and locks |
 | `GET/PATCH /api/agency/locations/:id/branding/look` | admin | client overrides |
 | `POST /api/agency/branding/logo` | admin | logo/mark/favicon upload (below) |
+| `POST /api/appearance/backdrop` | user | own background picture `{ name, data }` (data: URL) → `{ url }` for `backdrop_image` |
 
 ## Logos, marks, favicon, app name
 

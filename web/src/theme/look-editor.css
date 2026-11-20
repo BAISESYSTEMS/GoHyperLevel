@@ -1,0 +1,50 @@
+/* Darstellung → Stil & Fenster (LookStyle.tsx, BrandingLook.tsx): the editor's styles, loaded with the settings page.
+   The look itself – the variables every page uses – is look.css. */
+/* ---- Darstellung → Stil & Fenster: presets with mini windows, fine-tuning ---- */
+.lk-presets { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+.lk-preset { text-align: left; font: inherit; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 7px; }
+.lk-preset:hover:not(:disabled) { border-color: var(--brand-ring); }
+.lk-preset.on { border-color: var(--brand-ring); box-shadow: 0 0 0 2px var(--brand-ring); }
+.lk-preset:disabled { opacity: .55; cursor: not-allowed; }
+.lk-preset-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.lk-preset .muted { line-height: 1.35; }
+
+/* a tiny app window in a style: every value comes from the inline variables of styleVars() */
+.lk-mini { display: grid; grid-template-columns: 27% 1fr; height: 104px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background-color: var(--bg); background-image: var(--backdrop); background-size: var(--backdrop-size); background-blend-mode: var(--backdrop-blend); background-position: center; font-family: var(--font-ui); position: relative; }
+.lk-side { background: var(--lk-side); padding: 8px 5px; display: flex; flex-direction: column; gap: 5px; }
+.lk-side i { display: block; height: 5px; border-radius: min(var(--r-btn), 3px); background: var(--lk-side-text); opacity: .45; }
+.lk-side i.on { background: var(--brand); opacity: 1; }
+.lk-mini[data-side='floating'] .lk-side { margin: 5px 0 5px 5px; border-radius: calc(var(--r-card) / 2 + 2px); box-shadow: var(--sh-side); }
+.lk-mini[data-side='blend'] .lk-side { background: transparent; border-right: 1px solid var(--line); }
+.lk-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; padding-bottom: 7px; }
+.lk-head { height: 17px; display: flex; align-items: center; justify-content: space-between; padding: 0 7px; background: var(--panel); border-bottom: 1px solid var(--line); color: var(--text); font-size: 10px; font-weight: 700; }
+.lk-head i { display: block; width: 40%; height: 5px; border-radius: 3px; background: var(--line); }
+.lk-mini[data-head='clear'] .lk-head { background: transparent; border-bottom-color: transparent; }
+.lk-mini[data-head='glass'] .lk-head { background: color-mix(in srgb, var(--panel) 65%, transparent); border-bottom-color: color-mix(in srgb, var(--line) 60%, transparent); }
+.lk-mini[data-head='floating'] .lk-head { margin: 5px 6px 0; border: 1px solid var(--line); border-radius: calc(var(--r-card) / 2); box-shadow: var(--sh-side); }
+.lk-cards { display: grid; grid-template-columns: 1.4fr 1fr; gap: 6px; padding: 0 7px; flex: 1; min-height: 0; }
+.lk-card { background: var(--surface); border: var(--bd-w) solid var(--bd-c); border-radius: calc(var(--r-card) / 2); box-shadow: var(--sh-card); padding: 6px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.lk-card b { display: block; height: 5px; width: 60%; border-radius: 2px; background: var(--text); }
+.lk-card u { display: block; height: 4px; width: 85%; border-radius: 2px; background: var(--muted); opacity: .7; }
+.lk-btn { height: 10px; width: 34%; margin: 0 7px; border-radius: min(var(--r-btn), 5px); background: var(--brand); }
+.lk-mini[data-surface='brutal'] .lk-btn { border: 1.5px solid var(--text); box-shadow: 1.5px 1.5px 0 var(--text); }
+
+.lk-tune { display: grid; gap: 14px; margin-top: 16px; }
+.lk-tune > div > .small { margin-bottom: 5px; }
+.lk-surfaces { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.lk-surface { text-align: left; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+.lk-surface.on { border-color: var(--brand-ring); box-shadow: 0 0 0 2px var(--brand-ring); }
+.lk-surface:disabled { opacity: .55; cursor: not-allowed; }
+.lk-sample { height: 34px; background: var(--surface); border: var(--bd-w) solid var(--bd-c); border-radius: calc(var(--r-card) * .75); box-shadow: var(--sh-card); margin: 2px 6px 6px 0; }
+.lk-backdrops { display: flex; flex-wrap: wrap; gap: 8px; }
+.lk-backdrop { font: inherit; color: var(--text); width: 104px; height: 64px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; display: flex; align-items: flex-end; padding: 5px 7px; font-size: var(--fs-small); font-weight: 600; background-color: var(--bg); background-image: var(--backdrop); background-size: var(--backdrop-size); background-blend-mode: var(--backdrop-blend); background-position: center; }
+.lk-upload { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.lk-upload label { position: relative; }
+.lk-upload label:focus-within { outline: 2px solid var(--brand-ring); outline-offset: 2px; }
+.lk-upload label[aria-disabled='true'] { opacity: .55; cursor: not-allowed; }
+.lk-upload input[type='file'] { position: absolute; inset: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.lk-thumb { display: inline-block; width: 64px; height: 40px; border-radius: 8px; border: 1px solid var(--line); background-size: cover; background-position: center; }
+.lk-backdrop.on { border-color: var(--brand-ring); box-shadow: 0 0 0 2px var(--brand-ring); }
+.lk-backdrop:disabled { opacity: .55; cursor: not-allowed; }
+@media (max-width: 700px) { .lk-presets { grid-template-columns: 1fr 1fr; } .lk-mini { height: 88px; } }
+@media (max-width: 420px) { .lk-presets { grid-template-columns: 1fr; } }

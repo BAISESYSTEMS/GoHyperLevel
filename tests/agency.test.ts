@@ -170,7 +170,7 @@ describe('client logins with permissions', () => {
     t.api.clearCookie();
     expect((await t.api.post('/api/auth/login', { email: 'meier@kunde.de', password: 'kunde1234' })).status).toBe(200);
     t.api.setLocation(meier);
-    expect((await t.api.get('/api/me')).data.user.permissions).toEqual(['funnels', 'contacts']);
+    expect((await t.api.get('/api/me')).data.user.permissions).toEqual(['funnels', 'contacts', 'tasks']); // contacts include tasks & projects
     expect((await t.api.get('/api/funnels')).status).toBe(200);
     expect((await t.api.get('/api/contacts')).status).toBe(200);
     expect((await t.api.get('/api/tags')).status).toBe(200); // lookup
