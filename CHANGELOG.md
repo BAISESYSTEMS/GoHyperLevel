@@ -6,6 +6,14 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.75] – 2026-11-22
+
+### Added
+- **MCP-Kompaktmodus:** `/mcp?tools=compact` (oder Header `x-mcp-tools: compact`) zeigt nur `ghl_search` und `ghl_execute` statt über 350
+  Werkzeugen – rund 1,4 KB statt 337 KB Werkzeugbeschreibungen im Kontext. Die Suche versteht Deutsch und Englisch, ausgeführt wird mit
+  denselben Rechten, Prüfungen und demselben Protokoll wie beim direkten Aufruf.
+- Englischer Kurs „Run your company with HyperLevel“ (#27, danke @jeffrey-graham).
+
 ## [1.0.74] – 2026-11-15
 
 ### Added

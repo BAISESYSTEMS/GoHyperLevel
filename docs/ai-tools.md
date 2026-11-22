@@ -9,6 +9,10 @@ There are two ways to connect:
 | **API key** | A key per tool and device, created with one click, sent as `Authorization: Bearer …` | Codex CLI and IDE extension, Claude Code, Cursor, scripts |
 | **OAuth** | The app opens the HyperLevel login, you pick the sub-account and allow access – no key to copy | ChatGPT (developer mode connectors), Claude.ai / Claude Desktop custom connectors, `codex mcp login`, Claude Code |
 
+## Less context: compact mode
+
+340+ tool descriptions cost an agent a lot of context before it has done anything. Append `?tools=compact` to the MCP address (`https://<your-domain>/mcp?tools=compact`) and the client sees only two tools: `ghl_search` finds the right tool by keywords (German or English) and returns its schema, `ghl_execute` runs it. Same rights, checks and audit log as a direct call – details in [the API docs](api.md#mcp-server). Works with keys and with OAuth connectors.
+
 ## Where
 
 - **Settings → KI-Werkzeuge** (per sub-account): for everyone with the *Einstellungen* (settings) area – also client logins. Keys created here are always **sub-account keys** (`pghl_…`): they only reach this one sub-account. A client login can never get an agency key.

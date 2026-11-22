@@ -401,6 +401,65 @@ export const TOOLS: Tool[] = [
   },
 ];
 
+const describe = (t: Tool) => ({ name: t.name, title: t.title, description: t.description, inputSchema: t.inputSchema, annotations: { title: t.title, ...t.annotations } });
+
+/** The two tools of the compact mode: find a tool by keyword, then run it by name. */
+export const COMPACT_TOOLS = [
+  {
+    name: 'ghl_search',
+    title: 'Werkzeug suchen',
+    description:
+      'Sucht unter allen HyperLevel-Werkzeugen (CRM, Deals, Aufgaben, Inbox, Rechnungen, Social, Kurse, Buchhaltung …) nach Stichworten, deutsch oder englisch, und liefert die besten Treffer mit Name, Beschreibung und inputSchema. Danach mit ghl_execute ausführen. Für Routen ohne eigenes Werkzeug: ghl_api_routes und ghl_api.',
+    inputSchema: obj({ query: { type: 'string', description: 'Stichworte, z. B. "kontakt anlegen", "invoice", "deal stage"' }, limit: { type: 'integer', minimum: 1, maximum: 20, description: 'Anzahl Treffer (Standard 8)' } }, ['query']),
+    annotations: { title: 'Werkzeug suchen', ...RO },
+  },
+  {
+    name: 'ghl_execute',
+    title: 'Werkzeug ausführen',
+    description: 'Führt ein Werkzeug aus, das ghl_search gefunden hat: tool = Name (z. B. "ghl_upsert_contact"), arguments = Objekt nach dessen inputSchema. Rechte, Prüfungen und Protokoll gelten wie beim direkten Aufruf.',
+    inputSchema: obj({ tool: { type: 'string', description: 'Name des Werkzeugs aus ghl_search' }, arguments: { type: 'object', description: 'Argumente nach dem inputSchema des Werkzeugs' } }, ['tool']),
+    annotations: { title: 'Werkzeug ausführen', readOnlyHint: false, destructiveHint: true, openWorldHint: true },
+  },
+];
+
+const SYNONYMS: Record<string, string[]> = {
+  contact: ['kontakt', 'kunde', 'lead', 'person'], kontakt: ['contact'], kunde: ['contact'], deal: ['opportunit', 'pipeline'], opportunity: ['deal'],
+  invoice: ['rechnung'], rechnung: ['invoice'], task: ['aufgabe', 'todo'], aufgabe: ['task'], message: ['nachricht', 'mail', 'sms'], nachricht: ['message', 'send'],
+  appointment: ['termin', 'calendar', 'booking'], termin: ['appointment', 'calendar'], create: ['anlegen', 'erstellen', 'upsert'], anlegen: ['create', 'upsert'],
+  erstellen: ['create'], list: ['liste', 'alle'], liste: ['list'], delete: ['löschen', 'entfernen'], löschen: ['delete'], update: ['ändern', 'bearbeiten'],
+  ändern: ['update'], send: ['senden', 'schicken'], senden: ['send'], schicken: ['send'], post: ['beitrag', 'social'], beitrag: ['post'], project: ['projekt', 'location'],
+  projekt: ['project'], company: ['firma', 'unternehmen'], firma: ['company'], note: ['notiz'], notiz: ['note'], workflow: ['automation'], automation: ['workflow'],
+};
+const words = (s: string) => s.toLowerCase().split(/[^a-z0-9äöüß]+/).filter((w) => w.length > 1);
+
+/** Ranks tools by keyword hits in name (strongest), title and description; German and English everyday words count for each other. */
+export function searchTools(list: Tool[], query: string, limit = 8) {
+  const terms = words(query);
+  const max = Math.min(20, Math.max(1, Number.isFinite(limit) ? Math.floor(limit) : 8));
+  if (!terms.length) return { total: list.length, hint: 'Stichworte angeben, z. B. "kontakt", "rechnung", "deal"', tools: [] as ReturnType<typeof describe>[] };
+  const scored = list
+    .map((t) => {
+      const name = t.name.toLowerCase();
+      const title = t.title.toLowerCase();
+      const desc = t.description.toLowerCase();
+      let score = 0;
+      let hits = 0;
+      for (const term of terms) {
+        let best = 0;
+        for (const [w, weight] of [[term, 1] as [string, number], ...(SYNONYMS[term] ?? []).map((x): [string, number] => [x, 0.6])]) {
+          best = Math.max(best, ((name.includes(w) ? 6 : 0) + (title.includes(w) ? 3 : 0) + (desc.includes(w) ? 1 : 0)) * weight);
+        }
+        if (best > 0) hits++;
+        score += best;
+      }
+      return { t, score: score * (hits / terms.length) };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || a.t.name.length - b.t.name.length || a.t.name.localeCompare(b.t.name))
+    .slice(0, max);
+  return { total: list.length, tools: scored.map(({ t }) => describe(t)) };
+}
+
 function checkArgs(tool: Tool, args: Json) {
   const req: string[] = tool.inputSchema.required ?? [];
   const missing = req.filter((k) => args[k] === undefined || args[k] === null || args[k] === '');
@@ -627,6 +686,39 @@ export const mcpModule: Module = {
       };
       c.api = (method, path, opts = {}) => relay(method, path, opts);
 
+      // Compact mode (/mcp?tools=compact or header x-mcp-tools: compact): tools/list names only ghl_search and ghl_execute, so a client
+      // spends a few hundred tokens of context instead of the whole catalogue; every tool stays reachable through ghl_execute.
+      const compact = /^(compact|search)$/i.test(String(ctx.query.get('tools') ?? ctx.req.headers['x-mcp-tools'] ?? ''));
+      const visibleTools = async () => [...tools(), ...(await callerTools(c))].filter((t) => c.agency || !t.agencyOnly);
+      const callTool = async (name: string, rawArgs: unknown): Promise<any> => {
+        const own = tools().find((x) => x.name === name);
+        const t = own ?? (name.startsWith('ext_') ? (await callerTools(c)).find((x) => x.name === name) : undefined);
+        if (!t || (!c.agency && t.agencyOnly)) throw new RpcError(-32602, `Unbekanntes Tool: ${name.slice(0, 100)}${compact ? ' – mit ghl_search suchen' : ''}`);
+        let args: Json;
+        try {
+          args = normalizeArgs(t, rawArgs);
+        } catch (e) {
+          throw new RpcError(-32602, (e as Error).message);
+        }
+        checkArgs(t, args);
+        const readToken = own && t.annotations.readOnlyHint ? token(16) : '';
+        if (readToken) readToolTokens.add(readToken);
+        try {
+          // A connection for one sub-account cannot be pointed at another one (also by tools that leave location_id to the key).
+          if (!c.agency && args.location_id !== undefined && args.location_id !== null && args.location_id !== '' && String(args.location_id) !== c.locationId) throw new HttpError(403, 'Dieser Schlüssel gilt nur für einen Sub-Account');
+          const out = await t.run(readToken ? { ...c, api: (method, path, opts = {}) => relay(method, path, opts, readToken) } : c, args);
+          const textOut = JSON.stringify(out ?? { ok: true });
+          const res: any = { content: [{ type: 'text', text: textOut.length > 60_000 ? `${textOut.slice(0, 60_000)}… (gekürzt – Filter/limit nutzen)` : textOut }], isError: false };
+          if (out && typeof out === 'object' && !Array.isArray(out)) res.structuredContent = out;
+          return res;
+        } catch (e) {
+          const status = e instanceof HttpError ? ` (${e.status})` : '';
+          return { content: [{ type: 'text', text: `Fehler${status}: ${(e as Error).message}` }], isError: true };
+        } finally {
+          if (readToken) readToolTokens.delete(readToken);
+        }
+      };
+
       const handleOne = async (msg: any): Promise<any | null> => {
         const isNotification = msg && msg.id === undefined;
         try {
@@ -639,9 +731,11 @@ export const mcpModule: Module = {
                 protocolVersion: PROTOCOL_VERSIONS.includes(wanted) ? wanted : PROTOCOL_VERSIONS[0],
                 capabilities: { tools: { listChanged: false } },
                 serverInfo: { name: 'gohigh', title: app.services.brandName?.() ?? 'HyperLevel', version: APP_VERSION },
-                instructions: c.agency
+                instructions:
+                  (compact ? 'Kompaktmodus: Finde das passende Werkzeug mit ghl_search (Stichworte, z. B. „Kontakt anlegen“) und führe es mit ghl_execute {tool, arguments} aus. ' : '') +
+                  (c.agency
                   ? 'Agentur-CRM: Jedes Projekt ist ein Sub-Account (location_id). Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.'
-                  : `CRM eines einzelnen Sub-Accounts (location_id ${c.locationId}) – andere Sub-Accounts sind mit dieser Verbindung nicht erreichbar. Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.`,
+                  : `CRM eines einzelnen Sub-Accounts (location_id ${c.locationId}) – andere Sub-Accounts sind mit dieser Verbindung nicht erreichbar. Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.`),
               };
               break;
             }
@@ -649,40 +743,38 @@ export const mcpModule: Module = {
               result = {};
               break;
             case 'tools/list':
-              result = {
-                tools: [...tools(), ...(await callerTools(c))]
-                  .filter((t) => c.agency || !t.agencyOnly)
-                  .map((t) => ({ name: t.name, title: t.title, description: t.description, inputSchema: t.inputSchema, annotations: { title: t.title, ...t.annotations } })),
-              };
+              result = { tools: compact ? COMPACT_TOOLS : (await visibleTools()).map(describe) };
               break;
             case 'tools/call': {
               const name = msg.params?.name;
               if (typeof name !== 'string' || !name) throw new RpcError(-32602, 'Tool-Name fehlt (params.name)');
-              const own = tools().find((x) => x.name === name);
-              const t = own ?? (name.startsWith('ext_') ? (await callerTools(c)).find((x) => x.name === name) : undefined);
-              if (!t || (!c.agency && t.agencyOnly)) throw new RpcError(-32602, `Unbekanntes Tool: ${name.slice(0, 100)}`);
-              let args: Json;
-              try {
-                args = normalizeArgs(t, msg.params?.arguments);
-              } catch (e) {
-                throw new RpcError(-32602, (e as Error).message);
+              if (name === 'ghl_search') {
+                let a: Json;
+                try {
+                  a = normalizeArgs({ name, inputSchema: COMPACT_TOOLS[0].inputSchema }, msg.params?.arguments);
+                } catch (e) {
+                  throw new RpcError(-32602, (e as Error).message);
+                }
+                const out = searchTools(await visibleTools(), String(a.query ?? ''), Number(a.limit ?? 8));
+                result = { content: [{ type: 'text', text: JSON.stringify(out) }], structuredContent: out, isError: false };
+                break;
               }
-              checkArgs(t, args);
-              const readToken = own && t.annotations.readOnlyHint ? token(16) : '';
-              if (readToken) readToolTokens.add(readToken);
-              try {
-                // A connection for one sub-account cannot be pointed at another one (also by tools that leave location_id to the key).
-                if (!c.agency && args.location_id !== undefined && args.location_id !== null && args.location_id !== '' && String(args.location_id) !== c.locationId) throw new HttpError(403, 'Dieser Schlüssel gilt nur für einen Sub-Account');
-                const out = await t.run(readToken ? { ...c, api: (method, path, opts = {}) => relay(method, path, opts, readToken) } : c, args);
-                const textOut = JSON.stringify(out ?? { ok: true });
-                result = { content: [{ type: 'text', text: textOut.length > 60_000 ? `${textOut.slice(0, 60_000)}… (gekürzt – Filter/limit nutzen)` : textOut }], isError: false };
-                if (out && typeof out === 'object' && !Array.isArray(out)) result.structuredContent = out;
-              } catch (e) {
-                const status = e instanceof HttpError ? ` (${e.status})` : '';
-                result = { content: [{ type: 'text', text: `Fehler${status}: ${(e as Error).message}` }], isError: true };
-              } finally {
-                if (readToken) readToolTokens.delete(readToken);
+              if (name === 'ghl_execute') {
+                const a = msg.params?.arguments;
+                if (!isPlain(a) || typeof a.tool !== 'string' || !a.tool) throw new RpcError(-32602, 'Parameter „tool“ fehlt (Name aus ghl_search)');
+                if (a.tool === 'ghl_execute' || a.tool === 'ghl_search') throw new RpcError(-32602, 'ghl_execute ruft nur Fach-Tools auf');
+                let inner: unknown = a.arguments ?? {};
+                if (typeof inner === 'string') {
+                  try {
+                    inner = JSON.parse(inner);
+                  } catch {
+                    throw new RpcError(-32602, 'Parameter „arguments“ muss ein Objekt sein');
+                  }
+                }
+                result = await callTool(a.tool, inner);
+                break;
               }
+              result = await callTool(name, msg.params?.arguments);
               break;
             }
             default:
