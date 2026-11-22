@@ -30,7 +30,7 @@ Seiten mit deutscher Fassung öffnen hier auf Deutsch, die übrigen auf Englisch
 ## CRM, Vertrieb & Zusammenarbeit
 
 - [Vertrieb](sales.md) · [Firmen, eigene Objekte & Lead-Scoring](objects.de.md) · [Custom Values](custom-values.md) · [Projekte & Zeiterfassung](projects.md)
-- [Team-Postfach](team-inbox.md) · [Team-Kalender](team-calendars.md) · [Buchungsregeln](booking.md) · [Telefonie](telephony.md) · [Bewertungen](reputation.md)
+- [Team-Postfach](team-inbox.md) · [Team-Kalender](team-calendars.md) · [Buchungsregeln](booking.md) · [A2UI-Termin-Auswahl](a2ui.md) · [Telefonie](telephony.md) · [Bewertungen](reputation.md)
 - [Team-Chat](team-chat.md) · [Live-Zusammenarbeit](collaboration.de.md) · [Wiki](wiki.md) · [Canvas](canvas.md) · [Living Boards](living-boards.md) · [Office](office.de.md) · [XR](xr.md)
 - [Rückgängig, Verlauf & Papierkorb](undo.md)
 

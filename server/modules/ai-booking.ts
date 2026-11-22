@@ -120,10 +120,10 @@ export function splitBooking(raw: string): { rest: Record<string, any>; booking:
 const EMAIL = /^[^@\s<>"]+@[^@\s<>"]+\.[a-z]{2,}$/i;
 const PHONE = /^\+?[\d][\d\s()/-]{4,24}$/;
 const NAME = /^[\p{L}][\p{L}\p{M}' .-]{0,79}$/u;
-const placeholder = (c: Contact) => !c.first_name || c.first_name === 'Website-Besucher';
+export const placeholder = (c: Contact) => !c.first_name || c.first_name === 'Website-Besucher';
 
 /** Fills empty contact fields from what the visitor said (like the KI-Assistent's lead capture: never an e-mail another contact has). */
-function fillLead(app: App, locationId: string, c: Contact, lead: Record<string, unknown>): Contact {
+export function fillLead(app: App, locationId: string, c: Contact, lead: Record<string, unknown>): Contact {
   const s = (k: string) => String(lead?.[k] ?? '').trim();
   const patch: Record<string, string> = {};
   if (s('first_name') && NAME.test(s('first_name')) && placeholder(c)) patch.first_name = s('first_name');
@@ -147,13 +147,15 @@ export async function chatTurn(app: App, o: { locationId: string; contact: Conta
   const schema = withBooking(o.schema);
   let prompt = `${o.prompt}\n\n${slotsBlock(app, cals)}\n\n${BOOKING_TASK}`;
   let last: { text: string; [k: string]: unknown } | null = null;
+  // The day the bot looked up: its answer gets the appointment picker (A2UI, modules/a2ui.ts) so the visitor can tap a time.
+  let pick: { calendar_id: string; date: string } | null = null;
   const tool = (text: string) =>
     (prompt += `\n\n<werkzeug_ergebnis>\n${text}\n</werkzeug_ergebnis>\nAntworte jetzt dem Besucher (booking.action "none" – oder "book", wenn er eine dieser Zeiten bestätigt hat).`);
   for (let round = 0; round < 3; round++) {
     const r = await o.ask(prompt, schema);
     const split = splitBooking(r.text);
     if (!split) return r;
-    last = { ...r, text: JSON.stringify(split.rest) };
+    last = { ...r, text: JSON.stringify(split.rest), ...(pick ? { pick } : {}) };
     const b = split.booking;
     if (!b || b.action === 'none') return last;
     const cal = pickCalendar(cals, b.calendar_id);
@@ -164,6 +166,7 @@ export async function chatTurn(app: App, o: { locationId: string; contact: Conta
     if (b.action === 'check_slots') {
       try {
         tool(checkSlots(app, cal, b.date).text);
+        pick = { calendar_id: cal.id, date: b.date };
       } catch (e) {
         tool((e as Error).message);
       }

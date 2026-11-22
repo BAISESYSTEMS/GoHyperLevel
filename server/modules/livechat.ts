@@ -72,15 +72,18 @@ document.body.appendChild(f);document.body.appendChild(b);})();`;
   </form>
   <form id="f" style="display:flex;gap:6px;padding:10px;border-top:1px solid var(--line)"><input id="t" placeholder="Nachricht…" aria-label="Nachricht" autocomplete="off" required><button aria-label="Senden">➤</button></form>
 </div>
-<style>.m{max-width:80%;padding:8px 11px;border-radius:12px;white-space:pre-wrap;word-break:break-word;font-size:14px}.in{align-self:flex-end;background:var(--brand);color:#fff}.out{align-self:flex-start;background:#fff;border:1px solid var(--line)}</style>
+<style>.m{max-width:80%;padding:8px 11px;border-radius:12px;white-space:pre-wrap;word-break:break-word;font-size:14px}.in{align-self:flex-end;background:var(--brand);color:#fff}.out{align-self:flex-start;background:#fff;border:1px solid var(--line)}.ui{align-self:stretch;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:14px}</style>
+<script src="/a2ui-renderer.js"></script>
 <script>
 var C=${jsonForScript(cfg)},key='pghl_chat_'+C.loc,vis=null,last='';
 try{vis=localStorage.getItem(key)}catch(e){}
 var box=document.getElementById('msgs'),who=document.getElementById('who');
 function add(dir,txt){var d=document.createElement('div');d.className='m '+dir;d.textContent=txt;box.appendChild(d);box.scrollTop=box.scrollHeight}
+async function a2(msg){var r=await fetch('/api/public/chat/'+C.loc+'/a2ui',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({visitor:vis,message:msg})});var j=await r.json().catch(function(){return{}});if(!r.ok)throw new Error(j.error||'Das ging gerade nicht.');return j}
+function ui(msgs){if(!window.HLA2UI)return;var d=document.createElement('div');d.className='ui';box.appendChild(d);window.HLA2UI.mount(d,msgs,{send:function(m){return a2(m).then(function(j){setTimeout(poll,300);return j.messages||[]})},callAgent:function(m){return a2(m).then(function(j){return j.message})}});box.scrollTop=box.scrollHeight}
 add('out',C.greeting);
 if(C.askEmail&&!vis)who.hidden=false;
-async function poll(){if(!vis)return;try{var r=await fetch('/api/public/chat/'+C.loc+'/messages?visitor='+encodeURIComponent(vis)+'&after='+encodeURIComponent(last));var j=await r.json();(j.messages||[]).forEach(function(m){last=m.created_at;add(m.direction==='in'?'in':'out',m.body)})}catch(e){}}
+async function poll(){if(!vis)return;try{var r=await fetch('/api/public/chat/'+C.loc+'/messages?visitor='+encodeURIComponent(vis)+'&after='+encodeURIComponent(last));var j=await r.json();(j.messages||[]).forEach(function(m){last=m.created_at;add(m.direction==='in'?'in':'out',m.body);if(m.ui)ui(m.ui)})}catch(e){}}
 document.getElementById('f').onsubmit=async function(e){e.preventDefault();var t=document.getElementById('t'),txt=t.value.trim();if(!txt)return;t.value='';
 var data={body:txt,visitor:vis,page:C.page,attr:C.attr,ref:C.ref};if(!who.hidden){var fd=new FormData(who);data.name=fd.get('name');data.email=fd.get('email')}
 var r=await fetch('/api/public/chat/'+C.loc+'/messages',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});var j=await r.json();
@@ -120,17 +123,18 @@ poll();setInterval(poll,4000);
       const v = db.get('SELECT * FROM chat_visitors WHERE token = ? AND location_id = ?', String(ctx.query.get('visitor') ?? ''), ctx.params.loc);
       if (!v) return { messages: [] };
       const after = ctx.query.get('after') || '';
-      return {
-        messages: db.all(
-          // Only from this visitor's own start: somebody who types a known address into the widget joins that contact, but never
-          // reads the chats that happened before (docs/security-review-2026-10.md, O-2).
-          `SELECT direction, body, created_at FROM messages WHERE contact_id = ? AND channel = 'chat' AND created_at > ? AND created_at >= ? ORDER BY created_at LIMIT ?`,
-          v.contact_id,
-          after,
-          v.created_at,
-          clampLimit(ctx.query.get('limit'), 200, 500),
-        ),
-      };
+      const rows = db.all<{ id: string; direction: string; body: string; created_at: string }>(
+        // Only from this visitor's own start: somebody who types a known address into the widget joins that contact, but never
+        // reads the chats that happened before (docs/security-review-2026-10.md, O-2).
+        `SELECT id, direction, body, created_at FROM messages WHERE contact_id = ? AND channel = 'chat' AND created_at > ? AND created_at >= ? ORDER BY created_at LIMIT ?`,
+        v.contact_id,
+        after,
+        v.created_at,
+        clampLimit(ctx.query.get('limit'), 200, 500),
+      );
+      // Interfaces under the bot's answers (A2UI 1.0, modules/a2ui.ts), e.g. the appointment picker.
+      const ui: Map<string, unknown[]> = app.services.a2ui?.forMessages(rows.map((r) => r.id)) ?? new Map();
+      return { messages: rows.map(({ id: mid, ...m }) => (ui.has(mid) ? { ...m, ui: ui.get(mid) } : m)) };
     });
 
     router.get('/api/livechat', 'location', (ctx) => {

@@ -266,7 +266,8 @@ busy times, round robin / collective / seats of team calendars) and booking a fr
 
 - **Website chat bot of the [KI-Assistent](ai-assistant.md#booking-appointments):** *KI-Assistent → Live-Chat-Bot → Termine buchen*
   switches it on. The bot gets the free times of the next two weeks, can look up a day and books once the visitor confirmed a
-  time and gave name and e-mail (or phone). Its answer carries the confirmation.
+  time and gave name and e-mail (or phone). Its answer carries the confirmation. After it looked up free times, its answer
+  carries a tappable **appointment picker** ([A2UI](a2ui.md)) that books with one tap.
 - **Agents' auto-replies in every inbox channel** (e-mail, SMS, website chat, WhatsApp, Messenger, Instagram) and the agent chat:
   the agent's safety level **"Termin buchen"** ([agent.md](agent.md#safety-model)) lets it look up free times and book a free
   slot without a click – also after reading the customer's message – while every other change still asks. The reply itself

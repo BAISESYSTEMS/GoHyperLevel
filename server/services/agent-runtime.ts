@@ -281,8 +281,16 @@ export async function execTool(env: RunEnv, state: LoopState, tool: AgentTool, c
     const text = typeof out === 'string' ? out : JSON.stringify(compactResult(out ?? { ok: true }, env.locationId));
     const links = linksFor(tool.name, call.args, out);
     const undo = undoSink.length ? undoSink : undefined;
-    env.emit({ type: 'tool_result', id: call.id, status: 'ok', links, preview: text.slice(0, 2000), undo });
-    return { type: 'tool_result', id: call.id, name: tool.name, content: wrapToolOutput(tool.name, text, untrusted), meta: { status: 'ok', links, title: tool.title, klass, undo } };
+    // An interface for the result (A2UI 1.0, modules/a2ui.ts), e.g. free times as an appointment picker – shown in the chat only,
+    // the model keeps reading the plain result.
+    let ui: unknown[] | undefined;
+    try {
+      ui = env.app.services.a2ui?.toolPicker?.(tool.name, out) ?? undefined;
+    } catch {
+      ui = undefined;
+    }
+    env.emit({ type: 'tool_result', id: call.id, status: 'ok', links, preview: text.slice(0, 2000), undo, ...(ui ? { ui } : {}) });
+    return { type: 'tool_result', id: call.id, name: tool.name, content: wrapToolOutput(tool.name, text, untrusted), meta: { status: 'ok', links, title: tool.title, klass, undo, ...(ui ? { ui } : {}) } };
   } catch (e) {
     const status = e instanceof HttpError || e instanceof AgentError ? ` (${e.status})` : '';
     const msg = (e as Error).message || 'Fehler';

@@ -33,6 +33,7 @@ import { pmCostingModule } from './pm-costing.js';
 import { pmRetainersModule } from './pm-retainers.js';
 import { quoteApprovalsModule } from './quote-approvals.js';
 import { livechatModule } from './livechat.js';
+import { a2uiModule } from './a2ui.js';
 import { dateTriggersModule } from './date-triggers.js';
 import { twofactorModule } from './twofactor.js';
 import { contractsModule } from './contracts.js';
@@ -384,6 +385,7 @@ export const MODULES: Module[] = [
   calendarSyncModule,
   backupsModule,
   livechatModule,
+  a2uiModule,
   dateTriggersModule,
   twofactorModule,
   contractsModule,

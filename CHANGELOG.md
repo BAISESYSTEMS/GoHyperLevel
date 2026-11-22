@@ -6,6 +6,14 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.76] – 2026-11-22
+
+### Added
+- **A2UI-Termin-Auswahl (A2UI 1.0):** Hat der Website-Chat-Bot freie Zeiten nachgesehen, hängt unter seiner Antwort eine
+  Auswahl – freie Zeiten als Chips, Name und E-Mail nur wenn nötig, „Termin buchen“. Beim Antippen fragt der Chat, ob die Zeit
+  noch frei ist; gebucht wird nach denselben Regeln wie beim Bot. Im Assistenten zeigt `ghl_booking_slots` dieselbe Auswahl, die
+  Wahl geht als Nachricht an den Agenten. Eigener, abhängigkeitsfreier Renderer (`/a2ui-renderer.js`), Doku in `docs/a2ui.md`.
+
 ## [1.0.75] – 2026-11-22
 
 ### Added

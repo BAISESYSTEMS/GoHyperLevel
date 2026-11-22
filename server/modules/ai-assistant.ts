@@ -634,14 +634,18 @@ export const aiAssistantModule: Module = {
       const pre = recentReplies >= BOT_HOURLY_CAP ? 'Zu viele Bot-Antworten in dieser Stunde' : handoffBefore(lastText, { keywords: settings.handoff_keywords, botReplies: st.bot_replies, maxReplies: settings.max_bot_replies });
       if (pre) return handoff(locId, conv, contact, pre, settings, lastText);
       let raw: string;
+      let pick: { calendar_id: string; date: string } | undefined;
       try {
         const contactId = contact.id;
         const ask = (user: string, schema: Record<string, unknown>) => runAi({ locationId: locId, purpose: 'chat_bot', user, schema, contactId, conversationId: convId });
         const prompt = `${visitorContext(locId, contact, messages, settings)}\n\n${botTask(settings, missingLead(contact))}`;
         // "Termin buchen" (modules/ai-booking.ts): with calendars released for the AI the bot may look up free times and book one.
-        const turn = app.services.chatBotTurn as undefined | ((o: { locationId: string; contact: Contact; conversationId: string; prompt: string; schema: typeof BOT_SCHEMA; ask: typeof ask }) => Promise<{ text: string }>);
+        const turn = app.services.chatBotTurn as
+          | undefined
+          | ((o: { locationId: string; contact: Contact; conversationId: string; prompt: string; schema: typeof BOT_SCHEMA; ask: typeof ask }) => Promise<{ text: string; pick?: { calendar_id: string; date: string } }>);
         const r = turn ? await turn({ locationId: locId, contact, conversationId: convId, prompt, schema: BOT_SCHEMA, ask }) : await ask(prompt, BOT_SCHEMA);
         raw = r.text;
+        pick = (r as { pick?: { calendar_id: string; date: string } }).pick;
       } catch (e) {
         return handoff(locId, conv, contact, `KI nicht verfügbar: ${(e as Error).message}`, settings, lastText);
       }
@@ -652,7 +656,15 @@ export const aiAssistantModule: Module = {
       if (out.buying_intent) await buyingIntent(locId, conv, contact, out, settings);
       const post = handoffAfter(out, settings.min_confidence);
       if (post) return handoff(locId, conv, contact, post, settings, lastText);
-      await botSay(locId, contact.id, out.reply);
+      const said = await botSay(locId, contact.id, out.reply);
+      // The bot looked up free times: tappable times under its answer (A2UI appointment picker, modules/a2ui.ts).
+      if (pick && said?.id && said.status !== 'failed') {
+        try {
+          app.services.a2ui?.attachChatPicker(locId, { conversationId: convId, messageId: said.id, contact, pick });
+        } catch (e) {
+          console.error('[a2ui] picker', (e as Error).message);
+        }
+      }
       db.run('UPDATE ai_conversations SET bot_replies = bot_replies + 1, updated_at = ? WHERE conversation_id = ?', now(), convId);
     };
 

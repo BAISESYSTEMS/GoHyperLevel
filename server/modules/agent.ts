@@ -938,7 +938,7 @@ export function uiItems(history: Msg[]) {
         const meta = (r?.meta ?? {}) as Record<string, any>;
         const raw = r?.content ?? '';
         const inner = raw.replace(/^<tool_output[^>]*>\n?/, '').replace(/\n?<\/tool_output>$/, '');
-        return { id: c.id, name: c.name, title: meta.title ?? c.name, klass: meta.klass, args: c.args, status: r ? (meta.status ?? (r.isError ? 'error' : 'ok')) : 'pending', links: meta.links ?? [], preview: inner.slice(0, 2000), error: meta.error, undo: meta.undo };
+        return { id: c.id, name: c.name, title: meta.title ?? c.name, klass: meta.klass, args: c.args, status: r ? (meta.status ?? (r.isError ? 'error' : 'ok')) : 'pending', links: meta.links ?? [], preview: inner.slice(0, 2000), error: meta.error, undo: meta.undo, ...(meta.ui ? { ui: meta.ui } : {}) };
       });
     // A call still waiting for its confirmation is shown as the confirmation card, not as a tool card.
     const shown = tools.filter((t) => t.status !== 'pending');

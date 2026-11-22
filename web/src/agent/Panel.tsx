@@ -12,6 +12,7 @@ import { canRecord, micError, onPlaying, speak, speakableText, startRecording, s
 import './agent.css';
 import { useT } from '../i18n';
 import { useCompanion } from '../companion/store';
+import { A2uiView } from '../a2ui/A2uiView';
 
 /**
  * The HyperLevel Agent on every page: a right drawer (full screen on phones and on demand), opened with
@@ -42,6 +43,8 @@ export interface ToolCard {
   error?: string;
   /** What this call changed, as journal entries (modules/undo.ts): the card offers "Rückgängig". */
   undo?: { id: string; label: string; notice?: string }[];
+  /** An interface for the result (A2UI 1.0 messages, e.g. the appointment picker of ghl_booking_slots – docs/a2ui.md). */
+  ui?: Record<string, unknown>[];
 }
 export type Block = { kind: 'text'; text: string } | { kind: 'tools'; tools: ToolCard[] };
 export interface FileRef {
@@ -114,9 +117,9 @@ export function applyEvent(items: Item[], e: AgentEvent): Item[] {
       const b = blocks[i];
       if (b.kind !== 'tools' || !b.tools.some((t) => t.id === e.id)) continue;
       found = true;
-      blocks[i] = { kind: 'tools', tools: b.tools.map((t) => (t.id === e.id ? { ...t, status: e.status, links: e.links ?? t.links, preview: e.preview ?? t.preview, error: e.error ?? t.error, undo: e.undo ?? t.undo } : t)) };
+      blocks[i] = { kind: 'tools', tools: b.tools.map((t) => (t.id === e.id ? { ...t, status: e.status, links: e.links ?? t.links, preview: e.preview ?? t.preview, error: e.error ?? t.error, undo: e.undo ?? t.undo, ui: e.ui ?? t.ui } : t)) };
     }
-    if (!found && e.status) blocks.push({ kind: 'tools', tools: [{ id: e.id, name: e.name ?? 'werkzeug', title: e.name ?? 'Werkzeug', status: e.status, error: e.error, links: e.links, preview: e.preview, undo: e.undo }] });
+    if (!found && e.status) blocks.push({ kind: 'tools', tools: [{ id: e.id, name: e.name ?? 'werkzeug', title: e.name ?? 'Werkzeug', status: e.status, error: e.error, links: e.links, preview: e.preview, undo: e.undo, ui: e.ui }] });
   }
   out[out.length - 1] = { role: 'assistant', blocks };
   return out;
@@ -179,6 +182,20 @@ export function ToolCardView({ t: card, onNavigate }: { t: ToolCard; onNavigate:
         </div>
       )}
       {card.status === 'ok' && (CARD_TOOLS as readonly string[]).includes(card.name) && <WerkstattToolCard t={card} onNavigate={onNavigate} />}
+      {card.status === 'ok' && !!card.ui?.length && (
+        <A2uiView
+          messages={card.ui}
+          onAction={(a) => {
+            if (a.name !== 'choose_slot') return;
+            const m = String(Array.isArray(a.context.slot) ? (a.context.slot[0] ?? '') : (a.context.slot ?? '')).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2})$/);
+            if (!m) return t('Bitte zuerst eine Zeit wählen.');
+            const slot = `${m[3]}.${m[2]}.${m[1]} ${m[4]}`;
+            // The choice goes back to the agent as the person's next message; it then books with ghl_book_appointment.
+            window.dispatchEvent(new CustomEvent('pghl:agent-say', { detail: { text: t('Bitte buche den Termin am {slot} Uhr im Kalender „{calendar}“.', { slot, calendar: String(a.context.calendar ?? '') }) } }));
+            return t('Gewählt: {slot} Uhr', { slot });
+          }}
+        />
+      )}
       {openDetail && (
         <div className="agent-tool-detail">
           <div className="muted small">
@@ -478,6 +495,17 @@ export function AgentPanel() {
       setHistory(null);
     }
   };
+  // A choice in an A2UI card (ToolCardView, e.g. a time of the appointment picker) is sent as the person's next message.
+  const sendRef = useRef(send);
+  sendRef.current = send;
+  useEffect(() => {
+    const say = (e: Event) => {
+      const text = String((e as CustomEvent<{ text?: string }>).detail?.text ?? '').trim();
+      if (text) void sendRef.current(text);
+    };
+    window.addEventListener('pghl:agent-say', say);
+    return () => window.removeEventListener('pghl:agent-say', say);
+  }, []);
 
   const startVoice = async () => {
     const m = micRef.current;

@@ -30,7 +30,7 @@ Pages marked **(DE)** are only available in German for now – translations are 
 ## CRM, sales & teamwork
 
 - [Sales](sales.md) · [Companies, custom objects & lead scoring](objects.md) · [Custom values](custom-values.md) · [Projects & time tracking](projects.md)
-- [Team inbox](team-inbox.md) · [Team calendars](team-calendars.md) · [Booking rules](booking.md) · [Telephony](telephony.md) · [Reputation](reputation.md)
+- [Team inbox](team-inbox.md) · [Team calendars](team-calendars.md) · [Booking rules](booking.md) · [A2UI appointment picker](a2ui.md) · [Telephony](telephony.md) · [Reputation](reputation.md)
 - [Team chat](team-chat.md) · [Live collaboration](collaboration.md) · [Wiki](wiki.md) · [Canvas](canvas.md) · [Living Boards](living-boards.md) · [Office](office.md) · [XR](xr.md)
 - [Undo, history & trash](undo.md)
 

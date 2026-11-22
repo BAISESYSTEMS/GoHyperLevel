@@ -143,4 +143,8 @@ export default {
   Stopp: 'Stop',
   Senden: 'Send',
   schreibt: 'typing',
+  // A2UI appointment picker under ghl_booking_slots
+  'Bitte zuerst eine Zeit wählen.': 'Please pick a time first.',
+  'Bitte buche den Termin am {slot} Uhr im Kalender „{calendar}“.': 'Please book the appointment on {slot} in the calendar “{calendar}”.',
+  'Gewählt: {slot} Uhr': 'Chosen: {slot}',
 } satisfies Catalog;
