@@ -55,7 +55,7 @@
   "dependencies": {
     "@twilio/voice-sdk": "^2.18.5",
     "esbuild-wasm": "^0.28.2",
-    "imapflow": "^1.7.8",
+    "imapflow": "^2.5.8",
     "mailparser": "^3.9.33",
     "nodemailer": "^10.0.13",
     "qrcode": "^1.5.4",
