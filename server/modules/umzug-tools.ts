@@ -124,6 +124,17 @@ export const UMZUG_TOOLS: Tool[] = [
       const j = await call.api('POST', a.dry_run ? '/api/umzug/dry-run' : '/api/umzug/jobs', { location: loc(call, a), body: { source: a.source, parts: a.parts, file_ids: a.file_ids, mapping: a.mapping, options: a.options } });
       return { started: jobBrief(j), next: 'Fortschritt: ghl_umzug_status mit job_id.' };
     },
+    // As an MCP task: start and wait until the job is no longer running (up to 2 hours), then the report (modules/mcp.ts).
+    task: async (call, a) => {
+      const l = loc(call, a);
+      let j = await call.api('POST', a.dry_run ? '/api/umzug/dry-run' : '/api/umzug/jobs', { location: l, body: { source: a.source, parts: a.parts, file_ids: a.file_ids, mapping: a.mapping, options: a.options } });
+      const until = Date.now() + 2 * 3600_000;
+      while (['running', 'undoing', 'queued'].includes(j.status) && Date.now() < until) {
+        await new Promise((r) => setTimeout(r, 5000));
+        j = await call.api('GET', `/api/umzug/jobs/${encodeURIComponent(String(j.id))}`, { location: l });
+      }
+      return jobBrief(j);
+    },
   },
   {
     name: 'ghl_umzug_status',

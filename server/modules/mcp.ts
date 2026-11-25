@@ -1,8 +1,29 @@
 import type { App, Module } from '../core/app.js';
 import { isRelay } from '../core/app.js';
 import { HttpError, notFound, str, type Ctx, type User } from '../core/http.js';
+import { createHash } from 'node:crypto';
 import { id, now, sha256, token } from '../core/util.js';
+import { portableMarkdown } from '../services/wiki-markdown.js';
 import { APP_VERSION } from '../version.js';
+import { classify } from '../services/agent-safety.js';
+import { BUILTIN_SKILLS, findSkillFile, skillEntry, skillName, wikiSkill, type Skill } from '../services/mcp-skills.js';
+import {
+  argsDigest,
+  clientCan,
+  complete,
+  confirmAnswer,
+  confirmRequest,
+  ERR,
+  EXT,
+  headerProblem,
+  LEGACY_VERSIONS,
+  META,
+  MODERN_VERSIONS,
+  openState,
+  requestMeta,
+  sealState,
+  SUPPORTED_VERSIONS,
+} from '../services/mcp-ext.js';
 
 /**
  * Agency API keys (all sub-accounts at once, read-only or read/write) and an MCP endpoint
@@ -11,7 +32,8 @@ import { APP_VERSION } from '../version.js';
  * Every tool is a thin relay onto the REST API, so permissions, validation and the audit log apply.
  */
 
-const PROTOCOL_VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
+/** Versions of the initialize handshake ("legacy"); modern requests carry 2026-07-28 in _meta (services/mcp-ext.ts). */
+const PROTOCOL_VERSIONS = LEGACY_VERSIONS;
 
 type Json = Record<string, any>;
 /** Other modules add their own tools via `app.services.mcpTools` (see docs.ts). */
@@ -28,6 +50,13 @@ export interface Tool {
   untrusted?: boolean;
   /** Part of the agent's safety level "Termin buchen": free slots and booking them run without confirmation there (modules/ai-booking.ts). */
   booking?: boolean;
+  /**
+   * Long-running: for a client that declares the Tasks extension, tools/call returns a task handle at once and this runs in the
+   * background (e.g. waits for a media job until it is done); without it the tool runs as usual.
+   */
+  task?: (call: Caller, args: Json) => Promise<unknown>;
+  /** Top-level arguments that take a file (schema marked `x-mcp-file`, File Uploads extension): the bytes come by upload. */
+  fileArgs?: string[];
   /** Set at registration: the module that added the tool (core/app.ts). */
   module?: string;
   run: (call: Caller, args: Json) => Promise<unknown>;
@@ -38,6 +67,8 @@ export interface Caller {
   locationId?: string;
   /** Whether the person behind the call has the area of a route (set by the in-app agent; absent = the route decides). */
   can?: (method: string, path: string) => boolean;
+  /** Who is calling (key, OAuth grant): tasks, confirmations and uploads are bound to it. */
+  principal?: string;
 }
 
 const LOC = { location_id: { type: 'string', description: 'Sub-Account/Projekt-ID (aus ghl_list_projects)' } };
@@ -532,6 +563,11 @@ class RpcError extends Error {
   constructor(
     public code: number,
     message: string,
+    public data?: unknown,
+    /** HTTP status for a single (non-batch) modern request (400 for version/header errors, 404 for an unknown method). */
+    public http?: number,
+    /** File Uploads: the error body has no jsonrpc/id (MissingRequiredClientCapability). */
+    public bare?: boolean,
   ) {
     super(message);
   }
@@ -551,6 +587,24 @@ export const mcpModule: Module = {
         id TEXT PRIMARY KEY, name TEXT NOT NULL, prefix TEXT NOT NULL, key_hash TEXT NOT NULL UNIQUE, scope TEXT NOT NULL DEFAULT 'write',
         created_by TEXT, created_at TEXT NOT NULL, last_used_at TEXT
       );`,
+    ],
+    [
+      '002-modern',
+      // Tasks (long-running tool calls) and File Uploads (staged bytes between the two tools/call of an upload).
+      `CREATE TABLE mcp_tasks (
+        id TEXT PRIMARY KEY, principal TEXT NOT NULL, tool TEXT NOT NULL, status TEXT NOT NULL, status_message TEXT NOT NULL DEFAULT '',
+        result TEXT, error TEXT, created_at TEXT NOT NULL, updated_at TEXT NOT NULL, expires_at TEXT NOT NULL
+      );
+      CREATE INDEX mcp_tasks_expiry ON mcp_tasks(expires_at);
+      CREATE TABLE mcp_uploads (
+        id TEXT PRIMARY KEY, principal TEXT NOT NULL, tool TEXT NOT NULL, digest TEXT NOT NULL, used INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL, expires_at TEXT NOT NULL
+      );
+      CREATE TABLE mcp_upload_files (
+        token TEXT PRIMARY KEY, upload_id TEXT NOT NULL REFERENCES mcp_uploads(id) ON DELETE CASCADE, file_id TEXT NOT NULL,
+        size INTEGER NOT NULL, data BLOB, received_at TEXT
+      );
+      CREATE INDEX mcp_uploads_expiry ON mcp_uploads(expires_at);`,
     ],
   ],
   register(app) {
@@ -636,34 +690,126 @@ export const mcpModule: Module = {
       }
       return out;
     };
+    /** Who a bearer is (agency key, sub-account key, OAuth token), or null. */
+    const resolveCaller = (bearer: string): Caller | null => {
+      if (bearer.startsWith('pghla_')) {
+        const k = db.get<any>('SELECT id FROM agency_api_keys WHERE key_hash = ?', sha256(bearer));
+        return k ? ({ agency: true, principal: `akey:${k.id}`, api: () => Promise.resolve() } as Caller) : null;
+      }
+      if (bearer.startsWith('pghl_')) {
+        const k = db.get<any>('SELECT id, location_id FROM api_keys WHERE key_hash = ?', sha256(bearer));
+        return k ? ({ agency: false, locationId: k.location_id, principal: `key:${k.id}`, api: () => Promise.resolve() } as Caller) : null;
+      }
+      if (!bearer) return null;
+      // Other credentials, e.g. OAuth access tokens (modules/mcp-oauth.ts): same scoping as the keys.
+      for (const resolve of (app.services.mcpAuth ?? []) as ((b: string) => { agency: boolean; locationId?: string; principal?: string } | null)[]) {
+        const r = resolve(bearer);
+        if (r) return { agency: r.agency, locationId: r.agency ? undefined : r.locationId, principal: r.principal ?? `token:${sha256(bearer).slice(0, 24)}`, api: () => Promise.resolve() } as Caller;
+      }
+      return null;
+    };
+
+    // --- Skills over MCP: built-in skills plus wiki pages in a space „Skills“ (services/mcp-skills.ts) -------------------------
+    const skillsFor = (c: Caller): Skill[] => {
+      const out: Skill[] = [...BUILTIN_SKILLS];
+      const taken = new Set(out.map((s) => s.name));
+      try {
+        const rows = db.all<any>(
+          `SELECT p.title, p.body, l.name AS loc_name FROM wiki_pages p JOIN wiki_spaces s ON s.id = p.space_id JOIN locations l ON l.id = p.location_id
+           WHERE p.trashed_at IS NULL AND lower(trim(s.name)) IN ('skills', 'skill', 'mcp-skills', 'mcp skills') ${c.agency ? '' : 'AND p.location_id = ?'}
+           ORDER BY l.name, p.position, p.title LIMIT 200`,
+          ...(c.agency ? [] : [c.locationId]),
+        );
+        for (const r of rows) {
+          if (!String(r.body ?? '').trim()) continue;
+          let s = wikiSkill({ title: r.title, body: portableMarkdown(r.body, app.baseUrl()) }, c.agency ? `${skillName(r.loc_name)}-` : '');
+          for (let i = 2; taken.has(s.name); i++) s = wikiSkill({ title: `${r.title} ${i}`, body: portableMarkdown(r.body, app.baseUrl()) }, c.agency ? `${skillName(r.loc_name)}-` : '');
+          taken.add(s.name);
+          out.push(s);
+          if (out.length >= 100) break;
+        }
+      } catch (e) {
+        // Without the wiki module there are only the built-in skills.
+        if (!/no such table/i.test((e as Error).message)) console.error('[mcp skills]', (e as Error).message);
+      }
+      return out;
+    };
+
+    // --- Tasks (extension io.modelcontextprotocol/tasks) ---------------------------------------------------------------------
+    const TASK_TTL_MS = 24 * 3600_000;
+    const TERMINAL = new Set(['completed', 'failed', 'cancelled']);
+    // A restart ends what ran in this process: such tasks fail instead of staying "working" forever.
+    db.run(`UPDATE mcp_tasks SET status = 'failed', error = ?, status_message = 'Abgebrochen', updated_at = ? WHERE status = 'working'`, JSON.stringify({ code: -32603, message: 'Der Server wurde neu gestartet – bitte erneut ausführen.' }), now());
+    const taskView = (r: any) => ({
+      taskId: r.id,
+      status: r.status,
+      ...(r.status_message ? { statusMessage: r.status_message } : {}),
+      createdAt: r.created_at,
+      lastUpdatedAt: r.updated_at,
+      ttlMs: TASK_TTL_MS,
+      pollIntervalMs: 3000,
+      ...(r.status === 'completed' && r.result ? { result: JSON.parse(r.result) } : {}),
+      ...(r.status === 'failed' && r.error ? { error: JSON.parse(r.error) } : {}),
+    });
+    const startTask = (c: Caller, t: Tool, work: () => Promise<any>) => {
+      db.run('DELETE FROM mcp_tasks WHERE expires_at < ?', now());
+      const row = { id: `task_${token(16)}`, principal: c.principal ?? '', tool: t.name, status: 'working', status_message: `${t.title} läuft`, created_at: now(), updated_at: now(), expires_at: new Date(Date.now() + TASK_TTL_MS).toISOString() };
+      db.insert('mcp_tasks', row);
+      void (async () => {
+        let res: any;
+        try {
+          res = await work();
+        } catch (e) {
+          res = { content: [{ type: 'text', text: `Fehler: ${(e as Error).message}` }], isError: true };
+        }
+        db.run(`UPDATE mcp_tasks SET status = 'completed', result = ?, status_message = ?, updated_at = ? WHERE id = ? AND status = 'working'`, JSON.stringify(complete(res)), res?.isError ? 'Mit Fehler beendet' : 'Fertig', now(), row.id);
+      })();
+      return { resultType: 'task', ...taskView(row) };
+    };
+    const ownTask = (c: Caller, taskId: unknown) => {
+      const r = typeof taskId === 'string' ? db.get<any>('SELECT * FROM mcp_tasks WHERE id = ? AND principal = ?', taskId, c.principal ?? '') : null;
+      if (!r) throw new RpcError(-32602, 'Unbekannter Task');
+      return r;
+    };
+
+    // --- File Uploads (extension io.modelcontextprotocol/files, beta): bytes come by PUT between the two tools/call -------------
+    const UPLOAD_TTL_MS = 60 * 60_000;
+    const DEFAULT_MAX_FILE = 10 * 1024 * 1024;
+    const maxFile = (t: Tool, arg: string) => Number(t.inputSchema?.properties?.[arg]?.['x-mcp-file']?.maxSize) || DEFAULT_MAX_FILE;
+    const originOf = (ctx: Ctx) => {
+      const host = String(ctx.req.headers['x-forwarded-host'] ?? ctx.req.headers.host ?? '').split(',')[0].trim();
+      if (!host) return app.baseUrl();
+      return /^(localhost|127\.|\[::1\])/.test(host) ? `http://${host}` : `https://${host}`;
+    };
+    const prevRaw = app.services.rawBodyLimit;
+    app.services.rawBodyLimit = (method: string, path: string, req: any, cookies: Record<string, string>): number | undefined =>
+      method === 'PUT' && path.startsWith('/mcp/uploads/') && req.headers.authorization ? 32 * 1024 * 1024 : prevRaw?.(method, path, req, cookies);
+    router.add('PUT', '/mcp/uploads/:token', 'public', (ctx) => {
+      const bearer = String(ctx.req.headers.authorization ?? '').match(/^Bearer\s+(.+)$/i)?.[1] ?? '';
+      const c = resolveCaller(bearer);
+      const f = db.get<any>('SELECT f.token, f.size, f.data IS NOT NULL AS has, u.principal, u.expires_at, u.used FROM mcp_upload_files f JOIN mcp_uploads u ON u.id = f.upload_id WHERE f.token = ?', ctx.params.token);
+      const no = (status: number, error: string) => ({ __raw: true as const, status, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ error }) });
+      if (!c || !f || f.principal !== c.principal || f.expires_at < now() || f.used) return no(404, 'Upload nicht gefunden oder abgelaufen');
+      if (f.has) return no(409, 'Diese Datei ist schon angekommen');
+      const buf = ctx.rawBuffer ?? Buffer.alloc(0);
+      if (buf.length !== f.size) return no(400, `Größe passt nicht (${buf.length} statt ${f.size} Bytes)`);
+      db.run('UPDATE mcp_upload_files SET data = ?, received_at = ? WHERE token = ? AND data IS NULL', buf, now(), f.token);
+      return { __raw: true as const, status: 201, headers: {}, body: '' };
+    });
+
     router.get('/mcp', 'public', () => ({ __raw: true, status: 405, headers: { allow: 'POST', 'content-type': 'application/json' }, body: JSON.stringify({ error: 'MCP: bitte POST (Streamable HTTP, JSON)' }) }));
     router.delete('/mcp', 'public', () => ({ __raw: true, status: 405, headers: { allow: 'POST' }, body: '' }));
     router.post('/mcp', 'public', async (ctx) => {
       const auth = String(ctx.req.headers.authorization ?? '');
       const bearer = auth.match(/^Bearer\s+(.+)$/i)?.[1] ?? '';
-      let caller: Caller | null = null;
-      if (bearer.startsWith('pghla_')) {
-        const k = db.get('SELECT * FROM agency_api_keys WHERE key_hash = ?', sha256(bearer));
-        if (k) caller = { agency: true, api: () => Promise.resolve() } as any;
-      } else if (bearer.startsWith('pghl_')) {
-        const k = db.get('SELECT * FROM api_keys WHERE key_hash = ?', sha256(bearer));
-        if (k) caller = { agency: false, locationId: k.location_id, api: () => Promise.resolve() } as any;
-      } else if (bearer) {
-        // Other credentials, e.g. OAuth access tokens (modules/mcp-oauth.ts): same scoping as the keys.
-        for (const resolve of (app.services.mcpAuth ?? []) as ((b: string) => { agency: boolean; locationId?: string } | null)[]) {
-          const r = resolve(bearer);
-          if (r) {
-            caller = { agency: r.agency, locationId: r.agency ? undefined : r.locationId, api: () => Promise.resolve() } as any;
-            break;
-          }
-        }
-      }
+      const caller = resolveCaller(bearer);
       if (!caller) {
         // The challenge points MCP clients to the OAuth metadata (when the OAuth module is there).
         const challenge: string = app.services.mcpChallenge?.(ctx, bearer ? 'invalid_token' : undefined) ?? 'Bearer realm="gohigh"';
         return { __raw: true, status: 401, headers: { 'content-type': 'application/json', 'www-authenticate': challenge }, body: JSON.stringify({ error: bearer ? 'Schlüssel oder Token ungültig oder abgelaufen' : 'Authorization: Bearer <Schlüssel oder OAuth-Token> fehlt' }) };
       }
       const c = caller;
+      const principal = c.principal ?? '';
       const relay = async (method: string, path: string, opts: { body?: unknown; location?: string } = {}, readToken = '') => {
         const location = c.agency ? opts.location : c.locationId;
         if (!c.agency && opts.location && opts.location !== c.locationId) throw new HttpError(403, 'Dieser Schlüssel gilt nur für einen Sub-Account');
@@ -690,7 +836,18 @@ export const mcpModule: Module = {
       // spends a few hundred tokens of context instead of the whole catalogue; every tool stays reachable through ghl_execute.
       const compact = /^(compact|search)$/i.test(String(ctx.query.get('tools') ?? ctx.req.headers['x-mcp-tools'] ?? ''));
       const visibleTools = async () => [...tools(), ...(await callerTools(c))].filter((t) => c.agency || !t.agencyOnly);
-      const callTool = async (name: string, rawArgs: unknown): Promise<any> => {
+      const toResult = (out: unknown) => {
+        const textOut = JSON.stringify(out ?? { ok: true });
+        const res: any = { content: [{ type: 'text', text: textOut.length > 60_000 ? `${textOut.slice(0, 60_000)}… (gekürzt – Filter/limit nutzen)` : textOut }], isError: false };
+        if (out && typeof out === 'object' && !Array.isArray(out)) res.structuredContent = out;
+        return res;
+      };
+      const errorResult = (e: unknown) => {
+        const status = e instanceof HttpError ? ` (${e.status})` : '';
+        return { content: [{ type: 'text', text: `Fehler${status}: ${(e as Error).message}` }], isError: true };
+      };
+      /** params: the whole tools/call params (inputResponses, requestState, _meta) – for ghl_execute the outer call's. */
+      const callTool = async (name: string, rawArgs: unknown, params: any = {}): Promise<any> => {
         const own = tools().find((x) => x.name === name);
         const t = own ?? (name.startsWith('ext_') ? (await callerTools(c)).find((x) => x.name === name) : undefined);
         if (!t || (!c.agency && t.agencyOnly)) throw new RpcError(-32602, `Unbekanntes Tool: ${name.slice(0, 100)}${compact ? ' – mit ghl_search suchen' : ''}`);
@@ -701,41 +858,123 @@ export const mcpModule: Module = {
           throw new RpcError(-32602, (e as Error).message);
         }
         checkArgs(t, args);
-        const readToken = own && t.annotations.readOnlyHint ? token(16) : '';
-        if (readToken) readToolTokens.add(readToken);
-        try {
-          // A connection for one sub-account cannot be pointed at another one (also by tools that leave location_id to the key).
-          if (!c.agency && args.location_id !== undefined && args.location_id !== null && args.location_id !== '' && String(args.location_id) !== c.locationId) throw new HttpError(403, 'Dieser Schlüssel gilt nur für einen Sub-Account');
-          const out = await t.run(readToken ? { ...c, api: (method, path, opts = {}) => relay(method, path, opts, readToken) } : c, args);
-          const textOut = JSON.stringify(out ?? { ok: true });
-          const res: any = { content: [{ type: 'text', text: textOut.length > 60_000 ? `${textOut.slice(0, 60_000)}… (gekürzt – Filter/limit nutzen)` : textOut }], isError: false };
-          if (out && typeof out === 'object' && !Array.isArray(out)) res.structuredContent = out;
-          return res;
-        } catch (e) {
-          const status = e instanceof HttpError ? ` (${e.status})` : '';
-          return { content: [{ type: 'text', text: `Fehler${status}: ${(e as Error).message}` }], isError: true };
-        } finally {
-          if (readToken) readToolTokens.delete(readToken);
+        // A connection for one sub-account cannot be pointed at another one (also by tools that leave location_id to the key).
+        if (!c.agency && args.location_id !== undefined && args.location_id !== null && args.location_id !== '' && String(args.location_id) !== c.locationId)
+          return errorResult(new HttpError(403, 'Dieser Schlüssel gilt nur für einen Sub-Account'));
+        const rm = requestMeta(params);
+        const can = clientCan(rm);
+
+        // File Uploads: first call → upload targets, second call (requestState) → the staged bytes go into the arguments.
+        if (own && t.fileArgs?.length) {
+          const files = t.fileArgs.flatMap((a) => (isPlain(args[a]) ? [{ arg: a, f: args[a] as Json }] : []));
+          const pending = files.filter((x) => Number(x.f.size) > 0 && x.f.data === undefined);
+          if (pending.length) {
+            if (!can.upload)
+              throw new RpcError(ERR.missingCapability, 'Diese App kann diesem Konnektor keine Dateien senden – das Werkzeug wurde nicht ausgeführt (oder die Datei als data in Base64 mitgeben).', { requiredCapabilities: { extensions: { [EXT.files]: { upload: {} } } } }, 400, true);
+            for (const x of pending) if (Number(x.f.size) > maxFile(t, x.arg)) return { ...errorResult(new HttpError(413, `„${String(x.f.name ?? x.f.id).slice(0, 80)}“ ist zu groß (höchstens ${Math.round(maxFile(t, x.arg) / 1024 / 1024)} MB)`)) };
+            if (new Set(files.map((x) => String(x.f.id))).size !== files.length) return errorResult(new HttpError(400, 'Zwei Dateien haben dieselbe id'));
+            const digest = argsDigest(t.name, args);
+            if (params.requestState === undefined) {
+              db.run('DELETE FROM mcp_uploads WHERE expires_at < ?', now());
+              const up = { id: `up_${token(24)}`, principal, tool: t.name, digest, used: 0, created_at: now(), expires_at: new Date(Date.now() + UPLOAD_TTL_MS).toISOString() };
+              db.insert('mcp_uploads', up);
+              const base = originOf(ctx);
+              const uploads = pending.map((x) => {
+                const tok = token(32);
+                db.insert('mcp_upload_files', { token: tok, upload_id: up.id, file_id: String(x.f.id), size: Number(x.f.size) });
+                return { fileId: String(x.f.id), url: `${base}/mcp/uploads/${tok}`, headers: { 'Content-Type': 'application/octet-stream' }, credentials: 'include' };
+              });
+              return { resultType: 'upload_required', content: [], uploads, requestState: up.id };
+            }
+            const up = typeof params.requestState === 'string' ? db.get<any>('SELECT * FROM mcp_uploads WHERE id = ?', params.requestState) : null;
+            if (!up || up.principal !== principal || up.expires_at < now() || up.used) throw new RpcError(-32602, 'requestState ungültig, abgelaufen oder schon benutzt');
+            if (up.tool !== t.name || up.digest !== digest) throw new RpcError(-32602, 'Die Argumente passen nicht zum Upload');
+            const staged = db.all<any>('SELECT file_id, size, data FROM mcp_upload_files WHERE upload_id = ?', up.id);
+            for (const x of pending) {
+              const s = staged.find((r) => r.file_id === String(x.f.id));
+              const buf: Buffer | null = s?.data ? Buffer.from(s.data) : null;
+              if (!buf || buf.length !== Number(x.f.size)) return errorResult(new HttpError(400, `Die Datei „${String(x.f.name ?? x.f.id).slice(0, 80)}“ ist nicht (vollständig) angekommen`));
+              const want = isPlain(x.f.digest) ? String(x.f.digest.value ?? '') : '';
+              if (want && createHash('sha256').update(buf).digest('base64url') !== want.replace(/=+$/, '')) return errorResult(new HttpError(400, `Prüfsumme von „${String(x.f.name ?? x.f.id).slice(0, 80)}“ stimmt nicht`));
+              args[x.arg] = { ...x.f, data: buf.toString('base64') };
+            }
+            if (!db.run('UPDATE mcp_uploads SET used = 1 WHERE id = ? AND used = 0', up.id).changes) throw new RpcError(-32602, 'requestState schon benutzt');
+            try {
+              return toResult(await t.run(c, args));
+            } catch (e) {
+              return errorResult(e);
+            } finally {
+              db.run('DELETE FROM mcp_uploads WHERE id = ?', up.id);
+            }
+          }
         }
+
+        // Confirmation before sending, deleting, paying … (elicitation, form mode) – only for clients that can show it.
+        // The answer comes with the retried call; requestState binds it to this caller, tool and arguments (HMAC, 10 minutes).
+        const klass = t.klassFor ? t.klassFor(args) : classify(t);
+        if (own && can.elicitForm && klass === 'sensitive' && !t.fileArgs?.length) {
+          const digest = argsDigest(t.name, args);
+          const st = openState(app.config.secret, params.requestState);
+          const valid = !!st && st.k === 'confirm' && st.p === principal && st.t === t.name && st.d === digest;
+          const ans = valid ? confirmAnswer(t.name, params.inputResponses) : 'missing';
+          if (ans === 'no') return { content: [{ type: 'text', text: 'Nicht ausgeführt: Der Nutzer hat abgelehnt oder nicht bestätigt.' }], isError: true };
+          if (ans !== 'yes') return { resultType: 'input_required', inputRequests: { confirm: confirmRequest(t, args) }, requestState: sealState(app.config.secret, { p: principal, t: t.name, d: digest, k: 'confirm' }) };
+        }
+
+        const readToken = own && t.annotations.readOnlyHint ? token(16) : '';
+        const runIt = async (fn: (call: Caller, a: Json) => Promise<unknown>) => {
+          if (readToken) readToolTokens.add(readToken);
+          try {
+            return toResult(await fn(readToken ? { ...c, api: (method, path, opts = {}) => relay(method, path, opts, readToken) } : c, args));
+          } catch (e) {
+            return errorResult(e);
+          } finally {
+            if (readToken) readToolTokens.delete(readToken);
+          }
+        };
+        // Long-running tools run as a task for clients that declare the Tasks extension.
+        if (own && t.task && can.tasks) return startTask(c, t, () => runIt(t.task!));
+        return runIt(t.run);
       };
 
-      const handleOne = async (msg: any): Promise<any | null> => {
+      const discover = () =>
+        complete({
+          supportedVersions: SUPPORTED_VERSIONS,
+          capabilities: { tools: { listChanged: false }, resources: {}, extensions: { [EXT.skills]: {}, [EXT.tasks]: {}, [EXT.files]: { upload: {} } } },
+          _meta: { [META.serverInfo]: { name: 'gohigh', title: app.services.brandName?.() ?? 'HyperLevel', version: APP_VERSION } },
+          instructions:
+            'HyperLevel-CRM: Jedes Projekt ist ein Sub-Account (location_id) – starte mit ghl_list_projects. Die Skills (hyperlevel-basics u. a.) erklären die Abläufe. Schreibende Tools wirken sofort und landen im Protokoll; vor Senden, Löschen und Bezahlen fragt der Server nach.',
+          ttlMs: 3_600_000,
+          cacheScope: 'public',
+        });
+
+      const handleOne = async (msg: any): Promise<{ body: any; http?: number } | null> => {
         const isNotification = msg && msg.id === undefined;
+        const rm = requestMeta(msg?.params);
         try {
           if (!msg || msg.jsonrpc !== '2.0' || typeof msg.method !== 'string') throw new RpcError(-32600, 'Ungültige JSON-RPC-Anfrage');
+          // Modern request (version in _meta): the version must be one we speak and the routing headers must match the body.
+          if (rm.version) {
+            if (!MODERN_VERSIONS.includes(rm.version)) throw new RpcError(ERR.unsupportedVersion, 'Unsupported protocol version', { supported: SUPPORTED_VERSIONS, requested: rm.version }, 400);
+            const problem = headerProblem(ctx.req.headers as Record<string, unknown>, msg, rm.version);
+            if (problem) throw new RpcError(ERR.headerMismatch, `Header mismatch: ${problem}`, undefined, 400);
+          }
           let result: any;
           switch (msg.method) {
+            case 'server/discover':
+              result = discover();
+              break;
             case 'initialize': {
               const wanted = msg.params?.protocolVersion;
               result = {
                 protocolVersion: PROTOCOL_VERSIONS.includes(wanted) ? wanted : PROTOCOL_VERSIONS[0],
-                capabilities: { tools: { listChanged: false } },
+                capabilities: { tools: { listChanged: false }, resources: {}, extensions: { [EXT.skills]: {} } },
                 serverInfo: { name: 'gohigh', title: app.services.brandName?.() ?? 'HyperLevel', version: APP_VERSION },
                 instructions:
                   (compact ? 'Kompaktmodus: Finde das passende Werkzeug mit ghl_search (Stichworte, z. B. „Kontakt anlegen“) und führe es mit ghl_execute {tool, arguments} aus. ' : '') +
                   (c.agency
-                  ? 'Agentur-CRM: Jedes Projekt ist ein Sub-Account (location_id). Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.'
-                  : `CRM eines einzelnen Sub-Accounts (location_id ${c.locationId}) – andere Sub-Accounts sind mit dieser Verbindung nicht erreichbar. Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.`),
+                    ? 'Agentur-CRM: Jedes Projekt ist ein Sub-Account (location_id). Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.'
+                    : `CRM eines einzelnen Sub-Accounts (location_id ${c.locationId}) – andere Sub-Accounts sind mit dieser Verbindung nicht erreichbar. Starte mit ghl_list_projects. Schreibende Tools wirken sofort und landen im Protokoll. Social-Posts standardmäßig als Entwurf anlegen; ghl_send_message verschickt echt.`),
               };
               break;
             }
@@ -743,7 +982,7 @@ export const mcpModule: Module = {
               result = {};
               break;
             case 'tools/list':
-              result = { tools: compact ? COMPACT_TOOLS : (await visibleTools()).map(describe) };
+              result = complete({ tools: compact ? COMPACT_TOOLS : (await visibleTools()).map(describe), ttlMs: 300_000, cacheScope: 'private' });
               break;
             case 'tools/call': {
               const name = msg.params?.name;
@@ -771,21 +1010,67 @@ export const mcpModule: Module = {
                     throw new RpcError(-32602, 'Parameter „arguments“ muss ein Objekt sein');
                   }
                 }
-                result = await callTool(a.tool, inner);
+                result = await callTool(a.tool, inner, msg.params);
                 break;
               }
-              result = await callTool(name, msg.params?.arguments);
+              result = await callTool(name, msg.params?.arguments, msg.params);
+              break;
+            }
+            // Skills over MCP: the catalogue, one entry, and the files through resources/read.
+            case 'skills/list':
+              result = complete({ skills: skillsFor(c).map(skillEntry), ttlMs: 300_000, cacheScope: 'private' });
+              break;
+            case 'skills/get': {
+              const hit = findSkillFile(skillsFor(c), String(msg.params?.uri ?? ''));
+              if (!hit || hit.file !== hit.skill.files[0]) throw new RpcError(-32602, 'Unbekannter Skill');
+              result = complete({ skill: skillEntry(hit.skill), ttlMs: 300_000, cacheScope: 'private' });
+              break;
+            }
+            case 'resources/list':
+              result = complete({
+                resources: skillsFor(c).flatMap((s) => s.files.map((f) => ({ uri: f.uri, name: `${s.name}/${f.uri.split('/').slice(3).join('/')}`, mimeType: 'text/markdown' }))),
+                ttlMs: 300_000,
+                cacheScope: 'private',
+              });
+              break;
+            case 'resources/templates/list':
+              result = complete({ resourceTemplates: [], ttlMs: 300_000, cacheScope: 'public' });
+              break;
+            case 'resources/read': {
+              const uri = String(msg.params?.uri ?? '');
+              const hit = findSkillFile(skillsFor(c), uri);
+              if (!hit) throw new RpcError(-32602, 'Resource not found');
+              result = complete({ contents: [{ uri, mimeType: 'text/markdown', text: hit.file.text }], ttlMs: 300_000, cacheScope: 'private' });
+              break;
+            }
+            // Tasks: state, input (none needed – confirmations happen before a task starts) and cooperative cancel.
+            case 'tasks/get':
+              result = complete(taskView(ownTask(c, msg.params?.taskId)));
+              break;
+            case 'tasks/update':
+              ownTask(c, msg.params?.taskId);
+              result = complete({});
+              break;
+            case 'tasks/cancel': {
+              const r = ownTask(c, msg.params?.taskId);
+              if (!TERMINAL.has(r.status)) db.run(`UPDATE mcp_tasks SET status = 'cancelled', status_message = 'Abgebrochen', updated_at = ? WHERE id = ? AND status = 'working'`, now(), r.id);
+              result = complete({});
               break;
             }
             default:
               if (msg.method.startsWith('notifications/')) return null;
-              throw new RpcError(-32601, `Methode nicht unterstützt: ${msg.method}`);
+              throw new RpcError(-32601, `Methode nicht unterstützt: ${msg.method}`, undefined, rm.version ? 404 : undefined);
           }
-          return isNotification ? null : { jsonrpc: '2.0', id: msg.id, result };
-        } catch (e) {
           if (isNotification) return null;
+          // Modern results always carry resultType (task, input_required and upload_required set their own).
+          if (rm.version && result && typeof result === 'object' && !('resultType' in result)) result = complete(result);
+          return { body: { jsonrpc: '2.0', id: msg.id, result } };
+        } catch (e) {
+          if (isNotification && !(e instanceof RpcError && e.bare)) return null;
           const code = e instanceof RpcError ? e.code : -32603;
-          return { jsonrpc: '2.0', id: msg?.id ?? null, error: { code, message: (e as Error).message } };
+          const error = { code, message: (e as Error).message, ...(e instanceof RpcError && e.data !== undefined ? { data: e.data } : {}) };
+          const http = e instanceof RpcError && rm.version ? e.http : undefined;
+          return { body: e instanceof RpcError && e.bare ? { error } : { jsonrpc: '2.0', id: msg?.id ?? null, error }, http };
         }
       };
 
@@ -796,9 +1081,10 @@ export const mcpModule: Module = {
         return { __raw: true, status: 400, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } }) };
       }
       const batch = Array.isArray(payload);
-      const results = (await Promise.all((batch ? payload : [payload]).map(handleOne))).filter((r) => r !== null);
+      const results = (await Promise.all((batch ? payload : [payload]).map(handleOne))).filter((r): r is { body: any; http?: number } => r !== null);
       if (!results.length) return { __raw: true, status: 202, headers: {}, body: '' };
-      return { __raw: true, status: 200, headers: { 'content-type': 'application/json' }, body: JSON.stringify(batch ? results : results[0]) };
+      const status = !batch && results[0].http ? results[0].http : 200;
+      return { __raw: true, status, headers: { 'content-type': 'application/json' }, body: JSON.stringify(batch ? results.map((r) => r.body) : results[0].body) };
     });
   },
 };

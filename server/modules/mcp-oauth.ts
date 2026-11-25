@@ -432,7 +432,7 @@ export const mcpOAuthModule: Module = {
       ...(app.services.mcpAuth ?? []),
       (bearer: string) => {
         const r = resolveAccess(bearer);
-        return r ? { agency: !r.grant.location_id, locationId: r.grant.location_id ?? undefined, access: r.grant.access } : null;
+        return r ? { agency: !r.grant.location_id, locationId: r.grant.location_id ?? undefined, access: r.grant.access, principal: `grant:${r.grant.id}` } : null;
       },
     ];
 

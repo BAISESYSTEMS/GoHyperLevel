@@ -13,6 +13,17 @@ There are two ways to connect:
 
 340+ tool descriptions cost an agent a lot of context before it has done anything. Append `?tools=compact` to the MCP address (`https://<your-domain>/mcp?tools=compact`) and the client sees only two tools: `ghl_search` finds the right tool by keywords (German or English) and returns its schema, `ghl_execute` runs it. Same rights, checks and audit log as a direct call – details in [the API docs](api.md#mcp-server). Works with keys and with OAuth connectors.
 
+## Skills, background tasks and confirmations
+
+HyperLevel speaks MCP revision 2026-07-28 with three of its new extensions – clients that support them (Claude and Claude Code) use them on their own:
+
+- **Skills:** the server brings its own instructions – how to work with sub-accounts, invoices (GoBD), deals, appointments, social posts and saving insights. The client loads a skill only when it needs it, so it costs no context. **Your own skills:** create a wiki space named **Skills** in a sub-account; every page in it becomes a skill (title = name, first paragraph = when to use it). That is how an agency teaches the assistant its own processes, without code.
+- **Background tasks:** images, videos, audio, transcriptions and migrations run as a task – the assistant gets a ticket, you keep chatting, and it fetches the result when it is ready.
+- **Confirmation:** before sending, deleting, paying or publishing, the client shows a question from HyperLevel ("„Projektdatei löschen“ ausführen?"), deleting needs `LÖSCHEN` typed in. This also covers compact mode, where every tool runs through `ghl_execute`.
+- **File uploads (beta):** `ghl_upload_file` takes a file straight from the client, not through the chat. Claude only sends files to connectors from its directory, so for now this works with clients that send `file.data`.
+
+Details for developers: [MCP 2026-07-28](api.md#mcp-2026-07-28-skills-tasks-confirmations-file-uploads).
+
 ## Where
 
 - **Settings → KI-Werkzeuge** (per sub-account): for everyone with the *Einstellungen* (settings) area – also client logins. Keys created here are always **sub-account keys** (`pghl_…`): they only reach this one sub-account. A client login can never get an agency key.

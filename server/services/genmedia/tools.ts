@@ -25,11 +25,18 @@ async function startAndWait(call: Caller, a: Record<string, any>, body: Record<s
   return waitFor(call, a.location_id, job, Math.max(0, Math.min(120, Number(a.wait_seconds ?? waitDefault) || 0)));
 }
 
-async function waitFor(call: Caller, location: string | undefined, job: any, seconds: number) {
+/** As an MCP task (Tasks extension): start the job and wait until it is done, up to 30 minutes (modules/mcp.ts → Tool.task). */
+const TASK_WAIT_S = 30 * 60;
+async function startAndFinish(call: Caller, a: Record<string, any>, body: Record<string, any>) {
+  const job = await call.api('POST', '/api/genmedia/jobs', { location: a.location_id, body: { ...body, source: 'mcp', library: true } });
+  return waitFor(call, a.location_id, job, TASK_WAIT_S, 4000);
+}
+
+async function waitFor(call: Caller, location: string | undefined, job: any, seconds: number, everyMs = 1500) {
   const until = Date.now() + seconds * 1000;
   let cur = job;
   while (!['succeeded', 'failed', 'canceled'].includes(cur.status) && Date.now() < until) {
-    await sleep(1500);
+    await sleep(everyMs);
     cur = await call.api('GET', `/api/genmedia/jobs/${encodeURIComponent(cur.id)}`, { location });
   }
   return summary(cur);
@@ -63,6 +70,7 @@ export const GENMEDIA_TOOLS: Tool[] = [
     },
     annotations: W,
     run: (call, a) => startAndWait(call, a, { capability: 'image', prompt: a.prompt, negative_prompt: a.negative_prompt, aspect_ratio: a.aspect_ratio, seed: a.seed, image_url: a.image_url, connection_id: a.connection_id, model: a.model, params: a.params }, 60),
+    task: (call, a) => startAndFinish(call, a, { capability: 'image', prompt: a.prompt, negative_prompt: a.negative_prompt, aspect_ratio: a.aspect_ratio, seed: a.seed, image_url: a.image_url, connection_id: a.connection_id, model: a.model, params: a.params }),
   },
   {
     name: 'ghl_generate_video',
@@ -75,6 +83,7 @@ export const GENMEDIA_TOOLS: Tool[] = [
     },
     annotations: W,
     run: (call, a) => startAndWait(call, a, { capability: 'video', prompt: a.prompt, negative_prompt: a.negative_prompt, aspect_ratio: a.aspect_ratio, duration: a.duration, seed: a.seed, image_url: a.image_url, connection_id: a.connection_id, model: a.model, params: a.params }, 0),
+    task: (call, a) => startAndFinish(call, a, { capability: 'video', prompt: a.prompt, negative_prompt: a.negative_prompt, aspect_ratio: a.aspect_ratio, duration: a.duration, seed: a.seed, image_url: a.image_url, connection_id: a.connection_id, model: a.model, params: a.params }),
   },
   {
     name: 'ghl_generate_audio',
@@ -87,6 +96,7 @@ export const GENMEDIA_TOOLS: Tool[] = [
     },
     annotations: W,
     run: (call, a) => startAndWait(call, a, { capability: a.kind === 'music' ? 'audio_music' : 'audio_tts', prompt: a.text, voice: a.voice, language: a.language, duration: a.kind === 'music' ? a.duration : undefined, connection_id: a.connection_id, model: a.model, params: a.params }, 60),
+    task: (call, a) => startAndFinish(call, a, { capability: a.kind === 'music' ? 'audio_music' : 'audio_tts', prompt: a.text, voice: a.voice, language: a.language, duration: a.kind === 'music' ? a.duration : undefined, connection_id: a.connection_id, model: a.model, params: a.params }),
   },
   {
     name: 'ghl_transcribe',
@@ -98,6 +108,7 @@ export const GENMEDIA_TOOLS: Tool[] = [
     },
     annotations: W,
     run: (call, a) => startAndWait(call, a, { capability: 'stt', audio_url: a.audio_url, audio_upload_id: a.upload_id, language: a.language, prompt: a.prompt, connection_id: a.connection_id, model: a.model, params: a.params }, 90),
+    task: (call, a) => startAndFinish(call, a, { capability: 'stt', audio_url: a.audio_url, audio_upload_id: a.upload_id, language: a.language, prompt: a.prompt, connection_id: a.connection_id, model: a.model, params: a.params }),
   },
   {
     name: 'ghl_get_media_job',

@@ -6,6 +6,20 @@ production deploy. The Android app keeps its own version (`versionName` 1.0.x).
 
 ## [Unreleased]
 
+## [1.0.77] – 2026-11-25
+
+### Added
+- **MCP 2026-07-28:** `/mcp` spricht die neue, zustandslose MCP-Version (Version und Fähigkeiten in jeder Anfrage, `server/discover`,
+  `resultType`, Cache-Hinweise, Header-Prüfung) und weiter den alten Handshake – inklusive 2025-11-25.
+- **Skills über MCP:** HyperLevel liefert eigene Anleitungen mit (Grundlagen, Rechnungen, Deals, Termine, Social-Posts, Insights
+  speichern); Claude lädt sie nur bei Bedarf. Jede Wiki-Seite in einem Bereich „Skills“ wird zum eigenen Skill des Sub-Accounts.
+- **Rückfrage vor riskanten Aktionen:** Vor Senden, Löschen, Bezahlen und Veröffentlichen fragt der Server im Client nach (Elicitation),
+  Löschen braucht ein getipptes `LÖSCHEN` – auch über `ghl_execute` im Kompaktmodus.
+- **Hintergrund-Aufgaben (Tasks):** Bilder, Videos, Audio, Transkription und Umzüge laufen für Clients mit Tasks-Erweiterung im
+  Hintergrund; das Ergebnis kommt per `tasks/get`.
+- **Datei-Uploads (Beta):** `ghl_upload_file` nimmt Dateien direkt vom Client entgegen (Erweiterung `io.modelcontextprotocol/files`),
+  nicht durch den Chat; ohne Erweiterung als Base64.
+
 ## [1.0.76] – 2026-11-22
 
 ### Added

@@ -193,6 +193,43 @@ const TOOLS: Tool[] = [
     run: (call, a) => call.api('POST', '/api/project-files', { location: a.location_id, body: { files: a.files, source: a.source } }),
   },
   {
+    // File Uploads extension (beta): the client sends the bytes by upload, not through the chat (modules/mcp.ts → fileArgs).
+    name: 'ghl_upload_file',
+    title: 'Datei als Projektdatei hochladen',
+    description: `Lädt eine Datei des Nutzers (PDF, Bild, Tabelle, Audio …, bis ${FILE_MAX / MB} MB) als Projektdatei hoch – die Bytes gehen direkt an HyperLevel, nicht durch den Chat. path: Zielpfad wie „belege/rechnung-04.pdf“ (Standard: der Dateiname). Ohne Datei-Upload-Unterstützung der App: file.data mit Base64 mitgeben.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        ...LOC,
+        file: {
+          type: 'object',
+          description: `Die Datei, bis ${FILE_MAX / MB} MB.`,
+          'x-mcp-file': { maxSize: FILE_MAX },
+          properties: {
+            id: { type: 'string', minLength: 1, maxLength: 128 },
+            name: { type: 'string' },
+            mimeType: { type: 'string' },
+            size: { type: 'integer', minimum: 0 },
+            digest: { type: 'object', properties: { algorithm: { const: 'sha-256' }, value: { type: 'string' } }, required: ['algorithm', 'value'] },
+          },
+          required: ['id', 'mimeType', 'size'],
+        },
+        path: { type: 'string', description: 'Zielpfad, Standard: der Dateiname' },
+        source: { type: 'string', description: 'Herkunft, Standard „claude-upload“' },
+      },
+      required: ['file'],
+    },
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false },
+    fileArgs: ['file'],
+    run: (call, a) => {
+      const f = a.file ?? {};
+      const data = typeof f.data === 'string' ? f.data : '';
+      if (!data && Number(f.size) > 0) throw new HttpError(400, 'Die Datei fehlt (Upload oder file.data in Base64)');
+      const name = String(f.name ?? f.id ?? 'datei').replace(/[\\/]+/g, '-').slice(0, 200) || 'datei';
+      return call.api('POST', '/api/project-files', { location: a.location_id, body: { files: [{ path: String(a.path ?? '').trim() || name, data, mime: f.mimeType }], source: a.source || 'claude-upload' } });
+    },
+  },
+  {
     name: 'ghl_list_files',
     title: 'Projektdateien auflisten',
     description: 'Die abgelegten Dateien eines Projekts (Pfad, Typ, Größe, SHA-256, Herkunft, Datum), optional nur unter einem Pfad-Präfix (prefix, z. B. „src/“).',
